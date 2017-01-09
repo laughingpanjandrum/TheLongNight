@@ -23,6 +23,7 @@ public:
 	bool isPunctuator(char c);
 	//Input
 	TCOD_key_t getkey();
+	TCOD_key_t waitForKeypress();
 	//Special shape-drawing functions
 	void drawBox(int leftx, int topy, int width, int height, TCODColor col = TCODColor::grey);
 };

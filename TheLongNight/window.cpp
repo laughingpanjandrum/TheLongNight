@@ -6,7 +6,7 @@ window::window() : window("THE LONG NIGHT", 100, 70)
 }
 
 window::window(std::string name, int xsize, int ysize) {
-	TCODConsole::setCustomFont("fonts/Taffer_10x10.png", TCOD_FONT_LAYOUT_ASCII_INROW, 16, 16);
+	TCODConsole::setCustomFont("fonts/terminal.png", TCOD_FONT_LAYOUT_ASCII_INCOL, 16, 16);
 	TCODSystem::setFps(30);
 	TCODConsole::initRoot(xsize, ysize, name.c_str());
 	//drawFont();
@@ -121,14 +121,20 @@ GETTING INPUT
 */
 
 /*
-Get a single character from the console. Freezes time until a key is entered.
+Get a single character from the console.
 Input: None.
 Output: Character input by the user.
 */
 TCOD_key_t window::getkey() {
-	//TCODConsole::waitForKeypress(true);
-	//return TCODConsole::waitForKeypress(true);
 	return TCODConsole::checkForKeypress();
+}
+
+/*
+Get a single character from a console. Freezes until input is recieved.
+*/
+TCOD_key_t window::waitForKeypress()
+{
+	return TCODConsole::waitForKeypress(true);
 }
 
 /*
