@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClInclude Include="element.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="keycodes.h" />
     <ClInclude Include="tileConsts.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="maptile.h" />

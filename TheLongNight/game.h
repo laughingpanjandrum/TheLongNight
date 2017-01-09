@@ -11,8 +11,9 @@ It also draws all the stuff that needs drawing.
 
 #include "libtcod.hpp"
 #include "window.h"
-#include "map.h"
+#include "keycodes.h"
 
+#include "map.h"
 #include "person.h"
 
 class game
@@ -29,9 +30,15 @@ private:
 	//Character/state/etc
 	map* currentMap;
 	person* player;
+	bool isGameOver = false;
 	//Drawing functions
 	void drawScreen();
 	void drawMap(int atx, int aty);
+	//Input processing
+	void processCommand();
+	void processMove(TCOD_key_t kp);
+	bool isMovementKey(TCOD_key_t kp);
+	void movePlayer(int xnew, int ynew);
 	//Draw location constants
 	const static int MAP_DRAW_X = 3;
 	const static int MAP_DRAW_Y = 3;
