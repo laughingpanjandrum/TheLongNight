@@ -7,6 +7,8 @@ Basic constructor. Creates an empty map of the given size.
 */
 map::map(int xsize, int ysize)
 {
+	this->xsize = xsize;
+	this->ysize = ysize;
 	//Fill our array of maptiles with empty tiles.
 	for (int x = 0; x < xsize; x++) {
 		//Each x-coordinate is a vector
@@ -22,4 +24,23 @@ map::map(int xsize, int ysize)
 
 map::~map()
 {
+}
+
+/*
+	BOUNDARY CHECKING
+*/
+
+bool map::inBounds(int x, int y)
+{
+	return x >= 0 && x < xsize && y >= 0 && y < ysize;
+}
+
+
+/*
+	GETTING
+*/
+
+maptile * map::getTile(int x, int y)
+{
+	return maptiles.at(x)->at(y);
 }

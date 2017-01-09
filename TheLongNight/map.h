@@ -14,6 +14,12 @@ public:
 	map() : map(10, 10) {}
 	map(int xsize, int ysize);
 	~map();
+	//Boundary checking
+	bool inBounds(int x, int y);
+	//Getting
+	int getXSize() { return xsize; }
+	int getYSize() { return ysize; }
+	maptile* getTile(int x, int y);
 private:
 	//Boundaries and map creation
 	int xsize, ysize;
