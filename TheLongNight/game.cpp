@@ -21,6 +21,9 @@ game::~game()
 
 void game::mainGameLoop()
 {
+	//Character create
+	player = new person();
+	//Draw
 	drawScreen();
 	win.waitForKeypress();
 }
@@ -47,8 +50,8 @@ Clears, draws the entire screen, then refreshes.
 void game::drawScreen() 
 {
 	win.clear();
-	//drawMap(MAP_DRAW_X, MAP_DRAW_Y);
-	win.drawFont();
+	drawMap(MAP_DRAW_X, MAP_DRAW_Y);
+	//win.drawFont();
 	win.refresh();
 }
 
@@ -62,7 +65,7 @@ void game::drawMap(int atx, int aty)
 	for (int x = 0; x < currentMap->getXSize(); x++) {
 		for (int y = 0; y < currentMap->getYSize(); y++) {
 			maptile* m = currentMap->getTile(x, y);
-			win.writec(atx + x, aty + y, m->tile, m->color, m->bgcolor);
+			win.writec(atx + x, aty + y, m->tileCode, m->color, m->bgcolor);
 		}
 	}
 }

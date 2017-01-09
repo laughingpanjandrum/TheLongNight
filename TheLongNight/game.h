@@ -13,6 +13,8 @@ It also draws all the stuff that needs drawing.
 #include "window.h"
 #include "map.h"
 
+#include "person.h"
+
 class game
 {
 public:
@@ -26,6 +28,7 @@ private:
 	window win;
 	//Character/state/etc
 	map* currentMap;
+	person* player;
 	//Drawing functions
 	void drawScreen();
 	void drawMap(int atx, int aty);

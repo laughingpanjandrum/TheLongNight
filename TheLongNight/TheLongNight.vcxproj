@@ -118,16 +118,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="element.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="maptile.cpp" />
+    <ClCompile Include="person.cpp" />
     <ClCompile Include="TheLongNight.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="element.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="tileConsts.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="maptile.h" />
+    <ClInclude Include="person.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
