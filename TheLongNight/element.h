@@ -22,10 +22,15 @@ public:
 	//Setters
 	void setPosition(int x, int y);
 	void setPosition(coord pos);
-	//Getters
+	//Getters: position
 	coord getPosition() { return xy; }
 	int getx() { return xy.first; }
 	int gety() { return xy.second; }
+	bool isAtPosition(int x, int y);
+	//Getters: aesthetics
+	std::string getName() { return name; }
+	int getTileCode() { return tileCode; }
+	TCODColor getColor() { return color; }
 protected:
 	//Flavour deets
 	std::string name;

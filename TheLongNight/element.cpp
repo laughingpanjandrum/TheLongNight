@@ -28,3 +28,11 @@ void element::setPosition(coord pos)
 {
 	xy = pos;
 }
+
+/*
+Returns whether our position matches the given coordinates.
+*/
+bool element::isAtPosition(int x, int y)
+{
+	return x == xy.first && y == xy.second;
+}

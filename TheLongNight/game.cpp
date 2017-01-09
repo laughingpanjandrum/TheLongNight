@@ -23,6 +23,7 @@ void game::mainGameLoop()
 {
 	//Character create
 	player = new person();
+	currentMap->addPerson(player, 3, 3);
 	//Draw
 	drawScreen();
 	win.waitForKeypress();
@@ -59,13 +60,17 @@ void game::drawScreen()
 Just draws the current map.
 Input: Coordinates to start drawing at (the top left corner of the map)
 */
-void game::drawMap(int atx, int aty)
-{	
+void game::drawMap(int leftx, int topy)
+{
 	//Draw entire map, left to right & top to bottom
 	for (int x = 0; x < currentMap->getXSize(); x++) {
 		for (int y = 0; y < currentMap->getYSize(); y++) {
 			maptile* m = currentMap->getTile(x, y);
-			win.writec(atx + x, aty + y, m->tileCode, m->color, m->bgcolor);
+			win.writec(leftx + x, topy + y, m->tileCode, m->color, m->bgcolor);
 		}
+	}
+	//Now draw stuff over top, i.e. characters, items, etc.
+	for (auto p : currentMap->getAllPeople()) {
+		win.writec(leftx + p->getx(), topy + p->gety(), p->getTileCode(), p->getColor());
 	}
 }
