@@ -21,7 +21,7 @@ game::~game()
 
 void game::mainGameLoop()
 {
-	drawMap();
+	drawScreen();
 	win.waitForKeypress();
 }
 
@@ -41,17 +41,28 @@ void game::setCurrentMap(map * newMapP)
 	DRAWING STUFF
 */
 
-void game::drawMap()
+/*
+Clears, draws the entire screen, then refreshes.
+*/
+void game::drawScreen() 
 {
 	win.clear();
-	int atx = 10;
-	int aty = 10;
-	//Draw entire map, left to right
+	//drawMap(MAP_DRAW_X, MAP_DRAW_Y);
+	win.drawFont();
+	win.refresh();
+}
+
+/*
+Just draws the current map.
+Input: Coordinates to start drawing at (the top left corner of the map)
+*/
+void game::drawMap(int atx, int aty)
+{	
+	//Draw entire map, left to right & top to bottom
 	for (int x = 0; x < currentMap->getXSize(); x++) {
 		for (int y = 0; y < currentMap->getYSize(); y++) {
 			maptile* m = currentMap->getTile(x, y);
 			win.writec(atx + x, aty + y, m->tile, m->color, m->bgcolor);
 		}
 	}
-	win.refresh();
 }

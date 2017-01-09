@@ -27,7 +27,11 @@ private:
 	//Character/state/etc
 	map* currentMap;
 	//Drawing functions
-	void drawMap();
+	void drawScreen();
+	void drawMap(int atx, int aty);
+	//Draw location constants
+	const static int MAP_DRAW_X = 3;
+	const static int MAP_DRAW_Y = 3;
 };
 
 #endif

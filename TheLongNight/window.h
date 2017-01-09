@@ -13,7 +13,7 @@ public:
 	//Debug
 	void drawFont();
 	//Writing
-	void writec(int x, int y, char c, TCODColor col, TCODColor bgcol = TCODColor::black);
+	void writec(int x, int y, int c, TCODColor col, TCODColor bgcol = TCODColor::black);
 	void write(int x, int y, std::string txt, TCODColor col, TCODColor bgcol = TCODColor::black);
 	int writeWrapped(int x, int y, unsigned int lineLen, std::string txt, TCODColor col, TCODColor bgcol = TCODColor::black);
 	void clear();

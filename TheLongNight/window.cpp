@@ -6,10 +6,10 @@ window::window() : window("THE LONG NIGHT", 100, 70)
 }
 
 window::window(std::string name, int xsize, int ysize) {
-	TCODConsole::setCustomFont("fonts/terminal.png", TCOD_FONT_LAYOUT_ASCII_INCOL, 16, 16);
+	TCODConsole::setCustomFont("fonts/Taffer_10x10.png", TCOD_FONT_LAYOUT_ASCII_INROW, 16, 16);
+	TCODConsole::mapAsciiCodesToFont(0, 255, 0, 16);
 	TCODSystem::setFps(30);
 	TCODConsole::initRoot(xsize, ysize, name.c_str());
-	//drawFont();
 }
 
 /*
@@ -22,7 +22,7 @@ Displays the font we're using, character by character.
 void window::drawFont() {
 	int atx = 1;
 	int aty = 1;
-	for (int c = 1; c < 254; c++) {
+	for (int c = 1; c < 255; c++) {
 		//Numeral
 		write(atx, aty, std::to_string(c), TCODColor::lightGreen);
 		//Character
@@ -46,7 +46,7 @@ WRITING
 Put a character at the specified screen location.
 Input: x, y coordinates in the window; a character; a foreground and background color.
 */
-void window::writec(int x, int y, char c, TCODColor col, TCODColor bgcol) {
+void window::writec(int x, int y, int c, TCODColor col, TCODColor bgcol) {
 	TCODConsole::root->putCharEx(x, y, c, col, bgcol);
 }
 
