@@ -16,6 +16,16 @@ It also draws all the stuff that needs drawing.
 #include "map.h"
 #include "person.h"
 
+//Draw data - useful little chunk of data that defines what to draw at a point on the map
+struct drawData {
+	drawData() {}
+	drawData(int tileCode, TCODColor color, TCODColor bgcolor): 
+		tileCode(tileCode), color(color), bgcolor(bgcolor) {}
+	int tileCode;
+	TCODColor color;
+	TCODColor bgcolor;
+};
+
 class game
 {
 public:
@@ -34,6 +44,7 @@ private:
 	//Drawing functions
 	void drawScreen();
 	void drawMap(int atx, int aty);
+	drawData getDrawData(int x, int y);
 	//Input processing
 	void processCommand();
 	void processMove(TCOD_key_t kp);

@@ -15,7 +15,7 @@ map::map(int xsize, int ysize)
 		maptileVector1d* yvector = new maptileVector1d;
 		//Fill this vector with empty tiles
 		for (int y = 0; y < ysize; y++)
-			yvector->push_back(new maptile());
+			yvector->push_back(floor());
 		//And then push this vector onto the x-list
 		maptiles.push_back(yvector);
 	}
@@ -85,4 +85,21 @@ person * map::getPerson(int x, int y)
 			return p;
 	}
 	return nullptr;
+}
+
+/*
+	FOV STUFF
+*/
+
+/*
+Computes FOV for a person at the given position.
+*/
+void map::updateFOV(int xpos, int ypos)
+{
+	datamap->computeFov(xpos, ypos);
+}
+
+bool map::isPointInFOV(int x, int y)
+{
+	return datamap->isInFov(x, y);
 }

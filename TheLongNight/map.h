@@ -30,6 +30,9 @@ public:
 	//Getting: movement data
 	bool isWalkable(int x, int y) { return datamap->isWalkable(x, y); }
 	bool isSeeThrough(int x, int y) { return datamap->isTransparent(x, y); }
+	//FOV stuff
+	void updateFOV(int xpos, int ypos);
+	bool isPointInFOV(int x, int y);
 private:
 	//Boundaries and map creation
 	int xsize, ysize;

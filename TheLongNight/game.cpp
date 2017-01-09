@@ -15,6 +15,7 @@ game::game()
 	//Character create
 	player = new person();
 	currentMap->addPerson(player, 3, 3);
+	currentMap->updateFOV(player->getx(), player->gety());
 }
 
 
@@ -72,14 +73,45 @@ void game::drawMap(int leftx, int topy)
 	//Draw entire map, left to right & top to bottom
 	for (int x = 0; x < currentMap->getXSize(); x++) {
 		for (int y = 0; y < currentMap->getYSize(); y++) {
-			maptile* m = currentMap->getTile(x, y);
-			win.writec(leftx + x, topy + y, m->getTileCode(), m->getColor(), m->getBgColor());
+			drawData toDraw = getDrawData(x, y);
+			win.writec(leftx + x, topy + y, toDraw.tileCode, toDraw.color, toDraw.bgcolor);
 		}
 	}
-	//Now draw stuff over top, i.e. characters, items, etc.
-	for (auto p : currentMap->getAllPeople()) {
-		win.writec(leftx + p->getx(), topy + p->gety(), p->getTileCode(), p->getColor());
+}
+
+/*
+Returns what to draw at the given point.
+*/
+drawData game::getDrawData(int x, int y)
+{
+	//Basic data comes from the map tile
+	maptile* m = currentMap->getTile(x, y);
+	drawData toDraw(m->getTileCode(), m->getColor(), m->getBgColor());
+	//If this point isn't visible, don't draw it!
+	if (!currentMap->isPointInFOV(x, y)) {
+		//Darken color if out of FOV
+		toDraw.color = win.mixColors(toDraw.color, TCODColor::black, 0.8);
+		toDraw.bgcolor = win.mixColors(toDraw.bgcolor, TCODColor::black, 0.8);
 	}
+	else {
+		//Is there a player here?
+		person* p = currentMap->getPerson(x, y);
+		if (p != nullptr) {
+			toDraw.tileCode = p->getTileCode();
+			toDraw.color = p->getColor();
+		}
+		//Darken tiles that are further away
+		int distance = hypot(x - player->getx(), y - player->gety());
+		float modifier = distance * 0.05;
+		if (modifier > 0.9)
+			modifier = 0.9;
+		else if (modifier < 0.1)
+			modifier = 0.1;
+		toDraw.color = win.mixColors(toDraw.color, TCODColor::black, modifier);
+		toDraw.bgcolor = win.mixColors(toDraw.bgcolor, TCODColor::black, modifier);
+	}
+	//Done! Return it all
+	return toDraw;
 }
 
 /*
@@ -134,6 +166,8 @@ void game::movePlayer(int xnew, int ynew)
 		//Possible to walk on?
 		if (currentMap->isWalkable(xnew, ynew)) {
 			player->setPosition(xnew, ynew);
+			//Update the FOV when we move
+			currentMap->updateFOV(player->getx(), player->gety());
 		}
 	}
 }
