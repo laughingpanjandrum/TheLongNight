@@ -7,6 +7,11 @@ game::game()
 	//We start by creating an empty map, just for now
 	map* newmap = new map();
 	setCurrentMap(newmap);
+	//Add some random walls and shit
+	currentMap->setTile(wall(), 5, 5);
+	currentMap->setTile(wall(), 6, 5);
+	currentMap->setTile(wall(), 8, 8);
+	currentMap->setTile(wall(), 10, 8);
 	//Character create
 	player = new person();
 	currentMap->addPerson(player, 3, 3);
@@ -68,7 +73,7 @@ void game::drawMap(int leftx, int topy)
 	for (int x = 0; x < currentMap->getXSize(); x++) {
 		for (int y = 0; y < currentMap->getYSize(); y++) {
 			maptile* m = currentMap->getTile(x, y);
-			win.writec(leftx + x, topy + y, m->tileCode, m->color, m->bgcolor);
+			win.writec(leftx + x, topy + y, m->getTileCode(), m->getColor(), m->getBgColor());
 		}
 	}
 	//Now draw stuff over top, i.e. characters, items, etc.
@@ -124,7 +129,11 @@ Change player character's position, if the move is valid.
 */
 void game::movePlayer(int xnew, int ynew)
 {
+	//In bounds?
 	if (currentMap->inBounds(xnew, ynew)) {
-		player->setPosition(xnew, ynew);
+		//Possible to walk on?
+		if (currentMap->isWalkable(xnew, ynew)) {
+			player->setPosition(xnew, ynew);
+		}
 	}
 }

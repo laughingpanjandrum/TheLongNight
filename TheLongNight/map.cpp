@@ -19,6 +19,9 @@ map::map(int xsize, int ysize)
 		//And then push this vector onto the x-list
 		maptiles.push_back(yvector);
 	}
+	//Also build a datamap for FOV/etc
+	datamap = new TCODMap(xsize, ysize);
+	datamap->clear(true, true);
 }
 
 
@@ -44,7 +47,10 @@ Change the tile at the given position.
 */
 void map::setTile(maptile * t, int x, int y)
 {
+	//Change tile
 	maptiles.at(x)->at(y) = t;
+	//Update metadata at this point
+	datamap->setProperties(x, y, t->isSeeThrough(), t->isWalkable());
 }
 
 /*
