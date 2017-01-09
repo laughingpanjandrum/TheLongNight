@@ -90,8 +90,8 @@ drawData game::getDrawData(int x, int y)
 	//If this point isn't visible, don't draw it!
 	if (!currentMap->isPointInFOV(x, y)) {
 		//Darken color if out of FOV
-		toDraw.color = win.mixColors(toDraw.color, TCODColor::black, 0.8);
-		toDraw.bgcolor = win.mixColors(toDraw.bgcolor, TCODColor::black, 0.8);
+		toDraw.color = win.mixColors(toDraw.color, TCODColor::black, 0.9);
+		toDraw.bgcolor = win.mixColors(toDraw.bgcolor, TCODColor::black, 0.9);
 	}
 	else {
 		//Is there a player here?
@@ -102,9 +102,9 @@ drawData game::getDrawData(int x, int y)
 		}
 		//Darken tiles that are further away
 		int distance = hypot(x - player->getx(), y - player->gety());
-		float modifier = distance * 0.05;
-		if (modifier > 0.9)
-			modifier = 0.9;
+		float modifier = distance * 0.07;
+		if (modifier > 0.85)
+			modifier = 0.85;
 		else if (modifier < 0.1)
 			modifier = 0.1;
 		toDraw.color = win.mixColors(toDraw.color, TCODColor::black, modifier);
