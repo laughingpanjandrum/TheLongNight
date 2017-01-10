@@ -31,6 +31,7 @@ public:
 	void die();
 	//Equipment
 	void equipItem(item* which);
+	void addItem(item* which);
 	weapon* getWeapon();
 	armour* getArmour();
 	//Flags

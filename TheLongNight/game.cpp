@@ -17,13 +17,13 @@ game::game()
 	currentMap->setTile(acid(), 14, 13);
 	//Character create
 	player = new person();
-	player->equipItem(weapon_SplinteredSword());
 	//player->equipItem(armour_RuinedUniform());
 	player->isPlayer = true;
 	currentMap->addPerson(player, 3, 3);
 	currentMap->updateFOV(player->getx(), player->gety());
 	//Starting items
 	currentMap->addItem(armour_RuinedUniform(), 6, 6);
+	currentMap->addItem(weapon_SplinteredSword(), 2, 3);
 	//Monsters
 	monster* m = drownedDead();
 	currentMap->addPerson(m, 12, 12);

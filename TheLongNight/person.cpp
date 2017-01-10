@@ -85,6 +85,14 @@ void person::equipItem(item * which)
 }
 
 /*
+Add the given item to our items carried.
+*/
+void person::addItem(item * which)
+{
+	items.addItem(which);
+}
+
+/*
 Returns our equipped weapon, or nullptr if we don't have one equipped.
 */
 weapon * person::getWeapon()

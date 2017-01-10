@@ -9,6 +9,13 @@ i.e. all item types/monster types should be kept here.
 
 #include <vector>
 
+//Game states
+
+enum gameState {
+	MAP_MODE,
+	VIEWING_INVENTORY
+};
+
 //Item types
 
 enum itemTypes {
