@@ -18,10 +18,12 @@ game::game()
 	//Character create
 	player = new person();
 	player->equipItem(weapon_SplinteredSword());
-	player->equipItem(armour_RuinedUniform());
+	//player->equipItem(armour_RuinedUniform());
 	player->isPlayer = true;
 	currentMap->addPerson(player, 3, 3);
 	currentMap->updateFOV(player->getx(), player->gety());
+	//Starting items
+	currentMap->addItem(armour_RuinedUniform(), 6, 6);
 	//Monsters
 	monster* m = drownedDead();
 	currentMap->addPerson(m, 12, 12);
@@ -202,6 +204,14 @@ drawData game::getDrawData(int x, int y)
 		if (p != nullptr) {
 			toDraw.tileCode = p->getTileCode();
 			toDraw.color = p->getColor();
+		}
+		else {
+			//Is there an item here?
+			item* it = currentMap->getItem(x, y);
+			if (it != nullptr) {
+				toDraw.tileCode = it->getTileCode();
+				toDraw.color = it->getColor();
+			}
 		}
 		//Darken tiles that are further away
 		int distance = hypot(x - player->getx(), y - player->gety());

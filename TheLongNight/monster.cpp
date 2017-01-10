@@ -29,6 +29,11 @@ void monster::setMoveStats(int speed)
 	this->baseMoveSpeed = speed;
 }
 
+void monster::setHealth(int hp)
+{
+	this->health.setTo(hp);
+}
+
 /*
 Monster definitions
 */
@@ -36,8 +41,9 @@ Monster definitions
 monster * drownedDead()
 {
 	monster * m = new monster("Drowned Dead", DROWNED_DEAD_TILE, TCODColor::darkGreen);
-	m->setMeleeStats(10, SPEED_NORMAL);
+	m->setMeleeStats(10, SPEED_SLOW);
 	m->setMoveStats(SPEED_NORMAL);
+	m->setHealth(10);
 	return m;
 }
 

@@ -70,6 +70,23 @@ void map::removePerson(person * p)
 	people.erase(std::find(people.begin(), people.end(), p), people.end());
 }
 
+/*
+Add an item to the map.
+*/
+void map::addItem(item * it, int x, int y)
+{
+	items.push_back(it);
+	it->setPosition(x, y);
+}
+
+/*
+Delete an item from the map.
+*/
+void map::removeItem(item * it)
+{
+	items.erase(std::find(items.begin(), items.end(), it), items.end());
+}
+
 
 /*
 	GETTING
@@ -91,6 +108,15 @@ person * map::getPerson(int x, int y)
 	for (auto p : people) {
 		if (p->isAtPosition(x, y))
 			return p;
+	}
+	return nullptr;
+}
+
+item * map::getItem(int x, int y)
+{
+	for (auto i : items) {
+		if (i->isAtPosition(x, y))
+			return i;
 	}
 	return nullptr;
 }

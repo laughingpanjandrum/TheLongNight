@@ -14,6 +14,7 @@ public:
 	//Setting
 	void setMeleeStats(int damage, int speed);
 	void setMoveStats(int speed);
+	void setHealth(int hp);
 };
 
 //Monster definitions
