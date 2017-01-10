@@ -12,6 +12,9 @@ game::game()
 	currentMap->setTile(wall(), 6, 5);
 	currentMap->setTile(wall(), 8, 8);
 	currentMap->setTile(wall(), 10, 8);
+	currentMap->setTile(acid(), 13, 13);
+	currentMap->setTile(acid(), 13, 14);
+	currentMap->setTile(acid(), 14, 13);
 	//Character create
 	player = new person();
 	currentMap->addPerson(player, 3, 3);
@@ -181,9 +184,26 @@ void game::movePlayer(int xnew, int ynew)
 	if (currentMap->inBounds(xnew, ynew)) {
 		//Possible to walk on?
 		if (currentMap->isWalkable(xnew, ynew)) {
+			//Adjust position and deal with the consequences
 			player->setPosition(xnew, ynew);
+			standOnTile(player);
 			//Update the FOV when we move
 			currentMap->updateFOV(player->getx(), player->gety());
+		}
+	}
+}
+
+/*
+Apply effects of standing on a tile to the given person.
+Usually ticks once per round, and once when the player first moves to this tile.
+*/
+void game::standOnTile(person * victim)
+{
+	maptile* mt = currentMap->getTile(victim->getx(), victim->gety());
+	for (auto te : mt->getTouchEffects()) {
+		if (te == ACID_TOUCH) {
+			//Take damage! OUCH
+			victim->takeDamage(5);
 		}
 	}
 }

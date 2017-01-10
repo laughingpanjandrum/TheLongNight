@@ -48,9 +48,11 @@ private:
 	void drawInterface(int atx, int aty);
 	//Input processing
 	void processCommand();
+	//Movement
 	void processMove(TCOD_key_t kp);
 	bool isMovementKey(TCOD_key_t kp);
 	void movePlayer(int xnew, int ynew);
+	void standOnTile(person* victim);
 	//Draw location constants
 	const static int MAP_DRAW_X = 3;
 	const static int MAP_DRAW_Y = 3;
