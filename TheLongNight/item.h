@@ -20,5 +20,7 @@ private:
 	itemTypes category;
 };
 
+const std::string getItemCategoryName(itemTypes cat);
+
 #endif
 

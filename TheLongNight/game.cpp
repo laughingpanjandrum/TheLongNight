@@ -69,9 +69,16 @@ void game::setCurrentMap(map * newMapP)
 }
 
 /*
+Change the game state.
+*/
+void game::setState(gameState st)
+{
+	state = st;
+}
+
+/*
 	PASSAGE OF TIME
 */
-
 
 void game::endPlayerTurn()
 {
@@ -163,7 +170,13 @@ Clears, draws the entire screen, then refreshes.
 void game::drawScreen() 
 {
 	win.clear();
-	drawMap(MAP_DRAW_X, MAP_DRAW_Y);
+	//Figure out what to draw
+	if (state == STATE_VIEW_MAP) {
+		drawMap(MAP_DRAW_X, MAP_DRAW_Y);
+	}
+	else if (state == STATE_VIEW_INVENTORY) {
+		drawInventory(MAP_DRAW_X, MAP_DRAW_Y);
+	}
 	drawInterface(MAP_DRAW_X + 40, MAP_DRAW_Y);
 	//win.drawFont();
 	win.refresh();
@@ -258,6 +271,26 @@ void game::drawInterface(int leftx, int topy)
 }
 
 /*
+List inventory
+*/
+void game::drawInventory(int atx, int aty)
+{
+	//List all categories
+	for (unsigned int i = 0; i < ALL_ITEM_TYPES.size(); i++) {
+		//Category
+		itemTypes cat = ALL_ITEM_TYPES[i];
+		std::string title = getItemCategoryName(cat);
+		win.write(atx, ++aty, title, TCODColor::lightGrey);
+		//Items of this type that we have
+		itemVector carriedItems = player->getItemsOfType(cat);
+		//And draw all of THEM
+		for (auto item : carriedItems) {
+			win.write(atx + 1, ++aty, item->getName(), item->getColor());
+		}
+	}
+}
+
+/*
 	COMMAND PROCESSING
 */
 
@@ -266,6 +299,11 @@ void game::processCommand()
 	TCOD_key_t kp = win.getkey();
 	if (kp.c == 'Q')
 		isGameOver = true;
+	//Menus
+	else if (kp.vk == KEY_BACK_OUT)
+		setState(STATE_VIEW_MAP);
+	else if (kp.c == 'i')
+		setState(STATE_VIEW_INVENTORY);
 	//Movement
 	else if (isMovementKey(kp))
 		processMove(kp);
@@ -346,6 +384,7 @@ void game::standOnTile(person * victim)
 		item* itemHere = currentMap->getItem(victim->getx(), victim->gety());
 		if (itemHere != nullptr) {
 			//Get item
+			victim->addItem(itemHere);
 			victim->equipItem(itemHere);
 			//...and remove it from the floor
 			currentMap->removeItem(itemHere);

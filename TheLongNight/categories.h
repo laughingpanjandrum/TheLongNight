@@ -12,8 +12,8 @@ i.e. all item types/monster types should be kept here.
 //Game states
 
 enum gameState {
-	MAP_MODE,
-	VIEWING_INVENTORY
+	STATE_VIEW_MAP,
+	STATE_VIEW_INVENTORY
 };
 
 //Item types

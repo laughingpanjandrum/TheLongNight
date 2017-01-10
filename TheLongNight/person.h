@@ -30,6 +30,7 @@ public:
 	void takeDamage(int amount);
 	void die();
 	//Equipment
+	std::vector<item*> getItemsOfType(itemTypes category) { return items.getItemList(category); }
 	void equipItem(item* which);
 	void addItem(item* which);
 	weapon* getWeapon();

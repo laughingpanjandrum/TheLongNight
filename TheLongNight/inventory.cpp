@@ -59,9 +59,10 @@ Add an item to our storage, without equipping it.
 void inventory::addItem(item * which)
 {
 	//Find the proper list
-	for (auto ilist : carried) {
-		if (ilist.category == which->getCategory()) {
-			ilist.add(which);
+	for (auto ilist = carried.begin(); ilist != carried.end(); ilist++) {
+		if ((*ilist).category == which->getCategory()) {
+			(*ilist).add(which);
+			return;
 		}
 	}
 }
@@ -81,4 +82,18 @@ item * inventory::getEquipped(itemTypes category)
 			return it.equipped;
 	}
 	return nullptr;
+}
+
+/*
+Return all carried items of the given type.
+*/
+std::vector<item*> inventory::getItemList(itemTypes category)
+{
+	//Find this category
+	for (auto it : carried) {
+		if (it.category == category)
+			return it.items;
+	}
+	//If we don't find this category for some reason, return an empty vector
+	return std::vector<item*>();
 }

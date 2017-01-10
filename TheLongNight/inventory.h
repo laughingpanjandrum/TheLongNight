@@ -39,6 +39,7 @@ public:
 	void addItem(item* which);
 	//Getters
 	item* getEquipped(itemTypes category);
+	std::vector<item*> getItemList(itemTypes category);
 	weapon* getWeapon() { return equippedWeapon; }
 	armour* getArmour() { return equippedArmour; }
 private:

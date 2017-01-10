@@ -43,7 +43,10 @@ private:
 	//Character/state/etc
 	map* currentMap;
 	person* player;
+	gameState state = STATE_VIEW_MAP;
 	bool isGameOver = false;
+	//State manipulation
+	void setState(gameState st);
 	//Turn tracking
 	turnTracker turns;
 	int playerTurnDelay = 0; //When it increases, that means the player's turn is over!
@@ -58,6 +61,7 @@ private:
 	void drawMap(int atx, int aty);
 	drawData getDrawData(int x, int y);
 	void drawInterface(int atx, int aty);
+	void drawInventory(int atx, int aty);
 	//Input processing
 	void processCommand();
 	//Movement
