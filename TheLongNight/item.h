@@ -13,6 +13,8 @@ public:
 	item(std::string name, int tileCode, TCODColor color): element(name,tileCode,color) {}
 	item(std::string name, int tileCode, TCODColor color, itemTypes category);
 	~item();
+	//Getters
+	itemTypes getCategory() { return category; }
 private:
 	//Sorting
 	itemTypes category;

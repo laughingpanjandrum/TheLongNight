@@ -17,6 +17,7 @@ game::game()
 	currentMap->setTile(acid(), 14, 13);
 	//Character create
 	player = new person();
+	player->equipItem(weapon_SplinteredSword());
 	player->isPlayer = true;
 	currentMap->addPerson(player, 3, 3);
 	currentMap->updateFOV(player->getx(), player->gety());
@@ -226,6 +227,12 @@ void game::drawInterface(int leftx, int topy)
 	//Health
 	win.drawCounter(player->getHealth(), "LIFE", atx, aty, TCODColor::darkRed, TCODColor::darkGrey, 20);
 	win.write(atx + 4, ++aty, player->getHealth().getAsString(), TCODColor::darkRed);
+	//Equipment
+	weapon* wp = player->getWeapon();
+	if (wp != nullptr) {
+		win.writec(atx, ++aty, wp->getTileCode(), wp->getColor());
+		win.write(atx + 2, aty, wp->getName(), wp->getColor());
+	}
 	//Target info
 	person* target = player->getTarget();
 	if (target != nullptr) {

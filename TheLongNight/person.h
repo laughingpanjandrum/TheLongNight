@@ -5,6 +5,10 @@
 #include "element.h"
 #include "counter.h"
 
+#include "inventory.h"
+#include "categories.h"
+#include "weapon.h"
+
 class person: public element
 {
 public:
@@ -23,12 +27,17 @@ public:
 	//Damage and healing
 	void takeDamage(int amount);
 	void die();
+	//Equipment
+	void equipItem(item* which);
+	weapon* getWeapon();
 	//Flags
 	bool isDead = false;
 	bool isPlayer = true;
 private:
 	//Attributes
 	counter health;
+	//Equipment
+	inventory items;
 	//Current thing we're trying to kill
 	person* target;
 };

@@ -28,3 +28,23 @@ void person::die()
 {
 	isDead = true;
 }
+
+/*
+	INVENTORY, EQUIPMENT
+*/
+
+/*
+Equip the given item, if possible.
+*/
+void person::equipItem(item * which)
+{
+	items.equipItem(which);
+}
+
+/*
+Returns our equipped weapon, or nullptr if we don't have one equipped.
+*/
+weapon * person::getWeapon()
+{
+	return items.getWeapon();
+}

@@ -15,6 +15,9 @@ const int PLAYER_TILE = 1;
 
 const int DROWNED_DEAD_TILE = 100;
 
+//Items
+const int SWORD_TILE = 173;
+
 //Maptiles
 const int BASIC_FLOOR_TILE = 46;
 const int BASIC_WALL_TILE = 178;
