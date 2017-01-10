@@ -118,6 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="counter.cpp" />
     <ClCompile Include="element.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="map.cpp" />
@@ -127,6 +128,7 @@
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="counter.h" />
     <ClInclude Include="element.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="keycodes.h" />

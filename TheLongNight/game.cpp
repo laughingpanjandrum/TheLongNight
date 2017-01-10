@@ -60,6 +60,7 @@ void game::drawScreen()
 {
 	win.clear();
 	drawMap(MAP_DRAW_X, MAP_DRAW_Y);
+	drawInterface(MAP_DRAW_X + 40, MAP_DRAW_Y);
 	//win.drawFont();
 	win.refresh();
 }
@@ -115,6 +116,18 @@ drawData game::getDrawData(int x, int y)
 }
 
 /*
+Draws everything that's not the map!
+*/
+void game::drawInterface(int leftx, int topy)
+{
+	int atx = leftx;
+	int aty = topy;
+	//Health
+	win.drawCounter(player->getHealth(), "LIFE", atx, aty, TCODColor::darkRed, TCODColor::darkGrey, 20);
+	win.write(atx + 4, ++aty, player->getHealth().getAsString(), TCODColor::darkRed);
+}
+
+/*
 	COMMAND PROCESSING
 */
 
@@ -126,6 +139,9 @@ void game::processCommand()
 	//Movement
 	else if (isMovementKey(kp))
 		processMove(kp);
+	//Debug
+	else if (kp.c == 'w')
+		player->takeDamage(5);
 }
 
 /*

@@ -3,14 +3,22 @@
 #define PERSON_H
 
 #include "element.h"
+#include "counter.h"
 
 class person: public element
 {
 public:
 	//Constructors/destructors
 	person(): person("Player", PLAYER_TILE, TCODColor::white) {}
-	person(std::string name, int tileCode, TCODColor color): element(name,tileCode,color) {}
+	person(std::string name, int tileCode, TCODColor color);
 	~person();
+	//Getters
+	counter getHealth() { return health; }
+	//Damage and healing
+	void takeDamage(int amount);
+private:
+	//Attributes
+	counter health;
 };
 
 #endif

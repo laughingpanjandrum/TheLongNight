@@ -1,5 +1,6 @@
 #include "window.h"
 #include "libtcod.hpp"
+#include "tileConsts.h"
 
 window::window() : window("THE LONG NIGHT", 100, 70)
 {
@@ -169,5 +170,29 @@ void window::drawBox(int leftx, int topy, int width, int height, TCODColor col) 
 	for (int y = topy + 1; y < topy + height; y++) {
 		writec(leftx, y, '|', col);
 		writec(leftx + width, y, '|', col);
+	}
+}
+
+/*
+Draws a counter (as defined in counter.h).
+Can place a title on top, and displays col1 for the section that's full, col2 for the empty section.
+maxSize is the length of the bar we'll draw.
+*/
+void window::drawCounter(counter c, std::string title, int x, int y, TCODColor col1, TCODColor col2, int maxSize)
+{
+	//Draw title first
+	write(x, y, title, col1);
+	x += title.size();
+	//Figure out how many tiles to draw 'full' and how many to draw 'empty'
+	float frac = c.getPercent();
+	int toDrawFull = maxSize * frac;
+	int toDrawEmpty = maxSize - toDrawFull;
+	//And then draw them!
+	int i = 0;
+	for (i; i < toDrawFull; i++) {
+		writec(x + i, y, FULL_COUNTER_TILE, col1);
+	}
+	for (i; i < maxSize; i++) {
+		writec(x + i, y, EMPTY_COUNTER_TILE, col2);
 	}
 }

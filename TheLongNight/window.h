@@ -1,6 +1,7 @@
 
 #include <string>
 #include "libtcod.hpp"
+#include "counter.h"
 
 #ifndef WINDOW_H
 #define WINDOW_H
@@ -26,6 +27,7 @@ public:
 	TCOD_key_t waitForKeypress();
 	//Special shape-drawing functions
 	void drawBox(int leftx, int topy, int width, int height, TCODColor col = TCODColor::grey);
+	void drawCounter(counter c, std::string title, int x, int y, TCODColor col1, TCODColor col2, int maxSize = 10);
 };
 
 #endif

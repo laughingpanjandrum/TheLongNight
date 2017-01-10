@@ -6,6 +6,10 @@ This file defines which font characters correspond to which tiles.
 #ifndef TILE_CONSTS_H
 #define TILE_CONSTS_H
 
+//Interface
+const int FULL_COUNTER_TILE = 177;
+const int EMPTY_COUNTER_TILE = 176;
+
 //Characters
 const int PLAYER_TILE = 1;
 

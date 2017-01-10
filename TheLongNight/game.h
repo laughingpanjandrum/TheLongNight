@@ -45,6 +45,7 @@ private:
 	void drawScreen();
 	void drawMap(int atx, int aty);
 	drawData getDrawData(int x, int y);
+	void drawInterface(int atx, int aty);
 	//Input processing
 	void processCommand();
 	void processMove(TCOD_key_t kp);

@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\maps">
+      <UniqueIdentifier>{12f7b713-3055-42bf-817b-392c5af1125a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\elements">
+      <UniqueIdentifier>{2efc7ede-f03e-40ac-888e-0b6ceef8b9e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\maps">
+      <UniqueIdentifier>{5e09d4f2-3999-4d96-b14d-bed664954b55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\elements">
+      <UniqueIdentifier>{4e4f10c0-9b8b-4204-adc0-b55ed0f055bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TheLongNight.cpp">
@@ -21,19 +33,22 @@
     <ClCompile Include="window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="map.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="maptile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="element.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\elements</Filter>
+    </ClCompile>
+    <ClCompile Include="map.cpp">
+      <Filter>Source Files\maps</Filter>
+    </ClCompile>
+    <ClCompile Include="maptile.cpp">
+      <Filter>Source Files\maps</Filter>
     </ClCompile>
     <ClCompile Include="person.cpp">
+      <Filter>Source Files\elements</Filter>
+    </ClCompile>
+    <ClCompile Include="counter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,25 +56,28 @@
     <ClInclude Include="window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="map.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="maptile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="element.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="person.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="tileConsts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="keycodes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="map.h">
+      <Filter>Header Files\maps</Filter>
+    </ClInclude>
+    <ClInclude Include="maptile.h">
+      <Filter>Header Files\maps</Filter>
+    </ClInclude>
+    <ClInclude Include="element.h">
+      <Filter>Header Files\elements</Filter>
+    </ClInclude>
+    <ClInclude Include="person.h">
+      <Filter>Header Files\elements</Filter>
+    </ClInclude>
+    <ClInclude Include="counter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
