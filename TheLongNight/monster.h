@@ -8,7 +8,7 @@ class monster: public person
 {
 public:
 	//Constructors
-	monster() : person() {}
+	monster() : person() { isPlayer = false; }
 	monster(std::string name, int tileCode, TCODColor color): person(name,tileCode,color) {}
 	~monster() {}
 };

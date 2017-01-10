@@ -127,6 +127,7 @@
     <ClCompile Include="person.cpp" />
     <ClCompile Include="TheLongNight.cpp" />
     <ClCompile Include="turnTracker.cpp" />
+    <ClCompile Include="utility.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -140,6 +141,7 @@
     <ClInclude Include="maptile.h" />
     <ClInclude Include="person.h" />
     <ClInclude Include="turnTracker.h" />
+    <ClInclude Include="utility.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

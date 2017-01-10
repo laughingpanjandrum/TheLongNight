@@ -13,6 +13,7 @@ It also draws all the stuff that needs drawing.
 #include "window.h"
 #include "keycodes.h"
 #include "turnTracker.h"
+#include "utility.h"
 
 #include "map.h"
 #include "person.h"
@@ -48,6 +49,9 @@ private:
 	int playerTurnDelay = 0; //When it increases, that means the player's turn is over!
 	void endPlayerTurn();
 	//Monster actions
+	bool aiIsValidMove(person* ai, int xnew, int ynew);
+	void aiMoveToTarget(person* ai);
+	void aiFindTarget(person* ai);
 	void doMonsterTurn(person* ai);
 	//Drawing functions
 	void drawScreen();
@@ -59,7 +63,7 @@ private:
 	//Movement
 	void processMove(TCOD_key_t kp);
 	bool isMovementKey(TCOD_key_t kp);
-	void movePlayer(int xnew, int ynew);
+	void movePerson(person* p, int xnew, int ynew);
 	void standOnTile(person* victim);
 	//Combat
 	void meleeAttack(person* attacker, person* target);

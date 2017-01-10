@@ -16,6 +16,7 @@ public:
 	counter getHealth() { return health; }
 	person* getTarget() { return target; }
 	int getMoveDelay() { return 1; }
+	int getAttackDelay() { return 1; }
 	//Setters
 	void setTarget(person* target) { this->target = target; }
 	void clearTarget() { target = nullptr; }
@@ -24,6 +25,7 @@ public:
 	void die();
 	//Flags
 	bool isDead = false;
+	bool isPlayer = true;
 private:
 	//Attributes
 	counter health;

@@ -17,6 +17,7 @@ game::game()
 	currentMap->setTile(acid(), 14, 13);
 	//Character create
 	player = new person();
+	player->isPlayer = true;
 	currentMap->addPerson(player, 3, 3);
 	currentMap->updateFOV(player->getx(), player->gety());
 	//Monsters
@@ -87,11 +88,66 @@ void game::endPlayerTurn()
 	AI ACTIONS
 */
 
+/*
+Returns whether the given ai will move to the given point.
+*/
+bool game::aiIsValidMove(person * ai, int xnew, int ynew)
+{
+	if (!currentMap->inBounds(xnew, ynew))
+		return false;
+	else if (!currentMap->isWalkable(xnew, ynew))
+		return false;
+	return true;
+}
 
+/*
+AI moves directly towards its target, melee-attacking if possible.
+*/
+void game::aiMoveToTarget(person * ai)
+{
+	int xnew = ai->getx();
+	int ynew = ai->gety();
+	person* target = ai->getTarget();
+	//Movement vectors
+	xnew += get1dVector(xnew, target->getx());
+	ynew += get1dVector(ynew, target->gety());
+	//Try to move it
+	if (aiIsValidMove(ai, xnew, ynew)) {
+		movePerson(ai, xnew, ynew);
+	}
+	//Time passes
+	turns.addEntity(ai, ai->getMoveDelay());
+}
+
+/*
+AI tries to find something to kill.
+*/
+void game::aiFindTarget(person * ai)
+{
+	//If the player can see us, we can see them. ONE SIMPLE RULE.
+	if (currentMap->isPointInFOV(ai->getx(), ai->gety())) {
+		ai->setTarget(player);
+	}
+}
+
+/*
+Monster does its turn and then is placed back into the turn tracker.
+*/
 void game::doMonsterTurn(person * ai)
 {
-	ai->setPosition(ai->getx() + 1, ai->gety());
-	turns.addEntity(ai, 1);
+	//If we're dead, we probably shouldn't do anything
+	if (ai->isDead)
+		return;
+	//Do we have a target?
+	person* target = ai->getTarget();
+	if (target == nullptr)
+		aiFindTarget(ai);
+	//If we have one, just move towards it
+	if (target != nullptr)
+		aiMoveToTarget(ai);
+	else
+		//If not, just wait
+		turns.addEntity(ai, 1);
 }
 
 /*
@@ -213,7 +269,7 @@ void game::processMove(TCOD_key_t kp)
 	else if (kp.vk == KEY_WEST)
 		xnew--;
 	//And then move there!
-	movePlayer(xnew, ynew);
+	movePerson(player, xnew, ynew);
 }
 
 /*
@@ -227,7 +283,7 @@ bool game::isMovementKey(TCOD_key_t kp)
 /*
 Change player character's position, if the move is valid.
 */
-void game::movePlayer(int xnew, int ynew)
+void game::movePerson(person* p, int xnew, int ynew)
 {
 	//In bounds?
 	if (currentMap->inBounds(xnew, ynew)) {
@@ -237,16 +293,21 @@ void game::movePlayer(int xnew, int ynew)
 			person* here = currentMap->getPerson(xnew, ynew);
 			if (here != nullptr) {
 				//We attack
-				meleeAttack(player, here);
+				meleeAttack(p, here);
+				//Player delay, if this is the player
+				if (p->isPlayer)
+					playerTurnDelay = p->getAttackDelay();
 			}
 			else {
 				//Adjust position and deal with the consequences
-				player->setPosition(xnew, ynew);
-				standOnTile(player);
-				//Update the FOV when we move
-				currentMap->updateFOV(player->getx(), player->gety());
-				//Time passes
-				playerTurnDelay = player->getMoveDelay();
+				p->setPosition(xnew, ynew);
+				standOnTile(p);
+				//If this is the player, update the FOV
+				if (p->isPlayer) {
+					currentMap->updateFOV(player->getx(), player->gety());
+					//Time passes
+					playerTurnDelay = p->getMoveDelay();
+				}
 			}
 		}
 	}
