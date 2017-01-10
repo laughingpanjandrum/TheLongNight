@@ -72,16 +72,15 @@ void game::setCurrentMap(map * newMapP)
 
 void game::endPlayerTurn()
 {
+	//Add player to turn tracker
 	turns.addEntity(player, playerTurnDelay);
 	playerTurnDelay = 0;
-	person* nextTurn;
 	//Cycle through all turns
-	do {
+	person* nextTurn = turns.getNext();
+	while (nextTurn != player) {
+		doMonsterTurn(nextTurn);
 		nextTurn = turns.getNext();
-		if (nextTurn != player) {
-			doMonsterTurn(nextTurn);
-		}
-	} while (nextTurn != player);
+	}
 }
 
 
