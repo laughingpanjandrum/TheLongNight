@@ -54,6 +54,9 @@
     <ClCompile Include="monster.cpp">
       <Filter>Source Files\elements</Filter>
     </ClCompile>
+    <ClCompile Include="turnTracker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window.h">
@@ -85,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="monster.h">
       <Filter>Header Files\elements</Filter>
+    </ClInclude>
+    <ClInclude Include="turnTracker.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

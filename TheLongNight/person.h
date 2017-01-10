@@ -14,6 +14,11 @@ public:
 	~person();
 	//Getters
 	counter getHealth() { return health; }
+	person* getTarget() { return target; }
+	int getMoveDelay() { return 1; }
+	//Setters
+	void setTarget(person* target) { this->target = target; }
+	void clearTarget() { target = nullptr; }
 	//Damage and healing
 	void takeDamage(int amount);
 	void die();
@@ -22,6 +27,8 @@ public:
 private:
 	//Attributes
 	counter health;
+	//Current thing we're trying to kill
+	person* target;
 };
 
 #endif

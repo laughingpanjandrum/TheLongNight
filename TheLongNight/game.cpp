@@ -20,7 +20,11 @@ game::game()
 	currentMap->addPerson(player, 3, 3);
 	currentMap->updateFOV(player->getx(), player->gety());
 	//Monsters
-	currentMap->addPerson(drownedDead(), 12, 12);
+	monster* m = drownedDead();
+	currentMap->addPerson(m, 12, 12);
+	//Add everything to the turn timer
+	//turns.addEntity(player, 0);
+	turns.addEntity(m, 1);
 }
 
 
@@ -38,6 +42,11 @@ void game::mainGameLoop()
 	//Draw
 	while (!isGameOver) {
 		drawScreen();
+		//Has the player's turn ended?
+		if (playerTurnDelay > 0) {
+			endPlayerTurn();
+		}
+		//Process player action
 		processCommand();
 	}
 }
@@ -52,6 +61,37 @@ Sets the current map
 void game::setCurrentMap(map * newMapP)
 {
 	currentMap = newMapP;
+}
+
+/*
+	PASSAGE OF TIME
+*/
+
+
+void game::endPlayerTurn()
+{
+	turns.addEntity(player, playerTurnDelay);
+	playerTurnDelay = 0;
+	person* nextTurn;
+	//Cycle through all turns
+	do {
+		nextTurn = turns.getNext();
+		if (nextTurn != player) {
+			doMonsterTurn(nextTurn);
+		}
+	} while (nextTurn != player);
+}
+
+
+/*
+	AI ACTIONS
+*/
+
+
+void game::doMonsterTurn(person * ai)
+{
+	ai->setPosition(ai->getx() + 1, ai->gety());
+	turns.addEntity(ai, 1);
 }
 
 /*
@@ -130,6 +170,13 @@ void game::drawInterface(int leftx, int topy)
 	//Health
 	win.drawCounter(player->getHealth(), "LIFE", atx, aty, TCODColor::darkRed, TCODColor::darkGrey, 20);
 	win.write(atx + 4, ++aty, player->getHealth().getAsString(), TCODColor::darkRed);
+	//Target info
+	person* target = player->getTarget();
+	if (target != nullptr) {
+		aty++;
+		win.write(atx, ++aty, target->getName(), target->getColor());
+		win.write(atx, ++aty, "HP:" + target->getHealth().getAsString(), TCODColor::darkRed);
+	}
 }
 
 /*
@@ -190,8 +237,7 @@ void game::movePlayer(int xnew, int ynew)
 			person* here = currentMap->getPerson(xnew, ynew);
 			if (here != nullptr) {
 				//We attack
-				here->takeDamage(10);
-				clearDeadCreatures();
+				meleeAttack(player, here);
 			}
 			else {
 				//Adjust position and deal with the consequences
@@ -199,6 +245,8 @@ void game::movePlayer(int xnew, int ynew)
 				standOnTile(player);
 				//Update the FOV when we move
 				currentMap->updateFOV(player->getx(), player->gety());
+				//Time passes
+				playerTurnDelay = player->getMoveDelay();
 			}
 		}
 	}
@@ -217,6 +265,25 @@ void game::standOnTile(person * victim)
 			victim->takeDamage(5);
 		}
 	}
+}
+
+/*
+	COMBAT
+*/
+
+/*
+One creature attacks another in melee.
+*/
+void game::meleeAttack(person * attacker, person * target)
+{
+	target->takeDamage(10);
+	//Update targeting
+	if (target->isDead)
+		attacker->clearTarget();
+	else
+		attacker->setTarget(target);
+	//Make sure dead things are removed from the map
+	clearDeadCreatures();
 }
 
 /*

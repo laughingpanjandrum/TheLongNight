@@ -12,6 +12,7 @@ It also draws all the stuff that needs drawing.
 #include "libtcod.hpp"
 #include "window.h"
 #include "keycodes.h"
+#include "turnTracker.h"
 
 #include "map.h"
 #include "person.h"
@@ -42,6 +43,12 @@ private:
 	map* currentMap;
 	person* player;
 	bool isGameOver = false;
+	//Turn tracking
+	turnTracker turns;
+	int playerTurnDelay = 0; //When it increases, that means the player's turn is over!
+	void endPlayerTurn();
+	//Monster actions
+	void doMonsterTurn(person* ai);
 	//Drawing functions
 	void drawScreen();
 	void drawMap(int atx, int aty);
@@ -54,6 +61,8 @@ private:
 	bool isMovementKey(TCOD_key_t kp);
 	void movePlayer(int xnew, int ynew);
 	void standOnTile(person* victim);
+	//Combat
+	void meleeAttack(person* attacker, person* target);
 	//Keeping the world up to date
 	void clearDeadCreatures();
 	//Draw location constants
