@@ -19,6 +19,8 @@ game::game()
 	player = new person();
 	currentMap->addPerson(player, 3, 3);
 	currentMap->updateFOV(player->getx(), player->gety());
+	//Monsters
+	currentMap->addPerson(drownedDead(), 12, 12);
 }
 
 
@@ -184,11 +186,19 @@ void game::movePlayer(int xnew, int ynew)
 	if (currentMap->inBounds(xnew, ynew)) {
 		//Possible to walk on?
 		if (currentMap->isWalkable(xnew, ynew)) {
-			//Adjust position and deal with the consequences
-			player->setPosition(xnew, ynew);
-			standOnTile(player);
-			//Update the FOV when we move
-			currentMap->updateFOV(player->getx(), player->gety());
+			//Is someone already here?
+			person* here = currentMap->getPerson(xnew, ynew);
+			if (here != nullptr) {
+				//We attack
+				here->takeDamage(10);
+			}
+			else {
+				//Adjust position and deal with the consequences
+				player->setPosition(xnew, ynew);
+				standOnTile(player);
+				//Update the FOV when we move
+				currentMap->updateFOV(player->getx(), player->gety());
+			}
 		}
 	}
 }

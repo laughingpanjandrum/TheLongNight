@@ -123,6 +123,7 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="maptile.cpp" />
+    <ClCompile Include="monster.cpp" />
     <ClCompile Include="person.cpp" />
     <ClCompile Include="TheLongNight.cpp" />
     <ClCompile Include="window.cpp" />
@@ -132,6 +133,7 @@
     <ClInclude Include="element.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="keycodes.h" />
+    <ClInclude Include="monster.h" />
     <ClInclude Include="tileConsts.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="maptile.h" />

@@ -15,6 +15,7 @@ It also draws all the stuff that needs drawing.
 
 #include "map.h"
 #include "person.h"
+#include "monster.h"
 
 //Draw data - useful little chunk of data that defines what to draw at a point on the map
 struct drawData {
