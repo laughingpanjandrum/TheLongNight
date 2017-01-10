@@ -191,6 +191,7 @@ void game::movePlayer(int xnew, int ynew)
 			if (here != nullptr) {
 				//We attack
 				here->takeDamage(10);
+				clearDeadCreatures();
 			}
 			else {
 				//Adjust position and deal with the consequences
@@ -215,5 +216,26 @@ void game::standOnTile(person * victim)
 			//Take damage! OUCH
 			victim->takeDamage(5);
 		}
+	}
+}
+
+/*
+	KEEPING THE WORLD UPDATED
+*/
+
+/*
+Removes all dead creatures from the map.
+*/
+void game::clearDeadCreatures()
+{
+	personVector toClear;
+	//Find everyone who's dead
+	for (auto p : currentMap->getAllPeople()) {
+		if (p->isDead)
+			toClear.push_back(p);
+	}
+	//And remove them!
+	for (auto p : toClear) {
+		currentMap->removePerson(p);
 	}
 }

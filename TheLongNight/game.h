@@ -54,6 +54,8 @@ private:
 	bool isMovementKey(TCOD_key_t kp);
 	void movePlayer(int xnew, int ynew);
 	void standOnTile(person* victim);
+	//Keeping the world up to date
+	void clearDeadCreatures();
 	//Draw location constants
 	const static int MAP_DRAW_X = 3;
 	const static int MAP_DRAW_Y = 3;

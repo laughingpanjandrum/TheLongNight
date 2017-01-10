@@ -6,11 +6,12 @@
 #include "maptile.h"
 #include "person.h"
 
+typedef std::vector<person*> personVector;
+
 class map
 {
 	typedef std::vector<maptile*> maptileVector1d;
 	typedef std::vector<maptileVector1d*> maptileVector2d;
-	typedef std::vector<person*> personVector;
 public:
 	//Constructors/destructor
 	map() : map(30, 30) {}
@@ -21,6 +22,7 @@ public:
 	//Setting
 	void setTile(maptile* t, int x, int y);
 	void addPerson(person* p, int x, int y);
+	void removePerson(person* p);
 	//Getting: position and elements
 	int getXSize() { return xsize; }
 	int getYSize() { return ysize; }

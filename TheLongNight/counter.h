@@ -33,6 +33,9 @@ public:
 	//Resetting
 	void clear() { value = 0; }
 	void restore() { value = maxValue; }
+	//Checking
+	bool isEmpty() { return value == 0; }
+	bool isFull() { return value == maxValue; }
 private:
 	int value;
 	int maxValue;

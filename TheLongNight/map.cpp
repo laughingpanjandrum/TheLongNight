@@ -62,6 +62,14 @@ void map::addPerson(person * p, int x, int y)
 	p->setPosition(x, y);
 }
 
+/*
+Delete a character from the map.
+*/
+void map::removePerson(person * p)
+{
+	people.erase(std::find(people.begin(), people.end(), p), people.end());
+}
+
 
 /*
 	GETTING

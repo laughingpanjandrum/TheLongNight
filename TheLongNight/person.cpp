@@ -20,4 +20,11 @@ person::~person()
 void person::takeDamage(int amount)
 {
 	health.decrease(amount);
+	if (health.isEmpty())
+		die();
+}
+
+void person::die()
+{
+	isDead = true;
 }

@@ -16,6 +16,9 @@ public:
 	counter getHealth() { return health; }
 	//Damage and healing
 	void takeDamage(int amount);
+	void die();
+	//Flags
+	bool isDead = false;
 private:
 	//Attributes
 	counter health;
