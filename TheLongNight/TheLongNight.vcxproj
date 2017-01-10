@@ -121,6 +121,7 @@
     <ClCompile Include="counter.cpp" />
     <ClCompile Include="element.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="item.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="maptile.cpp" />
     <ClCompile Include="monster.cpp" />
@@ -128,12 +129,15 @@
     <ClCompile Include="TheLongNight.cpp" />
     <ClCompile Include="turnTracker.cpp" />
     <ClCompile Include="utility.cpp" />
+    <ClCompile Include="weapon.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="categories.h" />
     <ClInclude Include="counter.h" />
     <ClInclude Include="element.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="item.h" />
     <ClInclude Include="keycodes.h" />
     <ClInclude Include="monster.h" />
     <ClInclude Include="tileConsts.h" />
@@ -142,6 +146,7 @@
     <ClInclude Include="person.h" />
     <ClInclude Include="turnTracker.h" />
     <ClInclude Include="utility.h" />
+    <ClInclude Include="weapon.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
