@@ -69,6 +69,9 @@
     <ClCompile Include="inventory.cpp">
       <Filter>Source Files\elements</Filter>
     </ClCompile>
+    <ClCompile Include="armour.cpp">
+      <Filter>Source Files\elements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window.h">
@@ -117,6 +120,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="inventory.h">
+      <Filter>Header Files\elements</Filter>
+    </ClInclude>
+    <ClInclude Include="armour.h">
       <Filter>Header Files\elements</Filter>
     </ClInclude>
   </ItemGroup>

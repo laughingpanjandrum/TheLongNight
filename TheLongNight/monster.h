@@ -11,6 +11,9 @@ public:
 	monster();
 	monster(std::string name, int tileCode, TCODColor color);
 	~monster() {}
+	//Setting
+	void setMeleeStats(int damage, int speed);
+	void setMoveStats(int speed);
 };
 
 //Monster definitions

@@ -18,6 +18,7 @@ game::game()
 	//Character create
 	player = new person();
 	player->equipItem(weapon_SplinteredSword());
+	player->equipItem(armour_RuinedUniform());
 	player->isPlayer = true;
 	currentMap->addPerson(player, 3, 3);
 	currentMap->updateFOV(player->getx(), player->gety());
@@ -232,6 +233,11 @@ void game::drawInterface(int leftx, int topy)
 		win.writec(atx, ++aty, wp->getTileCode(), wp->getColor());
 		win.write(atx + 2, aty, wp->getName(), wp->getColor());
 	}
+	armour* ar = player->getArmour();
+	if (ar != nullptr) {
+		win.writec(atx, ++aty, ar->getTileCode(), ar->getColor());
+		win.write(atx + 2, aty, ar->getName(), ar->getColor());
+	}
 	//Target info
 	person* target = player->getTarget();
 	if (target != nullptr) {
@@ -345,10 +351,17 @@ void game::meleeAttack(person * attacker, person * target)
 {
 	//Figure out how much damage to do
 	weapon* wp = attacker->getWeapon();
-	int damage = 1;
+	int damage = attacker->getBaseMeleeDamage();
 	if (wp != nullptr) {
 		damage = wp->getDamage();
 	}
+	//Reduce damage via armour
+	int def = target->getDefence();
+	int damageReduction = ((float)def / 100.0) * damage;
+	damage -= damageReduction;
+	//Minimum damage is 1
+	if (damage < 1)
+		damage = 1;
 	//Deal the damage
 	target->takeDamage(damage);
 	//Update targeting

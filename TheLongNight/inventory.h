@@ -9,6 +9,7 @@ Keeps track of stored inventory and equipped items.
 #include <vector>
 #include "categories.h"
 #include "weapon.h"
+#include "armour.h"
 
 
 struct inventorySlot {
@@ -29,11 +30,14 @@ public:
 	//Getters
 	item* getEquipped(itemTypes category);
 	weapon* getWeapon() { return equippedWeapon; }
+	armour* getArmour() { return equippedArmour; }
 private:
 	//Slots
 	slotVector equipped;
 	//Important items: we save pointers to these when they're equipped
 	weapon* equippedWeapon;
+	armour* equippedArmour;
+
 };
 
 #endif

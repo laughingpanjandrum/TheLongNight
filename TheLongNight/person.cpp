@@ -19,10 +19,14 @@ person::~person()
 
 /*
 How long our movement takes.
+Based on our equipped body armour.
 */
 int person::getMoveDelay()
 {
-	return SPEED_NORMAL;
+	armour* a = getArmour();
+	if (a != nullptr)
+		return a->getMoveSpeed();
+	return baseMoveSpeed;
 }
 
 /*
@@ -34,7 +38,22 @@ int person::getAttackDelay()
 	weapon* wp = getWeapon();
 	if (wp != nullptr)
 		return wp->getAttackDelay();
-	return SPEED_NORMAL;
+	return baseAttackSpeed;
+}
+
+/*
+Returns reduction to physical damage as an int out of 100%.
+*/
+int person::getDefence()
+{
+	//Base reduction
+	int base = 0;
+	//Bonus from armour
+	armour* ar = getArmour();
+	if (ar != nullptr)
+		base += ar->getDefence();
+	//Done!
+	return base;
 }
 
 /*
@@ -71,4 +90,9 @@ Returns our equipped weapon, or nullptr if we don't have one equipped.
 weapon * person::getWeapon()
 {
 	return items.getWeapon();
+}
+
+armour * person::getArmour()
+{
+	return items.getArmour();
 }

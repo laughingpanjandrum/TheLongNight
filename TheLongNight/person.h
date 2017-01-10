@@ -21,6 +21,8 @@ public:
 	person* getTarget() { return target; }
 	int getMoveDelay();
 	int getAttackDelay();
+	int getBaseMeleeDamage() { return baseMeleeDamage; }
+	int getDefence();
 	//Setters
 	void setTarget(person* target) { this->target = target; }
 	void clearTarget() { target = nullptr; }
@@ -30,12 +32,16 @@ public:
 	//Equipment
 	void equipItem(item* which);
 	weapon* getWeapon();
+	armour* getArmour();
 	//Flags
 	bool isDead = false;
 	bool isPlayer = true;
-private:
+protected:
 	//Attributes
 	counter health;
+	int baseMeleeDamage = 1; //how much damage we do bare-handed
+	int baseAttackSpeed = SPEED_NORMAL; //how quickly we attack bare-handed
+	int baseMoveSpeed = SPEED_FAST; //how quickly we move if unarmoured
 	//Equipment
 	inventory items;
 	//Current thing we're trying to kill

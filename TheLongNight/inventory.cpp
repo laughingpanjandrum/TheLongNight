@@ -29,6 +29,8 @@ void inventory::equipItem(item * which)
 			//We might also want to make a special pointer to this item
 			if (it.category == ITEM_WEAPON)
 				equippedWeapon = static_cast<weapon*>(which);
+			else if (it.category == ITEM_BODY_ARMOUR)
+				equippedArmour = static_cast<armour*>(which);
 		}
 	}
 }

@@ -118,6 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="armour.cpp" />
     <ClCompile Include="counter.cpp" />
     <ClCompile Include="element.cpp" />
     <ClCompile Include="game.cpp" />
@@ -134,6 +135,7 @@
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="armour.h" />
     <ClInclude Include="categories.h" />
     <ClInclude Include="counter.h" />
     <ClInclude Include="element.h" />
