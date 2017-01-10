@@ -19,8 +19,8 @@ public:
 	//Getters
 	counter getHealth() { return health; }
 	person* getTarget() { return target; }
-	int getMoveDelay() { return 1; }
-	int getAttackDelay() { return 1; }
+	int getMoveDelay();
+	int getAttackDelay();
 	//Setters
 	void setTarget(person* target) { this->target = target; }
 	void clearTarget() { target = nullptr; }

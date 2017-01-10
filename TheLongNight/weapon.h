@@ -14,6 +14,9 @@ public:
 	~weapon();
 	//Setting
 	void setBasicAttributes(int damage, int attackDelay);
+	//Getting
+	int getDamage() { return damage; }
+	int getAttackDelay() { return attackDelay; }
 private:
 	//Weapon deetz
 	int damage;

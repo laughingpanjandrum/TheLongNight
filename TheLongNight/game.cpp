@@ -343,7 +343,14 @@ One creature attacks another in melee.
 */
 void game::meleeAttack(person * attacker, person * target)
 {
-	target->takeDamage(10);
+	//Figure out how much damage to do
+	weapon* wp = attacker->getWeapon();
+	int damage = 1;
+	if (wp != nullptr) {
+		damage = wp->getDamage();
+	}
+	//Deal the damage
+	target->takeDamage(damage);
 	//Update targeting
 	if (target->isDead)
 		attacker->clearTarget();

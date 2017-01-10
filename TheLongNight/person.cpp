@@ -14,6 +14,30 @@ person::~person()
 }
 
 /*
+	GETTING ATTRIBUTES
+*/
+
+/*
+How long our movement takes.
+*/
+int person::getMoveDelay()
+{
+	return SPEED_NORMAL;
+}
+
+/*
+How long a melee attack takes.
+Based on our equipped weapon.
+*/
+int person::getAttackDelay()
+{
+	weapon* wp = getWeapon();
+	if (wp != nullptr)
+		return wp->getAttackDelay();
+	return SPEED_NORMAL;
+}
+
+/*
 	DAMAGE AND HEALING
 */
 
