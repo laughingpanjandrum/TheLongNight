@@ -341,6 +341,17 @@ Usually ticks once per round, and once when the player first moves to this tile.
 */
 void game::standOnTile(person * victim)
 {
+	//If we're the PLAYER, we pick up any items that are here
+	if (victim->isPlayer) {
+		item* itemHere = currentMap->getItem(victim->getx(), victim->gety());
+		if (itemHere != nullptr) {
+			//Get item
+			victim->equipItem(itemHere);
+			//...and remove it from the floor
+			currentMap->removeItem(itemHere);
+		}
+	}
+	//Tile effects
 	maptile* mt = currentMap->getTile(victim->getx(), victim->gety());
 	for (auto te : mt->getTouchEffects()) {
 		if (te == ACID_TOUCH) {
