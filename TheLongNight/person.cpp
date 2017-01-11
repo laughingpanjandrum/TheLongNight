@@ -161,7 +161,8 @@ void person::equipItem(item * which)
 {
 	items.equipItem(which);
 	//Other consequences of equipping something
-	if (which->getCategory() == ITEM_WEAPON) {
+	itemTypes cat = which->getCategory();
+	if (cat == ITEM_WEAPON || cat == ITEM_OFFHAND) {
 		weapon* wp = static_cast<weapon*>(which);
 		//Special weapon attack is a spell
 		if (wp->getSpecialAttack() != nullptr)
