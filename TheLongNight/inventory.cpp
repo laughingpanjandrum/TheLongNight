@@ -28,6 +28,8 @@ void inventory::equipItem(item * which)
 	itemTypes cat = which->getCategory();
 	if (cat == ITEM_WEAPON)
 		equippedWeapon = static_cast<weapon*>(which);
+	else if (cat == ITEM_OFFHAND)
+		equippedOffhand = static_cast<weapon*>(which);
 	else if (cat == ITEM_BODY_ARMOUR)
 		equippedArmour = static_cast<armour*>(which);
 	else if (cat == ITEM_CONSUMABLE && equippedConsumables.size() < MAX_CONSUMABLE_SLOTS) {

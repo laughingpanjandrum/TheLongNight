@@ -281,6 +281,12 @@ void game::drawInterface(int leftx, int topy)
 	}
 	else
 		win.write(atx + 2, ++aty, "no weapon", TCODColor::darkGrey);
+	//Offhand item
+	weapon* of = player->getOffhand();
+	if (of != nullptr) {
+		win.writec(atx, ++aty, of->getTileCode(), of->getColor());
+		win.write(atx + 2, aty, of->getMenuName(), of->getColor());
+	}
 	//Armour
 	armour* ar = player->getArmour();
 	if (ar != nullptr) {

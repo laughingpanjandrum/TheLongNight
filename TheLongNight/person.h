@@ -60,6 +60,7 @@ public:
 	void addItem(item* which);
 	void cycleConsumable() { items.cycleConsumable(); }
 	weapon* getWeapon();
+	weapon* getOffhand() { return items.getOffhand(); }
 	armour* getArmour();
 	consumable* getSelectedConsumable();
 	consumableVector getConsumableList();

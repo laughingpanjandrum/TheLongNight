@@ -25,6 +25,7 @@ public:
 	void setSpellstoreSize(int size) { spellstoreSize = size; }
 	void addSpell(spell* sp) { spellstore.push_back(sp); }
 	void setSpellPower(int power) { spellPower = power; }
+	void makeOffhand() { category = ITEM_OFFHAND; } //Make this an offhand weapon
 
 	//Getting
 	int getDamage() { return damage; }

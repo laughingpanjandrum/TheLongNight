@@ -15,7 +15,7 @@ public:
 	~item();
 	//Getters
 	itemTypes getCategory() { return category; }
-private:
+protected:
 	//Sorting
 	itemTypes category;
 };

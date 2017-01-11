@@ -36,9 +36,11 @@ public:
 	itemlistVector getAllCarried() { return carried; }
 	item* getEquipped(itemTypes category);
 	std::vector<item*> getItemList(itemTypes category);
-	weapon* getWeapon() { return equippedWeapon; }
-	armour* getArmour() { return equippedArmour; }
 	std::vector<consumable*> getConsumables() { return equippedConsumables; }
+	//Getting particular items
+	weapon* getWeapon() { return equippedWeapon; }
+	weapon* getOffhand() { return equippedOffhand; }
+	armour* getArmour() { return equippedArmour; }
 	//Selecting particular slots
 	void cycleConsumable();
 	consumable* getSelectedConsumable();
@@ -47,6 +49,7 @@ private:
 	itemlistVector carried;
 	//Important items: we save pointers to these when they're equipped
 	weapon* equippedWeapon;
+	weapon* equippedOffhand;
 	armour* equippedArmour;
 	std::vector<consumable*> equippedConsumables;
 	int selectedConsumable = 0;

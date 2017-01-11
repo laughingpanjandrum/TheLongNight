@@ -19,7 +19,7 @@ enum gameState {
 //Item types
 
 enum itemTypes {
-	ITEM_WEAPON, 
+	ITEM_WEAPON, ITEM_OFFHAND,
 	ITEM_BODY_ARMOUR, ITEM_HELMET,
 	ITEM_CONSUMABLE,
 	ITEM_SPELL
