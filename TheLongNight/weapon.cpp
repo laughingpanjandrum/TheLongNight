@@ -28,8 +28,10 @@ void weapon::addStatusEffect(statusEffects eType, int damage)
 
 
 /*
-	Weapon types
+	ALL ITEMS
 */
+
+//		Weapons
 
 weapon * weapon_SplinteredSword()
 {
@@ -39,6 +41,18 @@ weapon * weapon_SplinteredSword()
 	wp->setSpecialAttack(attack_Splintering());
 	return wp;
 }
+
+//		Shields
+
+weapon * shield_BatteredWoodenShield()
+{
+	weapon* wp = new weapon("Battered Wooden Shield", SHIELD_TILE, TCODColor::sepia);
+	wp->setDefence(10);
+	wp->makeOffhand();
+	return wp;
+}
+
+//		Wands
 
 weapon * wand_DriftwoodWand()
 {

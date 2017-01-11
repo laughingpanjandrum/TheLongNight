@@ -20,6 +20,7 @@ public:
 
 	//Setting
 	void setBasicAttributes(int damage, int attackDelay);
+	void setDefence(int def) { defence = def; }
 	void addStatusEffect(statusEffects eType, int damage);
 	void setSpecialAttack(spell* sp) { specialAttack = sp; }
 	void setSpellstoreSize(int size) { spellstoreSize = size; }
@@ -30,6 +31,7 @@ public:
 	//Getting
 	int getDamage() { return damage; }
 	int getAttackDelay() { return attackDelay; }
+	int getDefence() { return defence; }
 	spell* getSpecialAttack() { return specialAttack; }
 	spellVector getSpells() { return spellstore; }
 	bool canAddSpell() { return spellstore.size() < spellstoreSize; }
@@ -46,6 +48,7 @@ private:
 	//Weapon deetz
 	int damage;
 	int attackDelay;
+	int defence = 0;
 
 	//Special attack
 	spell* specialAttack;
@@ -63,6 +66,9 @@ private:
 
 //Weapons
 weapon* weapon_SplinteredSword();
+
+//Shields
+weapon* shield_BatteredWoodenShield();
 
 //Wands
 weapon* wand_DriftwoodWand();

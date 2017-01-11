@@ -22,8 +22,10 @@ game::game()
 	currentMap->updateFOV(player->getx(), player->gety());
 	//Starting items
 	currentMap->addItem(armour_RuinedUniform(), 6, 6);
+	currentMap->addItem(headgear_CaptainsTricorn(), 5, 6);
 	currentMap->addItem(weapon_SplinteredSword(), 2, 3);
 	currentMap->addItem(wand_DriftwoodWand(), 3, 4);
+	currentMap->addItem(shield_BatteredWoodenShield(), 4, 4);
 	currentMap->addItem(consumable_StarwaterDraught(), 7, 5);
 	currentMap->addItem(consumable_InvigoratingTea(), 7, 6);
 	//Monsters
@@ -378,6 +380,14 @@ void game::drawInterface(int leftx, int topy)
 		win.writec(atx, ++aty, of->getTileCode(), of->getColor());
 		win.write(atx + 2, aty, of->getMenuName(), of->getColor());
 	}
+	//Helmet
+	armour* helm = player->getHelmet();
+	if (helm != nullptr) {
+		win.writec(atx, ++aty, helm->getTileCode(), helm->getColor());
+		win.write(atx + 2, aty, helm->getMenuName(), helm->getColor());
+	}
+	else
+		win.write(atx + 2, ++aty, "no helmet", TCODColor::darkGrey);
 	//Armour
 	armour* ar = player->getArmour();
 	if (ar != nullptr) {

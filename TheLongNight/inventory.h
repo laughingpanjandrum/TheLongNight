@@ -41,6 +41,7 @@ public:
 	weapon* getWeapon() { return equippedWeapon; }
 	weapon* getOffhand() { return equippedOffhand; }
 	armour* getArmour() { return equippedArmour; }
+	armour* getHelmet() { return equippedHelmet; }
 	//Selecting particular slots
 	void cycleConsumable();
 	consumable* getSelectedConsumable();
@@ -51,6 +52,7 @@ private:
 	weapon* equippedWeapon;
 	weapon* equippedOffhand;
 	armour* equippedArmour;
+	armour* equippedHelmet;
 	std::vector<consumable*> equippedConsumables;
 	int selectedConsumable = 0;
 };

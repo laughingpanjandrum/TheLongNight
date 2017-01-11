@@ -28,6 +28,7 @@ private:
 	Armour objects
 */
 
+armour* headgear_CaptainsTricorn();
 armour* armour_RuinedUniform();
 
 #endif

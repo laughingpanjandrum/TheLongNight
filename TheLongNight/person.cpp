@@ -55,6 +55,14 @@ int person::getDefence()
 	armour* ar = getArmour();
 	if (ar != nullptr)
 		base += ar->getDefence();
+	//Bonus from headgear
+	armour* helm = getHelmet();
+	if (helm != nullptr)
+		base += helm->getDefence();
+	//Bonus from offhand item
+	weapon* offhand = getOffhand();
+	if (offhand != nullptr)
+		base += offhand->getDefence();
 	//Done!
 	return base;
 }
@@ -199,22 +207,6 @@ Add the given item to our items carried.
 void person::addItem(item * which)
 {
 	items.addItem(which);
-}
-
-/*
-Returns our equipped weapon, or nullptr if we don't have one equipped.
-*/
-weapon * person::getWeapon()
-{
-	return items.getWeapon();
-}
-
-/*
-Returns our equipped body armour.
-*/
-armour * person::getArmour()
-{
-	return items.getArmour();
 }
 
 consumable * person::getSelectedConsumable()

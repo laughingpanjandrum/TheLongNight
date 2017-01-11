@@ -60,9 +60,10 @@ public:
 	void equipItem(item* which);
 	void addItem(item* which);
 	void cycleConsumable() { items.cycleConsumable(); }
-	weapon* getWeapon();
+	weapon* getWeapon() { return items.getWeapon(); }
 	weapon* getOffhand() { return items.getOffhand(); }
-	armour* getArmour();
+	armour* getArmour() { return items.getArmour(); }
+	armour* getHelmet() { return items.getHelmet(); }
 	consumable* getSelectedConsumable();
 	consumableVector getConsumableList();
 

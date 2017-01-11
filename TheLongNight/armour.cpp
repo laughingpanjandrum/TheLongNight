@@ -16,6 +16,13 @@ armour::~armour()
 	ARMOUR OBJECTS
 */
 
+armour * headgear_CaptainsTricorn()
+{
+	armour* h = new armour("Captain's Tricorn", HELMET_TILE, TCODColor::lightBlue, ITEM_HELMET);
+	h->setDefence(5);
+	return h;
+}
+
 armour * armour_RuinedUniform()
 {
 	armour* a = new armour("Ruined Uniform", ARMOUR_TILE, TCODColor::lightBlue, ITEM_BODY_ARMOUR);

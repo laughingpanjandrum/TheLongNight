@@ -32,6 +32,8 @@ void inventory::equipItem(item * which)
 		equippedOffhand = static_cast<weapon*>(which);
 	else if (cat == ITEM_BODY_ARMOUR)
 		equippedArmour = static_cast<armour*>(which);
+	else if (cat == ITEM_HELMET)
+		equippedHelmet = static_cast<armour*>(which);
 	else if (cat == ITEM_CONSUMABLE && equippedConsumables.size() < MAX_CONSUMABLE_SLOTS) {
 		//We get a new consumable
 		equippedConsumables.push_back(static_cast<consumable*>(which));
