@@ -30,6 +30,17 @@ struct drawData {
 	TCODColor bgcolor;
 };
 
+//Messages!
+struct message {
+	message(std::string txt, TCODColor color) :
+		txt(txt), color(color) {}
+	std::string txt;
+	TCODColor color;
+};
+
+typedef std::vector<message> messageVector;
+
+
 class game
 {
 public:
@@ -55,6 +66,10 @@ private:
 
 	//State manipulation
 	void setState(gameState st);
+
+	//Messages
+	messageVector messages;
+	void addMessage(std::string txt, TCODColor color);
 
 	//Turn tracking
 	turnTracker turns;
@@ -92,6 +107,7 @@ private:
 
 	//Spellcasting
 	void castSpell(spell* sp);
+	void dischargeSpellOnTarget(spell* sp, person* caster, person* target);
 
 	//Keeping the world up to date
 	void tick();

@@ -9,6 +9,8 @@ This file defines which font characters correspond to which tiles.
 //Interface
 const int FULL_COUNTER_TILE = 177;
 const int EMPTY_COUNTER_TILE = 176;
+const int VIGOUR_GLYPH = 4;
+const int HEALTH_GLYPH = 3;
 
 //Characters
 const int PLAYER_TILE = 1;

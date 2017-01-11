@@ -77,6 +77,13 @@ void game::setState(gameState st)
 	state = st;
 }
 
+void game::addMessage(std::string txt, TCODColor color)
+{
+	messages.push_back(message(txt, color));
+	if (messages.size() > 5)
+		messages.pop_back();
+}
+
 /*
 	PASSAGE OF TIME
 */
@@ -273,7 +280,9 @@ void game::drawInterface(int leftx, int topy)
 		//Weapon special attack
 		spell* atk = wp->getSpecialAttack();
 		if (atk != nullptr) {
-			win.write(atx + 3, ++aty, atk->getName(), atk->getColor());
+			win.writec(atx + 3, ++aty, VIGOUR_GLYPH, TCODColor::darkGreen);
+			win.write(atx + 4, aty, std::to_string(atk->getVigourCost()), TCODColor::green);
+			win.write(atx + 6, aty, atk->getName(), atk->getColor());
 		}
 	}
 	else
@@ -316,6 +325,12 @@ void game::drawInterface(int leftx, int topy)
 				win.write(atx + 1, ++aty, "BLEED:" + bleed->getAsString(), TCODColor::crimson);
 		}
 	}
+	//Messages
+	atx = MAP_DRAW_X;
+	aty = MAP_DRAW_Y + 40;
+	for (auto m : messages) {
+		win.write(atx, aty++, m.txt, m.color);
+	}
 }
 
 /*
@@ -357,6 +372,8 @@ void game::processCommand()
 		player->cycleConsumable();
 	else if (kp.c == 'q')
 		useConsumable();
+	else if (kp.c == 's')
+		castSpell(player->getWeapon()->getSpecialAttack());
 	//Movement
 	else if (isMovementKey(kp))
 		processMove(kp);
@@ -395,10 +412,14 @@ Its strength is the given potency.
 */
 void game::applyEffectToPerson(person * target, effect eff, int potency)
 {
+	//Restoratives
 	if (eff == RESTORE_HEALTH)
 		target->addHealth(potency);
 	else if (eff == RESTORE_VIGOUR)
 		target->addVigour(potency);
+	//Damage effects
+	else if (eff == APPLY_BLEED_DAMAGE)
+		target->takeSpecialDamage(EFFECT_BLEED, potency);
 }
 
 /*
@@ -502,7 +523,7 @@ One creature attacks another in melee.
 */
 void game::meleeAttack(person * attacker, person * target)
 {
-	//Figure out how much damage to do
+	//First: NORMAL DAMAGE
 	weapon* wp = attacker->getWeapon();
 	int damage = attacker->getBaseMeleeDamage();
 	if (wp != nullptr) {
@@ -517,6 +538,11 @@ void game::meleeAttack(person * attacker, person * target)
 		damage = 1;
 	//Deal the damage
 	target->takeDamage(damage);
+	//Next: SPELL DISCHARGES
+	if (attacker->buffNextMelee != nullptr) {
+		dischargeSpellOnTarget(attacker->buffNextMelee, attacker, target);
+		attacker->buffNextMelee = nullptr;
+	}
 	//Next: STATUS EFFECTS
 	if (wp != nullptr) {
 		for (int idx = 0; idx < wp->getStatusEffectCount(); idx++) {
@@ -542,6 +568,30 @@ Player starts the casting of a spell.
 */
 void game::castSpell(spell * sp)
 {
+	int vcost = sp->getVigourCost();
+	if (player->getVigour().getValue() >= vcost) {
+		//We have enough vig to cast. PROCEED.
+		attackType aType = sp->getAttackType();
+		if (aType == ATTACK_MELEE) {
+			//Our next melee attack will have this buff.
+			player->buffNextMelee = sp;
+			addMessage("Select melee target", sp->getColor());
+		}
+	}
+}
+
+/*
+Spell actually affects the target
+*/
+void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
+{
+	addMessage(caster->getName() + " hits " + target->getName() + " with " + sp->getName(), sp->getColor());
+	//Iterate through all effects
+	for (int idx = 0; idx < sp->getEffectsCount(); idx++) {
+		applyEffectToPerson(target, sp->getEffectType(idx), sp->getEffectPotency(idx));
+	}
+	//This is when the caster expends their vigour
+	caster->loseVigour(sp->getVigourCost());
 }
 
 /*

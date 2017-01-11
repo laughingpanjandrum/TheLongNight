@@ -25,6 +25,7 @@ public:
 	int getEffectPotency(int idx) { return effectPotencies.at(idx); }
 	attackType getAttackType() { return aType; }
 	int getAttackRange() { return attackRange; }
+	int getVigourCost() { return vigourCost; }
 
 private:
 

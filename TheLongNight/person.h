@@ -39,12 +39,16 @@ public:
 	void takeDamage(int amount);
 	void takeStatusEffectDamage(statusEffects eType, int damage);
 	void addVigour(int amount) { vigour.increase(amount); }
+	void loseVigour(int amount) { vigour.decrease(amount); }
 	void die();
 
 	//Special damage types
 	void takeSpecialDamage(statusEffects eff, int damage);
 	counter* getSpecialEffectBuildup(statusEffects eff);
 	int getBleedDuration() { return isBleeding; }
+
+	//Magic
+	spell* buffNextMelee; //This spell is automatically discharged onto the next thing we attack in melee.
 
 	//Equipment
 	std::vector<item*> getItemsOfType(itemTypes category) { return items.getItemList(category); }
