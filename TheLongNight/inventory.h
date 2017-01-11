@@ -39,6 +39,9 @@ public:
 	weapon* getWeapon() { return equippedWeapon; }
 	armour* getArmour() { return equippedArmour; }
 	std::vector<consumable*> getConsumables() { return equippedConsumables; }
+	//Selecting particular slots
+	void cycleConsumable();
+	consumable* getSelectedConsumable();
 private:
 	//Slots
 	itemlistVector carried;
@@ -46,7 +49,7 @@ private:
 	weapon* equippedWeapon;
 	armour* equippedArmour;
 	std::vector<consumable*> equippedConsumables;
-
+	std::vector<consumable*>::iterator selectedConsumable;
 };
 
 #endif

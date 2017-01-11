@@ -38,6 +38,7 @@ public:
 	void addItem(item* which);
 	weapon* getWeapon();
 	armour* getArmour();
+	consumable* getSelectedConsumable();
 	consumableVector getConsumableList();
 	//Flags
 	bool isDead = false;

@@ -275,7 +275,7 @@ void game::drawInterface(int leftx, int topy)
 	else
 		win.write(atx + 2, ++aty, "no armour", TCODColor::darkGrey);
 	//All five consumable slots
-	consumableVector clist = player->getConsumableList();
+	/*consumableVector clist = player->getConsumableList();
 	for (auto c : clist) {
 		if (c != nullptr) {
 			win.writec(atx, ++aty, c->getTileCode(), c->getColor());
@@ -283,6 +283,15 @@ void game::drawInterface(int leftx, int topy)
 		}
 		else
 			win.write(atx + 2, ++aty, "-empty slot-", TCODColor::darkGrey);
+	}*/
+	consumable* c = player->getSelectedConsumable();
+	if (c != nullptr) {
+		if (c != nullptr) {
+			win.writec(atx, ++aty, c->getTileCode(), c->getColor());
+			win.write(atx + 2, aty, c->getMenuName(), c->getColor());
+		}
+		else
+			win.write(atx + 2, ++aty, "no consumable", TCODColor::darkGrey);
 	}
 	//Target info
 	person* target = player->getTarget();

@@ -108,6 +108,11 @@ armour * person::getArmour()
 	return items.getArmour();
 }
 
+consumable * person::getSelectedConsumable()
+{
+	return items.getSelectedConsumable();
+}
+
 /*
 Returns a vector of all of our consumable slots.
 */
