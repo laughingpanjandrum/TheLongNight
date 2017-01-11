@@ -90,6 +90,9 @@ std::vector<item*> inventory::getItemList(itemTypes category)
 	return std::vector<item*>();
 }
 
+/*
+Select the next consumable.
+*/
 void inventory::cycleConsumable()
 {
 	selectedConsumable++;
@@ -97,6 +100,9 @@ void inventory::cycleConsumable()
 		selectedConsumable = 0;
 }
 
+/*
+Returns which equipped consumable we currently have selected.
+*/
 consumable * inventory::getSelectedConsumable()
 {
 	if (selectedConsumable < equippedConsumables.size())

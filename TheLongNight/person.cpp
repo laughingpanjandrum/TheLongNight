@@ -7,6 +7,7 @@ Also sets a default health value, which you'll probably want to change!
 person::person(std::string name, int tileCode, TCODColor color) : element(name, tileCode, color)
 {
 	health.setTo(100);
+	vigour.setTo(10);
 }
 
 person::~person()

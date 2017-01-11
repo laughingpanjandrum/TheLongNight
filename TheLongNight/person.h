@@ -21,6 +21,7 @@ public:
 	~person();
 	//Getters
 	counter getHealth() { return health; }
+	counter getVigour() { return vigour; }
 	person* getTarget() { return target; }
 	int getMoveDelay();
 	int getAttackDelay();
@@ -47,6 +48,7 @@ public:
 protected:
 	//Attributes
 	counter health;
+	counter vigour;
 	int baseMeleeDamage = 1; //how much damage we do bare-handed
 	int baseAttackSpeed = SPEED_NORMAL; //how quickly we attack bare-handed
 	int baseMoveSpeed = SPEED_FAST; //how quickly we move if unarmoured

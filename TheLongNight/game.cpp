@@ -258,6 +258,9 @@ void game::drawInterface(int leftx, int topy)
 	//Health
 	win.drawCounter(player->getHealth(), "LIFE", atx, aty, TCODColor::darkRed, TCODColor::darkGrey, 20);
 	win.write(atx + 4, ++aty, player->getHealth().getAsString(), TCODColor::darkRed);
+	//Vigour
+	win.drawCounter(player->getVigour(), "VIG ", atx, ++aty, TCODColor::darkGreen, TCODColor::darkGrey, 20);
+	win.write(atx + 4, ++aty, player->getVigour().getAsString(), TCODColor::darkGreen);
 	//	Equipment
 	//Weapons
 	weapon* wp = player->getWeapon();
