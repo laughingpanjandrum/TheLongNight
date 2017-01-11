@@ -267,8 +267,14 @@ void game::drawInterface(int leftx, int topy)
 	//Weapons
 	weapon* wp = player->getWeapon();
 	if (wp != nullptr) {
+		//Weapon
 		win.writec(atx, ++aty, wp->getTileCode(), wp->getColor());
 		win.write(atx + 2, aty, wp->getMenuName(), wp->getColor());
+		//Weapon special attack
+		spell* atk = wp->getSpecialAttack();
+		if (atk != nullptr) {
+			win.write(atx + 3, ++aty, atk->getName(), atk->getColor());
+		}
 	}
 	else
 		win.write(atx + 2, ++aty, "no weapon", TCODColor::darkGrey);
@@ -524,6 +530,18 @@ void game::meleeAttack(person * attacker, person * target)
 		attacker->setTarget(target);
 	//Make sure dead things are removed from the map
 	clearDeadCreatures();
+}
+
+
+/*
+	SPELL MAGIC
+*/
+
+/*
+Player starts the casting of a spell.
+*/
+void game::castSpell(spell * sp)
+{
 }
 
 /*

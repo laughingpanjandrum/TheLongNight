@@ -36,5 +36,6 @@ weapon * weapon_SplinteredSword()
 	weapon* wp = new weapon("Splintered Sword", SWORD_TILE, TCODColor::grey);
 	wp->setBasicAttributes(25, SPEED_NORMAL);
 	//wp->addStatusEffect(EFFECT_BLEED, 20);
+	wp->setSpecialAttack(attack_Splintering());
 	return wp;
 }

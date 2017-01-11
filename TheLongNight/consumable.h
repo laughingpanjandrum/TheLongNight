@@ -5,8 +5,6 @@
 #include "item.h"
 #include "counter.h"
 
-typedef std::vector<effect> effectVector;
-
 class consumable : public item
 {
 public:

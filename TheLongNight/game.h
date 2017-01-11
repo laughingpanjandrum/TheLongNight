@@ -90,6 +90,9 @@ private:
 	//Combat
 	void meleeAttack(person* attacker, person* target);
 
+	//Spellcasting
+	void castSpell(spell* sp);
+
 	//Keeping the world up to date
 	void tick();
 	void clearDeadCreatures();

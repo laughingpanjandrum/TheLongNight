@@ -21,7 +21,8 @@ enum gameState {
 enum itemTypes {
 	ITEM_WEAPON, 
 	ITEM_BODY_ARMOUR, ITEM_HELMET,
-	ITEM_CONSUMABLE
+	ITEM_CONSUMABLE,
+	ITEM_SPELL
 };
 
 const std::vector<itemTypes> ALL_ITEM_TYPES = { ITEM_WEAPON, ITEM_BODY_ARMOUR, ITEM_HELMET, ITEM_CONSUMABLE };
@@ -46,5 +47,16 @@ enum effect {
 enum statusEffects {
 	EFFECT_BLEED, EFFECT_POISON, EFFECT_PLAGUE
 };
+
+//Spell attack types
+
+enum attackType {
+	ATTACK_MELEE, ATTACK_RANGE, ATTACK_AOE
+};
+
+
+//Useful types
+
+typedef std::vector<effect> effectVector;
 
 #endif

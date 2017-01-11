@@ -3,6 +3,7 @@
 #define WEAPON_H
 
 #include "item.h"
+#include "spell.h"
 
 typedef std::vector<statusEffects> statusEffectVector;
 
@@ -19,10 +20,12 @@ public:
 	//Setting
 	void setBasicAttributes(int damage, int attackDelay);
 	void addStatusEffect(statusEffects eType, int damage);
+	void setSpecialAttack(spell* sp) { specialAttack = sp; }
 
 	//Getting
 	int getDamage() { return damage; }
 	int getAttackDelay() { return attackDelay; }
+	spell* getSpecialAttack() { return specialAttack; }
 
 	//Status effects
 	int getStatusEffectCount() { return statusEffectType.size(); } //Returns number of status effects we apply
@@ -34,6 +37,9 @@ private:
 	//Weapon deetz
 	int damage;
 	int attackDelay;
+
+	//Special attack
+	spell* specialAttack;
 
 	//Special effects
 	statusEffectVector statusEffectType;
