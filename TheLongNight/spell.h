@@ -45,4 +45,7 @@ private:
 //Weapon arts
 spell* attack_Splintering();
 
+//Arcane spells
+spell* spell_MagicMissile();
+
 #endif

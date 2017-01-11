@@ -48,6 +48,11 @@ public:
 
 	//Magic
 	spell* buffNextMelee; //This spell is automatically discharged onto the next thing we attack in melee.
+	void addSpellKnown(spell* sp) { spellsKnown.push_back(sp); }
+	void removeSpellKnown(spell* sp);
+	spellVector getSpellsKnown() { return spellsKnown; }
+	spell* getCurrentSpell();
+	void cycleSelectedSpell();
 
 	//Equipment
 	std::vector<item*> getItemsOfType(itemTypes category) { return items.getItemList(category); }
@@ -85,6 +90,10 @@ protected:
 
 	//Equipment
 	inventory items;
+
+	//Magic
+	spellVector spellsKnown; //List of spells we have stored in our weapon/wand/etc
+	int selectedSpell = 0; //Highlighted spell
 
 	//Current thing we're trying to kill
 	person* target;

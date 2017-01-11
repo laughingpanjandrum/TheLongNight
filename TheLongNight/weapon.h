@@ -6,6 +6,7 @@
 #include "spell.h"
 
 typedef std::vector<statusEffects> statusEffectVector;
+typedef std::vector<spell*> spellVector;
 
 class weapon : public item
 {
@@ -21,11 +22,18 @@ public:
 	void setBasicAttributes(int damage, int attackDelay);
 	void addStatusEffect(statusEffects eType, int damage);
 	void setSpecialAttack(spell* sp) { specialAttack = sp; }
+	void setSpellstoreSize(int size) { spellstoreSize = size; }
+	void addSpell(spell* sp) { spellstore.push_back(sp); }
+	void setSpellPower(int power) { spellPower = power; }
 
 	//Getting
 	int getDamage() { return damage; }
 	int getAttackDelay() { return attackDelay; }
 	spell* getSpecialAttack() { return specialAttack; }
+	spellVector getSpells() { return spellstore; }
+	bool canAddSpell() { return spellstore.size() < spellstoreSize; }
+	int getSpellstoreSize() { return spellstoreSize; }
+	int getSpellPower() { return spellPower; }
 
 	//Status effects
 	int getStatusEffectCount() { return statusEffectType.size(); } //Returns number of status effects we apply
@@ -41,13 +49,21 @@ private:
 	//Special attack
 	spell* specialAttack;
 
+	//Spell storage
+	spellVector spellstore;
+	int spellstoreSize = 0;
+	int spellPower = 0; //As a percent
+
 	//Special effects
 	statusEffectVector statusEffectType;
 	std::vector<int> statusEffectDamage;
 
 };
 
-//Weapon types
+//Weapons
 weapon* weapon_SplinteredSword();
+
+//Wands
+weapon* wand_DriftwoodWand();
 
 #endif

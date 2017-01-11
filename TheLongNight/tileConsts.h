@@ -22,6 +22,7 @@ const int WRETCH_TILE = 119;
 const int SWORD_TILE = 173;
 const int ARMOUR_TILE = 91;
 const int VIAL_TILE = 235;
+const int SPELL_TILE = 246;
 
 //Maptiles
 const int BASIC_FLOOR_TILE = 46;

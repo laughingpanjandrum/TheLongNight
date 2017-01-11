@@ -115,6 +115,42 @@ counter* person::getSpecialEffectBuildup(statusEffects eff)
 }
 
 /*
+	MAGIC
+*/
+
+
+/*
+Forget a spell we know (e.g. because we un-equipped a wand)
+*/
+void person::removeSpellKnown(spell * sp)
+{
+	auto iter = std::find(spellsKnown.begin(), spellsKnown.end(), sp);
+	spellsKnown.erase(iter);
+}
+
+/*
+Returns the spell we currently have active.
+*/
+spell * person::getCurrentSpell()
+{
+	if (spellsKnown.size() > 0)
+		return spellsKnown.at(selectedSpell);
+	return nullptr;
+}
+
+/*
+Cycle to the next spell
+*/
+void person::cycleSelectedSpell()
+{
+	selectedSpell++;
+	if (selectedSpell >= spellsKnown.size())
+		selectedSpell = 0;
+}
+
+
+
+/*
 	INVENTORY, EQUIPMENT
 */
 
@@ -124,6 +160,16 @@ Equip the given item, if possible.
 void person::equipItem(item * which)
 {
 	items.equipItem(which);
+	//Other consequences of equipping something
+	if (which->getCategory() == ITEM_WEAPON) {
+		weapon* wp = static_cast<weapon*>(which);
+		//Special weapon attack is a spell
+		if (wp->getSpecialAttack() != nullptr)
+			addSpellKnown(wp->getSpecialAttack());
+		//See if it contains any spells we can memorize
+		for (auto sp : wp->getSpells())
+			addSpellKnown(sp);
+	}
 }
 
 /*

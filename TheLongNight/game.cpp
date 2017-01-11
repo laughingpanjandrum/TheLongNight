@@ -23,6 +23,7 @@ game::game()
 	//Starting items
 	currentMap->addItem(armour_RuinedUniform(), 6, 6);
 	currentMap->addItem(weapon_SplinteredSword(), 2, 3);
+	currentMap->addItem(wand_DriftwoodWand(), 3, 4);
 	currentMap->addItem(consumable_StarwaterDraught(), 7, 5);
 	currentMap->addItem(consumable_InvigoratingTea(), 7, 6);
 	//Monsters
@@ -277,13 +278,6 @@ void game::drawInterface(int leftx, int topy)
 		//Weapon
 		win.writec(atx, ++aty, wp->getTileCode(), wp->getColor());
 		win.write(atx + 2, aty, wp->getMenuName(), wp->getColor());
-		//Weapon special attack
-		spell* atk = wp->getSpecialAttack();
-		if (atk != nullptr) {
-			win.writec(atx + 3, ++aty, VIGOUR_GLYPH, TCODColor::darkGreen);
-			win.write(atx + 4, aty, std::to_string(atk->getVigourCost()), TCODColor::green);
-			win.write(atx + 6, aty, atk->getName(), atk->getColor());
-		}
 	}
 	else
 		win.write(atx + 2, ++aty, "no weapon", TCODColor::darkGrey);
@@ -304,6 +298,13 @@ void game::drawInterface(int leftx, int topy)
 		}
 		else
 			win.write(atx + 2, ++aty, "no consumable", TCODColor::darkGrey);
+	}
+	//Spell selected
+	spell* sp = player->getCurrentSpell();
+	if (sp != nullptr) {
+		win.writec(atx + 3, ++aty, VIGOUR_GLYPH, TCODColor::darkGreen);
+		win.write(atx + 4, aty, std::to_string(sp->getVigourCost()), TCODColor::green);
+		win.write(atx + 6, aty, sp->getName(), sp->getColor());
 	}
 	//Target info
 	person* target = player->getTarget();
@@ -370,10 +371,12 @@ void game::processCommand()
 	//Using stuff
 	else if (kp.c == 'c')
 		player->cycleConsumable();
+	else if (kp.c == 'a')
+		player->cycleSelectedSpell();
 	else if (kp.c == 'q')
 		useConsumable();
 	else if (kp.c == 's')
-		castSpell(player->getWeapon()->getSpecialAttack());
+		castSpell(player->getCurrentSpell());
 	//Movement
 	else if (isMovementKey(kp))
 		processMove(kp);

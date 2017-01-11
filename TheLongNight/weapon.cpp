@@ -39,3 +39,12 @@ weapon * weapon_SplinteredSword()
 	wp->setSpecialAttack(attack_Splintering());
 	return wp;
 }
+
+weapon * wand_DriftwoodWand()
+{
+	weapon* wp = new weapon("Driftwood Wand", SWORD_TILE, TCODColor::sepia);
+	wp->setBasicAttributes(5, SPEED_SLOW);
+	wp->setSpellstoreSize(2);
+	wp->addSpell(spell_MagicMissile());
+	return wp;
+}

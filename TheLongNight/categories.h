@@ -38,7 +38,8 @@ const int SPEED_FAST = 1;
 enum effect {
 	//Nice effects
 	RESTORE_HEALTH, RESTORE_VIGOUR,
-	//Weapon effects
+	//Damage effects
+	APPLY_PHYSICAL_DAMAGE,
 	APPLY_BLEED_DAMAGE
 };
 
