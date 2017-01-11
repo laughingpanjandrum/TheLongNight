@@ -56,6 +56,9 @@ public:
 	consumable* getSelectedConsumable();
 	consumableVector getConsumableList();
 
+	//Targeting
+	void checkTargetValidity();
+
 	//Stuff that happens on a timer
 	void applyStatusEffects();
 	void tick();

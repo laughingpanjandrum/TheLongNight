@@ -186,6 +186,21 @@ consumableVector person::getConsumableList()
 	return clist;*/
 }
 
+/*
+	TARGETING
+*/
+
+/*
+If our target is dead or otherwise invalid, forget about them.
+*/
+void person::checkTargetValidity()
+{
+	if (target != nullptr) {
+		if (target->isDead)
+			target = nullptr;
+	}
+}
+
 
 /*
 Timer-based stuff

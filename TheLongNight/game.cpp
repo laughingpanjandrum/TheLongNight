@@ -85,6 +85,7 @@ void game::endPlayerTurn()
 {
 	//Timer effects happen
 	tick();
+	player->checkTargetValidity();
 	//Add player to turn tracker
 	turns.addEntity(player, playerTurnDelay);
 	playerTurnDelay = 0;
