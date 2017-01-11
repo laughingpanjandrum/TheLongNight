@@ -120,6 +120,60 @@ void game::setCursorPosition(coord xy)
 
 
 /*
+	PATHFINDING
+*/
+
+/*
+Returns TCOD-format path to the given coord
+*/
+TCODPath* game::getPathToCoord(coord startxy, coord endxy)
+{
+	TCODPath *path = currentMap->getPath();
+	path->compute(startxy.first, startxy.second, endxy.first, endxy.second);
+	return path;
+}
+
+
+/*
+Builds a vector of x,y coordinate pairs in a straight line from the start point to the endpoint.
+*/
+pathVector game::getLine(coord startxy, coord endxy)
+{
+	pathVector path;
+	coord atxy = startxy; //Current position
+	//Vectors to final point
+	int xvec = get1dVector(startxy.first, endxy.first);
+	int yvec = get1dVector(startxy.second, endxy.second);
+	//Adjust one point at a time until we get there
+	while (atxy != endxy) {
+		//Move the current point
+		if (atxy.first != endxy.first)
+			atxy.first += xvec;
+		if (atxy.second != endxy.second)
+			atxy.second += yvec;
+		//Append to path
+		coord thisPt = atxy;
+		path.push_back(thisPt);
+	}
+	//Done
+	return path;
+}
+
+/*
+Returns the first person we find walking along the given path vector.
+*/
+person * game::getTargetOnPath(pathVector path)
+{
+	for (auto pt : path) {
+		person* target = currentMap->getPerson(pt.first, pt.second);
+		if (target != nullptr)
+			return target;
+	}
+	return nullptr;
+}
+
+
+/*
 	PASSAGE OF TIME
 */
 
@@ -466,6 +520,8 @@ void game::applyEffectToPerson(person * target, effect eff, int potency)
 	else if (eff == RESTORE_VIGOUR)
 		target->addVigour(potency);
 	//Damage effects
+	else if (eff == APPLY_PHYSICAL_DAMAGE)
+		target->takeDamage(potency);
 	else if (eff == APPLY_BLEED_DAMAGE)
 		target->takeStatusEffectDamage(EFFECT_BLEED, potency);
 }
@@ -639,7 +695,21 @@ void game::castSpell(spell * sp)
 			addMessage("Select melee target", sp->getColor());
 		}
 		else if (aType == ATTACK_RANGE) {
-
+			if (targetModeOn) {
+				//Get a path to the target
+				pathVector path = getLine(player->getPosition(), targetPt);
+				//See if there's something to hit on the path
+				person* target = getTargetOnPath(path);
+				if (target != nullptr) {
+					//We hit!
+					dischargeSpellOnTarget(sp, player, target);
+					//Time taken is the attack delay of our OFFHAND item (which will usually be e.g. a wand)
+					playerTurnDelay += player->getOffhand()->getAttackDelay();
+				}
+			}
+			else {
+				addMessage("First, turn on targeting mode!", TCODColor::white);
+			}
 		}
 	}
 }
@@ -649,7 +719,7 @@ Spell actually affects the target
 */
 void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 {
-	addMessage(caster->getName() + " hits " + target->getName() + " with " + sp->getName(), sp->getColor());
+	addMessage(caster->getName() + " hits " + target->getName() + " with " + sp->getName() + "!", sp->getColor());
 	//Iterate through all effects
 	for (int idx = 0; idx < sp->getEffectsCount(); idx++) {
 		applyEffectToPerson(target, sp->getEffectType(idx), sp->getEffectPotency(idx));

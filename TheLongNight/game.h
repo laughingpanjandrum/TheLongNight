@@ -39,6 +39,7 @@ struct message {
 };
 
 typedef std::vector<message> messageVector;
+typedef std::vector<coord> pathVector;
 
 
 class game
@@ -77,6 +78,11 @@ private:
 	void toggleTargetMode();
 	void setCursorPosition(int xnew, int ynew);
 	void setCursorPosition(coord xy);
+
+	//Pathfinding
+	TCODPath* getPathToCoord(coord startxy, coord endxy);
+	pathVector getLine(coord startxy, coord endxy);
+	person* getTargetOnPath(pathVector path);
 
 	//Turn tracking
 	turnTracker turns;

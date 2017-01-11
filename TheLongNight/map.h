@@ -37,9 +37,10 @@ public:
 	//Getting: movement data
 	bool isWalkable(int x, int y) { return datamap->isWalkable(x, y); }
 	bool isSeeThrough(int x, int y) { return datamap->isTransparent(x, y); }
-	//FOV stuff
+	//FOV/pathfinding stuff
 	void updateFOV(int xpos, int ypos);
 	bool isPointInFOV(int x, int y);
+	TCODPath* getPath();
 private:
 	//Boundaries and map creation
 	int xsize, ysize;

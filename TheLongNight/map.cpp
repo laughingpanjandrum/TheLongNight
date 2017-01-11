@@ -138,3 +138,9 @@ bool map::isPointInFOV(int x, int y)
 {
 	return datamap->isInFov(x, y);
 }
+
+TCODPath* map::getPath()
+{
+	TCODPath *path = new TCODPath(datamap);
+	return path;
+}
