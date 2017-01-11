@@ -25,3 +25,9 @@ consumable * consumable_StarwaterDraught()
 	consumable* c = new consumable("Starwater Draught", VIAL_TILE, TCODColor::cyan);
 	return c;
 }
+
+consumable * consumable_InvigoratingTea()
+{
+	consumable* c = new consumable("Invigorating Tea", VIAL_TILE, TCODColor::green);
+	return c;
+}

@@ -25,6 +25,7 @@ game::game()
 	currentMap->addItem(armour_RuinedUniform(), 6, 6);
 	currentMap->addItem(weapon_SplinteredSword(), 2, 3);
 	currentMap->addItem(consumable_StarwaterDraught(), 7, 5);
+	currentMap->addItem(consumable_InvigoratingTea(), 7, 6);
 	//Monsters
 	for (int i = 0; i < 7; i++) {
 		monster* m = drownedDead();
@@ -336,6 +337,9 @@ void game::processCommand()
 		setState(STATE_VIEW_MAP);
 	else if (kp.c == 'i')
 		setState(STATE_VIEW_INVENTORY);
+	//Using stuff
+	else if (kp.c == 'c')
+		player->cycleConsumable();
 	//Movement
 	else if (isMovementKey(kp))
 		processMove(kp);

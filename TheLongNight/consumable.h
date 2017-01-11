@@ -29,5 +29,6 @@ private:
 */
 
 consumable* consumable_StarwaterDraught();
+consumable* consumable_InvigoratingTea();
 
 #endif

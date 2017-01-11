@@ -33,8 +33,6 @@ void inventory::equipItem(item * which)
 	else if (cat == ITEM_CONSUMABLE && equippedConsumables.size() < MAX_CONSUMABLE_SLOTS) {
 		//We get a new consumable
 		equippedConsumables.push_back(static_cast<consumable*>(which));
-		//Point to it!
-		selectedConsumable = equippedConsumables.end()--;
 	}
 }
 
@@ -94,11 +92,14 @@ std::vector<item*> inventory::getItemList(itemTypes category)
 
 void inventory::cycleConsumable()
 {
+	selectedConsumable++;
+	if (selectedConsumable >= equippedConsumables.size())
+		selectedConsumable = 0;
 }
 
 consumable * inventory::getSelectedConsumable()
 {
-	if (selectedConsumable != equippedConsumables.end())
-		return *selectedConsumable;
+	if (selectedConsumable < equippedConsumables.size())
+		return equippedConsumables.at(selectedConsumable);
 	return nullptr;
 }

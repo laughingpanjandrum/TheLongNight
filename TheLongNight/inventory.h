@@ -49,7 +49,7 @@ private:
 	weapon* equippedWeapon;
 	armour* equippedArmour;
 	std::vector<consumable*> equippedConsumables;
-	std::vector<consumable*>::iterator selectedConsumable;
+	int selectedConsumable = 0;
 };
 
 #endif
