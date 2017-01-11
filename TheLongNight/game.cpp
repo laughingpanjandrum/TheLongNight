@@ -373,14 +373,31 @@ void game::useConsumable()
 			//And perform the proper effect
 			int potency = toUse->getPotency();
 			for (auto eff : toUse->getEffects()) {
-				if (eff == RESTORE_HEALTH)
-					player->addHealth(potency);
-				else if (eff == RESTORE_VIGOUR)
-					player->addVigour(potency);
+				applyEffectToPerson(player, eff, potency);
 			}
 		}
 	}
 }
+
+/*
+	EFFECTS
+*/
+
+/*
+Apply any effect to any person.
+Its strength is the given potency.
+*/
+void game::applyEffectToPerson(person * target, effect eff, int potency)
+{
+	if (eff == RESTORE_HEALTH)
+		target->addHealth(potency);
+	else if (eff == RESTORE_VIGOUR)
+		target->addVigour(potency);
+}
+
+/*
+	MOVEMENT
+*/
 
 /*
 Movement commands

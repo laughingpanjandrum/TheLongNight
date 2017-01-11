@@ -35,7 +35,10 @@ const int SPEED_FAST = 1;
 //Effects
 
 enum effect {
-	RESTORE_HEALTH, RESTORE_VIGOUR
+	//Nice effects
+	RESTORE_HEALTH, RESTORE_VIGOUR,
+	//Weapon effects
+	APPLY_BLEED_DAMAGE
 };
 
 //Damage types

@@ -78,6 +78,9 @@ private:
 	void processCommand();
 	void useConsumable();
 
+	//Effects
+	void applyEffectToPerson(person* target, effect e, int potency);
+
 	//Movement
 	void processMove(TCOD_key_t kp);
 	bool isMovementKey(TCOD_key_t kp);
