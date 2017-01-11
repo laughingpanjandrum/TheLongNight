@@ -10,13 +10,7 @@ Keeps track of stored inventory and equipped items.
 #include "categories.h"
 #include "weapon.h"
 #include "armour.h"
-
-//Slot with equipped item
-struct inventorySlot {
-	inventorySlot(itemTypes category): category(category) {}
-	item* equipped = nullptr; //Item equipped here
-	itemTypes category; //What type of item can be equipped here
-};
+#include "consumable.h"
 
 //Slot with list of carried items
 struct inventoryList {
@@ -28,29 +22,30 @@ struct inventoryList {
 
 class inventory
 {
-	typedef std::vector<inventorySlot> slotVector;
 	typedef std::vector<inventoryList> itemlistVector;
 public:
 	inventory();
 	~inventory();
+	//Constants
+	static const int MAX_CONSUMABLE_SLOTS = 5;
 	//Setters
 	void equipItem(item* which);
 	void unequipItem(item* which);
 	void addItem(item* which);
 	//Getters
-	slotVector getAllEquipped() { return equipped; }
 	itemlistVector getAllCarried() { return carried; }
 	item* getEquipped(itemTypes category);
 	std::vector<item*> getItemList(itemTypes category);
 	weapon* getWeapon() { return equippedWeapon; }
 	armour* getArmour() { return equippedArmour; }
+	std::vector<consumable*> getConsumables() { return equippedConsumables; }
 private:
 	//Slots
-	slotVector equipped;
 	itemlistVector carried;
 	//Important items: we save pointers to these when they're equipped
 	weapon* equippedWeapon;
 	armour* equippedArmour;
+	std::vector<consumable*> equippedConsumables;
 
 };
 

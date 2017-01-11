@@ -4,17 +4,6 @@
 
 inventory::inventory()
 {
-	//We get an equipment slot for each item type
-	for (unsigned int i = 0; i < ALL_ITEM_TYPES.size(); i++) {
-		//Some item types get more than one slot
-		itemTypes cat = ALL_ITEM_TYPES[i];
-		int slots = 1;
-		if (cat == ITEM_CONSUMABLE)
-			slots = 5;
-		//Add the slots
-		for (int i = 0; i < slots; i++)
-			equipped.push_back(inventorySlot(cat));
-	}
 	//And a list of items for each item type
 	for (unsigned int i = 0; i < ALL_ITEM_TYPES.size(); i++) {
 		carried.push_back(inventoryList(ALL_ITEM_TYPES[i]));
@@ -35,29 +24,23 @@ Equips the item in the relevant slot
 */
 void inventory::equipItem(item * which)
 {
-	//Find slot for this category
-	for (auto it : equipped) {
-		if (it.category == which->getCategory()) {
-			//Equip
-			it.equipped = which;
-			//We might also want to make a special pointer to this item
-			if (it.category == ITEM_WEAPON)
-				equippedWeapon = static_cast<weapon*>(which);
-			else if (it.category == ITEM_BODY_ARMOUR)
-				equippedArmour = static_cast<armour*>(which);
-		}
-	}
+	//We might also want to make a special pointer to this item
+	itemTypes cat = which->getCategory();
+	if (cat == ITEM_WEAPON)
+		equippedWeapon = static_cast<weapon*>(which);
+	else if (cat == ITEM_BODY_ARMOUR)
+		equippedArmour = static_cast<armour*>(which);
+	else if (cat == ITEM_CONSUMABLE && equippedConsumables.size() < MAX_CONSUMABLE_SLOTS)
+		equippedConsumables.push_back(static_cast<consumable*>(which));
 }
 
 /*
 Unequips item, but doesn't drop it
+(NOT IMPLEMENTED)
 */
 void inventory::unequipItem(item * which)
 {
-	for (auto it : equipped) {
-		if (it.equipped == which)
-			it.equipped = nullptr;
-	}
+	itemTypes cat = which->getCategory();
 }
 
 /*
@@ -84,9 +67,9 @@ This is generally slower than getting it directly from the pointer!
 */
 item * inventory::getEquipped(itemTypes category)
 {
-	for (auto it : equipped) {
-		if (it.category == category)
-			return it.equipped;
+	switch (category) {
+	case(ITEM_WEAPON): return getWeapon();
+	case(ITEM_BODY_ARMOUR): return getArmour();
 	}
 	return nullptr;
 }

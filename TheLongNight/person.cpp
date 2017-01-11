@@ -113,7 +113,12 @@ Returns a vector of all of our consumable slots.
 */
 consumableVector person::getConsumableList()
 {
-	consumableVector clist;
+	auto clist = items.getConsumables();
+	//Pad out to full size with empty slots
+	while (clist.size() < items.MAX_CONSUMABLE_SLOTS)
+		clist.push_back(nullptr);
+	return clist;
+	/*consumableVector clist;
 	auto equipmentList = items.getAllEquipped();
 	for (auto i = equipmentList.begin(); i != equipmentList.end(); i++) {
 		if ((*i).category == ITEM_CONSUMABLE) {
@@ -121,5 +126,5 @@ consumableVector person::getConsumableList()
 			clist.push_back(cons);
 		}
 	}
-	return clist;
+	return clist;*/
 }
