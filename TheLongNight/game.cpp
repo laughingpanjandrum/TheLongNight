@@ -24,6 +24,7 @@ game::game()
 	//Starting items
 	currentMap->addItem(armour_RuinedUniform(), 6, 6);
 	currentMap->addItem(weapon_SplinteredSword(), 2, 3);
+	currentMap->addItem(consumable_StarwaterDraught(), 7, 5);
 	//Monsters
 	monster* m = drownedDead();
 	currentMap->addPerson(m, 12, 12);
@@ -250,16 +251,32 @@ void game::drawInterface(int leftx, int topy)
 	//Health
 	win.drawCounter(player->getHealth(), "LIFE", atx, aty, TCODColor::darkRed, TCODColor::darkGrey, 20);
 	win.write(atx + 4, ++aty, player->getHealth().getAsString(), TCODColor::darkRed);
-	//Equipment
+	//	Equipment
+	//Weapons
 	weapon* wp = player->getWeapon();
 	if (wp != nullptr) {
 		win.writec(atx, ++aty, wp->getTileCode(), wp->getColor());
 		win.write(atx + 2, aty, wp->getName(), wp->getColor());
 	}
+	else
+		win.write(atx + 2, ++aty, "no weapon", TCODColor::darkGrey);
+	//Armour
 	armour* ar = player->getArmour();
 	if (ar != nullptr) {
 		win.writec(atx, ++aty, ar->getTileCode(), ar->getColor());
 		win.write(atx + 2, aty, ar->getName(), ar->getColor());
+	}
+	else
+		win.write(atx + 2, ++aty, "no armour", TCODColor::darkGrey);
+	//All five consumable slots
+	consumableVector clist = player->getConsumableList();
+	for (auto c : clist) {
+		if (c != nullptr) {
+			win.writec(atx, ++aty, c->getTileCode(), c->getColor());
+			win.write(atx + 2, aty, c->getName(), c->getColor());
+		}
+		else
+			win.write(atx + 2, ++aty, "-empty slot-", TCODColor::darkGrey);
 	}
 	//Target info
 	person* target = player->getTarget();

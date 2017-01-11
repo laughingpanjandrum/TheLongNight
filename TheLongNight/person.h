@@ -8,6 +8,9 @@
 #include "inventory.h"
 #include "categories.h"
 #include "weapon.h"
+#include "consumable.h"
+
+typedef std::vector<consumable*> consumableVector;
 
 class person: public element
 {
@@ -35,6 +38,7 @@ public:
 	void addItem(item* which);
 	weapon* getWeapon();
 	armour* getArmour();
+	consumableVector getConsumableList();
 	//Flags
 	bool isDead = false;
 	bool isPlayer = true;

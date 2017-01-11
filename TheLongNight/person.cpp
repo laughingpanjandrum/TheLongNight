@@ -100,7 +100,26 @@ weapon * person::getWeapon()
 	return items.getWeapon();
 }
 
+/*
+Returns our equipped body armour.
+*/
 armour * person::getArmour()
 {
 	return items.getArmour();
+}
+
+/*
+Returns a vector of all of our consumable slots.
+*/
+consumableVector person::getConsumableList()
+{
+	consumableVector clist;
+	auto equipmentList = items.getAllEquipped();
+	for (auto i = equipmentList.begin(); i != equipmentList.end(); i++) {
+		if ((*i).category == ITEM_CONSUMABLE) {
+			consumable* cons = static_cast<consumable*>((*i).equipped);
+			clist.push_back(cons);
+		}
+	}
+	return clist;
 }

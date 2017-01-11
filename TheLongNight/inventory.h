@@ -38,6 +38,8 @@ public:
 	void unequipItem(item* which);
 	void addItem(item* which);
 	//Getters
+	slotVector getAllEquipped() { return equipped; }
+	itemlistVector getAllCarried() { return carried; }
 	item* getEquipped(itemTypes category);
 	std::vector<item*> getItemList(itemTypes category);
 	weapon* getWeapon() { return equippedWeapon; }

@@ -67,7 +67,7 @@ Delete a character from the map.
 */
 void map::removePerson(person * p)
 {
-	people.erase(std::find(people.begin(), people.end(), p), people.end());
+	people.erase(std::find(people.begin(), people.end(), p));
 }
 
 /*
@@ -84,7 +84,8 @@ Delete an item from the map.
 */
 void map::removeItem(item * it)
 {
-	items.erase(std::find(items.begin(), items.end(), it), items.end());
+	auto iter = std::find(items.begin(), items.end(), it);
+	items.erase(iter);
 }
 
 

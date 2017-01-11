@@ -18,6 +18,7 @@ const int DROWNED_DEAD_TILE = 100;
 //Items
 const int SWORD_TILE = 173;
 const int ARMOUR_TILE = 91;
+const int VIAL_TILE = 239;
 
 //Maptiles
 const int BASIC_FLOOR_TILE = 46;

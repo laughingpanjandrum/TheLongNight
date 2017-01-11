@@ -6,7 +6,14 @@ inventory::inventory()
 {
 	//We get an equipment slot for each item type
 	for (unsigned int i = 0; i < ALL_ITEM_TYPES.size(); i++) {
-		equipped.push_back(inventorySlot(ALL_ITEM_TYPES[i]));
+		//Some item types get more than one slot
+		itemTypes cat = ALL_ITEM_TYPES[i];
+		int slots = 1;
+		if (cat == ITEM_CONSUMABLE)
+			slots = 5;
+		//Add the slots
+		for (int i = 0; i < slots; i++)
+			equipped.push_back(inventorySlot(cat));
 	}
 	//And a list of items for each item type
 	for (unsigned int i = 0; i < ALL_ITEM_TYPES.size(); i++) {
