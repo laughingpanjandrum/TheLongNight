@@ -71,6 +71,13 @@ private:
 	messageVector messages;
 	void addMessage(std::string txt, TCODColor color);
 
+	//Targeting
+	bool targetModeOn = false;
+	coord targetPt;
+	void toggleTargetMode();
+	void setCursorPosition(int xnew, int ynew);
+	void setCursorPosition(coord xy);
+
 	//Turn tracking
 	turnTracker turns;
 	int playerTurnDelay = 0; //When it increases, that means the player's turn is over!

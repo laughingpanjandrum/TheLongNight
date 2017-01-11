@@ -85,6 +85,40 @@ void game::addMessage(std::string txt, TCODColor color)
 		messages.pop_back();
 }
 
+
+/*
+	TARGETING
+*/
+
+
+void game::toggleTargetMode()
+{
+	targetModeOn = !targetModeOn;
+	if (targetModeOn) {
+		//Starting position
+		setCursorPosition(player->getPosition());
+	}
+}
+
+/*
+Set position using two intss
+*/
+void game::setCursorPosition(int xnew, int ynew)
+{
+	targetPt.first = xnew;
+	targetPt.second = ynew;
+}
+
+/*
+Set position using another coordinate
+*/
+void game::setCursorPosition(coord xy)
+{
+	targetPt.first = xy.first;
+	targetPt.second = xy.second;
+}
+
+
 /*
 	PASSAGE OF TIME
 */
@@ -254,6 +288,9 @@ drawData game::getDrawData(int x, int y)
 		toDraw.color = win.mixColors(toDraw.color, TCODColor::black, modifier);
 		toDraw.bgcolor = win.mixColors(toDraw.bgcolor, TCODColor::black, modifier);
 	}
+	//Highlight cursor position
+	if (targetModeOn && x == targetPt.first && y == targetPt.second)
+		toDraw.bgcolor = TCODColor::pink;
 	//Done! Return it all
 	return toDraw;
 }
@@ -384,6 +421,8 @@ void game::processCommand()
 	else if (kp.c == 's')
 		castSpell(player->getCurrentSpell());
 	//Movement
+	else if (kp.c == 't')
+		toggleTargetMode();
 	else if (isMovementKey(kp))
 		processMove(kp);
 	//Debug
@@ -440,9 +479,18 @@ Movement commands
 */
 void game::processMove(TCOD_key_t kp)
 {
-	//Determine new position
-	int xnew = player->getx();
-	int ynew = player->gety();
+	//Cursor or player?
+	int xnew;
+	int ynew;
+	if (targetModeOn) {
+		xnew = targetPt.first;
+		ynew = targetPt.second;
+	}
+	else {
+		xnew = player->getx();
+		ynew = player->gety();
+	}
+	//Find new position
 	if (kp.vk == KEY_NORTH)
 		ynew--;
 	else if (kp.vk == KEY_SOUTH)
@@ -451,8 +499,11 @@ void game::processMove(TCOD_key_t kp)
 		xnew++;
 	else if (kp.vk == KEY_WEST)
 		xnew--;
-	//And then move there!
-	movePerson(player, xnew, ynew);
+	//Are we moving the cursor or the player?
+	if (targetModeOn)
+		setCursorPosition(xnew, ynew);
+	else
+		movePerson(player, xnew, ynew);
 }
 
 /*
@@ -586,6 +637,9 @@ void game::castSpell(spell * sp)
 			//Our next melee attack will have this buff.
 			player->buffNextMelee = sp;
 			addMessage("Select melee target", sp->getColor());
+		}
+		else if (aType == ATTACK_RANGE) {
+
 		}
 	}
 }
