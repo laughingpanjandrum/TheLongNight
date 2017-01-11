@@ -17,7 +17,6 @@ game::game()
 	currentMap->setTile(acid(), 14, 13);
 	//Character create
 	player = new person();
-	//player->equipItem(armour_RuinedUniform());
 	player->isPlayer = true;
 	currentMap->addPerson(player, 3, 3);
 	currentMap->updateFOV(player->getx(), player->gety());
@@ -27,8 +26,8 @@ game::game()
 	currentMap->addItem(consumable_StarwaterDraught(), 7, 5);
 	currentMap->addItem(consumable_InvigoratingTea(), 7, 6);
 	//Monsters
-	for (int i = 0; i < 7; i++) {
-		monster* m = drownedDead();
+	for (int i = 0; i < 4; i++) {
+		monster* m = monster_ThinWretch();
 		currentMap->addPerson(m, 10 + i, 12 + i / 2);
 		turns.addEntity(m, 1);
 	}
@@ -84,6 +83,8 @@ void game::setState(gameState st)
 
 void game::endPlayerTurn()
 {
+	//Timer effects happen
+	tick();
 	//Add player to turn tracker
 	turns.addEntity(player, playerTurnDelay);
 	playerTurnDelay = 0;
@@ -278,16 +279,7 @@ void game::drawInterface(int leftx, int topy)
 	}
 	else
 		win.write(atx + 2, ++aty, "no armour", TCODColor::darkGrey);
-	//All five consumable slots
-	/*consumableVector clist = player->getConsumableList();
-	for (auto c : clist) {
-		if (c != nullptr) {
-			win.writec(atx, ++aty, c->getTileCode(), c->getColor());
-			win.write(atx + 2, aty, c->getMenuName(), c->getColor());
-		}
-		else
-			win.write(atx + 2, ++aty, "-empty slot-", TCODColor::darkGrey);
-	}*/
+	//Consumable selected
 	consumable* c = player->getSelectedConsumable();
 	if (c != nullptr) {
 		if (c != nullptr) {
@@ -301,8 +293,21 @@ void game::drawInterface(int leftx, int topy)
 	person* target = player->getTarget();
 	if (target != nullptr) {
 		aty++;
+		//Health
 		win.write(atx, ++aty, target->getName(), target->getColor());
 		win.write(atx, ++aty, "HP:" + target->getHealth().getAsString(), TCODColor::darkRed);
+		//Bleed
+		int bleeding = target->getBleedDuration();
+		if (bleeding > 0) {
+			//Currently bleeding
+			win.write(atx + 1, ++aty, "Bleeding (" + std::to_string(bleeding) + ")", TCODColor::crimson);
+		}
+		else {
+			//Bleed building up but not proc'd
+			counter* bleed = target->getSpecialEffectBuildup(EFFECT_BLEED);
+			if (bleed->getValue() > 0)
+				win.write(atx + 1, ++aty, "BLEED:" + bleed->getAsString(), TCODColor::crimson);
+		}
 	}
 }
 
@@ -488,6 +493,12 @@ void game::meleeAttack(person * attacker, person * target)
 		damage = 1;
 	//Deal the damage
 	target->takeDamage(damage);
+	//Next: STATUS EFFECTS
+	if (wp != nullptr) {
+		for (int idx = 0; idx < wp->getStatusEffectCount(); idx++) {
+			target->takeStatusEffectDamage(wp->getStatusEffectType(idx), wp->getStatusEffectDamage(idx));
+		}
+	}
 	//Update targeting
 	if (target->isDead)
 		attacker->clearTarget();
@@ -500,6 +511,20 @@ void game::meleeAttack(person * attacker, person * target)
 /*
 	KEEPING THE WORLD UPDATED
 */
+
+/*
+Happens right after the player's turn.
+This is when status effects proc, & everything else that involves a timer happens.
+*/
+void game::tick()
+{
+	//Creature ticks
+	for (auto p : currentMap->getAllPeople()) {
+		p->tick();
+	}
+	//Clear out any lingering death
+	clearDeadCreatures();
+}
 
 /*
 Removes all dead creatures from the map.

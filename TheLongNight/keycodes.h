@@ -11,6 +11,7 @@ keycodeConst KEY_SOUTH = TCODK_DOWN;
 keycodeConst KEY_EAST = TCODK_RIGHT;
 keycodeConst KEY_WEST = TCODK_LEFT;
 
+keycodeConst KEY_CYCLE = TCODK_TAB;
 keycodeConst KEY_BACK_OUT = TCODK_ESCAPE;
 
 #endif

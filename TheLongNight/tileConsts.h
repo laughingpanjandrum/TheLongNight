@@ -14,6 +14,7 @@ const int EMPTY_COUNTER_TILE = 176;
 const int PLAYER_TILE = 1;
 
 const int DROWNED_DEAD_TILE = 100;
+const int WRETCH_TILE = 119;
 
 //Items
 const int SWORD_TILE = 173;

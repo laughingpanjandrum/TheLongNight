@@ -38,7 +38,7 @@ void monster::setHealth(int hp)
 Monster definitions
 */
 
-monster * drownedDead()
+monster * monster_DrownedDead()
 {
 	monster * m = new monster("Drowned Dead", DROWNED_DEAD_TILE, TCODColor::darkGreen);
 	m->setMeleeStats(10, SPEED_SLOW);
@@ -47,3 +47,11 @@ monster * drownedDead()
 	return m;
 }
 
+monster * monster_ThinWretch()
+{
+	monster * m = new monster("Thin Wretch", WRETCH_TILE, TCODColor::green);
+	m->setMeleeStats(10, SPEED_NORMAL);
+	m->setMoveStats(SPEED_NORMAL);
+	m->setHealth(50);
+	return m;
+}

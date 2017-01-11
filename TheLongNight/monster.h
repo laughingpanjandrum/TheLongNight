@@ -18,6 +18,8 @@ public:
 };
 
 //Monster definitions
-monster* drownedDead();
+monster* monster_DrownedDead();
+monster* monster_ThinWretch();
+
 
 #endif

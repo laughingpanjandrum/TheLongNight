@@ -23,6 +23,19 @@ counter::~counter()
 }
 
 /*
+Set both maximum and starting values.
+If no starting value is provided, defaults to max value.
+*/
+void counter::setTo(int maxVal, int startVal)
+{
+	maxValue = maxVal;
+	if (startVal == -1)
+		value = maxVal;
+	else
+		value = startVal;
+}
+
+/*
 	ADJUSTING VALUE
 */
 

@@ -6,8 +6,10 @@ Also sets a default health value, which you'll probably want to change!
 */
 person::person(std::string name, int tileCode, TCODColor color) : element(name, tileCode, color)
 {
+	//Default values for stats/resistances
 	health.setTo(100);
 	vigour.setTo(10);
+	bleedBuildup.setTo(20, 0);
 }
 
 person::~person()
@@ -66,6 +68,9 @@ void person::addHealth(int amount)
 	health.increase(amount);
 }
 
+/*
+Standard damage. Kills us if we run out of health.
+*/
 void person::takeDamage(int amount)
 {
 	health.decrease(amount);
@@ -73,9 +78,50 @@ void person::takeDamage(int amount)
 		die();
 }
 
+/*
+Applies special effects, e.g. bleed, poison.
+*/
+void person::takeStatusEffectDamage(statusEffects eType, int damage)
+{
+	if (eType == EFFECT_BLEED) {
+		bleedBuildup.increase(damage);
+		if (bleedBuildup.isFull()) {
+			//We BLEED!
+			bleedBuildup.clear();
+			isBleeding += 2;
+		}
+	}
+}
+
+/*
+We DIE.
+The game is in charge of making sure we get removed from the map.
+*/
 void person::die()
 {
 	isDead = true;
+}
+
+/*
+Apply a special damage type, e.g. bleed
+*/
+void person::takeSpecialDamage(statusEffects eff, int damage)
+{
+	if (eff == EFFECT_BLEED) {
+		bleedBuildup.increase(damage);
+	}
+}
+
+/*
+Returns counter for the designation damage type.
+Returns an empty counter if, for some reason, no result is found.
+*/
+counter* person::getSpecialEffectBuildup(statusEffects eff)
+{
+	switch (eff) {
+	case(EFFECT_BLEED): return &bleedBuildup;
+	}
+	return new counter();
 }
 
 /*
@@ -138,4 +184,30 @@ consumableVector person::getConsumableList()
 		}
 	}
 	return clist;*/
+}
+
+
+/*
+Timer-based stuff
+*/
+
+/*
+Status effects tick down or proc
+*/
+void person::applyStatusEffects()
+{
+	//Bleed: 25 damage/turn once it procs
+	bleedBuildup.decrease();
+	if (isBleeding) {
+		isBleeding--;
+		takeDamage(25);
+	}
+}
+
+/*
+Everything timer-based happens
+*/
+void person::tick()
+{
+	applyStatusEffects();
 }

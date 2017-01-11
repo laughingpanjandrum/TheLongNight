@@ -19,7 +19,7 @@ public:
 	//Setting
 	void setValue(int v) { value = v; }
 	void setMaxValue(int mv) { maxValue = mv; }
-	void setTo(int v) { value = v; maxValue = v; }
+	void setTo(int maxVal, int startVal = -1);
 	//Getting
 	int getValue() { return value; }
 	int getMaxValue() { return maxValue; }

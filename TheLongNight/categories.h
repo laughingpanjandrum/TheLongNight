@@ -38,4 +38,10 @@ enum effect {
 	RESTORE_HEALTH, RESTORE_VIGOUR
 };
 
+//Damage types
+
+enum statusEffects {
+	EFFECT_BLEED, EFFECT_POISON, EFFECT_PLAGUE
+};
+
 #endif
