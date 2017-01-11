@@ -148,6 +148,26 @@ void person::cycleSelectedSpell()
 		selectedSpell = 0;
 }
 
+/*
+Effective potency of most spells.
+If we have two equipped items that have separate spellpower ratings, we use the higher of the two.
+*/
+int person::getSpellPower()
+{
+	weapon* wp = getWeapon();
+	weapon* offhand = getOffhand();
+	int spellPower = 0;
+	//From weapon
+	if (wp != nullptr)
+		spellPower = wp->getSpellPower();
+	//See if offhand is higher
+	if (offhand != nullptr)
+		if (offhand->getSpellPower() > spellPower)
+			spellPower = offhand->getSpellPower();
+	//Done
+	return spellPower;
+}
+
 
 
 /*

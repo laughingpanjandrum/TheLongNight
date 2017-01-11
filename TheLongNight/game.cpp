@@ -722,7 +722,12 @@ void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 	addMessage(caster->getName() + " hits " + target->getName() + " with " + sp->getName() + "!", sp->getColor());
 	//Iterate through all effects
 	for (int idx = 0; idx < sp->getEffectsCount(); idx++) {
-		applyEffectToPerson(target, sp->getEffectType(idx), sp->getEffectPotency(idx));
+		//Potency scales with the caster's spell power
+		int potency = sp->getEffectPotency(idx);
+		int spellPower = caster->getSpellPower();
+		potency = (float)potency * ((float)spellPower / 100);
+		//Apply the actual effect
+		applyEffectToPerson(target, sp->getEffectType(idx), potency);
 	}
 	//This is when the caster expends their vigour
 	caster->loseVigour(sp->getVigourCost());

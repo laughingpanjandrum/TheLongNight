@@ -53,6 +53,7 @@ public:
 	spellVector getSpellsKnown() { return spellsKnown; }
 	spell* getCurrentSpell();
 	void cycleSelectedSpell();
+	int getSpellPower();
 
 	//Equipment
 	std::vector<item*> getItemsOfType(itemTypes category) { return items.getItemList(category); }
