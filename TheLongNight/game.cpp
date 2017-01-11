@@ -104,10 +104,16 @@ Returns whether the given ai will move to the given point.
 */
 bool game::aiIsValidMove(person * ai, int xnew, int ynew)
 {
+	//Make sure it's in bounds
 	if (!currentMap->inBounds(xnew, ynew))
 		return false;
 	else if (!currentMap->isWalkable(xnew, ynew))
 		return false;
+	//Make sure we won't attack a friendly
+	person* here = currentMap->getPerson(xnew, ynew);
+	if (here != nullptr && !here->isPlayer)
+		return false;
+	//Otherwise, we're good to go!
 	return true;
 }
 
