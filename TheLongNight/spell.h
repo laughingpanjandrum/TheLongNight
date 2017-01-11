@@ -18,6 +18,7 @@ public:
 	void setAttackType(attackType aType, int attackRange = 1);
 	void addEffect(effect eff, int potency);
 	void setVigourCost(int v) { vigourCost = v; }
+	void setAttackRange(int r) { attackRange = r; }
 
 	//Getting
 	int getEffectsCount() { return effectsApplied.size(); }

@@ -49,6 +49,7 @@ spell * spell_MagicMissile()
 	spell* sp = new spell("Magic Missile", SPELL_TILE, TCODColor::magenta);
 	sp->setAttackType(ATTACK_RANGE);
 	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 50);
+	sp->setAttackRange(5);
 	sp->setVigourCost(1);
 	return sp;
 }

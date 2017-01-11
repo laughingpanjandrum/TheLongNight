@@ -701,10 +701,17 @@ void game::castSpell(spell * sp)
 				//See if there's something to hit on the path
 				person* target = getTargetOnPath(path);
 				if (target != nullptr) {
-					//We hit!
-					dischargeSpellOnTarget(sp, player, target);
-					//Time taken is the attack delay of our OFFHAND item (which will usually be e.g. a wand)
-					playerTurnDelay += player->getOffhand()->getAttackDelay();
+					//Is it in range?
+					int dist = hypot(player->getx() - target->getx(), player->gety() - target->gety());
+					if (dist <= sp->getAttackRange()) {
+						//We hit!
+						dischargeSpellOnTarget(sp, player, target);
+						//Time taken is the attack delay of our OFFHAND item (which will usually be e.g. a wand)
+						playerTurnDelay += player->getOffhand()->getAttackDelay();
+					}
+					else {
+						addMessage("Out of range!", TCODColor::white);
+					}
 				}
 			}
 			else {

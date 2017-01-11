@@ -46,7 +46,7 @@ weapon * wand_DriftwoodWand()
 	wp->setBasicAttributes(5, SPEED_SLOW);
 	wp->setSpellstoreSize(2);
 	wp->addSpell(spell_MagicMissile());
-	wp->setSpellPower(50);
+	wp->setSpellPower(100);
 	wp->makeOffhand();
 	return wp;
 }
