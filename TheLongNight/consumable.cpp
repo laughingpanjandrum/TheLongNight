@@ -2,8 +2,22 @@
 
 
 
+consumable::consumable(std::string name, int tileCode, TCODColor color) :
+	item(name, tileCode, color, ITEM_CONSUMABLE)
+{
+	amount.setTo(1);
+}
+
 consumable::~consumable()
 {
+}
+
+/*
+Returns amount left combined with name.
+*/
+std::string consumable::getMenuName()
+{
+	return getName() + " x" + std::to_string(getAmountLeft());
 }
 
 consumable * consumable_StarwaterDraught()

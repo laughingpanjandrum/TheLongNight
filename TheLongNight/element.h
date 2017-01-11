@@ -31,6 +31,8 @@ public:
 	std::string getName() { return name; }
 	int getTileCode() { return tileCode; }
 	TCODColor getColor() { return color; }
+	//For overriding
+	virtual std::string getMenuName() { return name; }
 protected:
 	//Flavour deets
 	std::string name;

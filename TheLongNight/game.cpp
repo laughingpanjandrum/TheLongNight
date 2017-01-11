@@ -26,11 +26,11 @@ game::game()
 	currentMap->addItem(weapon_SplinteredSword(), 2, 3);
 	currentMap->addItem(consumable_StarwaterDraught(), 7, 5);
 	//Monsters
-	monster* m = drownedDead();
-	currentMap->addPerson(m, 12, 12);
-	//Add everything to the turn timer
-	//turns.addEntity(player, 0);
-	turns.addEntity(m, 1);
+	for (int i = 0; i < 7; i++) {
+		monster* m = drownedDead();
+		currentMap->addPerson(m, 10 + i, 12 + i / 2);
+		turns.addEntity(m, 1);
+	}
 }
 
 
@@ -256,7 +256,7 @@ void game::drawInterface(int leftx, int topy)
 	weapon* wp = player->getWeapon();
 	if (wp != nullptr) {
 		win.writec(atx, ++aty, wp->getTileCode(), wp->getColor());
-		win.write(atx + 2, aty, wp->getName(), wp->getColor());
+		win.write(atx + 2, aty, wp->getMenuName(), wp->getColor());
 	}
 	else
 		win.write(atx + 2, ++aty, "no weapon", TCODColor::darkGrey);
@@ -264,7 +264,7 @@ void game::drawInterface(int leftx, int topy)
 	armour* ar = player->getArmour();
 	if (ar != nullptr) {
 		win.writec(atx, ++aty, ar->getTileCode(), ar->getColor());
-		win.write(atx + 2, aty, ar->getName(), ar->getColor());
+		win.write(atx + 2, aty, ar->getMenuName(), ar->getColor());
 	}
 	else
 		win.write(atx + 2, ++aty, "no armour", TCODColor::darkGrey);
@@ -273,7 +273,7 @@ void game::drawInterface(int leftx, int topy)
 	for (auto c : clist) {
 		if (c != nullptr) {
 			win.writec(atx, ++aty, c->getTileCode(), c->getColor());
-			win.write(atx + 2, aty, c->getName(), c->getColor());
+			win.write(atx + 2, aty, c->getMenuName(), c->getColor());
 		}
 		else
 			win.write(atx + 2, ++aty, "-empty slot-", TCODColor::darkGrey);

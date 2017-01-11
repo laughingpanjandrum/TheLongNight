@@ -26,7 +26,6 @@ enum itemTypes {
 
 const std::vector<itemTypes> ALL_ITEM_TYPES = { ITEM_WEAPON, ITEM_BODY_ARMOUR, ITEM_HELMET, ITEM_CONSUMABLE };
 
-
 //Speeds
 
 const int SPEED_SLOW = 4;
