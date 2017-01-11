@@ -61,6 +61,11 @@ int person::getDefence()
 	DAMAGE AND HEALING
 */
 
+void person::addHealth(int amount)
+{
+	health.increase(amount);
+}
+
 void person::takeDamage(int amount)
 {
 	health.decrease(amount);

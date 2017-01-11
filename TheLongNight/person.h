@@ -31,7 +31,9 @@ public:
 	void setTarget(person* target) { this->target = target; }
 	void clearTarget() { target = nullptr; }
 	//Damage and healing
+	void addHealth(int amount);
 	void takeDamage(int amount);
+	void addVigour(int amount) { vigour.increase(amount); }
 	void die();
 	//Equipment
 	std::vector<item*> getItemsOfType(itemTypes category) { return items.getItemList(category); }

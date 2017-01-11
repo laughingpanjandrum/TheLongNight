@@ -343,12 +343,37 @@ void game::processCommand()
 	//Using stuff
 	else if (kp.c == 'c')
 		player->cycleConsumable();
+	else if (kp.c == 'q')
+		useConsumable();
 	//Movement
 	else if (isMovementKey(kp))
 		processMove(kp);
 	//Debug
 	else if (kp.c == 'w')
 		player->takeDamage(5);
+}
+
+/*
+We use up our selected consumable.
+*/
+void game::useConsumable()
+{
+	consumable* toUse = player->getSelectedConsumable();
+	if (toUse != nullptr) {
+		//Make sure we have enough
+		if (toUse->getAmountLeft() > 0) {
+			//Use it!
+			toUse->lose();
+			//And perform the proper effect
+			int potency = toUse->getPotency();
+			for (auto eff : toUse->getEffects()) {
+				if (eff == RESTORE_HEALTH)
+					player->addHealth(potency);
+				else if (eff == RESTORE_VIGOUR)
+					player->addVigour(potency);
+			}
+		}
+	}
 }
 
 /*

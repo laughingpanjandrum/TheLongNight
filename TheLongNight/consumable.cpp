@@ -23,11 +23,15 @@ std::string consumable::getMenuName()
 consumable * consumable_StarwaterDraught()
 {
 	consumable* c = new consumable("Starwater Draught", VIAL_TILE, TCODColor::cyan);
+	c->addEffect(RESTORE_HEALTH);
+	c->setPotency(25);
 	return c;
 }
 
 consumable * consumable_InvigoratingTea()
 {
 	consumable* c = new consumable("Invigorating Tea", VIAL_TILE, TCODColor::green);
+	c->addEffect(RESTORE_VIGOUR);
+	c->setPotency(5);
 	return c;
 }

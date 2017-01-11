@@ -32,4 +32,10 @@ const int SPEED_SLOW = 4;
 const int SPEED_NORMAL = 2;
 const int SPEED_FAST = 1;
 
+//Effects
+
+enum effect {
+	RESTORE_HEALTH, RESTORE_VIGOUR
+};
+
 #endif

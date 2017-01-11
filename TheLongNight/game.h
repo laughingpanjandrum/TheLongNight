@@ -64,6 +64,7 @@ private:
 	void drawInventory(int atx, int aty);
 	//Input processing
 	void processCommand();
+	void useConsumable();
 	//Movement
 	void processMove(TCOD_key_t kp);
 	bool isMovementKey(TCOD_key_t kp);

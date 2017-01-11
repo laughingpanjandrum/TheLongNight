@@ -5,6 +5,7 @@
 #include "item.h"
 #include "counter.h"
 
+typedef std::vector<effect> effectVector;
 
 class consumable : public item
 {
@@ -19,9 +20,18 @@ public:
 	int getAmountLeft() { return amount.getValue(); }
 	//Flava
 	virtual std::string getMenuName();
+	//Effects
+	effectVector getEffects() { return effectsApplied; }
+	int getPotency() { return potency; }
+	//Setting effects
+	void addEffect(effect eff) { effectsApplied.push_back(eff); }
+	void setPotency(int pot) { potency = pot; }
 private:
 	//Quantity!
 	counter amount;
+	//Effects and potency
+	effectVector effectsApplied;
+	int potency;
 };
 
 /*
