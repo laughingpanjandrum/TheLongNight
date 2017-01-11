@@ -103,16 +103,6 @@ void person::die()
 }
 
 /*
-Apply a special damage type, e.g. bleed
-*/
-void person::takeSpecialDamage(statusEffects eff, int damage)
-{
-	if (eff == EFFECT_BLEED) {
-		bleedBuildup.increase(damage);
-	}
-}
-
-/*
 Returns counter for the designation damage type.
 Returns an empty counter if, for some reason, no result is found.
 */

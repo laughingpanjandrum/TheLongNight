@@ -419,7 +419,7 @@ void game::applyEffectToPerson(person * target, effect eff, int potency)
 		target->addVigour(potency);
 	//Damage effects
 	else if (eff == APPLY_BLEED_DAMAGE)
-		target->takeSpecialDamage(EFFECT_BLEED, potency);
+		target->takeStatusEffectDamage(EFFECT_BLEED, potency);
 }
 
 /*
@@ -523,6 +523,7 @@ One creature attacks another in melee.
 */
 void game::meleeAttack(person * attacker, person * target)
 {
+	addMessage(attacker->getName() + " strikes " + target->getName(), attacker->getColor());
 	//First: NORMAL DAMAGE
 	weapon* wp = attacker->getWeapon();
 	int damage = attacker->getBaseMeleeDamage();

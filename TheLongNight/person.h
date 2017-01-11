@@ -37,13 +37,12 @@ public:
 	//Damage and healing
 	void addHealth(int amount);
 	void takeDamage(int amount);
-	void takeStatusEffectDamage(statusEffects eType, int damage);
 	void addVigour(int amount) { vigour.increase(amount); }
 	void loseVigour(int amount) { vigour.decrease(amount); }
 	void die();
 
 	//Special damage types
-	void takeSpecialDamage(statusEffects eff, int damage);
+	void takeStatusEffectDamage(statusEffects eType, int damage);
 	counter* getSpecialEffectBuildup(statusEffects eff);
 	int getBleedDuration() { return isBleeding; }
 
