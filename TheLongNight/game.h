@@ -97,6 +97,11 @@ private:
 	void aiFindTarget(person* ai);
 	void doMonsterTurn(person* ai);
 
+	//Menu management/drawing
+	menu* currentMenu;
+	void drawMenu(menu* m, int atx, int aty);
+	void navigateMenu(TCOD_key_t kp);
+
 	//Drawing functions
 	void drawScreen();
 	void drawMap(int atx, int aty);

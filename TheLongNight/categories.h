@@ -25,7 +25,7 @@ enum itemTypes {
 	ITEM_SPELL
 };
 
-const std::vector<itemTypes> ALL_ITEM_TYPES = { ITEM_WEAPON, ITEM_BODY_ARMOUR, ITEM_HELMET, ITEM_CONSUMABLE };
+const std::vector<itemTypes> ALL_ITEM_TYPES = { ITEM_WEAPON, ITEM_OFFHAND, ITEM_BODY_ARMOUR, ITEM_HELMET, ITEM_CONSUMABLE };
 
 //Speeds
 

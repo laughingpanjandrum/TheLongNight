@@ -28,6 +28,7 @@ public:
 	void scrollUp();
 
 	//Getting
+	std::string getTitle() { return title; }
 	elementVector getAllElements() { return elements; }
 	element* getSelectedItem() { return elements.at(idx); }
 

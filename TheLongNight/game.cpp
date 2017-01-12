@@ -79,6 +79,15 @@ Change the game state.
 void game::setState(gameState st)
 {
 	state = st;
+	//Set up the new state
+	if (st == STATE_VIEW_INVENTORY) {
+		//Pick an ITEM CATEGORY
+		currentMenu = new menu("INVENTORY");
+		for (auto cat : ALL_ITEM_TYPES) {
+			element* e = new element(getItemCategoryName(cat), 0, TCODColor::lightGrey);
+			currentMenu->addElement(e);
+		}
+	}
 }
 
 void game::addMessage(std::string txt, TCODColor color)
@@ -302,9 +311,52 @@ void game::doMonsterTurn(person * ai)
 		turns.addEntity(ai, 1);
 }
 
+
+
+/*
+	MENUS
+*/
+
+
+/*
+Just displays a menu! It's pretty simple.
+*/
+void game::drawMenu(menu * m, int atx, int aty)
+{
+	//Title
+	win.write(atx, aty, m->getTitle(), TCODColor::white);
+	//Elements
+	auto elements = m->getAllElements();
+	for (auto it = elements.begin(); it != elements.end(); it++) {
+		//SHOW NAME
+		win.write(atx + 2, ++aty, (*it)->getName(), (*it)->getColor());
+		//Indicate whether this is the highlighted element
+		if (m->getSelectedItem() == (*it)) {
+			win.writec(atx + 1, aty, '>', TCODColor::white);
+		}
+	}
+}
+
+/*
+Change menu selection
+*/
+void game::navigateMenu(TCOD_key_t kp)
+{
+	if (kp.vk == KEY_NORTH) {
+		currentMenu->scrollUp();
+	}
+	else {
+		currentMenu->scrollDown();
+	}
+}
+
+
+
 /*
 	DRAWING STUFF
 */
+
+
 
 /*
 Clears, draws the entire screen, then refreshes.
@@ -480,6 +532,7 @@ List inventory
 */
 void game::drawInventory(int atx, int aty)
 {
+	/*
 	//List all categories
 	for (unsigned int i = 0; i < ALL_ITEM_TYPES.size(); i++) {
 		//Category
@@ -493,6 +546,8 @@ void game::drawInventory(int atx, int aty)
 			win.write(atx + 1, ++aty, item->getName(), item->getColor());
 		}
 	}
+	*/
+	drawMenu(currentMenu, MAP_DRAW_X, MAP_DRAW_Y);
 }
 
 /*
@@ -522,7 +577,10 @@ void game::processCommand()
 	else if (kp.c == 't')
 		toggleTargetMode();
 	else if (isMovementKey(kp))
-		processMove(kp);
+		if (state == STATE_VIEW_MAP)
+			processMove(kp);
+		else
+			navigateMenu(kp);
 	//Debug
 	else if (kp.c == 'w')
 		player->takeDamage(5);
