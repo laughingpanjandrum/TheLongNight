@@ -64,6 +64,8 @@ private:
 
 };
 
+std::string getAttackSpeedName(int del);
+
 //Weapons
 weapon* weapon_SplinteredSword();
 

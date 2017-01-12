@@ -187,6 +187,11 @@ Equip the given item, if possible.
 */
 void person::equipItem(item * which)
 {
+	//If there's already an equipped item in this slot, UNEQUIP IT
+	item* here = items.getEquipped(which->getCategory());
+	if (here != nullptr)
+		unequipItem(here);
+	//Equip the new item
 	items.equipItem(which);
 	//Other consequences of equipping something
 	itemTypes cat = which->getCategory();
@@ -198,6 +203,25 @@ void person::equipItem(item * which)
 		//See if it contains any spells we can memorize
 		for (auto sp : wp->getSpells())
 			addSpellKnown(sp);
+		//Reset selected spell, just in case the number of spells changed
+		selectedSpell = 0;
+	}
+}
+
+/*
+Unequip the given item (if it's equipped).
+*/
+void person::unequipItem(item * which)
+{
+	if (hasItemEquipped(which)) {
+		itemTypes cat = which->getCategory();
+		if (cat == ITEM_WEAPON || ITEM_OFFHAND) {
+			weapon* wp = static_cast<weapon*>(which);
+			//We forget any spells/special attacks this item conferred
+			if (wp->getSpecialAttack() != nullptr)
+				removeSpellKnown(wp->getSpecialAttack());
+			for (auto sp : wp->getSpells())
+				removeSpellKnown(sp);		}
 	}
 }
 

@@ -583,14 +583,39 @@ void game::drawItemInfo(item * it, int atx, int aty)
 	if (player->hasItemEquipped(it))
 		win.write(atx + 12, aty, "EQUIPPED", TCODColor::grey);
 	//Rest of item info
-	aty++;
+	aty += 1;
+	atx += 1;
 	switch (it->getCategory()) {
-	case (ITEM_WEAPON): drawWeaponInfo(it, atx, aty);
+	case (ITEM_WEAPON): drawWeaponInfo(static_cast<weapon*>(it), atx, aty);
+	case(ITEM_OFFHAND): drawWeaponInfo(static_cast<weapon*>(it), atx, aty);
 	}
 }
 
-void game::drawWeaponInfo(item * it, int atx, int aty)
+/*
+Weapon descriptions.
+*/
+void game::drawWeaponInfo(weapon * it, int atx, int aty)
 {
+	int offset = 10;
+	TCODColor maincol = TCODColor::white;
+	//Damage
+	win.write(atx, aty, "DAMAGE", TCODColor::darkRed);
+	win.write(atx + offset, aty, std::to_string(it->getDamage()), maincol);
+	//Rate
+	win.write(atx, ++aty, "SPEED", TCODColor::yellow);
+	win.write(atx + offset, aty, getAttackSpeedName(it->getAttackDelay()), maincol);
+	//Defence, if any
+	if (it->getDefence() > 0) {
+		win.write(atx, ++aty, "DEFENCE", TCODColor::sepia);
+		win.write(atx + offset, aty, std::to_string(it->getDefence()), maincol);
+	}
+	//Special attack, if any
+	spell* atk = it->getSpecialAttack();
+	if (atk != nullptr) {
+		win.writec(atx, ++aty, VIGOUR_GLYPH, TCODColor::green);
+		win.write(atx + 1, aty, std::to_string(atk->getVigourCost()), TCODColor::green);
+		win.write(atx + 4, aty, atk->getName(), atk->getColor());
+	}
 }
 
 /*

@@ -58,6 +58,7 @@ public:
 	//Equipment
 	std::vector<item*> getItemsOfType(itemTypes category) { return items.getItemList(category); }
 	void equipItem(item* which);
+	void unequipItem(item* which);
 	void addItem(item* which);
 	void cycleConsumable() { items.cycleConsumable(); }
 	weapon* getWeapon() { return items.getWeapon(); }

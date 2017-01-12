@@ -28,6 +28,20 @@ void weapon::addStatusEffect(statusEffects eType, int damage)
 
 
 /*
+For descriptive reasons.
+*/
+std::string getAttackSpeedName(int del)
+{
+	switch (del) {
+	case(SPEED_FAST): return "Fast";
+	case(SPEED_NORMAL): return "Normal";
+	case(SPEED_SLOW): return "Slow";
+	}
+	return "Unknown";
+}
+
+
+/*
 	ALL ITEMS
 */
 

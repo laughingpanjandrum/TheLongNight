@@ -75,7 +75,9 @@ item * inventory::getEquipped(itemTypes category)
 {
 	switch (category) {
 	case(ITEM_WEAPON): return getWeapon();
+	case(ITEM_OFFHAND): return getOffhand();
 	case(ITEM_BODY_ARMOUR): return getArmour();
+	case(ITEM_HELMET): return getHelmet();
 	}
 	return nullptr;
 }
