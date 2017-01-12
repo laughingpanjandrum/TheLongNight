@@ -352,6 +352,12 @@ void game::acceptCurrentMenuIndex()
 		item* sel = static_cast<item*>(currentMenu->getSelectedItem());
 		selectInventoryCategory(sel->getCategory());
 	}
+	else if (state == STATE_VIEW_INVENTORY_CATEGORY) {
+		//Equip the selected item
+		item* sel = static_cast<item*>(currentMenu->getSelectedItem());
+		if (sel != nullptr)
+			player->equipItem(sel);
+	}
 }
 
 /*
