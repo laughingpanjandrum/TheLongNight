@@ -666,10 +666,7 @@ void game::standOnTile(person * victim)
 	//Tile effects
 	maptile* mt = currentMap->getTile(victim->getx(), victim->gety());
 	for (auto te : mt->getTouchEffects()) {
-		if (te == ACID_TOUCH) {
-			//Take damage! OUCH
-			victim->takeDamage(5);
-		}
+		applyEffectToPerson(victim, te, mt->getPotency());
 	}
 }
 

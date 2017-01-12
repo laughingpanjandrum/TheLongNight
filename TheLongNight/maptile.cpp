@@ -9,7 +9,7 @@ maptile::~maptile()
 /*
 Returns whether we have the given touch effect.
 */
-bool maptile::hasTouchEffect(touchEffect te)
+bool maptile::hasTouchEffect(effect te)
 {
 	return std::find(touchEffects.begin(), touchEffects.end(), te) != touchEffects.end();
 }
@@ -27,6 +27,7 @@ maptile * wall()
 maptile * acid()
 {
 	maptile* a = new maptile("Acid", BASIC_WATER_TILE, TCODColor::lighterGreen, TCODColor::green);
-	a->addTouchEffect(ACID_TOUCH);
+	a->addTouchEffect(APPLY_PHYSICAL_DAMAGE);
+	a->setPotency(5);
 	return a;
 }
