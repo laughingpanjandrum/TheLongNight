@@ -111,6 +111,10 @@ private:
 	void drawInterface(int atx, int aty);
 	void drawInventory(int atx, int aty);
 
+	//Drawing item information
+	void drawItemInfo(item* it, int atx, int aty);
+	void drawWeaponInfo(item* it, int atx, int aty);
+
 	//Input processing
 	void processCommand();
 	void useConsumable();

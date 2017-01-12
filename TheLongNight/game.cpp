@@ -547,11 +547,50 @@ void game::drawInterface(int leftx, int topy)
 }
 
 /*
-List inventory
+List inventory.
+When an item is selected, show its description.
 */
+
 void game::drawInventory(int atx, int aty)
 {
+	//The menu
 	drawMenu(currentMenu, MAP_DRAW_X, MAP_DRAW_Y);
+	//Show selected item, if relevant
+	if (state == STATE_VIEW_INVENTORY_CATEGORY)
+		if (currentMenu->getSelectedItem() != nullptr) {
+			//Selected menu object should be an ITEM
+			item* sel = static_cast<item*>(currentMenu->getSelectedItem());
+			drawItemInfo(sel, atx, aty + 20);
+		}
+}
+
+
+/*
+	ITEM INFO
+*/
+
+/*
+This just figures out which particular info-drawing function to use.
+*/
+void game::drawItemInfo(item * it, int atx, int aty)
+{
+	//Tile and name
+	win.writec(atx, aty, it->getTileCode(), it->getColor());
+	win.write(atx + 2, aty, it->getName(), it->getColor());
+	//Type of item
+	win.write(atx, ++aty, getItemCategoryName(it->getCategory()), TCODColor::darkGrey);
+	//Indicate whether equipped or not
+	if (player->hasItemEquipped(it))
+		win.write(atx + 12, aty, "EQUIPPED", TCODColor::grey);
+	//Rest of item info
+	aty++;
+	switch (it->getCategory()) {
+	case (ITEM_WEAPON): drawWeaponInfo(it, atx, aty);
+	}
+}
+
+void game::drawWeaponInfo(item * it, int atx, int aty)
+{
 }
 
 /*

@@ -236,6 +236,20 @@ consumableVector person::getConsumableList()
 }
 
 /*
+Returns whether the given item is equipped.
+*/
+bool person::hasItemEquipped(item * it)
+{
+	switch (it->getCategory()) {
+	case(ITEM_WEAPON): return it == getWeapon();
+	case(ITEM_OFFHAND): return it == getOffhand();
+	case(ITEM_BODY_ARMOUR): return it == getArmour();
+	case(ITEM_HELMET): return it == getHelmet();
+	}
+	return false;
+}
+
+/*
 	TARGETING
 */
 

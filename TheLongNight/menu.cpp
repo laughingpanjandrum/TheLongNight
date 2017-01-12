@@ -24,3 +24,14 @@ void menu::scrollUp()
 	if (idx < 0)
 		idx = elements.size() - 1;
 }
+
+/*
+Returns the element at the selected index.
+If there are no menu elements, returns nullptr.
+*/
+element * menu::getSelectedItem()
+{
+	if (elements.size())
+		return elements.at(idx);
+	return nullptr;
+}

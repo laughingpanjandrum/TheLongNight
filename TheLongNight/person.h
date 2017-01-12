@@ -66,6 +66,7 @@ public:
 	armour* getHelmet() { return items.getHelmet(); }
 	consumable* getSelectedConsumable();
 	consumableVector getConsumableList();
+	bool hasItemEquipped(item* it);
 
 	//Targeting
 	void checkTargetValidity();
