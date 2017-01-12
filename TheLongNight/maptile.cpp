@@ -31,3 +31,13 @@ maptile * acid()
 	a->setPotency(5);
 	return a;
 }
+
+/*
+Resting tile.
+*/
+maptile * tile_StatueOfRest()
+{
+	maptile* statue = new maptile("Statue of Rest", STATUE_TILE, TCODColor::lightCyan, TCODColor::darkestCyan);
+	statue->addTouchEffect(ALLOW_INVENTORY_MANAGEMENT);
+	return statue;
+}

@@ -31,4 +31,6 @@ const int BASIC_FLOOR_TILE = 46;
 const int BASIC_WALL_TILE = 178;
 const int BASIC_WATER_TILE = 247;
 
+const int STATUE_TILE = 244;
+
 #endif

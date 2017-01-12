@@ -37,6 +37,8 @@ const int SPEED_FAST = 1;
 //Effects
 
 enum effect {
+	//Interface effects (for PC only)
+	ALLOW_INVENTORY_MANAGEMENT,
 	//Nice effects
 	RESTORE_HEALTH, RESTORE_VIGOUR,
 	//Damage effects

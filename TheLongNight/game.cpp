@@ -8,6 +8,7 @@ game::game()
 	map* newmap = new map();
 	setCurrentMap(newmap);
 	//Add some random walls and shit
+	currentMap->setTile(tile_StatueOfRest(), 2, 2);
 	currentMap->setTile(wall(), 5, 5);
 	currentMap->setTile(wall(), 6, 5);
 	currentMap->setTile(wall(), 8, 8);
@@ -557,8 +558,13 @@ Its strength is the given potency.
 */
 void game::applyEffectToPerson(person * target, effect eff, int potency)
 {
+	//Interface stuff for PCs only
+	if (eff == ALLOW_INVENTORY_MANAGEMENT && target->isPlayer) {
+		//Can manage inventory when we step on this tile
+		setState(STATE_VIEW_INVENTORY);
+	}
 	//Restoratives
-	if (eff == RESTORE_HEALTH)
+	else if (eff == RESTORE_HEALTH)
 		target->addHealth(potency);
 	else if (eff == RESTORE_VIGOUR)
 		target->addVigour(potency);

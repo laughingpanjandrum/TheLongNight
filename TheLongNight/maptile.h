@@ -56,4 +56,6 @@ maptile* floor();
 maptile* wall();
 maptile* acid();
 
+maptile* tile_StatueOfRest();
+
 #endif
