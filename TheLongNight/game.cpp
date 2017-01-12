@@ -107,8 +107,13 @@ Set position using two intss
 */
 void game::setCursorPosition(int xnew, int ynew)
 {
+	//Move cursor position
 	targetPt.first = xnew;
 	targetPt.second = ynew;
+	//If the cursor is over something, make it our target
+	person* target = currentMap->getPerson(xnew, ynew);
+	if (target != nullptr)
+		player->setTarget(target);
 }
 
 /*
