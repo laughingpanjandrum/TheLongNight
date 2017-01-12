@@ -16,6 +16,7 @@ It also draws all the stuff that needs drawing.
 #include "utility.h"
 #include "menu.h"
 
+#include "mapLoader.h"
 #include "map.h"
 #include "person.h"
 #include "monster.h"

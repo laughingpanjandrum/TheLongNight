@@ -1,8 +1,8 @@
 Stardrift Wreckage
 start:19,10
 -codes
-# "wall_stone"
-. "floor"
+# wall_stone
+. floor
 -endcodes
 ........................................
 ........................................

@@ -5,17 +5,19 @@
 game::game()
 {
 	//We start by creating an empty map, just for now
-	map* newmap = new map();
+	//map* newmap = new map();
+	mapLoader makemap;
+	map* newmap = makemap.loadMapFromFile("maps/stardrift_wreckage_1.txt");
 	setCurrentMap(newmap);
 	//Add some random walls and shit
-	currentMap->setTile(tile_StatueOfRest(), 2, 2);
+	/*currentMap->setTile(tile_StatueOfRest(), 2, 2);
 	currentMap->setTile(wall(), 5, 5);
 	currentMap->setTile(wall(), 6, 5);
 	currentMap->setTile(wall(), 8, 8);
 	currentMap->setTile(wall(), 10, 8);
 	currentMap->setTile(acid(), 13, 13);
 	currentMap->setTile(acid(), 13, 14);
-	currentMap->setTile(acid(), 14, 13);
+	currentMap->setTile(acid(), 14, 13);*/
 	//Character create
 	player = new person();
 	player->isPlayer = true;

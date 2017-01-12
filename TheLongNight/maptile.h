@@ -13,13 +13,14 @@ class maptile
 public:
 
 	//Constructors/destructor
-	maptile() : maptile("Floor", BASIC_FLOOR_TILE, TCODColor::grey, TCODColor::black) {}
+	maptile() : maptile("Floor", BASIC_FLOOR_TILE, TCODColor::grey, TCODColor::black, "undefined") {}
 	maptile(std::string name, int tileCode, TCODColor color, TCODColor bgcolor, std::string handle, bool walkable = true, bool seeThrough = true): 
 		name(name), color(color), bgcolor(bgcolor), tileCode(tileCode), walkable(walkable), seeThrough(seeThrough), handle(handle) {}
 	~maptile();
 
 	//Getters
 	std::string getName() { return name; }
+	std::string getHandle() { return handle; }
 	int getTileCode() { return tileCode; }
 	TCODColor getColor() { return color; }
 	TCODColor getBgColor() { return bgcolor; }
@@ -54,11 +55,15 @@ private:
 
 };
 
+typedef std::vector<maptile*> tileVector;
+
 //Constants
 maptile* floor();
 maptile* wall();
 maptile* acid();
 
 maptile* tile_StatueOfRest();
+
+const tileVector ALL_MAPTILES = { floor(), wall(), tile_StatueOfRest() };
 
 #endif
