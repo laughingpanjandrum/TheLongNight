@@ -7,10 +7,6 @@ mapLoader::mapLoader()
 }
 
 
-mapLoader::~mapLoader()
-{
-}
-
 /*
 	LOADING
 */
@@ -30,7 +26,7 @@ map * mapLoader::loadMapFromFile(std::string filename)
 	stringVector tiles;
 	//These two vectors contain encodings for different tile types
 	stringVector tileHandles; //These are the maptile handles we'll need
-	std::vector<char> tileChars; //These appear in the file
+	charVector tileChars; //These appear in the file
 	
 	/*
 	Now we can actually load info from the file
@@ -39,7 +35,7 @@ map * mapLoader::loadMapFromFile(std::string filename)
 	//First line is the map name
 	getline(mapfile, mapname);
 	//Now read in creature positions until we reach encodings
-	std::string line;
+	std::string line = "";
 	while (line != "-codes") {
 		getline(mapfile, line);
 	}
@@ -67,7 +63,7 @@ map * mapLoader::loadMapFromFile(std::string filename)
 	mapfile.close();
 
 	//This converts from tile HANDLES to actual tile POINTERS
-	tileVector tileList = getTileList(tileHandles);
+	tileVector* tileList = getTileList(tileHandles);
 
 	/*
 	Now we actually generate the map
@@ -81,7 +77,7 @@ map * mapLoader::loadMapFromFile(std::string filename)
 			//Character at this point
 			char c = tiles.at(y).at(x);
 			//Convert to tile
-			maptile* mt = getTileByChar(c, tileChars, tileList);
+			maptile* mt = getTileByChar(c, &tileChars, tileList);
 			//And add it to the map!
 			m->setTile(mt, x, y);
 		}
@@ -89,20 +85,21 @@ map * mapLoader::loadMapFromFile(std::string filename)
 
 	//Return final map
 	return m;
+
 }
 
 
 /*
 Given a list of tile handles, creates a list of actual tiles and returns it.
 */
-tileVector mapLoader::getTileList(stringVector tileHandles)
+tileVector * mapLoader::getTileList(stringVector tileHandles)
 {
-	tileVector tileCodes;
+	tileVector* tileCodes = new tileVector();
 	for (auto handle : tileHandles) {
 		//Sort through all available tiles
 		for (auto tile : ALL_MAPTILES) {
 			if (tile->getHandle() == handle) {
-				tileCodes.push_back(tile);
+				tileCodes->push_back(tile);
 				break;
 			}
 		}
@@ -113,12 +110,12 @@ tileVector mapLoader::getTileList(stringVector tileHandles)
 /*
 Returns maptile corresponding to the given character.
 */
-maptile * mapLoader::getTileByChar(char c, std::vector<char> tileChars, tileVector tileList)
+maptile * mapLoader::getTileByChar(char c, charVector* tileChars, tileVector* tileList)
 {
 	//Find character index
-	for (int i = 0; i < tileChars.size(); i++) {
-		if (tileChars.at(i) == c)
-			return tileList.at(i);
+	for (int i = 0; i < tileChars->size(); i++) {
+		if (tileChars->at(i) == c)
+			return tileList->at(i);
 	}
 	return nullptr;
 }

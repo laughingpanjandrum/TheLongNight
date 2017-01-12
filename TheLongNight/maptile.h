@@ -13,9 +13,9 @@ class maptile
 public:
 
 	//Constructors/destructor
-	maptile() : maptile("Floor", BASIC_FLOOR_TILE, TCODColor::grey, TCODColor::black, "undefined") {}
-	maptile(std::string name, int tileCode, TCODColor color, TCODColor bgcolor, std::string handle, bool walkable = true, bool seeThrough = true): 
-		name(name), color(color), bgcolor(bgcolor), tileCode(tileCode), walkable(walkable), seeThrough(seeThrough), handle(handle) {}
+	maptile() : maptile("Floor", "undefined", BASIC_FLOOR_TILE, TCODColor::grey, TCODColor::black) {}
+	maptile(std::string name, std::string handle, int tileCode, TCODColor color, TCODColor bgcolor, bool walkable = true, bool seeThrough = true): 
+		name(name), handle(handle), color(color), bgcolor(bgcolor), tileCode(tileCode), walkable(walkable), seeThrough(seeThrough) {}
 	~maptile();
 
 	//Getters
@@ -37,7 +37,7 @@ public:
 private:
 
 	//Uniquely defines a tile using the map loader
-	const std::string handle;
+	std::string handle;
 
 	//Aesthetic data
 	std::string name;
