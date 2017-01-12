@@ -723,6 +723,22 @@ void game::meleeAttack(person * attacker, person * target)
 
 
 /*
+	INVENTORY MANAGEMENT
+*/
+
+
+/*
+Set up the MAIN MENU for inventory management, where you can select an inventory category.
+*/
+void game::createInventoryMenu()
+{
+	menu* itemsMenu = new menu("INVENTORY");
+
+}
+
+
+
+/*
 	SPELL MAGIC
 */
 

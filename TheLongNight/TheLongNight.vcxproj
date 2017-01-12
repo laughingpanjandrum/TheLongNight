@@ -127,6 +127,7 @@
     <ClCompile Include="item.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="maptile.cpp" />
+    <ClCompile Include="menu.cpp" />
     <ClCompile Include="monster.cpp" />
     <ClCompile Include="person.cpp" />
     <ClCompile Include="spell.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="inventory.h" />
     <ClInclude Include="item.h" />
     <ClInclude Include="keycodes.h" />
+    <ClInclude Include="menu.h" />
     <ClInclude Include="monster.h" />
     <ClInclude Include="spell.h" />
     <ClInclude Include="tileConsts.h" />

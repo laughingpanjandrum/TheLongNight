@@ -78,6 +78,9 @@
     <ClCompile Include="consumable.cpp">
       <Filter>Source Files\elements</Filter>
     </ClCompile>
+    <ClCompile Include="menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window.h">
@@ -136,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="consumable.h">
       <Filter>Header Files\elements</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

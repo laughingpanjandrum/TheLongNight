@@ -7,6 +7,7 @@ characters, items, and so on.
 #ifndef ELEMENT_H
 #define ELEMENT_H
 
+#include <vector>
 #include <string>
 #include "libtcod.hpp"
 #include "tileConsts.h"
@@ -41,6 +42,8 @@ protected:
 	//Position
 	coord xy;
 };
+
+typedef std::vector<element*> elementVector;
 
 #endif
 

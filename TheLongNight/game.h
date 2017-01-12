@@ -14,6 +14,7 @@ It also draws all the stuff that needs drawing.
 #include "keycodes.h"
 #include "turnTracker.h"
 #include "utility.h"
+#include "menu.h"
 
 #include "map.h"
 #include "person.h"
@@ -118,6 +119,9 @@ private:
 
 	//Combat
 	void meleeAttack(person* attacker, person* target);
+
+	//Inventory management
+	void createInventoryMenu();
 
 	//Spellcasting
 	void castSpell(spell* sp);
