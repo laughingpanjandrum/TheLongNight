@@ -79,15 +79,6 @@ Change the game state.
 void game::setState(gameState st)
 {
 	state = st;
-	//Set up the new state
-	if (st == STATE_VIEW_INVENTORY) {
-		//Pick an ITEM CATEGORY
-		currentMenu = new menu("INVENTORY");
-		for (auto cat : ALL_ITEM_TYPES) {
-			element* e = new element(getItemCategoryName(cat), 0, TCODColor::lightGrey);
-			currentMenu->addElement(e);
-		}
-	}
 }
 
 void game::addMessage(std::string txt, TCODColor color)
@@ -350,6 +341,34 @@ void game::navigateMenu(TCOD_key_t kp)
 	}
 }
 
+/*
+Press ENTER in a menu
+*/
+void game::acceptCurrentMenuIndex()
+{
+	//What this does depends on which MENU we're in
+	if (state == STATE_VIEW_INVENTORY) {
+		//Selected menu object should be an ITEM
+		item* sel = static_cast<item*>(currentMenu->getSelectedItem());
+		selectInventoryCategory(sel->getCategory());
+	}
+}
+
+/*
+Return to previous menu, if possible, or close menu altogether
+*/
+void game::menuBackOut()
+{
+	if (state == STATE_VIEW_INVENTORY_CATEGORY) {
+		//Back up to standard inventory menu
+		createInventoryMenu();
+	}
+	else {
+		//Return to map
+		setState(STATE_VIEW_MAP);
+	}
+}
+
 
 
 /*
@@ -368,7 +387,7 @@ void game::drawScreen()
 	if (state == STATE_VIEW_MAP) {
 		drawMap(MAP_DRAW_X, MAP_DRAW_Y);
 	}
-	else if (state == STATE_VIEW_INVENTORY) {
+	else if (state == STATE_VIEW_INVENTORY || state == STATE_VIEW_INVENTORY_CATEGORY) {
 		drawInventory(MAP_DRAW_X, MAP_DRAW_Y);
 	}
 	drawInterface(MAP_DRAW_X + 40, MAP_DRAW_Y);
@@ -532,21 +551,6 @@ List inventory
 */
 void game::drawInventory(int atx, int aty)
 {
-	/*
-	//List all categories
-	for (unsigned int i = 0; i < ALL_ITEM_TYPES.size(); i++) {
-		//Category
-		itemTypes cat = ALL_ITEM_TYPES[i];
-		std::string title = getItemCategoryName(cat);
-		win.write(atx, ++aty, title, TCODColor::lightGrey);
-		//Items of this type that we have
-		itemVector carriedItems = player->getItemsOfType(cat);
-		//And draw all of THEM
-		for (auto item : carriedItems) {
-			win.write(atx + 1, ++aty, item->getName(), item->getColor());
-		}
-	}
-	*/
 	drawMenu(currentMenu, MAP_DRAW_X, MAP_DRAW_Y);
 }
 
@@ -561,9 +565,11 @@ void game::processCommand()
 		isGameOver = true;
 	//Menus
 	else if (kp.vk == KEY_BACK_OUT)
-		setState(STATE_VIEW_MAP);
+		menuBackOut();
 	else if (kp.c == 'i')
-		setState(STATE_VIEW_INVENTORY);
+		createInventoryMenu();
+	else if (kp.vk == KEY_ACCEPT)
+		acceptCurrentMenuIndex();
 	//Using stuff
 	else if (kp.c == 'c')
 		player->cycleConsumable();
@@ -619,7 +625,7 @@ void game::applyEffectToPerson(person * target, effect eff, int potency)
 	//Interface stuff for PCs only
 	if (eff == ALLOW_INVENTORY_MANAGEMENT && target->isPlayer) {
 		//Can manage inventory when we step on this tile
-		setState(STATE_VIEW_INVENTORY);
+		createInventoryMenu();
 	}
 	//Restoratives
 	else if (eff == RESTORE_HEALTH)
@@ -790,8 +796,26 @@ Set up the MAIN MENU for inventory management, where you can select an inventory
 */
 void game::createInventoryMenu()
 {
-	menu* itemsMenu = new menu("INVENTORY");
+	setState(STATE_VIEW_INVENTORY);
+	//Pick an ITEM CATEGORY
+	currentMenu = new menu("INVENTORY");
+	for (auto cat : ALL_ITEM_TYPES) {
+		item* e = new item(getItemCategoryName(cat), 0, TCODColor::lightGrey, cat);
+		currentMenu->addElement(e);
+	}
+}
 
+/*
+New menu listing inventory items in this category
+*/
+void game::selectInventoryCategory(itemTypes cat)
+{
+	setState(STATE_VIEW_INVENTORY_CATEGORY);
+	//Setup menu
+	currentMenu = new menu(getItemCategoryName(cat));
+	for (auto item : player->getItemsOfType(cat)) {
+		currentMenu->addElement(item);
+	}
 }
 
 

@@ -101,6 +101,8 @@ private:
 	menu* currentMenu;
 	void drawMenu(menu* m, int atx, int aty);
 	void navigateMenu(TCOD_key_t kp);
+	void acceptCurrentMenuIndex();
+	void menuBackOut();
 
 	//Drawing functions
 	void drawScreen();
@@ -127,6 +129,7 @@ private:
 
 	//Inventory management
 	void createInventoryMenu();
+	void selectInventoryCategory(itemTypes cat);
 
 	//Spellcasting
 	void castSpell(spell* sp);
