@@ -201,6 +201,22 @@ void game::endPlayerTurn()
 */
 
 /*
+Returns a list of all adjacent coords that the given ai will willingly walk upon.
+*/
+pathVector game::getAllAdjacentWalkable(person * ai)
+{
+	pathVector pts;
+	for (int x = ai->getx() - 1; x <= ai->getx() + 1; x++) {
+		for (int y = ai->gety() - 1; y <= ai->gety() + 1; y++) {
+			if (aiIsValidMove(ai, x, y)) {
+				pts.push_back(coord(x, y));
+			}
+		}
+	}
+	return pts;
+}
+
+/*
 Returns whether the given ai will move to the given point.
 */
 bool game::aiIsValidMove(person * ai, int xnew, int ynew)
@@ -223,16 +239,28 @@ AI moves directly towards its target, melee-attacking if possible.
 */
 void game::aiMoveToTarget(person * ai)
 {
-	int xnew = ai->getx();
-	int ynew = ai->gety();
-	person* target = ai->getTarget();
-	//Movement vectors
-	xnew += get1dVector(xnew, target->getx());
-	ynew += get1dVector(ynew, target->gety());
-	//Try to move it
-	if (aiIsValidMove(ai, xnew, ynew)) {
-		movePerson(ai, xnew, ynew);
+	//Rudimentary pathing. First we list all walkable points adjacent to us
+	pathVector pts = getAllAdjacentWalkable(ai);
+	//If there are no walkable points, GIVE UP
+	if (pts.size() == 0) {
+		turns.addEntity(ai, ai->getMoveDelay());
+		return;
 	}
+	//If there are, find the one that's nearest our target
+	person* t = ai->getTarget();
+	coord bestPt = pts.at(0);
+	int bestDist = hypot(bestPt.first - t->getx(), bestPt.second - t->gety());
+	//Look for the shortest distance
+	for (int i = 1; i < pts.size(); i++) {
+		coord pt = pts.at(i);
+		int newDist = hypot(pt.first - t->getx(), pt.second - t->gety());
+		if (newDist < bestDist) {
+			bestDist = newDist;
+			bestPt = pt;
+		}
+	}
+	//Now move to this point
+	movePerson(ai, bestPt.first, bestPt.second);
 	//Time passes
 	turns.addEntity(ai, ai->getMoveDelay());
 }

@@ -90,6 +90,7 @@ private:
 	void endPlayerTurn();
 
 	//Monster actions
+	pathVector getAllAdjacentWalkable(person* ai);
 	bool aiIsValidMove(person* ai, int xnew, int ynew);
 	void aiMoveToTarget(person* ai);
 	void aiFindTarget(person* ai);
