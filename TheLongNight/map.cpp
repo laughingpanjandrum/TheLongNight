@@ -15,7 +15,7 @@ map::map(int xsize, int ysize)
 		maptileVector1d* yvector = new maptileVector1d;
 		//Fill this vector with empty tiles
 		for (int y = 0; y < ysize; y++)
-			yvector->push_back(floor());
+			yvector->push_back(tile_Floor());
 		//And then push this vector onto the x-list
 		maptiles.push_back(yvector);
 	}

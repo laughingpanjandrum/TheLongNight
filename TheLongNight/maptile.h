@@ -58,12 +58,16 @@ private:
 typedef std::vector<maptile*> tileVector;
 
 //Constants
-maptile* floor();
-maptile* wall();
-maptile* acid();
+maptile* tile_Floor();
+maptile* tile_Wall();
+maptile* tile_Door();
+maptile* tile_Acid();
 
 maptile* tile_StatueOfRest();
 
-const tileVector ALL_MAPTILES = { floor(), wall(), tile_StatueOfRest() };
+const tileVector ALL_MAPTILES = {	
+	tile_Floor(), tile_Wall(), tile_Door(), tile_Acid(),
+	tile_StatueOfRest() 
+};
 
 #endif
