@@ -56,7 +56,7 @@ public:
 	//Game running
 	void mainGameLoop();
 
-private:
+protected:
 	
 	window win;
 

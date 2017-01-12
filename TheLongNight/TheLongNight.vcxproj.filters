@@ -81,6 +81,9 @@
     <ClCompile Include="menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="mapLoader.cpp">
+      <Filter>Source Files\maps</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window.h">
@@ -142,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="menu.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mapLoader.h">
+      <Filter>Header Files\maps</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
