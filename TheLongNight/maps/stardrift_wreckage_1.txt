@@ -2,6 +2,10 @@ Stardrift Wreckage
 start:18,9
 drowned_dead:18,12
 drowned_dead:19,13
+-items
+splintered_sword:18,7
+starwater_draught:17,7
+-enditems
 -codes
 # wall_stone
 . floor_stone

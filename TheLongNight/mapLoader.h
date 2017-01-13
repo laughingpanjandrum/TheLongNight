@@ -11,6 +11,7 @@ Creates maps defined by text files.
 #include <fstream>
 #include "map.h"
 #include "monster.h"
+#include "itemMaster.h"
 
 class mapLoader
 {

@@ -31,6 +31,8 @@ map * mapLoader::loadMapFromFile(std::string filename)
 	coord startPt;
 	//Tracks MONSTERS that we want to put on the map!
 	monsterVector monsters;
+	//Tracks ITEMS that we want to put on the map!
+	itemVector items;
 	
 	/*
 	Now we can actually load info from the file
@@ -40,45 +42,65 @@ map * mapLoader::loadMapFromFile(std::string filename)
 	getline(mapfile, mapname);
 
 	//Now read in creature positions until we reach encodings
+	bool loadingItems = false;
 	std::string line = "";
 	getline(mapfile, line);
 	while (line != "-codes") {
-		//Read till we reach the colon, which indicates end of name
-		int i = 0;
-		char c = line.at(i);
-		std::string chunk = "";
-		while (c != ':') {
-			chunk += c;
-			i++;
-			c = line.at(i);
-		}
-		//Now read in the coords. x-coord is BEFORE the comma
-		i++;
-		c = line.at(i);
-		std::string xcoord = "";
-		while (c != ',') {
-			xcoord += c;
-			i++;
-			c = line.at(i);
-		}
-		//y-coord is AFTER the comma
-		std::string ycoord = "";
-		for (int n = i + 1; n < line.size(); n++) {
-			ycoord += line.at(n);
-		}
-		//Now see what kind of coordinate we made!
-		int x = std::stoi(xcoord);
-		int y = std::stoi(ycoord);
-		if (chunk == "start") {
-			//Starting position!
-			startPt.first = x;
-			startPt.second = y;
-		}
+
+		//Start/stop doing items?
+		if (line == "-items")
+			loadingItems = true;
+		else if (line == "-enditems")
+			loadingItems = false;
 		else {
-			//New monster!
-			monster* m = getMonsterByHandle(chunk);
-			m->setPosition(x, y);
-			monsters.push_back(m);
+
+			//Read till we reach the colon, which indicates end of name
+			int i = 0;
+			char c = line.at(i);
+			std::string chunk = "";
+			while (c != ':') {
+				chunk += c;
+				i++;
+				c = line.at(i);
+			}
+
+			//Now read in the coords. x-coord is BEFORE the comma
+			i++;
+			c = line.at(i);
+			std::string xcoord = "";
+			while (c != ',') {
+				xcoord += c;
+				i++;
+				c = line.at(i);
+			}
+
+			//y-coord is AFTER the comma
+			std::string ycoord = "";
+			for (int n = i + 1; n < line.size(); n++) {
+				ycoord += line.at(n);
+			}
+
+			//Now see what kind of coordinate we made!
+			int x = std::stoi(xcoord);
+			int y = std::stoi(ycoord);
+			if (chunk == "start") {
+				//Starting position!
+				startPt.first = x;
+				startPt.second = y;
+			}
+			else if (loadingItems) {
+				//New item!
+				item* it = getItemByHandle(chunk);
+				it->setPosition(x, y);
+				items.push_back(it);
+			}
+			else {
+				//New monster!
+				monster* m = getMonsterByHandle(chunk);
+				m->setPosition(x, y);
+				monsters.push_back(m);
+			}
+
 		}
 		//Next line!
 		getline(mapfile, line);
@@ -136,6 +158,11 @@ map * mapLoader::loadMapFromFile(std::string filename)
 	//Add monsters to map
 	for (auto monst : monsters) {
 		m->addPerson(monst, monst->getx(), monst->gety());
+	}
+
+	//Add items to map
+	for (auto item : items) {
+		m->addItem(item, item->getx(), item->gety());
 	}
 
 	//Return final map
