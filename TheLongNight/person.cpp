@@ -231,7 +231,10 @@ Add the given item to our items carried.
 */
 void person::addItem(item * which)
 {
-	items.addItem(which);
+	bool stackedWithOther = items.addItem(which);
+	//Also equip it, y'know, if we FEEL like it
+	if (!stackedWithOther)
+		equipItem(which);
 }
 
 consumable * person::getSelectedConsumable()

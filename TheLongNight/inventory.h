@@ -26,33 +26,43 @@ class inventory
 public:
 	inventory();
 	~inventory();
+
 	//Constants
 	static const int MAX_CONSUMABLE_SLOTS = 5;
+
 	//Setters
 	void equipItem(item* which);
 	void unequipItem(item* which);
-	void addItem(item* which);
+	bool addItem(item* which);
+
 	//Getters
 	itemlistVector getAllCarried() { return carried; }
 	item* getEquipped(itemTypes category);
 	std::vector<item*> getItemList(itemTypes category);
 	std::vector<consumable*> getConsumables() { return equippedConsumables; }
+
 	//Getting particular items
 	weapon* getWeapon() { return equippedWeapon; }
 	weapon* getOffhand() { return equippedOffhand; }
 	armour* getArmour() { return equippedArmour; }
 	armour* getHelmet() { return equippedHelmet; }
+
 	//Selecting particular slots
 	void cycleConsumable();
 	consumable* getSelectedConsumable();
+
 private:
+
 	//Slots
 	itemlistVector carried;
-	//Important items: we save pointers to these when they're equipped
+	
+	//Pointers to each equipped item
 	weapon* equippedWeapon;
 	weapon* equippedOffhand;
 	armour* equippedArmour;
 	armour* equippedHelmet;
+
+	//Consumables appear as a list
 	std::vector<consumable*> equippedConsumables;
 	int selectedConsumable = 0;
 };

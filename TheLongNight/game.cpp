@@ -823,7 +823,6 @@ void game::standOnTile(person * victim)
 		if (itemHere != nullptr) {
 			//Get item
 			victim->addItem(itemHere);
-			victim->equipItem(itemHere);
 			//...and remove it from the floor
 			currentMap->removeItem(itemHere);
 		}

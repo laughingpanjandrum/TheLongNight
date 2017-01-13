@@ -8,7 +8,8 @@ drowned_dead:14,24
 -items
 splintered_sword:17,17
 starwater_draught:16,9
-starwater_draught:13,14
+starwater_draught:13,24
+starwater_draught:15,9
 ruined_uniform:23,17
 captains_tricorn:24,17
 -enditems

@@ -51,14 +51,27 @@ void inventory::unequipItem(item * which)
 
 /*
 Add an item to our storage, without equipping it.
+Returns TRUE if the item stacked with another item.
+Returns FALSE if a new entry was created for this item.
 */
-void inventory::addItem(item * which)
+bool inventory::addItem(item * which)
 {
 	//Find the proper list
 	for (auto ilist = carried.begin(); ilist != carried.end(); ilist++) {
 		if ((*ilist).category == which->getCategory()) {
+			//Found the correct list, now check for stacking
+			if (which->isStackable()) {
+				//Is there anything we can stack with?
+				for (auto item : (*ilist).items) {
+					if (item->getName() == which->getName()) {
+						item->add(which->getAmountLeft());
+						return true;
+					}
+				}
+			}
+			//If we failed to stack, we just append the item
 			(*ilist).add(which);
-			return;
+			return false;
 		}
 	}
 }

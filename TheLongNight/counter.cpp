@@ -67,3 +67,14 @@ void counter::add(int amount)
 	else if (value < 0)
 		value = 0;
 }
+
+/*
+Changes the maximum value.
+If adjustCurrentValue is true, we will apply the same change to the maximum value.
+*/
+void counter::increaseMaxValue(int amount, bool adjustCurrentValue)
+{
+	maxValue += amount;
+	if (adjustCurrentValue)
+		value += amount;
+}
