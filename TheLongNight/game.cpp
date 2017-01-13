@@ -12,7 +12,9 @@ game::game()
 	//Character create
 	player = new person();
 	player->isPlayer = true;
-	currentMap->addPerson(player, 3, 3);
+	//Find starting position
+	coord startPt = currentMap->getStartPoint();
+	currentMap->addPerson(player, startPt.first, startPt.second);
 	currentMap->updateFOV(player->getx(), player->gety());
 	//Starting items
 	currentMap->addItem(armour_RuinedUniform(), 6, 6);

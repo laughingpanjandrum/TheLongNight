@@ -27,6 +27,8 @@ map * mapLoader::loadMapFromFile(std::string filename)
 	//These two vectors contain encodings for different tile types
 	stringVector tileHandles; //These are the maptile handles we'll need
 	charVector tileChars; //These appear in the file
+	//The starting point, just in case we happen to have one
+	coord startPt;
 	
 	/*
 	Now we can actually load info from the file
@@ -34,11 +36,46 @@ map * mapLoader::loadMapFromFile(std::string filename)
 	
 	//First line is the map name
 	getline(mapfile, mapname);
+
 	//Now read in creature positions until we reach encodings
 	std::string line = "";
+	getline(mapfile, line);
 	while (line != "-codes") {
+		//Read till we reach the colon, which indicates end of name
+		int i = 0;
+		char c = line.at(i);
+		std::string chunk = "";
+		while (c != ':') {
+			chunk += c;
+			i++;
+			c = line.at(i);
+		}
+		//Now read in the coords. x-coord is BEFORE the comma
+		i++;
+		c = line.at(i);
+		std::string xcoord = "";
+		while (c != ',') {
+			xcoord += c;
+			i++;
+			c = line.at(i);
+		}
+		//y-coord is AFTER the comma
+		std::string ycoord = "";
+		for (int n = i + 1; n < line.size(); n++) {
+			ycoord += line.at(n);
+		}
+		//Now see what kind of coordinate we made!
+		int x = std::stoi(xcoord);
+		int y = std::stoi(ycoord);
+		if (chunk == "start") {
+			//Starting position!
+			startPt.first = x;
+			startPt.second = y;
+		}
+		//Next line!
 		getline(mapfile, line);
 	}
+
 	//Next series of lines define tile encodings
 	getline(mapfile, line);
 	while (line != "-endcodes") {
@@ -49,6 +86,7 @@ map * mapLoader::loadMapFromFile(std::string filename)
 		//Next line
 		getline(mapfile, line);
 	}
+
 	//The rest of the file is the map itself
 	while (getline(mapfile, line)) {
 		//Longest line defines x-size
@@ -59,6 +97,7 @@ map * mapLoader::loadMapFromFile(std::string filename)
 		//And now just remember this line
 		tiles.push_back(line);
 	}
+
 	//Done with the file
 	mapfile.close();
 
@@ -82,6 +121,9 @@ map * mapLoader::loadMapFromFile(std::string filename)
 			m->setTile(mt, x, y);
 		}
 	}
+
+	//Add start point to map
+	m->setStartPoint(startPt);
 
 	//Return final map
 	return m;

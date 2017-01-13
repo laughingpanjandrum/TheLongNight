@@ -16,7 +16,7 @@ bool maptile::hasTouchEffect(effect te)
 
 maptile * tile_Floor()
 {
-	return new maptile("Floor", "floor_stone", BASIC_FLOOR_TILE, TCODColor::darkGreen, TCODColor::darkestGreen);
+	return new maptile("Floor", "floor_stone", BASIC_FLOOR_TILE, TCODColor::grey, TCODColor::darkerGrey);
 }
 
 maptile * tile_Wall()

@@ -1,5 +1,5 @@
 Stardrift Wreckage
-start:19,10
+start:18,9
 -codes
 # wall_stone
 . floor_stone
