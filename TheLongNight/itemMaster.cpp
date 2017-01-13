@@ -16,6 +16,11 @@ item * getItemByHandle(std::string handle)
 		return consumable_StarwaterDraught();
 	else if (handle == "invigorating_tea")
 		return consumable_InvigoratingTea();
+	//ARMOUR
+	else if (handle == "captains_tricorn")
+		return headgear_CaptainsTricorn();
+	else if (handle == "ruined_uniform")
+		return armour_RuinedUniform();
 	//Uh oh, we didn't find anything!
 	return nullptr;
 }

@@ -205,15 +205,15 @@ Returns a list of all adjacent coords that the given ai will willingly walk upon
 */
 pathVector game::getAllAdjacentWalkable(person * ai)
 {
-	pathVector pts;
-	for (int x = ai->getx() - 1; x <= ai->getx() + 1; x++) {
-		for (int y = ai->gety() - 1; y <= ai->gety() + 1; y++) {
-			if (aiIsValidMove(ai, x, y)) {
-				pts.push_back(coord(x, y));
-			}
-		}
+	int x = ai->getx();
+	int y = ai->gety();
+	pathVector pts = { coord(x - 1, y), coord(x + 1, y), coord(x, y - 1), coord(x, y + 1) };
+	pathVector goodPts;
+	for (auto pt : pts) {
+		if (aiIsValidMove(ai, pt.first, pt.second))
+			goodPts.push_back(pt);
 	}
-	return pts;
+	return goodPts;
 }
 
 /*
@@ -646,6 +646,8 @@ void game::processCommand()
 	//Movement
 	else if (kp.c == 't')
 		toggleTargetMode();
+	else if (kp.c == 'z')
+		playerTurnDelay = player->getMoveDelay();
 	else if (isMovementKey(kp))
 		if (state == STATE_VIEW_MAP)
 			processMove(kp);

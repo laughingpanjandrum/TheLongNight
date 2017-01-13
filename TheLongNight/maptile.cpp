@@ -30,6 +30,11 @@ maptile * tile_Door()
 	return d;
 }
 
+maptile * tile_Water()
+{
+	return new maptile("Water", "water", BASIC_WATER_TILE, TCODColor::cyan, TCODColor::blue);
+}
+
 maptile * tile_Acid()
 {
 	maptile* a = new maptile("Acid", "acid", BASIC_WATER_TILE, TCODColor::lighterGreen, TCODColor::green);

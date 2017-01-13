@@ -133,7 +133,8 @@ Forget a spell we know (e.g. because we un-equipped a wand)
 void person::removeSpellKnown(spell * sp)
 {
 	auto iter = std::find(spellsKnown.begin(), spellsKnown.end(), sp);
-	spellsKnown.erase(iter);
+	if (iter != spellsKnown.end())
+		spellsKnown.erase(iter);
 }
 
 /*

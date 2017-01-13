@@ -61,12 +61,15 @@ typedef std::vector<maptile*> tileVector;
 maptile* tile_Floor();
 maptile* tile_Wall();
 maptile* tile_Door();
+
+maptile* tile_Water();
 maptile* tile_Acid();
 
 maptile* tile_StatueOfRest();
 
 const tileVector ALL_MAPTILES = {	
-	tile_Floor(), tile_Wall(), tile_Door(), tile_Acid(),
+	tile_Floor(), tile_Wall(), tile_Door(), 
+	tile_Water(), tile_Acid(),
 	tile_StatueOfRest() 
 };
 
