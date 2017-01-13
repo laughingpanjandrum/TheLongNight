@@ -26,6 +26,9 @@ g glass
 T terminal
 B bed
 -endcodes
+-connections
+east:cbeach_1
+-endconnections
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ^^^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^

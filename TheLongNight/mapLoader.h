@@ -35,7 +35,8 @@ private:
 	maptile* getTileByChar(char c, charVector* tileChars, tileVector* tileList);
 
 	//File locations
-	const std::string folder = "maps/";
+	const std::string FOLDER = "maps/"; //This is prepended to every map handle we load
+	const std::string FILE_EXTENSION = ".txt"; //This is appended to every map handle we load
 	const std::string startMap = "stardrift_wreckage_1";
 
 };

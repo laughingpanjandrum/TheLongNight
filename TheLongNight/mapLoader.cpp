@@ -33,6 +33,9 @@ map * mapLoader::loadMapFromFile(std::string filename)
 	monsterVector monsters;
 	//Tracks ITEMS that we want to put on the map!
 	itemVector items;
+	//Tracks CONNECTIONS that should appear on the map
+	connectionVector connectionPoints;
+	stringVector connectionHandles;
 	
 	/*
 	Now we can actually load info from the file
@@ -117,6 +120,36 @@ map * mapLoader::loadMapFromFile(std::string filename)
 		getline(mapfile, line);
 	}
 
+	//Finally, we load in map connections
+	while (line != "-connections")
+		getline(mapfile, line);
+	getline(mapfile, line);
+	//connection name:where it goes
+	while (line != "-endconnections") {
+		std::string chunk;
+		int i = 0;
+		char c = line.at(i);
+		//Everything before the colon is the connection type
+		while (c != ':' && i < line.size()) {
+			chunk += c;
+			c = line.at(++i);
+		}
+		//Everything after it is the new map name
+		std::string newMapHandle = line.substr(i + 1, line.size());
+		connectionHandles.push_back(FOLDER + newMapHandle + FILE_EXTENSION);
+		//Figure out which direction we've chosen
+		if (chunk == "east")
+			connectionPoints.push_back(CONNECT_EAST);
+		else if (chunk == "west")
+			connectionPoints.push_back(CONNECT_WEST);
+		else if (chunk == "north")
+			connectionPoints.push_back(CONNECT_NORTH);
+		else if (chunk == "south")
+			connectionPoints.push_back(CONNECT_SOUTH);
+		//Next line
+		getline(mapfile, line);
+	}
+
 	//The rest of the file is the map itself
 	while (getline(mapfile, line)) {
 		//Longest line defines x-size
@@ -167,6 +200,10 @@ map * mapLoader::loadMapFromFile(std::string filename)
 	for (auto item : items) {
 		m->addItem(item, item->getx(), item->gety());
 	}
+
+	//Add connections
+	for (int i = 0; i < connectionPoints.size(); i++)
+		m->addConnection(connectionPoints.at(i), connectionHandles.at(i));
 
 	//Return final map
 	return m;

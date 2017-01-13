@@ -21,7 +21,7 @@ game::game()
 			turns.addEntity(m, 1);
 	}
 	//Debug: Add a map connection
-	currentMap->addConnection(CONNECT_EAST, "maps/cbeach_1.txt");
+	//currentMap->addConnection(CONNECT_EAST, "maps/cbeach_1.txt");
 }
 
 
@@ -934,6 +934,8 @@ void game::tryMapChange(int xnew, int ynew)
 			for (auto person : newMap->getAllPeople())
 				if (!person->isPlayer)
 					turns.addEntity(person, 1);
+			//Update FOV for new map
+			currentMap->updateFOV(player->getx(), player->gety());
 		}
 	}
 }

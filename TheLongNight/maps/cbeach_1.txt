@@ -7,6 +7,9 @@ splintered_sword:5,5
 . floor_sand
 # wall_sand
 -endcodes
+-connections
+west:stardrift_wreckage_1
+-endconnections
 ........................................
 ........................................
 ........................................
