@@ -25,6 +25,12 @@
     <Filter Include="Source Files\elements">
       <UniqueIdentifier>{4e4f10c0-9b8b-4204-adc0-b55ed0f055bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\utility">
+      <UniqueIdentifier>{c5e807d0-5f48-4fa2-be7f-79b72b9e0a66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\utility">
+      <UniqueIdentifier>{9363e22e-e31e-4a71-8ead-8f5355192d29}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TheLongNight.cpp">
@@ -48,17 +54,8 @@
     <ClCompile Include="person.cpp">
       <Filter>Source Files\elements</Filter>
     </ClCompile>
-    <ClCompile Include="counter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="monster.cpp">
       <Filter>Source Files\elements</Filter>
-    </ClCompile>
-    <ClCompile Include="turnTracker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="utility.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="item.cpp">
       <Filter>Source Files\elements</Filter>
@@ -78,14 +75,26 @@
     <ClCompile Include="consumable.cpp">
       <Filter>Source Files\elements</Filter>
     </ClCompile>
-    <ClCompile Include="menu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="mapLoader.cpp">
       <Filter>Source Files\maps</Filter>
     </ClCompile>
     <ClCompile Include="itemMaster.cpp">
       <Filter>Source Files\elements</Filter>
+    </ClCompile>
+    <ClCompile Include="utility.cpp">
+      <Filter>Source Files\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="turnTracker.cpp">
+      <Filter>Source Files\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="menu.cpp">
+      <Filter>Source Files\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="counter.cpp">
+      <Filter>Source Files\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="animations.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -93,9 +102,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="tileConsts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="keycodes.h">
@@ -113,20 +119,8 @@
     <ClInclude Include="person.h">
       <Filter>Header Files\elements</Filter>
     </ClInclude>
-    <ClInclude Include="counter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="monster.h">
       <Filter>Header Files\elements</Filter>
-    </ClInclude>
-    <ClInclude Include="turnTracker.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="utility.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="categories.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="item.h">
       <Filter>Header Files\elements</Filter>
@@ -146,14 +140,32 @@
     <ClInclude Include="consumable.h">
       <Filter>Header Files\elements</Filter>
     </ClInclude>
-    <ClInclude Include="menu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="mapLoader.h">
       <Filter>Header Files\maps</Filter>
     </ClInclude>
     <ClInclude Include="itemMaster.h">
       <Filter>Header Files\elements</Filter>
+    </ClInclude>
+    <ClInclude Include="counter.h">
+      <Filter>Header Files\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="tileConsts.h">
+      <Filter>Header Files\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="turnTracker.h">
+      <Filter>Header Files\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>Header Files\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility.h">
+      <Filter>Header Files\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="categories.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="animations.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

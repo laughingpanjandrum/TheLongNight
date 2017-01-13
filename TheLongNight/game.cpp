@@ -46,6 +46,7 @@ void game::mainGameLoop()
 	//Draw
 	while (!isGameOver) {
 		drawScreen();
+		updateAnimations();
 		//Has the player's turn ended?
 		if (playerTurnDelay > 0) {
 			endPlayerTurn();
@@ -439,6 +440,8 @@ drawData game::getDrawData(int x, int y)
 				toDraw.color = it->getColor();
 			}
 		}
+		//Allow animations to adjust draw data
+		toDraw = getAnimationDataOverride(&toDraw, x, y);
 		//Darken tiles that are further away
 		int distance = hypot(x - player->getx(), y - player->gety());
 		float modifier = distance * 0.07;
@@ -562,6 +565,38 @@ void game::drawInventory(int atx, int aty)
 			item* sel = static_cast<item*>(currentMenu->getSelectedItem());
 			drawItemInfo(sel, atx, aty + 20);
 		}
+}
+
+
+/*
+Allows animations to adjust draw data when drawing the map.
+*/
+drawData game::getAnimationDataOverride(drawData * baseData, int x, int y)
+{
+	for (auto a : playingAnimations) {
+		baseData = &a->getDrawData(baseData, x, y);
+	}
+	return *baseData;
+}
+
+/*
+Progresses animations and checks to see if any are done and should be deleted.
+*/
+void game::updateAnimations()
+{
+	animVector toDelete;
+	//Progress and check for deletions
+	for (auto a : playingAnimations) {
+		a->tick();
+		if (a->isDone())
+			toDelete.push_back(a);
+	}
+	//And delete anything that's expired
+	for (auto a : toDelete) {
+		auto it = std::find(playingAnimations.begin(), playingAnimations.end(), a);
+		if (it != playingAnimations.end())
+			playingAnimations.erase(it);
+	}
 }
 
 
@@ -836,6 +871,8 @@ void game::meleeAttack(person * attacker, person * target)
 		dischargeSpellOnTarget(attacker->buffNextMelee, attacker, target);
 		attacker->buffNextMelee = nullptr;
 	}
+	//Animation effect
+	addAnimations(new flashCharacter(target, TCODColor::red));
 	//Next: STATUS EFFECTS
 	if (wp != nullptr) {
 		for (int idx = 0; idx < wp->getStatusEffectCount(); idx++) {

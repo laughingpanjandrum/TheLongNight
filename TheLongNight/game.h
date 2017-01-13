@@ -15,22 +15,13 @@ It also draws all the stuff that needs drawing.
 #include "turnTracker.h"
 #include "utility.h"
 #include "menu.h"
+#include "animations.h"
 
 #include "mapLoader.h"
 #include "map.h"
 #include "person.h"
 #include "monster.h"
 
-
-//Draw data - useful little chunk of data that defines what to draw at a point on the map
-struct drawData {
-	drawData() {}
-	drawData(int tileCode, TCODColor color, TCODColor bgcolor): 
-		tileCode(tileCode), color(color), bgcolor(bgcolor) {}
-	int tileCode;
-	TCODColor color;
-	TCODColor bgcolor;
-};
 
 //Messages!
 struct message {
@@ -41,7 +32,6 @@ struct message {
 };
 
 typedef std::vector<message> messageVector;
-typedef std::vector<coord> pathVector;
 
 
 class game
@@ -111,6 +101,12 @@ private:
 	drawData getDrawData(int x, int y);
 	void drawInterface(int atx, int aty);
 	void drawInventory(int atx, int aty);
+
+	//Animations
+	animVector playingAnimations;
+	void addAnimations(animations* a) { playingAnimations.push_back(a); }
+	drawData getAnimationDataOverride(drawData* baseData, int x, int y);
+	void updateAnimations();
 
 	//Drawing item information
 	void drawItemInfo(item* it, int atx, int aty);
