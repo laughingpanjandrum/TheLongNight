@@ -155,6 +155,9 @@ map * mapLoader::loadMapFromFile(std::string filename)
 	//Add start point to map
 	m->setStartPoint(startPt);
 
+	//Set name
+	m->setName(mapname);
+
 	//Add monsters to map
 	for (auto monst : monsters) {
 		m->addPerson(monst, monst->getx(), monst->gety());

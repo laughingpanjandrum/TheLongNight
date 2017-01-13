@@ -16,14 +16,6 @@ game::game()
 	coord startPt = currentMap->getStartPoint();
 	currentMap->addPerson(player, startPt.first, startPt.second);
 	currentMap->updateFOV(player->getx(), player->gety());
-	//Starting items
-	currentMap->addItem(armour_RuinedUniform(), 6, 6);
-	currentMap->addItem(headgear_CaptainsTricorn(), 5, 6);
-	currentMap->addItem(weapon_SplinteredSword(), 2, 3);
-	currentMap->addItem(wand_DriftwoodWand(), 3, 4);
-	currentMap->addItem(shield_BatteredWoodenShield(), 4, 4);
-	currentMap->addItem(consumable_StarwaterDraught(), 7, 5);
-	currentMap->addItem(consumable_InvigoratingTea(), 7, 6);
 	//Add monsters to clock
 	for (auto m : currentMap->getAllPeople()) {
 		if (!m->isPlayer)
@@ -402,6 +394,8 @@ Input: Coordinates to start drawing at (the top left corner of the map)
 */
 void game::drawMap(int leftx, int topy)
 {
+	//Draw map name just above
+	win.write(leftx + 10, topy - 1, currentMap->getName(), TCODColor::white);
 	//Draw entire map, left to right & top to bottom
 	for (int x = 0; x < currentMap->getXSize(); x++) {
 		for (int y = 0; y < currentMap->getYSize(); y++) {

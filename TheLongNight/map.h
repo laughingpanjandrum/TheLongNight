@@ -21,6 +21,10 @@ public:
 	map(int xsize, int ysize);
 	~map();
 
+	//Flava getting & setting
+	void setName(std::string n) { name = n; }
+	std::string getName() { return name; }
+
 	//Boundary checking
 	bool inBounds(int x, int y);
 
@@ -51,6 +55,9 @@ public:
 	TCODPath* getPath();
 
 private:
+
+	//Flava
+	std::string name;
 
 	//Boundaries and map creation
 	int xsize, ysize;

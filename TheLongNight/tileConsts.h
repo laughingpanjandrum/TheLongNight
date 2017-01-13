@@ -32,6 +32,10 @@ const int BASIC_WALL_TILE = 178;
 const int BASIC_WATER_TILE = 247;
 const int BASIC_DOOR_TILE = 43;
 
+const int BED_TILE = 220;
+const int MOSS_TILE = 34;
+const int TERMINAL_TILE = 228;
+
 const int STATUE_TILE = 244;
 
 #endif

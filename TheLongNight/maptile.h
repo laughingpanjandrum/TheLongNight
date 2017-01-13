@@ -57,19 +57,33 @@ private:
 
 typedef std::vector<maptile*> tileVector;
 
-//Constants
-maptile* tile_Floor();
-maptile* tile_Wall();
-maptile* tile_Door();
+//	Constants
 
-maptile* tile_Water();
-maptile* tile_Acid();
+maptile* tile_Floor();	//"floor_stone"
+maptile* tile_MossyFloor(); //"floor_mossy_stone"
+maptile* tile_Sand(); //"floor_sand"
 
-maptile* tile_StatueOfRest();
+maptile* tile_SandyRock(); //"wall_sand"
+maptile* tile_Wall(); //"wall_stone"
+
+maptile* tile_Door(); //"door_stone"
+maptile* tile_Glass(); //"glass"
+
+maptile* tile_Water(); //"water"
+maptile* tile_MossyWater(); //"water_mossy"
+maptile* tile_Acid(); //"acid"
+
+maptile* tile_Bed(); //"bed"
+maptile* tile_Terminal(); //"terminal"
+
+maptile* tile_StatueOfRest(); //"statue"
 
 const tileVector ALL_MAPTILES = {	
-	tile_Floor(), tile_Wall(), tile_Door(), 
-	tile_Water(), tile_Acid(),
+	tile_Floor(), tile_MossyFloor(), tile_Sand(),
+	tile_Wall(), tile_SandyRock(),
+	tile_Door(), tile_Glass(),
+	tile_Water(), tile_MossyWater(), tile_Acid(),
+	tile_Bed(), tile_Terminal(),
 	tile_StatueOfRest() 
 };
 

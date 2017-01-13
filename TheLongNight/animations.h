@@ -41,7 +41,6 @@ public:
 
 typedef std::vector<animations*> animVector;
 
-
 class flashCharacter : public animations
 {
 public:
@@ -52,7 +51,7 @@ public:
 protected:
 	person* p;
 	const TCODColor color;
-	int timeLeft = 5;
+	int timeLeft = 3;
 };
 
 #endif
