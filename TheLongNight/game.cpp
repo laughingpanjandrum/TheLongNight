@@ -6,7 +6,6 @@ game::game()
 {
 	//We start by creating an empty map, just for now
 	map* newmap = new map();
-	mapLoader makemap;
 	newmap = makemap.loadMapFromFile("maps/stardrift_wreckage_1.txt");
 	setCurrentMap(newmap);
 	//Character create
@@ -21,6 +20,8 @@ game::game()
 		if (!m->isPlayer)
 			turns.addEntity(m, 1);
 	}
+	//Debug: Add a map connection
+	currentMap->addConnection(CONNECT_EAST, "maps/cbeach_1.txt");
 }
 
 
@@ -67,6 +68,45 @@ void game::setState(gameState st)
 {
 	state = st;
 }
+
+
+
+/*
+	MAP MANAGEMENT
+*/
+
+
+/*
+Add a new map.
+The handle is the name of the map file it was loaded from.
+It's how maps are differentiated, and how they keep track of interconnections.
+*/
+void game::addKnownMap(map * m, std::string handle)
+{
+	allMaps.push_back(m);
+	allMapHandles.push_back(handle);
+}
+
+/*
+Get a map we have memorized.
+If we don't find the handle, we return nullptr.
+*/
+map * game::getKnownMap(std::string handle)
+{
+	for (int i = 0; i < allMapHandles.size(); i++) {
+		if (allMapHandles.at(i) == handle)
+			return allMaps.at(i);
+	}
+	return nullptr;
+}
+
+
+
+
+/*
+	MESSAGES
+*/
+
 
 void game::addMessage(std::string txt, TCODColor color)
 {
@@ -767,7 +807,7 @@ void game::processMove(TCOD_key_t kp)
 	if (targetModeOn)
 		setCursorPosition(xnew, ynew);
 	else
-		movePerson(player, xnew, ynew);
+		playerMoveLogic(xnew, ynew);
 }
 
 /*
@@ -776,6 +816,21 @@ Returns whether the given key is a movement command
 bool game::isMovementKey(TCOD_key_t kp)
 {
 	return kp.vk == KEY_NORTH || kp.vk == KEY_EAST || kp.vk == KEY_SOUTH || kp.vk == KEY_WEST;
+}
+
+/*
+This handles a player move.
+These differ from NPC movements, since the player can potentially move to a new map.
+*/
+void game::playerMoveLogic(int xnew, int ynew)
+{
+	//Are we moving off the map? If so, see if we can move to a new map
+	if (!currentMap->inBounds(xnew, ynew)) {
+		tryMapChange(xnew, ynew);
+		return;
+	}
+	//The movement itself
+	movePerson(player, xnew, ynew);
 }
 
 /*
@@ -834,9 +889,62 @@ void game::standOnTile(person * victim)
 	}
 }
 
+
+
+/*
+	INTER - MAP MOVEMENT
+*/
+
+
+/*
+See if this move will take us to a new map
+*/
+void game::tryMapChange(int xnew, int ynew)
+{
+	//Figure out which direction we're stepping
+	connectionPoint dr;
+	if (xnew >= currentMap->getXSize())
+		dr = CONNECT_EAST;
+	else if (xnew < 0)
+		dr = CONNECT_WEST;
+	else if (ynew >= currentMap->getYSize())
+		dr = CONNECT_NORTH;
+	else if (ynew < 0)
+		dr = CONNECT_SOUTH;
+	else
+		return;
+	//Get handle of connecting map, should one exist
+	std::string newHandle = currentMap->getConnection(dr);
+	if (newHandle.size()) {
+		//Find corresponding map, should one exist
+		map* newMap = getKnownMap(newHandle);
+		if (newMap == nullptr)
+			newMap = makemap.loadMapFromFile(newHandle);
+		//Make sure we actually ended up with a map
+		if (newMap != nullptr) {
+			//Remove player from current map
+			currentMap->removePerson(player);
+			//Set new map
+			setCurrentMap(newMap);
+			//Add player to new map
+			coord startPt = newMap->getStartPoint();
+			newMap->addPerson(player, startPt.first, startPt.second);
+			//Set up new clock for the new map
+			turns.clear();
+			for (auto person : newMap->getAllPeople())
+				if (!person->isPlayer)
+					turns.addEntity(person, 1);
+		}
+	}
+}
+
+
+
 /*
 	COMBAT
 */
+
+
 
 /*
 One creature attacks another in melee.

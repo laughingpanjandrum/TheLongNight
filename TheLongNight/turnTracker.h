@@ -22,13 +22,18 @@ class turnTracker
 {
 	typedef std::vector<trackedEntity> trackedEntityVector;
 public:
+
 	//Constructor
 	turnTracker();
 	~turnTracker();
+
 	//Setting
 	void addEntity(person* entity, int atDelay);
+	void clear() { tracking.clear(); }
+
 	//Getting
 	person* getNext();
+
 private:
 	trackedEntityVector tracking;
 };

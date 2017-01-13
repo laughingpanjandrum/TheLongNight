@@ -237,6 +237,9 @@ void person::addItem(item * which)
 		equipItem(which);
 }
 
+/*
+Returns the currently-highlighted consumable.
+*/
 consumable * person::getSelectedConsumable()
 {
 	return items.getSelectedConsumable();

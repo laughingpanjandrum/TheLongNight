@@ -7,8 +7,13 @@
 #include "person.h"
 #include "item.h"
 
+enum connectionPoint {
+	CONNECT_NORTH, CONNECT_SOUTH, CONNECT_EAST, CONNECT_WEST
+};
+
 typedef std::vector<person*> personVector;
 typedef std::vector<item*> itemVector;
+typedef std::vector<connectionPoint> connectionVector;
 
 class map
 {
@@ -25,8 +30,10 @@ public:
 	void setName(std::string n) { name = n; }
 	std::string getName() { return name; }
 
-	//Boundary checking
+	//Connections and boundary checking
 	bool inBounds(int x, int y);
+	void addConnection(connectionPoint dr, std::string mapHandle);
+	std::string getConnection(connectionPoint dr);
 
 	//Setting
 	void setTile(maptile* t, int x, int y);
@@ -62,6 +69,8 @@ private:
 	//Boundaries and map creation
 	int xsize, ysize;
 	coord startPt;
+	connectionVector connectionPoints;
+	std::vector<std::string> connectionHandles;
 
 	//Map elements
 	maptileVector2d maptiles;
@@ -72,5 +81,7 @@ private:
 	TCODMap* datamap;
 
 };
+
+typedef std::vector<map*> mapVector;
 
 #endif

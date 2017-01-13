@@ -39,6 +39,28 @@ bool map::inBounds(int x, int y)
 }
 
 /*
+Add a new connection to a given side of the map.
+The string is the handle (filename) of the map we're attaching.
+*/
+void map::addConnection(connectionPoint dr, std::string mapHandle)
+{
+	connectionPoints.push_back(dr);
+	connectionHandles.push_back(mapHandle);
+}
+
+/*
+Returns the map handle associated with the given direction, or nullptr if none is found.
+*/
+std::string map::getConnection(connectionPoint dr)
+{
+	for (int i = 0; i < connectionPoints.size(); i++) {
+		if (connectionPoints.at(i) == dr)
+			return connectionHandles.at(i);
+	}
+	return "";
+}
+
+/*
 	SETTING
 */
 

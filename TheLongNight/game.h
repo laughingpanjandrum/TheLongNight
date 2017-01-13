@@ -60,6 +60,12 @@ private:
 	//State manipulation
 	void setState(gameState st);
 
+	//Map management
+	mapVector allMaps;
+	std::vector<std::string> allMapHandles;
+	void addKnownMap(map* m, std::string handle);
+	map* getKnownMap(std::string handle);
+
 	//Messages
 	messageVector messages;
 	void addMessage(std::string txt, TCODColor color);
@@ -122,8 +128,13 @@ private:
 	//Movement
 	void processMove(TCOD_key_t kp);
 	bool isMovementKey(TCOD_key_t kp);
+	void playerMoveLogic(int xnew, int ynew);
 	void movePerson(person* p, int xnew, int ynew);
 	void standOnTile(person* victim);
+
+	//Inter-map movement
+	mapLoader makemap;
+	void tryMapChange(int xnew, int ynew);
 
 	//Combat
 	void meleeAttack(person* attacker, person* target);
