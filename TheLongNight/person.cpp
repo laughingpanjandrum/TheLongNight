@@ -216,7 +216,7 @@ void person::unequipItem(item * which)
 {
 	if (hasItemEquipped(which)) {
 		itemTypes cat = which->getCategory();
-		if (cat == ITEM_WEAPON || ITEM_OFFHAND) {
+		if (cat == ITEM_WEAPON || cat == ITEM_OFFHAND) {
 			weapon* wp = static_cast<weapon*>(which);
 			//We forget any spells/special attacks this item conferred
 			if (wp->getSpecialAttack() != nullptr)
