@@ -55,3 +55,16 @@ monster * monster_ThinWretch()
 	m->setHealth(50);
 	return m;
 }
+
+
+/*
+This giant nightmare is how monsters are defined in map files.
+*/
+monster * getMonsterByHandle(std::string handle)
+{
+	if (handle == "drowned_dead")
+		return monster_DrownedDead();
+	else if (handle == "thin_wretch")
+		return monster_ThinWretch();
+	return nullptr;
+}

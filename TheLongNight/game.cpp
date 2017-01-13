@@ -24,11 +24,10 @@ game::game()
 	currentMap->addItem(shield_BatteredWoodenShield(), 4, 4);
 	currentMap->addItem(consumable_StarwaterDraught(), 7, 5);
 	currentMap->addItem(consumable_InvigoratingTea(), 7, 6);
-	//Monsters
-	for (int i = 0; i < 4; i++) {
-		monster* m = monster_ThinWretch();
-		currentMap->addPerson(m, 10 + i, 12 + i / 2);
-		turns.addEntity(m, 1);
+	//Add monsters to clock
+	for (auto m : currentMap->getAllPeople()) {
+		if (!m->isPlayer)
+			turns.addEntity(m, 1);
 	}
 }
 

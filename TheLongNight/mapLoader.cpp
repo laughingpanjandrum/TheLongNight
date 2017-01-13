@@ -29,6 +29,8 @@ map * mapLoader::loadMapFromFile(std::string filename)
 	charVector tileChars; //These appear in the file
 	//The starting point, just in case we happen to have one
 	coord startPt;
+	//Tracks MONSTERS that we want to put on the map!
+	monsterVector monsters;
 	
 	/*
 	Now we can actually load info from the file
@@ -71,6 +73,12 @@ map * mapLoader::loadMapFromFile(std::string filename)
 			//Starting position!
 			startPt.first = x;
 			startPt.second = y;
+		}
+		else {
+			//New monster!
+			monster* m = getMonsterByHandle(chunk);
+			m->setPosition(x, y);
+			monsters.push_back(m);
 		}
 		//Next line!
 		getline(mapfile, line);
@@ -124,6 +132,11 @@ map * mapLoader::loadMapFromFile(std::string filename)
 
 	//Add start point to map
 	m->setStartPoint(startPt);
+
+	//Add monsters to map
+	for (auto monst : monsters) {
+		m->addPerson(monst, monst->getx(), monst->gety());
+	}
 
 	//Return final map
 	return m;

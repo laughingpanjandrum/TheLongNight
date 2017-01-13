@@ -10,6 +10,7 @@ Creates maps defined by text files.
 #include <iostream>
 #include <fstream>
 #include "map.h"
+#include "monster.h"
 
 class mapLoader
 {
