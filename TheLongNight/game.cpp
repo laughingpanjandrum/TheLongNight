@@ -6,8 +6,10 @@ game::game()
 {
 	//We start by creating an empty map, just for now
 	map* newmap = new map();
-	newmap = makemap.loadMapFromFile("maps/stardrift_wreckage_1.txt");
+	newmap = makemap.loadMapFromFile(makemap.getStartMapHandle());
 	setCurrentMap(newmap);
+	//Remember the first map
+	addKnownMap(newmap, makemap.getStartMapHandle());
 	//Character create
 	player = new person();
 	player->isPlayer = true;
@@ -922,22 +924,44 @@ void game::tryMapChange(int xnew, int ynew)
 			newMap = makemap.loadMapFromFile(newHandle);
 		//Make sure we actually ended up with a map
 		if (newMap != nullptr) {
-			//Remove player from current map
-			currentMap->removePerson(player);
-			//Set new map
-			setCurrentMap(newMap);
-			//Add player to new map
-			coord startPt = newMap->getStartPoint();
-			newMap->addPerson(player, startPt.first, startPt.second);
-			//Set up new clock for the new map
-			turns.clear();
-			for (auto person : newMap->getAllPeople())
-				if (!person->isPlayer)
-					turns.addEntity(person, 1);
-			//Update FOV for new map
-			currentMap->updateFOV(player->getx(), player->gety());
+			loadNewMap(newMap, dr, xnew, ynew);
+			//Remember this map
+			addKnownMap(newMap, newHandle);
 		}
 	}
+}
+
+/*
+Actually loads us onto the given new map.
+The coordinates are our position on the old map, which define where we'll end up on the new one.
+*/
+void game::loadNewMap(map * newMap, connectionPoint connect, int oldx, int oldy)
+{
+	//Remove player from current map
+	currentMap->removePerson(player);
+	//Set new map
+	setCurrentMap(newMap);
+	//Figure our what our new coordinates will be, based on where we moved from
+	int xnew = oldx;
+	int ynew = oldy;
+	if (connect == CONNECT_EAST)
+		xnew = 0;
+	else if (connect = CONNECT_WEST)
+		xnew = newMap->getXSize() - 1;
+	else if (connect == CONNECT_NORTH)
+		ynew = newMap->getYSize() - 1;
+	else if (connect == CONNECT_SOUTH)
+		ynew = 0;
+	//Add player to new map
+	//coord startPt = newMap->getStartPoint();
+	newMap->addPerson(player, xnew, ynew);
+	//Set up new clock for the new map
+	turns.clear();
+	for (auto person : newMap->getAllPeople())
+		if (!person->isPlayer)
+			turns.addEntity(person, 1);
+	//Update FOV for new map
+	currentMap->updateFOV(player->getx(), player->gety());
 }
 
 

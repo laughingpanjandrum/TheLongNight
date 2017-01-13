@@ -135,6 +135,7 @@ private:
 	//Inter-map movement
 	mapLoader makemap;
 	void tryMapChange(int xnew, int ynew);
+	void loadNewMap(map* newMap, connectionPoint connect, int oldx, int oldy);
 
 	//Combat
 	void meleeAttack(person* attacker, person* target);
