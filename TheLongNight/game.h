@@ -31,6 +31,12 @@ struct message {
 	TCODColor color;
 };
 
+//Save point data - a coordinate and a map pointer
+struct savePoint {
+	map* saveMap;
+	coord savePt;
+};
+
 typedef std::vector<message> messageVector;
 
 
@@ -151,6 +157,11 @@ private:
 	//Keeping the world up to date
 	void tick();
 	void clearDeadCreatures();
+
+	//Save points
+	savePoint ourSavePt;
+	void setSavePoint();
+	void restoreFromSavePoint();
 	
 	//Draw location constants
 	const static int MAP_DRAW_X = 3;

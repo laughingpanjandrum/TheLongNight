@@ -17,6 +17,8 @@ game::game()
 	coord startPt = currentMap->getStartPoint();
 	currentMap->addPerson(player, startPt.first, startPt.second);
 	currentMap->updateFOV(player->getx(), player->gety());
+	//Make our starting position a save point
+	setSavePoint();
 	//Add monsters to clock
 	for (auto m : currentMap->getAllPeople()) {
 		if (!m->isPlayer)
@@ -762,13 +764,14 @@ void game::applyEffectToPerson(person * target, effect eff, int potency)
 		//Can manage inventory when we step on this tile
 		createInventoryMenu();
 	}
+	else if (eff == SET_SAVE_POINT && target->isPlayer) {
+		//This is a save point; we'll respawn here on death
+		setSavePoint();
+	}
 	//Restoratives
 	else if (eff == FULL_RESTORE) {
 		//Restore all attributes to max
-		target->addHealth(1000);
-		target->addVigour(1000);
-		//Refresh all consumables
-		target->restoreItemsToMax();
+		target->fullRestore();
 	}
 	else if (eff == RESTORE_HEALTH)
 		target->addHealth(potency);
@@ -951,7 +954,7 @@ void game::loadNewMap(map * newMap, connectionPoint connect, int oldx, int oldy)
 	int ynew = oldy;
 	if (connect == CONNECT_EAST)
 		xnew = 0;
-	else if (connect = CONNECT_WEST)
+	else if (connect == CONNECT_WEST)
 		xnew = newMap->getXSize() - 1;
 	else if (connect == CONNECT_NORTH)
 		ynew = newMap->getYSize() - 1;
@@ -1142,14 +1145,50 @@ Removes all dead creatures from the map.
 */
 void game::clearDeadCreatures()
 {
-	personVector toClear;
-	//Find everyone who's dead
-	for (auto p : currentMap->getAllPeople()) {
-		if (p->isDead)
-			toClear.push_back(p);
+	//If the player is dead, SPECIAL STUFF happens
+	if (player->isDead)
+		restoreFromSavePoint();
+	else {
+		//Otherwise, check for dead NPCs
+		personVector toClear;
+		//Find everyone who's dead
+		for (auto p : currentMap->getAllPeople()) {
+			if (p->isDead)
+				toClear.push_back(p);
+		}
+		//And remove them!
+		for (auto p : toClear) {
+			currentMap->removePerson(p);
+		}
 	}
-	//And remove them!
-	for (auto p : toClear) {
-		currentMap->removePerson(p);
-	}
+}
+
+
+
+/*
+	SAVE POINTS
+*/
+
+
+/*
+Sets save point to our current position.
+*/
+void game::setSavePoint()
+{
+	ourSavePt.saveMap = currentMap;
+	ourSavePt.savePt = player->getPosition();
+}
+
+/*
+Returns player to save point.
+*/
+void game::restoreFromSavePoint()
+{
+	//Resurrect player
+	player->fullRestore();
+	player->isDead = false;
+	//Return us to our save point
+	loadNewMap(ourSavePt.saveMap, CONNECT_VERTICAL, ourSavePt.savePt.first, ourSavePt.savePt.second);
+	//Put us back in the clock
+	turns.addEntity(player, 0);
 }

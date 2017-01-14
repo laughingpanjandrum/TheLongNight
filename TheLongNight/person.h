@@ -39,6 +39,7 @@ public:
 	void takeDamage(int amount);
 	void addVigour(int amount) { vigour.increase(amount); }
 	void loseVigour(int amount) { vigour.decrease(amount); }
+	void fullRestore();
 	void die();
 
 	//Special damage types

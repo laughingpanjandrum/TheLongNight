@@ -102,6 +102,16 @@ void person::takeStatusEffectDamage(statusEffects eType, int damage)
 }
 
 /*
+Fully restores all of our attributes and items.
+*/
+void person::fullRestore()
+{
+	health.restore();
+	vigour.restore();
+	restoreItemsToMax();
+}
+
+/*
 We DIE.
 The game is in charge of making sure we get removed from the map.
 */

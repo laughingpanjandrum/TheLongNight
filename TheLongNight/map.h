@@ -8,7 +8,8 @@
 #include "item.h"
 
 enum connectionPoint {
-	CONNECT_NORTH, CONNECT_SOUTH, CONNECT_EAST, CONNECT_WEST
+	CONNECT_NORTH, CONNECT_SOUTH, CONNECT_EAST, CONNECT_WEST,
+	CONNECT_VERTICAL
 };
 
 typedef std::vector<person*> personVector;
