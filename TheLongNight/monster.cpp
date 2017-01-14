@@ -62,8 +62,10 @@ This giant nightmare is how monsters are defined in map files.
 */
 monster * getMonsterByHandle(std::string handle)
 {
+	//Stardrift Wreckage
 	if (handle == "drowned_dead")
 		return monster_DrownedDead();
+	//Coruscating Beach
 	else if (handle == "thin_wretch")
 		return monster_ThinWretch();
 	return nullptr;

@@ -22,6 +22,7 @@ public:
 	//Stacking
 	virtual const bool isStackable() { return false; }
 	virtual const void add(int amount) {}
+	virtual const void restoreToMax() {}
 
 protected:
 

@@ -267,6 +267,18 @@ consumableVector person::getConsumableList()
 }
 
 /*
+Refreshes all consumables (and any other items that require restoration)
+*/
+void person::restoreItemsToMax()
+{
+	for (auto itemCat : items.getAllCarried()) {
+		for (auto item : itemCat.items) {
+			item->restoreToMax();
+		}
+	}
+}
+
+/*
 Returns whether the given item is equipped.
 */
 bool person::hasItemEquipped(item * it)

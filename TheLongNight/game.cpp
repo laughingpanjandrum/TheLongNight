@@ -22,8 +22,6 @@ game::game()
 		if (!m->isPlayer)
 			turns.addEntity(m, 1);
 	}
-	//Debug: Add a map connection
-	//currentMap->addConnection(CONNECT_EAST, "maps/cbeach_1.txt");
 }
 
 
@@ -765,6 +763,13 @@ void game::applyEffectToPerson(person * target, effect eff, int potency)
 		createInventoryMenu();
 	}
 	//Restoratives
+	else if (eff == FULL_RESTORE) {
+		//Restore all attributes to max
+		target->addHealth(1000);
+		target->addVigour(1000);
+		//Refresh all consumables
+		target->restoreItemsToMax();
+	}
 	else if (eff == RESTORE_HEALTH)
 		target->addHealth(potency);
 	else if (eff == RESTORE_VIGOUR)

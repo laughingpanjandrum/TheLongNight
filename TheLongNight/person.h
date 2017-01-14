@@ -67,6 +67,7 @@ public:
 	armour* getHelmet() { return items.getHelmet(); }
 	consumable* getSelectedConsumable();
 	consumableVector getConsumableList();
+	void restoreItemsToMax();
 	bool hasItemEquipped(item* it);
 
 	//Targeting

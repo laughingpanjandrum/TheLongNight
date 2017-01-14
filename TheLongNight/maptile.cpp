@@ -85,5 +85,6 @@ maptile * tile_StatueOfRest()
 {
 	maptile* statue = new maptile("Statue of Rest", "statue", STATUE_TILE, TCODColor::lightCyan, TCODColor::darkestCyan);
 	statue->addTouchEffect(ALLOW_INVENTORY_MANAGEMENT);
+	statue->addTouchEffect(FULL_RESTORE);
 	return statue;
 }
