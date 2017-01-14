@@ -301,6 +301,46 @@ void game::aiMoveToTarget(person * ai)
 }
 
 /*
+See if we want to cast any of our spells.
+*/
+bool game::aiTryUseSpell(person * ai)
+{
+	//Sort through all our spells and see if any of them look likely
+	person* target = ai->getTarget();
+	for (auto sp : ai->getSpellsKnown()) {
+		attackType aType = sp->getAttackType();
+		if (aType == ATTACK_RANGE) {
+			//Ranged spell - do we have the reach for it?
+			pathVector path = getLine(ai->getPosition(), target->getPosition());
+			person* willHit = getTargetOnPath(path);
+			if (willHit == target) {
+				//Check spell range
+				int dist = hypot(player->getx() - target->getx(), player->gety() - target->gety());
+				if (dist <= sp->getAttackRange()) {
+					//We hit!
+					dischargeSpellOnTarget(sp, ai, target);
+					//Time passes
+					turns.addEntity(ai, ai->getAttackDelay());
+					return true;
+				}
+			}
+		}
+	}
+	//We didn't use any abilities
+	return false;
+}
+
+/*
+What we choose to do if we have a target.
+*/
+void game::aiDoCombatAction(person * ai)
+{
+	//Try casting a spell. If that fails, move towards our target.
+	if (!aiTryUseSpell(ai))
+		aiMoveToTarget(ai);
+}
+
+/*
 AI tries to find something to kill.
 */
 void game::aiFindTarget(person * ai)
@@ -325,7 +365,7 @@ void game::doMonsterTurn(person * ai)
 		aiFindTarget(ai);
 	//If we have one, just move towards it
 	if (target != nullptr)
-		aiMoveToTarget(ai);
+		aiDoCombatAction(ai);
 	else
 		//If not, just wait
 		turns.addEntity(ai, 1);

@@ -175,7 +175,7 @@ int person::getSpellPower()
 {
 	weapon* wp = getWeapon();
 	weapon* offhand = getOffhand();
-	int spellPower = 0;
+	int spellPower = baseSpellPower;
 	//From weapon
 	if (wp != nullptr)
 		spellPower = wp->getSpellPower();

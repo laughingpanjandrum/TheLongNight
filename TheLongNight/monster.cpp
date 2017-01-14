@@ -44,6 +44,8 @@ monster * monster_DrownedDead()
 	m->setMeleeStats(10, SPEED_SLOW);
 	m->setMoveStats(SPEED_NORMAL);
 	m->setHealth(10);
+	m->addSpellKnown(spell_MagicMissile());
+	m->setSpellPower(100);
 	return m;
 }
 
@@ -55,6 +57,26 @@ monster * monster_ThinWretch()
 	m->setHealth(50);
 	return m;
 }
+
+monster * monster_TimidWretch()
+{
+	monster * m = new monster("Timid Wretch", WRETCH_TILE, TCODColor::lightGreen);
+	m->setMeleeStats(15, SPEED_FAST);
+	m->setMoveStats(SPEED_SLOW);
+	m->setHealth(50);
+	return m;
+}
+
+monster * monster_BloatedWretch()
+{
+	monster * m = new monster("Bloated Wretch", WRETCH_TILE, TCODColor::darkLime);
+	m->setMeleeStats(25, SPEED_SLOW);
+	m->setMoveStats(SPEED_SLOW);
+	m->setHealth(100);
+	m->addSpellKnown(ability_Burst());
+	return m;
+}
+
 
 
 /*
@@ -68,5 +90,9 @@ monster * getMonsterByHandle(std::string handle)
 	//Coruscating Beach
 	else if (handle == "thin_wretch")
 		return monster_ThinWretch();
+	else if (handle == "timid_wretch")
+		return monster_TimidWretch();
+	else if (handle == "bloated_wretch")
+		return monster_BloatedWretch();
 	return nullptr;
 }

@@ -21,14 +21,21 @@ public:
 	void setMeleeStats(int damage, int speed);
 	void setMoveStats(int speed);
 	void setHealth(int hp);
+	void setSpellPower(int power) { baseSpellPower = power; }
 
 };
 
 typedef std::vector<monster*> monsterVector;
 
-//Monster definitions
+//		Monster definitions
+
+//Stardrift Wreckage
 monster* monster_DrownedDead();
+
+//Coruscating Beach
 monster* monster_ThinWretch();
+monster* monster_TimidWretch();
+monster* monster_BloatedWretch();
 
 monster* getMonsterByHandle(std::string handle);
 

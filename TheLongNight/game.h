@@ -97,6 +97,8 @@ private:
 	pathVector getAllAdjacentWalkable(person* ai);
 	bool aiIsValidMove(person* ai, int xnew, int ynew);
 	void aiMoveToTarget(person* ai);
+	bool aiTryUseSpell(person* ai);
+	void aiDoCombatAction(person* ai);
 	void aiFindTarget(person* ai);
 	void doMonsterTurn(person* ai);
 

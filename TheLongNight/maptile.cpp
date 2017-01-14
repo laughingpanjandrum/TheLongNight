@@ -79,7 +79,7 @@ maptile * tile_Terminal()
 }
 
 /*
-Resting tile.
+Resting tile. Serves as a save point and provides a full restore.
 */
 maptile * tile_StatueOfRest()
 {

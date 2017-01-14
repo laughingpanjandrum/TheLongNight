@@ -49,4 +49,7 @@ spell* attack_Splintering();
 //Arcane spells
 spell* spell_MagicMissile();
 
+//Monster abilities
+spell* ability_Burst();
+
 #endif

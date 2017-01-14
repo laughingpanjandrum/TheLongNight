@@ -44,6 +44,8 @@ spell * attack_Splintering()
 	return sp;
 }
 
+//Spells
+
 spell * spell_MagicMissile()
 {
 	spell* sp = new spell("Magic Missile", SPELL_TILE, TCODColor::magenta);
@@ -51,5 +53,16 @@ spell * spell_MagicMissile()
 	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 50);
 	sp->setAttackRange(5);
 	sp->setVigourCost(1);
+	return sp;
+}
+
+//Monster abilities
+
+spell* ability_Burst()
+{
+	spell* sp = new spell("Burst", SPELL_TILE, TCODColor::darkLime);
+	sp->setAttackType(ATTACK_AOE);
+	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 25);
+	sp->setAttackRange(2);
 	return sp;
 }
