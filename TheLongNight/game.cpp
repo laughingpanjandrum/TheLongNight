@@ -820,6 +820,8 @@ void game::doAOE(spell * sp, person * caster)
 			}
 		}
 	}
+	//Animation of the event
+	addAnimations(new explosion(caster->getPosition(), r, sp->getColor(), sp->getColor()));
 }
 
 /*

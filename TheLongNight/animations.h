@@ -41,6 +41,9 @@ public:
 
 typedef std::vector<animations*> animVector;
 
+/*
+Briefly changes a person's colour.
+*/
 class flashCharacter : public animations
 {
 public:
@@ -52,6 +55,26 @@ protected:
 	person* p;
 	const TCODColor color;
 	int timeLeft = 3;
+};
+
+
+/*
+Explosion effect, starting at centre and expanding outward.
+*/
+class explosion : public animations
+{
+public:
+	explosion(coord ctr, int radius, TCODColor col1, TCODColor col2) :
+		ctr(ctr), radius(radius), col1(col1), col2(col2) {}
+	virtual drawData getDrawData(drawData* baseData, int x, int y);
+	virtual void tick() { atPoint++; }
+	virtual bool isDone() { return atPoint >= radius; }
+protected:
+	coord ctr;
+	int radius;
+	int atPoint = 0;
+	TCODColor col1;
+	TCODColor col2;
 };
 
 #endif
