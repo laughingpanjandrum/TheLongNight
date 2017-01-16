@@ -10,7 +10,7 @@ class armour : public item
 public:
 	//Constructors
 	armour(): item() {}
-	armour(std::string name, int tileCode, TCODColor color, itemTypes slot);
+	armour(std::string name, int tileCode, TCODColor color, itemTypes slot, std::string description);
 	~armour();
 	//Setting
 	void setDefence(int def) { this->defence = def; }

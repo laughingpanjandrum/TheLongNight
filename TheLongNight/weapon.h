@@ -14,8 +14,8 @@ public:
 
 	//Item categories
 	weapon(): item() {}
-	weapon(std::string name, int tileCode, TCODColor color) :
-		item(name, tileCode, color, ITEM_WEAPON) {}
+	weapon(std::string name, int tileCode, TCODColor color, std::string description) :
+		item(name, tileCode, color, ITEM_WEAPON, description) {}
 	~weapon();
 
 	//Setting

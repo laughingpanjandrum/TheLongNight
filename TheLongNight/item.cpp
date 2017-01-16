@@ -4,7 +4,8 @@
 /*
 Basic constructor you should always use!
 */
-item::item(std::string name, int tileCode, TCODColor color, itemTypes category): item(name,tileCode,color)
+item::item(std::string name, int tileCode, TCODColor color, itemTypes category, std::string description)
+	: item(name, tileCode, color, description)
 {
 	this->category = category;
 }

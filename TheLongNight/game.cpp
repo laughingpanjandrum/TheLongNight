@@ -709,6 +709,8 @@ void game::drawItemInfo(item * it, int atx, int aty)
 	//Indicate whether equipped or not
 	if (player->hasItemEquipped(it))
 		win.write(atx + 12, aty, "EQUIPPED", TCODColor::grey);
+	//Item description
+	aty = win.writeWrapped(atx + 1, aty + 1, 40, it->description, TCODColor::lightGrey);
 	//Rest of item info
 	aty += 1;
 	atx += 1;

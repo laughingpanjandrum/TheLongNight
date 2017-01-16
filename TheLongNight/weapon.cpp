@@ -49,9 +49,9 @@ std::string getAttackSpeedName(int del)
 
 weapon * weapon_SplinteredSword()
 {
-	weapon* wp = new weapon("Splintered Sword", SWORD_TILE, TCODColor::grey);
+	weapon* wp = new weapon("Splintered Sword", SWORD_TILE, TCODColor::grey,
+		"Once a treasured heirloom. Now it's just a broken sword, decent at serration, but certainly unfit for a stardrift captain.");
 	wp->setBasicAttributes(25, SPEED_NORMAL);
-	//wp->addStatusEffect(EFFECT_BLEED, 20);
 	wp->setSpecialAttack(attack_Splintering());
 	return wp;
 }
@@ -60,7 +60,8 @@ weapon * weapon_SplinteredSword()
 
 weapon * shield_BatteredWoodenShield()
 {
-	weapon* wp = new weapon("Battered Wooden Shield", SHIELD_TILE, TCODColor::sepia);
+	weapon* wp = new weapon("Battered Wooden Shield", SHIELD_TILE, TCODColor::sepia,
+		"It's just a scrap of wood, but it might still save your life.");
 	wp->setDefence(10);
 	wp->makeOffhand();
 	return wp;
@@ -70,7 +71,8 @@ weapon * shield_BatteredWoodenShield()
 
 weapon * wand_DriftwoodWand()
 {
-	weapon* wp = new weapon("Driftwood Wand", SWORD_TILE, TCODColor::sepia);
+	weapon* wp = new weapon("Driftwood Wand", SWORD_TILE, TCODColor::sepia,
+		"Someone made this chunk of wand in a desparate hurry.");
 	wp->setBasicAttributes(5, SPEED_SLOW);
 	wp->setSpellstoreSize(2);
 	wp->addSpell(spell_ArcaneRadiance());

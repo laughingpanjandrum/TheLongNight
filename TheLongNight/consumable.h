@@ -11,7 +11,7 @@ public:
 
 	//Constructors
 	consumable() : item() {}
-	consumable(std::string name, int tileCode, TCODColor color);
+	consumable(std::string name, int tileCode, TCODColor color, std::string description);
 	~consumable();
 
 	//Quantity adjustments

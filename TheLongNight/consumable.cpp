@@ -2,8 +2,8 @@
 
 
 
-consumable::consumable(std::string name, int tileCode, TCODColor color) :
-	item(name, tileCode, color, ITEM_CONSUMABLE)
+consumable::consumable(std::string name, int tileCode, TCODColor color, std::string description) :
+	item(name, tileCode, color, ITEM_CONSUMABLE, description)
 {
 	amount.setTo(1);
 }
@@ -22,7 +22,8 @@ std::string consumable::getMenuName()
 
 consumable * consumable_StarwaterDraught()
 {
-	consumable* c = new consumable("Starwater Draught", VIAL_TILE, TCODColor::cyan);
+	consumable* c = new consumable("Starwater Draught", VIAL_TILE, TCODColor::cyan,
+		"Flask of water touched by starlight, which confers healing properties.");
 	c->addEffect(RESTORE_HEALTH);
 	c->setPotency(25);
 	return c;
@@ -30,7 +31,8 @@ consumable * consumable_StarwaterDraught()
 
 consumable * consumable_InvigoratingTea()
 {
-	consumable* c = new consumable("Invigorating Tea", VIAL_TILE, TCODColor::green);
+	consumable* c = new consumable("Invigorating Tea", VIAL_TILE, TCODColor::green,
+		"A specially brewed tea that restores vigour.");
 	c->addEffect(RESTORE_VIGOUR);
 	c->setPotency(5);
 	return c;

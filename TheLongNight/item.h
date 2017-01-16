@@ -11,8 +11,9 @@ public:
 
 	//Constructors
 	item(): element() {}
-	item(std::string name, int tileCode, TCODColor color): element(name,tileCode,color) {}
-	item(std::string name, int tileCode, TCODColor color, itemTypes category);
+	item(std::string name, int tileCode, TCODColor color, std::string description = "") : 
+		element(name, tileCode, color, description) {}
+	item(std::string name, int tileCode, TCODColor color, itemTypes category, std::string description = "");
 	~item();
 
 	//Getters
