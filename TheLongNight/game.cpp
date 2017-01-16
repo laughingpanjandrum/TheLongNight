@@ -239,7 +239,7 @@ void game::endPlayerTurn()
 /*
 Returns a list of all adjacent coords that the given ai will willingly walk upon.
 */
-pathVector game::getAllAdjacentWalkable(person * ai)
+pathVector game::getAllAdjacentWalkable(monster * ai)
 {
 	int x = ai->getx();
 	int y = ai->gety();
@@ -255,7 +255,7 @@ pathVector game::getAllAdjacentWalkable(person * ai)
 /*
 Returns whether the given ai will move to the given point.
 */
-bool game::aiIsValidMove(person * ai, int xnew, int ynew)
+bool game::aiIsValidMove(monster * ai, int xnew, int ynew)
 {
 	//Make sure it's in bounds
 	if (!currentMap->inBounds(xnew, ynew))
@@ -273,7 +273,7 @@ bool game::aiIsValidMove(person * ai, int xnew, int ynew)
 /*
 AI moves directly towards its target, melee-attacking if possible.
 */
-void game::aiMoveToTarget(person * ai)
+void game::aiMoveToTarget(monster * ai)
 {
 	//Rudimentary pathing. First we list all walkable points adjacent to us
 	pathVector pts = getAllAdjacentWalkable(ai);
@@ -304,8 +304,12 @@ void game::aiMoveToTarget(person * ai)
 /*
 See if we want to cast any of our spells.
 */
-bool game::aiTryUseSpell(person * ai)
+bool game::aiTryUseSpell(monster * ai)
 {
+	//Random chance to not cast a spell
+	int r = randint(1, 100);
+	if (r > ai->getSpellCastChance())
+		return false;
 	//Sort through all our spells and see if any of them look likely
 	person* target = ai->getTarget();
 	for (auto sp : ai->getSpellsKnown()) {
@@ -344,7 +348,7 @@ bool game::aiTryUseSpell(person * ai)
 /*
 What we choose to do if we have a target.
 */
-void game::aiDoCombatAction(person * ai)
+void game::aiDoCombatAction(monster * ai)
 {
 	//Try casting a spell. If that fails, move towards our target.
 	if (!aiTryUseSpell(ai))
@@ -354,7 +358,7 @@ void game::aiDoCombatAction(person * ai)
 /*
 AI tries to find something to kill.
 */
-void game::aiFindTarget(person * ai)
+void game::aiFindTarget(monster * ai)
 {
 	//If the player can see us, we can see them. ONE SIMPLE RULE.
 	if (currentMap->isPointInFOV(ai->getx(), ai->gety())) {
@@ -365,8 +369,9 @@ void game::aiFindTarget(person * ai)
 /*
 Monster does its turn and then is placed back into the turn tracker.
 */
-void game::doMonsterTurn(person * ai)
+void game::doMonsterTurn(person * p)
 {
+	monster* ai = static_cast<monster*>(p);
 	//If we're dead, we probably shouldn't do anything
 	if (ai->isDead)
 		return;

@@ -23,6 +23,15 @@ public:
 	void setHealth(int hp);
 	void setSpellPower(int power) { baseSpellPower = power; }
 
+	//Setting/getting behaviours
+	void setSpellCastChance(int c) { spellCastChance = c; }
+	int getSpellCastChance() { return spellCastChance; }
+
+protected:
+
+	//Behaviours
+	int spellCastChance = 0;
+
 };
 
 typedef std::vector<monster*> monsterVector;

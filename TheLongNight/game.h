@@ -94,12 +94,12 @@ private:
 	void endPlayerTurn();
 
 	//Monster actions
-	pathVector getAllAdjacentWalkable(person* ai);
-	bool aiIsValidMove(person* ai, int xnew, int ynew);
-	void aiMoveToTarget(person* ai);
-	bool aiTryUseSpell(person* ai);
-	void aiDoCombatAction(person* ai);
-	void aiFindTarget(person* ai);
+	pathVector getAllAdjacentWalkable(monster* ai);
+	bool aiIsValidMove(monster* ai, int xnew, int ynew);
+	void aiMoveToTarget(monster* ai);
+	bool aiTryUseSpell(monster* ai);
+	void aiDoCombatAction(monster* ai);
+	void aiFindTarget(monster* ai);
 	void doMonsterTurn(person* ai);
 
 	//Menu management/drawing

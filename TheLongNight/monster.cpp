@@ -76,6 +76,7 @@ monster * monster_BloatedWretch()
 	m->setMoveStats(SPEED_SLOW);
 	m->setHealth(100);
 	m->addSpellKnown(ability_Burst());
+	m->setSpellCastChance(10);
 	return m;
 }
 
