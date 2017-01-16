@@ -651,12 +651,13 @@ void game::drawInventory(int atx, int aty)
 	//The menu
 	drawMenu(currentMenu, MAP_DRAW_X, MAP_DRAW_Y);
 	//Show selected item, if relevant
-	if (state == STATE_VIEW_INVENTORY_CATEGORY)
+	if (state == STATE_VIEW_INVENTORY_CATEGORY) {
 		if (currentMenu->getSelectedItem() != nullptr) {
 			//Selected menu object should be an ITEM
 			item* sel = static_cast<item*>(currentMenu->getSelectedItem());
 			drawItemInfo(sel, atx, aty + 20);
 		}
+	}
 }
 
 
@@ -715,8 +716,10 @@ void game::drawItemInfo(item * it, int atx, int aty)
 	aty += 1;
 	atx += 1;
 	switch (it->getCategory()) {
-	case (ITEM_WEAPON): drawWeaponInfo(static_cast<weapon*>(it), atx, aty);
+	case(ITEM_WEAPON): drawWeaponInfo(static_cast<weapon*>(it), atx, aty);
 	case(ITEM_OFFHAND): drawWeaponInfo(static_cast<weapon*>(it), atx, aty);
+	case(ITEM_BODY_ARMOUR): drawArmourInfo(static_cast<armour*>(it), atx, aty);
+	case(ITEM_HELMET): drawArmourInfo(static_cast<armour*>(it), atx, aty);
 	}
 }
 
@@ -741,11 +744,34 @@ void game::drawWeaponInfo(weapon * it, int atx, int aty)
 	//Special attack, if any
 	spell* atk = it->getSpecialAttack();
 	if (atk != nullptr) {
+		//Name of special attack
 		win.writec(atx, ++aty, VIGOUR_GLYPH, TCODColor::green);
 		win.write(atx + 1, aty, std::to_string(atk->getVigourCost()), TCODColor::green);
 		win.write(atx + 4, aty, atk->getName(), atk->getColor());
+		//Special attack description
+		win.write(atx + 4, ++aty, '(' + atk->description + ')', TCODColor::lightGrey);
 	}
 }
+
+/*
+Armour descriptions.
+*/
+void game::drawArmourInfo(armour * it, int atx, int aty)
+{
+	int offset = 10;
+	TCODColor maincol = TCODColor::white;
+	//DEF
+	win.write(atx, aty, "DEFENCE", TCODColor::sepia);
+	win.write(atx + offset, aty, std::to_string(it->getDefence()), maincol);
+	//Move speed adjustment, if body armour
+	if (it->getCategory() == ITEM_BODY_ARMOUR) {
+		win.write(atx, ++aty, "SPEED", TCODColor::orange);
+		win.write(atx + offset, aty, getAttackSpeedName(it->getMoveSpeed()), maincol);
+	}
+}
+
+
+
 
 /*
 	COMMAND PROCESSING

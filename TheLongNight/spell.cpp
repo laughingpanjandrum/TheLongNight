@@ -2,8 +2,8 @@
 
 
 
-spell::spell(std::string name, int tileCode, TCODColor color) :
-	item(name, tileCode, color, ITEM_SPELL)
+spell::spell(std::string name, int tileCode, TCODColor color, std::string description) :
+	item(name, tileCode, color, ITEM_SPELL, description)
 {
 }
 
@@ -37,7 +37,8 @@ Spell objects
 
 spell * attack_Splintering()
 {
-	spell* sp = new spell("Splintering", SWORD_TILE, TCODColor::crimson);
+	spell* sp = new spell("Splintering", SWORD_TILE, TCODColor::crimson,
+		"Deals 20 bleed damage to target.");
 	sp->setAttackType(ATTACK_MELEE);
 	sp->addEffect(APPLY_BLEED_DAMAGE, 20);
 	sp->setVigourCost(1);
@@ -49,7 +50,8 @@ spell * attack_Splintering()
 
 spell * spell_MagicMissile()
 {
-	spell* sp = new spell("Magic Missile", SPELL_TILE, TCODColor::magenta);
+	spell* sp = new spell("Magic Missile", SPELL_TILE, TCODColor::magenta,
+		"Attack deals magic damage.");
 	sp->setAttackType(ATTACK_RANGE);
 	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 50);
 	sp->setAttackRange(5);
@@ -59,7 +61,8 @@ spell * spell_MagicMissile()
 
 spell * spell_ArcaneRadiance()
 {
-	spell* sp = new spell("Arcane Radiance", SPELL_TILE, TCODColor::darkMagenta);
+	spell* sp = new spell("Arcane Radiance", SPELL_TILE, TCODColor::darkMagenta,
+		"A blast of magical energy strikes everything within 3 spaces.");
 	sp->setAttackType(ATTACK_AOE);
 	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 25);
 	sp->setAttackRange(3);

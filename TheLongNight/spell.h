@@ -11,7 +11,7 @@ public:
 
 	//Constructors
 	spell() : item() {}
-	spell(std::string name, int tileCode, TCODColor color);
+	spell(std::string name, int tileCode, TCODColor color, std::string description = "");
 	~spell();
 
 	//Setting
