@@ -48,6 +48,7 @@ spell* attack_Splintering();
 
 //Arcane spells
 spell* spell_MagicMissile();
+spell* spell_ArcaneRadiance();
 
 //Monster abilities
 spell* ability_Burst();

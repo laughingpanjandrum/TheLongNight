@@ -1118,6 +1118,20 @@ void game::castSpell(spell * sp)
 			player->buffNextMelee = sp;
 			addMessage("Select melee target", sp->getColor());
 		}
+		else if (aType == ATTACK_AOE) {
+			//Hits everything within its radius
+			int r = sp->getAttackRange();
+			for (int x = player->getx() - r; x <= player->getx() + r; x++) {
+				for (int y = player->gety() - r; y <= player->gety() + r; y++) {
+					person* target = currentMap->getPerson(x, y);
+					if (target != nullptr && target != player) {
+						dischargeSpellOnTarget(sp, player, target);
+					}
+				}
+			}
+			//Time taken
+			playerTurnDelay += player->getOffhand()->getAttackDelay();
+		}
 		else if (aType == ATTACK_RANGE) {
 			if (targetModeOn) {
 				//Get a path to the target

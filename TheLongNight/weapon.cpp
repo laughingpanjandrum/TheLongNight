@@ -73,7 +73,7 @@ weapon * wand_DriftwoodWand()
 	weapon* wp = new weapon("Driftwood Wand", SWORD_TILE, TCODColor::sepia);
 	wp->setBasicAttributes(5, SPEED_SLOW);
 	wp->setSpellstoreSize(2);
-	wp->addSpell(spell_MagicMissile());
+	wp->addSpell(spell_ArcaneRadiance());
 	wp->setSpellPower(100);
 	wp->makeOffhand();
 	return wp;

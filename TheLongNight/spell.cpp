@@ -56,6 +56,16 @@ spell * spell_MagicMissile()
 	return sp;
 }
 
+spell * spell_ArcaneRadiance()
+{
+	spell* sp = new spell("Arcane Radiance", SPELL_TILE, TCODColor::darkMagenta);
+	sp->setAttackType(ATTACK_AOE);
+	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 25);
+	sp->setAttackRange(3);
+	sp->setVigourCost(2);
+	return sp;
+}
+
 //Monster abilities
 
 spell* ability_Burst()
