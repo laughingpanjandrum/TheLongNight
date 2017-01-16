@@ -9,6 +9,7 @@
 #include "person.h"
 
 typedef std::vector<coord> pathVector;
+typedef std::vector<TCODColor> colorVector;
 
 
 //Draw data - useful little chunk of data that defines what to draw at a point on the map
@@ -64,17 +65,16 @@ Explosion effect, starting at centre and expanding outward.
 class explosion : public animations
 {
 public:
-	explosion(coord ctr, int radius, TCODColor col1, TCODColor col2) :
-		ctr(ctr), radius(radius), col1(col1), col2(col2) {}
+	explosion(coord ctr, int radius, TCODColor col1, TCODColor col2);
 	virtual drawData getDrawData(drawData* baseData, int x, int y);
-	virtual void tick() { atPoint++; }
-	virtual bool isDone() { return atPoint >= radius; }
+	virtual void tick();
+	virtual bool isDone() { return atPoint > radius; }
 protected:
 	coord ctr;
-	int radius;
-	int atPoint = 0;
-	TCODColor col1;
-	TCODColor col2;
+	const int radius;
+	counter tickDelay;
+	int atPoint = 0; 
+	TCODColor* colArray;
 };
 
 #endif

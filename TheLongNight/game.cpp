@@ -820,8 +820,10 @@ void game::doAOE(spell * sp, person * caster)
 			}
 		}
 	}
-	//Animation of the event
-	addAnimations(new explosion(caster->getPosition(), r, sp->getColor(), sp->getColor()));
+	//Animation of the event; colour goes from spell colour to a lighter version on the outside
+	TCODColor col1 = sp->getColor();
+	TCODColor col2 = win.mixColors(col1, TCODColor::white, 0.5);
+	addAnimations(new explosion(caster->getPosition(), r, col1, col2));
 }
 
 /*
