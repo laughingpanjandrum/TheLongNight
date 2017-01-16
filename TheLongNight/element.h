@@ -13,6 +13,7 @@ characters, items, and so on.
 #include "tileConsts.h"
 
 typedef std::pair<int, int> coord;
+typedef std::vector<coord> coordVector;
 
 class element
 {

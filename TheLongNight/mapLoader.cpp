@@ -30,7 +30,9 @@ map * mapLoader::loadMapFromFile(std::string filename)
 	//The starting point, just in case we happen to have one
 	coord startPt;
 	//Tracks MONSTERS that we want to put on the map!
-	monsterVector monsters;
+	//monsterVector monsters;
+	stringVector monsterSpawnTags;
+	coordVector monsterSpawnCoords;
 	//Tracks ITEMS that we want to put on the map!
 	itemVector items;
 	//Tracks CONNECTIONS that should appear on the map
@@ -99,9 +101,11 @@ map * mapLoader::loadMapFromFile(std::string filename)
 			}
 			else {
 				//New monster!
-				monster* m = getMonsterByHandle(chunk);
-				m->setPosition(x, y);
-				monsters.push_back(m);
+				//monster* m = getMonsterByHandle(chunk);
+				//m->setPosition(x, y);
+				//monsters.push_back(m);
+				monsterSpawnTags.push_back(chunk);
+				monsterSpawnCoords.push_back(coord(x, y));
 			}
 
 		}
@@ -191,9 +195,12 @@ map * mapLoader::loadMapFromFile(std::string filename)
 	//Set name
 	m->setName(mapname);
 
-	//Add monsters to map
-	for (auto monst : monsters) {
+	//Add monster spawners to map
+	/*for (auto monst : monsters) {
 		m->addPerson(monst, monst->getx(), monst->gety());
+	}*/
+	for (int i = 0; i < monsterSpawnTags.size(); i++) {
+		m->addMonsterSpawner(monsterSpawnTags.at(i), monsterSpawnCoords.at(i));
 	}
 
 	//Add items to map

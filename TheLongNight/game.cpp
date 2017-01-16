@@ -8,6 +8,7 @@ game::game()
 	map* newmap = new map();
 	newmap = makemap.loadMapFromFile(makemap.getStartMapHandle());
 	setCurrentMap(newmap);
+	newmap->respawnAllMonsters();
 	//Remember the first map
 	addKnownMap(newmap, makemap.getStartMapHandle());
 	//Character create
@@ -989,6 +990,8 @@ void game::loadNewMap(map * newMap, connectionPoint connect, int oldx, int oldy)
 	currentMap->removePerson(player);
 	//Set new map
 	setCurrentMap(newMap);
+	//Respawn monsters on map
+	newMap->respawnAllMonsters();
 	//Figure our what our new coordinates will be, based on where we moved from
 	int xnew = oldx;
 	int ynew = oldy;
@@ -1001,7 +1004,6 @@ void game::loadNewMap(map * newMap, connectionPoint connect, int oldx, int oldy)
 	else if (connect == CONNECT_SOUTH)
 		ynew = 0;
 	//Add player to new map
-	//coord startPt = newMap->getStartPoint();
 	newMap->addPerson(player, xnew, ynew);
 	//Set up new clock for the new map
 	turns.clear();

@@ -5,6 +5,7 @@
 #include <vector>
 #include "maptile.h"
 #include "person.h"
+#include "monster.h"
 #include "item.h"
 
 enum connectionPoint {
@@ -43,6 +44,7 @@ public:
 	void addItem(item* it, int x, int y);
 	void removeItem(item* it);
 	void setStartPoint(coord sp) { startPt = sp; }
+	void addMonsterSpawner(std::string monsterTag, coord xy);
 
 	//Getting: position and elements
 	int getXSize() { return xsize; }
@@ -56,6 +58,9 @@ public:
 	//Getting: movement data
 	bool isWalkable(int x, int y) { return datamap->isWalkable(x, y); }
 	bool isSeeThrough(int x, int y) { return datamap->isTransparent(x, y); }
+
+	//Spawning
+	void respawnAllMonsters();
 
 	//FOV/pathfinding stuff
 	void updateFOV(int xpos, int ypos);
@@ -77,6 +82,10 @@ private:
 	maptileVector2d maptiles;
 	personVector people;
 	itemVector items;
+
+	//Saved list of monsters to respawn
+	std::vector<std::string> monsterSpawnTags;
+	coordVector monsterSpawnCoords;
 
 	//TCOD map data - for FOV, pathfinding, etc.
 	TCODMap* datamap;

@@ -44,8 +44,8 @@ monster * monster_DrownedDead()
 	m->setMeleeStats(10, SPEED_SLOW);
 	m->setMoveStats(SPEED_NORMAL);
 	m->setHealth(10);
-	m->addSpellKnown(spell_MagicMissile());
-	m->setSpellPower(100);
+	//m->addSpellKnown(spell_MagicMissile());
+	//m->setSpellPower(100);
 	return m;
 }
 

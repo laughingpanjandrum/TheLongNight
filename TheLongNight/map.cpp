@@ -112,6 +112,16 @@ void map::removeItem(item * it)
 
 
 /*
+These respawn each time the map is reloaded
+*/
+void map::addMonsterSpawner(std::string monsterTag, coord xy)
+{
+	monsterSpawnTags.push_back(monsterTag);
+	monsterSpawnCoords.push_back(xy);
+}
+
+
+/*
 	GETTING
 */
 
@@ -144,9 +154,35 @@ item * map::getItem(int x, int y)
 	return nullptr;
 }
 
+
+
+/*
+	Clear and respawn npcs
+*/
+
+
+/*
+Deletes all monsters and spawns new ones.
+Also deletes the PC so make sure they get re-added if you want them to exist!
+*/
+void map::respawnAllMonsters()
+{
+	//Remove existing
+	people.clear();
+	//Spawn anew
+	for (int i = 0; i < monsterSpawnTags.size(); i++) {
+		monster* m = getMonsterByHandle(monsterSpawnTags.at(i));
+		coord c = monsterSpawnCoords.at(i);
+		addPerson(m, c.first, c.second);
+	}
+}
+
+
 /*
 	FOV STUFF
 */
+
+
 
 /*
 Computes FOV for a person at the given position.
