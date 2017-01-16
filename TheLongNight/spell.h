@@ -28,6 +28,9 @@ public:
 	int getAttackRange() { return attackRange; }
 	int getVigourCost() { return vigourCost; }
 
+	//Flags
+	bool usesSpellPower = true;
+
 private:
 
 	//What we actually do

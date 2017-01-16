@@ -41,6 +41,7 @@ spell * attack_Splintering()
 	sp->setAttackType(ATTACK_MELEE);
 	sp->addEffect(APPLY_BLEED_DAMAGE, 20);
 	sp->setVigourCost(1);
+	sp->usesSpellPower = false;
 	return sp;
 }
 
@@ -74,5 +75,6 @@ spell* ability_Burst()
 	sp->setAttackType(ATTACK_AOE);
 	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 25);
 	sp->setAttackRange(2);
+	sp->usesSpellPower = false;
 	return sp;
 }
