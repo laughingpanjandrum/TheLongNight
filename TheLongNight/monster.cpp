@@ -9,6 +9,8 @@ monster::monster(std::string name, int tileCode, TCODColor color) :
 {
 	//We're not the player! That's kind of our defining feature
 	isPlayer = false;
+	//Default to 100% spell power
+	setSpellPower(100);
 }
 
 /*

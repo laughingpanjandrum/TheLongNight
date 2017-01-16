@@ -316,7 +316,7 @@ bool game::aiTryUseSpell(person * ai)
 			person* willHit = getTargetOnPath(path);
 			if (willHit == target) {
 				//Check spell range
-				int dist = hypot(player->getx() - target->getx(), player->gety() - target->gety());
+				int dist = hypot(ai->getx() - target->getx(), ai->gety() - target->gety());
 				if (dist <= sp->getAttackRange()) {
 					//We hit!
 					dischargeSpellOnTarget(sp, ai, target);
@@ -324,6 +324,16 @@ bool game::aiTryUseSpell(person * ai)
 					turns.addEntity(ai, ai->getAttackDelay());
 					return true;
 				}
+			}
+		}
+		else if (aType == ATTACK_AOE) {
+			//See if AOE spell will hit target
+			int dist = hypot(ai->getx() - target->getx(), ai->gety() - target->gety());
+			if (dist <= sp->getAttackRange()) {
+				//Do the AOE!
+				doAOE(sp, ai);
+				turns.addEntity(ai, ai->getAttackDelay());
+				return true;
 			}
 		}
 	}
@@ -795,6 +805,24 @@ void game::useConsumable()
 */
 
 /*
+Discharge an AOE spell.
+*/
+void game::doAOE(spell * sp, person * caster)
+{
+	int r = sp->getAttackRange();
+	for (int x = caster->getx() - r; x <= caster->getx() + r; x++) {
+		for (int y = caster->gety() - r; y <= caster->gety() + r; y++) {
+			//Check for target here
+			person* target = currentMap->getPerson(x, y);
+			//AOE doesn't affect caster
+			if (target != nullptr && target != caster) {
+				dischargeSpellOnTarget(sp, caster, target);
+			}
+		}
+	}
+}
+
+/*
 Apply any effect to any person.
 Its strength is the given potency.
 */
@@ -1120,15 +1148,7 @@ void game::castSpell(spell * sp)
 		}
 		else if (aType == ATTACK_AOE) {
 			//Hits everything within its radius
-			int r = sp->getAttackRange();
-			for (int x = player->getx() - r; x <= player->getx() + r; x++) {
-				for (int y = player->gety() - r; y <= player->gety() + r; y++) {
-					person* target = currentMap->getPerson(x, y);
-					if (target != nullptr && target != player) {
-						dischargeSpellOnTarget(sp, player, target);
-					}
-				}
-			}
+			doAOE(sp, player);
 			//Time taken
 			playerTurnDelay += player->getOffhand()->getAttackDelay();
 		}

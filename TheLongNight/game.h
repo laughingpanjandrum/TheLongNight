@@ -131,6 +131,7 @@ private:
 	void useConsumable();
 
 	//Effects
+	void doAOE(spell* sp, person* caster);
 	void applyEffectToPerson(person* target, effect e, int potency);
 
 	//Movement
