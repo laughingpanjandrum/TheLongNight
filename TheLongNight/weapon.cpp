@@ -65,6 +65,23 @@ weapon * weapon_SplinteredSword()
 	return wp;
 }
 
+weapon * weapon_CrowKnightSword()
+{
+	weapon* wp = new weapon("Crow Knight Sword", SWORD_TILE, TCODColor::lightGrey,
+		"The hilt is carved in the shape of a crow's head, and the blade is tinted black. The crow knights are certainly dedicated to a theme.");
+	wp->setBasicAttributes(50, SPEED_NORMAL);
+	return wp;
+}
+
+weapon * weapon_CrowKnife()
+{
+	weapon* wp = new weapon("Crow Knife", SWORD_TILE, TCODColor::lightGrey,
+		"The short blade of this knife is barbed to inflict bleeding.");
+	wp->setBasicAttributes(20, SPEED_NORMAL);
+	wp->addStatusEffect(EFFECT_BLEED, 10);
+	return wp;
+}
+
 //		Shields
 
 weapon * shield_BatteredWoodenShield()

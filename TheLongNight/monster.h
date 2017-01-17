@@ -67,6 +67,10 @@ monster* monster_TimidWretch();
 monster* monster_BloatedWretch();
 monster* boss_TheWretchedMass();
 
+//Pilgrim's Road
+monster* monster_CrowKnight();
+monster* monster_CrowThief();
+
 monster* getMonsterByHandle(std::string handle);
 
 #endif

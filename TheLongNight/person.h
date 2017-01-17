@@ -97,7 +97,9 @@ protected:
 	int baseAttackSpeed = SPEED_NORMAL; //how quickly we attack bare-handed
 	int baseMoveSpeed = SPEED_FAST; //how quickly we move if unarmoured
 
-	//Resistances/status effects
+	//Resistances
+
+	//Status effects
 	int isBleeding = 0;
 	counter bleedBuildup;
 

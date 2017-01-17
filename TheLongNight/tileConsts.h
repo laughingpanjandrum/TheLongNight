@@ -21,6 +21,7 @@ const int PLAYER_TILE = 1;
 
 const int DROWNED_DEAD_TILE = 100;
 const int WRETCH_TILE = 119;
+const int CROW_KNIGHT_TILE = 107;
 
 //Items
 const int SWORD_TILE = 173;
@@ -39,6 +40,8 @@ const int BASIC_DOOR_TILE = 43;
 
 const int BED_TILE = 220;
 const int MOSS_TILE = 34;
+const int BUSH_TILE = 37;
+const int TREE_TILE = 3;
 const int TERMINAL_TILE = 228;
 
 const int STATUE_TILE = 244;

@@ -626,15 +626,20 @@ Draws everything that's not the map!
 */
 void game::drawInterface(int leftx, int topy)
 {
+	
 	int atx = leftx;
 	int aty = topy;
+	
 	//Health
 	win.drawCounter(player->getHealth(), "LIFE", atx, aty, TCODColor::darkRed, TCODColor::darkGrey, 20);
 	win.write(atx + 4, ++aty, player->getHealth().getAsString(), TCODColor::darkRed);
+	
 	//Vigour
 	win.drawCounter(player->getVigour(), "VIG ", atx, ++aty, TCODColor::darkGreen, TCODColor::darkGrey, 20);
 	win.write(atx + 4, ++aty, player->getVigour().getAsString(), TCODColor::darkGreen);
+	
 	//	Equipment
+	
 	//Weapons
 	weapon* wp = player->getWeapon();
 	if (wp != nullptr) {
@@ -644,12 +649,14 @@ void game::drawInterface(int leftx, int topy)
 	}
 	else
 		win.write(atx + 2, ++aty, "no weapon", TCODColor::darkGrey);
+	
 	//Offhand item
 	weapon* of = player->getOffhand();
 	if (of != nullptr) {
 		win.writec(atx, ++aty, of->getTileCode(), of->getColor());
 		win.write(atx + 2, aty, of->getMenuName(), of->getColor());
 	}
+	
 	//Helmet
 	armour* helm = player->getHelmet();
 	if (helm != nullptr) {
@@ -658,6 +665,7 @@ void game::drawInterface(int leftx, int topy)
 	}
 	else
 		win.write(atx + 2, ++aty, "no helmet", TCODColor::darkGrey);
+	
 	//Armour
 	armour* ar = player->getArmour();
 	if (ar != nullptr) {
@@ -666,6 +674,7 @@ void game::drawInterface(int leftx, int topy)
 	}
 	else
 		win.write(atx + 2, ++aty, "no armour", TCODColor::darkGrey);
+	
 	//Consumable selected
 	consumable* c = player->getSelectedConsumable();
 	if (c != nullptr) {
@@ -676,6 +685,7 @@ void game::drawInterface(int leftx, int topy)
 		else
 			win.write(atx + 2, ++aty, "no consumable", TCODColor::darkGrey);
 	}
+	
 	//Spell selected
 	spell* sp = player->getCurrentSpell();
 	if (sp != nullptr) {
@@ -683,10 +693,22 @@ void game::drawInterface(int leftx, int topy)
 		win.write(atx + 4, aty, std::to_string(sp->getVigourCost()), TCODColor::green);
 		win.write(atx + 6, aty, sp->getName(), sp->getColor());
 	}
+	
 	//Buffs
 	if (player->hasFreeMoves()) {
 		win.write(atx, ++aty, "CHARGE!", TCODColor::yellow);
 	}
+	
+	//Status effects
+	if (player->getBleedDuration()) {
+		win.write(atx, ++aty, "BLEEDING " + std::to_string(player->getBleedDuration()), TCODColor::crimson);
+	}
+	else {
+		auto bl = player->getSpecialEffectBuildup(EFFECT_BLEED);
+		if (bl->getValue() > 0)
+			win.drawCounter(*bl, "BLEED", atx, ++aty, TCODColor::crimson, TCODColor::darkGrey, 10);
+	}
+
 	//Target info
 	person* target = player->getTarget();
 	if (target != nullptr) {
@@ -1252,34 +1274,42 @@ One creature attacks another in melee.
 void game::meleeAttack(person * attacker, person * target)
 {
 	addMessage(attacker->getName() + " strikes " + target->getName(), attacker->getColor());
+	
 	//First: NORMAL DAMAGE
 	weapon* wp = attacker->getWeapon();
 	int damage = attacker->getBaseMeleeDamage();
 	if (wp != nullptr) {
 		damage = wp->getDamage();
 	}
+	
 	//Reduce damage via armour
 	int def = target->getDefence();
 	int damageReduction = ((float)def / 100.0) * damage;
 	damage -= damageReduction;
+	
 	//Minimum damage is 1
 	if (damage < 1)
 		damage = 1;
+	
 	//Deal the damage
 	target->takeDamage(damage);
-	//Next: SPELL DISCHARGES
+	
+	//Next: SPELL DISCHARGES, if we have one readied
 	if (attacker->buffNextMelee != nullptr) {
 		dischargeSpellOnTarget(attacker->buffNextMelee, attacker, target);
 		attacker->buffNextMelee = nullptr;
 	}
+	
 	//Animation effect
 	addAnimations(new flashCharacter(target, TCODColor::red));
+	
 	//Next: STATUS EFFECTS
 	if (wp != nullptr) {
 		for (int idx = 0; idx < wp->getStatusEffectCount(); idx++) {
 			target->takeStatusEffectDamage(wp->getStatusEffectType(idx), wp->getStatusEffectDamage(idx));
 		}
 	}
+	
 	//Update targeting
 	if (target->isDead)
 		attacker->clearTarget();
@@ -1534,5 +1564,18 @@ void game::debugMenu()
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());
 		loadMapFromHandle("maps/cbeach_2.txt", CONNECT_WARP, player->getx(), player->gety());
+	}
+	else if (txt == "warppilgrim") {
+		player->addItem(weapon_SplinteredSword());
+		player->addItem(armour_RuinedUniform());
+		player->addItem(headgear_CaptainsTricorn());
+		player->addItem(spell_MagicMissile());
+		player->addItem(spell_ArcaneRadiance());
+		player->addItem(wand_DriftwoodWand());
+		player->addItem(shield_BatteredWoodenShield());
+		player->addItem(consumable_StarwaterDraught());
+		player->addItem(consumable_StarwaterDraught());
+		player->addItem(consumable_StarwaterDraught());
+		loadMapFromHandle("maps/pilgrims_road_1.txt", CONNECT_WARP, player->getx(), player->gety());
 	}
 }

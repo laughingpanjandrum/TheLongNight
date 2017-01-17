@@ -207,6 +207,7 @@ void person::equipItem(item * which)
 	//Other consequences of equipping something
 	if (equipped) {
 		itemTypes cat = which->getCategory();
+
 		if (cat == ITEM_WEAPON || cat == ITEM_OFFHAND) {
 			weapon* wp = static_cast<weapon*>(which);
 			//Special weapon attack is a spell
@@ -218,10 +219,20 @@ void person::equipItem(item * which)
 			//Reset selected spell, just in case the number of spells changed
 			selectedSpell = 0;
 		}
+
+		else if (cat == ITEM_BODY_ARMOUR || cat == ITEM_HELMET) {
+			armour* ar = static_cast<armour*>(which);
+			//We might gain some resistances!
+			int bleedResist = ar->getBleedResist();
+			if (bleedResist)
+				bleedBuildup.increaseMaxValue(bleedResist, false);
+		}
+
 		else if (cat == ITEM_SPELL) {
 			//Update our spellstore if the item was successfully equipped
 			addSpellKnown(static_cast<spell*>(which));
 		}
+
 	}
 }
 
@@ -232,13 +243,24 @@ void person::unequipItem(item * which)
 {
 	if (hasItemEquipped(which)) {
 		itemTypes cat = which->getCategory();
+
 		if (cat == ITEM_WEAPON || cat == ITEM_OFFHAND) {
 			weapon* wp = static_cast<weapon*>(which);
 			//We forget any spells/special attacks this item conferred
 			if (wp->getSpecialAttack() != nullptr)
 				removeSpellKnown(wp->getSpecialAttack());
 			for (auto sp : wp->getSpells())
-				removeSpellKnown(sp);		}
+				removeSpellKnown(sp);		
+		}
+
+		else if (cat == ITEM_BODY_ARMOUR || cat == ITEM_HELMET) {
+			armour* ar = static_cast<armour*>(which);
+			//We might lose some resistances!
+			int bleedResist = ar->getBleedResist();
+			if (bleedResist)
+				bleedBuildup.increaseMaxValue(-bleedResist, false);
+		}
+
 	}
 }
 

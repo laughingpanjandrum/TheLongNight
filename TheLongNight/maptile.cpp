@@ -34,6 +34,11 @@ maptile * tile_Grass()
 	return new maptile("Grass", "floor_grass", BASIC_FLOOR_TILE, TCODColor::green, TCODColor::darkerGreen);
 }
 
+maptile * tile_Road()
+{
+	return new maptile("Road", "floor_road", BASIC_FLOOR_TILE, TCODColor::sepia, TCODColor::darkerSepia);
+}
+
 maptile * tile_SandyRock()
 {
 	return new maptile("Sandy Rock", "wall_sand", BASIC_WALL_TILE, TCODColor::darkAmber, TCODColor::amber, false, false);
@@ -73,6 +78,16 @@ maptile * tile_DoorUnlocker()
 maptile * tile_Glass()
 {
 	return new maptile("Glass", "glass", BASIC_WALL_TILE, TCODColor::cyan, TCODColor::black, false, true);
+}
+
+maptile * tile_Bush()
+{
+	return new maptile("Bush", "bush", BUSH_TILE, TCODColor::green, TCODColor::darkerGreen, true, false);
+}
+
+maptile * tile_Tree()
+{
+	return new maptile("Tree", "tree", TREE_TILE, TCODColor::sepia, TCODColor::darkerGreen, false, true);
 }
 
 maptile * tile_Water()

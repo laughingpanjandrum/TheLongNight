@@ -130,7 +130,29 @@ monster * boss_TheWretchedMass()
 	return m;
 }
 
+/*
+Pilgrim's Road
+*/
 
+monster * monster_CrowKnight()
+{
+	monster* m = new monster("Crow Knight", CROW_KNIGHT_TILE, TCODColor::lightGrey);
+	m->setHealth(100);
+	m->setMoveStats(SPEED_NORMAL);
+	m->setMeleeStats(25, SPEED_NORMAL);
+	m->equipItem(weapon_CrowKnightSword());
+	return m;
+}
+
+monster * monster_CrowThief()
+{
+	monster* m = new monster("Crow Thief", CROW_KNIGHT_TILE, TCODColor::lightGreen);
+	m->setHealth(50);
+	m->setMoveStats(SPEED_FAST);
+	m->setMeleeStats(10, SPEED_FAST);
+	m->equipItem(weapon_CrowKnife());
+	return m;
+}
 
 /*
 This giant nightmare is how monsters are defined in map files.
@@ -151,6 +173,12 @@ monster * getMonsterByHandle(std::string handle)
 		return monster_BloatedWretch();
 	else if (handle == "the_wretched_mass")
 		return boss_TheWretchedMass();
+
+	//Pilgrim's Road
+	else if (handle == "crow_knight")
+		return monster_CrowKnight();
+	else if (handle == "crow_thief")
+		return monster_CrowThief();
 
 	//LET'S HOPE WE NEVER GET HERE!
 	return nullptr;
