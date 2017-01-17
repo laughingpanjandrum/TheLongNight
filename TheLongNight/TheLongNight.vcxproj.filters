@@ -96,6 +96,9 @@
     <ClCompile Include="animations.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="miscItem.cpp">
+      <Filter>Source Files\elements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window.h">
@@ -166,6 +169,9 @@
     </ClInclude>
     <ClInclude Include="animations.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="miscItem.h">
+      <Filter>Header Files\elements</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -26,6 +26,7 @@ const int ARMOUR_TILE = 91;
 const int HELMET_TILE = 252;
 const int VIAL_TILE = 235;
 const int SPELL_TILE = 246;
+const int KEY_TILE = 190;
 
 //Maptiles
 const int BASIC_FLOOR_TILE = 46;

@@ -11,6 +11,7 @@ Keeps track of stored inventory and equipped items.
 #include "weapon.h"
 #include "armour.h"
 #include "consumable.h"
+#include "miscItem.h"
 
 //Slot with list of carried items
 struct inventoryList {
@@ -51,6 +52,9 @@ public:
 	bool equipSpell(spell* sp);
 	void unequipSpell(spell* sp);
 	bool isSpellEquipped(spell* sp);
+
+	//Keys
+	bool hasKey(std::string keyTag);
 
 	//Selecting particular slots
 	void cycleConsumable();

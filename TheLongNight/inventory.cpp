@@ -96,6 +96,21 @@ bool inventory::isSpellEquipped(spell * sp)
 	return false;
 }
 
+
+/*
+Returns whether we have the key that will unlock the given door tag.
+*/
+bool inventory::hasKey(std::string keyTag)
+{
+	//Search our MISCELLANEOUS ITEMS
+	for (auto it : getItemList(ITEM_MISC)) {
+		miscItem* misc = static_cast<miscItem*>(it);
+		if (misc->isKey && misc->getKeyTag() == keyTag)
+			return true;
+	}
+	return false;
+}
+
 /*
 Add an item to our storage, without equipping it.
 Returns TRUE if the item stacked with another item.

@@ -958,6 +958,8 @@ void game::applyEffectToPerson(person * target, effect eff, int potency)
 		//Auto-unlock adjacent doors
 		unlockAdjacentTiles(target->getx(), target->gety());
 	}
+	else if (eff == CHECK_FOR_UNLOCK && target->isPlayer)
+		tryUnlockDoor(target->getx(), target->gety());
 
 	//Restoratives
 
@@ -1075,6 +1077,13 @@ void game::movePerson(person* p, int xnew, int ynew)
 				}
 			}
 		}
+		else {
+			//If we try to step onto a non-walkable tile, try TOUCHING IT instead
+			coord oldPos = p->getPosition();
+			p->setPosition(xnew, ynew);
+			standOnTile(p);
+			p->setPosition(oldPos);
+		}
 	}
 }
 
@@ -1121,6 +1130,24 @@ void game::unlockAdjacentTiles(int cx, int cy)
 					addMessage("Door unlocked!", TCODColor::white);
 				}
 			}
+		}
+	}
+}
+
+
+/*
+Check to see if we have the key for the given tile.
+*/
+void game::tryUnlockDoor(int x, int y)
+{
+	maptile* t = currentMap->getTile(x, y);
+	if (t->isDoor && t->isDoorLocked()) {
+		//Check for key
+		if (player->hasKey(t->unlockCode)) {
+			//Unlocked!
+			t->unlockDoor();
+			currentMap->updateDatamapAtPoint(x, y);
+			addMessage("Unlocked " + t->getName() + ".", t->getColor());
 		}
 	}
 }

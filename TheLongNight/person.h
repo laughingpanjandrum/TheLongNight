@@ -75,6 +75,7 @@ public:
 	consumableVector getConsumableList();
 	void restoreItemsToMax();
 	bool hasItemEquipped(item* it);
+	bool hasKey(std::string keyTag);
 
 	//Targeting
 	void checkTargetValidity();

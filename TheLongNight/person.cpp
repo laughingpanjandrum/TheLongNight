@@ -310,6 +310,14 @@ bool person::hasItemEquipped(item * it)
 }
 
 /*
+Returns whether we have the key that will unlock a door.
+*/
+bool person::hasKey(std::string keyTag)
+{
+	return items.hasKey(keyTag);
+}
+
+/*
 	TARGETING
 */
 

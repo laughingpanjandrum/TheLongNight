@@ -84,7 +84,6 @@ weapon * wand_DriftwoodWand()
 		"Someone made this chunk of wand in a desparate hurry.");
 	wp->setBasicAttributes(5, SPEED_SLOW);
 	wp->setSpellstoreSize(2);
-	wp->addSpell(ability_Charge());
 	wp->setSpellPower(100);
 	wp->makeOffhand();
 	return wp;

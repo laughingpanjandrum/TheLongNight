@@ -38,6 +38,7 @@ public:
 	bool isDoor = false;
 	void unlockDoor() { walkable = true; }
 	bool isDoorLocked() { return isDoor && !walkable; }
+	std::string unlockCode;
 
 private:
 
@@ -86,6 +87,9 @@ maptile* tile_Terminal(); //"terminal"
 
 maptile* tile_StatueOfRest(); //"statue"
 
+//Specific locked doors
+maptile* tile_WretchedDoor(); //"wretched_door"
+
 const tileVector ALL_MAPTILES = {	
 	tile_Floor(), tile_MossyFloor(), tile_Sand(),
 	tile_Wall(), tile_SandyRock(),
@@ -93,7 +97,9 @@ const tileVector ALL_MAPTILES = {
 	tile_Glass(),
 	tile_Water(), tile_MossyWater(), tile_Acid(),
 	tile_Bed(), tile_Terminal(),
-	tile_StatueOfRest() 
+	tile_StatueOfRest(),
+	//Special locked doors
+	tile_WretchedDoor()
 };
 
 #endif

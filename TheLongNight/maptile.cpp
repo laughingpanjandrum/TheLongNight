@@ -109,3 +109,17 @@ maptile * tile_StatueOfRest()
 	statue->addTouchEffect(SET_SAVE_POINT);
 	return statue;
 }
+
+
+/*
+	Specific locked doors
+*/
+
+maptile * tile_WretchedDoor()
+{
+	maptile* door = new maptile("Wretched Door", "wretched_door", BASIC_DOOR_TILE, TCODColor::lightAmber, TCODColor::darkAmber, false, false);
+	door->unlockCode = "wretched_door";
+	door->isDoor = true;
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	return door;
+}

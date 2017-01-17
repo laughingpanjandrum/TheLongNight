@@ -80,8 +80,6 @@ monster * monster_DrownedDead()
 	m->setMeleeStats(10, SPEED_SLOW);
 	m->setMoveStats(SPEED_NORMAL);
 	m->setHealth(10);
-	//m->addSpellKnown(spell_MagicMissile());
-	//m->setSpellPower(100);
 	return m;
 }
 
@@ -126,7 +124,6 @@ monster * boss_TheWretchedMass()
 	m->setHealth(400);
 	m->setMoveStats(SPEED_SLOW);
 	m->setMeleeStats(25, SPEED_SLOW);
-	m->addSpawnableCreature("timid_wretch");
 	m->addSpawnableCreature("thin_wretch");
 	m->setSpawnChance(25);
 	return m;

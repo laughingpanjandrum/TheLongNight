@@ -143,6 +143,7 @@ private:
 	void movePerson(person* p, int xnew, int ynew);
 	void standOnTile(person* victim);
 	void unlockAdjacentTiles(int x, int y);
+	void tryUnlockDoor(int x, int y);
 
 	//Inter-map movement
 	mapLoader makemap;

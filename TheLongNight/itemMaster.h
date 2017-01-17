@@ -11,6 +11,7 @@ Mostly used by the map loader - so that we have a consistent place to track item
 #include "armour.h"
 #include "spell.h"
 #include "consumable.h"
+#include "miscItem.h"
 
 /*
 Giant nightmare function that turns names into items.
