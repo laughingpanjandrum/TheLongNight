@@ -24,6 +24,7 @@ public:
 	void setSpellPower(int power) { baseSpellPower = power; }
 
 	//Setting/getting behaviours
+	bool keepsDistance = false;
 	void setSpellCastChance(int c) { spellCastChance = c; }
 	int getSpellCastChance() { return spellCastChance; }
 

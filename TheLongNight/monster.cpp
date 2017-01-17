@@ -68,6 +68,7 @@ monster * monster_TimidWretch()
 	m->setHealth(50);
 	m->addSpellKnown(ability_Charge());
 	m->setSpellCastChance(50);
+	m->keepsDistance = true;
 	return m;
 }
 
