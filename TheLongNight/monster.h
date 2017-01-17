@@ -3,6 +3,7 @@
 #define MONSTER_H
 
 #include "person.h"
+#include "utility.h"
 
 class monster: public person
 {
@@ -28,10 +29,21 @@ public:
 	void setSpellCastChance(int c) { spellCastChance = c; }
 	int getSpellCastChance() { return spellCastChance; }
 
+	//Spawning stuff
+	bool canSpawnCreatures() { return spawnList.size() > 0; }
+	bool wantsToSpawn();
+	monster * getRandomSpawn();
+	void addSpawnableCreature(std::string handle) { spawnList.push_back(handle); }
+	void setSpawnChance(int c) { spawnChance = c; }
+
 protected:
 
 	//Behaviours
 	int spellCastChance = 0;
+
+	//Spawning powers
+	std::vector<std::string> spawnList;
+	int spawnChance = 0;
 
 };
 
@@ -46,6 +58,7 @@ monster* monster_DrownedDead();
 monster* monster_ThinWretch();
 monster* monster_TimidWretch();
 monster* monster_BloatedWretch();
+monster* boss_TheWretchedMass();
 
 monster* getMonsterByHandle(std::string handle);
 

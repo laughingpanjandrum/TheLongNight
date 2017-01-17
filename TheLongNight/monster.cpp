@@ -36,9 +36,43 @@ void monster::setHealth(int hp)
 	this->health.setTo(hp);
 }
 
+
+/*
+	SPAWNING NEW MONSTERS
+*/
+
+
+/*
+Random roll to decide if we want to spawn a thing
+*/
+bool monster::wantsToSpawn()
+{
+	int r = randint(1, 100);
+	return r <= spawnChance;
+}
+
+
+/*
+Pick a random monster from our spawn list.
+*/
+monster * monster::getRandomSpawn()
+{
+	int i = randrange(spawnList.size());
+	std::string handle = spawnList.at(i);
+	return getMonsterByHandle(handle);
+}
+
+
+
+
+
+
 /*
 Monster definitions
 */
+
+
+
 
 monster * monster_DrownedDead()
 {
@@ -53,7 +87,7 @@ monster * monster_DrownedDead()
 
 monster * monster_ThinWretch()
 {
-	monster * m = new monster("Thin Wretch", WRETCH_TILE, TCODColor::green);
+	monster * m = new monster("Thin Wretch", WRETCH_TILE, TCODColor::darkGreen);
 	m->setMeleeStats(10, SPEED_NORMAL);
 	m->setMoveStats(SPEED_NORMAL);
 	m->setHealth(50);
@@ -62,7 +96,7 @@ monster * monster_ThinWretch()
 
 monster * monster_TimidWretch()
 {
-	monster * m = new monster("Timid Wretch", WRETCH_TILE, TCODColor::lightGreen);
+	monster * m = new monster("Timid Wretch", WRETCH_TILE, TCODColor::lightestGreen);
 	m->setMeleeStats(15, SPEED_FAST);
 	m->setMoveStats(SPEED_SLOW);
 	m->setHealth(50);
@@ -83,6 +117,21 @@ monster * monster_BloatedWretch()
 	return m;
 }
 
+/*
+Coruscating Beach boss
+*/
+monster * boss_TheWretchedMass()
+{
+	monster* m = new monster("The Wretched Mass", WRETCH_TILE, TCODColor::purple);
+	m->setHealth(400);
+	m->setMoveStats(SPEED_SLOW);
+	m->setMeleeStats(25, SPEED_SLOW);
+	m->addSpawnableCreature("timid_wretch");
+	m->addSpawnableCreature("thin_wretch");
+	m->setSpawnChance(50);
+	return m;
+}
+
 
 
 /*
@@ -90,9 +139,11 @@ This giant nightmare is how monsters are defined in map files.
 */
 monster * getMonsterByHandle(std::string handle)
 {
+
 	//Stardrift Wreckage
 	if (handle == "drowned_dead")
 		return monster_DrownedDead();
+
 	//Coruscating Beach
 	else if (handle == "thin_wretch")
 		return monster_ThinWretch();
@@ -100,5 +151,9 @@ monster * getMonsterByHandle(std::string handle)
 		return monster_TimidWretch();
 	else if (handle == "bloated_wretch")
 		return monster_BloatedWretch();
+	else if (handle == "the_wretched_mass")
+		return boss_TheWretchedMass();
+
+	//LET'S HOPE WE NEVER GET HERE!
 	return nullptr;
 }

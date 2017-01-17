@@ -98,6 +98,7 @@ private:
 	bool aiIsValidMove(monster* ai, int xnew, int ynew);
 	bool aiMoveToTarget(monster* ai);
 	bool aiTryUseSpell(monster* ai);
+	void aiSpawnCreature(monster* ai);
 	void aiDoCombatAction(monster* ai);
 	void aiFindTarget(monster* ai);
 	void doMonsterTurn(person* ai);

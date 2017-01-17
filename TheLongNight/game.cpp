@@ -368,12 +368,45 @@ bool game::aiTryUseSpell(monster * ai)
 }
 
 /*
+Try to spawn something nearby!
+*/
+void game::aiSpawnCreature(monster * ai)
+{
+	//First find a free point adjacent to us
+	coordVector pts;
+	for (int x = ai->getx() - 1; x <= ai->getx() + 1; x++) {
+		for (int y = ai->gety() - 1; y <= ai->gety() + 1; y++) {
+			//IS THIS POINT OKAY?
+			if (aiIsValidMove(ai,x,y) && currentMap->getPerson(x, y) == nullptr) {
+				//YES IT IS OKAY
+				pts.push_back(coord(x, y));
+			}
+		}
+	}
+	//now PICK A RANDOM ONE
+	if (pts.size()) {
+		int p = randrange(pts.size());
+		coord pt = pts.at(p);
+		monster* m = ai->getRandomSpawn();
+		//AND PUT IT DOWN
+		currentMap->addPerson(m, pt.first, pt.second);
+		//And add it to the clock
+		turns.addEntity(m, 1);
+		//And the current AI also uses up its turn
+		turns.addEntity(ai, ai->getAttackDelay());
+	}
+}
+
+/*
 What we choose to do if we have a target.
 */
 void game::aiDoCombatAction(monster * ai)
 {
-	//Try casting a spell. If that fails, move towards our target.
-	if (!aiTryUseSpell(ai))
+	//First see if we want to spawn something!
+	if (ai->canSpawnCreatures() && ai->wantsToSpawn())
+		aiSpawnCreature(ai);
+	//If not, try casting a spell. If that fails, move towards our target.
+	else if (!aiTryUseSpell(ai))
 		//We keep moving until the move function says we're done.
 		while (!aiMoveToTarget(ai)) {}
 }

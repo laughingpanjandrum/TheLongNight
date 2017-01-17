@@ -6,6 +6,7 @@ thin_wretch:5,25
 thin_wretch:6,23
 thin_wretch:5,25
 thin_wretch:7,26
+the_wretched_mass:20,7
 -items
 arcane_radiance:13,20
 -enditems
