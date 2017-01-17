@@ -230,6 +230,8 @@ void game::endPlayerTurn()
 	while (nextTurn != player) {
 		doMonsterTurn(nextTurn);
 		nextTurn = turns.getNext();
+		//Make sure dead things are removed from the map
+		clearDeadCreatures();
 	}
 }
 
@@ -1052,11 +1054,11 @@ void game::movePerson(person* p, int xnew, int ynew)
 			//Is someone already here?
 			person* here = currentMap->getPerson(xnew, ynew);
 			if (here != nullptr) {
-				//We attack
-				meleeAttack(p, here);
 				//Player delay, if this is the player
 				if (p->isPlayer)
 					playerTurnDelay = p->getAttackDelay();
+				//We attack
+				meleeAttack(p, here);
 			}
 			else {
 				//Adjust position and deal with the consequences
@@ -1257,8 +1259,6 @@ void game::meleeAttack(person * attacker, person * target)
 		attacker->clearTarget();
 	else
 		attacker->setTarget(target);
-	//Make sure dead things are removed from the map
-	clearDeadCreatures();
 }
 
 
@@ -1440,6 +1440,7 @@ void game::restoreFromSavePoint()
 	//Resurrect player
 	player->fullRestore();
 	player->isDead = false;
+	player->setTarget(nullptr);
 	//Return us to our save point
 	loadNewMap(ourSavePt.saveMap, CONNECT_VERTICAL, ourSavePt.savePt.first, ourSavePt.savePt.second);
 	//Put us back in the clock
