@@ -32,6 +32,8 @@ protected:
 
 };
 
+typedef std::vector<item*> itemVector;
+
 const std::string getItemCategoryName(itemTypes cat);
 
 #endif

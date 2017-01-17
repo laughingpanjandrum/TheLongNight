@@ -36,6 +36,10 @@ public:
 	void addSpawnableCreature(std::string handle) { spawnList.push_back(handle); }
 	void setSpawnChance(int c) { spawnChance = c; }
 
+	//Item drops when we DIE
+	itemVector getItemDrops() { return drops; }
+	void addItemDrop(item* it) { drops.push_back(it); }
+
 protected:
 
 	//Behaviours
@@ -44,6 +48,9 @@ protected:
 	//Spawning powers
 	std::vector<std::string> spawnList;
 	int spawnChance = 0;
+
+	//Item drops
+	itemVector drops;
 
 };
 

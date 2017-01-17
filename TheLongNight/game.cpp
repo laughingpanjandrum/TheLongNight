@@ -1321,6 +1321,16 @@ void game::selectInventoryCategory(itemTypes cat)
 	}
 }
 
+/*
+We get the items a dead monster dropped
+*/
+void game::getDeathDrops(monster * m)
+{
+	for (auto it : m->getItemDrops()) {
+		player->addItem(it);
+	}
+}
+
 
 
 /*
@@ -1439,6 +1449,8 @@ void game::clearDeadCreatures()
 		//And remove them!
 		for (auto p : toClear) {
 			currentMap->removePerson(p);
+			//And the PLAYER gets the ITEMS we drop!
+			getDeathDrops(static_cast<monster*>(p));
 		}
 	}
 }

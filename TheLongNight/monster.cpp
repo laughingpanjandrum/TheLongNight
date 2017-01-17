@@ -126,6 +126,7 @@ monster * boss_TheWretchedMass()
 	m->setMeleeStats(25, SPEED_SLOW);
 	m->addSpawnableCreature("thin_wretch");
 	m->setSpawnChance(25);
+	m->addItemDrop(key_WretchsKey());
 	return m;
 }
 

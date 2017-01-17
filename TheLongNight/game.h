@@ -157,6 +157,7 @@ private:
 	//Inventory management
 	void createInventoryMenu();
 	void selectInventoryCategory(itemTypes cat);
+	void getDeathDrops(monster* m);
 
 	//Spellcasting
 	void castSpell(spell* sp);
