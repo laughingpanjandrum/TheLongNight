@@ -874,7 +874,9 @@ Its strength is the given potency.
 */
 void game::applyEffectToPerson(person * target, effect eff, int potency)
 {
+	
 	//Interface stuff for PCs only
+	
 	if (eff == ALLOW_INVENTORY_MANAGEMENT && target->isPlayer) {
 		//Can manage inventory when we step on this tile
 		createInventoryMenu();
@@ -883,7 +885,13 @@ void game::applyEffectToPerson(person * target, effect eff, int potency)
 		//This is a save point; we'll respawn here on death
 		setSavePoint();
 	}
+	else if (eff == UNLOCK_ADJACENT_DOORS && target->isPlayer) {
+		//Auto-unlock adjacent doors
+		unlockAdjacentTiles(target->getx(), target->gety());
+	}
+	
 	//Restoratives
+	
 	else if (eff == FULL_RESTORE) {
 		//Restore all attributes to max
 		target->fullRestore();
@@ -892,7 +900,9 @@ void game::applyEffectToPerson(person * target, effect eff, int potency)
 		target->addHealth(potency);
 	else if (eff == RESTORE_VIGOUR)
 		target->addVigour(potency);
+	
 	//Damage effects
+	
 	else if (eff == APPLY_PHYSICAL_DAMAGE)
 		target->takeDamage(potency);
 	else if (eff == APPLY_BLEED_DAMAGE)
@@ -1013,6 +1023,28 @@ void game::standOnTile(person * victim)
 	maptile* mt = currentMap->getTile(victim->getx(), victim->gety());
 	for (auto te : mt->getTouchEffects()) {
 		applyEffectToPerson(victim, te, mt->getPotency());
+	}
+}
+
+/*
+Automatically unlocks ALL doors adjacent (within 1 space) of the given point
+*/
+void game::unlockAdjacentTiles(int cx, int cy)
+{
+	for (int x = cx - 1; x <= cx + 1; x++) {
+		for (int y = cy - 1; y <= cy + 1; y++) {
+			if (currentMap->inBounds(x, y)) {
+				//Check tile here
+				maptile* t = currentMap->getTile(x, y);
+				if (t->isDoor && t->isDoorLocked()) {
+					//Unlock door and update the map
+					t->unlockDoor();
+					currentMap->updateDatamapAtPoint(x, y);
+					//Message about it
+					addMessage("Door unlocked!", TCODColor::white);
+				}
+			}
+		}
 	}
 }
 

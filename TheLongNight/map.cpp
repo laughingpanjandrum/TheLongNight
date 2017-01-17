@@ -76,7 +76,7 @@ void map::setTile(maptile * t, int x, int y)
 	//Change tile
 	maptiles.at(x)->at(y) = t;
 	//Update metadata at this point
-	datamap->setProperties(x, y, t->isSeeThrough(), t->isWalkable());
+	updateDatamapAtPoint(x, y);
 }
 
 /*
@@ -122,6 +122,17 @@ void map::addMonsterSpawner(std::string monsterTag, coord xy)
 {
 	monsterSpawnTags.push_back(monsterTag);
 	monsterSpawnCoords.push_back(xy);
+}
+
+
+/*
+Update datamap properties - walkable & seethru - at the given point.
+Call whenever things change at a specific point.
+*/
+void map::updateDatamapAtPoint(int x, int y)
+{
+	maptile* t = getTile(x, y);
+	datamap->setProperties(x, y, t->isSeeThrough(), t->isWalkable());
 }
 
 

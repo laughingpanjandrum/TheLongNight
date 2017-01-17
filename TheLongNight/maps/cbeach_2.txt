@@ -3,9 +3,9 @@ bloated_wretch:6,19
 timid_wretch:7,18
 timid_wretch:7,20
 thin_wretch:5,25
-thin_wretch:6,27
-thin_wretch:5,28
-thin_wretch:7,29
+thin_wretch:6,23
+thin_wretch:5,25
+thin_wretch:7,26
 -items
 arcane_radiance:13,20
 -enditems
@@ -17,8 +17,8 @@ arcane_radiance:13,20
 ~ water
 : water_mossy
 ? statue
-T terminal
-+ door_stone
++ locked_door
+! door_unlocker
 -endcodes
 -connections
 west:cbeach_1
@@ -45,7 +45,7 @@ west:cbeach_1
 ..####..~~~~~~~~~~....#.......#~##....?#
 .......~~:;;;~~~:~~..........####.....##
 .......~~~~;";~~~~~........######....###
-.......~~~~;";~~~~~........#..#####+####
+.......~~~~;";~~~~~........+!.#####.####
 ....#...~~"";";~~~........##...#......##
 .........~~~:~~~~........##............#
 ..........~~~~~~........##.........#####

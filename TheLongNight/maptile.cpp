@@ -45,6 +45,26 @@ maptile * tile_Door()
 	return d;
 }
 
+/*
+Door is initially locked (but can be unlocked later)
+*/
+maptile * tile_LockedDoor()
+{
+	maptile* d = new maptile("Door", "locked_door", BASIC_DOOR_TILE, TCODColor::darkerGrey, TCODColor::grey, false, false);
+	d->isDoor = true;
+	return d;
+}
+
+/*
+Unlocks all adjacent doors when stepped on
+*/
+maptile * tile_DoorUnlocker()
+{
+	maptile* u = new maptile("Floor", "door_unlocker", BASIC_FLOOR_TILE, TCODColor::grey, TCODColor::darkerGrey);
+	u->addTouchEffect(UNLOCK_ADJACENT_DOORS);
+	return u;
+}
+
 maptile * tile_Glass()
 {
 	return new maptile("Glass", "glass", BASIC_WALL_TILE, TCODColor::cyan, TCODColor::black, false, true);

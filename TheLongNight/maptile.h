@@ -34,6 +34,11 @@ public:
 	int getPotency() { return potency; }
 	bool hasTouchEffect(effect te);
 
+	//Locking and unlocking
+	bool isDoor = false;
+	void unlockDoor() { walkable = true; }
+	bool isDoorLocked() { return isDoor && !walkable; }
+
 private:
 
 	//Uniquely defines a tile using the map loader
@@ -67,6 +72,9 @@ maptile* tile_SandyRock(); //"wall_sand"
 maptile* tile_Wall(); //"wall_stone"
 
 maptile* tile_Door(); //"door_stone"
+maptile* tile_LockedDoor(); //"locked_door"
+maptile* tile_DoorUnlocker(); //"door_unlocker"
+
 maptile* tile_Glass(); //"glass"
 
 maptile* tile_Water(); //"water"
@@ -81,7 +89,8 @@ maptile* tile_StatueOfRest(); //"statue"
 const tileVector ALL_MAPTILES = {	
 	tile_Floor(), tile_MossyFloor(), tile_Sand(),
 	tile_Wall(), tile_SandyRock(),
-	tile_Door(), tile_Glass(),
+	tile_Door(), tile_LockedDoor(), tile_DoorUnlocker(),
+	tile_Glass(),
 	tile_Water(), tile_MossyWater(), tile_Acid(),
 	tile_Bed(), tile_Terminal(),
 	tile_StatueOfRest() 

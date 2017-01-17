@@ -48,6 +48,9 @@ public:
 	void setStartPoint(coord sp) { startPt = sp; }
 	void addMonsterSpawner(std::string monsterTag, coord xy);
 
+	//Datamap
+	void updateDatamapAtPoint(int x, int y);
+
 	//Getting: position and elements
 	int getXSize() { return xsize; }
 	int getYSize() { return ysize; }
