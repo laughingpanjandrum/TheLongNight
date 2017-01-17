@@ -155,6 +155,7 @@ private:
 	void meleeAttack(person* attacker, person* target);
 
 	//Inventory management
+	void pickUpItem(item* it);
 	void createInventoryMenu();
 	void selectInventoryCategory(itemTypes cat);
 	void getDeathDrops(monster* m);

@@ -1098,11 +1098,10 @@ void game::standOnTile(person * victim)
 		item* itemHere = currentMap->getItem(victim->getx(), victim->gety());
 		if (itemHere != nullptr) {
 			//Get item
-			victim->addItem(itemHere);
+			pickUpItem(itemHere);
+			//victim->addItem(itemHere);
 			//...and remove it from the floor
 			currentMap->removeItem(itemHere);
-			//Message about it
-			addMessage("Picked up " + itemHere->getName() + ".", itemHere->getColor());
 		}
 	}
 	//Tile effects
@@ -1295,6 +1294,17 @@ void game::meleeAttack(person * attacker, person * target)
 
 
 /*
+We get a new item - picked up off the floor, auto-dropped by a monster, or whatever
+*/
+void game::pickUpItem(item * it)
+{
+	//Get it
+	player->addItem(it);
+	//Message about it
+	addMessage("Got " + it->getName() + "!", it->getColor());
+}
+
+/*
 Set up the MAIN MENU for inventory management, where you can select an inventory category.
 */
 void game::createInventoryMenu()
@@ -1327,7 +1337,7 @@ We get the items a dead monster dropped
 void game::getDeathDrops(monster * m)
 {
 	for (auto it : m->getItemDrops()) {
-		player->addItem(it);
+		pickUpItem(it);
 	}
 }
 
