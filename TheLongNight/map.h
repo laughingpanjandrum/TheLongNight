@@ -21,6 +21,8 @@ class map
 {
 	typedef std::vector<maptile*> maptileVector1d;
 	typedef std::vector<maptileVector1d*> maptileVector2d;
+	typedef std::vector<bool> boolVector1d;
+	typedef std::vector<boolVector1d> boolVector2d;
 public:
 
 	//Constructors/destructor
@@ -67,6 +69,10 @@ public:
 	bool isPointInFOV(int x, int y);
 	TCODPath* getPath();
 
+	//Memory map
+	void addToMemoryMap(int x, int y) { memoryMap.at(x).at(y) = true; }
+	bool inMemoryMap(int x, int y) { return memoryMap.at(x).at(y); }
+
 private:
 
 	//Flava
@@ -80,6 +86,7 @@ private:
 
 	//Map elements
 	maptileVector2d maptiles;
+	boolVector2d memoryMap;
 	personVector people;
 	itemVector items;
 

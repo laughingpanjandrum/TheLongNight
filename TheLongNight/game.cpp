@@ -513,11 +513,20 @@ drawData game::getDrawData(int x, int y)
 	drawData toDraw(m->getTileCode(), m->getColor(), m->getBgColor());
 	//If this point isn't visible, don't draw it!
 	if (!currentMap->isPointInFOV(x, y)) {
-		//Darken color if out of FOV
-		toDraw.color = win.mixColors(toDraw.color, TCODColor::black, 0.9);
-		toDraw.bgcolor = win.mixColors(toDraw.bgcolor, TCODColor::black, 0.9);
+		//What to draw if out of FOV
+		if (currentMap->inMemoryMap(x, y)) {
+			toDraw.color = win.mixColors(toDraw.color, TCODColor::black, 0.9);
+			toDraw.bgcolor = win.mixColors(toDraw.bgcolor, TCODColor::black, 0.9);
+		}
+		else {
+			toDraw.tileCode = EMPTY_TILE;
+			toDraw.color = TCODColor::black;
+			toDraw.bgcolor = TCODColor::black;
+		}
 	}
 	else {
+		//If we can see it, add it to the memory map
+		currentMap->addToMemoryMap(x, y);
 		//Is there a player here?
 		person* p = currentMap->getPerson(x, y);
 		if (p != nullptr) {
@@ -635,7 +644,7 @@ void game::drawInterface(int leftx, int topy)
 	}
 	//Messages
 	atx = MAP_DRAW_X;
-	aty = MAP_DRAW_Y + 40;
+	aty = MAP_DRAW_Y + 42;
 	for (auto m : messages) {
 		win.write(atx, aty++, m.txt, m.color);
 	}

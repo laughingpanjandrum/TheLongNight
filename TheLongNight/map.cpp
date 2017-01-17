@@ -13,11 +13,15 @@ map::map(int xsize, int ysize)
 	for (int x = 0; x < xsize; x++) {
 		//Each x-coordinate is a vector
 		maptileVector1d* yvector = new maptileVector1d;
+		boolVector1d ymemory;
 		//Fill this vector with empty tiles
-		for (int y = 0; y < ysize; y++)
+		for (int y = 0; y < ysize; y++) {
 			yvector->push_back(tile_Floor());
+			ymemory.push_back(false);
+		}
 		//And then push this vector onto the x-list
 		maptiles.push_back(yvector);
+		memoryMap.push_back(ymemory);
 	}
 	//Also build a datamap for FOV/etc
 	datamap = new TCODMap(xsize, ysize);
