@@ -114,8 +114,10 @@ map * game::getKnownMap(std::string handle)
 void game::addMessage(std::string txt, TCODColor color)
 {
 	messages.push_back(message(txt, color));
-	if (messages.size() > 5)
-		messages.pop_back();
+	if (messages.size() > 5) {
+		//Delete first message
+		messages.erase(messages.begin());
+	}
 }
 
 
