@@ -203,19 +203,25 @@ void person::equipItem(item * which)
 	if (here != nullptr)
 		unequipItem(here);
 	//Equip the new item
-	items.equipItem(which);
+	bool equipped = items.equipItem(which);
 	//Other consequences of equipping something
-	itemTypes cat = which->getCategory();
-	if (cat == ITEM_WEAPON || cat == ITEM_OFFHAND) {
-		weapon* wp = static_cast<weapon*>(which);
-		//Special weapon attack is a spell
-		if (wp->getSpecialAttack() != nullptr)
-			addSpellKnown(wp->getSpecialAttack());
-		//See if it contains any spells we can memorize
-		for (auto sp : wp->getSpells())
-			addSpellKnown(sp);
-		//Reset selected spell, just in case the number of spells changed
-		selectedSpell = 0;
+	if (equipped) {
+		itemTypes cat = which->getCategory();
+		if (cat == ITEM_WEAPON || cat == ITEM_OFFHAND) {
+			weapon* wp = static_cast<weapon*>(which);
+			//Special weapon attack is a spell
+			if (wp->getSpecialAttack() != nullptr)
+				addSpellKnown(wp->getSpecialAttack());
+			//See if it contains any spells we can memorize
+			for (auto sp : wp->getSpells())
+				addSpellKnown(sp);
+			//Reset selected spell, just in case the number of spells changed
+			selectedSpell = 0;
+		}
+		else if (cat == ITEM_SPELL) {
+			//Update our spellstore if the item was successfully equipped
+			addSpellKnown(static_cast<spell*>(which));
+		}
 	}
 }
 
@@ -298,6 +304,7 @@ bool person::hasItemEquipped(item * it)
 	case(ITEM_OFFHAND): return it == getOffhand();
 	case(ITEM_BODY_ARMOUR): return it == getArmour();
 	case(ITEM_HELMET): return it == getHelmet();
+	case(ITEM_SPELL): return items.isSpellEquipped(static_cast<spell*>(it));
 	}
 	return false;
 }

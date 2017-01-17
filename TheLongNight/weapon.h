@@ -35,6 +35,7 @@ public:
 	spell* getSpecialAttack() { return specialAttack; }
 	spellVector getSpells() { return spellstore; }
 	bool canAddSpell() { return spellstore.size() < spellstoreSize; }
+	bool hasSpellStored(spell* sp);
 	int getSpellstoreSize() { return spellstoreSize; }
 	int getSpellPower() { return spellPower; }
 

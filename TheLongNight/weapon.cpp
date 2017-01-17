@@ -26,6 +26,15 @@ void weapon::addStatusEffect(statusEffects eType, int damage)
 	statusEffectDamage.push_back(damage);
 }
 
+/*
+Returns whether we're currently holding the given spell.
+*/
+bool weapon::hasSpellStored(spell * sp)
+{
+	auto it = std::find(spellstore.begin(), spellstore.end(), sp);
+	return it != spellstore.end();
+}
+
 
 /*
 For descriptive reasons.
@@ -75,7 +84,7 @@ weapon * wand_DriftwoodWand()
 		"Someone made this chunk of wand in a desparate hurry.");
 	wp->setBasicAttributes(5, SPEED_SLOW);
 	wp->setSpellstoreSize(2);
-	wp->addSpell(spell_MagicMissile());
+	//wp->addSpell(spell_MagicMissile());
 	wp->setSpellPower(100);
 	wp->makeOffhand();
 	return wp;

@@ -31,7 +31,7 @@ public:
 	static const int MAX_CONSUMABLE_SLOTS = 5;
 
 	//Setters
-	void equipItem(item* which);
+	bool equipItem(item* which);
 	void unequipItem(item* which);
 	bool addItem(item* which);
 
@@ -46,6 +46,11 @@ public:
 	weapon* getOffhand() { return equippedOffhand; }
 	armour* getArmour() { return equippedArmour; }
 	armour* getHelmet() { return equippedHelmet; }
+
+	//Spells, which are special
+	bool equipSpell(spell* sp);
+	void unequipSpell(spell* sp);
+	bool isSpellEquipped(spell* sp);
 
 	//Selecting particular slots
 	void cycleConsumable();

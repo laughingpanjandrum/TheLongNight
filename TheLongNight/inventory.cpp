@@ -22,7 +22,7 @@ inventory::~inventory()
 /*
 Equips the item in the relevant slot
 */
-void inventory::equipItem(item * which)
+bool inventory::equipItem(item * which)
 {
 	//We might also want to make a special pointer to this item
 	itemTypes cat = which->getCategory();
@@ -34,10 +34,11 @@ void inventory::equipItem(item * which)
 		equippedArmour = static_cast<armour*>(which);
 	else if (cat == ITEM_HELMET)
 		equippedHelmet = static_cast<armour*>(which);
-	else if (cat == ITEM_CONSUMABLE && equippedConsumables.size() < MAX_CONSUMABLE_SLOTS) {
-		//We get a new consumable
+	else if (cat == ITEM_CONSUMABLE && equippedConsumables.size() < MAX_CONSUMABLE_SLOTS)
 		equippedConsumables.push_back(static_cast<consumable*>(which));
-	}
+	else if (cat == ITEM_SPELL) //Currently only spells can fail to equip
+		return equipSpell(static_cast<spell*>(which));
+	return true;
 }
 
 /*
@@ -47,6 +48,52 @@ Unequips item, but doesn't drop it
 void inventory::unequipItem(item * which)
 {
 	itemTypes cat = which->getCategory();
+}
+
+/*
+Spells have to be equipped onto an item with spellstore.
+Returns whether we were able to equip the spell.
+*/
+bool inventory::equipSpell(spell * sp)
+{
+	//Can our main weapon hold it?
+	weapon* wp = getWeapon();
+	if (wp != nullptr && wp->canAddSpell()) {
+		wp->addSpell(sp);
+		return true;
+	}
+	else {
+		//If not, try offhand
+		weapon* off = getOffhand();
+		if (off != nullptr && off->canAddSpell()) {
+			off->addSpell(sp);
+			return true;
+		}
+	}
+	//We didn't find a place to equip this item.
+	return false;
+}
+
+/*
+Remove spell from whatever we have it equipped on, if anything
+(NEEDS TO BE IMPLEMENTED)
+*/
+void inventory::unequipSpell(spell * sp)
+{
+}
+
+/*
+Only true if the spell is contained in something we have equipped.
+*/
+bool inventory::isSpellEquipped(spell * sp)
+{
+	weapon* wp = getWeapon();
+	weapon* off = getOffhand();
+	if (wp != nullptr && wp->hasSpellStored(sp))
+		return true;
+	if (off != nullptr && off->hasSpellStored(sp))
+		return true;
+	return false;
 }
 
 /*

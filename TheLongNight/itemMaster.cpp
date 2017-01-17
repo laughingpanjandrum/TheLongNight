@@ -21,6 +21,11 @@ item * getItemByHandle(std::string handle)
 		return headgear_CaptainsTricorn();
 	else if (handle == "ruined_uniform")
 		return armour_RuinedUniform();
+	//SPELLS
+	else if (handle == "magic_missile")
+		return spell_MagicMissile();
+	else if (handle == "arcane_radiance")
+		return spell_ArcaneRadiance();
 	//Uh oh, we didn't find anything!
 	return nullptr;
 }

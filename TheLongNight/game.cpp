@@ -1005,6 +1005,8 @@ void game::standOnTile(person * victim)
 			victim->addItem(itemHere);
 			//...and remove it from the floor
 			currentMap->removeItem(itemHere);
+			//Message about it
+			addMessage("Picked up " + itemHere->getName() + ".", itemHere->getColor());
 		}
 	}
 	//Tile effects
