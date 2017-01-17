@@ -1192,9 +1192,9 @@ void game::tryMapChange(int xnew, int ynew)
 	else if (xnew < 0)
 		dr = CONNECT_WEST;
 	else if (ynew >= currentMap->getYSize())
-		dr = CONNECT_NORTH;
-	else if (ynew < 0)
 		dr = CONNECT_SOUTH;
+	else if (ynew < 0)
+		dr = CONNECT_NORTH;
 	else
 		return;
 	//Get handle of connecting map, should one exist

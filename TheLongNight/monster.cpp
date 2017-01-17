@@ -154,6 +154,18 @@ monster * monster_CrowThief()
 	return m;
 }
 
+monster * monster_CrowArcher()
+{
+	monster* m = new monster("Crow Archer", CROW_KNIGHT_TILE, TCODColor::lightBlue);
+	m->setHealth(100);
+	m->setMoveStats(SPEED_NORMAL);
+	m->setMeleeStats(10, SPEED_NORMAL);
+	m->addSpellKnown(ability_CrowArrow());
+	m->setSpellCastChance(50);
+	m->keepsDistance = true;
+	return m;
+}
+
 /*
 This giant nightmare is how monsters are defined in map files.
 */
@@ -179,6 +191,8 @@ monster * getMonsterByHandle(std::string handle)
 		return monster_CrowKnight();
 	else if (handle == "crow_thief")
 		return monster_CrowThief();
+	else if (handle == "crow_archer")
+		return monster_CrowArcher();
 
 	//LET'S HOPE WE NEVER GET HERE!
 	return nullptr;

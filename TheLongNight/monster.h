@@ -70,6 +70,7 @@ monster* boss_TheWretchedMass();
 //Pilgrim's Road
 monster* monster_CrowKnight();
 monster* monster_CrowThief();
+monster* monster_CrowArcher();
 
 monster* getMonsterByHandle(std::string handle);
 

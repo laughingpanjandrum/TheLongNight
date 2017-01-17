@@ -91,3 +91,13 @@ spell* ability_Burst()
 	sp->usesSpellPower = false;
 	return sp;
 }
+
+spell * ability_CrowArrow()
+{
+	spell* sp = new spell("Crow Arrow", SPELL_TILE, TCODColor::lightGrey);
+	sp->setAttackType(ATTACK_RANGE);
+	sp->setAttackRange(8);
+	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 25);
+	sp->usesSpellPower = false;
+	return sp;
+}
