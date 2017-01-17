@@ -147,6 +147,7 @@ private:
 	//Inter-map movement
 	mapLoader makemap;
 	void tryMapChange(int xnew, int ynew);
+	void loadMapFromHandle(std::string handle, connectionPoint connect, int oldx, int oldy);
 	void loadNewMap(map* newMap, connectionPoint connect, int oldx, int oldy);
 
 	//Combat
@@ -168,10 +169,15 @@ private:
 	savePoint ourSavePt;
 	void setSavePoint();
 	void restoreFromSavePoint();
+
+	//Debugging options
+	void debugMenu();
 	
 	//Draw location constants
 	const static int MAP_DRAW_X = 3;
 	const static int MAP_DRAW_Y = 3;
+
+
 };
 
 #endif

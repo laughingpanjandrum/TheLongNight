@@ -372,6 +372,7 @@ Try to spawn something nearby!
 */
 void game::aiSpawnCreature(monster * ai)
 {
+
 	//First find a free point adjacent to us
 	coordVector pts;
 	for (int x = ai->getx() - 1; x <= ai->getx() + 1; x++) {
@@ -383,6 +384,7 @@ void game::aiSpawnCreature(monster * ai)
 			}
 		}
 	}
+
 	//now PICK A RANDOM ONE
 	if (pts.size()) {
 		int p = randrange(pts.size());
@@ -395,6 +397,7 @@ void game::aiSpawnCreature(monster * ai)
 		//And the current AI also uses up its turn
 		turns.addEntity(ai, ai->getAttackDelay());
 	}
+
 }
 
 /*
@@ -851,6 +854,7 @@ void game::processCommand()
 	TCOD_key_t kp = win.getkey();
 	if (kp.c == 'Q')
 		isGameOver = true;
+
 	//Menus
 	else if (kp.vk == KEY_BACK_OUT)
 		menuBackOut();
@@ -858,6 +862,7 @@ void game::processCommand()
 		createInventoryMenu();
 	else if (kp.vk == KEY_ACCEPT)
 		acceptCurrentMenuIndex();
+
 	//Using stuff
 	else if (kp.c == 'c')
 		player->cycleConsumable();
@@ -867,6 +872,7 @@ void game::processCommand()
 		useConsumable();
 	else if (kp.c == 's')
 		castSpell(player->getCurrentSpell());
+
 	//Movement
 	else if (kp.c == 't')
 		toggleTargetMode();
@@ -877,9 +883,10 @@ void game::processCommand()
 			processMove(kp);
 		else
 			navigateMenu(kp);
+
 	//Debug
-	else if (kp.c == 'w')
-		player->takeDamage(5);
+	else if (kp.c == '~')
+		debugMenu();
 }
 
 /*
@@ -1143,16 +1150,24 @@ void game::tryMapChange(int xnew, int ynew)
 	//Get handle of connecting map, should one exist
 	std::string newHandle = currentMap->getConnection(dr);
 	if (newHandle.size()) {
-		//Find corresponding map, should one exist
-		map* newMap = getKnownMap(newHandle);
-		if (newMap == nullptr)
-			newMap = makemap.loadMapFromFile(newHandle);
-		//Make sure we actually ended up with a map
-		if (newMap != nullptr) {
-			loadNewMap(newMap, dr, xnew, ynew);
-			//Remember this map
-			addKnownMap(newMap, newHandle);
-		}
+		loadMapFromHandle(newHandle, dr, xnew, ynew);
+	}
+}
+
+/*
+Try to load a map given its text handle.
+*/
+void game::loadMapFromHandle(std::string handle, connectionPoint connect, int oldx, int oldy)
+{
+	//Find corresponding map, should one exist
+	map* newMap = getKnownMap(handle);
+	if (newMap == nullptr)
+		newMap = makemap.loadMapFromFile(handle);
+	//Make sure we actually ended up with a map
+	if (newMap != nullptr) {
+		loadNewMap(newMap, connect, oldx, oldy);
+		//Remember this map
+		addKnownMap(newMap, handle);
 	}
 }
 
@@ -1179,6 +1194,11 @@ void game::loadNewMap(map * newMap, connectionPoint connect, int oldx, int oldy)
 		ynew = newMap->getYSize() - 1;
 	else if (connect == CONNECT_SOUTH)
 		ynew = 0;
+	else if (connect == CONNECT_WARP) {
+		coord pt = newMap->getStartPoint();
+		xnew = pt.first;
+		ynew = pt.second;
+	}
 	//Add player to new map
 	newMap->addPerson(player, xnew, ynew);
 	//Set up new clock for the new map
@@ -1336,7 +1356,9 @@ Spell actually affects the target
 */
 void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 {
-	addMessage(caster->getName() + " hits " + target->getName() + " with " + sp->getName() + "!", sp->getColor());
+	//No message if this is a self-buff
+	if (caster != target)
+		addMessage(caster->getName() + " hits " + target->getName() + " with " + sp->getName() + "!", sp->getColor());
 	//Iterate through all effects
 	for (int idx = 0; idx < sp->getEffectsCount(); idx++) {
 		//Amount of damage (or whatever numeric value we require) the spell does
@@ -1422,4 +1444,43 @@ void game::restoreFromSavePoint()
 	loadNewMap(ourSavePt.saveMap, CONNECT_VERTICAL, ourSavePt.savePt.first, ourSavePt.savePt.second);
 	//Put us back in the clock
 	turns.addEntity(player, 0);
+}
+
+
+
+
+/*
+	DEBUGGING
+*/
+
+
+/*
+FOR DEBUGGING, IDIOT
+*/
+void game::debugMenu()
+{
+	std::string txt = win.getstr(1, 1);
+
+	//WHAT DEBUG DO WE WANT TO DO?!
+	if (txt == "map") {
+		txt = win.getstr(1, 1);
+		//Load map by NAME
+		txt = makemap.getMapHandle(txt);
+		loadMapFromHandle(txt, CONNECT_WARP, player->getx(), player->gety());
+	}
+
+	//Set up special game states
+	else if (txt == "warpboss1") {
+		player->addItem(weapon_SplinteredSword());
+		player->addItem(armour_RuinedUniform());
+		player->addItem(headgear_CaptainsTricorn());
+		player->addItem(spell_MagicMissile());
+		player->addItem(spell_ArcaneRadiance());
+		player->addItem(wand_DriftwoodWand());
+		player->addItem(shield_BatteredWoodenShield());
+		player->addItem(consumable_StarwaterDraught());
+		player->addItem(consumable_StarwaterDraught());
+		player->addItem(consumable_StarwaterDraught());
+		loadMapFromHandle("maps/cbeach_2.txt", CONNECT_WARP, player->getx(), player->gety());
+	}
 }

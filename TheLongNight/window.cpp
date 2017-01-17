@@ -122,6 +122,37 @@ GETTING INPUT
 */
 
 /*
+This is a super klutzy function that constantly clears the whole screen
+SO USE IT CAREFULLY
+*/
+std::string window::getstr(int x, int y)
+{
+	std::string txt = "";
+	clear();
+	write(x, y, "~_", TCODColor::white);
+	refresh();
+	TCOD_key_t kp = waitForKeypress();
+	while (kp.vk != TCODK_ENTER) {
+		//SPECIAL KEYS
+		if (kp.vk == TCODK_BACKSPACE) {
+			if (txt.size())
+				txt.pop_back();
+		}
+		else if (kp.vk == TCODK_SHIFT) {
+			//do nothing
+		}
+		else
+			txt += kp.c;
+		//Show what we did
+		clear();
+		write(x, y, '~' + txt + '_', TCODColor::white);
+		refresh();
+		kp = waitForKeypress();
+	}
+	return txt;
+}
+
+/*
 Get a single character from the console.
 Input: None.
 Output: Character input by the user.
@@ -135,6 +166,7 @@ Get a single character from a console. Freezes until input is recieved.
 */
 TCOD_key_t window::waitForKeypress()
 {
+	TCODConsole::waitForKeypress(true);
 	return TCODConsole::waitForKeypress(true);
 }
 

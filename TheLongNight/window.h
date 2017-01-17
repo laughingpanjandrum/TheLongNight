@@ -23,6 +23,7 @@ public:
 	TCODColor mixColors(TCODColor col1, TCODColor col2, float perc);
 	bool isPunctuator(char c);
 	//Input
+	std::string getstr(int x, int y);
 	TCOD_key_t getkey();
 	TCOD_key_t waitForKeypress();
 	//Special shape-drawing functions

@@ -1,4 +1,5 @@
 Coruscating Beach
+start:38,18
 bloated_wretch:6,19
 timid_wretch:7,18
 timid_wretch:7,20

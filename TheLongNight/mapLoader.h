@@ -27,6 +27,7 @@ public:
 
 	//Map generation
 	std::string getStartMapHandle() { return FOLDER + START_MAP_NAME + FILE_EXTENSION; }
+	std::string getMapHandle(std::string name) { return FOLDER + name + FILE_EXTENSION; }
 	map* loadMapFromFile(std::string filename);
 
 private:
