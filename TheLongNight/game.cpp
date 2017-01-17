@@ -272,15 +272,17 @@ bool game::aiIsValidMove(monster * ai, int xnew, int ynew)
 
 /*
 AI moves directly towards its target, melee-attacking if possible.
+Returns whether we're done moving.
+We might not be done if we get multiple moves in one turn!
 */
-void game::aiMoveToTarget(monster * ai)
+bool game::aiMoveToTarget(monster * ai)
 {
 	//Rudimentary pathing. First we list all walkable points adjacent to us
 	pathVector pts = getAllAdjacentWalkable(ai);
 	//If there are no walkable points, GIVE UP
 	if (pts.size() == 0) {
 		turns.addEntity(ai, ai->getMoveDelay());
-		return;
+		return true;
 	}
 	//If there are, find the one that's nearest our target
 	person* t = ai->getTarget();
@@ -297,8 +299,15 @@ void game::aiMoveToTarget(monster * ai)
 	}
 	//Now move to this point
 	movePerson(ai, bestPt.first, bestPt.second);
-	//Time passes
-	turns.addEntity(ai, ai->getMoveDelay());
+	//Time passes (UNLESS WE HAVE FREE MOVES!)
+	if (!ai->hasFreeMoves()) {
+		turns.addEntity(ai, ai->getMoveDelay());
+		return true;
+	}
+	else {
+		ai->useFreeMove();
+		return false;
+	}
 }
 
 /*
@@ -340,6 +349,10 @@ bool game::aiTryUseSpell(monster * ai)
 				return true;
 			}
 		}
+		else if (aType == ATTACK_BUFF_SELF) {
+			//Cast spell on self - usually a good idea!
+			dischargeSpellOnTarget(sp, ai, ai);
+		}
 	}
 	//We didn't use any abilities
 	return false;
@@ -352,7 +365,8 @@ void game::aiDoCombatAction(monster * ai)
 {
 	//Try casting a spell. If that fails, move towards our target.
 	if (!aiTryUseSpell(ai))
-		aiMoveToTarget(ai);
+		//We keep moving until the move function says we're done.
+		while (!aiMoveToTarget(ai)) {}
 }
 
 /*
@@ -622,6 +636,10 @@ void game::drawInterface(int leftx, int topy)
 		win.write(atx + 4, aty, std::to_string(sp->getVigourCost()), TCODColor::green);
 		win.write(atx + 6, aty, sp->getName(), sp->getColor());
 	}
+	//Buffs
+	if (player->hasFreeMoves()) {
+		win.write(atx, ++aty, "CHARGE!", TCODColor::yellow);
+	}
 	//Target info
 	person* target = player->getTarget();
 	if (target != nullptr) {
@@ -889,9 +907,9 @@ void game::applyEffectToPerson(person * target, effect eff, int potency)
 		//Auto-unlock adjacent doors
 		unlockAdjacentTiles(target->getx(), target->gety());
 	}
-	
+
 	//Restoratives
-	
+
 	else if (eff == FULL_RESTORE) {
 		//Restore all attributes to max
 		target->fullRestore();
@@ -900,6 +918,11 @@ void game::applyEffectToPerson(person * target, effect eff, int potency)
 		target->addHealth(potency);
 	else if (eff == RESTORE_VIGOUR)
 		target->addVigour(potency);
+
+	//Buffs
+
+	else if (eff == GAIN_FREE_MOVES)
+		target->gainFreeMoves(potency);
 	
 	//Damage effects
 	
@@ -994,7 +1017,10 @@ void game::movePerson(person* p, int xnew, int ynew)
 				if (p->isPlayer) {
 					currentMap->updateFOV(player->getx(), player->gety());
 					//Time passes
-					playerTurnDelay = p->getMoveDelay();
+					if (!player->hasFreeMoves())
+						playerTurnDelay = p->getMoveDelay();
+					else
+						player->useFreeMove();
 				}
 			}
 		}
@@ -1225,6 +1251,10 @@ void game::castSpell(spell * sp)
 			//Our next melee attack will have this buff.
 			player->buffNextMelee = sp;
 			addMessage("Select melee target", sp->getColor());
+		}
+		else if (aType == ATTACK_BUFF_SELF) {
+			//Spell is applied to self
+			dischargeSpellOnTarget(sp, player, player);
 		}
 		else if (aType == ATTACK_AOE) {
 			//Hits everything within its radius

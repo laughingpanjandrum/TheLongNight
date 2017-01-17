@@ -72,6 +72,16 @@ spell * spell_ArcaneRadiance()
 
 //Monster abilities
 
+
+spell * ability_Charge()
+{
+	spell* sp = new spell("Charge", SPELL_TILE, TCODColor::white);
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(GAIN_FREE_MOVES, 3);
+	sp->usesSpellPower = false;
+	return sp;
+}
+
 spell* ability_Burst()
 {
 	spell* sp = new spell("Burst", SPELL_TILE, TCODColor::darkLime);

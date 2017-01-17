@@ -54,6 +54,7 @@ spell* spell_MagicMissile();
 spell* spell_ArcaneRadiance();
 
 //Monster abilities
+spell* ability_Charge();
 spell* ability_Burst();
 
 #endif

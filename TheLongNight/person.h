@@ -47,6 +47,11 @@ public:
 	counter* getSpecialEffectBuildup(statusEffects eff);
 	int getBleedDuration() { return isBleeding; }
 
+	//Buffing
+	void gainFreeMoves(int f) { freeMoves += f; }
+	bool hasFreeMoves() { return freeMoves > 0; }
+	void useFreeMove() { freeMoves--; }
+
 	//Magic
 	spell* buffNextMelee; //This spell is automatically discharged onto the next thing we attack in melee.
 	void addSpellKnown(spell* sp) { spellsKnown.push_back(sp); }
@@ -94,6 +99,9 @@ protected:
 	//Resistances/status effects
 	int isBleeding = 0;
 	counter bleedBuildup;
+
+	//Buffs
+	int freeMoves = 0; //While this is >0, our move delay is zero; this ticks down each time we move.
 
 	//Equipment
 	inventory items;

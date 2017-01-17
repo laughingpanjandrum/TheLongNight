@@ -66,6 +66,8 @@ monster * monster_TimidWretch()
 	m->setMeleeStats(15, SPEED_FAST);
 	m->setMoveStats(SPEED_SLOW);
 	m->setHealth(50);
+	m->addSpellKnown(ability_Charge());
+	m->setSpellCastChance(50);
 	return m;
 }
 
@@ -76,7 +78,7 @@ monster * monster_BloatedWretch()
 	m->setMoveStats(SPEED_SLOW);
 	m->setHealth(100);
 	m->addSpellKnown(ability_Burst());
-	m->setSpellCastChance(10);
+	m->setSpellCastChance(25);
 	return m;
 }
 

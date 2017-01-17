@@ -96,7 +96,7 @@ private:
 	//Monster actions
 	pathVector getAllAdjacentWalkable(monster* ai);
 	bool aiIsValidMove(monster* ai, int xnew, int ynew);
-	void aiMoveToTarget(monster* ai);
+	bool aiMoveToTarget(monster* ai);
 	bool aiTryUseSpell(monster* ai);
 	void aiDoCombatAction(monster* ai);
 	void aiFindTarget(monster* ai);
