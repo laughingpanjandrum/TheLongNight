@@ -25,12 +25,13 @@ captains_tricorn:24,17
 g glass
 T terminal
 B bed
+D water_deep
 -endcodes
 -connections
 east:cbeach_1
 -endconnections
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+~~~~DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD~~~~~
 =^^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
 =^^^^^~~^^^^^^^^^^^^^^^^^^^^^^^^^^^~~^^^
 =^^^^^^^######gggggggggggg######^^^~~^^^

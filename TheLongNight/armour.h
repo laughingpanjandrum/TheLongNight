@@ -31,5 +31,9 @@ private:
 armour* headgear_CaptainsTricorn();
 armour* armour_RuinedUniform();
 
+armour* headgear_CrowKnightsHood();
+armour* armour_CrowKnightsArmour();
+
+
 #endif
 

@@ -59,3 +59,32 @@ void explosion::tick()
 		atPoint++;
 	}
 }
+
+
+
+/*
+		BULLET PATH
+*/
+
+
+bulletPath::bulletPath(coordVector pts, int tileCode, TCODColor color) :
+	pts(pts), tileCode(tileCode), color(color)
+{
+}
+
+drawData bulletPath::getDrawData(drawData * baseData, int x, int y)
+{
+	if (atIdx < pts.size()) {
+		coord pt = pts.at(atIdx);
+		if (pt.first == x && pt.second == y) {
+			baseData->tileCode = tileCode;
+			baseData->color = color;
+		}
+	}
+	return *baseData;
+}
+
+void bulletPath::tick()
+{
+	atIdx++;
+}

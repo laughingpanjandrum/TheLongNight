@@ -13,6 +13,9 @@ const int VIGOUR_GLYPH = 4;
 const int HEALTH_GLYPH = 3;
 const int EMPTY_TILE = 32;
 
+//For animations
+const int BULLET_TILE = 42;
+
 //Characters
 const int PLAYER_TILE = 1;
 

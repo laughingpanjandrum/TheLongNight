@@ -29,6 +29,11 @@ maptile * tile_Sand()
 	return new maptile("Sand", "floor_sand", BASIC_FLOOR_TILE, TCODColor::amber, TCODColor::darkerAmber);
 }
 
+maptile * tile_Grass()
+{
+	return new maptile("Grass", "floor_grass", BASIC_FLOOR_TILE, TCODColor::green, TCODColor::darkerGreen);
+}
+
 maptile * tile_SandyRock()
 {
 	return new maptile("Sandy Rock", "wall_sand", BASIC_WALL_TILE, TCODColor::darkAmber, TCODColor::amber, false, false);
@@ -78,6 +83,11 @@ maptile * tile_Water()
 maptile * tile_MossyWater()
 {
 	return new maptile("Water", "water_mossy", MOSS_TILE, TCODColor::green, TCODColor::blue);
+}
+
+maptile * tile_DeepWater()
+{
+	return new maptile("Deep Water", "water_deep", BASIC_WATER_TILE, TCODColor::cyan, TCODColor::darkBlue, false, true);
 }
 
 maptile * tile_Acid()

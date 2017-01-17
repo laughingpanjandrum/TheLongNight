@@ -32,3 +32,20 @@ armour * armour_RuinedUniform()
 	a->setMoveSpeed(SPEED_FAST);
 	return a;
 }
+
+armour * headgear_CrowKnightsHood()
+{
+	armour* a = new armour("Crow Knight's Hood", HELMET_TILE, TCODColor::lightGrey, ITEM_HELMET,
+		"The hood of a crow knight is black, and interlaced with singular white feathers.");
+	a->setDefence(5);
+	return a;
+}
+
+armour * armour_CrowKnightsArmour()
+{
+	armour* a = new armour("Crow Knight's Armour", ARMOUR_TILE, TCODColor::lightGrey, ITEM_BODY_ARMOUR,
+		"The feathered armour of the crow knights is thick and warm. Beady eyes are not required.");
+	a->setDefence(10);
+	a->setMoveSpeed(SPEED_FAST);
+	return a;
+}

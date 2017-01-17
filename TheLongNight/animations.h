@@ -77,4 +77,22 @@ protected:
 	TCODColor* colArray;
 };
 
+
+/*
+Bullet path effect - traces path with some kind of tile.
+*/
+class bulletPath : public animations
+{
+public:
+	bulletPath(coordVector pts, int tileCode, TCODColor color);
+	virtual drawData getDrawData(drawData* baseData, int x, int y);
+	virtual void tick();
+	virtual bool isDone() { return atIdx >= pts.size(); }
+private:
+	int atIdx = 0;
+	coordVector pts;
+	int tileCode;
+	TCODColor color;
+};
+
 #endif

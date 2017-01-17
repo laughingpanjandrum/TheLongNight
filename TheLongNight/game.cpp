@@ -1385,6 +1385,8 @@ void game::castSpell(spell * sp)
 						dischargeSpellOnTarget(sp, player, target);
 						//Time taken is the attack delay of our OFFHAND item (which will usually be e.g. a wand)
 						playerTurnDelay += player->getOffhand()->getAttackDelay();
+						//Bullet animation!
+						addAnimations(new bulletPath(path, BULLET_TILE, sp->getColor()));
 					}
 					else {
 						addMessage("Out of range!", TCODColor::white);
