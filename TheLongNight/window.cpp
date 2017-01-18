@@ -7,9 +7,11 @@ window::window() : window("THE LONG NIGHT", 100, 70)
 }
 
 window::window(std::string name, int xsize, int ysize) {
-	TCODConsole::setCustomFont("fonts/Taffer_10x10.png", TCOD_FONT_LAYOUT_ASCII_INROW, 16, 16);
-	TCODConsole::mapAsciiCodesToFont(0, 255, 0, 16);
 	TCODSystem::setFps(30);
+	//Setup console
+	mainConsole = new TCODConsole(xsize, ysize);
+	mainConsole->setCustomFont("fonts/main_10x10.png", TCOD_FONT_LAYOUT_ASCII_INROW, 16, 16);
+	//Go!
 	TCODConsole::initRoot(xsize, ysize, name.c_str());
 }
 
@@ -47,8 +49,8 @@ WRITING
 Put a character at the specified screen location.
 Input: x, y coordinates in the window; a character; a foreground and background color.
 */
-void window::writec(int x, int y, int c, TCODColor col, TCODColor bgcol) {
-	TCODConsole::root->putCharEx(x, y, c, col, bgcol);
+void window::writec(int x, int y, int c, TCODColor col, TCODColor bgcol, bool toAltConsole) {
+	mainConsole->putCharEx(x, y, c, col, bgcol);
 }
 
 /*
@@ -56,9 +58,9 @@ Put a string at the specified screen location.
 Input: x, y coordinates in the window; a string of text; a foreground and background color.
 Output: None.
 */
-void window::write(int x, int y, std::string txt, TCODColor col, TCODColor bgcol) {
+void window::write(int x, int y, std::string txt, TCODColor col, TCODColor bgcol, bool toAltConsole) {
 	for (unsigned int i = 0; i < txt.size(); i++) {
-		writec(x, y, txt.at(i), col, bgcol);
+		writec(x, y, txt.at(i), col, bgcol, toAltConsole);
 		x++;
 	}
 }
@@ -67,7 +69,7 @@ void window::write(int x, int y, std::string txt, TCODColor col, TCODColor bgcol
 Puts a string at the specified location. Wraps string to given line length.
 Returns the last y-coordinate we draw on.
 */
-int window::writeWrapped(int x, int y, unsigned int lineLen, std::string txt, TCODColor col, TCODColor bgcol)
+int window::writeWrapped(int x, int y, unsigned int lineLen, std::string txt, TCODColor col, TCODColor bgcol, bool toAltConsole)
 {
 	//Break string up into chunks, each of which (ideally) ends with a space.
 	std::string word = "";
@@ -95,7 +97,7 @@ int window::writeWrapped(int x, int y, unsigned int lineLen, std::string txt, TC
 	if (word.size())
 		line += word;
 	if (line.size())
-		write(x, y, line, col, bgcol);
+		write(x, y, line, col, bgcol, toAltConsole);
 	return y;
 }
 
@@ -105,6 +107,7 @@ Input: None.
 Output: None.
 */
 void window::refresh() {
+	TCODConsole::blit(mainConsole, 0, 0, 0, 0, TCODConsole::root, 0, 0);
 	TCODConsole::flush();
 }
 
@@ -115,6 +118,7 @@ Output: None.
 */
 void window::clear() {
 	TCODConsole::root->clear();
+	mainConsole->clear();
 }
 
 /*

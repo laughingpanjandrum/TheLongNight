@@ -560,8 +560,10 @@ void game::drawMap(int leftx, int topy)
 	//Draw entire map, left to right & top to bottom
 	for (int x = 0; x < currentMap->getXSize(); x++) {
 		for (int y = 0; y < currentMap->getYSize(); y++) {
+			//Figure out what to draw here.
 			drawData toDraw = getDrawData(x, y);
-			win.writec(leftx + x, topy + y, toDraw.tileCode, toDraw.color, toDraw.bgcolor);
+			//Map is drawn on the secondary console, not the root.
+			win.writec(leftx + x, topy + y, toDraw.tileCode, toDraw.color, toDraw.bgcolor, true);
 		}
 	}
 }
