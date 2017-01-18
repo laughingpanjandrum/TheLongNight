@@ -39,6 +39,8 @@ public:
 	//Item drops when we DIE
 	itemVector getItemDrops() { return drops; }
 	void addItemDrop(item* it) { drops.push_back(it); }
+	int getFragmentsDropped() { return dropsFragments; }
+	void setFragmentsDropped(int f) { dropsFragments = f; }
 
 	//Flags
 	bool isBoss = false;

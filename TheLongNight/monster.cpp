@@ -80,6 +80,7 @@ monster * monster_DrownedDead()
 	m->setMeleeStats(10, SPEED_SLOW);
 	m->setMoveStats(SPEED_NORMAL);
 	m->setHealth(10);
+	m->setFragmentsDropped(1);
 	return m;
 }
 
@@ -89,6 +90,7 @@ monster * monster_ThinWretch()
 	m->setMeleeStats(10, SPEED_NORMAL);
 	m->setMoveStats(SPEED_NORMAL);
 	m->setHealth(50);
+	m->setFragmentsDropped(5);
 	return m;
 }
 
@@ -101,6 +103,7 @@ monster * monster_TimidWretch()
 	m->addSpellKnown(ability_Charge());
 	m->setSpellCastChance(50);
 	m->keepsDistance = true;
+	m->setFragmentsDropped(10);
 	return m;
 }
 
@@ -112,6 +115,7 @@ monster * monster_BloatedWretch()
 	m->setHealth(100);
 	m->addSpellKnown(ability_Burst());
 	m->setSpellCastChance(25);
+	m->setFragmentsDropped(20);
 	return m;
 }
 
@@ -128,6 +132,7 @@ monster * boss_TheWretchedMass()
 	m->setSpawnChance(25);
 	m->addItemDrop(key_WretchsKey());
 	m->isBoss = true;
+	m->setFragmentsDropped(200);
 	return m;
 }
 
@@ -142,6 +147,7 @@ monster * monster_CrowKnight()
 	m->setMoveStats(SPEED_NORMAL);
 	m->setMeleeStats(20, SPEED_NORMAL);
 	m->equipItem(weapon_CrowKnightSword());
+	m->setFragmentsDropped(25);
 	return m;
 }
 
@@ -152,6 +158,7 @@ monster * monster_CrowThief()
 	m->setMoveStats(SPEED_FAST);
 	m->setMeleeStats(10, SPEED_FAST);
 	m->equipItem(weapon_CrowKnife());
+	m->setFragmentsDropped(25);
 	return m;
 }
 
@@ -164,6 +171,7 @@ monster * monster_CrowArcher()
 	m->addSpellKnown(ability_CrowArrow());
 	m->setSpellCastChance(50);
 	m->keepsDistance = true;
+	m->setFragmentsDropped(25);
 	return m;
 }
 
@@ -175,6 +183,7 @@ monster * monster_ForlornCrowKnight()
 	m->equipItem(weapon_CrowHalfsword());
 	m->addSpellKnown(attack_Quickstep());
 	m->setSpellCastChance(20);
+	m->setFragmentsDropped(100);
 	return m;
 }
 

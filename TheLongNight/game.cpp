@@ -1469,6 +1469,8 @@ void game::getDeathDrops(monster * m)
 	for (auto it : m->getItemDrops()) {
 		pickUpItem(it);
 	}
+	//Fragments
+	fragments += m->getFragmentsDropped();
 }
 
 
