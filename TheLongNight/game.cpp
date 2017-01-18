@@ -829,11 +829,12 @@ void game::drawItemInfo(item * it, int atx, int aty)
 	//Rest of item info
 	aty += 1;
 	atx += 1;
-	switch (it->getCategory()) {
-	case(ITEM_WEAPON): drawWeaponInfo(static_cast<weapon*>(it), atx, aty);
-	case(ITEM_OFFHAND): drawWeaponInfo(static_cast<weapon*>(it), atx, aty);
-	case(ITEM_BODY_ARMOUR): drawArmourInfo(static_cast<armour*>(it), atx, aty);
-	case(ITEM_HELMET): drawArmourInfo(static_cast<armour*>(it), atx, aty);
+	auto cat = it->getCategory();
+	switch (cat) {
+	case(ITEM_WEAPON): drawWeaponInfo(static_cast<weapon*>(it), atx, aty); break;
+	case(ITEM_OFFHAND): drawWeaponInfo(static_cast<weapon*>(it), atx, aty); break;
+	case(ITEM_BODY_ARMOUR): drawArmourInfo(static_cast<armour*>(it), atx, aty); break;
+	case(ITEM_HELMET): drawArmourInfo(static_cast<armour*>(it), atx, aty); break;
 	}
 }
 
@@ -1406,19 +1407,30 @@ void game::bossKillMessage()
 
 
 /*
-Display a special message when we pick up an item
+Display a special message when we pick up an item.
+Returns whether we want to equip it or not!
 */
-void game::itemPickupMessage(item * it)
+bool game::itemPickupMessage(item * it)
 {
 	int atx = MAP_DRAW_X;
 	int aty = MAP_DRAW_Y + 10;
 	win.clearRegion(atx - 1, aty, 42, 15);
 	win.drawBox(atx - 1, aty, 42, 15, TCODColor::darkSepia);
+	//What we can do
+	std::string txt = "[ENTER] Equip  [ESC] Store";
+	win.write(atx, ++aty, centreText(txt, 40), TCODColor::white);
+	aty += 2;
 	//Fill in with ITEM DEETS
 	drawItemInfo(it, atx, aty + 1);
-	//Wait for input
+	//Wait for input: equip or no?
 	win.refresh();
-	while (win.getkey().vk != KEY_ACCEPT) {}
+	TCOD_key_t kp = win.getkey();
+	while (kp.vk != KEY_BACK_OUT) {
+		if (kp.vk == KEY_ACCEPT)
+			return true;
+		kp = win.getkey();
+	}
+	return false;
 }
 
 /*
@@ -1427,10 +1439,12 @@ We get a new item - picked up off the floor, auto-dropped by a monster, or whate
 void game::pickUpItem(item * it)
 {
 	//Get it
-	player->addItem(it);
+	bool stackedWithOther = player->addItem(it);
 	//Message about it
 	addMessage("Got " + it->getName() + "!", it->getColor());
-	itemPickupMessage(it);
+	bool equipItem = itemPickupMessage(it);
+	if (equipItem && !stackedWithOther)
+		player->equipItem(it);
 }
 
 /*

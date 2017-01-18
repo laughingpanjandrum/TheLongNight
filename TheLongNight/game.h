@@ -161,7 +161,7 @@ private:
 	void bossKillMessage();
 
 	//Inventory management
-	void itemPickupMessage(item* it);
+	bool itemPickupMessage(item* it);
 	void pickUpItem(item* it);
 	void createInventoryMenu();
 	void selectInventoryCategory(itemTypes cat);

@@ -14,6 +14,9 @@ public:
 		item(name, tileCode, color, ITEM_MISC, description) {}
 	~miscItem();
 
+	//Override
+	virtual const int isEquippable() { return false; }
+
 	//For key/lock items
 	bool isKey;
 	void setKeyTag(std::string t) { keyTag = t; }

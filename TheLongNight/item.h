@@ -19,6 +19,7 @@ public:
 	//Getters
 	itemTypes getCategory() { return category; }
 	virtual int getAmountLeft() { return 1; }
+	virtual const int isEquippable() { return true; }
 
 	//Stacking
 	virtual const bool isStackable() { return false; }

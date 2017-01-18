@@ -267,12 +267,9 @@ void person::unequipItem(item * which)
 /*
 Add the given item to our items carried.
 */
-void person::addItem(item * which)
+bool person::addItem(item * which)
 {
-	bool stackedWithOther = items.addItem(which);
-	//Also equip it, y'know, if we FEEL like it
-	if (!stackedWithOther)
-		equipItem(which);
+	return items.addItem(which);
 }
 
 /*
