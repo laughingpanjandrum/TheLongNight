@@ -10,6 +10,8 @@ item * getItemByHandle(std::string handle)
 		return weapon_CrowKnightSword();
 	else if (handle == "crow_knife")
 		return weapon_CrowKnife();
+	else if (handle == "crow_half_sword")
+		return weapon_CrowHalfsword();
 
 	//SHIELDS
 	else if (handle == "battered_wooden_shield")

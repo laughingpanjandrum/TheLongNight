@@ -31,7 +31,7 @@ const std::vector<itemTypes> ALL_ITEM_TYPES =
 
 //Speeds
 
-const int SPEED_SLOW = 4;
+const int SPEED_SLOW = 3;
 const int SPEED_NORMAL = 2;
 const int SPEED_FAST = 1;
 

@@ -71,6 +71,7 @@ std::string getAttackSpeedName(int del);
 weapon* weapon_SplinteredSword();
 weapon* weapon_CrowKnightSword();
 weapon* weapon_CrowKnife();
+weapon* weapon_CrowHalfsword();
 
 //Shields
 weapon* shield_BatteredWoodenShield();

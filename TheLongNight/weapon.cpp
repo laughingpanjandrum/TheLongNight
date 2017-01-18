@@ -82,6 +82,15 @@ weapon * weapon_CrowKnife()
 	return wp;
 }
 
+weapon * weapon_CrowHalfsword()
+{
+	weapon* wp = new weapon("Crow Half-sword", SWORD_TILE, TCODColor::darkCrimson,
+		"Serrated half-sword of a crow knight, thirsting for blood.");
+	wp->setBasicAttributes(25, SPEED_NORMAL);
+	wp->addStatusEffect(EFFECT_BLEED, 25);
+	return wp;
+}
+
 //		Shields
 
 weapon * shield_BatteredWoodenShield()

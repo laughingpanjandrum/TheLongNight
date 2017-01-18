@@ -71,6 +71,7 @@ monster* boss_TheWretchedMass();
 monster* monster_CrowKnight();
 monster* monster_CrowThief();
 monster* monster_CrowArcher();
+monster* monster_ForlornCrowKnight();
 
 monster* getMonsterByHandle(std::string handle);
 

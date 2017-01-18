@@ -342,6 +342,8 @@ bool game::aiTryUseSpell(monster * ai)
 				//Check spell range
 				int dist = hypot(ai->getx() - target->getx(), ai->gety() - target->gety());
 				if (dist <= sp->getAttackRange()) {
+					//animation
+					addAnimations(new bulletPath(path, BULLET_TILE, sp->getColor()));
 					//We hit!
 					dischargeSpellOnTarget(sp, ai, target);
 					//Time passes
@@ -1576,6 +1578,6 @@ void game::debugMenu()
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());
-		loadMapFromHandle("maps/pilgrims_road_1.txt", CONNECT_WARP, player->getx(), player->gety());
+		loadMapFromHandle("maps/silent_ruins.txt", CONNECT_WARP, player->getx(), player->gety());
 	}
 }

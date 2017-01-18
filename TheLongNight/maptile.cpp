@@ -49,10 +49,20 @@ maptile * tile_Wall()
 	return new maptile("Wall", "wall_stone", BASIC_WALL_TILE, TCODColor::darkGrey, TCODColor::black, false, false);
 }
 
+maptile * tile_WoodenWall()
+{
+	return new maptile("Wall", "wall_wood", BASIC_WALL_TILE, TCODColor::lightSepia, TCODColor::darkerSepia, false, false);
+}
+
 maptile * tile_Door()
 {
 	maptile* d = new maptile("Door", "door_stone", BASIC_DOOR_TILE, TCODColor::darkerGrey, TCODColor::grey, true, false);
 	return d;
+}
+
+maptile * tile_WoodenDoor()
+{
+	return new maptile("Door", "door_wood", BASIC_DOOR_TILE, TCODColor::darkerSepia, TCODColor::lightSepia, true, false);
 }
 
 /*

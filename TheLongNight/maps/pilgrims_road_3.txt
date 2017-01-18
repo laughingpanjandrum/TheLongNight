@@ -21,6 +21,7 @@ D water_deep
 -endcodes
 -connections
 west:pilgrims_road_2
+east:silent_ruins
 -endconnections
 ######.........rrrr................#####
 #####..........rrrr.....T.....%.....####

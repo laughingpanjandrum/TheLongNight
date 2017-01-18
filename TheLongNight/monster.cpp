@@ -139,7 +139,7 @@ monster * monster_CrowKnight()
 	monster* m = new monster("Crow Knight", CROW_KNIGHT_TILE, TCODColor::lightGrey);
 	m->setHealth(100);
 	m->setMoveStats(SPEED_NORMAL);
-	m->setMeleeStats(25, SPEED_NORMAL);
+	m->setMeleeStats(20, SPEED_NORMAL);
 	m->equipItem(weapon_CrowKnightSword());
 	return m;
 }
@@ -163,6 +163,17 @@ monster * monster_CrowArcher()
 	m->addSpellKnown(ability_CrowArrow());
 	m->setSpellCastChance(50);
 	m->keepsDistance = true;
+	return m;
+}
+
+monster * monster_ForlornCrowKnight()
+{
+	monster* m = new monster("Forlorn Crow Knight", CROW_KNIGHT_TILE, TCODColor::darkCrimson);
+	m->setHealth(200);
+	m->setMoveStats(SPEED_NORMAL);
+	m->equipItem(weapon_CrowHalfsword());
+	m->addSpellKnown(ability_Charge());
+	m->setSpellCastChance(20);
 	return m;
 }
 
@@ -193,6 +204,8 @@ monster * getMonsterByHandle(std::string handle)
 		return monster_CrowThief();
 	else if (handle == "crow_archer")
 		return monster_CrowArcher();
+	else if (handle == "forlorn_crow_knight")
+		return monster_ForlornCrowKnight();
 
 	//LET'S HOPE WE NEVER GET HERE!
 	return nullptr;
