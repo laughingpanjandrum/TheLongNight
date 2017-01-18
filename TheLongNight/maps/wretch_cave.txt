@@ -4,10 +4,14 @@ timid_wretch:4,21
 bloated_wretch:13,12
 bloated_wretch:10,27
 bloated_wretch:12,28
+timid_wretch:22,20
+timid_wretch:23,19
+timid_wretch:25,18
+bloated_wretch:20,17
 -items
 thin_knife:2,27
 straight_sword:9,15
-warhammer:10,19
+warhammer:10,17
 -enditems
 -codes
 . floor_stone
@@ -26,6 +30,7 @@ D water_deep
 -endcodes
 -connections
 west:cbeach_2
+north:old_fairweather
 -endconnections
 ;;;;;;;;;;;;;;;#;;;;;;;;;;%;;;r;;#######
 ;;;;;;;;;;;;;;;#;;;%;;;;;;;;;;r;;;######
@@ -44,7 +49,7 @@ west:cbeach_2
 ....#.....###..~...#.....~~~~~~~......#.
 ....#~.#..#.:~...###"...~~~~~~~~~.....#.
 ..###..####"..."##.....~~~~~~~~~~~...##.
-..#....".X!..####..~~~~~~~~~~~~~~~~..#..
+..#....".#...####..~~~~~~~~~~~~~~~~..#..
 ..#~.....###.#......~~~~~~~~~~~~~~...#..
 ..#...~.##...##......~~~~~~~~~~~~~...#..
 ..##."..#...."#.."....~~~~~~~~~~~"...#..

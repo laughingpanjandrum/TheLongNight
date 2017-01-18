@@ -699,6 +699,10 @@ void game::drawInterface(int leftx, int topy)
 		win.write(atx + 4, aty, std::to_string(sp->getVigourCost()), TCODColor::green);
 		win.write(atx + 6, aty, sp->getName(), sp->getColor());
 	}
+
+	//Money
+	win.writec(atx, ++aty, FRAGMENT_GLYPH, TCODColor::amber);
+	win.write(atx + 2, aty, std::to_string(fragments), TCODColor::lightAmber);
 	
 	//Buffs
 	if (player->hasFreeMoves()) {
@@ -1343,6 +1347,11 @@ void game::meleeAttack(person * attacker, person * target)
 		attacker->clearTarget();
 	else
 		attacker->setTarget(target);
+
+	//If we're an AI, this expends all of our free moves
+	if (!target->isPlayer && target->hasFreeMoves())
+		target->clearFreeMoves();
+
 }
 
 /*
@@ -1689,5 +1698,21 @@ void game::debugMenu()
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());
 		loadMapFromHandle("maps/wretch_cave.txt", CONNECT_WARP, player->getx(), player->gety());
+	}
+	else if (txt == "fairweather") {
+		player->addItem(weapon_SplinteredSword());
+		player->addItem(weapon_ThinKnife());
+		player->addItem(weapon_StraightSword());
+		player->addItem(weapon_Warhammer());
+		player->addItem(armour_RuinedUniform());
+		player->addItem(headgear_CaptainsTricorn());
+		player->addItem(spell_MagicMissile());
+		player->addItem(spell_ArcaneRadiance());
+		player->addItem(wand_DriftwoodWand());
+		player->addItem(shield_BatteredWoodenShield());
+		player->addItem(consumable_StarwaterDraught());
+		player->addItem(consumable_StarwaterDraught());
+		player->addItem(consumable_StarwaterDraught());
+		loadMapFromHandle("maps/old_fairweather.txt", CONNECT_WARP, player->getx(), player->gety());
 	}
 }

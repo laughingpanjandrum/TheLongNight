@@ -171,6 +171,9 @@ private:
 	void castSpell(spell* sp);
 	void dischargeSpellOnTarget(spell* sp, person* caster, person* target);
 
+	// $$ money money $$
+	int fragments = 0;
+
 	//Keeping the world up to date
 	void tick();
 	void clearDeadCreatures();

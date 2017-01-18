@@ -15,7 +15,7 @@ window::window(std::string name, int xsize, int ysize) {
 	TCODConsole::initRoot(xsize, ysize, name.c_str());
 	//Custom font mapping
 	int asc = 256;
-	for (int y = 17; y < 32; y++) {
+	for (int y = 16; y < 32; y++) {
 		TCODConsole::mapAsciiCodesToFont(asc, 16, 0, y);
 		asc += 16;
 	}

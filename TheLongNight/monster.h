@@ -54,6 +54,7 @@ protected:
 
 	//Item drops
 	itemVector drops;
+	int dropsFragments = 0;
 
 };
 

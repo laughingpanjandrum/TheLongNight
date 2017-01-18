@@ -66,7 +66,7 @@ weapon * weapon_SplinteredSword()
 
 weapon * weapon_ThinKnife()
 {
-	weapon* wp = new weapon("Thin Knife", SWORD_TILE, TCODColor::lightGrey,
+	weapon* wp = new weapon("Thin Knife", DAGGER_TILE, TCODColor::lightGrey,
 		"A weapon for small, quick folks.");
 	wp->setBasicAttributes(15, SPEED_FAST);
 	wp->setSpecialAttack(attack_Quickstep());
@@ -84,7 +84,7 @@ weapon * weapon_StraightSword()
 
 weapon * weapon_Warhammer()
 {
-	weapon* wp = new weapon("Warhammer", SWORD_TILE, TCODColor::lightSepia,
+	weapon* wp = new weapon("Warhammer", HAMMER_TILE, TCODColor::lightSepia,
 		"A big ole hammer for smashing things.");
 	wp->setBasicAttributes(50, SPEED_SLOW);
 	wp->setSpecialAttack(attack_Knockback());

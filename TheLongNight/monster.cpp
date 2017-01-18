@@ -173,7 +173,7 @@ monster * monster_ForlornCrowKnight()
 	m->setHealth(200);
 	m->setMoveStats(SPEED_NORMAL);
 	m->equipItem(weapon_CrowHalfsword());
-	m->addSpellKnown(ability_Charge());
+	m->addSpellKnown(attack_Quickstep());
 	m->setSpellCastChance(20);
 	return m;
 }

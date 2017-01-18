@@ -3,7 +3,8 @@
 item * getItemByHandle(std::string handle)
 {
 	
-	//WEAPONS
+	//	WEAPONS
+	//Starters
 	if (handle == "splintered_sword")
 		return weapon_SplinteredSword();
 	else if (handle == "thin_knife")
@@ -12,6 +13,7 @@ item * getItemByHandle(std::string handle)
 		return weapon_StraightSword();
 	else if (handle == "warhammer")
 		return weapon_Warhammer();
+	//Pilgrim's Road
 	else if (handle == "crow_knight_sword")
 		return weapon_CrowKnightSword();
 	else if (handle == "crow_knife")

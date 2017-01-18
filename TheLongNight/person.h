@@ -48,6 +48,7 @@ public:
 	int getBleedDuration() { return isBleeding; }
 
 	//Buffing
+	void clearFreeMoves() { freeMoves = 0; }
 	void gainFreeMoves(int f) { freeMoves += f; }
 	bool hasFreeMoves() { return freeMoves > 0; }
 	void useFreeMove() { freeMoves--; }
