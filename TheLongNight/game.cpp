@@ -1677,4 +1677,17 @@ void game::debugMenu()
 		player->addItem(consumable_StarwaterDraught());
 		loadMapFromHandle("maps/pilgrims_road_1.txt", CONNECT_WARP, player->getx(), player->gety());
 	}
+	else if (txt == "wretch") {
+		player->addItem(weapon_SplinteredSword());
+		player->addItem(armour_RuinedUniform());
+		player->addItem(headgear_CaptainsTricorn());
+		player->addItem(spell_MagicMissile());
+		player->addItem(spell_ArcaneRadiance());
+		player->addItem(wand_DriftwoodWand());
+		player->addItem(shield_BatteredWoodenShield());
+		player->addItem(consumable_StarwaterDraught());
+		player->addItem(consumable_StarwaterDraught());
+		player->addItem(consumable_StarwaterDraught());
+		loadMapFromHandle("maps/wretch_cave.txt", CONNECT_WARP, player->getx(), player->gety());
+	}
 }
