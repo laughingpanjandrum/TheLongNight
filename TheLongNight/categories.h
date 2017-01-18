@@ -13,7 +13,13 @@ i.e. all item types/monster types should be kept here.
 
 enum gameState {
 	STATE_VIEW_MAP,
-	STATE_VIEW_INVENTORY, STATE_VIEW_INVENTORY_CATEGORY
+	STATE_VIEW_INVENTORY, STATE_VIEW_INVENTORY_CATEGORY,
+	STATE_LEVEL_UP_MENU
+};
+
+//Equipment scaling types
+enum statScaling {
+	SCALE_STR, SCALE_DEX, SCALE_ARC, SCALE_DEV
 };
 
 //Item types

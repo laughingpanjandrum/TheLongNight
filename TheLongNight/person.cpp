@@ -16,6 +16,17 @@ person::~person()
 {
 }
 
+
+
+
+/*
+Returns how much extra damage the given weapon does, based on our stats.
+*/
+int person::getScalingDamage(weapon * wp)
+{
+	return 0;
+}
+
 /*
 	GETTING ATTRIBUTES
 */

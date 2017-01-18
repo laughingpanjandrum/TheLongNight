@@ -43,6 +43,8 @@ private:
 
 };
 
+typedef std::vector<consumable*> consumableVector;
+
 /*
 	Consumable objects
 */

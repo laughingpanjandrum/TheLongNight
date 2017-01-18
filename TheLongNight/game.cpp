@@ -14,6 +14,7 @@ game::game()
 	//Character create
 	player = new person();
 	player->isPlayer = true;
+	player->stats = new statline(1, 1, 1, 1, 1, 1, 1);
 	//Find starting position
 	coord startPt = currentMap->getStartPoint();
 	currentMap->addPerson(player, startPt.first, startPt.second);
@@ -509,6 +510,8 @@ void game::acceptCurrentMenuIndex()
 		if (sel != nullptr)
 			player->equipItem(sel);
 	}
+	else if (state == STATE_LEVEL_UP_MENU)
+		doLevelUp();
 }
 
 /*
@@ -520,6 +523,9 @@ void game::menuBackOut()
 		//Back up to standard inventory menu
 		createInventoryMenu();
 	}
+	else if (state == STATE_LEVEL_UP_MENU)
+		//Back to main inventory menu
+		createInventoryMenu();
 	else {
 		//Return to map
 		setState(STATE_VIEW_MAP);
@@ -547,6 +553,8 @@ void game::drawScreen()
 	else if (state == STATE_VIEW_INVENTORY || state == STATE_VIEW_INVENTORY_CATEGORY) {
 		drawInventory(MAP_DRAW_X, MAP_DRAW_Y);
 	}
+	else if (state == STATE_LEVEL_UP_MENU)
+		drawLevelUpMenu(MAP_DRAW_X, MAP_DRAW_Y);
 	drawInterface(MAP_DRAW_X + 40, MAP_DRAW_Y);
 	//win.drawFont();
 	win.refresh();
@@ -772,6 +780,10 @@ void game::drawInventory(int atx, int aty)
 			drawItemInfo(sel, atx, aty + 20);
 		}
 	}
+	else {
+		//We can go to the level-up menu from here
+		win.write(atx, aty + 20, "Press [C] to LEVEL UP", TCODColor::white);
+	}
 }
 
 
@@ -905,6 +917,8 @@ void game::processCommand()
 		createInventoryMenu();
 	else if (kp.vk == KEY_ACCEPT)
 		acceptCurrentMenuIndex();
+	else if (kp.c == 'C')
+		setupLevelUpMenu();
 
 	//Using stuff
 	else if (kp.c == 'c')
@@ -1308,6 +1322,8 @@ void game::meleeAttack(person * attacker, person * target)
 		damage = wp->getDamage();
 	}
 
+	//Damage scaling from stats, if any
+
 	//Damage buffs
 	float dbuff = (float)attacker->scaleNextAttack / 100.0;
 	damage += dbuff * (float)damage;
@@ -1570,9 +1586,94 @@ void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 	caster->loseVigour(sp->getVigourCost());
 }
 
+
+
+/*
+	LEVELING UP
+*/
+
+
+/*
+Create the level-up menu.
+*/
+void game::setupLevelUpMenu()
+{
+	TCODColor statCol = TCODColor::lightGrey;
+	menu* lmenu = new menu("LEVEL UP");
+	lmenu->addElement("HEALTH", statCol);
+	lmenu->addElement("VIGOUR", statCol);
+	lmenu->addElement("STRENGTH", statCol);
+	lmenu->addElement("DEXTERITY", statCol);
+	lmenu->addElement("ARCANA", statCol);
+	lmenu->addElement("DEVOTION", statCol);
+	currentMenu = lmenu;
+	setState(STATE_LEVEL_UP_MENU);
+}
+
+
+/*
+Level up selected stat.
+*/
+void game::doLevelUp()
+{
+	element* e = currentMenu->getSelectedItem();
+	std::string name = e->getName();
+	//Buff selected stat
+	if (name == "HEALTH")
+		player->stats->health++;
+	else if (name == "VIGOUR")
+		player->stats->vigour++;
+	else if (name == "STRENGTH")
+		player->stats->strength++;
+	else if (name == "DEXTERITY")
+		player->stats->dexterity++;
+	else if (name == "ARCANA")
+		player->stats->arcana++;
+	else if (name == "DEVOTION")
+		player->stats->devotion++;
+	//Increase overall level
+	player->stats->level++;
+	//Adjust stats that increase passively
+	int maxHealth = 90 + 10 * player->stats->health;
+	int maxVigour = 8 + 2 * player->stats->vigour;
+	player->setMaxHealth(maxHealth);
+	player->setMaxVigour(maxVigour);
+}
+
+void game::drawLevelUpMenu(int atx, int aty)
+{
+	//Stats menu
+	drawMenu(currentMenu, atx, aty);
+	//Stat levels
+	TCODColor statCol = TCODColor::green;
+	int offset = 12;
+	win.write(atx + offset, ++aty, std::to_string(player->stats->health), statCol);
+	win.write(atx + offset, ++aty, std::to_string(player->stats->vigour), statCol);
+	win.write(atx + offset, ++aty, std::to_string(player->stats->strength), statCol);
+	win.write(atx + offset, ++aty, std::to_string(player->stats->dexterity), statCol);
+	win.write(atx + offset, ++aty, std::to_string(player->stats->arcana), statCol);
+	win.write(atx + offset, ++aty, std::to_string(player->stats->devotion), statCol);
+	//How much the next level COSTS
+	aty += 2;
+	win.write(atx, aty, "Requires", TCODColor::white);
+	win.writec(atx + 9, aty, FRAGMENT_GLYPH, TCODColor::amber);
+	//Colour indicates whether we have enough
+	TCODColor col = TCODColor::red;
+	if (fragments >= player->getNextLevelCost())
+		col = TCODColor::green;
+	//Show it
+	win.write(atx + 10, aty, std::to_string(player->getNextLevelCost()), col);
+}
+
+
+
+
 /*
 	KEEPING THE WORLD UPDATED
 */
+
+
+
 
 /*
 Happens right after the player's turn.

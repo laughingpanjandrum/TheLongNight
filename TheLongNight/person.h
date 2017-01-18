@@ -10,7 +10,22 @@
 #include "weapon.h"
 #include "consumable.h"
 
-typedef std::vector<consumable*> consumableVector;
+/*
+Struct for keeping track of a character with a statblock.
+i.e. the PC.
+These alter stats; don't use them for monsters with hardcoded stats.
+*/
+struct statline {
+	statline(int h, int v, int s, int d, int a, int dv, int lvl = 0) : 
+		health(h), vigour(v), strength(s), dexterity(d), arcana(a), devotion(dv), level(lvl) {}
+	int health;
+	int vigour;
+	int strength;
+	int dexterity;
+	int arcana;
+	int devotion;
+	int level;
+};
 
 class person: public element
 {
@@ -20,6 +35,11 @@ public:
 	person(): person("Player", PLAYER_TILE, TCODColor::white) {}
 	person(std::string name, int tileCode, TCODColor color);
 	~person();
+
+	//Stats (if we have any!)
+	statline* stats;
+	int getNextLevelCost() { return stats->level * 100; }
+	int getScalingDamage(weapon* wp);
 
 	//Getters
 	counter getHealth() { return health; }
@@ -33,8 +53,10 @@ public:
 	//Setters
 	void setTarget(person* target) { this->target = target; }
 	void clearTarget() { target = nullptr; }
+	void setMaxHealth(int h) { health.setTo(h); }
+	void setMaxVigour(int v) { vigour.setTo(v); }
 
-	//Damage and healing
+	//Taking damage and healing
 	void addHealth(int amount);
 	void takeDamage(int amount);
 	void addVigour(int amount) { vigour.increase(amount); }

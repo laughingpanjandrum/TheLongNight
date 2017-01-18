@@ -171,8 +171,11 @@ private:
 	void castSpell(spell* sp);
 	void dischargeSpellOnTarget(spell* sp, person* caster, person* target);
 
-	// $$ money money $$
+	// $$ money money $$ and leveling up
 	int fragments = 0;
+	void setupLevelUpMenu();
+	void doLevelUp();
+	void drawLevelUpMenu(int atx, int aty);
 
 	//Keeping the world up to date
 	void tick();
