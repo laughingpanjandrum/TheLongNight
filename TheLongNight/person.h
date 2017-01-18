@@ -51,6 +51,7 @@ public:
 	void gainFreeMoves(int f) { freeMoves += f; }
 	bool hasFreeMoves() { return freeMoves > 0; }
 	void useFreeMove() { freeMoves--; }
+	int scaleNextAttack = 0; //Percent damage bonus damage added to next attack
 
 	//Magic
 	spell* buffNextMelee; //This spell is automatically discharged onto the next thing we attack in melee.

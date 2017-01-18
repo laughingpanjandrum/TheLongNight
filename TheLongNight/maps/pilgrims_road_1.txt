@@ -1,8 +1,9 @@
 Pilgrim's Road
 start:0,36
-crow_knight:20,10
+bloated_wretch:20,10
 -items
 invigorating_tea:8,10
+warhammer:7,32
 -enditems
 -codes
 . floor_grass

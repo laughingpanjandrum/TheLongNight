@@ -61,7 +61,33 @@ weapon * weapon_SplinteredSword()
 	weapon* wp = new weapon("Splintered Sword", SWORD_TILE, TCODColor::grey,
 		"Once a treasured heirloom. Now it's just a broken sword, decent at serration, but certainly unfit for a stardrift captain.");
 	wp->setBasicAttributes(25, SPEED_NORMAL);
-	wp->setSpecialAttack(attack_Splintering());
+	return wp;
+}
+
+weapon * weapon_ThinKnife()
+{
+	weapon* wp = new weapon("Thin Knife", SWORD_TILE, TCODColor::lightGrey,
+		"A weapon for small, quick folks.");
+	wp->setBasicAttributes(15, SPEED_FAST);
+	wp->setSpecialAttack(attack_Quickstep());
+	return wp;
+}
+
+weapon * weapon_StraightSword()
+{
+	weapon* wp = new weapon("Straight Sword", SWORD_TILE, TCODColor::lightGrey,
+		"It's just a simple sword, but the haft has a nice little dragon face carved in it.");
+	wp->setBasicAttributes(25, SPEED_NORMAL);
+	wp->setSpecialAttack(attack_StrongAttack());
+	return wp;
+}
+
+weapon * weapon_Warhammer()
+{
+	weapon* wp = new weapon("Warhammer", SWORD_TILE, TCODColor::lightSepia,
+		"A big ole hammer for smashing things.");
+	wp->setBasicAttributes(50, SPEED_SLOW);
+	wp->setSpecialAttack(attack_Knockback());
 	return wp;
 }
 

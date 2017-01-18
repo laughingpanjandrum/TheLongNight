@@ -44,10 +44,13 @@ enum effect {
 	//Nice effects
 	FULL_RESTORE, RESTORE_HEALTH, RESTORE_VIGOUR,
 	GAIN_FREE_MOVES,
+	//Attack buffs
+	SCALE_NEXT_ATTACK,
 	//Damage effects
 	APPLY_PHYSICAL_DAMAGE,
 	APPLY_BLEED_DAMAGE,
-	KILL_CASTER
+	//Other special effects
+	KNOCKBACK_TARGET
 };
 
 //Damage types

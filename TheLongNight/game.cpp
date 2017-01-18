@@ -1012,13 +1012,20 @@ void game::applyEffectToPerson(person * target, effect eff, int potency)
 
 	else if (eff == GAIN_FREE_MOVES)
 		target->gainFreeMoves(potency);
-	
+	else if (eff == SCALE_NEXT_ATTACK)
+		target->scaleNextAttack = potency;
+
 	//Damage effects
-	
+
 	else if (eff == APPLY_PHYSICAL_DAMAGE)
 		target->takeDamage(potency);
 	else if (eff == APPLY_BLEED_DAMAGE)
 		target->takeStatusEffectDamage(EFFECT_BLEED, potency);
+
+	//Special effects, other
+	else if (eff == KNOCKBACK_TARGET)
+		knockbackTarget(target, potency);
+
 }
 
 /*
@@ -1295,6 +1302,13 @@ void game::meleeAttack(person * attacker, person * target)
 	if (wp != nullptr) {
 		damage = wp->getDamage();
 	}
+
+	//Damage buffs
+	float dbuff = (float)attacker->scaleNextAttack / 100.0;
+	damage += dbuff * (float)damage;
+	if (attacker->scaleNextAttack)
+		//This buff only lasts for 1 attack
+		attacker->scaleNextAttack = 0;
 	
 	//Reduce damage via armour
 	int def = target->getDefence();
@@ -1329,6 +1343,20 @@ void game::meleeAttack(person * attacker, person * target)
 		attacker->clearTarget();
 	else
 		attacker->setTarget(target);
+}
+
+/*
+Target gets shoved away.
+Currently ONLY AFFECTS NPCS and they are ALWAYS SHOVED AWAY FROM THE PLAYER
+Yes, it's kinda clunky.
+*/
+void game::knockbackTarget(person * target, int distance)
+{
+	int xv = get1dVector(player->getx(), target->getx());
+	int yv = get1dVector(player->gety(), target->gety());
+	for (int i = 0; i < distance; i++) {
+		movePerson(target, target->getx() + xv, target->gety() + yv);
+	}
 }
 
 
@@ -1647,6 +1675,6 @@ void game::debugMenu()
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());
-		loadMapFromHandle("maps/silent_ruins.txt", CONNECT_WARP, player->getx(), player->gety());
+		loadMapFromHandle("maps/pilgrims_road_1.txt", CONNECT_WARP, player->getx(), player->gety());
 	}
 }

@@ -67,8 +67,14 @@ private:
 
 std::string getAttackSpeedName(int del);
 
-//Weapons
+//	Weapons
+
+//Starter weapons
 weapon* weapon_SplinteredSword();
+weapon* weapon_ThinKnife();
+weapon* weapon_StraightSword();
+weapon* weapon_Warhammer();
+
 weapon* weapon_CrowKnightSword();
 weapon* weapon_CrowKnife();
 weapon* weapon_CrowHalfsword();

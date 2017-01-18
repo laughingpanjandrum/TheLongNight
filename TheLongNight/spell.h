@@ -48,6 +48,9 @@ private:
 
 //Weapon arts
 spell* attack_Splintering();
+spell* attack_Quickstep();
+spell* attack_StrongAttack();
+spell* attack_Knockback();
 
 //Arcane spells
 spell* spell_MagicMissile();

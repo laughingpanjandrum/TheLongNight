@@ -46,6 +46,39 @@ spell * attack_Splintering()
 	return sp;
 }
 
+spell * attack_Quickstep()
+{
+	spell* sp = new spell("Quickstep", SWORD_TILE, TCODColor::yellow,
+		"Quickly leap one space.");
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->setVigourCost(1);
+	sp->usesSpellPower = false;
+	sp->addEffect(GAIN_FREE_MOVES, 1);
+	return sp;
+}
+
+spell * attack_StrongAttack()
+{
+	spell* sp = new spell("Strong Attack", SWORD_TILE, TCODColor::darkRed,
+		"Next attack deals double damage.");
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(SCALE_NEXT_ATTACK, 100);
+	sp->setVigourCost(1);
+	sp->usesSpellPower = false;
+	return sp;
+}
+
+spell * attack_Knockback()
+{
+	spell* sp = new spell("Knockback", SWORD_TILE, TCODColor::lightBlue,
+		"Next attack knocks target back.");
+	sp->setAttackType(ATTACK_MELEE);
+	sp->addEffect(KNOCKBACK_TARGET, 2);
+	sp->setVigourCost(1);
+	sp->usesSpellPower = false;
+	return sp;
+}
+
 //Spells
 
 spell * spell_MagicMissile()

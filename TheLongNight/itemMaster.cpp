@@ -6,6 +6,12 @@ item * getItemByHandle(std::string handle)
 	//WEAPONS
 	if (handle == "splintered_sword")
 		return weapon_SplinteredSword();
+	else if (handle == "thin_knife")
+		return weapon_ThinKnife();
+	else if (handle == "straight_sword")
+		return weapon_StraightSword();
+	else if (handle == "warhammer")
+		return weapon_Warhammer();
 	else if (handle == "crow_knight_sword")
 		return weapon_CrowKnightSword();
 	else if (handle == "crow_knife")
