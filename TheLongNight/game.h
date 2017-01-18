@@ -157,8 +157,10 @@ private:
 	//Boss fights
 	monster* currentBoss;
 	void setBoss(monster* m);
+	void bossKillMessage();
 
 	//Inventory management
+	void itemPickupMessage(item* it);
 	void pickUpItem(item* it);
 	void createInventoryMenu();
 	void selectInventoryCategory(itemTypes cat);

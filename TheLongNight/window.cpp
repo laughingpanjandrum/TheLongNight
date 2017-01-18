@@ -124,6 +124,18 @@ void window::refresh() {
 }
 
 /*
+Clears only the specified region.
+*/
+void window::clearRegion(int lx, int ty, int w, int h)
+{
+	for (int x = lx; x < lx + w; x++) {
+		for (int y = ty; y < ty + h; y++) {
+			mainConsole->putCharEx(x, y, ' ', TCODColor::black, TCODColor::black);
+		}
+	}
+}
+
+/*
 Clear the root console.
 Input: None.
 Output: None.

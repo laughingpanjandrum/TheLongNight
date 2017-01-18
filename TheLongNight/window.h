@@ -26,6 +26,7 @@ public:
 		bool toAltConsole = false);
 	
 	//Clearing/refreshing
+	void clearRegion(int x, int y, int w, int h);
 	void clear();
 	void refresh();
 	

@@ -50,3 +50,14 @@ int get1dVector(int ourPt, int destination)
 		return 1;
 	return 0;
 }
+
+/*
+Returns the given text with whitespace preceding it, so that it will be centred on a line of the given length.
+*/
+std::string centreText(std::string txt, int width)
+{
+	int sp = (width / 2) - (txt.size() / 2);
+	for (sp; sp > 0; sp--)
+		txt = " " + txt;
+	return txt;
+}

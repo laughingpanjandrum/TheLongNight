@@ -1345,10 +1345,44 @@ void game::setBoss(monster * m)
 
 
 /*
+Displays a special message when we kill a BOSS.
+*/
+void game::bossKillMessage()
+{
+	int atx = MAP_DRAW_X;
+	int aty = MAP_DRAW_Y;
+	win.clearRegion(atx - 1, aty, 42, 5);
+	win.drawBox(atx - 1, aty, 42, 5, TCODColor::darkRed);
+	aty++;
+	win.write(atx, aty, centreText(currentBoss->getName(), 40), currentBoss->getColor());
+	std::string txt2 = "has been destroyed. Well done, pilgrim!";
+	win.write(atx, ++aty, centreText(txt2, 40), TCODColor::white);
+	//Refresh and wait for input
+	win.refresh();
+	while (win.getkey().vk != KEY_ACCEPT) {}
+}
+
+
+/*
 	INVENTORY MANAGEMENT
 */
 
 
+/*
+Display a special message when we pick up an item
+*/
+void game::itemPickupMessage(item * it)
+{
+	int atx = MAP_DRAW_X;
+	int aty = MAP_DRAW_Y + 10;
+	win.clearRegion(atx - 1, aty, 42, 15);
+	win.drawBox(atx - 1, aty, 42, 15, TCODColor::darkSepia);
+	//Fill in with ITEM DEETS
+	drawItemInfo(it, atx, aty + 1);
+	//Wait for input
+	win.refresh();
+	while (win.getkey().vk != KEY_ACCEPT) {}
+}
 
 /*
 We get a new item - picked up off the floor, auto-dropped by a monster, or whatever
@@ -1359,6 +1393,7 @@ void game::pickUpItem(item * it)
 	player->addItem(it);
 	//Message about it
 	addMessage("Got " + it->getName() + "!", it->getColor());
+	itemPickupMessage(it);
 }
 
 /*
@@ -1524,8 +1559,10 @@ void game::clearDeadCreatures()
 			//And the PLAYER gets the ITEMS we drop!
 			getDeathDrops(static_cast<monster*>(p));
 			//And if this was the BOSS, then this BOSS FIGHT is over
-			if (p == currentBoss)
+			if (p == currentBoss) {
+				bossKillMessage();
 				currentBoss = nullptr;
+			}
 		}
 
 	}
