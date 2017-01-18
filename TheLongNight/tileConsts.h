@@ -19,7 +19,7 @@ const int BULLET_TILE = 42;
 //Characters
 const int PLAYER_TILE = 1;
 
-const int DROWNED_DEAD_TILE = 100;
+const int DROWNED_DEAD_TILE = 340;
 const int WRETCH_TILE = 119;
 const int CROW_KNIGHT_TILE = 107;
 

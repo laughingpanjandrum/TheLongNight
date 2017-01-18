@@ -16,9 +16,8 @@ public:
 	//Debug
 	void drawFont();
 
-	//Other consoles
+	//Console
 	TCODConsole* mainConsole;
-	TCODConsole* mapConsole;
 	
 	//Writing
 	void writec(int x, int y, int c, TCODColor col, TCODColor bgcol = TCODColor::black, bool toAltConsole = false);

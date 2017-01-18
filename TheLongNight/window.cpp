@@ -10,9 +10,17 @@ window::window(std::string name, int xsize, int ysize) {
 	TCODSystem::setFps(30);
 	//Setup console
 	mainConsole = new TCODConsole(xsize, ysize);
-	mainConsole->setCustomFont("fonts/main_10x10.png", TCOD_FONT_LAYOUT_ASCII_INROW, 16, 16);
+	mainConsole->setCustomFont("fonts/large_10x10.png", TCOD_FONT_LAYOUT_ASCII_INROW, 16, 32);
 	//Go!
 	TCODConsole::initRoot(xsize, ysize, name.c_str());
+	//Custom font mapping
+	int asc = 256;
+	for (int y = 17; y < 32; y++) {
+		TCODConsole::mapAsciiCodesToFont(asc, 16, 0, y);
+		asc += 16;
+	}
+	//TCODConsole::mapAsciiCodeToFont(339, 4, 22);
+	//TCODConsole::mapAsciiCodesToFont(256, 255, 17, 0);
 }
 
 /*
@@ -41,9 +49,13 @@ void window::drawFont() {
 }
 
 
+
+
 /*
 WRITING
 */
+
+
 
 /*
 Put a character at the specified screen location.
@@ -127,7 +139,7 @@ GETTING INPUT
 
 /*
 This is a super klutzy function that constantly clears the whole screen
-SO USE IT CAREFULLY
+It's pretty much just for debugging purposes
 */
 std::string window::getstr(int x, int y)
 {
