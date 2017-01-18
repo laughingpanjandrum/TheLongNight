@@ -154,6 +154,10 @@ private:
 	//Combat
 	void meleeAttack(person* attacker, person* target);
 
+	//Boss fights
+	monster* currentBoss;
+	void setBoss(monster* m);
+
 	//Inventory management
 	void pickUpItem(item* it);
 	void createInventoryMenu();

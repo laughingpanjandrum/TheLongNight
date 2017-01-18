@@ -1,18 +1,11 @@
 Coruscating Beach
 start:2,2
-thin_wretch:13,6
-thin_wretch:15,5
-thin_wretch:16,4
-timid_wretch:27,12
-bloated_wretch:28,14
-bloated_wretch:24,33
-timid_wretch:23,32
-timid_wretch:22,32
-thin_wretch:38,31
-thin_wretch:39,32
-thin_wretch:37,32
-thin_wretch:37,34
-thin_wretch:40,34
+timid_wretch:21,6
+bloated_wretch:18,11
+thin_wretch:17,13
+timid_wretch:23,34
+timid_wretch:22,26
+bloated_wretch:38,33
 -items
 driftwood_wand:23,6
 battered_wooden_shield:21,15

@@ -127,6 +127,7 @@ monster * boss_TheWretchedMass()
 	m->addSpawnableCreature("thin_wretch");
 	m->setSpawnChance(25);
 	m->addItemDrop(key_WretchsKey());
+	m->isBoss = true;
 	return m;
 }
 

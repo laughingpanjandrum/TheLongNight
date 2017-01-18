@@ -44,6 +44,6 @@ const int BUSH_TILE = 37;
 const int TREE_TILE = 5;
 const int TERMINAL_TILE = 228;
 
-const int STATUE_TILE = 244;
+const int STATUE_TILE = 500;
 
 #endif

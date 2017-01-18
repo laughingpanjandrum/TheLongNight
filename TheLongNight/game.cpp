@@ -426,6 +426,9 @@ void game::aiFindTarget(monster * ai)
 	//If the player can see us, we can see them. ONE SIMPLE RULE.
 	if (currentMap->isPointInFOV(ai->getx(), ai->gety())) {
 		ai->setTarget(player);
+		//If we are a BOSS, it looks like a BOSS FIGHT just started
+		if (ai->isBoss)
+			setBoss(ai);
 	}
 }
 
@@ -732,9 +735,17 @@ void game::drawInterface(int leftx, int topy)
 				win.write(atx + 1, ++aty, "BLEED:" + bleed->getAsString(), TCODColor::crimson);
 		}
 	}
-	//Messages
+
+	//BOSS HEALTH BAR, if we're fighting a boss
 	atx = MAP_DRAW_X;
 	aty = MAP_DRAW_Y + 42;
+	if (currentBoss != nullptr) {
+		win.write(atx, aty, currentBoss->getName(), currentBoss->getColor());
+		win.drawCounter(currentBoss->getHealth(), "", atx, aty + 1, TCODColor::red, TCODColor::darkGrey, 40);
+	}
+
+	//Messages
+	aty += 2;
 	for (auto m : messages) {
 		win.write(atx, aty++, m.txt, m.color);
 	}
@@ -1322,8 +1333,21 @@ void game::meleeAttack(person * attacker, person * target)
 
 
 /*
+	BOSS STUFF
+*/
+
+
+
+void game::setBoss(monster * m)
+{
+	currentBoss = m;
+}
+
+
+/*
 	INVENTORY MANAGEMENT
 */
+
 
 
 /*
@@ -1369,6 +1393,7 @@ We get the items a dead monster dropped
 */
 void game::getDeathDrops(monster * m)
 {
+	//Items
 	for (auto it : m->getItemDrops()) {
 		pickUpItem(it);
 	}
@@ -1484,6 +1509,7 @@ void game::clearDeadCreatures()
 	if (player->isDead)
 		restoreFromSavePoint();
 	else {
+		
 		//Otherwise, check for dead NPCs
 		personVector toClear;
 		//Find everyone who's dead
@@ -1491,12 +1517,17 @@ void game::clearDeadCreatures()
 			if (p->isDead)
 				toClear.push_back(p);
 		}
+		
 		//And remove them!
 		for (auto p : toClear) {
 			currentMap->removePerson(p);
 			//And the PLAYER gets the ITEMS we drop!
 			getDeathDrops(static_cast<monster*>(p));
+			//And if this was the BOSS, then this BOSS FIGHT is over
+			if (p == currentBoss)
+				currentBoss = nullptr;
 		}
+
 	}
 }
 

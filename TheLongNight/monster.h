@@ -40,6 +40,9 @@ public:
 	itemVector getItemDrops() { return drops; }
 	void addItemDrop(item* it) { drops.push_back(it); }
 
+	//Flags
+	bool isBoss = false;
+
 protected:
 
 	//Behaviours
