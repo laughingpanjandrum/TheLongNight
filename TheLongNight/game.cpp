@@ -555,7 +555,7 @@ void game::drawScreen()
 	}
 	else if (state == STATE_LEVEL_UP_MENU)
 		drawLevelUpMenu(MAP_DRAW_X, MAP_DRAW_Y);
-	drawInterface(MAP_DRAW_X + 40, MAP_DRAW_Y);
+	drawInterface(MAP_DRAW_X + 43, MAP_DRAW_Y);
 	//win.drawFont();
 	win.refresh();
 }
@@ -788,6 +788,45 @@ void game::drawInventory(int atx, int aty)
 
 
 /*
+Just sums up all of our stats on one sexy screen!
+*/
+void game::drawPlayerInfo(int atx, int aty)
+{
+	TCODColor mainCol = TCODColor::lightGrey;
+	
+	//Draw a big ole box
+	win.clearRegion(atx, aty, 40, 40);
+	win.drawBox(atx, aty, 40, 40, TCODColor::sepia);
+	
+	//Now FILL IN SOME DEETZ
+	atx++;
+	aty++;
+	win.write(atx, aty, player->getName(), player->getColor());
+	aty++;
+	
+	//Health and vigour
+	win.write(atx + 1, ++aty, "Health", mainCol);
+	win.write(atx + 10, aty, std::to_string(player->getHealth().getMaxValue()), TCODColor::red);
+	win.writec(atx, aty, HEALTH_GLYPH, TCODColor::red);
+	win.write(atx + 1, ++aty, "Vigour", mainCol);
+	win.write(atx + 10, aty, std::to_string(player->getVigour().getMaxValue()), TCODColor::green);
+	win.writec(atx, aty, VIGOUR_GLYPH, TCODColor::green);
+	aty++;
+	
+	//Defence
+	win.write(atx, ++aty, "DEFENCE", mainCol);
+	win.write(atx + 10, aty, std::to_string(player->getDefence()), TCODColor::lightBlue);
+	//Bleed resist
+	win.write(atx, ++aty, "RES:BLEED", mainCol);
+	win.write(atx + 10, aty, std::to_string(player->getSpecialEffectBuildup(EFFECT_BLEED)->getMaxValue()), TCODColor::crimson);
+	
+	//Done! Wait for input
+	win.refresh();
+	while (win.getkey().vk != KEY_ACCEPT) {}
+}
+
+
+/*
 Allows animations to adjust draw data when drawing the map.
 */
 drawData game::getAnimationDataOverride(drawData * baseData, int x, int y)
@@ -923,8 +962,12 @@ void game::processCommand()
 		createInventoryMenu();
 	else if (kp.vk == KEY_ACCEPT)
 		acceptCurrentMenuIndex();
-	else if (kp.c == 'C')
-		setupLevelUpMenu();
+	else if (kp.c == 'C') {
+		if (state == STATE_VIEW_INVENTORY)
+			setupLevelUpMenu();
+		else
+			drawPlayerInfo(MAP_DRAW_X, MAP_DRAW_Y);
+	}
 
 	//Using stuff
 	else if (kp.c == 'c')

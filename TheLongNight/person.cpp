@@ -202,13 +202,20 @@ int person::getSpellPower()
 	weapon* wp = getWeapon();
 	weapon* offhand = getOffhand();
 	int spellPower = baseSpellPower;
+
 	//From weapon
 	if (wp != nullptr)
 		spellPower = wp->getSpellPower();
+
 	//See if offhand is higher
 	if (offhand != nullptr)
 		if (offhand->getSpellPower() > spellPower)
 			spellPower = offhand->getSpellPower();
+
+	//Bonus from arcane scaling (if we use stats)
+	if (stats != nullptr)
+		spellPower += (stats->arcana - 1) * 10;
+
 	//Done
 	return spellPower;
 }

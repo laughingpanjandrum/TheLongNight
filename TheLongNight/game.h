@@ -110,12 +110,13 @@ private:
 	void acceptCurrentMenuIndex();
 	void menuBackOut();
 
-	//Drawing functions
+	//General drawing functions
 	void drawScreen();
 	void drawMap(int atx, int aty);
 	drawData getDrawData(int x, int y);
 	void drawInterface(int atx, int aty);
 	void drawInventory(int atx, int aty);
+	void drawPlayerInfo(int atx, int aty);
 
 	//Animations
 	animVector playingAnimations;
