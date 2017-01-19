@@ -173,6 +173,8 @@ private:
 	//Spellcasting
 	void castSpell(spell* sp);
 	void dischargeSpellOnTarget(spell* sp, person* caster, person* target);
+	void openSpellMenu();
+	void selectSpellFromMenu();
 
 	// $$ money money $$ and leveling up
 	int fragments = 0;

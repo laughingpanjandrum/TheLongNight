@@ -512,6 +512,8 @@ void game::acceptCurrentMenuIndex()
 	}
 	else if (state == STATE_LEVEL_UP_MENU)
 		doLevelUp();
+	else if (state == STATE_SELECT_SPELL)
+		selectSpellFromMenu();
 }
 
 /*
@@ -555,6 +557,7 @@ void game::drawScreen()
 	}
 	else if (state == STATE_LEVEL_UP_MENU)
 		drawLevelUpMenu(MAP_DRAW_X, MAP_DRAW_Y);
+	//Always draw the interface
 	drawInterface(MAP_DRAW_X + 43, MAP_DRAW_Y);
 	//win.drawFont();
 	win.refresh();
@@ -700,12 +703,18 @@ void game::drawInterface(int leftx, int topy)
 			win.write(atx + 2, ++aty, "no consumable", TCODColor::darkGrey);
 	}
 	
-	//Spell selected
-	spell* sp = player->getCurrentSpell();
-	if (sp != nullptr) {
-		win.writec(atx + 3, ++aty, VIGOUR_GLYPH, TCODColor::darkGreen);
-		win.write(atx + 4, aty, std::to_string(sp->getVigourCost()), TCODColor::green);
-		win.write(atx + 6, aty, sp->getName(), sp->getColor());
+	//Spell selected (or menu, if we're in that mode!)
+	if (state == STATE_SELECT_SPELL) {
+		drawMenu(currentMenu, atx, aty);
+		aty += currentMenu->getAllElements().size() + 1;
+	}
+	else {
+		spell* sp = player->getCurrentSpell();
+		if (sp != nullptr) {
+			win.writec(atx + 3, ++aty, VIGOUR_GLYPH, TCODColor::darkGreen);
+			win.write(atx + 4, aty, std::to_string(sp->getVigourCost()), TCODColor::green);
+			win.write(atx + 6, aty, sp->getName(), sp->getColor());
+		}
 	}
 
 	//Money
@@ -1028,7 +1037,7 @@ void game::processCommand()
 	else if (kp.c == 'c')
 		player->cycleConsumable();
 	else if (kp.c == 'a')
-		player->cycleSelectedSpell();
+		openSpellMenu();//player->cycleSelectedSpell();
 	else if (kp.c == 'q')
 		useConsumable();
 	else if (kp.c == 's')
@@ -1704,6 +1713,29 @@ void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 	}
 	//This is when the caster expends their vigour
 	caster->loseVigour(sp->getVigourCost());
+}
+
+
+/*
+Pick which spell you want to select!
+*/
+void game::openSpellMenu()
+{
+	menu* sm = new menu("CHOOSE SPELL");
+	for (auto sp : player->getSpellsKnown())
+		sm->addElement(sp);
+	currentMenu = sm;
+	setState(STATE_SELECT_SPELL);
+}
+
+/*
+Pick a spell off the menu, close the menu
+*/
+void game::selectSpellFromMenu()
+{
+	spell* sp = static_cast<spell*>(currentMenu->getSelectedItem());
+	player->setCurrentSpell(sp);
+	setState(STATE_VIEW_MAP);
 }
 
 

@@ -184,6 +184,15 @@ spell * person::getCurrentSpell()
 }
 
 /*
+We're given a spell, figure out which index we should be at
+*/
+void person::setCurrentSpell(spell * sp)
+{
+	while (spellsKnown.at(selectedSpell) != sp)
+		cycleSelectedSpell();
+}
+
+/*
 Cycle to the next spell
 */
 void person::cycleSelectedSpell()

@@ -84,6 +84,7 @@ public:
 	void removeSpellKnown(spell* sp);
 	spellVector getSpellsKnown() { return spellsKnown; }
 	spell* getCurrentSpell();
+	void setCurrentSpell(spell* sp);
 	void cycleSelectedSpell();
 	int getSpellPower();
 	int getDivinePower();
