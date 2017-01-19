@@ -727,26 +727,9 @@ void game::drawInterface(int leftx, int topy)
 			win.drawCounter(*bl, "BLEED", atx, ++aty, TCODColor::crimson, TCODColor::darkGrey, 10);
 	}
 
-	//Target info
-	person* target = player->getTarget();
-	if (target != nullptr) {
-		aty++;
-		//Health
-		win.write(atx, ++aty, target->getName(), target->getColor());
-		win.write(atx, ++aty, "HP:" + target->getHealth().getAsString(), TCODColor::darkRed);
-		//Bleed
-		int bleeding = target->getBleedDuration();
-		if (bleeding > 0) {
-			//Currently bleeding
-			win.write(atx + 1, ++aty, "Bleeding (" + std::to_string(bleeding) + ")", TCODColor::crimson);
-		}
-		else {
-			//Bleed building up but not proc'd
-			counter* bleed = target->getSpecialEffectBuildup(EFFECT_BLEED);
-			if (bleed->getValue() > 0)
-				win.write(atx + 1, ++aty, "BLEED:" + bleed->getAsString(), TCODColor::crimson);
-		}
-	}
+	//Draws whatever we have HIGHLIGHTED
+	aty += 2;
+	drawMouseover(atx, aty);
 
 	//BOSS HEALTH BAR, if we're fighting a boss
 	atx = MAP_DRAW_X;
@@ -823,6 +806,60 @@ void game::drawPlayerInfo(int atx, int aty)
 	//Done! Wait for input
 	win.refresh();
 	while (win.getkey().vk != KEY_ACCEPT) {}
+}
+
+
+/*
+Display info about whatever we've highlighted with the CURSOR.
+*/
+void game::drawMouseover(int atx, int aty)
+{
+	//Is the cursor even on?
+	if (!targetModeOn)
+		return;
+	//What are we pointing at?
+	coord mpt = targetPt;
+	if (currentMap->inBounds(mpt.first, mpt.second) && currentMap->isPointInFOV(mpt.first, mpt.second)) {
+		//Show highlighted object: person?
+		person* target = currentMap->getPerson(mpt.first, mpt.second);
+		if (target != nullptr)
+			drawTargetInfo(target, atx, aty);
+		else {
+			//Item?
+			item* it = currentMap->getItem(mpt.first, mpt.second);
+			if (it != nullptr) {
+				win.write(atx, aty, it->getName(), it->getColor());
+			}
+			else {
+				//If none of the above, show the tile here
+				maptile* t = currentMap->getTile(mpt.first, mpt.second);
+				win.write(atx, aty, t->getName(), t->getColor());
+			}
+		}
+	}
+}
+
+
+/*
+Info about a person we have highlighted on the map.
+*/
+void game::drawTargetInfo(person * target, int atx, int aty)
+{
+	//Health
+	win.write(atx, aty, target->getName(), target->getColor());
+	win.write(atx, ++aty, "HP:" + target->getHealth().getAsString(), TCODColor::darkRed);
+	//Bleed
+	int bleeding = target->getBleedDuration();
+	if (bleeding > 0) {
+		//Currently bleeding
+		win.write(atx + 1, ++aty, "Bleeding (" + std::to_string(bleeding) + ")", TCODColor::crimson);
+	}
+	else {
+		//Bleed building up but not proc'd
+		counter* bleed = target->getSpecialEffectBuildup(EFFECT_BLEED);
+		if (bleed->getValue() > 0)
+			win.write(atx + 1, ++aty, "BLEED:" + bleed->getAsString(), TCODColor::crimson);
+	}
 }
 
 
@@ -1806,6 +1843,27 @@ void game::restoreFromSavePoint()
 	loadNewMap(ourSavePt.saveMap, CONNECT_VERTICAL, ourSavePt.savePt.first, ourSavePt.savePt.second);
 	//Put us back in the clock
 	turns.addEntity(player, 0);
+}
+
+
+
+
+/*
+	COORDINATE CONVERSATIONS
+*/
+
+
+
+/*
+Translates a coordinate on the window into a coordinate on the map.
+If the cursor is outside the map, will return a point outside the map bounds!
+*/
+coord game::screenToMapCoords(coord pt)
+{
+	coord mpt;
+	mpt.first = pt.first - MAP_DRAW_X;
+	mpt.second = pt.second - MAP_DRAW_Y;
+	return mpt;
 }
 
 

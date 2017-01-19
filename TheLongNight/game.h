@@ -117,6 +117,8 @@ private:
 	void drawInterface(int atx, int aty);
 	void drawInventory(int atx, int aty);
 	void drawPlayerInfo(int atx, int aty);
+	void drawMouseover(int atx, int aty);
+	void drawTargetInfo(person* target, int atx, int aty);
 
 	//Animations
 	animVector playingAnimations;
@@ -186,6 +188,11 @@ private:
 	savePoint ourSavePt;
 	void setSavePoint();
 	void restoreFromSavePoint();
+
+	//Coordinate conversions
+	coord screenToMapCoords(coord pt);
+	TCOD_mouse_t mouse;
+	TCOD_key_t key;
 
 	//Debugging options
 	void debugMenu();

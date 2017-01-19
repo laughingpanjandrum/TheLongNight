@@ -45,7 +45,7 @@ const int BED_TILE = 220;
 const int MOSS_TILE = 34;
 const int BUSH_TILE = 37;
 const int TREE_TILE = 5;
-const int TERMINAL_TILE = 228;
+const int TERMINAL_TILE = 484;
 
 const int STATUE_TILE = 500;
 
