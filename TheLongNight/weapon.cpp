@@ -164,6 +164,7 @@ weapon * wand_DriftwoodWand()
 	wp->setSpellstoreSize(2);
 	wp->setSpellPower(100);
 	wp->makeOffhand();
+	wp->setSpecialAttack(ability_PowerSurge());
 	return wp;
 }
 
@@ -175,5 +176,6 @@ weapon * chime_ClericsCrackedChime()
 	wp->setSpellstoreSize(1);
 	wp->setDivinePower(100);
 	wp->makeOffhand();
+	wp->setSpecialAttack(ability_DivineFavour());
 	return wp;
 }

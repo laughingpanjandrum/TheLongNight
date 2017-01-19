@@ -75,6 +75,8 @@ public:
 	bool hasFreeMoves() { return freeMoves > 0; }
 	void useFreeMove() { freeMoves--; }
 	int scaleNextAttack = 0; //Percent damage bonus damage added to next attack
+	int scaleNextSpell = 0; //Buff to next spell cast
+	int healthTrickle = 0; //We get 1 point of this per tick until it runs out
 
 	//Magic
 	spell* buffNextMelee; //This spell is automatically discharged onto the next thing we attack in melee.
@@ -112,6 +114,7 @@ public:
 	//Flags
 	bool isDead = false;
 	bool isPlayer = true;
+	bool isHostile = true;
 
 protected:
 

@@ -435,5 +435,11 @@ Everything timer-based happens
 */
 void person::tick()
 {
+	//Status effects
 	applyStatusEffects();
+	//Health trickle
+	if (healthTrickle) {
+		healthTrickle--;
+		addHealth(1);
+	}
 }

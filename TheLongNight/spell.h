@@ -53,6 +53,10 @@ spell* attack_Quickstep();
 spell* attack_StrongAttack();
 spell* attack_Knockback();
 
+//Wand/chime powers
+spell* ability_PowerSurge();
+spell* ability_DivineFavour();
+
 //Arcane spells
 spell* spell_MagicMissile();
 spell* spell_ArcaneRadiance();

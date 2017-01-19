@@ -1137,6 +1137,10 @@ void game::applyEffectToPerson(person * target, effect eff, int potency)
 		target->gainFreeMoves(potency);
 	else if (eff == SCALE_NEXT_ATTACK)
 		target->scaleNextAttack = potency;
+	else if (eff == SCALE_NEXT_SPELL)
+		target->scaleNextSpell = potency;
+	else if (eff == ADD_HEALTH_TRICKLE)
+		target->healthTrickle += potency;
 
 	//Damage effects
 
@@ -1683,6 +1687,11 @@ void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 		if (sp->usesSpellPower) {
 			//Sometimes scales with spell power
 			int spellPower = caster->getSpellPower();
+			//Check for temporary buff
+			if (player->scaleNextSpell > 0) {
+				spellPower += player->scaleNextSpell;
+				player->scaleNextSpell = 0;
+			}
 			potency = (float)potency * ((float)spellPower / 100);
 		}
 		if (sp->usesDivinePower) {

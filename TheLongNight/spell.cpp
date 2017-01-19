@@ -75,6 +75,28 @@ spell * attack_Knockback()
 	return sp;
 }
 
+//Wand/chime powers
+
+spell * ability_PowerSurge()
+{
+	spell* sp = new spell("Power Surge", SWORD_TILE, TCODColor::magenta,
+		"Your next spell gains +50% power.");
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(SCALE_NEXT_SPELL, 50);
+	sp->setVigourCost(1);
+	return sp;
+}
+
+spell * ability_DivineFavour()
+{
+	spell* sp = new spell("Divine Favour", SWORD_TILE, TCODColor::darkYellow,
+		"Slowly restore some health.");
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(ADD_HEALTH_TRICKLE, 15);
+	sp->setVigourCost(1);
+	return sp;
+}
+
 //Spells
 
 spell * spell_MagicMissile()
