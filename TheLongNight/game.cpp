@@ -1322,7 +1322,8 @@ void game::meleeAttack(person * attacker, person * target)
 		//Weapon base damage
 		damage = wp->getDamage();
 		//Damage scaling from stats, if any
-		damage += attacker->getScalingDamage(wp);
+		int scalingPercent = attacker->getScalingDamage(wp);
+		damage += (float)scalingPercent / 100.0 * (float)damage;
 	}
 
 	//Damage buffs
@@ -1621,6 +1622,7 @@ void game::doLevelUp()
 	std::string name = e->getName();
 	//Can we afford it?
 	if (fragments >= player->getNextLevelCost()) {
+		fragments -= player->getNextLevelCost();
 		//Buff selected stat
 		if (name == "HEALTH")
 			player->stats->health++;

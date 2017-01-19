@@ -21,6 +21,7 @@ person::~person()
 
 /*
 Returns how much extra damage the given weapon does, based on our stats.
+The total bonus is a percentage of the weapon's base damage.
 */
 int person::getScalingDamage(weapon * wp)
 {
