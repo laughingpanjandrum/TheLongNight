@@ -19,6 +19,7 @@ D water_deep
 -endcodes
 -connections
 south:pilgrims_road_2
+east:pilgrims_road_4
 west:old_fairweather
 -endconnections
 DDDDDDDD~.........rrrr........##########
@@ -40,7 +41,7 @@ DDDDD~~............rrrr.........########
 ######~~~~..%...%T.rrrr.T..%....T....###
 ...###~~D~~...T...%rrrr..%..%..%...#####
 rrr.###~DDD~.%....rrrr.....T......######
-..r.%##~DDD~....T.rrrr...........#######
+..r.%##~~DD~....T.rrrr...........#######
 #.rr.###~~~..T.%..rrrr%..T..%....#######
 ##.rr.##~~.......%rrrr..........########
 ###.rr......%.....rrrr...%......########

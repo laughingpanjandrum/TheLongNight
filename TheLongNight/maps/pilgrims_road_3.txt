@@ -4,7 +4,7 @@ crow_archer:11,32
 crow_thief:12,31
 crow_knight:13,5
 -items
-crow_knight_sword:37,37
+crow_knight_sword:13,2
 crow_knights_armour:12,3
 -enditems
 -codes
@@ -20,15 +20,16 @@ D water_deep
 ~ water
 -endcodes
 -connections
+north:pilgrims_road_4
 west:pilgrims_road_2
 east:silent_ruins
 -endconnections
 ######.........rrrr................#####
-#####..........rrrr.....T.....%.....####
-#####...........rrrr........T........###
-####.......T....rrrr............T....###
-###..............rrrr..T.....%.......###
-##......T.........rrrr...............###
+#####.....~....rrrr.....T.....%.....####
+#####....~......rrrr........T........###
+####......~T....rrrr............T....###
+###........~.~...rrrr..T.....%.......###
+##......T.....T...rrrr...............###
 ##.........T.....rrrr.....%..T......####
 ##........%...T..rrrr...............####
 ##...T...........rrrr...............####

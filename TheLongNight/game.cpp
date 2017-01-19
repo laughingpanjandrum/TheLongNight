@@ -749,6 +749,7 @@ void game::drawInterface(int leftx, int topy)
 	drawMouseover(atx, aty);
 
 	//List controls
+	atx += 10;
 	aty = MAP_DRAW_Y + 43;
 	win.writec(atx, aty, 'a', TCODColor::green);
 	win.write(atx + 2, aty, "Select spell", TCODColor::white);
