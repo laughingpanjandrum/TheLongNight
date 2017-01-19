@@ -57,6 +57,9 @@ spell* attack_Knockback();
 spell* ability_PowerSurge();
 spell* ability_DivineFavour();
 
+//Thrown weapon attacks
+spell* attack_ThrowingKnives();
+
 //Arcane spells
 spell* spell_MagicMissile();
 spell* spell_ArcaneRadiance();

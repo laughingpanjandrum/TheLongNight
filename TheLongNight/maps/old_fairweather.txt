@@ -4,6 +4,7 @@ start:20,39
 starwater_draught:24,29
 ruined_knights_helm:21,21
 ruined_knights_armour:20,22
+throwing_knives:15,39
 -enditems
 -codes
 ; floor_stone

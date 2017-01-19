@@ -345,7 +345,7 @@ void person::unequipItem(item * which)
 		}
 
 		else if (cat == ITEM_BODY_ARMOUR || cat == ITEM_HELMET) {
-			armour* ar = static_cast<armour*>(which);
+			armour* ar = static_cast<armour*>(which); 
 			//Damage resistances
 			for (int r = 0; r != ALL_DAMAGE_TYPES; r++) {
 				damageType dr = static_cast<damageType>(r);

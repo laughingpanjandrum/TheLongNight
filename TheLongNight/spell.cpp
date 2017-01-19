@@ -97,6 +97,17 @@ spell * ability_DivineFavour()
 	return sp;
 }
 
+//Thrown weapon spells
+
+spell * attack_ThrowingKnives()
+{
+	spell* sp = new spell("Throwing Knives", DAGGER_TILE, TCODColor::lightGrey);
+	sp->setAttackType(ATTACK_RANGE);
+	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 25);
+	sp->setAttackRange(5);
+	return sp;
+}
+
 //Spells
 
 spell * spell_MagicMissile()

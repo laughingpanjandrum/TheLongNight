@@ -171,6 +171,7 @@ private:
 	void getDeathDrops(monster* m);
 
 	//Spellcasting
+	void doRangedSpell(spell* sp);
 	void castSpell(spell* sp);
 	void dischargeSpellOnTarget(spell* sp, person* caster, person* target);
 	void openSpellMenu();

@@ -4,6 +4,7 @@
 
 #include "item.h"
 #include "counter.h"
+#include "spell.h"
 
 class consumable : public item
 {
@@ -25,12 +26,15 @@ public:
 	virtual std::string getMenuName();
 
 	//Effects
+	bool isRangedAttackItem() { return rangedAttack != nullptr; }
 	effectVector getEffects() { return effectsApplied; }
 	int getPotency() { return potency; }
+	spell* getRangedAttack() { return rangedAttack; }
 
 	//Setting effects
 	void addEffect(effect eff) { effectsApplied.push_back(eff); }
 	void setPotency(int pot) { potency = pot; }
+	void setRangedAttack(spell* at) { rangedAttack = at; }
 
 private:
 
@@ -40,6 +44,9 @@ private:
 	//Effects and potency
 	effectVector effectsApplied;
 	int potency;
+
+	//Ranged attack is treated as a spell, for ranged-attack consumables
+	spell* rangedAttack;
 
 };
 
@@ -51,5 +58,7 @@ typedef std::vector<consumable*> consumableVector;
 
 consumable* consumable_StarwaterDraught();
 consumable* consumable_InvigoratingTea();
+
+consumable* ranged_ThrowingKnives();
 
 #endif

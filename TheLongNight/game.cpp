@@ -1120,8 +1120,16 @@ void game::useConsumable()
 			toUse->lose();
 			//And perform the proper effect
 			int potency = toUse->getPotency();
-			for (auto eff : toUse->getEffects()) {
-				applyEffectToPerson(player, eff, potency);
+			//Is this a ranged-attack item?
+			if (toUse->isRangedAttackItem()) {
+				//We're basically casting a SPELL here
+				doRangedSpell(toUse->getRangedAttack());
+			}
+			else {
+				//All effects are applied to PERSON
+				for (auto eff : toUse->getEffects()) {
+					applyEffectToPerson(player, eff, potency);
+				}
 			}
 		}
 	}
@@ -1667,6 +1675,36 @@ void game::getDeathDrops(monster * m)
 	SPELL MAGIC
 */
 
+
+/*
+Firing a ranged spell is... COMPLICATED
+*/
+void game::doRangedSpell(spell * sp)
+{
+	if (targetModeOn) {
+		//Get a path to the target
+		pathVector path = getLine(player->getPosition(), targetPt);
+		//See if there's something to hit on the path
+		person* target = getTargetOnPath(path);
+		if (target != nullptr) {
+			//Is it in range?
+			int dist = hypot(player->getx() - target->getx(), player->gety() - target->gety());
+			if (dist <= sp->getAttackRange()) {
+				//We hit!
+				dischargeSpellOnTarget(sp, player, target);
+				//Bullet animation!
+				addAnimations(new bulletPath(path, BULLET_TILE, sp->getColor()));
+			}
+			else {
+				addMessage("Out of range!", TCODColor::white);
+			}
+		}
+	}
+	else {
+		addMessage("First, turn on targeting mode!", TCODColor::white);
+	}
+}
+
 /*
 Player starts the casting of a spell.
 */
@@ -1692,30 +1730,10 @@ void game::castSpell(spell * sp)
 			playerTurnDelay += player->getOffhand()->getAttackDelay();
 		}
 		else if (aType == ATTACK_RANGE) {
-			if (targetModeOn) {
-				//Get a path to the target
-				pathVector path = getLine(player->getPosition(), targetPt);
-				//See if there's something to hit on the path
-				person* target = getTargetOnPath(path);
-				if (target != nullptr) {
-					//Is it in range?
-					int dist = hypot(player->getx() - target->getx(), player->gety() - target->gety());
-					if (dist <= sp->getAttackRange()) {
-						//We hit!
-						dischargeSpellOnTarget(sp, player, target);
-						//Time taken is the attack delay of our OFFHAND item (which will usually be e.g. a wand)
-						playerTurnDelay += player->getOffhand()->getAttackDelay();
-						//Bullet animation!
-						addAnimations(new bulletPath(path, BULLET_TILE, sp->getColor()));
-					}
-					else {
-						addMessage("Out of range!", TCODColor::white);
-					}
-				}
-			}
-			else {
-				addMessage("First, turn on targeting mode!", TCODColor::white);
-			}
+			//Hits target marked with the cursor
+			doRangedSpell(sp);
+			//Time taken is the attack delay of our OFFHAND item (which will usually be e.g. a wand)
+			playerTurnDelay += player->getOffhand()->getAttackDelay();
 		}
 	}
 }

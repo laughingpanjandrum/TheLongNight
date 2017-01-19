@@ -4,6 +4,7 @@
 
 #include "item.h"
 #include "spell.h"
+#include "utility.h"
 
 typedef std::vector<statusEffects> statusEffectVector;
 typedef std::vector<spell*> spellVector;

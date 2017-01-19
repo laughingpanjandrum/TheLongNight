@@ -37,6 +37,10 @@ item * getItemByHandle(std::string handle)
 	else if (handle == "invigorating_tea")
 		return consumable_InvigoratingTea();
 
+	//RANGED WEAPONS
+	else if (handle == "throwing_knives")
+		return ranged_ThrowingKnives();
+
 	//ARMOUR
 	else if (handle == "captains_tricorn")
 		return headgear_CaptainsTricorn();

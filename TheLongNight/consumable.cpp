@@ -37,3 +37,12 @@ consumable * consumable_InvigoratingTea()
 	c->setPotency(5);
 	return c;
 }
+
+consumable * ranged_ThrowingKnives()
+{
+	consumable* c = new consumable("Throwing Knives", DAGGER_TILE, TCODColor::lightGrey,
+		"Short knives to chuck at your enemies.");
+	c->setRangedAttack(attack_ThrowingKnives());
+	c->add(2); //Comes in a stack of 3
+	return c;
+}
