@@ -33,11 +33,29 @@ armour * armour_RuinedUniform()
 	return a;
 }
 
+armour * headgear_RuinedKnightsHelm()
+{
+	armour* h = new armour("Ruined Knight's Helm", HELMET_TILE, TCODColor::darkGreen, ITEM_HELMET,
+		"This helmet has taken more than a few blows.");
+	h->setDefence(10);
+	return h;
+}
+
+armour * armour_RuinedKnightsArmour()
+{
+	armour* a = new armour("Ruined Knight's Armour", ARMOUR_TILE, TCODColor::darkGreen, ITEM_BODY_ARMOUR,
+		"The heraldry on this armour is so old that it's illegible.");
+	a->setDefence(20);
+	a->setMoveSpeed(SPEED_NORMAL);
+	return a;
+}
+
 armour * headgear_CrowKnightsHood()
 {
 	armour* a = new armour("Crow Knight's Hood", HELMET_TILE, TCODColor::lightGrey, ITEM_HELMET,
 		"The hood of a crow knight is black, and interlaced with singular white feathers.");
 	a->setDefence(5);
+	a->setBleedResist(10);
 	return a;
 }
 
@@ -47,5 +65,6 @@ armour * armour_CrowKnightsArmour()
 		"The feathered armour of the crow knights is thick and warm. Beady eyes are not required.");
 	a->setDefence(10);
 	a->setMoveSpeed(SPEED_FAST);
+	a->setBleedResist(15);
 	return a;
 }

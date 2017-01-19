@@ -2,6 +2,8 @@ Ruins of Old Fairweather
 start:20,39
 -items
 starwater_draught:24,29
+ruined_knights_helm:11,31
+ruined_knights_armour:10,30
 -enditems
 -codes
 ; floor_stone

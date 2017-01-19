@@ -890,6 +890,12 @@ void game::drawArmourInfo(armour * it, int atx, int aty)
 	//DEF
 	win.write(atx, aty, "DEFENCE", TCODColor::sepia);
 	win.write(atx + offset, aty, std::to_string(it->getDefence()), maincol);
+	//Bleed resist
+	int br = it->getBleedResist();
+	if (br) {
+		win.write(atx, ++aty, "BLEED RES", TCODColor::crimson);
+		win.write(atx + offset, aty, std::to_string(br), maincol);
+	}
 	//Move speed adjustment, if body armour
 	if (it->getCategory() == ITEM_BODY_ARMOUR) {
 		win.write(atx, ++aty, "SPEED", TCODColor::orange);
@@ -1836,6 +1842,7 @@ void game::debugMenu()
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());
+		fragments += 320;
 		loadMapFromHandle("maps/old_fairweather.txt", CONNECT_WARP, player->getx(), player->gety());
 	}
 }

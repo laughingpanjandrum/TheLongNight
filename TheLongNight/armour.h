@@ -17,6 +17,7 @@ public:
 	//Setting
 	void setDefence(int def) { this->defence = def; }
 	void setMoveSpeed(int moveSpeed) { this->moveSpeed = moveSpeed; }
+	void setBleedResist(int r) { bleedResist = r; }
 
 	//Getting
 	int getDefence() { return defence; }
@@ -38,6 +39,9 @@ private:
 
 armour* headgear_CaptainsTricorn();
 armour* armour_RuinedUniform();
+
+armour* headgear_RuinedKnightsHelm();
+armour* armour_RuinedKnightsArmour();
 
 armour* headgear_CrowKnightsHood();
 armour* armour_CrowKnightsArmour();
