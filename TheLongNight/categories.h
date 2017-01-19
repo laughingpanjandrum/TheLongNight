@@ -18,9 +18,12 @@ enum gameState {
 };
 
 //Equipment scaling types
+
 enum statScaling {
 	SCALE_STR, SCALE_DEX, SCALE_ARC, SCALE_DEV
 };
+
+typedef std::vector<statScaling> statScaleVector;
 
 //Item types
 

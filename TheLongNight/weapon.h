@@ -44,6 +44,10 @@ public:
 	statusEffects getStatusEffectType(int idx) { return statusEffectType.at(idx); }
 	int getStatusEffectDamage(int idx) { return statusEffectDamage.at(idx); }
 
+	//Scaling
+	void addScalingType(statScaling st) { scaling.push_back(st); }
+	int getScalingDamage(statScaling st);
+
 private:
 
 	//Weapon deetz
@@ -62,6 +66,9 @@ private:
 	//Special effects
 	statusEffectVector statusEffectType;
 	std::vector<int> statusEffectDamage;
+
+	//Scaling
+	statScaleVector scaling;
 
 };
 

@@ -231,9 +231,9 @@ void game::endPlayerTurn()
 	while (nextTurn != player) {
 		doMonsterTurn(nextTurn);
 		nextTurn = turns.getNext();
-		//Make sure dead things are removed from the map
-		clearDeadCreatures();
 	}
+	//Make sure dead things are removed from the map
+	clearDeadCreatures();
 }
 
 
@@ -1319,10 +1319,11 @@ void game::meleeAttack(person * attacker, person * target)
 	weapon* wp = attacker->getWeapon();
 	int damage = attacker->getBaseMeleeDamage();
 	if (wp != nullptr) {
+		//Weapon base damage
 		damage = wp->getDamage();
+		//Damage scaling from stats, if any
+		damage += attacker->getScalingDamage(wp);
 	}
-
-	//Damage scaling from stats, if any
 
 	//Damage buffs
 	float dbuff = (float)attacker->scaleNextAttack / 100.0;
@@ -1618,26 +1619,29 @@ void game::doLevelUp()
 {
 	element* e = currentMenu->getSelectedItem();
 	std::string name = e->getName();
-	//Buff selected stat
-	if (name == "HEALTH")
-		player->stats->health++;
-	else if (name == "VIGOUR")
-		player->stats->vigour++;
-	else if (name == "STRENGTH")
-		player->stats->strength++;
-	else if (name == "DEXTERITY")
-		player->stats->dexterity++;
-	else if (name == "ARCANA")
-		player->stats->arcana++;
-	else if (name == "DEVOTION")
-		player->stats->devotion++;
-	//Increase overall level
-	player->stats->level++;
-	//Adjust stats that increase passively
-	int maxHealth = 90 + 10 * player->stats->health;
-	int maxVigour = 8 + 2 * player->stats->vigour;
-	player->setMaxHealth(maxHealth);
-	player->setMaxVigour(maxVigour);
+	//Can we afford it?
+	if (fragments >= player->getNextLevelCost()) {
+		//Buff selected stat
+		if (name == "HEALTH")
+			player->stats->health++;
+		else if (name == "VIGOUR")
+			player->stats->vigour++;
+		else if (name == "STRENGTH")
+			player->stats->strength++;
+		else if (name == "DEXTERITY")
+			player->stats->dexterity++;
+		else if (name == "ARCANA")
+			player->stats->arcana++;
+		else if (name == "DEVOTION")
+			player->stats->devotion++;
+		//Increase overall level
+		player->stats->level++;
+		//Adjust stats that increase passively
+		int maxHealth = 90 + 10 * player->stats->health;
+		int maxVigour = 8 + 2 * player->stats->vigour;
+		player->setMaxHealth(maxHealth);
+		player->setMaxVigour(maxVigour);
+	}
 }
 
 void game::drawLevelUpMenu(int atx, int aty)

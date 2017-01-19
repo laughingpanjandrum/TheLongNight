@@ -182,7 +182,7 @@ Also deletes the PC so make sure they get re-added if you want them to exist!
 */
 void map::respawnAllMonsters()
 {
-	//Remove existing
+	//Remove existing creatures
 	people.clear();
 	//Spawn anew
 	for (int i = 0; i < monsterSpawnTags.size(); i++) {
