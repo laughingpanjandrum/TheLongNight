@@ -42,7 +42,6 @@ spell * attack_Splintering()
 	sp->setAttackType(ATTACK_MELEE);
 	sp->addEffect(APPLY_BLEED_DAMAGE, 20);
 	sp->setVigourCost(1);
-	sp->usesSpellPower = false;
 	return sp;
 }
 
@@ -52,7 +51,6 @@ spell * attack_Quickstep()
 		"Quickly leap one space.");
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->setVigourCost(1);
-	sp->usesSpellPower = false;
 	sp->addEffect(GAIN_FREE_MOVES, 1);
 	return sp;
 }
@@ -64,7 +62,6 @@ spell * attack_StrongAttack()
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(SCALE_NEXT_ATTACK, 100);
 	sp->setVigourCost(1);
-	sp->usesSpellPower = false;
 	return sp;
 }
 
@@ -75,7 +72,6 @@ spell * attack_Knockback()
 	sp->setAttackType(ATTACK_MELEE);
 	sp->addEffect(KNOCKBACK_TARGET, 2);
 	sp->setVigourCost(1);
-	sp->usesSpellPower = false;
 	return sp;
 }
 
@@ -89,6 +85,7 @@ spell * spell_MagicMissile()
 	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 50);
 	sp->setAttackRange(5);
 	sp->setVigourCost(1);
+	sp->usesSpellPower = true;
 	return sp;
 }
 
@@ -100,6 +97,20 @@ spell * spell_ArcaneRadiance()
 	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 25);
 	sp->setAttackRange(3);
 	sp->setVigourCost(2);
+	sp->usesSpellPower = true;
+	return sp;
+}
+
+//Prayers
+
+spell * prayer_Restoration()
+{
+	spell* sp = new spell("Restoration", SPELL_TILE, TCODColor::darkYellow,
+		"Call upon the favour of the old gods to restore life essence.");
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(RESTORE_HEALTH, 25);
+	sp->setVigourCost(2);
+	sp->usesDivinePower = true;
 	return sp;
 }
 

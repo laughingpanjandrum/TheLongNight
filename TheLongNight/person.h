@@ -84,6 +84,7 @@ public:
 	spell* getCurrentSpell();
 	void cycleSelectedSpell();
 	int getSpellPower();
+	int getDivinePower();
 
 	//Equipment
 	std::vector<item*> getItemsOfType(itemTypes category) { return items.getItemList(category); }
@@ -137,6 +138,7 @@ protected:
 	spellVector spellsKnown; //List of spells we have stored in our weapon/wand/etc
 	int selectedSpell = 0; //Highlighted spell
 	int baseSpellPower = 0; //Flat bonus to spell power
+	int baseDivinePower = 0;
 
 	//Current thing we're trying to kill
 	person* target;

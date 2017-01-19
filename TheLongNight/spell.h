@@ -29,7 +29,8 @@ public:
 	int getVigourCost() { return vigourCost; }
 
 	//Flags
-	bool usesSpellPower = true;
+	bool usesSpellPower = false;
+	bool usesDivinePower = false;
 
 private:
 
@@ -55,6 +56,9 @@ spell* attack_Knockback();
 //Arcane spells
 spell* spell_MagicMissile();
 spell* spell_ArcaneRadiance();
+
+//Prayers
+spell* prayer_Restoration();
 
 //Monster abilities
 spell* ability_Charge();

@@ -26,6 +26,7 @@ public:
 	void setSpellstoreSize(int size) { spellstoreSize = size; }
 	void addSpell(spell* sp) { spellstore.push_back(sp); }
 	void setSpellPower(int power) { spellPower = power; }
+	void setDivinePower(int power) { divinePower = power; }
 	void makeOffhand() { category = ITEM_OFFHAND; } //Make this an offhand weapon
 
 	//Getting
@@ -33,11 +34,14 @@ public:
 	int getAttackDelay() { return attackDelay; }
 	int getDefence() { return defence; }
 	spell* getSpecialAttack() { return specialAttack; }
+
+	//Spell stuff
 	spellVector getSpells() { return spellstore; }
 	bool canAddSpell() { return spellstore.size() < spellstoreSize; }
 	bool hasSpellStored(spell* sp);
 	int getSpellstoreSize() { return spellstoreSize; }
 	int getSpellPower() { return spellPower; }
+	int getDivinePower() { return divinePower; }
 
 	//Status effects
 	int getStatusEffectCount() { return statusEffectType.size(); } //Returns number of status effects we apply
@@ -62,6 +66,7 @@ private:
 	spellVector spellstore;
 	int spellstoreSize = 0;
 	int spellPower = 0; //As a percent
+	int divinePower = 0;
 
 	//Special effects
 	statusEffectVector statusEffectType;
@@ -89,7 +94,8 @@ weapon* weapon_CrowHalfsword();
 //Shields
 weapon* shield_BatteredWoodenShield();
 
-//Wands
+//Wands/chimes
 weapon* wand_DriftwoodWand();
+weapon* chime_ClericsCrackedChime();
 
 #endif

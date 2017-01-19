@@ -815,8 +815,13 @@ Display info about whatever we've highlighted with the CURSOR.
 void game::drawMouseover(int atx, int aty)
 {
 	//Is the cursor even on?
-	if (!targetModeOn)
+	if (!targetModeOn) {
+		//If not, just show whatever the player is targeting
+		person* target = player->getTarget();
+		if (target != nullptr)
+			drawTargetInfo(target, atx, aty);
 		return;
+	}
 	//What are we pointing at?
 	coord mpt = targetPt;
 	if (currentMap->inBounds(mpt.first, mpt.second) && currentMap->isPointInFOV(mpt.first, mpt.second)) {
@@ -931,7 +936,7 @@ Weapon descriptions.
 */
 void game::drawWeaponInfo(weapon * it, int atx, int aty)
 {
-	int offset = 10;
+	int offset = 13;
 	TCODColor maincol = TCODColor::white;
 	//Damage
 	win.write(atx, aty, "DAMAGE", TCODColor::darkRed);
@@ -943,6 +948,19 @@ void game::drawWeaponInfo(weapon * it, int atx, int aty)
 	if (it->getDefence() > 0) {
 		win.write(atx, ++aty, "DEFENCE", TCODColor::sepia);
 		win.write(atx + offset, aty, std::to_string(it->getDefence()), maincol);
+	}
+	//Magic attributes, if any
+	if (it->getSpellstoreSize()) {
+		win.write(atx, ++aty, "SPELLSTORE", TCODColor::magenta);
+		win.write(atx + offset, aty, std::to_string(it->getSpellstoreSize()), maincol);
+	}
+	if (it->getSpellPower()) {
+		win.write(atx, ++aty, "SPELL POWER", TCODColor::lightBlue);
+		win.write(atx + offset, aty, std::to_string(it->getSpellPower()), maincol);
+	}
+	if (it->getDivinePower()) {
+		win.write(atx, ++aty, "DIVINE POWER", TCODColor::darkYellow);
+		win.write(atx + offset, aty, std::to_string(it->getDivinePower()), maincol);
 	}
 	//Special attack, if any
 	spell* atk = it->getSpecialAttack();
@@ -1666,6 +1684,11 @@ void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 			//Sometimes scales with spell power
 			int spellPower = caster->getSpellPower();
 			potency = (float)potency * ((float)spellPower / 100);
+		}
+		if (sp->usesDivinePower) {
+			//Or with divine power
+			int divPower = caster->getDivinePower();
+			potency = (float)potency * ((float)divPower / 100);
 		}
 		//Apply the actual effect
 		applyEffectToPerson(target, sp->getEffectType(idx), potency);

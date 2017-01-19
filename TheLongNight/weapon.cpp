@@ -166,3 +166,14 @@ weapon * wand_DriftwoodWand()
 	wp->makeOffhand();
 	return wp;
 }
+
+weapon * chime_ClericsCrackedChime()
+{
+	weapon* wp = new weapon("Cleric's Cracked Chime", SWORD_TILE, TCODColor::darkYellow,
+		"Ring this broken chime to politely ask favours of the gods.");
+	wp->setBasicAttributes(5, SPEED_SLOW);
+	wp->setSpellstoreSize(1);
+	wp->setDivinePower(100);
+	wp->makeOffhand();
+	return wp;
+}

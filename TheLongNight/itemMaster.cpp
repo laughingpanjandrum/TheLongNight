@@ -25,9 +25,11 @@ item * getItemByHandle(std::string handle)
 	else if (handle == "battered_wooden_shield")
 		return shield_BatteredWoodenShield();
 
-	//WANDS
+	//WANDS/CHIMES
 	else if (handle == "driftwood_wand")
 		return wand_DriftwoodWand();
+	else if (handle == "clerics_cracked_chime")
+		return chime_ClericsCrackedChime();
 
 	//CONSUMABLES
 	else if (handle == "starwater_draught")
@@ -48,12 +50,16 @@ item * getItemByHandle(std::string handle)
 		return headgear_CrowKnightsHood();
 	else if (handle == "crow_knights_armour")
 		return armour_CrowKnightsArmour();
-	
+
 	//SPELLS
 	else if (handle == "magic_missile")
 		return spell_MagicMissile();
 	else if (handle == "arcane_radiance")
 		return spell_ArcaneRadiance();
+
+	//PRAYERS
+	else if (handle == "restoration")
+		return prayer_Restoration();
 	
 	//MISC ITEMS
 	else if (handle == "wretched_key")
