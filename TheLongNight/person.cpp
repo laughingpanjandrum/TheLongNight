@@ -308,7 +308,12 @@ void person::equipItem(item * which)
 
 		else if (cat == ITEM_BODY_ARMOUR || cat == ITEM_HELMET) {
 			armour* ar = static_cast<armour*>(which);
-			//We might gain some resistances!
+			//Damage resistances
+			for (int r = 0; r != ALL_DAMAGE_TYPES; r++) {
+				damageType dr = static_cast<damageType>(r);
+				addDamageResist(dr, ar->getDamageResist(dr));
+			}
+			//Status effect resistances
 			int bleedResist = ar->getBleedResist();
 			if (bleedResist)
 				bleedBuildup.increaseMaxValue(bleedResist, false);
@@ -341,7 +346,12 @@ void person::unequipItem(item * which)
 
 		else if (cat == ITEM_BODY_ARMOUR || cat == ITEM_HELMET) {
 			armour* ar = static_cast<armour*>(which);
-			//We might lose some resistances!
+			//Damage resistances
+			for (int r = 0; r != ALL_DAMAGE_TYPES; r++) {
+				damageType dr = static_cast<damageType>(r);
+				addDamageResist(dr, -ar->getDamageResist(dr));
+			}
+			//Lose status effect resistances
 			int bleedResist = ar->getBleedResist();
 			if (bleedResist)
 				bleedBuildup.increaseMaxValue(-bleedResist, false);

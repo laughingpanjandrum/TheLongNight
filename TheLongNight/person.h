@@ -56,6 +56,7 @@ public:
 	void clearTarget() { target = nullptr; }
 	void setMaxHealth(int h) { health.setTo(h); }
 	void setMaxVigour(int v) { vigour.setTo(v); }
+	void addDamageResist(damageType dtype, int amount) { damageResist.at(dtype) += amount; }
 
 	//Taking damage and healing
 	void addHealth(int amount);

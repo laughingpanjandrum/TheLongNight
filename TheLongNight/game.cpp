@@ -282,6 +282,11 @@ We might not be done if we get multiple moves in one turn!
 */
 bool game::aiMoveToTarget(monster * ai)
 {
+
+	//If our target died at some point prior to this, QUIT MOVING
+	if (ai->getTarget() == nullptr)
+		return true;
+
 	//Rudimentary pathing. First we list all walkable points adjacent to us
 	pathVector pts = getAllAdjacentWalkable(ai);
 	//If there are no walkable points, GIVE UP
@@ -289,6 +294,7 @@ bool game::aiMoveToTarget(monster * ai)
 		turns.addEntity(ai, ai->getMoveDelay());
 		return true;
 	}
+
 	//If there are, find the one that's nearest our target
 	person* t = ai->getTarget();
 	coord bestPt = pts.at(0);
@@ -309,6 +315,7 @@ bool game::aiMoveToTarget(monster * ai)
 			bestPt = pt;
 		}
 	}
+
 	//Now move to this point
 	movePerson(ai, bestPt.first, bestPt.second);
 	//Time passes (UNLESS WE HAVE FREE MOVES!)
@@ -320,6 +327,7 @@ bool game::aiMoveToTarget(monster * ai)
 		ai->useFreeMove();
 		return false;
 	}
+
 }
 
 /*
@@ -1023,6 +1031,15 @@ void game::drawArmourInfo(armour * it, int atx, int aty)
 	//DEF
 	win.write(atx, aty, "DEFENCE", TCODColor::sepia);
 	win.write(atx + offset, aty, std::to_string(it->getDefence()), maincol);
+	//Damage resistances
+	for (int r = 0; r != ALL_DAMAGE_TYPES; r++) {
+		damageType dr = static_cast<damageType>(r);
+		int res = it->getDamageResist(dr);
+		if (res > 0) {
+			win.write(atx + 1, ++aty, getDamageTypeName(dr), getDamageTypeColor(dr));
+			win.write(atx + offset, aty, std::to_string(res), maincol);
+		}
+	}
 	//Bleed resist
 	int br = it->getBleedResist();
 	if (br) {
@@ -1570,8 +1587,8 @@ bool game::itemPickupMessage(item * it)
 {
 	int atx = MAP_DRAW_X;
 	int aty = MAP_DRAW_Y + 10;
-	win.clearRegion(atx - 1, aty, 42, 15);
-	win.drawBox(atx - 1, aty, 42, 15, TCODColor::darkSepia);
+	win.clearRegion(atx - 1, aty, 42, 18);
+	win.drawBox(atx - 1, aty, 42, 18, TCODColor::darkSepia);
 	//What we can do
 	std::string txt = "[ENTER] Equip  [ESC] Store";
 	win.write(atx, ++aty, centreText(txt, 40), TCODColor::white);

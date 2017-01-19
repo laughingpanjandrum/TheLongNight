@@ -42,10 +42,17 @@ item * getItemByHandle(std::string handle)
 		return headgear_CaptainsTricorn();
 	else if (handle == "ruined_uniform")
 		return armour_RuinedUniform();
+
+	else if (handle == "clerics_hood")
+		return headgear_ClericsHood();
+	else if (handle == "clerics_vestments")
+		return armour_ClericsVestments();
+
 	else if (handle == "ruined_knights_helm")
 		return headgear_RuinedKnightsHelm();
 	else if (handle == "ruined_knights_armour")
 		return armour_RuinedKnightsArmour();
+
 	else if (handle == "crow_knights_hood")
 		return headgear_CrowKnightsHood();
 	else if (handle == "crow_knights_armour")

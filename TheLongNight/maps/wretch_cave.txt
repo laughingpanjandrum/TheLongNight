@@ -12,6 +12,8 @@ bloated_wretch:20,17
 thin_knife:2,27
 straight_sword:9,15
 warhammer:10,17
+clerics_cracked_chime:17,7
+restoration:18,6
 -enditems
 -codes
 . floor_stone

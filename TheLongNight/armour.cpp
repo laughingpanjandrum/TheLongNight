@@ -6,6 +6,8 @@
 armour::armour(std::string name, int tileCode, TCODColor color, itemTypes slot, std::string description) :
 	item(name, tileCode, color, slot, description)
 {
+	for (int r = 0; r != ALL_DAMAGE_TYPES; r++)
+		damageResist.push_back(0);
 }
 
 armour::~armour()
@@ -47,6 +49,25 @@ armour * armour_RuinedKnightsArmour()
 		"The heraldry on this armour is so old that it's illegible.");
 	a->setDefence(20);
 	a->setMoveSpeed(SPEED_NORMAL);
+	return a;
+}
+
+armour * headgear_ClericsHood()
+{
+	armour* a = new armour("Cleric's Hood", HELMET_TILE, TCODColor::darkYellow, ITEM_HELMET,
+		"It's important to remember your prayers.");
+	a->setDefence(0);
+	a->setDamageResist(DAMAGE_PROFANE, 5);
+	return a;
+}
+
+armour * armour_ClericsVestments()
+{
+	armour* a = new armour("Cleric's Vestments", ARMOUR_TILE, TCODColor::darkYellow, ITEM_BODY_ARMOUR,
+		"The clerics of the Lady of the Rose were blessed with certain protections against profane powers, though, of course, that did not save them.");
+	a->setDefence(10);
+	a->setDamageResist(DAMAGE_PROFANE, 10);
+	a->setMoveSpeed(SPEED_FAST);
 	return a;
 }
 
