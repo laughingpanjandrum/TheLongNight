@@ -49,6 +49,7 @@ public:
 	int getAttackDelay();
 	int getBaseMeleeDamage() { return baseMeleeDamage; }
 	int getDefence();
+	int getDamageResist(damageType dr) { return damageResist.at(dr); }
 
 	//Setters
 	void setTarget(person* target) { this->target = target; }
@@ -58,7 +59,7 @@ public:
 
 	//Taking damage and healing
 	void addHealth(int amount);
-	void takeDamage(int amount);
+	void takeDamage(int amount, damageType dtype = DAMAGE_UNTYPED);
 	void addVigour(int amount) { vigour.increase(amount); }
 	void loseVigour(int amount) { vigour.decrease(amount); }
 	void fullRestore();
@@ -127,6 +128,7 @@ protected:
 	int baseMoveSpeed = SPEED_FAST; //how quickly we move if unarmoured
 
 	//Resistances
+	std::vector<int> damageResist;
 
 	//Status effects
 	int isBleeding = 0;

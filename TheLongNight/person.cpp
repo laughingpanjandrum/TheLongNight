@@ -6,10 +6,14 @@ Also sets a default health value, which you'll probably want to change!
 */
 person::person(std::string name, int tileCode, TCODColor color) : element(name, tileCode, color)
 {
-	//Default values for stats/resistances
+	//Default values for stats
 	health.setTo(100);
 	vigour.setTo(10);
+	//Status effects
 	bleedBuildup.setTo(20, 0);
+	//Resistances
+	for (int r = 0; r < ALL_DAMAGE_TYPES; r++)
+		damageResist.push_back(0);
 }
 
 person::~person()
@@ -105,8 +109,20 @@ void person::addHealth(int amount)
 /*
 Standard damage. Kills us if we run out of health.
 */
-void person::takeDamage(int amount)
+void person::takeDamage(int amount, damageType dtype)
 {
+	//Armour reduces damage
+	int resist = 0;
+	if (dtype == DAMAGE_PHYSICAL)
+		resist = getDefence();
+	else if (dtype != DAMAGE_UNTYPED)
+		resist = getDamageResist(dtype);
+	int def = ((float)resist / 100) * (float)amount;
+	amount -= def;
+	//Minimum 1 damage
+	if (amount < 1)
+		amount = 1;
+	//Take the rest
 	health.decrease(amount);
 	if (health.isEmpty())
 		die();

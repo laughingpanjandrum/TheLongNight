@@ -740,6 +740,19 @@ void game::drawInterface(int leftx, int topy)
 	aty += 2;
 	drawMouseover(atx, aty);
 
+	//List controls
+	aty = MAP_DRAW_Y + 43;
+	win.writec(atx, aty, 'a', TCODColor::green);
+	win.write(atx + 2, aty, "Select spell", TCODColor::white);
+	win.writec(atx, ++aty, 'c', TCODColor::green);
+	win.write(atx + 2, aty, "Cycle selected consumable", TCODColor::white);
+	win.writec(atx, ++aty, 't', TCODColor::green);
+	win.write(atx + 2, aty, "Toggle targeting mode", TCODColor::white);
+	win.writec(atx, ++aty, 's', TCODColor::green);
+	win.write(atx + 2, aty, "Cast current spell", TCODColor::white);
+	win.writec(atx, ++aty, 'q', TCODColor::green);
+	win.write(atx + 2, aty, "Use current consumable", TCODColor::white);
+
 	//BOSS HEALTH BAR, if we're fighting a boss
 	atx = MAP_DRAW_X;
 	aty = MAP_DRAW_Y + 42;
@@ -785,6 +798,7 @@ Just sums up all of our stats on one sexy screen!
 void game::drawPlayerInfo(int atx, int aty)
 {
 	TCODColor mainCol = TCODColor::lightGrey;
+	int offset = 13;
 	
 	//Draw a big ole box
 	win.clearRegion(atx, aty, 40, 40);
@@ -798,19 +812,35 @@ void game::drawPlayerInfo(int atx, int aty)
 	
 	//Health and vigour
 	win.write(atx + 1, ++aty, "Health", mainCol);
-	win.write(atx + 10, aty, std::to_string(player->getHealth().getMaxValue()), TCODColor::red);
+	win.write(atx + offset, aty, std::to_string(player->getHealth().getMaxValue()), TCODColor::red);
 	win.writec(atx, aty, HEALTH_GLYPH, TCODColor::red);
 	win.write(atx + 1, ++aty, "Vigour", mainCol);
-	win.write(atx + 10, aty, std::to_string(player->getVigour().getMaxValue()), TCODColor::green);
+	win.write(atx + offset, aty, std::to_string(player->getVigour().getMaxValue()), TCODColor::green);
 	win.writec(atx, aty, VIGOUR_GLYPH, TCODColor::green);
 	aty++;
 	
 	//Defence
 	win.write(atx, ++aty, "DEFENCE", mainCol);
-	win.write(atx + 10, aty, std::to_string(player->getDefence()), TCODColor::lightBlue);
+	win.write(atx + offset, aty, std::to_string(player->getDefence()), TCODColor::lightBlue);
+	//Damage resistances
+	for (int r = 0; r != ALL_DAMAGE_TYPES; r++) {
+		damageType dr = static_cast<damageType>(r);
+		int res = player->getDamageResist(dr);
+		win.write(atx + 1, ++aty, getDamageTypeName(dr), mainCol);
+		win.write(atx + offset, aty, std::to_string(res), getDamageTypeColor(dr));
+	}
+	aty++;
+
 	//Bleed resist
-	win.write(atx, ++aty, "RES:BLEED", mainCol);
-	win.write(atx + 10, aty, std::to_string(player->getSpecialEffectBuildup(EFFECT_BLEED)->getMaxValue()), TCODColor::crimson);
+	win.write(atx, ++aty, "BLEED Resist", mainCol);
+	win.write(atx + offset, aty, std::to_string(player->getSpecialEffectBuildup(EFFECT_BLEED)->getMaxValue()), TCODColor::crimson);
+	aty++;
+
+	//Magic stuff
+	win.write(atx, ++aty, "SPELL POWER", mainCol);
+	win.write(atx + offset, aty, std::to_string(player->getSpellPower()), TCODColor::magenta);
+	win.write(atx, ++aty, "DIVINE POWER", mainCol);
+	win.write(atx + offset, aty, std::to_string(player->getDivinePower()), TCODColor::darkYellow);
 	
 	//Done! Wait for input
 	win.refresh();
@@ -1450,17 +1480,8 @@ void game::meleeAttack(person * attacker, person * target)
 		//This buff only lasts for 1 attack
 		attacker->scaleNextAttack = 0;
 	
-	//Reduce damage via armour
-	int def = target->getDefence();
-	int damageReduction = ((float)def / 100.0) * damage;
-	damage -= damageReduction;
-	
-	//Minimum damage is 1
-	if (damage < 1)
-		damage = 1;
-	
 	//Deal the damage
-	target->takeDamage(damage);
+	target->takeDamage(damage, DAMAGE_PHYSICAL);
 	
 	//Next: SPELL DISCHARGES, if we have one readied
 	if (attacker->buffNextMelee != nullptr) {

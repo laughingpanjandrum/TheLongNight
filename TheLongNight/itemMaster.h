@@ -19,4 +19,10 @@ Used by the map loader.
 */
 item* getItemByHandle(std::string handle);
 
+/*
+This is for getting names and other ui data for damage types.
+*/
+std::string getDamageTypeName(damageType dtype);
+TCODColor getDamageTypeColor(damageType dtype);
+
 #endif

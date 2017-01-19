@@ -69,6 +69,15 @@ enum statusEffects {
 	EFFECT_BLEED, EFFECT_POISON, EFFECT_PLAGUE
 };
 
+enum damageType {
+	DAMAGE_MAGIC = 0,
+	DAMAGE_ACID = 1, DAMAGE_ELECTRIC = 2, DAMAGE_FIRE = 3, DAMAGE_COLD = 4,
+	DAMAGE_PROFANE = 5, DAMAGE_BLESSED = 6,
+	ALL_DAMAGE_TYPES = 7,
+	//Secret additional damage types!
+	DAMAGE_PHYSICAL = 8, DAMAGE_UNTYPED = 9
+};
+
 //Spell attack types
 
 enum attackType {

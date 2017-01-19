@@ -68,3 +68,38 @@ item * getItemByHandle(std::string handle)
 	//Uh oh, we didn't find anything!
 	return nullptr;
 }
+
+
+
+/*
+Damage type categories
+*/
+
+
+std::string getDamageTypeName(damageType dtype)
+{
+	switch (dtype) {
+	case(DAMAGE_MAGIC): return "Magical";
+	case(DAMAGE_ACID): return "Acid";
+	case(DAMAGE_COLD): return "Cold";
+	case(DAMAGE_ELECTRIC): return "Electric";
+	case(DAMAGE_FIRE): return "Fire";
+	case(DAMAGE_PROFANE): return "Profane";
+	case(DAMAGE_BLESSED): return "Blessed";
+	}
+	return "Physical";
+}
+
+TCODColor getDamageTypeColor(damageType dtype)
+{
+	switch (dtype) {
+	case(DAMAGE_MAGIC): return TCODColor::magenta;
+	case(DAMAGE_ACID): return TCODColor::green;
+	case(DAMAGE_COLD): return TCODColor::cyan;
+	case(DAMAGE_ELECTRIC): return TCODColor::lightPurple;
+	case(DAMAGE_FIRE): return TCODColor::flame;
+	case(DAMAGE_PROFANE): return TCODColor::darkPurple;
+	case(DAMAGE_BLESSED): return TCODColor::darkYellow;
+	}
+	return TCODColor::white;
+}
