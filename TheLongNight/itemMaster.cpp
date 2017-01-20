@@ -66,6 +66,10 @@ item * getItemByHandle(std::string handle)
 	else if (handle == "crow_knights_armour")
 		return armour_CrowKnightsArmour();
 
+	//CHARMS
+	else if (handle == "bloodstained_charm")
+		return charm_BloodstainedCharm();
+
 	//SPELLS
 	else if (handle == "magic_missile")
 		return spell_MagicMissile();

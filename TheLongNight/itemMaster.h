@@ -9,6 +9,7 @@ Mostly used by the map loader - so that we have a consistent place to track item
 
 #include "weapon.h"
 #include "armour.h"
+#include "charm.h"
 #include "spell.h"
 #include "consumable.h"
 #include "miscItem.h"

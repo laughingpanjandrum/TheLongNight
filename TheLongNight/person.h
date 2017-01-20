@@ -133,6 +133,7 @@ public:
 	weapon* getOffhand() { return items.getOffhand(); }
 	armour* getArmour() { return items.getArmour(); }
 	armour* getHelmet() { return items.getHelmet(); }
+	charm* getCharm() { return items.getCharm(); }
 	bool hasItemEquipped(item* it);
 
 	//Consumables

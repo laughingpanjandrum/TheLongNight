@@ -16,6 +16,11 @@ public:
 	item(std::string name, int tileCode, TCODColor color, itemTypes category, std::string description = "");
 	~item();
 
+	//Setters
+	void setDefence(int def) { this->defence = def; }
+	void setBleedResist(int r) { bleedResist = r; }
+	void setDamageResist(damageType dtype, int def) { damageResist.at(dtype) = def; }
+
 	//Getters
 	itemTypes getCategory() { return category; }
 	virtual int getAmountLeft() { return 1; }

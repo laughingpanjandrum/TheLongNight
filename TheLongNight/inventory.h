@@ -12,6 +12,7 @@ Keeps track of stored inventory and equipped items.
 #include "armour.h"
 #include "consumable.h"
 #include "miscItem.h"
+#include "charm.h"
 
 //Slot with list of carried items
 struct inventoryList {
@@ -48,6 +49,7 @@ public:
 	weapon* getOffhand() { return equippedOffhand; }
 	armour* getArmour() { return equippedArmour; }
 	armour* getHelmet() { return equippedHelmet; }
+	charm* getCharm() { return equippedCharm; }
 
 	//Weapon swapping
 	weapon* swapWeapon();
@@ -79,6 +81,7 @@ private:
 	weapon* equippedOffhand;
 	armour* equippedArmour;
 	armour* equippedHelmet;
+	charm* equippedCharm;
 	consumable* selectedConsumable;
 
 	//Secondary items for quick-swapping

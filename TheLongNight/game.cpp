@@ -708,6 +708,15 @@ void game::drawInterface(int leftx, int topy)
 	else
 		win.write(atx + 2, ++aty, "no armour", TCODColor::darkGrey);
 
+	//Charms
+	charm* ch = player->getCharm();
+	if (ch != nullptr) {
+		win.writec(atx, ++aty, ch->getTileCode(), ch->getColor());
+		win.write(atx + 2, aty, ch->getMenuName(), ch->getColor());
+	}
+	else
+		win.write(atx + 2, ++aty, "no charm", TCODColor::darkGrey);
+
 	aty++;
 	
 	//Consumable selected, or menu if we have that open

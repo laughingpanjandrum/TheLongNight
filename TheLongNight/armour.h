@@ -15,10 +15,7 @@ public:
 	~armour();
 
 	//Setting
-	void setDefence(int def) { this->defence = def; }
-	void setDamageResist(damageType dtype, int def) { damageResist.at(dtype) = def; }
 	void setMoveSpeed(int moveSpeed) { this->moveSpeed = moveSpeed; }
-	void setBleedResist(int r) { bleedResist = r; }
 
 	//Getting
 	int getMoveSpeed() { return moveSpeed; }

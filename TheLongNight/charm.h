@@ -13,7 +13,7 @@ public:
 	//Constructors
 	charm() : item() {}
 	charm(std::string name, int tileCode, TCODColor color, std::string description) :
-		item(name,tileCode,color,ITEM_CHARM,description) {}
+		item(name, tileCode, color, ITEM_CHARM, description) {}
 	~charm();
 
 	//Setting
@@ -30,5 +30,8 @@ private:
 	std::vector<int> effectPotency;
 
 };
+
+//Defined items
+charm* charm_BloodstainedCharm();
 
 #endif

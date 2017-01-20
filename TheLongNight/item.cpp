@@ -28,6 +28,7 @@ const std::string getItemCategoryName(itemTypes cat)
 	case(ITEM_OFFHAND): return "Offhand";
 	case(ITEM_BODY_ARMOUR): return "Body Armour";
 	case(ITEM_HELMET): return "Headgear";
+	case(ITEM_CHARM): return "Charm";
 	case(ITEM_CONSUMABLE): return "Consumable";
 	case(ITEM_SPELL): return "Spell";
 	case(ITEM_MISC): return "Miscellaneous";

@@ -34,6 +34,8 @@ bool inventory::equipItem(item * which)
 		equippedArmour = static_cast<armour*>(which);
 	else if (cat == ITEM_HELMET)
 		equippedHelmet = static_cast<armour*>(which);
+	else if (cat == ITEM_CHARM)
+		equippedCharm = static_cast<charm*>(which);
 	else if (cat == ITEM_CONSUMABLE && equippedConsumables.size() < MAX_CONSUMABLE_SLOTS)
 		equipConsumable(static_cast<consumable*>(which));
 	else if (cat == ITEM_SPELL) //Currently only spells can fail to equip
