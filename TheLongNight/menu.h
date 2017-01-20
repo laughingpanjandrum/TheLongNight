@@ -22,6 +22,7 @@ public:
 	//Setting up
 	void addElement(std::string name, TCODColor color);
 	void addElement(element* e) { elements.push_back(e); }
+	void removeElement(element* e);
 
 	//Menu navigation
 	void scrollDown();

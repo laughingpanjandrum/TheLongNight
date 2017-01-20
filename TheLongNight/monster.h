@@ -44,6 +44,11 @@ public:
 	int getFragmentsDropped() { return dropsFragments; }
 	void setFragmentsDropped(int f) { dropsFragments = f; }
 
+	//Shopkeeping
+	void addItemToStock(item* it, int price);
+	void removeItemFromStock(item* it);
+	itemVector getStock() { return stock; }
+
 	//Flags
 	bool isBoss = false;
 
@@ -59,6 +64,9 @@ protected:
 	//Item drops
 	itemVector drops;
 	int dropsFragments = 0;
+
+	//Shopkeeping
+	itemVector stock;
 
 };
 
@@ -81,6 +89,10 @@ monster* monster_CrowThief();
 monster* monster_CrowArcher();
 monster* monster_ForlornCrowKnight();
 monster* monster_TheOldCrow();
+
+
+//Friendly NPCs
+monster* npc_Gorem();
 
 monster* getMonsterByHandle(std::string handle);
 

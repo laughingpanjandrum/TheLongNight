@@ -19,3 +19,12 @@ miscItem * key_WretchsKey()
 	m->setKeyTag("wretched_door");
 	return m;
 }
+
+miscItem * key_OldCrowsKey()
+{
+	miscItem* m = new miscItem("Old Crow's Key", KEY_TILE, TCODColor::lightGrey,
+		"The Winter Court entrusted the crows with this key, and begged them to safeguard their lands against the scourge.");
+	m->isKey = true;
+	m->setKeyTag("crow_door");
+	return m;
+}

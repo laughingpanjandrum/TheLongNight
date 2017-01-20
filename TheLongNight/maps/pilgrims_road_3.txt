@@ -5,7 +5,7 @@ crow_thief:12,31
 crow_knight:13,5
 -items
 crow_knight_sword:13,2
-crow_knights_armour:12,3
+crow_knights_hood:12,3
 -enditems
 -codes
 . floor_grass

@@ -158,3 +158,13 @@ maptile * tile_WretchedDoor()
 	door->addTouchEffect(CHECK_FOR_UNLOCK);
 	return door;
 }
+
+maptile * tile_CrowDoor()
+{
+	maptile* door = new maptile("Old Crow Door", "crow_door", BASIC_DOOR_TILE, TCODColor::lightPurple, TCODColor::darkGrey,
+		false, false);
+	door->unlockCode = "crow_door";
+	door->isDoor = true;
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	return door;
+}

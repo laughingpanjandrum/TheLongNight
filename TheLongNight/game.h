@@ -187,6 +187,13 @@ private:
 	void doLevelUp();
 	void drawLevelUpMenu(int atx, int aty);
 
+	//Shopping
+	monster* currentShopkeeper;
+	void drawShopMenu(int atx, int aty);
+	void talkToShopkeeper();
+	void setupShopMenu(person* shopkeeper);
+	void buyItemFromShop();
+
 	//Keeping the world up to date
 	void tick();
 	void clearDeadCreatures();

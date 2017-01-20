@@ -150,6 +150,8 @@ void person::fullRestore()
 {
 	health.restore();
 	vigour.restore();
+	bleedBuildup.clear();
+	isBleeding = 0;
 	restoreItemsToMax();
 }
 

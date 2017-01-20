@@ -74,6 +74,26 @@ monster * monster::getRandomSpawn()
 }
 
 
+/*
+For shopkeeper NPCs
+*/
+void monster::addItemToStock(item * it, int price)
+{
+	it->setPrice(price);
+	stock.push_back(it);
+}
+
+/*
+Cause we bought something!
+*/
+void monster::removeItemFromStock(item * it)
+{
+	auto iter = std::find(stock.begin(), stock.end(), it);
+	if (iter != stock.end())
+		stock.erase(iter);
+}
+
+
 
 
 
@@ -209,10 +229,27 @@ monster * monster_TheOldCrow()
 	m->addSpellKnown(attack_Quickstep());
 	m->addSpellKnown(attack_Splintering());
 	m->setSpellCastChance(20);
-	m->setFragmentsDropped(400);
 	m->setDefence(DAMAGE_PHYSICAL, 10);
 	m->setBleedResist(45);
 	m->isBoss = true;
+	m->setFragmentsDropped(400);
+	m->addItemDrop(key_OldCrowsKey());
+	return m;
+}
+
+/*
+	FRIENDLIES
+*/
+
+
+monster * npc_Gorem()
+{
+	monster* m = new monster("Gorem, Ancient of Wyrd", GOREM_TILE, TCODColor::darkGreen);
+	m->setHealth(800);
+	m->isShopkeeper = true;
+	m->isHostile = false;
+	m->addItemToStock(weapon_CrowHalfsword(), 25);
+	m->addItemToStock(weapon_CrowKnife(), 25);
 	return m;
 }
 
@@ -247,6 +284,10 @@ monster * getMonsterByHandle(std::string handle)
 		return monster_ForlornCrowKnight();
 	else if (handle == "the_old_crow")
 		return monster_TheOldCrow();
+
+	//Friendly NPCs
+	else if (handle == "gorem")
+		return npc_Gorem();
 
 	//LET'S HOPE WE NEVER GET HERE!
 	return nullptr;

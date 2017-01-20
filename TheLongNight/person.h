@@ -127,6 +127,7 @@ public:
 	bool isDead = false;
 	bool isPlayer = true;
 	bool isHostile = true;
+	bool isShopkeeper = false;
 
 protected:
 

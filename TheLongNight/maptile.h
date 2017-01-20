@@ -96,6 +96,7 @@ maptile* tile_StatueOfRest(); //"statue"
 
 //Specific locked doors
 maptile* tile_WretchedDoor(); //"wretched_door"
+maptile* tile_CrowDoor(); //"crow_door"
 
 const tileVector ALL_MAPTILES = {	
 	tile_Floor(), tile_MossyFloor(), tile_Sand(), tile_Grass(), tile_Road(),
@@ -106,7 +107,7 @@ const tileVector ALL_MAPTILES = {
 	tile_Bed(), tile_Terminal(),
 	tile_StatueOfRest(),
 	//Special locked doors
-	tile_WretchedDoor()
+	tile_WretchedDoor(), tile_CrowDoor()
 };
 
 #endif

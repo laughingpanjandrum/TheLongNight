@@ -7,7 +7,6 @@ crow_thief:2,14
 crow_thief:5,16
 -items
 crow_knife:4,25
-crow_knights_hood:35,30
 -enditems
 -codes
 . floor_grass

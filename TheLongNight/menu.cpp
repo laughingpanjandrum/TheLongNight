@@ -11,6 +11,16 @@ void menu::addElement(std::string name, TCODColor color)
 	elements.push_back(e);
 }
 
+void menu::removeElement(element * e)
+{
+	auto iter = std::find(elements.begin(), elements.end(), e);
+	if (iter != elements.end())
+		elements.erase(iter);
+	//Also adjust the position of the selection index, if necessary
+	if (idx >= elements.size())
+		idx--;
+}
+
 void menu::scrollDown()
 {
 	idx++;

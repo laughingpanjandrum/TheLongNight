@@ -26,10 +26,17 @@ public:
 	virtual const void add(int amount) {}
 	virtual const void restoreToMax() {}
 
+	//Shopkeeping
+	int getPrice() { return price; }
+	void setPrice(int p) { price = p; }
+
 protected:
 
 	//Sorting
 	itemTypes category;
+
+	//Shopkeeping
+	int price = 0;
 
 };
 

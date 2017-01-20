@@ -450,6 +450,9 @@ void game::doMonsterTurn(person * p)
 	//If we're dead, we probably shouldn't do anything
 	if (ai->isDead)
 		return;
+	//Likewise, if we're non-hostile, we don't do anything
+	if (!ai->isHostile)
+		return;
 	//Do we have a target?
 	person* target = ai->getTarget();
 	if (target == nullptr)
@@ -524,6 +527,8 @@ void game::acceptCurrentMenuIndex()
 		selectSpellFromMenu();
 	else if (state == STATE_SELECT_CONSUMABLE)
 		selectConsumableFromMenu();
+	else if (state == STATE_SHOP_MENU)
+		buyItemFromShop();
 }
 
 /*
@@ -564,6 +569,8 @@ void game::drawScreen()
 	}
 	else if (state == STATE_LEVEL_UP_MENU)
 		drawLevelUpMenu(MAP_DRAW_X, MAP_DRAW_Y);
+	else if (state == STATE_SHOP_MENU)
+		drawShopMenu(MAP_DRAW_X, MAP_DRAW_Y);
 	else
 		drawMap(MAP_DRAW_X, MAP_DRAW_Y);
 	//Always draw the interface
@@ -766,6 +773,8 @@ void game::drawInterface(int leftx, int topy)
 	win.write(atx + 2, aty, "Select consumable", TCODColor::white);
 	win.writec(atx, ++aty, 't', TCODColor::green);
 	win.write(atx + 2, aty, "Toggle targeting mode", TCODColor::white);
+	win.writec(atx, ++aty, 'd', TCODColor::green);
+	win.write(atx + 2, aty, "Switch to secondary weapon", TCODColor::white);
 	win.writec(atx, ++aty, 's', TCODColor::green);
 	win.write(atx + 2, aty, "Cast current spell", TCODColor::white);
 	win.writec(atx, ++aty, 'q', TCODColor::green);
@@ -780,7 +789,7 @@ void game::drawInterface(int leftx, int topy)
 	}
 
 	//Messages
-	aty += 2;
+	aty += 3;
 	for (auto m : messages) {
 		win.write(atx, aty++, m.txt, m.color);
 	}
@@ -974,6 +983,13 @@ void game::drawItemInfo(item * it, int atx, int aty)
 	//Indicate whether equipped or not
 	if (player->hasItemEquipped(it))
 		win.write(atx + 12, aty, "EQUIPPED", TCODColor::grey);
+	//Show price, if one is defined
+	if (it->getPrice() > 0) {
+		win.write(atx, ++aty, "PRICE: ", TCODColor::white);
+		win.writec(atx + 6, aty, FRAGMENT_GLYPH, TCODColor::amber);
+		win.write(atx + 8, aty, std::to_string(it->getPrice()), TCODColor::amber);
+
+	}
 	//Item description
 	aty = win.writeWrapped(atx + 1, aty + 1, 40, it->description, TCODColor::lightGrey);
 	//Rest of item info
@@ -1099,8 +1115,10 @@ void game::processCommand()
 		useConsumable();
 	else if (kp.c == 's')
 		castSpell(player->getCurrentSpell());
-	else if (kp.c == 'd')
+	else if (kp.c == 'd') {
 		player->swapWeapon();
+		playerTurnDelay += SPEED_NORMAL;
+	}
 
 	//Movement
 	else if (kp.c == 't')
@@ -1112,6 +1130,10 @@ void game::processCommand()
 			processMove(kp);
 		else
 			navigateMenu(kp);
+
+	//Chitchat
+	else if (kp.c == 'T')
+		talkToShopkeeper();
 
 	//Debug
 	else if (kp.c == '~')
@@ -1918,6 +1940,85 @@ void game::drawLevelUpMenu(int atx, int aty)
 }
 
 
+/*
+	SHOPPING
+*/
+
+
+/*
+Displaying the shopping times!
+*/
+void game::drawShopMenu(int atx, int aty)
+{
+	//The SHOPPING LIST
+	drawMenu(currentMenu, atx, aty);
+	//Description of items for purchase
+	aty += currentMenu->getAllElements().size() + 10;
+	item* sel = static_cast<item*>(currentMenu->getSelectedItem());
+	if (sel != nullptr)
+		drawItemInfo(sel, atx, aty);
+}
+
+/*
+Look for a nearby shopkeeper that we can chat with.
+*/
+void game::talkToShopkeeper()
+{
+	int r = 2;
+	for (int x = player->getx() - r; x <= player->getx() + r; x++) 
+	{
+		for (int y = player->gety() - r; y <= player->gety() + r; y++) 
+		{
+			person* target = currentMap->getPerson(x, y);
+			if (target != nullptr) 
+			{
+				if (target->isShopkeeper) 
+				{
+					setupShopMenu(target);
+					return;
+				}
+			}
+		}
+	}
+}
+
+
+/*
+Create menu for SHOPPING!
+*/
+void game::setupShopMenu(person * shopkeeper)
+{
+	monster* m = static_cast<monster*>(shopkeeper);
+	currentMenu = new menu(shopkeeper->getName());
+	for (auto it : m->getStock()) {
+		currentMenu->addElement(it);
+	}
+	//We keep track of who the shopkeeper is
+	currentShopkeeper = m;
+	setState(STATE_SHOP_MENU);
+}
+
+
+/*
+Try to buy selected menu item
+*/
+void game::buyItemFromShop()
+{
+	item* it = static_cast<item*>(currentMenu->getSelectedItem());
+	if (it != nullptr) {
+		if (fragments >= it->getPrice()) {
+			//Pay the COST
+			fragments -= it->getPrice();
+			//But get the ITEM
+			pickUpItem(it);
+			//Remove from menu and shopkeeper's inventory
+			currentShopkeeper->removeItemFromStock(it);
+			currentMenu->removeElement(it);
+		}
+	}
+}
+
+
 
 
 /*
@@ -1962,15 +2063,15 @@ void game::clearDeadCreatures()
 		//And remove them!
 		for (auto p : toClear) {
 			currentMap->removePerson(p);
-			//And the PLAYER gets the ITEMS we drop!
-			getDeathDrops(static_cast<monster*>(p));
-			//And if this was the BOSS, then this BOSS FIGHT is over
+			//If this was the BOSS, then this BOSS FIGHT is over
 			if (p == currentBoss) {
 				bossKillMessage();
 				currentBoss = nullptr;
 				//Toggle setting on map so the boss won't respawn
 				currentMap->bossDestroyed = true;
 			}
+			//And the PLAYER gets the ITEMS we drop!
+			getDeathDrops(static_cast<monster*>(p));
 		}
 
 	}

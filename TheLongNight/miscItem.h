@@ -35,6 +35,7 @@ Items!
 */
 
 miscItem* key_WretchsKey();
+miscItem* key_OldCrowsKey();
 
 
 #endif
