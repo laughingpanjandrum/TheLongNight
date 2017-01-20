@@ -1268,7 +1268,7 @@ void game::doAOE(spell * sp, person * caster)
 Apply any effect to any person.
 Its strength is the given potency.
 */
-void game::applyEffectToPerson(person * target, effect eff, int potency)
+void game::applyEffectToPerson(person * target, effect eff, int potency, person* caster)
 {
 	
 	//Interface stuff for PCs only
@@ -1314,6 +1314,8 @@ void game::applyEffectToPerson(person * target, effect eff, int potency)
 
 	//Damage effects
 
+	else if (eff == CASTER_MELEE_ATTACK)
+		meleeAttack(caster, target);
 	else if (eff == APPLY_PHYSICAL_DAMAGE)
 		target->takeDamage(potency, DAMAGE_PHYSICAL);
 	else if (eff == APPLY_MAGIC_DAMAGE)
@@ -1323,7 +1325,7 @@ void game::applyEffectToPerson(person * target, effect eff, int potency)
 
 	//Special effects, other
 	else if (eff == KNOCKBACK_TARGET)
-		knockbackTarget(target, potency);
+		knockbackTarget(caster, target, potency);
 
 }
 
@@ -1639,13 +1641,11 @@ void game::meleeAttack(person * attacker, person * target)
 
 /*
 Target gets shoved away.
-Currently ONLY AFFECTS NPCS and they are ALWAYS SHOVED AWAY FROM THE PLAYER
-Yes, it's kinda clunky.
 */
-void game::knockbackTarget(person * target, int distance)
+void game::knockbackTarget(person * knocker, person * target, int distance)
 {
-	int xv = get1dVector(player->getx(), target->getx());
-	int yv = get1dVector(player->gety(), target->gety());
+	int xv = get1dVector(knocker->getx(), target->getx());
+	int yv = get1dVector(knocker->gety(), target->gety());
 	for (int i = 0; i < distance; i++) {
 		movePerson(target, target->getx() + xv, target->gety() + yv);
 	}
@@ -1899,7 +1899,7 @@ void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 		}
 		else {
 			//Just a buff!
-			applyEffectToPerson(target, sp->getEffectType(idx), potency);
+			applyEffectToPerson(target, sp->getEffectType(idx), potency, caster);
 			//This is when the caster expends their vigour
 			caster->loseVigour(sp->getVigourCost());
 		}
@@ -2309,6 +2309,7 @@ void game::debugMenu()
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());
+		player->addItem(weapon_NotchedGreatsword());
 		fragments += 500;
 		loadMapFromHandle("maps/pilgrims_road_5.txt", CONNECT_WARP, player->getx(), player->gety());
 	}

@@ -141,7 +141,7 @@ private:
 
 	//Effects
 	void doAOE(spell* sp, person* caster);
-	void applyEffectToPerson(person* target, effect e, int potency);
+	void applyEffectToPerson(person* target, effect e, int potency, person* caster = nullptr);
 
 	//Movement
 	void processMove(TCOD_key_t kp);
@@ -160,7 +160,7 @@ private:
 
 	//Combat
 	void meleeAttack(person* attacker, person* target);
-	void knockbackTarget(person* target, int distance);
+	void knockbackTarget(person* knocker, person* target, int distance);
 
 	//Boss fights
 	monster* currentBoss;

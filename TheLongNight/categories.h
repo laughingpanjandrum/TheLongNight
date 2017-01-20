@@ -61,6 +61,7 @@ enum effect {
 	//Defensive buffs
 	GAIN_DEFENCE,
 	//Damage effects
+	CASTER_MELEE_ATTACK,
 	APPLY_PHYSICAL_DAMAGE, APPLY_MAGIC_DAMAGE,
 	APPLY_BLEED_DAMAGE,
 	//Other special effects

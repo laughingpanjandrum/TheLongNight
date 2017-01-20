@@ -91,6 +91,8 @@ weapon* weapon_CrowKnightSword();
 weapon* weapon_CrowKnife();
 weapon* weapon_CrowHalfsword();
 
+weapon* weapon_NotchedGreatsword();
+
 //Shields
 weapon* shield_BatteredWoodenShield();
 weapon* shield_WoodenWyrdShield();

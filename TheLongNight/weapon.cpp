@@ -143,6 +143,16 @@ weapon * weapon_CrowHalfsword()
 	return wp;
 }
 
+weapon * weapon_NotchedGreatsword()
+{
+	weapon* wp = new weapon("Notched Greatsword", SWORD_TILE, TCODColor::grey,
+		"The blade of this huge sword is notched and marred, but it should still work.");
+	wp->setBasicAttributes(100, SPEED_SLOW);
+	wp->addScalingType(SCALE_STR);
+	wp->setSpecialAttack(attack_MightyCleave());
+	return wp;
+}
+
 //		Shields
 
 weapon * shield_BatteredWoodenShield()

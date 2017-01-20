@@ -85,6 +85,16 @@ spell * attack_Knockback()
 	return sp;
 }
 
+spell * attack_MightyCleave()
+{
+	spell* sp = new spell("Mighty Cleave", SWORD_TILE, TCODColor::grey,
+		"Attack all adjacent targets.");
+	sp->setAttackType(ATTACK_AOE);
+	sp->addEffect(CASTER_MELEE_ATTACK, 1);
+	sp->setVigourCost(2);
+	return sp;
+}
+
 //Wand/chime powers
 
 spell * ability_PowerSurge()

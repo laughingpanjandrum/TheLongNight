@@ -55,6 +55,7 @@ spell* attack_Splintering();
 spell* attack_Quickstep();
 spell* attack_StrongAttack();
 spell* attack_Knockback();
+spell* attack_MightyCleave();
 
 //Wand/chime powers
 spell* ability_PowerSurge();
