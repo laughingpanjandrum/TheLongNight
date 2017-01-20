@@ -133,7 +133,11 @@ private:
 
 	//Input processing
 	void processCommand();
+
+	//Consumables
 	void useConsumable();
+	void openConsumableMenu();
+	void selectConsumableFromMenu();
 
 	//Effects
 	void doAOE(spell* sp, person* caster);

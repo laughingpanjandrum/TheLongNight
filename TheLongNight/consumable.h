@@ -60,5 +60,6 @@ consumable* consumable_StarwaterDraught();
 consumable* consumable_InvigoratingTea();
 
 consumable* ranged_ThrowingKnives();
+consumable* ranged_LaceratingKnives();
 
 #endif

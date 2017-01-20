@@ -9,6 +9,7 @@ timid_wretch:7,28
 the_wretched_mass:20,7
 -items
 arcane_radiance:13,20
+throwing_knives:3,28
 -enditems
 -codes
 . floor_sand

@@ -284,12 +284,15 @@ Equip the given item, if possible.
 */
 void person::equipItem(item * which)
 {
+	
 	//If there's already an equipped item in this slot, UNEQUIP IT
 	item* here = items.getEquipped(which->getCategory());
 	if (here != nullptr)
 		unequipItem(here);
+
 	//Equip the new item
 	bool equipped = items.equipItem(which);
+	
 	//Other consequences of equipping something
 	if (equipped) {
 		itemTypes cat = which->getCategory();
@@ -386,15 +389,14 @@ consumableVector person::getConsumableList()
 	while (clist.size() < items.MAX_CONSUMABLE_SLOTS)
 		clist.push_back(nullptr);
 	return clist;
-	/*consumableVector clist;
-	auto equipmentList = items.getAllEquipped();
-	for (auto i = equipmentList.begin(); i != equipmentList.end(); i++) {
-		if ((*i).category == ITEM_CONSUMABLE) {
-			consumable* cons = static_cast<consumable*>((*i).equipped);
-			clist.push_back(cons);
-		}
-	}
-	return clist;*/
+}
+
+/*
+Hard-set our selected consumable
+*/
+void person::setCurrentConsumable(consumable * c)
+{
+	items.setSelectedConsumable(c);
 }
 
 /*
@@ -420,6 +422,7 @@ bool person::hasItemEquipped(item * it)
 	case(ITEM_BODY_ARMOUR): return it == getArmour();
 	case(ITEM_HELMET): return it == getHelmet();
 	case(ITEM_SPELL): return items.isSpellEquipped(static_cast<spell*>(it));
+	case(ITEM_CONSUMABLE): return items.isConsumableEquipped(static_cast<consumable*>(it));
 	}
 	return false;
 }

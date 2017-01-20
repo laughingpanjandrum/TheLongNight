@@ -103,6 +103,7 @@ public:
 	armour* getHelmet() { return items.getHelmet(); }
 	consumable* getSelectedConsumable();
 	consumableVector getConsumableList();
+	void setCurrentConsumable(consumable* c);
 	void restoreItemsToMax();
 	bool hasItemEquipped(item* it);
 	bool hasKey(std::string keyTag);

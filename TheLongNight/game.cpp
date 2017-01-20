@@ -522,6 +522,8 @@ void game::acceptCurrentMenuIndex()
 		doLevelUp();
 	else if (state == STATE_SELECT_SPELL)
 		selectSpellFromMenu();
+	else if (state == STATE_SELECT_CONSUMABLE)
+		selectConsumableFromMenu();
 }
 
 /*
@@ -557,14 +559,13 @@ void game::drawScreen()
 {
 	win.clear();
 	//Figure out what to draw
-	if (state == STATE_VIEW_MAP) {
-		drawMap(MAP_DRAW_X, MAP_DRAW_Y);
-	}
-	else if (state == STATE_VIEW_INVENTORY || state == STATE_VIEW_INVENTORY_CATEGORY) {
+	if (state == STATE_VIEW_INVENTORY || state == STATE_VIEW_INVENTORY_CATEGORY) {
 		drawInventory(MAP_DRAW_X, MAP_DRAW_Y);
 	}
 	else if (state == STATE_LEVEL_UP_MENU)
 		drawLevelUpMenu(MAP_DRAW_X, MAP_DRAW_Y);
+	else
+		drawMap(MAP_DRAW_X, MAP_DRAW_Y);
 	//Always draw the interface
 	drawInterface(MAP_DRAW_X + 43, MAP_DRAW_Y);
 	//win.drawFont();
@@ -699,21 +700,29 @@ void game::drawInterface(int leftx, int topy)
 	}
 	else
 		win.write(atx + 2, ++aty, "no armour", TCODColor::darkGrey);
+
+	aty++;
 	
-	//Consumable selected
-	consumable* c = player->getSelectedConsumable();
-	if (c != nullptr) {
+	//Consumable selected, or menu if we have that open
+	if (state == STATE_SELECT_CONSUMABLE) {
+		drawMenu(currentMenu, atx, ++aty);
+		aty += currentMenu->getAllElements().size() + 1;
+	}
+	else {
+		consumable* c = player->getSelectedConsumable();
 		if (c != nullptr) {
-			win.writec(atx, ++aty, c->getTileCode(), c->getColor());
-			win.write(atx + 2, aty, c->getMenuName(), c->getColor());
+			if (c != nullptr) {
+				win.writec(atx, ++aty, c->getTileCode(), c->getColor());
+				win.write(atx + 2, aty, c->getMenuName(), c->getColor());
+			}
+			else
+				win.write(atx + 2, ++aty, "no consumable", TCODColor::darkGrey);
 		}
-		else
-			win.write(atx + 2, ++aty, "no consumable", TCODColor::darkGrey);
 	}
 	
 	//Spell selected (or menu, if we're in that mode!)
 	if (state == STATE_SELECT_SPELL) {
-		drawMenu(currentMenu, atx, aty);
+		drawMenu(currentMenu, atx, ++aty);
 		aty += currentMenu->getAllElements().size() + 1;
 	}
 	else {
@@ -1083,7 +1092,7 @@ void game::processCommand()
 
 	//Using stuff
 	else if (kp.c == 'c')
-		player->cycleConsumable();
+		openConsumableMenu();//player->cycleConsumable();
 	else if (kp.c == 'a')
 		openSpellMenu();//player->cycleSelectedSpell();
 	else if (kp.c == 'q')
@@ -1133,6 +1142,32 @@ void game::useConsumable()
 			}
 		}
 	}
+}
+
+/*
+Menu where we select which consumable we want highlighted.
+*/
+void game::openConsumableMenu()
+{
+	menu* cmenu = new menu("SELECT ITEM");
+	for (auto it : player->getConsumableList()) {
+		if (it != nullptr)
+			cmenu->addElement(it);
+	}
+	currentMenu = cmenu;
+	setState(STATE_SELECT_CONSUMABLE);
+}
+
+/*
+Actually pick a consumable to highlight
+*/
+void game::selectConsumableFromMenu()
+{
+	//Select item
+	consumable* it = static_cast<consumable*>(currentMenu->getSelectedItem());
+	player->setCurrentConsumable(it);
+	//Close menu now!
+	setState(STATE_VIEW_MAP);
 }
 
 /*
@@ -2024,19 +2059,6 @@ void game::debugMenu()
 		player->addItem(consumable_StarwaterDraught());
 		loadMapFromHandle("maps/cbeach_2.txt", CONNECT_WARP, player->getx(), player->gety());
 	}
-	else if (txt == "warppilgrim") {
-		player->addItem(weapon_SplinteredSword());
-		player->addItem(armour_RuinedUniform());
-		player->addItem(headgear_CaptainsTricorn());
-		player->addItem(spell_MagicMissile());
-		player->addItem(spell_ArcaneRadiance());
-		player->addItem(wand_DriftwoodWand());
-		player->addItem(shield_BatteredWoodenShield());
-		player->addItem(consumable_StarwaterDraught());
-		player->addItem(consumable_StarwaterDraught());
-		player->addItem(consumable_StarwaterDraught());
-		loadMapFromHandle("maps/pilgrims_road_1.txt", CONNECT_WARP, player->getx(), player->gety());
-	}
 	else if (txt == "wretch") {
 		player->addItem(weapon_SplinteredSword());
 		player->addItem(armour_RuinedUniform());
@@ -2060,6 +2082,7 @@ void game::debugMenu()
 		player->addItem(spell_MagicMissile());
 		player->addItem(spell_ArcaneRadiance());
 		player->addItem(wand_DriftwoodWand());
+		player->addItem(ranged_ThrowingKnives());
 		player->addItem(shield_BatteredWoodenShield());
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());

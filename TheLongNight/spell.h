@@ -59,6 +59,7 @@ spell* ability_DivineFavour();
 
 //Thrown weapon attacks
 spell* attack_ThrowingKnives();
+spell* attack_LaceratingKnives();
 
 //Arcane spells
 spell* spell_MagicMissile();

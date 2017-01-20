@@ -35,7 +35,7 @@ bool inventory::equipItem(item * which)
 	else if (cat == ITEM_HELMET)
 		equippedHelmet = static_cast<armour*>(which);
 	else if (cat == ITEM_CONSUMABLE && equippedConsumables.size() < MAX_CONSUMABLE_SLOTS)
-		equippedConsumables.push_back(static_cast<consumable*>(which));
+		equipConsumable(static_cast<consumable*>(which));
 	else if (cat == ITEM_SPELL) //Currently only spells can fail to equip
 		return equipSpell(static_cast<spell*>(which));
 	return true;
@@ -96,6 +96,48 @@ bool inventory::isSpellEquipped(spell * sp)
 	return false;
 }
 
+/*
+Equip a consumable to our CONSUMABLES HOTBAR.
+*/
+void inventory::equipConsumable(consumable * c)
+{
+	//See if we have room in the hotbar
+	if (equippedConsumables.size() < MAX_CONSUMABLE_SLOTS) {
+		//Make sure we're not equipped it twice
+		auto f = std::find(equippedConsumables.begin(), equippedConsumables.end(), c);
+		if (f == equippedConsumables.end()) {
+			//Yup, we're not equipping it twice
+			equippedConsumables.push_back(c);
+			//If we don't have a SELECTED CONSUMABLE, make it this one
+			if (selectedConsumable == nullptr)
+				selectedConsumable = c;
+		}
+		else {
+			//If it's already equipped, let's UNEQUIP it!
+			equippedConsumables.erase(f);
+			//If this is our selected consumable, deselect it
+			if (selectedConsumable == c)
+				selectedConsumable = nullptr;
+		}
+	}
+}
+
+/*
+Hard-sets our selected consumable.
+*/
+void inventory::setSelectedConsumable(consumable * c)
+{
+	selectedConsumable = c;
+}
+
+/*
+Returns whether the given item is in our HOTBAR.
+*/
+bool inventory::isConsumableEquipped(consumable * c)
+{
+	return std::find(equippedConsumables.begin(), equippedConsumables.end(), c) != equippedConsumables.end();
+}
+
 
 /*
 Returns whether we have the key that will unlock the given door tag.
@@ -136,6 +178,8 @@ bool inventory::addItem(item * which)
 			return false;
 		}
 	}
+	//We shouldn't get here, hopefully
+	return false;
 }
 
 /*
@@ -176,9 +220,9 @@ Select the next consumable.
 */
 void inventory::cycleConsumable()
 {
-	selectedConsumable++;
+	/*selectedConsumable++;
 	if (selectedConsumable >= equippedConsumables.size())
-		selectedConsumable = 0;
+		selectedConsumable = 0;*/
 }
 
 /*
@@ -186,7 +230,8 @@ Returns which equipped consumable we currently have selected.
 */
 consumable * inventory::getSelectedConsumable()
 {
-	if (selectedConsumable < equippedConsumables.size())
+	/*if (selectedConsumable < equippedConsumables.size())
 		return equippedConsumables.at(selectedConsumable);
-	return nullptr;
+	return nullptr;*/
+	return selectedConsumable;
 }

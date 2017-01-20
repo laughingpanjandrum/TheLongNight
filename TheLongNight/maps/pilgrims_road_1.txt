@@ -3,6 +3,7 @@ start:0,36
 crow_knight:20,10
 -items
 invigorating_tea:8,10
+lacerating_knives:33,25
 -enditems
 -codes
 . floor_grass

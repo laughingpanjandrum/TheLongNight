@@ -53,6 +53,11 @@ public:
 	void unequipSpell(spell* sp);
 	bool isSpellEquipped(spell* sp);
 
+	//Consumables
+	void equipConsumable(consumable* c);
+	void setSelectedConsumable(consumable* c);
+	bool isConsumableEquipped(consumable* c);
+
 	//Keys
 	bool hasKey(std::string keyTag);
 
@@ -70,10 +75,11 @@ private:
 	weapon* equippedOffhand;
 	armour* equippedArmour;
 	armour* equippedHelmet;
+	consumable* selectedConsumable;
 
 	//Consumables appear as a list
 	std::vector<consumable*> equippedConsumables;
-	int selectedConsumable = 0;
+	//int selectedConsumable = 0;
 };
 
 #endif

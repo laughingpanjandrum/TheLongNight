@@ -43,6 +43,15 @@ consumable * ranged_ThrowingKnives()
 	consumable* c = new consumable("Throwing Knives", DAGGER_TILE, TCODColor::lightGrey,
 		"Short knives to chuck at your enemies.");
 	c->setRangedAttack(attack_ThrowingKnives());
-	c->add(2); //Comes in a stack of 3
+	c->add(4); //Comes in a stack
+	return c;
+}
+
+consumable * ranged_LaceratingKnives()
+{
+	consumable* c = new consumable("Lacerating Knives", DAGGER_TILE, TCODColor::lightCrimson,
+		"Short knives with lacerating spines, designed to carve the flesh of your enemies.");
+	c->setRangedAttack(attack_LaceratingKnives());
+	c->add(4);
 	return c;
 }

@@ -23,7 +23,6 @@ const std::string getItemCategoryName(itemTypes cat)
 	switch (cat) {
 	case(ITEM_WEAPON): return "Weapon";
 	case(ITEM_OFFHAND): return "Offhand";
-	case(ITEM_THROWN): return "Thrown";
 	case(ITEM_BODY_ARMOUR): return "Body Armour";
 	case(ITEM_HELMET): return "Headgear";
 	case(ITEM_CONSUMABLE): return "Consumable";

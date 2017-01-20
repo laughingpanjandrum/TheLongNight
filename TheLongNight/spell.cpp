@@ -108,6 +108,16 @@ spell * attack_ThrowingKnives()
 	return sp;
 }
 
+spell * attack_LaceratingKnives()
+{
+	spell* sp = new spell("Lacerating Knives", DAGGER_TILE, TCODColor::lightCrimson);
+	sp->setAttackType(ATTACK_RANGE);
+	sp->addEffect(APPLY_BLEED_DAMAGE, 20);
+	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 10);
+	sp->setAttackRange(5);
+	return sp;
+}
+
 //Spells
 
 spell * spell_MagicMissile()
