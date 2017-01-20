@@ -69,6 +69,7 @@ public:
 	int getBaseMeleeDamage() { return baseMeleeDamage; }
 	int getDefence();
 	int getDamageResist(damageType dr) { return damageResist.at(dr); }
+	int getMeleeDamage();
 
 	//Setters
 	void setTarget(person* target) { this->target = target; }

@@ -97,6 +97,24 @@ int person::getDefence()
 	return base;
 }
 
+
+/*
+Returns how much damage we do in melee.
+*/
+int person::getMeleeDamage()
+{
+	weapon* wp = getWeapon();
+	int damage = baseMeleeDamage;
+	if (wp != nullptr) {
+		//Base damage
+		damage = wp->getDamage();
+		//Scaling damage
+		int scalingPercent = getScalingDamage(wp);
+		damage += (float)scalingPercent / 100.0 * (float)damage;
+	}
+	return damage;
+}
+
 /*
 	DAMAGE AND HEALING
 */

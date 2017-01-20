@@ -881,6 +881,14 @@ void game::drawPlayerInfo(int atx, int aty)
 	win.write(atx + offset, aty, std::to_string(player->getDivinePower()), TCODColor::darkYellow);
 	aty++;
 
+	//Attacks/movement
+	win.write(atx, ++aty, "Move Speed", mainCol);
+	win.write(atx + offset, aty, getAttackSpeedName(player->getMoveDelay()), TCODColor::white);
+	win.write(atx, ++aty, "Attack Speed", mainCol);
+	win.write(atx + offset, aty, getAttackSpeedName(player->getAttackDelay()), TCODColor::white);
+	win.write(atx, ++aty, "Melee DMG", mainCol);
+	win.write(atx + offset, aty, std::to_string(player->getMeleeDamage()), TCODColor::darkRed);
+
 	//List buffs
 	for (auto b : player->getAllBuffs()) {
 		win.write(atx, ++aty, b->name, b->color);
@@ -888,7 +896,7 @@ void game::drawPlayerInfo(int atx, int aty)
 	
 	//Done! Wait for input
 	win.refresh();
-	while (win.getkey().vk != KEY_ACCEPT) {}
+	while (win.getkey().vk != KEY_BACK_OUT) {}
 }
 
 
@@ -1031,6 +1039,18 @@ void game::drawWeaponInfo(weapon * it, int atx, int aty)
 	//Damage
 	win.write(atx, aty, "DAMAGE", TCODColor::darkRed);
 	win.write(atx + offset, aty, std::to_string(it->getDamage()), maincol);
+	//Scaling
+	win.write(atx, ++aty, "SCALING:", TCODColor::red);
+	std::string scaling = "";
+	if (it->getScalingDamage(SCALE_STR))
+		scaling += "Str ";
+	if (it->getScalingDamage(SCALE_DEX))
+		scaling += "Dex ";
+	if (it->getScalingDamage(SCALE_ARC))
+		scaling += "Arc ";
+	if (it->getScalingDamage(SCALE_DEV))
+		scaling += "Dev ";
+	win.write(atx + offset, aty, scaling, maincol);
 	//Rate
 	win.write(atx, ++aty, "SPEED", TCODColor::yellow);
 	win.write(atx + offset, aty, getAttackSpeedName(it->getAttackDelay()), maincol);
@@ -1576,15 +1596,7 @@ void game::meleeAttack(person * attacker, person * target)
 	addMessage(attacker->getName() + " strikes " + target->getName(), attacker->getColor());
 	
 	//First: NORMAL DAMAGE
-	weapon* wp = attacker->getWeapon();
-	int damage = attacker->getBaseMeleeDamage();
-	if (wp != nullptr) {
-		//Weapon base damage
-		damage = wp->getDamage();
-		//Damage scaling from stats, if any
-		int scalingPercent = attacker->getScalingDamage(wp);
-		damage += (float)scalingPercent / 100.0 * (float)damage;
-	}
+	int damage = attacker->getMeleeDamage();
 
 	//Damage buffs
 	float dbuff = (float)attacker->scaleNextAttack / 100.0;
@@ -1606,6 +1618,7 @@ void game::meleeAttack(person * attacker, person * target)
 	addAnimations(new flashCharacter(target, TCODColor::red));
 	
 	//Next: STATUS EFFECTS
+	weapon* wp = attacker->getWeapon();
 	if (wp != nullptr) {
 		for (int idx = 0; idx < wp->getStatusEffectCount(); idx++) {
 			target->takeStatusEffectDamage(wp->getStatusEffectType(idx), wp->getStatusEffectDamage(idx));
