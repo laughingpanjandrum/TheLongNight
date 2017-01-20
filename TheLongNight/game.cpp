@@ -1140,6 +1140,8 @@ void game::useConsumable()
 					applyEffectToPerson(player, eff, potency);
 				}
 			}
+			//TIME PASSAGE DUDE
+			playerTurnDelay += SPEED_NORMAL;
 		}
 	}
 }

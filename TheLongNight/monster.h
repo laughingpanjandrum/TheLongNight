@@ -22,6 +22,7 @@ public:
 	void setMeleeStats(int damage, int speed);
 	void setMoveStats(int speed);
 	void setDefence(damageType dtype, int defence);
+	void setBleedResist(int br) { bleedBuildup.setMaxValue(br); }
 	void setHealth(int hp);
 	void setSpellPower(int power) { baseSpellPower = power; }
 

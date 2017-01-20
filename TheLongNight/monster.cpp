@@ -204,13 +204,14 @@ monster * monster_TheOldCrow()
 {
 	monster* m = new monster("The Old Crow", CROW_KNIGHT_TILE, TCODColor::lighterCrimson);
 	m->setHealth(400);
-	m->setMoveStats(SPEED_FAST);
+	m->setMoveStats(SPEED_NORMAL);
 	m->equipItem(weapon_CrowKnife());
 	m->addSpellKnown(attack_Quickstep());
 	m->addSpellKnown(attack_Splintering());
 	m->setSpellCastChance(20);
 	m->setFragmentsDropped(400);
 	m->setDefence(DAMAGE_PHYSICAL, 10);
+	m->setBleedResist(45);
 	m->isBoss = true;
 	return m;
 }
