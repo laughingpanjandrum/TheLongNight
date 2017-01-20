@@ -44,9 +44,13 @@ public:
 
 	//Getting particular items
 	weapon* getWeapon() { return equippedWeapon; }
+	weapon* getSecondaryWeapon() { return secondaryWeapon; }
 	weapon* getOffhand() { return equippedOffhand; }
 	armour* getArmour() { return equippedArmour; }
 	armour* getHelmet() { return equippedHelmet; }
+
+	//Weapon swapping
+	weapon* swapWeapon();
 
 	//Spells, which are special
 	bool equipSpell(spell* sp);
@@ -76,6 +80,9 @@ private:
 	armour* equippedArmour;
 	armour* equippedHelmet;
 	consumable* selectedConsumable;
+
+	//Secondary items for quick-swapping
+	weapon* secondaryWeapon;
 
 	//Consumables appear as a list
 	std::vector<consumable*> equippedConsumables;

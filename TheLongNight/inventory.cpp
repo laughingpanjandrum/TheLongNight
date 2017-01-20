@@ -50,6 +50,19 @@ void inventory::unequipItem(item * which)
 	itemTypes cat = which->getCategory();
 }
 
+
+/*
+Switch secondary and equipped weapons.
+Returns the newly-equipped weapon.
+*/
+weapon* inventory::swapWeapon()
+{
+	weapon* temp = equippedWeapon;
+	equippedWeapon = secondaryWeapon;
+	secondaryWeapon = temp;
+	return equippedWeapon;
+}
+
 /*
 Spells have to be equipped onto an item with spellstore.
 Returns whether we were able to equip the spell.

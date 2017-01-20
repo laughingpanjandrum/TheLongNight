@@ -1099,6 +1099,8 @@ void game::processCommand()
 		useConsumable();
 	else if (kp.c == 's')
 		castSpell(player->getCurrentSpell());
+	else if (kp.c == 'd')
+		player->swapWeapon();
 
 	//Movement
 	else if (kp.c == 't')

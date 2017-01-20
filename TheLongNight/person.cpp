@@ -299,14 +299,7 @@ void person::equipItem(item * which)
 
 		if (cat == ITEM_WEAPON || cat == ITEM_OFFHAND) {
 			weapon* wp = static_cast<weapon*>(which);
-			//Special weapon attack is a spell
-			if (wp->getSpecialAttack() != nullptr)
-				addSpellKnown(wp->getSpecialAttack());
-			//See if it contains any spells we can memorize
-			for (auto sp : wp->getSpells())
-				addSpellKnown(sp);
-			//Reset selected spell, just in case the number of spells changed
-			selectedSpell = 0;
+			doWeaponEquip(wp);
 		}
 
 		else if (cat == ITEM_BODY_ARMOUR || cat == ITEM_HELMET) {
@@ -328,6 +321,22 @@ void person::equipItem(item * which)
 		}
 
 	}
+}
+
+
+/*
+Switch between primary and secondary weapons.
+*/
+void person::swapWeapon()
+{
+	//Unequip current weapon
+	weapon* wp = items.getWeapon();
+	if (wp != nullptr)
+		unequipItem(wp);
+	//Switch to secondary weapon
+	wp = items.swapWeapon();
+	if (wp != nullptr)
+		doWeaponEquip(wp);
 }
 
 /*
@@ -369,6 +378,22 @@ Add the given item to our items carried.
 bool person::addItem(item * which)
 {
 	return items.addItem(which);
+}
+
+
+/*
+Sets up a newly-equipped weapon.
+*/
+void person::doWeaponEquip(weapon * wp)
+{
+	//Special weapon attack is a spell
+	if (wp->getSpecialAttack() != nullptr)
+		addSpellKnown(wp->getSpecialAttack());
+	//See if it contains any spells we can memorize
+	for (auto sp : wp->getSpells())
+		addSpellKnown(sp);
+	//Reset selected spell, just in case the number of spells changed
+	selectedSpell = 0;
 }
 
 /*

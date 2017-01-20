@@ -91,21 +91,29 @@ public:
 	int getSpellPower();
 	int getDivinePower();
 
-	//Equipment
+	//Equipping and unequipping items
 	std::vector<item*> getItemsOfType(itemTypes category) { return items.getItemList(category); }
 	void equipItem(item* which);
+	void swapWeapon();
 	void unequipItem(item* which);
 	bool addItem(item* which);
-	void cycleConsumable() { items.cycleConsumable(); }
+	void doWeaponEquip(weapon* it);
+
+	//Getting equipped items
 	weapon* getWeapon() { return items.getWeapon(); }
 	weapon* getOffhand() { return items.getOffhand(); }
 	armour* getArmour() { return items.getArmour(); }
 	armour* getHelmet() { return items.getHelmet(); }
+	bool hasItemEquipped(item* it);
+
+	//Consumables
 	consumable* getSelectedConsumable();
 	consumableVector getConsumableList();
+	void cycleConsumable() { items.cycleConsumable(); }
 	void setCurrentConsumable(consumable* c);
-	void restoreItemsToMax();
-	bool hasItemEquipped(item* it);
+	void restoreItemsToMax(); //Replenishes consumables
+
+	//Keys
 	bool hasKey(std::string keyTag);
 
 	//Targeting
