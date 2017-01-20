@@ -159,6 +159,7 @@ weapon * shield_WoodenWyrdShield()
 	weapon* wp = new weapon("Wooden Wyrd Shield", SHIELD_TILE, TCODColor::darkSepia,
 		"The Wyrd hid behind these shields when the Blind King's arrows rained down on them.");
 	wp->setDefence(10);
+	wp->setBleedResist(15);
 	wp->makeOffhand();
 	return wp;
 }

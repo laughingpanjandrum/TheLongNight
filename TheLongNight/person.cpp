@@ -407,7 +407,9 @@ void person::unequipItem(item * which)
 			if (wp->getSpecialAttack() != nullptr)
 				removeSpellKnown(wp->getSpecialAttack());
 			for (auto sp : wp->getSpells())
-				removeSpellKnown(sp);		
+				removeSpellKnown(sp);
+			//Remove resistances
+			bleedBuildup.increaseMaxValue(-wp->getBleedResist(), false);
 		}
 
 		else if (cat == ITEM_BODY_ARMOUR || cat == ITEM_HELMET) {
@@ -448,6 +450,9 @@ void person::doWeaponEquip(weapon * wp)
 		addSpellKnown(sp);
 	//Reset selected spell, just in case the number of spells changed
 	selectedSpell = 0;
+	//Resistances conferred
+	if (wp->getBleedResist() > 0)
+		bleedBuildup.increaseMaxValue(wp->getBleedResist(), false);
 }
 
 /*

@@ -779,6 +779,8 @@ void game::drawInterface(int leftx, int topy)
 	win.write(atx + 2, aty, "Cast current spell", TCODColor::white);
 	win.writec(atx, ++aty, 'q', TCODColor::green);
 	win.write(atx + 2, aty, "Use current consumable", TCODColor::white);
+	win.writec(atx, ++aty, 'T', TCODColor::green);
+	win.write(atx + 2, aty, "Talk to friendly NPC", TCODColor::white);
 
 	//BOSS HEALTH BAR, if we're fighting a boss
 	atx = MAP_DRAW_X;
@@ -1027,6 +1029,11 @@ void game::drawWeaponInfo(weapon * it, int atx, int aty)
 	if (it->getDefence() > 0) {
 		win.write(atx, ++aty, "DEFENCE", TCODColor::sepia);
 		win.write(atx + offset, aty, std::to_string(it->getDefence()), maincol);
+	}
+	//Bleed resist
+	if (it->getBleedResist() > 0) {
+		win.write(atx, ++aty, "BLEED Resist", TCODColor::crimson);
+		win.write(atx + offset, aty, std::to_string(it->getBleedResist()), maincol);
 	}
 	//Magic attributes, if any
 	if (it->getSpellstoreSize()) {
