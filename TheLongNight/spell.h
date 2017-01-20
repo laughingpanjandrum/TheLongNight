@@ -12,6 +12,8 @@ public:
 	//Constructors
 	spell() : item() {}
 	spell(std::string name, int tileCode, TCODColor color, std::string description = "");
+	//This is for quickly constructing spells for ranged weapon attacks
+	spell(int attackRange, int physDamage, effect otherEffect = NULL_EFFECT, int otherEffectPotency = 0);
 	~spell();
 
 	//Setting
@@ -56,10 +58,6 @@ spell* attack_Knockback();
 //Wand/chime powers
 spell* ability_PowerSurge();
 spell* ability_DivineFavour();
-
-//Thrown weapon attacks
-spell* attack_ThrowingKnives();
-spell* attack_LaceratingKnives();
 
 //Arcane spells
 spell* spell_MagicMissile();

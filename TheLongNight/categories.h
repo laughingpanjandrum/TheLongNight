@@ -49,6 +49,7 @@ const int SPEED_FAST = 1;
 //Effects
 
 enum effect {
+	NULL_EFFECT,
 	//Interface effects (for PC only)
 	ALLOW_INVENTORY_MANAGEMENT, SET_SAVE_POINT, UNLOCK_ADJACENT_DOORS, CHECK_FOR_UNLOCK,
 	//Nice effects

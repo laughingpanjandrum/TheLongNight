@@ -1,10 +1,20 @@
 #include "spell.h"
 
 
-
+//Standard constructor
 spell::spell(std::string name, int tileCode, TCODColor color, std::string description) :
 	item(name, tileCode, color, ITEM_SPELL, description)
 {
+}
+
+//Quick-and-dirty constructor for creating ranged-weapon-attack spells
+spell::spell(int attackRange, int physDamage, effect otherEffect, int otherEffectPotency) :
+	attackRange(attackRange), aType(ATTACK_RANGE)
+{
+	if (physDamage > 0)
+		addEffect(APPLY_PHYSICAL_DAMAGE, physDamage);
+	if (otherEffect != NULL_EFFECT)
+		addEffect(otherEffect, otherEffectPotency);
 }
 
 spell::~spell()
@@ -97,26 +107,6 @@ spell * ability_DivineFavour()
 	return sp;
 }
 
-//Thrown weapon spells
-
-spell * attack_ThrowingKnives()
-{
-	spell* sp = new spell("Throwing Knives", DAGGER_TILE, TCODColor::lightGrey);
-	sp->setAttackType(ATTACK_RANGE);
-	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 25);
-	sp->setAttackRange(5);
-	return sp;
-}
-
-spell * attack_LaceratingKnives()
-{
-	spell* sp = new spell("Lacerating Knives", DAGGER_TILE, TCODColor::lightCrimson);
-	sp->setAttackType(ATTACK_RANGE);
-	sp->addEffect(APPLY_BLEED_DAMAGE, 20);
-	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 10);
-	sp->setAttackRange(5);
-	return sp;
-}
 
 //Spells
 
