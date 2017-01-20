@@ -80,7 +80,7 @@ Returns reduction to physical damage as an int out of 100%.
 int person::getDefence()
 {
 	//Base reduction
-	int base = 0;
+	int base = baseDefence;
 	//Bonus from armour
 	armour* ar = getArmour();
 	if (ar != nullptr)

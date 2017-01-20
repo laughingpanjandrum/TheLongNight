@@ -129,7 +129,8 @@ protected:
 	int baseAttackSpeed = SPEED_NORMAL; //how quickly we attack bare-handed
 	int baseMoveSpeed = SPEED_FAST; //how quickly we move if unarmoured
 
-	//Resistances
+	//Resistances/defence
+	int baseDefence = 0;
 	std::vector<int> damageResist;
 
 	//Status effects

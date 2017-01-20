@@ -66,6 +66,7 @@ public:
 
 	//Spawning
 	void respawnAllMonsters();
+	bool bossDestroyed = false;
 
 	//FOV/pathfinding stuff
 	void updateFOV(int xpos, int ypos);

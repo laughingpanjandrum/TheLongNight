@@ -763,7 +763,7 @@ void game::drawInterface(int leftx, int topy)
 	win.writec(atx, aty, 'a', TCODColor::green);
 	win.write(atx + 2, aty, "Select spell", TCODColor::white);
 	win.writec(atx, ++aty, 'c', TCODColor::green);
-	win.write(atx + 2, aty, "Cycle selected consumable", TCODColor::white);
+	win.write(atx + 2, aty, "Select consumable", TCODColor::white);
 	win.writec(atx, ++aty, 't', TCODColor::green);
 	win.write(atx + 2, aty, "Toggle targeting mode", TCODColor::white);
 	win.writec(atx, ++aty, 's', TCODColor::green);
@@ -1964,6 +1964,8 @@ void game::clearDeadCreatures()
 			if (p == currentBoss) {
 				bossKillMessage();
 				currentBoss = nullptr;
+				//Toggle setting on map so the boss won't respawn
+				currentMap->bossDestroyed = true;
 			}
 		}
 
@@ -2089,5 +2091,29 @@ void game::debugMenu()
 		player->addItem(consumable_StarwaterDraught());
 		fragments += 320;
 		loadMapFromHandle("maps/old_fairweather.txt", CONNECT_WARP, player->getx(), player->gety());
+	}
+	else if (txt == "oldcrow") {
+		player->addItem(weapon_SplinteredSword());
+		player->addItem(weapon_ThinKnife());
+		player->addItem(weapon_StraightSword());
+		player->addItem(weapon_Warhammer());
+		player->addItem(armour_RuinedUniform());
+		player->addItem(headgear_CaptainsTricorn());
+		player->addItem(armour_RuinedKnightsArmour());
+		player->addItem(headgear_RuinedKnightsHelm());
+		player->addItem(headgear_CrowKnightsHood());
+		player->addItem(armour_CrowKnightsArmour());
+		player->addItem(spell_MagicMissile());
+		player->addItem(spell_ArcaneRadiance());
+		player->addItem(wand_DriftwoodWand());
+		player->addItem(ranged_ThrowingKnives());
+		player->addItem(ranged_LaceratingKnives());
+		player->addItem(shield_BatteredWoodenShield());
+		player->addItem(consumable_StarwaterDraught());
+		player->addItem(consumable_StarwaterDraught());
+		player->addItem(consumable_StarwaterDraught());
+		player->addItem(consumable_StarwaterDraught());
+		fragments += 500;
+		loadMapFromHandle("maps/pilgrims_road_5.txt", CONNECT_WARP, player->getx(), player->gety());
 	}
 }

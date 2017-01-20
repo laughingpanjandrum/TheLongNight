@@ -186,9 +186,13 @@ void map::respawnAllMonsters()
 	people.clear();
 	//Spawn anew
 	for (int i = 0; i < monsterSpawnTags.size(); i++) {
+		//Get monster corresponding to this tag
 		monster* m = getMonsterByHandle(monsterSpawnTags.at(i));
-		coord c = monsterSpawnCoords.at(i);
-		addPerson(m, c.first, c.second);
+		//Make sure we don't respawn the boss!
+		if (!bossDestroyed || !m->isBoss) {
+			coord c = monsterSpawnCoords.at(i);
+			addPerson(m, c.first, c.second);
+		}
 	}
 }
 

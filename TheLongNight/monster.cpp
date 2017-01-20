@@ -31,6 +31,17 @@ void monster::setMoveStats(int speed)
 	this->baseMoveSpeed = speed;
 }
 
+/*
+Quick and easy way to set defence/damage resist.
+*/
+void monster::setDefence(damageType dtype, int defence)
+{
+	if (dtype == DAMAGE_PHYSICAL)
+		baseDefence = defence;
+	else
+		damageResist.at(dtype) = defence;
+}
+
 void monster::setHealth(int hp)
 {
 	this->health.setTo(hp);
@@ -148,6 +159,7 @@ monster * monster_CrowKnight()
 	m->setMeleeStats(20, SPEED_NORMAL);
 	m->equipItem(weapon_CrowKnightSword());
 	m->setFragmentsDropped(25);
+	m->setDefence(DAMAGE_PHYSICAL, 10);
 	return m;
 }
 
@@ -184,6 +196,22 @@ monster * monster_ForlornCrowKnight()
 	m->addSpellKnown(attack_Quickstep());
 	m->setSpellCastChance(20);
 	m->setFragmentsDropped(100);
+	m->setDefence(DAMAGE_PHYSICAL, 10);
+	return m;
+}
+
+monster * monster_TheOldCrow()
+{
+	monster* m = new monster("The Old Crow", CROW_KNIGHT_TILE, TCODColor::lighterCrimson);
+	m->setHealth(400);
+	m->setMoveStats(SPEED_FAST);
+	m->equipItem(weapon_CrowKnife());
+	m->addSpellKnown(attack_Quickstep());
+	m->addSpellKnown(attack_Splintering());
+	m->setSpellCastChance(20);
+	m->setFragmentsDropped(400);
+	m->setDefence(DAMAGE_PHYSICAL, 10);
+	m->isBoss = true;
 	return m;
 }
 
@@ -216,6 +244,8 @@ monster * getMonsterByHandle(std::string handle)
 		return monster_CrowArcher();
 	else if (handle == "forlorn_crow_knight")
 		return monster_ForlornCrowKnight();
+	else if (handle == "the_old_crow")
+		return monster_TheOldCrow();
 
 	//LET'S HOPE WE NEVER GET HERE!
 	return nullptr;

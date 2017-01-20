@@ -19,6 +19,7 @@ D water_deep
 W wall_wood
 -endcodes
 -connections
+north:pilgrims_road_5
 south:pilgrims_road_3
 west:pilgrims_road_1
 -endconnections

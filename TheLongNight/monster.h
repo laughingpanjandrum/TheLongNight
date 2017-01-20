@@ -21,6 +21,7 @@ public:
 	//Setting
 	void setMeleeStats(int damage, int speed);
 	void setMoveStats(int speed);
+	void setDefence(damageType dtype, int defence);
 	void setHealth(int hp);
 	void setSpellPower(int power) { baseSpellPower = power; }
 
@@ -78,6 +79,7 @@ monster* monster_CrowKnight();
 monster* monster_CrowThief();
 monster* monster_CrowArcher();
 monster* monster_ForlornCrowKnight();
+monster* monster_TheOldCrow();
 
 monster* getMonsterByHandle(std::string handle);
 
