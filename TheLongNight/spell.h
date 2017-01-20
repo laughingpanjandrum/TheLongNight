@@ -33,6 +33,7 @@ public:
 	//Flags
 	bool usesSpellPower = false;
 	bool usesDivinePower = false;
+	bool addPermanentBuff = false;
 
 private:
 
@@ -66,6 +67,7 @@ spell* spell_ArcaneRadiance();
 
 //Prayers
 spell* prayer_Restoration();
+spell* prayer_WyrdChantOfStrength();
 
 //Monster abilities
 spell* ability_Charge();

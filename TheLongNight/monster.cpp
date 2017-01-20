@@ -244,12 +244,13 @@ monster * monster_TheOldCrow()
 
 monster * npc_Gorem()
 {
-	monster* m = new monster("Gorem, Ancient of Wyrd", GOREM_TILE, TCODColor::darkGrey);
+	monster* m = new monster("Gorem, Ancient of Wyrd", GOREM_TILE, TCODColor::lighterGrey);
 	m->setHealth(800);
 	m->isShopkeeper = true;
 	m->isHostile = false;
 	m->addItemToStock(shield_WoodenWyrdShield(), 25);
 	m->addItemToStock(chime_WyrdBellbranch(), 50);
+	m->addItemToStock(prayer_WyrdChantOfStrength(), 25);
 	return m;
 }
 

@@ -868,6 +868,12 @@ void game::drawPlayerInfo(int atx, int aty)
 	win.write(atx + offset, aty, std::to_string(player->getSpellPower()), TCODColor::magenta);
 	win.write(atx, ++aty, "DIVINE POWER", mainCol);
 	win.write(atx + offset, aty, std::to_string(player->getDivinePower()), TCODColor::darkYellow);
+	aty++;
+
+	//List buffs
+	for (auto b : player->getAllBuffs()) {
+		win.write(atx, ++aty, b->name, b->color);
+	}
 	
 	//Done! Wait for input
 	win.refresh();
@@ -1270,10 +1276,16 @@ void game::applyEffectToPerson(person * target, effect eff, int potency)
 	else if (eff == ADD_HEALTH_TRICKLE)
 		target->healthTrickle += potency;
 
+	//Defensive buffs
+	else if (eff == GAIN_DEFENCE)
+		target->addDefence(potency);
+
 	//Damage effects
 
 	else if (eff == APPLY_PHYSICAL_DAMAGE)
-		target->takeDamage(potency);
+		target->takeDamage(potency, DAMAGE_PHYSICAL);
+	else if (eff == APPLY_MAGIC_DAMAGE)
+		target->takeDamage(potency, DAMAGE_MAGIC);
 	else if (eff == APPLY_BLEED_DAMAGE)
 		target->takeStatusEffectDamage(EFFECT_BLEED, potency);
 
@@ -1806,13 +1818,17 @@ Spell actually affects the target
 */
 void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 {
+	
 	//No message if this is a self-buff
 	if (caster != target)
 		addMessage(caster->getName() + " hits " + target->getName() + " with " + sp->getName() + "!", sp->getColor());
+	
 	//Iterate through all effects
 	for (int idx = 0; idx < sp->getEffectsCount(); idx++) {
+		
 		//Amount of damage (or whatever numeric value we require) the spell does
 		int potency = sp->getEffectPotency(idx);
+		
 		if (sp->usesSpellPower) {
 			//Sometimes scales with spell power
 			int spellPower = caster->getSpellPower();
@@ -1823,6 +1839,7 @@ void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 			}
 			potency = (float)potency * ((float)spellPower / 100);
 		}
+		
 		if (sp->usesDivinePower) {
 			//Or with divine power
 			int divPower = caster->getDivinePower();
@@ -1833,11 +1850,27 @@ void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 			}
 			potency = (float)potency * ((float)divPower / 100);
 		}
-		//Apply the actual effect
-		applyEffectToPerson(target, sp->getEffectType(idx), potency);
+
+		//Permanent buff or temporary?
+		if (sp->addPermanentBuff) {
+			//Permanent buffs need to be tracked
+			if (target->addBuff(sp->getName(), sp->getColor(), sp->getEffectType(idx), potency)) {
+				applyEffectToPerson(target, sp->getEffectType(idx), potency);
+				//This is when the caster expends their vigour
+				caster->loseVigour(sp->getVigourCost());
+			}
+			else {
+				addMessage("You cannot stack this buff!", TCODColor::white);
+			}
+		}
+		else {
+			//Just a buff!
+			applyEffectToPerson(target, sp->getEffectType(idx), potency);
+			//This is when the caster expends their vigour
+			caster->loseVigour(sp->getVigourCost());
+		}
+	
 	}
-	//This is when the caster expends their vigour
-	caster->loseVigour(sp->getVigourCost());
 }
 
 
@@ -2106,6 +2139,7 @@ Returns player to save point.
 void game::restoreFromSavePoint()
 {
 	//Resurrect player
+	deletePlayerBuffs();
 	player->fullRestore();
 	player->isDead = false;
 	player->setTarget(nullptr);
@@ -2113,6 +2147,18 @@ void game::restoreFromSavePoint()
 	loadNewMap(ourSavePt.saveMap, CONNECT_VERTICAL, ourSavePt.savePt.first, ourSavePt.savePt.second);
 	//Put us back in the clock
 	turns.addEntity(player, 0);
+}
+
+
+/*
+Buffs are fully reset.
+*/
+void game::deletePlayerBuffs()
+{
+	for (auto b : player->getAllBuffs()) {
+		//Negative buff is applied!
+		applyEffectToPerson(player, b->effectApplied, -b->potency);
+	}
 }
 
 

@@ -202,6 +202,7 @@ private:
 	savePoint ourSavePt;
 	void setSavePoint();
 	void restoreFromSavePoint();
+	void deletePlayerBuffs();
 
 	//Coordinate conversions
 	coord screenToMapCoords(coord pt);

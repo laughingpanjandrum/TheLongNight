@@ -10,6 +10,24 @@
 #include "weapon.h"
 #include "consumable.h"
 
+
+/*
+Buff struct.
+This mostly exists to ensure that buffs can be REMOVED properly
+and so that we can't stack identical buffs.
+*/
+struct buff {
+	buff(std::string name, TCODColor color, effect effectApplied, int potency) :
+		name(name), color(color), effectApplied(effectApplied), potency(potency) {}
+	std::string name; //Buffs with the same name won't stack.
+	TCODColor color;
+	effect effectApplied;
+	int potency;
+};
+
+typedef std::vector<buff*> buffVector;
+
+
 /*
 Struct for keeping track of a character with a statblock.
 i.e. the PC.
@@ -57,6 +75,7 @@ public:
 	void setMaxHealth(int h) { health.setTo(h); }
 	void setMaxVigour(int v) { vigour.setTo(v); }
 	void addDamageResist(damageType dtype, int amount) { damageResist.at(dtype) += amount; }
+	void addDefence(int amount) { baseDefence += amount; }
 
 	//Taking damage and healing
 	void addHealth(int amount);
@@ -71,7 +90,15 @@ public:
 	counter* getSpecialEffectBuildup(statusEffects eff);
 	int getBleedDuration() { return isBleeding; }
 
-	//Buffing
+	//Permanent buffs
+	bool canAddBuff(buff* b);
+	bool addBuff(buff* b) { buffs.push_back(b); return true; }
+	bool addBuff(std::string name, TCODColor color, effect eType, int potency);
+	void removeBuff(buff* b);
+	void clearBuffs() { buffs.clear(); }
+	buffVector getAllBuffs() { return buffs; }
+
+	//Buffing attack
 	void clearFreeMoves() { freeMoves = 0; }
 	void gainFreeMoves(int f) { freeMoves += f; }
 	bool hasFreeMoves() { return freeMoves > 0; }
@@ -148,6 +175,7 @@ protected:
 	counter bleedBuildup;
 
 	//Buffs
+	buffVector buffs;
 	int freeMoves = 0; //While this is >0, our move delay is zero; this ticks down each time we move.
 
 	//Equipment

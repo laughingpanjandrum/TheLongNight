@@ -148,10 +148,15 @@ Fully restores all of our attributes and items.
 */
 void person::fullRestore()
 {
+	//Remove buffs
+	clearBuffs();
+	//Replenish health
 	health.restore();
 	vigour.restore();
+	//Remove status effects
 	bleedBuildup.clear();
 	isBleeding = 0;
+	//Replenish items
 	restoreItemsToMax();
 }
 
@@ -175,6 +180,53 @@ counter* person::getSpecialEffectBuildup(statusEffects eff)
 	}
 	return new counter();
 }
+
+
+
+/*
+	PERMANENT BUFFS
+*/
+
+
+/*
+We can't add a new buff if we already have one with the same name.
+*/
+bool person::canAddBuff(buff* b)
+{
+	for (auto b2 : buffs) {
+		if (b2->name == b->name)
+			return false;
+	}
+	return true;
+}
+
+/*
+Creates and adds a buff.
+This one first makes sure that we CAN have the buff, then adds it.
+Returns whether the buff was properly added.
+*/
+bool person::addBuff(std::string name, TCODColor color, effect eType, int potency)
+{
+	buff* b = new buff(name, color, eType, potency);
+	if (canAddBuff(b)) {
+		addBuff(b);
+		return true;
+	}
+	return false;
+}
+
+/*
+Deletes a specific buff ELEMENT
+This does not actually clear the buff!
+*/
+void person::removeBuff(buff* b)
+{
+	auto iter = std::find(buffs.begin(), buffs.end(), b);
+	if (iter != buffs.end())
+		buffs.erase(iter);
+}
+
+
 
 /*
 	MAGIC

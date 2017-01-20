@@ -125,7 +125,7 @@ spell * spell_MagicMissile()
 	spell* sp = new spell("Magic Missile", SPELL_TILE, TCODColor::magenta,
 		"Attack deals magic damage.");
 	sp->setAttackType(ATTACK_RANGE);
-	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 50);
+	sp->addEffect(APPLY_MAGIC_DAMAGE, 50);
 	sp->setAttackRange(5);
 	sp->setVigourCost(1);
 	sp->usesSpellPower = true;
@@ -154,6 +154,18 @@ spell * prayer_Restoration()
 	sp->addEffect(RESTORE_HEALTH, 25);
 	sp->setVigourCost(2);
 	sp->usesDivinePower = true;
+	return sp;
+}
+
+spell * prayer_WyrdChantOfStrength()
+{
+	spell* sp = new spell("Wyrd Chant of Strength", SPELL_TILE, TCODColor::darkGreen,
+		"Increases defence by 10%.");
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(GAIN_DEFENCE, 10);
+	sp->setVigourCost(2);
+	sp->usesDivinePower = true;
+	sp->addPermanentBuff = true;
 	return sp;
 }
 
