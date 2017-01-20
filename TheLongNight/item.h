@@ -21,6 +21,11 @@ public:
 	virtual int getAmountLeft() { return 1; }
 	virtual const int isEquippable() { return true; }
 
+	//Universal attributes: getting
+	int getDefence() { return defence; }
+	int getDamageResist(damageType dtype) { return damageResist.at(dtype); }
+	int getBleedResist() { return bleedResist; }
+
 	//Stacking
 	virtual const bool isStackable() { return false; }
 	virtual const void add(int amount) {}
@@ -37,6 +42,11 @@ protected:
 
 	//Shopkeeping
 	int price = 0;
+
+	//Any item can have these attributes
+	int defence = 0;
+	int bleedResist = 0;
+	std::vector<int> damageResist;
 
 };
 

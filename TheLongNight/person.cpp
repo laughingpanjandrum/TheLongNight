@@ -351,27 +351,33 @@ void person::equipItem(item * which)
 	if (equipped) {
 		itemTypes cat = which->getCategory();
 
+		//Specific item type stuff
 		if (cat == ITEM_WEAPON || cat == ITEM_OFFHAND) {
 			weapon* wp = static_cast<weapon*>(which);
 			doWeaponEquip(wp);
 		}
-
-		else if (cat == ITEM_BODY_ARMOUR || cat == ITEM_HELMET) {
-			armour* ar = static_cast<armour*>(which);
-			//Damage resistances
-			for (int r = 0; r != ALL_DAMAGE_TYPES; r++) {
-				damageType dr = static_cast<damageType>(r);
-				addDamageResist(dr, ar->getDamageResist(dr));
-			}
-			//Status effect resistances
-			int bleedResist = ar->getBleedResist();
-			if (bleedResist)
-				bleedBuildup.increaseMaxValue(bleedResist, false);
-		}
-
 		else if (cat == ITEM_SPELL) {
 			//Update our spellstore if the item was successfully equipped
 			addSpellKnown(static_cast<spell*>(which));
+		}
+
+		/*
+		Numerous item types can apply these effects
+		*/
+
+		if (cat == ITEM_WEAPON || cat == ITEM_BODY_ARMOUR || cat == ITEM_HELMET || cat == ITEM_CHARM) {
+
+			//Damage resistances
+			for (int r = 0; r != ALL_DAMAGE_TYPES; r++) {
+				damageType dr = static_cast<damageType>(r);
+				addDamageResist(dr, which->getDamageResist(dr));
+			}
+
+			//Status effect resistances
+			int bleedResist = which->getBleedResist();
+			if (bleedResist)
+				bleedBuildup.increaseMaxValue(bleedResist, false);
+		
 		}
 
 	}

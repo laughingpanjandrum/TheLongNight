@@ -34,8 +34,6 @@ public:
 	//Getting
 	int getDamage() { return damage; }
 	int getAttackDelay() { return attackDelay; }
-	int getDefence() { return defence; }
-	int getBleedResist() { return bleedResist; }
 	spell* getSpecialAttack() { return specialAttack; }
 
 	//Spell stuff
@@ -60,10 +58,6 @@ private:
 	//Weapon deetz
 	int damage;
 	int attackDelay;
-
-	//Defensive stats
-	int defence = 0;
-	int bleedResist = 0;
 
 	//Special attack
 	spell* specialAttack;

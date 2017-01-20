@@ -9,6 +9,7 @@
 #include "categories.h"
 #include "weapon.h"
 #include "consumable.h"
+#include "charm.h"
 
 
 /*

@@ -6,8 +6,6 @@
 armour::armour(std::string name, int tileCode, TCODColor color, itemTypes slot, std::string description) :
 	item(name, tileCode, color, slot, description)
 {
-	for (int r = 0; r != ALL_DAMAGE_TYPES; r++)
-		damageResist.push_back(0);
 }
 
 armour::~armour()

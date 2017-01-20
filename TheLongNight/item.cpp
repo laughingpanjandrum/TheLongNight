@@ -8,6 +8,9 @@ item::item(std::string name, int tileCode, TCODColor color, itemTypes category, 
 	: item(name, tileCode, color, description)
 {
 	this->category = category;
+	//Damage resistance list
+	for (int r = 0; r != ALL_DAMAGE_TYPES; r++)
+		damageResist.push_back(0);
 }
 
 item::~item()

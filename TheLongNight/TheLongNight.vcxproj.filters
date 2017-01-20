@@ -99,6 +99,9 @@
     <ClCompile Include="miscItem.cpp">
       <Filter>Source Files\elements</Filter>
     </ClCompile>
+    <ClCompile Include="charm.cpp">
+      <Filter>Source Files\elements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window.h">
@@ -171,6 +174,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="miscItem.h">
+      <Filter>Header Files\elements</Filter>
+    </ClInclude>
+    <ClInclude Include="charm.h">
       <Filter>Header Files\elements</Filter>
     </ClInclude>
   </ItemGroup>

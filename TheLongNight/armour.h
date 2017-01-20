@@ -21,18 +21,12 @@ public:
 	void setBleedResist(int r) { bleedResist = r; }
 
 	//Getting
-	int getDefence() { return defence; }
-	int getDamageResist(damageType dtype) { return damageResist.at(dtype); }
 	int getMoveSpeed() { return moveSpeed; }
-	int getBleedResist() { return bleedResist; }
 
 private:
 
 	//Attributes
-	int defence = 0;
-	int bleedResist = 0;
 	int moveSpeed = SPEED_NORMAL;
-	std::vector<int> damageResist;
 
 };
 

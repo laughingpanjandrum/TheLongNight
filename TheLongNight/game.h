@@ -173,6 +173,7 @@ private:
 	void createInventoryMenu();
 	void selectInventoryCategory(itemTypes cat);
 	void getDeathDrops(monster* m);
+	void equipItem(item* it);
 
 	//Spellcasting
 	void doRangedSpell(spell* sp);

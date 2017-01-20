@@ -519,7 +519,7 @@ void game::acceptCurrentMenuIndex()
 		//Equip the selected item
 		item* sel = static_cast<item*>(currentMenu->getSelectedItem());
 		if (sel != nullptr)
-			player->equipItem(sel);
+			equipItem(sel);
 	}
 	else if (state == STATE_LEVEL_UP_MENU)
 		doLevelUp();
@@ -1244,27 +1244,22 @@ void game::applyEffectToPerson(person * target, effect eff, int potency)
 	
 	//Interface stuff for PCs only
 	
-	if (eff == ALLOW_INVENTORY_MANAGEMENT && target->isPlayer) {
+	if (eff == ALLOW_INVENTORY_MANAGEMENT && target->isPlayer)
 		//Can manage inventory when we step on this tile
 		createInventoryMenu();
-	}
-	else if (eff == SET_SAVE_POINT && target->isPlayer) {
+	else if (eff == SET_SAVE_POINT && target->isPlayer)
 		//This is a save point; we'll respawn here on death
 		setSavePoint();
-	}
-	else if (eff == UNLOCK_ADJACENT_DOORS && target->isPlayer) {
+	else if (eff == UNLOCK_ADJACENT_DOORS && target->isPlayer)
 		//Auto-unlock adjacent doors
 		unlockAdjacentTiles(target->getx(), target->gety());
-	}
 	else if (eff == CHECK_FOR_UNLOCK && target->isPlayer)
 		tryUnlockDoor(target->getx(), target->gety());
 
 	//Restoratives
 
-	else if (eff == FULL_RESTORE) {
-		//Restore all attributes to max
+	else if (eff == FULL_RESTORE)
 		target->fullRestore();
-	}
 	else if (eff == RESTORE_HEALTH)
 		target->addHealth(potency);
 	else if (eff == RESTORE_VIGOUR)
@@ -1284,6 +1279,7 @@ void game::applyEffectToPerson(person * target, effect eff, int potency)
 		target->healthTrickle += potency;
 
 	//Defensive buffs
+
 	else if (eff == GAIN_DEFENCE)
 		target->addDefence(potency);
 
@@ -1749,6 +1745,15 @@ void game::getDeathDrops(monster * m)
 	}
 	//Fragments
 	fragments += m->getFragmentsDropped();
+}
+
+
+/*
+Equip the selected item.
+*/
+void game::equipItem(item * it)
+{
+	player->equipItem(it);
 }
 
 
