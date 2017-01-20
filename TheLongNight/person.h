@@ -78,6 +78,7 @@ public:
 	void useFreeMove() { freeMoves--; }
 	int scaleNextAttack = 0; //Percent damage bonus damage added to next attack
 	int scaleNextSpell = 0; //Buff to next spell cast
+	int scaleNextPrayer = 0; //Buff to next prayer cast
 	int healthTrickle = 0; //We get 1 point of this per tick until it runs out
 
 	//Magic

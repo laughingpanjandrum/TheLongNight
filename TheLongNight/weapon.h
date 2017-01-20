@@ -94,9 +94,11 @@ weapon* weapon_CrowHalfsword();
 
 //Shields
 weapon* shield_BatteredWoodenShield();
+weapon* shield_WoodenWyrdShield();
 
 //Wands/chimes
 weapon* wand_DriftwoodWand();
 weapon* chime_ClericsCrackedChime();
+weapon* chime_WyrdBellbranch();
 
 #endif

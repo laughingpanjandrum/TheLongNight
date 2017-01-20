@@ -107,6 +107,16 @@ spell * ability_DivineFavour()
 	return sp;
 }
 
+spell * ability_WyrdChannel()
+{
+	spell* sp = new spell("Wyrd Channel", SWORD_TILE, TCODColor::lightSepia,
+		"Next prayer has 150% power.");
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(SCALE_NEXT_PRAYER, 50);
+	sp->setVigourCost(1);
+	return sp;
+}
+
 
 //Spells
 

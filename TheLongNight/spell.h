@@ -58,6 +58,7 @@ spell* attack_Knockback();
 //Wand/chime powers
 spell* ability_PowerSurge();
 spell* ability_DivineFavour();
+spell* ability_WyrdChannel();
 
 //Arcane spells
 spell* spell_MagicMissile();

@@ -1265,6 +1265,8 @@ void game::applyEffectToPerson(person * target, effect eff, int potency)
 		target->scaleNextAttack = potency;
 	else if (eff == SCALE_NEXT_SPELL)
 		target->scaleNextSpell = potency;
+	else if (eff == SCALE_NEXT_PRAYER)
+		target->scaleNextPrayer = potency;
 	else if (eff == ADD_HEALTH_TRICKLE)
 		target->healthTrickle += potency;
 
@@ -1824,6 +1826,11 @@ void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 		if (sp->usesDivinePower) {
 			//Or with divine power
 			int divPower = caster->getDivinePower();
+			//Check for temporary buff
+			if (player->scaleNextPrayer > 0) {
+				divPower += player->scaleNextPrayer;
+				player->scaleNextPrayer = 0;
+			}
 			potency = (float)potency * ((float)divPower / 100);
 		}
 		//Apply the actual effect
@@ -2191,6 +2198,8 @@ void game::debugMenu()
 		player->addItem(wand_DriftwoodWand());
 		player->addItem(ranged_ThrowingKnives());
 		player->addItem(shield_BatteredWoodenShield());
+		player->addItem(chime_ClericsCrackedChime());
+		player->addItem(prayer_Restoration());
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());
@@ -2214,6 +2223,8 @@ void game::debugMenu()
 		player->addItem(ranged_ThrowingKnives());
 		player->addItem(ranged_LaceratingKnives());
 		player->addItem(shield_BatteredWoodenShield());
+		player->addItem(chime_ClericsCrackedChime());
+		player->addItem(prayer_Restoration());
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());

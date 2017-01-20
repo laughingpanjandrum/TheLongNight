@@ -154,6 +154,15 @@ weapon * shield_BatteredWoodenShield()
 	return wp;
 }
 
+weapon * shield_WoodenWyrdShield()
+{
+	weapon* wp = new weapon("Wooden Wyrd Shield", SHIELD_TILE, TCODColor::darkSepia,
+		"The Wyrd hid behind these shields when the Blind King's arrows rained down on them.");
+	wp->setDefence(10);
+	wp->makeOffhand();
+	return wp;
+}
+
 //		Wands
 
 weapon * wand_DriftwoodWand()
@@ -177,5 +186,17 @@ weapon * chime_ClericsCrackedChime()
 	wp->setDivinePower(100);
 	wp->makeOffhand();
 	wp->setSpecialAttack(ability_DivineFavour());
+	return wp;
+}
+
+weapon * chime_WyrdBellbranch()
+{
+	weapon* wp = new weapon("Wyrd Bellbranch", SWORD_TILE, TCODColor::sepia,
+		"The trees of the Wyrd once grew tiny singing bells on their branches.");
+	wp->setBasicAttributes(5, SPEED_SLOW);
+	wp->setSpellstoreSize(1);
+	wp->setDivinePower(100);
+	wp->setSpecialAttack(ability_WyrdChannel());
+	wp->makeOffhand();
 	return wp;
 }

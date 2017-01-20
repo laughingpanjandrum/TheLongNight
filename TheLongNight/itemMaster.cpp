@@ -24,6 +24,8 @@ item * getItemByHandle(std::string handle)
 	//SHIELDS
 	else if (handle == "battered_wooden_shield")
 		return shield_BatteredWoodenShield();
+	else if (handle == "wooden_wyrd_shield")
+		return shield_WoodenWyrdShield();
 
 	//WANDS/CHIMES
 	else if (handle == "driftwood_wand")
