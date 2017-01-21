@@ -237,6 +237,22 @@ monster * monster_TheOldCrow()
 	return m;
 }
 
+//Flooded Lowlands
+
+monster * monster_StarvingFishman()
+{
+	monster* m = new monster("Starving Fishman", FISHMAN_TILE, TCODColor::lightGreen);
+	m->setHealth(50);
+	m->setDefence(DAMAGE_PHYSICAL, 20);
+	m->setMeleeStats(50, SPEED_SLOW);
+	m->setMoveStats(SPEED_NORMAL);
+	m->addSpellKnown(ability_AcidSpit());
+	m->setSpellCastChance(15);
+	m->setBleedResist(60);
+	m->setFragmentsDropped(25);
+	return m;
+}
+
 /*
 	FRIENDLIES
 */
@@ -286,6 +302,10 @@ monster * getMonsterByHandle(std::string handle)
 		return monster_ForlornCrowKnight();
 	else if (handle == "the_old_crow")
 		return monster_TheOldCrow();
+
+	//Flooded Lowlands
+	else if (handle == "starving_fishman")
+		return monster_StarvingFishman();
 
 	//Friendly NPCs
 	else if (handle == "gorem")

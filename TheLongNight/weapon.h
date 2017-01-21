@@ -96,9 +96,11 @@ weapon* weapon_NotchedGreatsword();
 //Shields
 weapon* shield_BatteredWoodenShield();
 weapon* shield_WoodenWyrdShield();
+weapon* shield_BatteredSteelShield();
 
 //Wands/chimes
 weapon* wand_DriftwoodWand();
+weapon* wand_FishmansToadstaff();
 weapon* chime_ClericsCrackedChime();
 weapon* chime_WyrdBellbranch();
 

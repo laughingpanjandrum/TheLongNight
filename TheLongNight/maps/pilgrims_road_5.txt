@@ -19,6 +19,7 @@ W wall_wood
 & crow_door
 -endcodes
 -connections
+north:flooded_lowlands_1
 south:pilgrims_road_4
 -endconnections
 ;;;;;;#;;;;;;;;;;;;#;;;;;;;;;;;;;;;;;;;;

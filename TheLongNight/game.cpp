@@ -434,10 +434,13 @@ void game::aiFindTarget(monster * ai)
 {
 	//If the player can see us, we can see them. ONE SIMPLE RULE.
 	if (currentMap->isPointInFOV(ai->getx(), ai->gety())) {
-		ai->setTarget(player);
-		//If we are a BOSS, it looks like a BOSS FIGHT just started
-		if (ai->isBoss)
-			setBoss(ai);
+		int dist = hypot(player->getx() - ai->getx(), player->gety() - ai->gety());
+		if (dist <= 12) {
+			ai->setTarget(player);
+			//If we are a BOSS, it looks like a BOSS FIGHT just started
+			if (ai->isBoss)
+				setBoss(ai);
+		}
 	}
 }
 
@@ -1320,6 +1323,8 @@ void game::applyEffectToPerson(person * target, effect eff, int potency, person*
 		target->takeDamage(potency, DAMAGE_PHYSICAL);
 	else if (eff == APPLY_MAGIC_DAMAGE)
 		target->takeDamage(potency, DAMAGE_MAGIC);
+	else if (eff == APPLY_ACID_DAMAGE)
+		target->takeDamage(potency, DAMAGE_ACID);
 	else if (eff == APPLY_BLEED_DAMAGE)
 		target->takeStatusEffectDamage(EFFECT_BLEED, potency);
 
@@ -1898,8 +1903,13 @@ void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 			}
 		}
 		else {
-			//Just a buff!
+			//Just a normal spell casting
 			applyEffectToPerson(target, sp->getEffectType(idx), potency, caster);
+			//Infusions apply extra effects
+			if (caster->spellAcidInfusion) {
+				target->takeDamage(caster->spellAcidInfusion, DAMAGE_ACID);
+				caster->spellAcidInfusion = 0;
+			}
 			//This is when the caster expends their vigour
 			caster->loseVigour(sp->getVigourCost());
 		}
@@ -2312,5 +2322,31 @@ void game::debugMenu()
 		player->addItem(weapon_NotchedGreatsword());
 		fragments += 500;
 		loadMapFromHandle("maps/pilgrims_road_5.txt", CONNECT_WARP, player->getx(), player->gety());
+	}
+	else if (txt == "lowlands") {
+		player->addItem(weapon_SplinteredSword());
+		player->addItem(weapon_ThinKnife());
+		player->addItem(weapon_StraightSword());
+		player->addItem(weapon_Warhammer());
+		player->addItem(armour_RuinedUniform());
+		player->addItem(headgear_CaptainsTricorn());
+		player->addItem(armour_RuinedKnightsArmour());
+		player->addItem(headgear_RuinedKnightsHelm());
+		player->addItem(headgear_CrowKnightsHood());
+		player->addItem(armour_CrowKnightsArmour());
+		player->addItem(spell_MagicMissile());
+		player->addItem(spell_ArcaneRadiance());
+		player->addItem(wand_DriftwoodWand());
+		player->addItem(ranged_ThrowingKnives());
+		player->addItem(ranged_LaceratingKnives());
+		player->addItem(shield_BatteredWoodenShield());
+		player->addItem(chime_ClericsCrackedChime());
+		player->addItem(prayer_Restoration());
+		player->addItem(consumable_StarwaterDraught());
+		player->addItem(consumable_StarwaterDraught());
+		player->addItem(consumable_StarwaterDraught());
+		player->addItem(consumable_StarwaterDraught());
+		fragments += 700;
+		loadMapFromHandle("maps/flooded_lowlands_1.txt", CONNECT_WARP, player->getx(), player->gety());
 	}
 }

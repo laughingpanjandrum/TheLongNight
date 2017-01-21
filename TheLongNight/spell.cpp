@@ -107,6 +107,16 @@ spell * ability_PowerSurge()
 	return sp;
 }
 
+spell * ability_AcidInfusion()
+{
+	spell* sp = new spell("Acid Infusion", SWORD_TILE, TCODColor::darkLime,
+		"Infuses next attack spell with acid damage.");
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(SPELL_ACID_INFUSION, 25);
+	sp->setVigourCost(1);
+	return sp;
+}
+
 spell * ability_DivineFavour()
 {
 	spell* sp = new spell("Divine Favour", SWORD_TILE, TCODColor::darkYellow,
@@ -197,7 +207,6 @@ spell* ability_Burst()
 	sp->setAttackType(ATTACK_AOE);
 	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 25);
 	sp->setAttackRange(2);
-	sp->usesSpellPower = false;
 	return sp;
 }
 
@@ -207,6 +216,14 @@ spell * ability_CrowArrow()
 	sp->setAttackType(ATTACK_RANGE);
 	sp->setAttackRange(8);
 	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 10);
-	sp->usesSpellPower = false;
+	return sp;
+}
+
+spell * ability_AcidSpit()
+{
+	spell* sp = new spell("Acid Spit", SPELL_TILE, TCODColor::lightGreen);
+	sp->setAttackType(ATTACK_RANGE);
+	sp->setAttackRange(5);
+	sp->addEffect(APPLY_ACID_DAMAGE, 15);
 	return sp;
 }

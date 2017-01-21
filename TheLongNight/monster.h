@@ -90,6 +90,9 @@ monster* monster_CrowArcher();
 monster* monster_ForlornCrowKnight();
 monster* monster_TheOldCrow();
 
+//The Flooded Lowlands
+monster* monster_StarvingFishman();
+
 
 //Friendly NPCs
 monster* npc_Gorem();

@@ -23,6 +23,7 @@ const int PLAYER_TILE = 1;
 const int DROWNED_DEAD_TILE = 356;
 const int WRETCH_TILE = 119;
 const int CROW_KNIGHT_TILE = 107;
+const int FISHMAN_TILE = 358;
 
 const int GOREM_TILE = 324;
 

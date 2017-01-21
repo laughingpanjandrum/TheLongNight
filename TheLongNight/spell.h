@@ -59,6 +59,7 @@ spell* attack_MightyCleave();
 
 //Wand/chime powers
 spell* ability_PowerSurge();
+spell* ability_AcidInfusion();
 spell* ability_DivineFavour();
 spell* ability_WyrdChannel();
 
@@ -74,5 +75,6 @@ spell* prayer_WyrdChantOfStrength();
 spell* ability_Charge();
 spell* ability_Burst();
 spell* ability_CrowArrow();
+spell* ability_AcidSpit();
 
 #endif

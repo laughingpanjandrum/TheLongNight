@@ -100,15 +100,18 @@ public:
 	void clearBuffs() { buffs.clear(); }
 	buffVector getAllBuffs() { return buffs; }
 
-	//Buffing attack
+	//Buffing attacks
 	void clearFreeMoves() { freeMoves = 0; }
 	void gainFreeMoves(int f) { freeMoves += f; }
 	bool hasFreeMoves() { return freeMoves > 0; }
 	void useFreeMove() { freeMoves--; }
 	int scaleNextAttack = 0; //Percent damage bonus damage added to next attack
+	int healthTrickle = 0; //We get 1 point of this per tick until it runs out
+
+	//Spell buffs
 	int scaleNextSpell = 0; //Buff to next spell cast
 	int scaleNextPrayer = 0; //Buff to next prayer cast
-	int healthTrickle = 0; //We get 1 point of this per tick until it runs out
+	int spellAcidInfusion = 0;
 
 	//Magic
 	spell* buffNextMelee; //This spell is automatically discharged onto the next thing we attack in melee.

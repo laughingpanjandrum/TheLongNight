@@ -29,10 +29,14 @@ item * getItemByHandle(std::string handle)
 		return shield_BatteredWoodenShield();
 	else if (handle == "wooden_wyrd_shield")
 		return shield_WoodenWyrdShield();
+	else if (handle == "battered_steel_shield")
+		return shield_BatteredSteelShield();
 
 	//WANDS/CHIMES
 	else if (handle == "driftwood_wand")
 		return wand_DriftwoodWand();
+	else if (handle == "fishmans_toadstaff")
+		return wand_FishmansToadstaff();
 	else if (handle == "clerics_cracked_chime")
 		return chime_ClericsCrackedChime();
 

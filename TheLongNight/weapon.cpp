@@ -174,6 +174,18 @@ weapon * shield_WoodenWyrdShield()
 	return wp;
 }
 
+weapon * shield_BatteredSteelShield()
+{
+	weapon* wp = new weapon("Battered Steel Shield", SHIELD_TILE, TCODColor::grey,
+		"Aged, but perhaps still useful, if you can look past the dents.");
+	wp->setDefence(10);
+	wp->setDamageResist(DAMAGE_ACID, 5);
+	wp->setDamageResist(DAMAGE_FIRE, 5);
+	wp->setDamageResist(DAMAGE_ELECTRIC, 5);
+	wp->setDamageResist(DAMAGE_COLD, 5);
+	return wp;
+}
+
 //		Wands
 
 weapon * wand_DriftwoodWand()
@@ -185,6 +197,18 @@ weapon * wand_DriftwoodWand()
 	wp->setSpellPower(100);
 	wp->makeOffhand();
 	wp->setSpecialAttack(ability_PowerSurge());
+	return wp;
+}
+
+weapon * wand_FishmansToadstaff()
+{
+	weapon* wp = new weapon("Fishman's Toadstaff", SWORD_TILE, TCODColor::darkLime,
+		"Sometimes the toad impaled on the tip twitches. Is it still alive? Best not to dwell on it.");
+	wp->setBasicAttributes(5, SPEED_NORMAL);
+	wp->setSpellstoreSize(2);
+	wp->setSpellPower(75);
+	wp->setSpecialAttack(ability_AcidInfusion());
+	wp->makeOffhand();
 	return wp;
 }
 
