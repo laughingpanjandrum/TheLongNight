@@ -367,6 +367,7 @@ void person::equipItem(item * which)
 	
 	//Other consequences of equipping something
 	if (equipped) {
+
 		itemTypes cat = which->getCategory();
 
 		//Specific item type stuff
@@ -399,6 +400,18 @@ void person::equipItem(item * which)
 		}
 
 	}
+	else {
+
+		//See if we unequipped a spell
+		if (which->getCategory() == ITEM_SPELL) {
+			spell* sp = static_cast<spell*>(which);
+			auto iter = std::find(spellsKnown.begin(), spellsKnown.end(), sp);
+			if (iter != spellsKnown.end())
+				spellsKnown.erase(iter);
+		}
+
+	}
+
 }
 
 

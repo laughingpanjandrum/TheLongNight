@@ -110,7 +110,7 @@ spell * ability_PowerSurge()
 spell * ability_AcidInfusion()
 {
 	spell* sp = new spell("Acid Infusion", SWORD_TILE, TCODColor::darkLime,
-		"Infuses next attack spell with acid damage.");
+		"Infuses next spell with acid.");
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(SPELL_ACID_INFUSION, 25);
 	sp->setVigourCost(1);

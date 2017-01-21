@@ -80,9 +80,16 @@ bool inventory::equipSpell(spell * sp)
 	else {
 		//If not, try offhand
 		weapon* off = getOffhand();
-		if (off != nullptr && off->canAddSpell()) {
-			off->addSpell(sp);
-			return true;
+		//If it's already in here, remove it!
+		if (off != nullptr) {
+			if (off->hasSpellStored(sp)) {
+				off->removeSpell(sp);
+				return false;
+			}
+			else if (off->canAddSpell()) {
+				off->addSpell(sp);
+				return true;
+			}
 		}
 	}
 	//We didn't find a place to equip this item.

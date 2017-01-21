@@ -35,6 +35,16 @@ bool weapon::hasSpellStored(spell * sp)
 	return it != spellstore.end();
 }
 
+/*
+Remove a spell from here.
+*/
+void weapon::removeSpell(spell * sp)
+{
+	auto iter = std::find(spellstore.begin(), spellstore.end(), sp);
+	if (iter != spellstore.end())
+		spellstore.erase(iter);
+}
+
 
 /*
 Returns how much bonus damage per stat point we deal for the given stat.

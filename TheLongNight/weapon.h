@@ -25,10 +25,6 @@ public:
 	void setBleedResist(int br) { bleedResist = br; }
 	void addStatusEffect(statusEffects eType, int damage);
 	void setSpecialAttack(spell* sp) { specialAttack = sp; }
-	void setSpellstoreSize(int size) { spellstoreSize = size; }
-	void addSpell(spell* sp) { spellstore.push_back(sp); }
-	void setSpellPower(int power) { spellPower = power; }
-	void setDivinePower(int power) { divinePower = power; }
 	void makeOffhand() { category = ITEM_OFFHAND; } //Make this an offhand weapon
 
 	//Getting
@@ -36,13 +32,20 @@ public:
 	int getAttackDelay() { return attackDelay; }
 	spell* getSpecialAttack() { return specialAttack; }
 
-	//Spell stuff
+	//Spell stuff: Getting
 	spellVector getSpells() { return spellstore; }
 	bool canAddSpell() { return spellstore.size() < spellstoreSize; }
 	bool hasSpellStored(spell* sp);
 	int getSpellstoreSize() { return spellstoreSize; }
 	int getSpellPower() { return spellPower; }
 	int getDivinePower() { return divinePower; }
+
+	//Spell stuff: Setting
+	void setSpellstoreSize(int size) { spellstoreSize = size; }
+	void addSpell(spell* sp) { spellstore.push_back(sp); }
+	void removeSpell(spell* sp);
+	void setSpellPower(int power) { spellPower = power; }
+	void setDivinePower(int power) { divinePower = power; }
 
 	//Status effects
 	int getStatusEffectCount() { return statusEffectType.size(); } //Returns number of status effects we apply

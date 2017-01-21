@@ -1303,10 +1303,6 @@ void game::applyEffectToPerson(person * target, effect eff, int potency, person*
 		target->gainFreeMoves(potency);
 	else if (eff == SCALE_NEXT_ATTACK)
 		target->scaleNextAttack = potency;
-	else if (eff == SCALE_NEXT_SPELL)
-		target->scaleNextSpell = potency;
-	else if (eff == SCALE_NEXT_PRAYER)
-		target->scaleNextPrayer = potency;
 	else if (eff == ADD_HEALTH_TRICKLE)
 		target->healthTrickle += potency;
 
@@ -1314,6 +1310,15 @@ void game::applyEffectToPerson(person * target, effect eff, int potency, person*
 
 	else if (eff == GAIN_DEFENCE)
 		target->addDefence(potency);
+
+	//Spell buffs
+
+	else if (eff == SCALE_NEXT_SPELL)
+		target->scaleNextSpell = potency;
+	else if (eff == SCALE_NEXT_PRAYER)
+		target->scaleNextPrayer = potency;
+	else if (eff == SPELL_ACID_INFUSION)
+		target->spellAcidInfusion = potency;
 
 	//Damage effects
 
@@ -1496,6 +1501,9 @@ void game::tryUnlockDoor(int x, int y)
 			t->unlockDoor();
 			currentMap->updateDatamapAtPoint(x, y);
 			addMessage("Unlocked " + t->getName() + ".", t->getColor());
+		}
+		else {
+			addMessage("The " + t->getName() + " is locked!", t->getColor());
 		}
 	}
 }
@@ -1906,7 +1914,7 @@ void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 			//Just a normal spell casting
 			applyEffectToPerson(target, sp->getEffectType(idx), potency, caster);
 			//Infusions apply extra effects
-			if (caster->spellAcidInfusion) {
+			if (caster->spellAcidInfusion && target != caster) {
 				target->takeDamage(caster->spellAcidInfusion, DAMAGE_ACID);
 				caster->spellAcidInfusion = 0;
 			}
@@ -2346,6 +2354,7 @@ void game::debugMenu()
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());
+		player->addItem(wand_FishmansToadstaff());
 		fragments += 700;
 		loadMapFromHandle("maps/flooded_lowlands_1.txt", CONNECT_WARP, player->getx(), player->gety());
 	}
