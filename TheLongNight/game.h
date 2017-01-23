@@ -188,12 +188,19 @@ private:
 	void doLevelUp();
 	void drawLevelUpMenu(int atx, int aty);
 
-	//Shopping
+	//Shopping/chatting
 	monster* currentShopkeeper;
+	void talkToNPC();
+	void doDialogue(monster* target);
+	bool checkForDialogueEvent(std::string line, monster* target);
 	void drawShopMenu(int atx, int aty);
-	void talkToShopkeeper();
 	void setupShopMenu(person* shopkeeper);
 	void buyItemFromShop();
+
+	//Story event tracking!
+	std::vector<std::string> storyFlags;
+	void addStoryFlag(std::string f) { storyFlags.push_back(f); }
+	bool hasStoryFlag(std::string f);
 
 	//Keeping the world up to date
 	void tick();

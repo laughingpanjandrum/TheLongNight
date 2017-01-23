@@ -95,6 +95,44 @@ void monster::removeItemFromStock(item * it)
 }
 
 
+/*
+	CHIT CHAT
+*/
+
+
+/*
+Load in dialogue from a file.
+*/
+void monster::loadDialogue(std::string filename)
+{
+	//Create the file
+	std::ifstream dfile(filename);
+	//Load in lines of dialogue, one at a time
+	std::string line;
+	while (getline(dfile, line)) {
+		addDialogue(line);
+	}
+	//Done, close file
+	dfile.close();
+}
+
+
+/*
+Returns the next line of dialogue that we'll say.
+*/
+std::string monster::getNextDialogueLine()
+{
+	//See if we even have any dialogue
+	if (dialogue.size() == 0)
+		return "";
+	//If we do, figure out what line we're on
+	std::string line = dialogue.at(atChatLine);
+	if (atChatLine < dialogue.size() - 1)
+		atChatLine++;
+	return line;
+}
+
+
 
 
 
@@ -218,6 +256,7 @@ monster * monster_ForlornCrowKnight()
 	m->setSpellCastChance(20);
 	m->setFragmentsDropped(100);
 	m->setDefence(DAMAGE_PHYSICAL, 10);
+	m->respawns = false;
 	return m;
 }
 
@@ -269,6 +308,8 @@ monster * npc_Gorem()
 	m->addItemToStock(chime_WyrdBellbranch(), 50);
 	m->addItemToStock(prayer_WyrdChantOfStrength(), 25);
 	m->addItemToStock(charm_BloodstainedCharm(), 100);
+	//Chatting
+	m->loadDialogue("dialogue/gorem_chat.txt");
 	return m;
 }
 

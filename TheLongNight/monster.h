@@ -2,6 +2,8 @@
 #ifndef MONSTER_H
 #define MONSTER_H
 
+#include <iostream>
+#include <fstream>
 #include "person.h"
 #include "utility.h"
 
@@ -49,8 +51,16 @@ public:
 	void removeItemFromStock(item* it);
 	itemVector getStock() { return stock; }
 
+	//Chatting with ur buddies
+	void loadDialogue(std::string filename);
+	void addDialogue(std::string line) { dialogue.push_back(line); }
+	std::string getNextDialogueLine();
+	void backUpDialogue() { atChatLine--; }
+	bool hasDialogue() { return dialogue.size() > 0; }
+
 	//Flags
 	bool isBoss = false;
+	bool respawns = true;
 
 protected:
 
@@ -68,11 +78,19 @@ protected:
 	//Shopkeeping
 	itemVector stock;
 
+	//Chatting
+	std::vector<std::string> dialogue;
+	int atChatLine = 0;
+
 };
 
 typedef std::vector<monster*> monsterVector;
 
+
+
 //		Monster definitions
+
+
 
 //Stardrift Wreckage
 monster* monster_DrownedDead();
@@ -93,10 +111,11 @@ monster* monster_TheOldCrow();
 //The Flooded Lowlands
 monster* monster_StarvingFishman();
 
-
 //Friendly NPCs
 monster* npc_Gorem();
 
+
+//For map files
 monster* getMonsterByHandle(std::string handle);
 
 #endif

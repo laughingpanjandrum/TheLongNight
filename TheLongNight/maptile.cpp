@@ -116,7 +116,7 @@ maptile * tile_Bush()
 
 maptile * tile_Tree()
 {
-	return new maptile("Tree", "tree", TREE_TILE, TCODColor::sepia, TCODColor::darkerGreen, false, false);
+	return new maptile("Tree", "tree", TREE_TILE, TCODColor::lightSepia, TCODColor::darkerGreen, false, false);
 }
 
 maptile * tile_Water()

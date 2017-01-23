@@ -591,7 +591,7 @@ Input: Coordinates to start drawing at (the top left corner of the map)
 void game::drawMap(int leftx, int topy)
 {
 	//Draw map name just above
-	win.write(leftx + 10, topy - 1, currentMap->getName(), TCODColor::white);
+	win.write(leftx + 10, topy - 1, centreText(currentMap->getName(), 40), TCODColor::white);
 	//Draw entire map, left to right & top to bottom
 	for (int x = 0; x < currentMap->getXSize(); x++) {
 		for (int y = 0; y < currentMap->getYSize(); y++) {
@@ -1180,7 +1180,7 @@ void game::processCommand()
 
 		//Chitchat
 		else if (key.c == 'T')
-			talkToShopkeeper();
+			talkToNPC();
 
 		//Debug
 		else if (key.c == '~')
@@ -2043,9 +2043,89 @@ void game::drawLevelUpMenu(int atx, int aty)
 
 
 /*
-	SHOPPING
+	SHOPPING / TALKING
 */
 
+
+//Look for someone to talk to
+void game::talkToNPC()
+{
+	int r = 1;
+	for (int x = player->getx() - r; x <= player->getx() + r; x++)
+	{
+		for (int y = player->gety() - r; y <= player->gety() + r; y++)
+		{
+			if (x != player->getx() && y != player->gety()) 
+			{
+				monster* target = static_cast<monster*>(currentMap->getPerson(x, y));
+				if (target != nullptr)
+				{
+					//Talking
+					if (target->hasDialogue()) {
+						doDialogue(target);
+						return;
+					}
+					//Shopping, no talking
+					if (target->isShopkeeper) {
+						setupShopMenu(target);
+						return;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+/*
+Chitchat with an npc!
+*/
+void game::doDialogue(monster * target)
+{
+	std::string currentLine = target->getNextDialogueLine();
+	while (key.vk != KEY_BACK_OUT) {
+		win.clear();
+		//Box it in
+		win.clearRegion(MAP_DRAW_X, MAP_DRAW_Y, 40, 40);
+		win.drawBox(MAP_DRAW_X, MAP_DRAW_Y, 40, 40, TCODColor::sepia);
+		//Controls
+		int atx = MAP_DRAW_X + 1;
+		int aty = MAP_DRAW_Y + 1;
+		std::string txt = "[ENTER] Chat   [ESCAPE] Goodbye";
+		win.write(atx, aty, centreText(txt, 38), TCODColor::white);
+		//NPC name
+		aty += 2;
+		win.write(atx, aty, centreText(target->getName(), 38), target->getColor());
+		//Write dialogue!
+		aty += 4;
+		win.writeWrapped(atx, aty, 38, currentLine, TCODColor::lightGrey);
+		//Done drawing!
+		win.refresh();
+		//Check for input
+		TCODSystem::checkForEvent(TCOD_EVENT_ANY, &key, &mouse);
+		if (!key.pressed && key.vk == KEY_ACCEPT) {
+			currentLine = target->getNextDialogueLine();
+			//See if anything special happens (and if we should end the dialogue as well)
+			if (checkForDialogueEvent(currentLine, target))
+				break;
+		}
+	}
+}
+
+/*
+Sometimes special things happen when we're chatting with a friendly NPC.
+They're triggered by special codes embedded in dialogue!
+If we return True, the dialogue should end.
+*/
+bool game::checkForDialogueEvent(std::string line, monster * target)
+{
+	if (line == "|SHOP") {
+		target->backUpDialogue(); //Go back to the previous line of dialogue
+		setupShopMenu(target);
+		return true;
+	}
+	return false;
+}
 
 /*
 Displaying the shopping times!
@@ -2059,29 +2139,6 @@ void game::drawShopMenu(int atx, int aty)
 	item* sel = static_cast<item*>(currentMenu->getSelectedItem());
 	if (sel != nullptr)
 		drawItemInfo(sel, atx, aty);
-}
-
-/*
-Look for a nearby shopkeeper that we can chat with.
-*/
-void game::talkToShopkeeper()
-{
-	int r = 2;
-	for (int x = player->getx() - r; x <= player->getx() + r; x++) 
-	{
-		for (int y = player->gety() - r; y <= player->gety() + r; y++) 
-		{
-			person* target = currentMap->getPerson(x, y);
-			if (target != nullptr) 
-			{
-				if (target->isShopkeeper) 
-				{
-					setupShopMenu(target);
-					return;
-				}
-			}
-		}
-	}
 }
 
 
@@ -2129,6 +2186,11 @@ void game::buyItemFromShop()
 
 
 
+
+bool game::hasStoryFlag(std::string f)
+{
+	return std::find(storyFlags.begin(), storyFlags.end(), f) != storyFlags.end();
+}
 
 /*
 Happens right after the player's turn.
@@ -2311,7 +2373,7 @@ void game::debugMenu()
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());
-		fragments += 320;
+		fragments += 420;
 		loadMapFromHandle("maps/old_fairweather.txt", CONNECT_WARP, player->getx(), player->gety());
 	}
 	else if (txt == "oldcrow") {

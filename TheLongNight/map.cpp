@@ -189,7 +189,7 @@ void map::respawnAllMonsters()
 		//Get monster corresponding to this tag
 		monster* m = getMonsterByHandle(monsterSpawnTags.at(i));
 		//Make sure we don't respawn the boss!
-		if (!bossDestroyed || !m->isBoss) {
+		if ((!bossDestroyed || !m->isBoss)) {
 			coord c = monsterSpawnCoords.at(i);
 			addPerson(m, c.first, c.second);
 		}
