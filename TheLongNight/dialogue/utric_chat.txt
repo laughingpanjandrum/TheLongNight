@@ -3,3 +3,7 @@
 "Me? Oh, of course! My name is Utric the Rat."
 "I'm looking for an old friend of mine, Gottric the Digger... I don't suppose you've seen him? ...No, I didn't think so."
 "Well, it was a pleasure to meet you, at least! Take care of yourself!"
+|STORY_FLAG
+utricToFairweather
+|END_DIALOGUE
+"I'm making my way to the ruins of Old Fairweather... Perhaps I'll see you there!"

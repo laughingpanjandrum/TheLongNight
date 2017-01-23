@@ -2122,6 +2122,17 @@ bool game::checkForDialogueEvent(std::string line, monster * target)
 	if (line == "|SHOP") {
 		target->backUpDialogue(); //Go back to the previous line of dialogue
 		setupShopMenu(target);
+		//Shopping always puts a stop to talking
+		return true;
+	}
+	else if (line == "|STORY_FLAG") {
+		//The next line after this is a story flag!
+		addStoryFlag(target->getNextDialogueLine());
+		//Progress to the next line
+		return checkForDialogueEvent(target->getNextDialogueLine(), target);
+	}
+	else if (line == "|END_DIALOGUE") {
+		//Automatically ends the dialogue
 		return true;
 	}
 	return false;
