@@ -10,8 +10,17 @@ TCODColor maptile::getColor()
 {
 	if (isGlittery) {
 		//We create a colour close to, but not exactly like, our colour
-		float mix = (float)randint(1, 5) / 10.0;
-		return TCODColor::lerp(color, TCODColor::white, mix);
+		if (ascendingGlitter) {
+			glitterCoef += 0.05;
+			if (glitterCoef >= 0.8)
+				ascendingGlitter = false;
+		}
+		else {
+			glitterCoef -= 0.05;
+			if (glitterCoef <= 0.1)
+				ascendingGlitter = true;
+		}
+		return TCODColor::lerp(color, TCODColor::white, glitterCoef);
 	}
 	return color;
 }

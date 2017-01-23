@@ -79,6 +79,7 @@ For shopkeeper NPCs
 */
 void monster::addItemToStock(item * it, int price)
 {
+	it->isGlittery = false;
 	it->setPrice(price);
 	stock.push_back(it);
 }

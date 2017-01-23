@@ -45,6 +45,8 @@ public:
 
 	//Colour effects
 	bool isGlittery = false;
+	float glitterCoef = 0.0;
+	bool ascendingGlitter = true;
 
 private:
 
