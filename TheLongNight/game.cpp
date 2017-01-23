@@ -2264,8 +2264,11 @@ Sets save point to our current position.
 */
 void game::setSavePoint()
 {
+	//Set this as our save point
 	ourSavePt.saveMap = currentMap;
 	ourSavePt.savePt = player->getPosition();
+	//And reload the map around us
+	restoreFromSavePoint();
 }
 
 /*
