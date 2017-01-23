@@ -10,7 +10,7 @@ window::window(std::string name, int xsize, int ysize) {
 	TCODSystem::setFps(30);
 	//Setup console
 	mainConsole = new TCODConsole(xsize, ysize);
-	mainConsole->setCustomFont("fonts/large_10x10.png", TCOD_FONT_LAYOUT_ASCII_INROW, 16, 32);
+	mainConsole->setCustomFont("fonts/large_final_10x10.png", TCOD_FONT_LAYOUT_ASCII_INROW, 16, 32);
 	//Go!
 	TCODConsole::initRoot(xsize, ysize, name.c_str());
 	//Custom font mapping

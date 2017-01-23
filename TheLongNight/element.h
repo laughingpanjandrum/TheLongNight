@@ -11,6 +11,7 @@ characters, items, and so on.
 #include <string>
 #include "libtcod.hpp"
 #include "tileConsts.h"
+#include "utility.h"
 
 typedef std::pair<int, int> coord;
 typedef std::vector<coord> coordVector;
@@ -37,13 +38,18 @@ public:
 	//Getters: aesthetics
 	std::string getName() { return name; }
 	int getTileCode() { return tileCode; }
-	TCODColor getColor() { return color; }
+	TCODColor getColor();
 
 	//Text description of element; purely for ui
 	const std::string description;
 	
 	//For overriding
 	virtual std::string getMenuName() { return name; }
+
+	//If true, this changes how our colour is displayed
+	bool isGlittery = false;
+	float glitterCoef = 0.0;
+	bool ascendingGlitter = true;
 
 protected:
 

@@ -428,6 +428,8 @@ void person::swapWeapon()
 	wp = items.swapWeapon();
 	if (wp != nullptr)
 		doWeaponEquip(wp);
+	//Reset readied spell, since this could alter it
+	selectedSpell = 0;
 }
 
 /*
@@ -470,6 +472,9 @@ Add the given item to our items carried.
 */
 bool person::addItem(item * which)
 {
+	//Item stops glittering once we pick it up.
+	which->isGlittery = false;
+	//Now we can carry it.
 	return items.addItem(which);
 }
 

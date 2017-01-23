@@ -140,7 +140,7 @@ monster * monster_TimidWretch()
 
 monster * monster_BloatedWretch()
 {
-	monster * m = new monster("Bloated Wretch", WRETCH_TILE, TCODColor::darkLime);
+	monster * m = new monster("Bloated Wretch", BLOATED_WRETCH_TILE, TCODColor::darkLime);
 	m->setMeleeStats(25, SPEED_SLOW);
 	m->setMoveStats(SPEED_SLOW);
 	m->setHealth(100);
@@ -155,7 +155,7 @@ Coruscating Beach boss
 */
 monster * boss_TheWretchedMass()
 {
-	monster* m = new monster("The Wretched Mass", WRETCH_TILE, TCODColor::purple);
+	monster* m = new monster("The Wretched Mass", WRETCHED_MASS_TILE, TCODColor::purple);
 	m->setHealth(400);
 	m->setMoveStats(SPEED_SLOW);
 	m->setMeleeStats(25, SPEED_SLOW);
@@ -185,7 +185,7 @@ monster * monster_CrowKnight()
 
 monster * monster_CrowThief()
 {
-	monster* m = new monster("Crow Thief", CROW_KNIGHT_TILE, TCODColor::lightGreen);
+	monster* m = new monster("Crow Thief", CROW_THIEF_TILE, TCODColor::lightGreen);
 	m->setHealth(50);
 	m->setMoveStats(SPEED_FAST);
 	m->setMeleeStats(10, SPEED_FAST);
@@ -222,7 +222,7 @@ monster * monster_ForlornCrowKnight()
 
 monster * monster_TheOldCrow()
 {
-	monster* m = new monster("The Old Crow", CROW_KNIGHT_TILE, TCODColor::lighterCrimson);
+	monster* m = new monster("The Old Crow", THE_OLD_CROW_TILE, TCODColor::lighterCrimson);
 	m->setHealth(400);
 	m->setMoveStats(SPEED_NORMAL);
 	m->equipItem(weapon_CrowKnife());

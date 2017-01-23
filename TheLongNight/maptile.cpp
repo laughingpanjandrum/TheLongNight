@@ -6,6 +6,16 @@ maptile::~maptile()
 {
 }
 
+TCODColor maptile::getColor()
+{
+	if (isGlittery) {
+		//We create a colour close to, but not exactly like, our colour
+		float mix = (float)randint(1, 5) / 10.0;
+		return TCODColor::lerp(color, TCODColor::white, mix);
+	}
+	return color;
+}
+
 /*
 Returns whether we have the given touch effect.
 */
@@ -138,7 +148,8 @@ Resting tile. Serves as a save point and provides a full restore.
 */
 maptile * tile_StatueOfRest()
 {
-	maptile* statue = new maptile("Statue of Rest", "statue", STATUE_TILE, TCODColor::lightCyan, TCODColor::darkestCyan);
+	maptile* statue = new maptile("Statue of Rest", "statue", STATUE_TILE, TCODColor::lightCyan, TCODColor::darkestCyan, 
+		true, true, true);
 	statue->addTouchEffect(ALLOW_INVENTORY_MANAGEMENT);
 	statue->addTouchEffect(FULL_RESTORE);
 	statue->addTouchEffect(SET_SAVE_POINT);
@@ -161,7 +172,7 @@ maptile * tile_WretchedDoor()
 
 maptile * tile_CrowDoor()
 {
-	maptile* door = new maptile("Old Crow Door", "crow_door", BASIC_DOOR_TILE, TCODColor::lightPurple, TCODColor::darkGrey,
+	maptile* door = new maptile("Old Crow Door", "crow_door", BASIC_DOOR_TILE, TCODColor::grey, TCODColor::darkPurple,
 		false, false);
 	door->unlockCode = "crow_door";
 	door->isDoor = true;

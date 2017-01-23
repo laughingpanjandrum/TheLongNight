@@ -3,12 +3,12 @@ start:38,18
 bloated_wretch:6,19
 thin_wretch:7,18
 thin_wretch:7,20
-bloated_wretch:7,31
+thin_wretch:7,31
 bloated_wretch:8,32
 timid_wretch:7,28
 the_wretched_mass:20,7
 -items
-arcane_radiance:13,20
+arcane_radiance:13,21
 throwing_knives:3,28
 -enditems
 -codes

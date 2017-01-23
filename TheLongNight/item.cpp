@@ -7,6 +7,7 @@ Basic constructor you should always use!
 item::item(std::string name, int tileCode, TCODColor color, itemTypes category, std::string description)
 	: item(name, tileCode, color, description)
 {
+	this->isGlittery = true;
 	this->category = category;
 	//Damage resistance list
 	for (int r = 0; r != ALL_DAMAGE_TYPES; r++)

@@ -7,6 +7,7 @@
 #include "libtcod.hpp"
 #include "tileConsts.h"
 #include "categories.h"
+#include "utility.h"
 
 class maptile
 {
@@ -14,15 +15,17 @@ public:
 
 	//Constructors/destructor
 	maptile() : maptile("Floor", "undefined", BASIC_FLOOR_TILE, TCODColor::grey, TCODColor::black) {}
-	maptile(std::string name, std::string handle, int tileCode, TCODColor color, TCODColor bgcolor, bool walkable = true, bool seeThrough = true): 
-		name(name), handle(handle), color(color), bgcolor(bgcolor), tileCode(tileCode), walkable(walkable), seeThrough(seeThrough) {}
+	maptile(std::string name, std::string handle, int tileCode, TCODColor color, TCODColor bgcolor, 
+		bool walkable = true, bool seeThrough = true, bool glitters = false): 
+		name(name), handle(handle), color(color), bgcolor(bgcolor), tileCode(tileCode), 
+		walkable(walkable), seeThrough(seeThrough), isGlittery(glitters) {}
 	~maptile();
 
 	//Getters
 	std::string getName() { return name; }
 	std::string getHandle() { return handle; }
 	int getTileCode() { return tileCode; }
-	TCODColor getColor() { return color; }
+	TCODColor getColor();
 	TCODColor getBgColor() { return bgcolor; }
 	bool isWalkable() { return walkable; }
 	bool isSeeThrough() { return seeThrough; }
@@ -39,6 +42,9 @@ public:
 	void unlockDoor() { walkable = true; }
 	bool isDoorLocked() { return isDoor && !walkable; }
 	std::string unlockCode;
+
+	//Colour effects
+	bool isGlittery = false;
 
 private:
 

@@ -36,3 +36,22 @@ bool element::isAtPosition(int x, int y)
 {
 	return x == xy.first && y == xy.second;
 }
+
+TCODColor element::getColor()
+{
+	if (isGlittery) {
+		//We create a colour close to, but not exactly like, our colour
+		if (ascendingGlitter) {
+			glitterCoef += 0.05;
+			if (glitterCoef >= 0.8)
+				ascendingGlitter = false;
+		}
+		else {
+			glitterCoef -= 0.05;
+			if (glitterCoef <= 0.1)
+				ascendingGlitter = true;
+		}
+		return TCODColor::lerp(color, TCODColor::white, glitterCoef);
+	}
+	return color;
+}
