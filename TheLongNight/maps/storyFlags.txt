@@ -1,0 +1,5 @@
+!utricToFairweather
+map:old_fairweather
+npc:utric
+spt:15,14
+!end

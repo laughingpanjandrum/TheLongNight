@@ -66,6 +66,7 @@ public:
 
 	//Spawning
 	void respawnAllMonsters();
+	bool checkForMonsterMovement(std::string spawnTag);
 	bool bossDestroyed = false;
 
 	//FOV/pathfinding stuff

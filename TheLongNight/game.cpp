@@ -4,23 +4,32 @@
 
 game::game()
 {
+	
 	//We start by creating an empty map, just for now
 	map* newmap = new map();
 	newmap = makemap.loadMapFromFile(makemap.getStartMapHandle());
 	setCurrentMap(newmap);
 	newmap->respawnAllMonsters();
+	
 	//Remember the first map
 	addKnownMap(newmap, makemap.getStartMapHandle());
+
+	//Load in story events
+	loadStoryEvents("maps/storyFlags.txt");
+	
 	//Character create
 	player = new person();
 	player->isPlayer = true;
 	player->stats = new statline(1, 1, 1, 1, 1, 1, 1);
+	
 	//Find starting position
 	coord startPt = currentMap->getStartPoint();
 	currentMap->addPerson(player, startPt.first, startPt.second);
 	currentMap->updateFOV(player->getx(), player->gety());
+	
 	//Make our starting position a save point
 	setSavePoint();
+	
 	//Add monsters to clock
 	for (auto m : currentMap->getAllPeople()) {
 		if (!m->isPlayer)
@@ -2192,16 +2201,96 @@ void game::buyItemFromShop()
 
 
 /*
+	STORY EVENTS (ie NPC movement)
+*/
+
+
+/*
+Returns whether we have the specified story flag.
+*/
+bool game::hasStoryFlag(std::string f)
+{
+	return std::find(storyFlags.begin(), storyFlags.end(), f) != storyFlags.end();
+}
+
+
+/*
+Load in all story events and their triggers from a file.
+*/
+void game::loadStoryEvents(std::string filename)
+{
+	
+	//Open file
+	std::ifstream storyfile(filename);
+	//Stuff we need to keep track of
+	std::string storyFlag;
+	std::string monsterTag;
+	std::string mapFlag;
+	coord pt;
+	//Read in events, one at a time
+	std::string line;
+	std::string chunk;
+	bool buildingEvent = false;
+	
+	while (getline(storyfile, line)) {
+
+		//Make sure the line actually has a size
+		if (line.size()) {
+
+			if (line.at(0) == '!') {
+				
+				//If the first character is a '!', this is the start or end of a chunk
+				buildingEvent = !buildingEvent;
+				if (buildingEvent) {
+					//The rest of the line is the STORY FLAG
+					storyFlag = line.substr(1, line.size());
+				}
+				else {
+					//We're finished building, save this event
+					storyEvent ev(storyFlag, mapFlag, monsterTag, pt);
+					queueStoryEvent(ev);
+				}
+			
+			}
+
+			else if (buildingEvent) {
+				
+				//Substring of first 4 characters tells us what item we're adding
+				std::string title = line.substr(0, 3);
+				std::string content = line.substr(4, line.size());
+				if (title == "map")
+					mapFlag = content;
+				else if (title == "npc")
+					monsterTag = content;
+				else if (title == "spt") {
+					//Read in coordinates
+					int c = 4;
+					//x-coord
+					std::string chunk = "";
+					while (line.at(c) != ',') {
+						chunk += line.at(c);
+						c++;
+					}
+					pt.first = std::stoi(chunk);
+					//y-coord
+					chunk = line.substr(c + 1, line.size());
+					pt.second = std::stoi(chunk);
+				}
+
+			}
+		}
+	}
+	//Done, close file
+	storyfile.close();
+}
+
+
+/*
 	KEEPING THE WORLD UPDATED
 */
 
 
 
-
-bool game::hasStoryFlag(std::string f)
-{
-	return std::find(storyFlags.begin(), storyFlags.end(), f) != storyFlags.end();
-}
 
 /*
 Happens right after the player's turn.

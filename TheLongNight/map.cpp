@@ -198,6 +198,17 @@ void map::respawnAllMonsters()
 
 
 /*
+Determines whether a story flag mandates that a particular NPC should change locations.
+This assumes that only one entity in the universe has this spawn tag!
+If it returns True, then don't spawn the monster - he's moved.
+*/
+bool map::checkForMonsterMovement(std::string spawnTag)
+{
+	return false;
+}
+
+
+/*
 	FOV STUFF
 */
 

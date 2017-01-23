@@ -9,6 +9,9 @@ It also draws all the stuff that needs drawing.
 #ifndef GAME_H
 #define GAME_H
 
+#include <iostream>
+#include <fstream>
+
 #include "libtcod.hpp"
 #include "window.h"
 #include "keycodes.h"
@@ -37,8 +40,18 @@ struct savePoint {
 	coord savePt;
 };
 
-typedef std::vector<message> messageVector;
+//Story event, i.e. a specific monster tag is placed on a specific map
+struct storyEvent {
+	storyEvent(std::string storyFlag, std::string mapFlag, std::string monsterTag, coord spawnPt) :
+		storyFlag(storyFlag), mapFlag(mapFlag), monsterTag(monsterTag), spawnPt(spawnPt) {}
+	std::string storyFlag;
+	std::string mapFlag;
+	std::string monsterTag;
+	coord spawnPt;
+};
 
+typedef std::vector<message> messageVector;
+typedef std::vector<storyEvent> storyEventVector;
 
 class game
 {
@@ -201,6 +214,9 @@ private:
 	std::vector<std::string> storyFlags;
 	void addStoryFlag(std::string f) { storyFlags.push_back(f); }
 	bool hasStoryFlag(std::string f);
+	void loadStoryEvents(std::string filename);
+	storyEventVector storyEvents;
+	void queueStoryEvent(storyEvent e) { storyEvents.push_back(e); }
 
 	//Keeping the world up to date
 	void tick();

@@ -65,7 +65,7 @@ maptile * tile_SandyRock()
 
 maptile * tile_Wall()
 {
-	return new maptile("Wall", "wall_stone", BASIC_WALL_TILE, TCODColor::darkGrey, TCODColor::black, false, false);
+	return new maptile("Wall", "wall_stone", BASIC_WALL_TILE, TCODColor::darkGrey, TCODColor::darkestGrey, false, false);
 }
 
 maptile * tile_WoodenWall()
