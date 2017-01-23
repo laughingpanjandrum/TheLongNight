@@ -48,6 +48,8 @@ void game::mainGameLoop()
 		if (playerTurnDelay > 0) {
 			endPlayerTurn();
 		}
+		//Events
+		TCODSystem::checkForEvent(TCOD_EVENT_ANY, &key, &mouse);
 		//Process player action
 		processCommand();
 	}
@@ -909,15 +911,15 @@ Display info about whatever we've highlighted with the CURSOR.
 void game::drawMouseover(int atx, int aty)
 {
 	//Is the cursor even on?
-	if (!targetModeOn) {
+	/*if (!targetModeOn) {
 		//If not, just show whatever the player is targeting
 		person* target = player->getTarget();
 		if (target != nullptr)
 			drawTargetInfo(target, atx, aty);
 		return;
-	}
+	}*/
 	//What are we pointing at?
-	coord mpt = targetPt;
+	coord mpt = screenToMapCoords(coord(mouse.cx, mouse.cy));
 	if (currentMap->inBounds(mpt.first, mpt.second) && currentMap->isPointInFOV(mpt.first, mpt.second)) {
 		//Show highlighted object: person?
 		person* target = currentMap->getPerson(mpt.first, mpt.second);
@@ -1133,56 +1135,58 @@ void game::drawArmourInfo(armour * it, int atx, int aty)
 
 void game::processCommand()
 {
-	TCOD_key_t kp = win.getkey();
-	if (kp.c == 'Q')
-		isGameOver = true;
+	if (!key.pressed) {
+		if (key.c == 'Q')
+			isGameOver = true;
 
-	//Menus
-	else if (kp.vk == KEY_BACK_OUT)
-		menuBackOut();
-	else if (kp.c == 'i')
-		createInventoryMenu();
-	else if (kp.vk == KEY_ACCEPT)
-		acceptCurrentMenuIndex();
-	else if (kp.c == 'C') {
-		if (state == STATE_VIEW_INVENTORY)
-			setupLevelUpMenu();
-		else
-			drawPlayerInfo(MAP_DRAW_X, MAP_DRAW_Y);
+		//Menus
+		else if (key.vk == KEY_BACK_OUT)
+			menuBackOut();
+		else if (key.c == 'i')
+			createInventoryMenu();
+		else if (key.vk == KEY_ACCEPT)
+			acceptCurrentMenuIndex();
+		else if (key.c == 'C') {
+			if (state == STATE_VIEW_INVENTORY)
+				setupLevelUpMenu();
+			else
+				drawPlayerInfo(MAP_DRAW_X, MAP_DRAW_Y);
+		}
+
+		//Using stuff
+		else if (key.c == 'c')
+			openConsumableMenu();//player->cycleConsumable();
+		else if (key.c == 'a')
+			openSpellMenu();//player->cycleSelectedSpell();
+		else if (key.c == 'q')
+			useConsumable();
+		else if (key.c == 's')
+			castSpell(player->getCurrentSpell());
+		else if (key.c == 'd') {
+			player->swapWeapon();
+			playerTurnDelay += SPEED_NORMAL;
+		}
+
+		//Movement
+		else if (key.c == 't')
+			toggleTargetMode();
+		else if (key.c == 'z')
+			playerTurnDelay = player->getMoveDelay();
+		else if (isMovementKey(key))
+			if (state == STATE_VIEW_MAP)
+				processMove(key);
+			else
+				navigateMenu(key);
+
+		//Chitchat
+		else if (key.c == 'T')
+			talkToShopkeeper();
+
+		//Debug
+		else if (key.c == '~')
+			debugMenu();
+
 	}
-
-	//Using stuff
-	else if (kp.c == 'c')
-		openConsumableMenu();//player->cycleConsumable();
-	else if (kp.c == 'a')
-		openSpellMenu();//player->cycleSelectedSpell();
-	else if (kp.c == 'q')
-		useConsumable();
-	else if (kp.c == 's')
-		castSpell(player->getCurrentSpell());
-	else if (kp.c == 'd') {
-		player->swapWeapon();
-		playerTurnDelay += SPEED_NORMAL;
-	}
-
-	//Movement
-	else if (kp.c == 't')
-		toggleTargetMode();
-	else if (kp.c == 'z')
-		playerTurnDelay = player->getMoveDelay();
-	else if (isMovementKey(kp))
-		if (state == STATE_VIEW_MAP)
-			processMove(kp);
-		else
-			navigateMenu(kp);
-
-	//Chitchat
-	else if (kp.c == 'T')
-		talkToShopkeeper();
-
-	//Debug
-	else if (kp.c == '~')
-		debugMenu();
 }
 
 /*

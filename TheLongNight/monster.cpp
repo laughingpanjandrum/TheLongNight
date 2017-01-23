@@ -75,7 +75,7 @@ monster * monster::getRandomSpawn()
 
 
 /*
-For shopkeeper NPCs
+For shopkeeper NPCs.
 */
 void monster::addItemToStock(item * it, int price)
 {
