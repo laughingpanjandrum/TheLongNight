@@ -113,6 +113,7 @@ monster* monster_StarvingFishman();
 
 //Friendly NPCs
 monster* npc_Gorem();
+monster* npc_UtricTheRat();
 
 
 //For map files

@@ -15,6 +15,7 @@ spell::spell(int attackRange, int physDamage, effect otherEffect, int otherEffec
 		addEffect(APPLY_PHYSICAL_DAMAGE, physDamage);
 	if (otherEffect != NULL_EFFECT)
 		addEffect(otherEffect, otherEffectPotency);
+	this->vigourCost = 0;
 }
 
 spell::~spell()

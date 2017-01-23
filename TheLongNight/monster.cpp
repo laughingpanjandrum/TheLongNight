@@ -313,6 +313,15 @@ monster * npc_Gorem()
 	return m;
 }
 
+monster * npc_UtricTheRat()
+{
+	monster* m = new monster("Utric the Rat", GOREM_TILE, TCODColor::sepia);
+	m->setHealth(100);
+	m->isHostile = false;
+	m->loadDialogue("dialogue/utric_chat.txt");
+	return m;
+}
+
 /*
 This giant nightmare is how monsters are defined in map files.
 */
@@ -352,6 +361,8 @@ monster * getMonsterByHandle(std::string handle)
 	//Friendly NPCs
 	else if (handle == "gorem")
 		return npc_Gorem();
+	else if (handle == "utric")
+		return npc_UtricTheRat();
 
 	//LET'S HOPE WE NEVER GET HERE!
 	return nullptr;
