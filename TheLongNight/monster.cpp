@@ -108,7 +108,7 @@ Monster definitions
 
 monster * monster_DrownedDead()
 {
-	monster * m = new monster("Drowned Dead", DROWNED_DEAD_TILE, TCODColor::darkGreen);
+	monster * m = new monster("Drowned Dead", DROWNED_DEAD_TILE, TCODColor::lightGreen);
 	m->setMeleeStats(10, SPEED_SLOW);
 	m->setMoveStats(SPEED_NORMAL);
 	m->setHealth(10);
@@ -118,7 +118,7 @@ monster * monster_DrownedDead()
 
 monster * monster_ThinWretch()
 {
-	monster * m = new monster("Thin Wretch", WRETCH_TILE, TCODColor::darkGreen);
+	monster * m = new monster("Thin Wretch", WRETCH_TILE, TCODColor::green);
 	m->setMeleeStats(10, SPEED_NORMAL);
 	m->setMoveStats(SPEED_NORMAL);
 	m->setHealth(50);
@@ -141,7 +141,7 @@ monster * monster_TimidWretch()
 
 monster * monster_BloatedWretch()
 {
-	monster * m = new monster("Bloated Wretch", BLOATED_WRETCH_TILE, TCODColor::darkLime);
+	monster * m = new monster("Bloated Wretch", BLOATED_WRETCH_TILE, TCODColor::lime);
 	m->setMeleeStats(25, SPEED_SLOW);
 	m->setMoveStats(SPEED_SLOW);
 	m->setHealth(100);
@@ -156,7 +156,7 @@ Coruscating Beach boss
 */
 monster * boss_TheWretchedMass()
 {
-	monster* m = new monster("The Wretched Mass", WRETCHED_MASS_TILE, TCODColor::purple);
+	monster* m = new monster("The Wretched Mass", WRETCHED_MASS_TILE, TCODColor::lightGreen);
 	m->setHealth(400);
 	m->setMoveStats(SPEED_SLOW);
 	m->setMeleeStats(25, SPEED_SLOW);
@@ -210,7 +210,7 @@ monster * monster_CrowArcher()
 
 monster * monster_ForlornCrowKnight()
 {
-	monster* m = new monster("Forlorn Crow Knight", CROW_KNIGHT_TILE, TCODColor::darkCrimson);
+	monster* m = new monster("Forlorn Crow Knight", CROW_KNIGHT_TILE, TCODColor::crimson);
 	m->setHealth(200);
 	m->setMoveStats(SPEED_NORMAL);
 	m->equipItem(weapon_CrowHalfsword());
@@ -223,7 +223,7 @@ monster * monster_ForlornCrowKnight()
 
 monster * monster_TheOldCrow()
 {
-	monster* m = new monster("The Old Crow", THE_OLD_CROW_TILE, TCODColor::lighterCrimson);
+	monster* m = new monster("The Old Crow", THE_OLD_CROW_TILE, TCODColor::lightCrimson);
 	m->setHealth(400);
 	m->setMoveStats(SPEED_NORMAL);
 	m->equipItem(weapon_CrowKnife());

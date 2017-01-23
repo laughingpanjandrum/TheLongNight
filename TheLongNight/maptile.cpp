@@ -116,7 +116,7 @@ maptile * tile_Bush()
 
 maptile * tile_Tree()
 {
-	return new maptile("Tree", "tree", TREE_TILE, TCODColor::lightSepia, TCODColor::darkerGreen, false, false);
+	return new maptile("Tree", "tree", TREE_TILE, TCODColor::sepia, TCODColor::darkerGreen, false, false);
 }
 
 maptile * tile_Water()
@@ -149,7 +149,7 @@ maptile * tile_Bed()
 
 maptile * tile_Terminal()
 {
-	return new maptile("Terminal", "terminal", TERMINAL_TILE, TCODColor::green, TCODColor::darkerGrey);
+	return new maptile("Terminal", "terminal", TERMINAL_TILE, TCODColor::darkGreen, TCODColor::darkerGrey);
 }
 
 /*
@@ -157,7 +157,7 @@ Resting tile. Serves as a save point and provides a full restore.
 */
 maptile * tile_StatueOfRest()
 {
-	maptile* statue = new maptile("Statue of Rest", "statue", STATUE_TILE, TCODColor::lightCyan, TCODColor::darkestCyan, 
+	maptile* statue = new maptile("Statue of Rest", "statue", STATUE_TILE, TCODColor::cyan, TCODColor::darkestCyan, 
 		true, true, true);
 	statue->addTouchEffect(ALLOW_INVENTORY_MANAGEMENT);
 	statue->addTouchEffect(FULL_RESTORE);
@@ -172,10 +172,12 @@ maptile * tile_StatueOfRest()
 
 maptile * tile_WretchedDoor()
 {
-	maptile* door = new maptile("Wretched Door", "wretched_door", BASIC_DOOR_TILE, TCODColor::lightAmber, TCODColor::darkAmber, false, false);
+	maptile* door = new maptile("Wretched Door", "wretched_door", BASIC_DOOR_TILE, TCODColor::lightAmber, TCODColor::darkAmber, 
+		false, false);
 	door->unlockCode = "wretched_door";
 	door->isDoor = true;
 	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	door->isGlittery = true;
 	return door;
 }
 
@@ -186,5 +188,6 @@ maptile * tile_CrowDoor()
 	door->unlockCode = "crow_door";
 	door->isDoor = true;
 	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	door->isGlittery = true;
 	return door;
 }
