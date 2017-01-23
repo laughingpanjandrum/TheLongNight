@@ -1807,9 +1807,15 @@ Firing a ranged spell is... COMPLICATED
 */
 void game::doRangedSpell(spell * sp)
 {
-	if (targetModeOn) {
+	coord tp;
+	if (targetModeOn)
+		tp = targetPt;
+	else
+		tp = screenToMapCoords(coord(mouse.cx, mouse.cy));
+	//Make sure this point is in bounds
+	if (currentMap->inBounds(tp.first, tp.second)) {
 		//Get a path to the target
-		pathVector path = getLine(player->getPosition(), targetPt);
+		pathVector path = getLine(player->getPosition(), tp);
 		//See if there's something to hit on the path
 		person* target = getTargetOnPath(path);
 		if (target != nullptr) {
@@ -1827,7 +1833,7 @@ void game::doRangedSpell(spell * sp)
 		}
 	}
 	else {
-		addMessage("First, turn on targeting mode!", TCODColor::white);
+		addMessage("Aim with the mouse!", TCODColor::white);
 	}
 }
 
