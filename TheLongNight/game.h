@@ -167,6 +167,7 @@ private:
 	//Combat
 	void meleeAttack(person* attacker, person* target);
 	void knockbackTarget(person* knocker, person* target, int distance);
+	void pullTarget(person* puller, person* target, int distance);
 
 	//Boss fights
 	monster* currentBoss;

@@ -293,6 +293,34 @@ monster * monster_StarvingFishman()
 	return m;
 }
 
+monster * monster_FishmanDoomPreacher()
+{
+	monster* m = new monster("Fishman Doom-Preacher", FISHMAN_TILE, TCODColor::lime);
+	m->setHealth(100);
+	m->setDefence(DAMAGE_PHYSICAL, 15);
+	m->setBleedResist(60);
+	m->setMoveStats(SPEED_NORMAL);
+	m->setMeleeStats(10, SPEED_NORMAL);
+	m->addSpellKnown(ability_FeedingFrenzy());
+	m->setSpellCastChance(50);
+	m->setFragmentsDropped(50);
+	return m;
+}
+
+monster * monster_FishmanSpearfisher()
+{
+	monster* m = new monster("Fishman Spearfisher", FISHMAN_TILE, TCODColor::lightLime);
+	m->setHealth(75);
+	m->setDefence(DAMAGE_PHYSICAL, 20);
+	m->setBleedResist(60);
+	m->setMoveStats(SPEED_NORMAL);
+	m->setMeleeStats(40, SPEED_NORMAL);
+	m->addSpellKnown(attack_Spearfishing());
+	m->setSpellCastChance(40);
+	m->setFragmentsDropped(50);
+	return m;
+}
+
 /*
 	FRIENDLIES
 */
@@ -357,6 +385,10 @@ monster * getMonsterByHandle(std::string handle)
 	//Flooded Lowlands
 	else if (handle == "starving_fishman")
 		return monster_StarvingFishman();
+	else if (handle == "fishman_doom_preacher")
+		return monster_FishmanDoomPreacher();
+	else if (handle == "fishman_spearfisher")
+		return monster_FishmanSpearfisher();
 
 	//Friendly NPCs
 	else if (handle == "gorem")

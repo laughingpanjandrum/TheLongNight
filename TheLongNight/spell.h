@@ -56,6 +56,7 @@ spell* attack_Quickstep();
 spell* attack_StrongAttack();
 spell* attack_Knockback();
 spell* attack_MightyCleave();
+spell* attack_Spearfishing();
 
 //Wand/chime powers
 spell* ability_PowerSurge();
@@ -76,5 +77,6 @@ spell* ability_Charge();
 spell* ability_Burst();
 spell* ability_CrowArrow();
 spell* ability_AcidSpit();
+spell* ability_FeedingFrenzy();
 
 #endif

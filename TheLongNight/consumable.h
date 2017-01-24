@@ -61,5 +61,6 @@ consumable* consumable_InvigoratingTea();
 
 consumable* ranged_ThrowingKnives();
 consumable* ranged_LaceratingKnives();
+consumable* ranged_CorrodingJar();
 
 #endif

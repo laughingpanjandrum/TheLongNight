@@ -55,3 +55,12 @@ consumable * ranged_LaceratingKnives()
 	c->add(4);
 	return c;
 }
+
+consumable * ranged_CorrodingJar()
+{
+	consumable* c = new consumable("Corroding Jar", VIAL_TILE, TCODColor::lime,
+		"A jar filled with acid. Throw at armoured enemies to penetrate their defences.");
+	c->setRangedAttack(new spell(5, 5, APPLY_ACID_DAMAGE, 20));
+	c->add(3);
+	return c;
+}

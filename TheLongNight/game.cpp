@@ -1347,6 +1347,8 @@ void game::applyEffectToPerson(person * target, effect eff, int potency, person*
 	//Special effects, other
 	else if (eff == KNOCKBACK_TARGET)
 		knockbackTarget(caster, target, potency);
+	else if (eff == PULL_CLOSER)
+		pullTarget(caster, target, potency);
 
 }
 
@@ -1670,6 +1672,18 @@ void game::knockbackTarget(person * knocker, person * target, int distance)
 {
 	int xv = get1dVector(knocker->getx(), target->getx());
 	int yv = get1dVector(knocker->gety(), target->gety());
+	for (int i = 0; i < distance; i++) {
+		movePerson(target, target->getx() + xv, target->gety() + yv);
+	}
+}
+
+/*
+Target gets yanked closer.
+*/
+void game::pullTarget(person * puller, person * target, int distance)
+{
+	int xv = get1dVector(target->getx(), puller->getx());
+	int yv = get1dVector(target->gety(), puller->gety());
 	for (int i = 0; i < distance; i++) {
 		movePerson(target, target->getx() + xv, target->gety() + yv);
 	}

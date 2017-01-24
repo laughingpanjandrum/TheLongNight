@@ -96,6 +96,18 @@ spell * attack_MightyCleave()
 	return sp;
 }
 
+spell * attack_Spearfishing()
+{
+	spell* sp = new spell("Spearfishing", SWORD_TILE, TCODColor::lime,
+		"Ranged attack yanks target closer.");
+	sp->setAttackType(ATTACK_RANGE);
+	sp->setAttackRange(3);
+	sp->setVigourCost(1);
+	sp->addEffect(APPLY_BLEED_DAMAGE, 10);
+	sp->addEffect(PULL_CLOSER, 1);
+	return sp;
+}
+
 //Wand/chime powers
 
 spell * ability_PowerSurge()
@@ -226,5 +238,14 @@ spell * ability_AcidSpit()
 	sp->setAttackType(ATTACK_RANGE);
 	sp->setAttackRange(5);
 	sp->addEffect(APPLY_ACID_DAMAGE, 15);
+	return sp;
+}
+
+spell * ability_FeedingFrenzy()
+{
+	spell* sp = new spell("Feeding Frenzy", SPELL_TILE, TCODColor::lime);
+	sp->setAttackType(ATTACK_AOE);
+	sp->setAttackRange(3);
+	sp->addEffect(GAIN_FREE_MOVES, 3);
 	return sp;
 }

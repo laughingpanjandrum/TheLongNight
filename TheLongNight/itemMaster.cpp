@@ -51,6 +51,8 @@ item * getItemByHandle(std::string handle)
 		return ranged_ThrowingKnives();
 	else if (handle == "lacerating_knives")
 		return ranged_LaceratingKnives();
+	else if (handle == "corroding_jar")
+		return ranged_CorrodingJar();
 
 	//ARMOUR
 	else if (handle == "captains_tricorn")

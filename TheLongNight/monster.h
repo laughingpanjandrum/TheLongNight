@@ -111,6 +111,8 @@ monster* monster_TheOldCrow();
 
 //The Flooded Lowlands
 monster* monster_StarvingFishman();
+monster* monster_FishmanDoomPreacher();
+monster* monster_FishmanSpearfisher();
 
 //Friendly NPCs
 monster* npc_Gorem();
