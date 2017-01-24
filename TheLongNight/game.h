@@ -194,6 +194,7 @@ private:
 	void doRangedSpell(spell* sp);
 	void castSpell(spell* sp);
 	void dischargeSpellOnTarget(spell* sp, person* caster, person* target);
+	void dischargeSpellOnWeapon(spell* sp, person* caster, weapon* target);
 	void openSpellMenu();
 	void selectSpellFromMenu();
 

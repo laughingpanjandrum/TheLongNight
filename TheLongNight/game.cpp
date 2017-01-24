@@ -1969,6 +1969,10 @@ void game::castSpell(spell * sp)
 			//Spell is applied to self
 			dischargeSpellOnTarget(sp, player, player);
 		}
+		else if (aType == ATTACK_BUFF_WEAPON) {
+			//Spell is applied to our current weapon
+			dischargeSpellOnWeapon(sp, player, player->getWeapon());
+		}
 		else if (aType == ATTACK_AOE) {
 			//Hits everything within its radius
 			doAOE(sp, player);
@@ -2046,6 +2050,18 @@ void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 			caster->loseVigour(sp->getVigourCost());
 		}
 	
+	}
+}
+
+/*
+Spell affects weapon instead of person!
+*/
+void game::dischargeSpellOnWeapon(spell * sp, person * caster, weapon * target)
+{
+	//Make sure the weapon actually exists
+	if (target != nullptr) {
+		target->setBuff(sp->getWeaponBuff());
+		caster->loseVigour(sp->getVigourCost());
 	}
 }
 

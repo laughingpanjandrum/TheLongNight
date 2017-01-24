@@ -21,11 +21,13 @@ public:
 	void addEffect(effect eff, int potency);
 	void setVigourCost(int v) { vigourCost = v; }
 	void setAttackRange(int r) { attackRange = r; }
+	void setBuffApplied(damageType dtype, int damage) { buffApplied = weaponBuff(dtype, damage); }
 
 	//Getting
 	int getEffectsCount() { return effectsApplied.size(); }
 	effect getEffectType(int idx) { return effectsApplied.at(idx); }
 	int getEffectPotency(int idx) { return effectPotencies.at(idx); }
+	weaponBuff getWeaponBuff() { return buffApplied; }
 	attackType getAttackType() { return aType; }
 	int getAttackRange() { return attackRange; }
 	int getVigourCost() { return vigourCost; }
@@ -44,6 +46,9 @@ private:
 	//How we're applied
 	attackType aType;
 	int attackRange; //If not melee; otherwise defines either range OR aoe radius
+
+	//Special effects for buff spells
+	weaponBuff buffApplied;
 
 	//Casting cost
 	int vigourCost = 1;
@@ -67,6 +72,7 @@ spell* ability_WyrdChannel();
 //Arcane spells
 spell* spell_MagicMissile();
 spell* spell_ArcaneRadiance();
+spell* spell_ArcaneBlade();
 
 //Prayers
 spell* prayer_Restoration();

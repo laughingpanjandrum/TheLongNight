@@ -42,7 +42,13 @@ void weapon::addStatusEffect(statusEffects eType, int damage)
 
 int weapon::getDamageOfType(damageType dtype)
 {
-	return damageTypes.at(dtype);
+	//Base
+	int dmg = damageTypes.at(dtype);
+	//Bonus from buff?
+	if (currentBuff.dtype == dtype)
+		dmg += currentBuff.bonusDamage;
+	//Done
+	return dmg;
 }
 
 /*

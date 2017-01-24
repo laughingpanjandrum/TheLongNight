@@ -177,6 +177,17 @@ spell * spell_ArcaneRadiance()
 	return sp;
 }
 
+spell * spell_ArcaneBlade()
+{
+	spell* sp = new spell("Arcane Blade", SPELL_TILE, TCODColor::lightMagenta,
+		"Your weapon deals arcane damage.");
+	sp->setAttackType(ATTACK_BUFF_WEAPON);
+	sp->setBuffApplied(DAMAGE_MAGIC, 25);
+	sp->setVigourCost(2);
+	sp->usesSpellPower = true;
+	return sp;
+}
+
 //Prayers
 
 spell * prayer_Restoration()

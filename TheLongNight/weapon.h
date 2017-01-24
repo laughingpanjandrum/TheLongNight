@@ -53,6 +53,11 @@ public:
 	statusEffects getStatusEffectType(int idx) { return statusEffectType.at(idx); }
 	int getStatusEffectDamage(int idx) { return statusEffectDamage.at(idx); }
 
+	//Buffing
+	void setBuff(weaponBuff buff) { currentBuff = buff; }
+	void clearBuff(weaponBuff buff) { currentBuff = weaponBuff(); }
+	weaponBuff getCurrentBuff() { return currentBuff; }
+
 	//Scaling
 	void addScalingType(statScaling st) { scaling.push_back(st); }
 	int getScalingDamage(statScaling st);
@@ -79,9 +84,6 @@ private:
 
 	//Buffing
 	weaponBuff currentBuff;
-	void setBuff(weaponBuff buff) { currentBuff = buff; }
-	void clearBuff(weaponBuff buff) { currentBuff = weaponBuff(); }
-	weaponBuff getCurrentBuff() { return currentBuff; }
 
 	//Scaling
 	statScaleVector scaling;
