@@ -165,6 +165,17 @@ maptile * tile_StatueOfRest()
 	return statue;
 }
 
+/*
+Lets you teleport between maps.
+*/
+maptile * tile_VoidWarpstone()
+{
+	maptile* warpstone = new maptile("Void Warpstone", "warpstone", WARPSTONE_TILE, TCODColor::lightPurple, TCODColor::darkestPurple,
+		true, true, true);
+	warpstone->addTouchEffect(DO_WARP);
+	return warpstone;
+}
+
 
 /*
 	Specific locked doors
@@ -186,6 +197,17 @@ maptile * tile_CrowDoor()
 	maptile* door = new maptile("Old Crow Door", "crow_door", BASIC_DOOR_TILE, TCODColor::grey, TCODColor::darkPurple,
 		false, false);
 	door->unlockCode = "crow_door";
+	door->isDoor = true;
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	door->isGlittery = true;
+	return door;
+}
+
+maptile * tile_RuinedTownshipHallDoor()
+{
+	maptile* door = new maptile("Hall Door", "township_door", BASIC_DOOR_TILE, TCODColor::grey, TCODColor::darkGrey,
+		false, false);
+	door->unlockCode = "ruined_township_hall_door";
 	door->isDoor = true;
 	door->addTouchEffect(CHECK_FOR_UNLOCK);
 	door->isGlittery = true;

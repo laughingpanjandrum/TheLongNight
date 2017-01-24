@@ -14,6 +14,7 @@ battered_steel_shield:20,31
 -codes
 . floor_stone
 g floor_grass
+r floor_road
 " floor_mossy_stone
 ~ water
 D water_deep
@@ -23,6 +24,7 @@ D water_deep
 w wall_wood
 -endcodes
 -connections
+east:ruined_township
 west:flooded_lowlands_1
 -endconnections
 .............................#####......
@@ -53,7 +55,7 @@ west:flooded_lowlands_1
 .......wwww.....~~~~~......".."#...w.~..
 .......w..w......~~~...............w....
 ..................~~........."#.........
-........w.w.......~....."...............
+........w.w.......~....."...........rrrr
 ................~................#......
 ...................www......"......w....
 ........"....~.......w.............w~...

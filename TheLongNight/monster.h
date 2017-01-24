@@ -113,6 +113,7 @@ monster* monster_TheOldCrow();
 monster* monster_StarvingFishman();
 monster* monster_FishmanDoomPreacher();
 monster* monster_FishmanSpearfisher();
+monster* monster_GuardianGolem();
 
 //Friendly NPCs
 monster* npc_Gorem();

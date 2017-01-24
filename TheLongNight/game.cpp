@@ -543,6 +543,8 @@ void game::acceptCurrentMenuIndex()
 		selectConsumableFromMenu();
 	else if (state == STATE_SHOP_MENU)
 		buyItemFromShop();
+	else if (state == STATE_WARP)
+		doWarp(currentMenu->getSelectedItem()->getName());
 }
 
 /*
@@ -585,6 +587,8 @@ void game::drawScreen()
 		drawLevelUpMenu(MAP_DRAW_X, MAP_DRAW_Y);
 	else if (state == STATE_SHOP_MENU)
 		drawShopMenu(MAP_DRAW_X, MAP_DRAW_Y);
+	else if (state == STATE_WARP)
+		drawMenu(currentMenu, MAP_DRAW_X, MAP_DRAW_Y);
 	else
 		drawMap(MAP_DRAW_X, MAP_DRAW_Y);
 	//Always draw the interface
@@ -1307,6 +1311,8 @@ void game::applyEffectToPerson(person * target, effect eff, int potency, person*
 		unlockAdjacentTiles(target->getx(), target->gety());
 	else if (eff == CHECK_FOR_UNLOCK && target->isPlayer)
 		tryUnlockDoor(target->getx(), target->gety());
+	else if (eff == DO_WARP && target->isPlayer)
+		setupWarpMenu();
 
 	//Restoratives
 
@@ -1615,6 +1621,61 @@ void game::loadNewMap(map * newMap, connectionPoint connect, int oldx, int oldy)
 			turns.addEntity(person, 1);
 	//Update FOV for new map
 	currentMap->updateFOV(player->getx(), player->gety());
+}
+
+
+
+/*
+Warp between warp stones.
+*/
+void game::setupWarpMenu()
+{
+	//Add our current warp point, if it's not in there already
+	savePoint currentPt(currentMap, coord(player->getx(), player->gety()));
+	addWarpPoint(currentPt);
+	//Menu of known save points
+	menu* warpMenu = new menu("WARP STONES DISCOVERED");
+	for (auto warpPt : warpPoints) {
+		element* e = new element(warpPt.name, 0, TCODColor::white);
+		warpMenu->addElement(e);
+	}
+	//Ready to rock
+	currentMenu = warpMenu;
+	setState(STATE_WARP);
+}
+
+/*
+Only adds it if it's not already in there
+*/
+void game::addWarpPoint(savePoint pt)
+{
+	for (auto otherPt : warpPoints) {
+		if (otherPt == pt)
+			return;
+	}
+	//ADD NEW ONE!
+	pt.name = currentMap->getName();
+	warpPoints.push_back(pt);
+}
+
+/*
+Actually warp us to a selected point
+*/
+void game::doWarp(std::string warpPointName)
+{
+	//Find warp point matching the given name
+	savePoint* warp = nullptr;
+	for (auto warpPt : warpPoints) {
+		if (warpPt.name == warpPointName) {
+			warp = &warpPt;
+			break;
+		}
+	}
+	//Make sure we actually got one
+	if (warp != nullptr) {
+		restoreFromSavePoint(warp);
+		menuBackOut();
+	}
 }
 
 
@@ -2423,15 +2484,18 @@ void game::setSavePoint()
 /*
 Returns player to save point.
 */
-void game::restoreFromSavePoint()
+void game::restoreFromSavePoint(savePoint* warpTo)
 {
+	//If no point is provided, we warp to our main save point
+	if (warpTo == nullptr)
+		warpTo = &ourSavePt;
 	//Resurrect player
 	deletePlayerBuffs();
 	player->fullRestore();
 	player->isDead = false;
 	player->setTarget(nullptr);
 	//Return us to our save point
-	loadNewMap(ourSavePt.saveMap, CONNECT_VERTICAL, ourSavePt.savePt.first, ourSavePt.savePt.second);
+	loadNewMap(warpTo->saveMap, CONNECT_VERTICAL, warpTo->savePt.first, warpTo->savePt.second);
 	//Put us back in the clock
 	turns.addEntity(player, 0);
 }

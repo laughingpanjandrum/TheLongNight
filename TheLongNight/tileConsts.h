@@ -45,6 +45,7 @@ const int VIAL_TILE = 273;
 const int SPELL_TILE = 274;
 const int KEY_TILE = 275;
 const int CHARM_TILE = 276;
+const int SIGIL_TILE = 6;
 
 //Maptiles
 const int BASIC_FLOOR_TILE = 0;
@@ -59,5 +60,6 @@ const int TREE_TILE = 295;
 const int TERMINAL_TILE = 296; //ie a computer terminal
 
 const int STATUE_TILE = 297;
+const int WARPSTONE_TILE = 10;
 
 #endif

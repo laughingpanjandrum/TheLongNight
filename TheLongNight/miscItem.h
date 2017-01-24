@@ -34,8 +34,13 @@ private:
 Items!
 */
 
+//Keys
 miscItem* key_WretchsKey();
 miscItem* key_OldCrowsKey();
+miscItem* key_RuinedTownshipKey();
+
+//Other
+miscItem* misc_VoidSigil();
 
 
 #endif

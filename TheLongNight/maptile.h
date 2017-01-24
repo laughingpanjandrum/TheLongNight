@@ -101,10 +101,12 @@ maptile* tile_Bed(); //"bed"
 maptile* tile_Terminal(); //"terminal"
 
 maptile* tile_StatueOfRest(); //"statue"
+maptile* tile_VoidWarpstone(); //"warpstone"
 
 //Specific locked doors
 maptile* tile_WretchedDoor(); //"wretched_door"
 maptile* tile_CrowDoor(); //"crow_door"
+maptile* tile_RuinedTownshipHallDoor(); //"township_door"
 
 const tileVector ALL_MAPTILES = {	
 	tile_Floor(), tile_MossyFloor(), tile_Sand(), tile_Grass(), tile_Road(),
@@ -113,9 +115,9 @@ const tileVector ALL_MAPTILES = {
 	tile_Glass(), tile_Bush(), tile_Tree(),
 	tile_Water(), tile_MossyWater(), tile_DeepWater(), tile_Acid(),
 	tile_Bed(), tile_Terminal(),
-	tile_StatueOfRest(),
+	tile_StatueOfRest(), tile_VoidWarpstone(),
 	//Special locked doors
-	tile_WretchedDoor(), tile_CrowDoor()
+	tile_WretchedDoor(), tile_CrowDoor(), tile_RuinedTownshipHallDoor()
 };
 
 #endif

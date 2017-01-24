@@ -34,15 +34,19 @@ struct message {
 	TCODColor color;
 };
 
-//Save point data - a coordinate and a map pointer
+//Save point data - a coordinate and a map pointer, and an optional name
 struct savePoint {
+	savePoint() {}
+	savePoint(map* saveMap, coord savePt) : saveMap(saveMap), savePt(savePt) {}
+	bool operator==(const savePoint& rhs) { return name == rhs.name; }
 	map* saveMap;
 	coord savePt;
+	std::string name;
 };
 
 
 typedef std::vector<message> messageVector;
-
+typedef std::vector<savePoint> savePointVector;
 
 
 
@@ -160,9 +164,13 @@ private:
 
 	//Inter-map movement
 	mapLoader makemap;
+	savePointVector warpPoints;
 	void tryMapChange(int xnew, int ynew);
 	void loadMapFromHandle(std::string handle, connectionPoint connect, int oldx, int oldy);
 	void loadNewMap(map* newMap, connectionPoint connect, int oldx, int oldy);
+	void setupWarpMenu();
+	void addWarpPoint(savePoint pt);
+	void doWarp(std::string warpPointName);
 
 	//Combat
 	void meleeAttack(person* attacker, person* target);
@@ -221,7 +229,7 @@ private:
 	//Save points
 	savePoint ourSavePt;
 	void setSavePoint();
-	void restoreFromSavePoint();
+	void restoreFromSavePoint(savePoint* warpTo = nullptr);
 	void deletePlayerBuffs();
 
 	//Coordinate conversions

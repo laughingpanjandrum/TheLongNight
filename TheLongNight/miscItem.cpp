@@ -28,3 +28,27 @@ miscItem * key_OldCrowsKey()
 	m->setKeyTag("crow_door");
 	return m;
 }
+
+miscItem * key_RuinedTownshipKey()
+{
+	miscItem* m = new miscItem("Ruined Township Key", KEY_TILE, TCODColor::darkLime,
+		"Someone entrusted the guardian golem with the safekeeping of this key, and it persisted even after the end of the world.");
+	m->isKey = true;
+	m->setKeyTag("ruined_township_hall_door");
+	return m;
+}
+
+
+
+//Other
+
+
+
+miscItem * misc_VoidSigil()
+{
+	miscItem* m = new miscItem("Void Sigil Key", SIGIL_TILE, TCODColor::lightPurple,
+		"Sign of certain voidwalkers. Those who possess this key are permitted to use the void warping stones.");
+	m->isKey = true;
+	m->setKeyTag("void_sigil");
+	return m;
+}

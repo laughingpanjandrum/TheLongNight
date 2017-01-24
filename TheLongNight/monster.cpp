@@ -321,6 +321,20 @@ monster * monster_FishmanSpearfisher()
 	return m;
 }
 
+monster * monster_GuardianGolem()
+{
+	monster* m = new monster("Guardian Golem", GOREM_TILE, TCODColor::lightLime);
+	m->setHealth(300);
+	m->setDefence(DAMAGE_PHYSICAL, 10);
+	m->setBleedResist(1000);
+	m->setMoveStats(SPEED_SLOW);
+	m->setMeleeStats(100, SPEED_SLOW);
+	m->setFragmentsDropped(200);
+	m->addItemDrop(key_RuinedTownshipKey());
+	return m;
+}
+
+
 /*
 	FRIENDLIES
 */
@@ -389,6 +403,8 @@ monster * getMonsterByHandle(std::string handle)
 		return monster_FishmanDoomPreacher();
 	else if (handle == "fishman_spearfisher")
 		return monster_FishmanSpearfisher();
+	else if (handle == "guardian_golem")
+		return monster_GuardianGolem();
 
 	//Friendly NPCs
 	else if (handle == "gorem")
