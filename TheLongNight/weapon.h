@@ -15,12 +15,12 @@ public:
 
 	//Item categories
 	weapon(): item() {}
-	weapon(std::string name, int tileCode, TCODColor color, std::string description) :
-		item(name, tileCode, color, ITEM_WEAPON, description) {}
+	weapon(std::string name, int tileCode, TCODColor color, std::string description);
 	~weapon();
 
 	//Setting
 	void setBasicAttributes(int damage, int attackDelay);
+	void addDamageType(damageType dtype, int damage);
 	void setDefence(int def) { defence = def; }
 	void setBleedResist(int br) { bleedResist = br; }
 	void addStatusEffect(statusEffects eType, int damage);
@@ -29,6 +29,7 @@ public:
 
 	//Getting
 	int getDamage() { return damage; }
+	int getDamageOfType(damageType dtype);
 	int getAttackDelay() { return attackDelay; }
 	spell* getSpecialAttack() { return specialAttack; }
 
@@ -72,8 +73,15 @@ private:
 	int divinePower = 0;
 
 	//Special effects
+	std::vector<int> damageTypes;
 	statusEffectVector statusEffectType;
 	std::vector<int> statusEffectDamage;
+
+	//Buffing
+	weaponBuff currentBuff;
+	void setBuff(weaponBuff buff) { currentBuff = buff; }
+	void clearBuff(weaponBuff buff) { currentBuff = weaponBuff(); }
+	weaponBuff getCurrentBuff() { return currentBuff; }
 
 	//Scaling
 	statScaleVector scaling;

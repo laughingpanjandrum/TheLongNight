@@ -97,4 +97,12 @@ enum attackType {
 
 typedef std::vector<effect> effectVector;
 
+
+struct weaponBuff {
+	weaponBuff() {}
+	weaponBuff(damageType dtype, int bonusDamage) : dtype(dtype), bonusDamage(bonusDamage) {}
+	damageType dtype;
+	int bonusDamage = 0;
+};
+
 #endif

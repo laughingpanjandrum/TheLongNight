@@ -3,6 +3,15 @@
 
 
 
+weapon::weapon(std::string name, int tileCode, TCODColor color, std::string description) :
+	item(name, tileCode, color, ITEM_WEAPON, description)
+{
+	//Special damage types
+	for (int i = 0; i < ALL_DAMAGE_TYPES; i++) {
+		damageTypes.push_back(0);
+	}
+}
+
 weapon::~weapon()
 {
 }
@@ -17,6 +26,11 @@ void weapon::setBasicAttributes(int damage, int attackDelay)
 	this->attackDelay = attackDelay;
 }
 
+void weapon::addDamageType(damageType dtype, int damage)
+{
+	damageTypes.at(dtype) = damage;
+}
+
 /*
 Add a status effect, e.g. bleed, to the weapon's standard attack
 */
@@ -24,6 +38,11 @@ void weapon::addStatusEffect(statusEffects eType, int damage)
 {
 	statusEffectType.push_back(eType);
 	statusEffectDamage.push_back(damage);
+}
+
+int weapon::getDamageOfType(damageType dtype)
+{
+	return damageTypes.at(dtype);
 }
 
 /*

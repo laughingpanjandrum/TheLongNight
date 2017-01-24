@@ -1053,8 +1053,17 @@ void game::drawWeaponInfo(weapon * it, int atx, int aty)
 	int offset = 13;
 	TCODColor maincol = TCODColor::white;
 	//Damage
-	win.write(atx, aty, "DAMAGE", TCODColor::darkRed);
+	win.write(atx, aty, "DAMAGE:", TCODColor::darkRed);
 	win.write(atx + offset, aty, std::to_string(it->getDamage()), maincol);
+	//Special damage types
+	for (int d = 0; d < ALL_DAMAGE_TYPES; d++) {
+		damageType dt = static_cast<damageType>(d);
+		int dmg = it->getDamageOfType(dt);
+		if (dmg > 0) {
+			win.write(atx, ++aty, " " + getDamageTypeName(dt), getDamageTypeColor(dt));
+			win.write(atx + offset, aty, '+' + std::to_string(dmg), TCODColor::white);
+		}
+	}
 	//Scaling
 	win.write(atx, ++aty, "SCALING:", TCODColor::red);
 	std::string scaling = "";
@@ -1711,6 +1720,14 @@ void game::meleeAttack(person * attacker, person * target)
 	
 	//Deal the damage
 	target->takeDamage(damage, DAMAGE_PHYSICAL);
+
+	//Now deal special damage types
+	for (int dt = 0; dt < ALL_DAMAGE_TYPES; dt++) {
+		damageType dtype = static_cast<damageType>(dt);
+		int sdmg = attacker->getDamageOfType(dtype);
+		if (sdmg > 0)
+			target->takeDamage(sdmg, dtype);
+	}
 	
 	//Next: SPELL DISCHARGES, if we have one readied
 	if (attacker->buffNextMelee != nullptr) {

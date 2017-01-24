@@ -116,6 +116,18 @@ int person::getMeleeDamage()
 }
 
 /*
+Returns how much SPECIAL DAMAGE we do in melee.
+*/
+int person::getDamageOfType(damageType dtype)
+{
+	weapon* wp = getWeapon();
+	if (wp != nullptr) {
+		return wp->getDamageOfType(dtype);
+	}
+	return 0;
+}
+
+/*
 	DAMAGE AND HEALING
 */
 
