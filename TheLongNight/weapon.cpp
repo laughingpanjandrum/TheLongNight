@@ -69,7 +69,7 @@ std::string getAttackSpeedName(int del)
 	case(SPEED_NORMAL): return "Normal";
 	case(SPEED_SLOW): return "Slow";
 	}
-	return "Unknown";
+	return "None";
 }
 
 
@@ -163,6 +163,18 @@ weapon * weapon_NotchedGreatsword()
 	return wp;
 }
 
+weapon * weapon_FishmansHarpoon()
+{
+	weapon* wp = new weapon("Fishman's Harpoon", SWORD_TILE, TCODColor::lime,
+		"Its point is barbed to induce bleeding and to drag the victim.");
+	wp->setBasicAttributes(40, SPEED_NORMAL);
+	wp->addStatusEffect(EFFECT_BLEED, 10);
+	wp->addScalingType(SCALE_STR);
+	wp->addScalingType(SCALE_DEX);
+	wp->setSpecialAttack(attack_Spearfishing());
+	return wp;
+}
+
 //		Shields
 
 weapon * shield_BatteredWoodenShield()
@@ -193,6 +205,7 @@ weapon * shield_BatteredSteelShield()
 	wp->setDamageResist(DAMAGE_FIRE, 5);
 	wp->setDamageResist(DAMAGE_ELECTRIC, 5);
 	wp->setDamageResist(DAMAGE_COLD, 5);
+	wp->makeOffhand();
 	return wp;
 }
 

@@ -376,7 +376,7 @@ void person::equipItem(item * which)
 			doWeaponEquip(wp);
 		}
 		else if (cat == ITEM_SPELL) {
-			//Update our spellstore if the item was successfully equipped
+			//Update our spellstore if the spell was successfully equipped
 			addSpellKnown(static_cast<spell*>(which));
 		}
 
@@ -384,7 +384,7 @@ void person::equipItem(item * which)
 		Numerous item types can apply these effects
 		*/
 
-		if (cat == ITEM_WEAPON || cat == ITEM_BODY_ARMOUR || cat == ITEM_HELMET || cat == ITEM_CHARM) {
+		if (cat == ITEM_WEAPON || cat == ITEM_OFFHAND || cat == ITEM_BODY_ARMOUR || cat == ITEM_HELMET || cat == ITEM_CHARM) {
 
 			//Damage resistances
 			for (int r = 0; r != ALL_DAMAGE_TYPES; r++) {

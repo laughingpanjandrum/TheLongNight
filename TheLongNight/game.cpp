@@ -1071,6 +1071,15 @@ void game::drawWeaponInfo(weapon * it, int atx, int aty)
 		win.write(atx, ++aty, "DEFENCE", TCODColor::sepia);
 		win.write(atx + offset, aty, std::to_string(it->getDefence()), maincol);
 	}
+	//Damage resistances
+	for (int r = 0; r != ALL_DAMAGE_TYPES; r++) {
+		damageType dr = static_cast<damageType>(r);
+		int res = it->getDamageResist(dr);
+		if (res > 0) {
+			win.write(atx + 1, ++aty, getDamageTypeName(dr), getDamageTypeColor(dr));
+			win.write(atx + offset, aty, std::to_string(res), maincol);
+		}
+	}
 	//Bleed resist
 	if (it->getBleedResist() > 0) {
 		win.write(atx, ++aty, "BLEED Resist", TCODColor::crimson);

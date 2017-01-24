@@ -314,7 +314,7 @@ monster * monster_FishmanSpearfisher()
 	m->setDefence(DAMAGE_PHYSICAL, 20);
 	m->setBleedResist(60);
 	m->setMoveStats(SPEED_NORMAL);
-	m->setMeleeStats(40, SPEED_NORMAL);
+	m->equipItem(weapon_FishmansHarpoon());
 	m->addSpellKnown(attack_Spearfishing());
 	m->setSpellCastChance(40);
 	m->setFragmentsDropped(50);

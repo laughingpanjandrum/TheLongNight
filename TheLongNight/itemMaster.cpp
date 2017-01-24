@@ -23,6 +23,8 @@ item * getItemByHandle(std::string handle)
 	//Flooded Lowlands
 	else if (handle == "notched_greatsword")
 		return weapon_NotchedGreatsword();
+	else if (handle == "fishmans_harpoon")
+		return weapon_FishmansHarpoon();
 
 	//SHIELDS
 	else if (handle == "battered_wooden_shield")

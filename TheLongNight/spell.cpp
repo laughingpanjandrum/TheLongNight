@@ -246,6 +246,6 @@ spell * ability_FeedingFrenzy()
 	spell* sp = new spell("Feeding Frenzy", SPELL_TILE, TCODColor::lime);
 	sp->setAttackType(ATTACK_AOE);
 	sp->setAttackRange(3);
-	sp->addEffect(GAIN_FREE_MOVES, 3);
+	sp->addEffect(GAIN_FREE_MOVES, 1);
 	return sp;
 }

@@ -1,12 +1,10 @@
 Flooded Lowlands
 start:6,37
-fishman_spearfisher:6,29
 starving_fishman:6,32
 starving_fishman:7,31
 starving_fishman:5,30
 starving_fishman:5,31
 starving_fishman:17,4
-starving_fishman:18,4
 starving_fishman:16,6
 fishman_doom_preacher:17,5
 -items
@@ -26,6 +24,7 @@ w wall_wood
 -endcodes
 -connections
 south:pilgrims_road_5
+east:flooded_lowlands_2
 -endconnections
 .#......................................
 .#...............###..............#.....
