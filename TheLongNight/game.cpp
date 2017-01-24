@@ -919,14 +919,6 @@ Display info about whatever we've highlighted with the CURSOR.
 */
 void game::drawMouseover(int atx, int aty)
 {
-	//Is the cursor even on?
-	/*if (!targetModeOn) {
-		//If not, just show whatever the player is targeting
-		person* target = player->getTarget();
-		if (target != nullptr)
-			drawTargetInfo(target, atx, aty);
-		return;
-	}*/
 	//What are we pointing at?
 	coord mpt = screenToMapCoords(coord(mouse.cx, mouse.cy));
 	if (currentMap->inBounds(mpt.first, mpt.second) && currentMap->isPointInFOV(mpt.first, mpt.second)) {
@@ -946,6 +938,12 @@ void game::drawMouseover(int atx, int aty)
 				win.write(atx, aty, t->getName(), t->getColor());
 			}
 		}
+	}
+	else {
+		//If the mouse isn't in play, show the player's current target
+		person* target = player->getTarget();
+		if (target != nullptr)
+			drawTargetInfo(target, atx, aty);
 	}
 }
 
