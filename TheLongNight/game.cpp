@@ -1345,6 +1345,16 @@ void game::applyEffectToPerson(person * target, effect eff, int potency, person*
 
 	else if (eff == GAIN_DEFENCE)
 		target->addDefence(potency);
+	else if (eff == GAIN_ACID_RESIST)
+		target->addDamageResist(DAMAGE_ACID, potency);
+	else if (eff == GAIN_COLD_RESIST)
+		target->addDamageResist(DAMAGE_COLD, potency);
+	else if (eff == GAIN_ELECTRIC_RESIST)
+		target->addDamageResist(DAMAGE_ELECTRIC, potency);
+	else if (eff == GAIN_FIRE_RESIST)
+		target->addDamageResist(DAMAGE_FIRE, potency);
+	else if (eff == GAIN_MAGIC_RESIST)
+		target->addDamageResist(DAMAGE_MAGIC, potency);
 
 	//Spell buffs
 
@@ -2549,6 +2559,7 @@ void game::deletePlayerBuffs()
 		//Negative buff is applied!
 		applyEffectToPerson(player, b->effectApplied, -b->potency);
 	}
+	player->clearBuffs();
 }
 
 

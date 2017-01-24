@@ -188,6 +188,30 @@ spell * spell_ArcaneBlade()
 	return sp;
 }
 
+spell * spell_GottricsArcaneProtection()
+{
+	spell* sp = new spell("Gottric's Arcane Protection", SPELL_TILE, TCODColor::lighterMagenta,
+		"Confers protection from magic damage.");
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(GAIN_MAGIC_RESIST, 20);
+	sp->setVigourCost(2);
+	sp->usesSpellPower = true;
+	sp->addPermanentBuff = true;
+	return sp;
+}
+
+spell * spell_Frostbolt()
+{
+	spell* sp = new spell("Frostbolt", SPELL_TILE, TCODColor::cyan,
+		"Bolt deals cold damage.");
+	sp->setAttackType(ATTACK_RANGE);
+	sp->setAttackRange(5);
+	sp->addEffect(APPLY_COLD_DAMAGE, 25);
+	sp->setVigourCost(1);
+	sp->usesSpellPower = true;
+	return sp;
+}
+
 //Prayers
 
 spell * prayer_Restoration()

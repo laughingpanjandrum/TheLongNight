@@ -73,6 +73,8 @@ spell* ability_WyrdChannel();
 spell* spell_MagicMissile();
 spell* spell_ArcaneRadiance();
 spell* spell_ArcaneBlade();
+spell* spell_GottricsArcaneProtection();
+spell* spell_Frostbolt();
 
 //Prayers
 spell* prayer_Restoration();

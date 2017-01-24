@@ -178,8 +178,6 @@ Fully restores all of our attributes and items.
 */
 void person::fullRestore()
 {
-	//Remove buffs
-	clearBuffs();
 	//Replenish health
 	health.restore();
 	vigour.restore();
