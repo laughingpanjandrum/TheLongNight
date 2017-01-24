@@ -40,18 +40,11 @@ struct savePoint {
 	coord savePt;
 };
 
-//Story event, i.e. a specific monster tag is placed on a specific map
-struct storyEvent {
-	storyEvent(std::string storyFlag, std::string mapFlag, std::string monsterTag, coord spawnPt) :
-		storyFlag(storyFlag), mapFlag(mapFlag), monsterTag(monsterTag), spawnPt(spawnPt) {}
-	std::string storyFlag;
-	std::string mapFlag;
-	std::string monsterTag;
-	coord spawnPt;
-};
 
 typedef std::vector<message> messageVector;
-typedef std::vector<storyEvent> storyEventVector;
+
+
+
 
 class game
 {
@@ -212,11 +205,13 @@ private:
 
 	//Story event tracking!
 	std::vector<std::string> storyFlags;
-	void addStoryFlag(std::string f) { storyFlags.push_back(f); }
+	void addStoryFlag(std::string f);
 	bool hasStoryFlag(std::string f);
 	void loadStoryEvents(std::string filename);
-	storyEventVector storyEvents;
-	void queueStoryEvent(storyEvent e) { storyEvents.push_back(e); }
+	storyEventVector storyEventsReady;
+	storyEventVector storyEventsWaiting;
+	void saveStoryEvent(storyEvent e) { storyEventsWaiting.push_back(e); }
+	void queueStoryEvent(storyEvent e) { storyEventsReady.push_back(e); }
 
 	//Keeping the world up to date
 	void tick();

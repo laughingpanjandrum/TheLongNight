@@ -8,14 +8,27 @@
 #include "monster.h"
 #include "item.h"
 
+
 enum connectionPoint {
 	CONNECT_NORTH, CONNECT_SOUTH, CONNECT_EAST, CONNECT_WEST,
 	CONNECT_VERTICAL, CONNECT_WARP
 };
 
+
+//Story event, i.e. a specific monster tag is placed on a specific map
+struct storyEvent {
+	storyEvent(std::string storyFlag, std::string mapFlag, std::string monsterTag, coord spawnPt) :
+		storyFlag(storyFlag), mapFlag(mapFlag), monsterTag(monsterTag), spawnPt(spawnPt) {}
+	std::string storyFlag;
+	std::string mapFlag;
+	std::string monsterTag;
+	coord spawnPt;
+};
+
 typedef std::vector<person*> personVector;
 typedef std::vector<item*> itemVector;
 typedef std::vector<connectionPoint> connectionVector;
+typedef std::vector<storyEvent> storyEventVector;
 
 class map
 {
@@ -65,8 +78,8 @@ public:
 	bool isSeeThrough(int x, int y) { return datamap->isTransparent(x, y); }
 
 	//Spawning
-	void respawnAllMonsters();
-	bool checkForMonsterMovement(std::string spawnTag);
+	void respawnAllMonsters(storyEventVector eventsToWatch);
+	bool checkForMonsterMovement(storyEventVector eventsToWatch, std::string spawnTag);
 	bool bossDestroyed = false;
 
 	//FOV/pathfinding stuff

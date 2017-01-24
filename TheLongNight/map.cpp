@@ -180,20 +180,42 @@ item * map::getItem(int x, int y)
 Deletes all monsters and spawns new ones.
 Also deletes the PC so make sure they get re-added if you want them to exist!
 */
-void map::respawnAllMonsters()
+void map::respawnAllMonsters(storyEventVector eventsToWatch)
 {
 	//Remove existing creatures
 	people.clear();
+
+	//Create a list of creatures to remove from the spawn list
+	std::vector<std::string> spawnTagsToRemove;
+
 	//Spawn anew
 	for (int i = 0; i < monsterSpawnTags.size(); i++) {
-		//Get monster corresponding to this tag
-		monster* m = getMonsterByHandle(monsterSpawnTags.at(i));
-		//Make sure we don't respawn the boss!
-		if ((!bossDestroyed || !m->isBoss)) {
-			coord c = monsterSpawnCoords.at(i);
-			addPerson(m, c.first, c.second);
+
+		if (!checkForMonsterMovement(eventsToWatch, monsterSpawnTags.at(i))) {
+
+			//Get monster corresponding to this tag
+			monster* m = getMonsterByHandle(monsterSpawnTags.at(i));
+
+			//Make sure we don't respawn the boss!
+			if ((!bossDestroyed || !m->isBoss)) {
+				coord c = monsterSpawnCoords.at(i);
+				addPerson(m, c.first, c.second);
+			}
+
 		}
+		else {
+			//Put tag on a kill-me list
+			spawnTagsToRemove.push_back(monsterSpawnTags.at(i));
+		}
+
 	}
+
+	//Remove everything that shouldn't be here
+	for (auto toRemove : spawnTagsToRemove) {
+		auto iter = std::find(monsterSpawnTags.begin(), monsterSpawnTags.end(), toRemove);
+		monsterSpawnTags.erase(iter);
+	}
+
 }
 
 
@@ -202,8 +224,14 @@ Determines whether a story flag mandates that a particular NPC should change loc
 This assumes that only one entity in the universe has this spawn tag!
 If it returns True, then don't spawn the monster - he's moved.
 */
-bool map::checkForMonsterMovement(std::string spawnTag)
+bool map::checkForMonsterMovement(storyEventVector eventsToWatch, std::string spawnTag)
 {
+	for (auto ev : eventsToWatch) {
+		if (ev.monsterTag == spawnTag) {
+			//WE FOUND 'IM! He should no longer be here.
+			return true;
+		}
+	}
 	return false;
 }
 

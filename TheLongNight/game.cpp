@@ -9,7 +9,7 @@ game::game()
 	map* newmap = new map();
 	newmap = makemap.loadMapFromFile(makemap.getStartMapHandle());
 	setCurrentMap(newmap);
-	newmap->respawnAllMonsters();
+	newmap->respawnAllMonsters(storyEventsReady);
 	
 	//Remember the first map
 	addKnownMap(newmap, makemap.getStartMapHandle());
@@ -1580,7 +1580,7 @@ void game::loadNewMap(map * newMap, connectionPoint connect, int oldx, int oldy)
 	//Set new map
 	setCurrentMap(newMap);
 	//Respawn monsters on map
-	newMap->respawnAllMonsters();
+	newMap->respawnAllMonsters(storyEventsReady);
 	//Figure our what our new coordinates will be, based on where we moved from
 	int xnew = oldx;
 	int ynew = oldy;
@@ -2206,6 +2206,25 @@ void game::buyItemFromShop()
 
 
 /*
+Add a new story flag, and check for an associated event!
+*/
+void game::addStoryFlag(std::string f)
+{
+	//Add flag
+	storyFlags.push_back(f);
+	//See if we should be queuing an event
+	for (auto iter = storyEventsWaiting.begin(); iter != storyEventsWaiting.end(); iter++) {
+		if ((*iter).storyFlag == f) {
+			//Yup, this is the one!
+			queueStoryEvent(*iter);
+			storyEventsWaiting.erase(iter);
+			break;
+		}
+	}
+}
+
+
+/*
 Returns whether we have the specified story flag.
 */
 bool game::hasStoryFlag(std::string f)
@@ -2248,7 +2267,7 @@ void game::loadStoryEvents(std::string filename)
 				else {
 					//We're finished building, save this event
 					storyEvent ev(storyFlag, mapFlag, monsterTag, pt);
-					queueStoryEvent(ev);
+					saveStoryEvent(ev);
 				}
 			
 			}
