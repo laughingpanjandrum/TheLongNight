@@ -2094,30 +2094,41 @@ void game::doDialogue(monster * target)
 	std::string currentLine = target->getNextDialogueLine();
 	while (key.vk != KEY_BACK_OUT) {
 		win.clear();
+
 		//Box it in
 		win.clearRegion(MAP_DRAW_X, MAP_DRAW_Y, 40, 40);
 		win.drawBox(MAP_DRAW_X, MAP_DRAW_Y, 40, 40, TCODColor::sepia);
+
 		//Controls
 		int atx = MAP_DRAW_X + 1;
 		int aty = MAP_DRAW_Y + 1;
 		std::string txt = "[ENTER] Chat   [ESCAPE] Goodbye";
 		win.write(atx, aty, centreText(txt, 38), TCODColor::white);
+
 		//NPC name
 		aty += 2;
 		win.write(atx, aty, centreText(target->getName(), 38), target->getColor());
+
 		//Write dialogue!
 		aty += 4;
 		win.writeWrapped(atx, aty, 38, currentLine, TCODColor::lightGrey);
+
 		//Done drawing!
 		win.refresh();
+
 		//Check for input
 		TCODSystem::checkForEvent(TCOD_EVENT_ANY, &key, &mouse);
 		if (!key.pressed && key.vk == KEY_ACCEPT) {
+
 			currentLine = target->getNextDialogueLine();
 			//See if anything special happens (and if we should end the dialogue as well)
 			if (checkForDialogueEvent(currentLine, target))
 				break;
+			//Otherwise, update current line of dialogue to make sure it's correct
+			currentLine = target->getCurrentDialogueLine();
+
 		}
+
 	}
 }
 
@@ -2139,6 +2150,15 @@ bool game::checkForDialogueEvent(std::string line, monster * target)
 		addStoryFlag(target->getNextDialogueLine());
 		//Progress to the next line
 		return checkForDialogueEvent(target->getNextDialogueLine(), target);
+	}
+	else if (line == "|STORY_FLAG_SKIP") {
+		std::string storyFlag = target->getNextDialogueLine();
+		std::string lineName = target->getNextDialogueLine();
+		//If we have the provided story flag, skip ahead in the dialogue.
+		if (hasStoryFlag(storyFlag)) {
+			//WE HAVE IT. Now look for the line name
+			while (target->getNextDialogueLine() != lineName) {}
+		}
 	}
 	else if (line == "|END_DIALOGUE") {
 		//Automatically ends the dialogue
@@ -2521,9 +2541,19 @@ void game::debugMenu()
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());
-		player->addItem(weapon_NotchedGreatsword());
-		fragments += 500;
+		fragments += 600;
 		loadMapFromHandle("maps/pilgrims_road_5.txt", CONNECT_WARP, player->getx(), player->gety());
+	}
+	else if (txt == "forlorn") {
+		fragments += 600;
+		player->addItem(weapon_NotchedGreatsword());
+		player->addItem(armour_CrowKnightsArmour());
+		player->addItem(headgear_CrowKnightsHood());
+		player->addItem(consumable_StarwaterDraught());
+		player->addItem(consumable_StarwaterDraught());
+		player->addItem(consumable_StarwaterDraught());
+		player->addItem(consumable_StarwaterDraught());
+		loadMapFromHandle("maps/silent_ruins.txt", CONNECT_WARP, player->getx(), player->gety());
 	}
 	else if (txt == "lowlands") {
 		player->addItem(weapon_SplinteredSword());

@@ -55,6 +55,7 @@ public:
 	void loadDialogue(std::string filename);
 	void addDialogue(std::string line) { dialogue.push_back(line); }
 	std::string getNextDialogueLine();
+	std::string getCurrentDialogueLine() { return dialogue.at(atChatLine); }
 	void backUpDialogue() { atChatLine--; }
 	bool hasDialogue() { return dialogue.size() > 0; }
 

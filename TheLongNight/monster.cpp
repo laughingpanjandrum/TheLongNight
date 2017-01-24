@@ -315,7 +315,7 @@ monster * npc_Gorem()
 
 monster * npc_UtricTheRat()
 {
-	monster* m = new monster("Utric the Rat", GOREM_TILE, TCODColor::sepia);
+	monster* m = new monster("Utric the Rat", GOREM_TILE, TCODColor::lighterSepia);
 	m->setHealth(100);
 	m->isHostile = false;
 	m->loadDialogue("dialogue/utric_chat.txt");

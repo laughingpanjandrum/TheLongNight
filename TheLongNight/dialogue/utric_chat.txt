@@ -1,4 +1,7 @@
 "Hello, hello! How nice to see a friendly face!"
+|STORY_FLAG_SKIP
+utricToFairweather
+[IN_FAIRWEATHER]
 "I hope you've killed that horrible crow outside... I found him terribly frightening, didn't you?"
 "Me? Oh, of course! My name is Utric the Rat."
 "I'm looking for an old friend of mine, Gottric the Digger... I don't suppose you've seen him? ...No, I didn't think so."
@@ -7,3 +10,7 @@
 utricToFairweather
 |END_DIALOGUE
 "I'm making my way to the ruins of Old Fairweather... Perhaps I'll see you there!"
+|END_DIALOGUE
+[IN_FAIRWEATHER]
+"Aha! Good to see you made it, friend!"
+|END_DIALOGUE
