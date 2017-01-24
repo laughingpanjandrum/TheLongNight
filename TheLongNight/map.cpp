@@ -185,8 +185,12 @@ void map::respawnAllMonsters(storyEventVector eventsToWatch)
 	//Remove existing creatures
 	people.clear();
 
+	//Check for new creatures that need to be added
+	addMovingMonster(eventsToWatch);
+
 	//Create a list of creatures to remove from the spawn list
 	std::vector<std::string> spawnTagsToRemove;
+	coordVector spawnCoordsToRemove;
 
 	//Spawn anew
 	for (int i = 0; i < monsterSpawnTags.size(); i++) {
@@ -206,6 +210,7 @@ void map::respawnAllMonsters(storyEventVector eventsToWatch)
 		else {
 			//Put tag on a kill-me list
 			spawnTagsToRemove.push_back(monsterSpawnTags.at(i));
+			spawnCoordsToRemove.push_back(monsterSpawnCoords.at(i));
 		}
 
 	}
@@ -215,7 +220,30 @@ void map::respawnAllMonsters(storyEventVector eventsToWatch)
 		auto iter = std::find(monsterSpawnTags.begin(), monsterSpawnTags.end(), toRemove);
 		monsterSpawnTags.erase(iter);
 	}
+	for (auto toRemove : spawnCoordsToRemove) {
+		auto iter = std::find(monsterSpawnCoords.begin(), monsterSpawnCoords.end(), toRemove);
+		monsterSpawnCoords.erase(iter);
+	}
 
+}
+
+
+/*
+See if any new monster spawns have appeared!
+*/
+void map::addMovingMonster(storyEventVector eventsToWatch)
+{
+	for (auto ev : eventsToWatch) {
+		if (ev.mapFlag == mapTag) {
+			//Make sure this guy isn't already in here
+			auto iter = std::find(monsterSpawnTags.begin(), monsterSpawnTags.end(), ev.monsterTag);
+			if (iter == monsterSpawnTags.end()) {
+				//He's not! EMPLACE
+				monsterSpawnTags.push_back(ev.monsterTag);
+				monsterSpawnCoords.push_back(ev.spawnPt);
+			}
+		}
+	}
 }
 
 
@@ -227,7 +255,7 @@ If it returns True, then don't spawn the monster - he's moved.
 bool map::checkForMonsterMovement(storyEventVector eventsToWatch, std::string spawnTag)
 {
 	for (auto ev : eventsToWatch) {
-		if (ev.monsterTag == spawnTag) {
+		if (ev.monsterTag == spawnTag && ev.mapFlag != mapTag) {
 			//WE FOUND 'IM! He should no longer be here.
 			return true;
 		}

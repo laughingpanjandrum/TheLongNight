@@ -192,8 +192,9 @@ map * mapLoader::loadMapFromFile(std::string filename)
 	//Add start point to map
 	m->setStartPoint(startPt);
 
-	//Set name
+	//Set name and tag
 	m->setName(mapname);
+	m->setMapTag(filename);
 
 	//Add monster spawners to map
 	/*for (auto monst : monsters) {

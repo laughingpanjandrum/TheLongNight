@@ -46,6 +46,8 @@ public:
 	//Flava getting & setting
 	void setName(std::string n) { name = n; }
 	std::string getName() { return name; }
+	void setMapTag(std::string t) { mapTag = t; }
+	std::string getMapTag() { return mapTag; }
 
 	//Connections and boundary checking
 	bool inBounds(int x, int y);
@@ -79,6 +81,7 @@ public:
 
 	//Spawning
 	void respawnAllMonsters(storyEventVector eventsToWatch);
+	void addMovingMonster(storyEventVector eventsToWatch);
 	bool checkForMonsterMovement(storyEventVector eventsToWatch, std::string spawnTag);
 	bool bossDestroyed = false;
 
@@ -95,6 +98,7 @@ private:
 
 	//Flava
 	std::string name;
+	std::string mapTag; //how we're identified
 
 	//Boundaries and map creation
 	int xsize, ysize;
