@@ -792,7 +792,7 @@ void game::drawInterface(int leftx, int topy)
 	drawMouseover(atx, aty);
 
 	//List controls
-	atx += 10;
+	atx += 15;
 	aty = MAP_DRAW_Y + 43;
 	win.writec(atx, aty, 'a', TCODColor::green);
 	win.write(atx + 2, aty, "Select spell", TCODColor::white);
@@ -1633,6 +1633,11 @@ void game::setupWarpMenu()
 	//Add our current warp point, if it's not in there already
 	savePoint currentPt(currentMap, coord(player->getx(), player->gety()));
 	addWarpPoint(currentPt);
+	//We need a particular item to be able to use warp stones
+	if (!player->hasKey("warpstone")) {
+		addMessage("This mysterious stone does not respond to your presence.", TCODColor::white);
+		return;
+	}
 	//Menu of known save points
 	menu* warpMenu = new menu("WARP STONES DISCOVERED");
 	for (auto warpPt : warpPoints) {
@@ -1649,6 +1654,7 @@ Only adds it if it's not already in there
 */
 void game::addWarpPoint(savePoint pt)
 {
+	//See if it's already in here
 	for (auto otherPt : warpPoints) {
 		if (otherPt == pt)
 			return;

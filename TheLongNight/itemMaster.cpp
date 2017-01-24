@@ -90,10 +90,12 @@ item * getItemByHandle(std::string handle)
 	//PRAYERS
 	else if (handle == "restoration")
 		return prayer_Restoration();
-	
+
 	//MISC ITEMS
 	else if (handle == "wretched_key")
 		return key_WretchsKey();
+	else if (handle == "void_sigil")
+		return misc_VoidSigil();
 	
 	//Uh oh, we didn't find anything!
 	return nullptr;

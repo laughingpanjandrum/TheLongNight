@@ -49,6 +49,6 @@ miscItem * misc_VoidSigil()
 	miscItem* m = new miscItem("Void Sigil Key", SIGIL_TILE, TCODColor::lightPurple,
 		"Sign of certain voidwalkers. Those who possess this key are permitted to use the void warping stones.");
 	m->isKey = true;
-	m->setKeyTag("void_sigil");
+	m->setKeyTag("warpstone");
 	return m;
 }

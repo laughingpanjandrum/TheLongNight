@@ -60,6 +60,6 @@ const int TREE_TILE = 295;
 const int TERMINAL_TILE = 296; //ie a computer terminal
 
 const int STATUE_TILE = 297;
-const int WARPSTONE_TILE = 10;
+const int WARPSTONE_TILE = 11;
 
 #endif
