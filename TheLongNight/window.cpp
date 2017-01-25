@@ -159,23 +159,23 @@ std::string window::getstr(int x, int y)
 	clear();
 	write(x, y, "~_", TCODColor::white);
 	refresh();
-	TCOD_key_t kp = waitForKeypress();
-	while (kp.vk != TCODK_ENTER) {
+	TCOD_key_t key = TCODConsole::waitForKeypress(false);
+	while (key.vk != TCODK_ENTER) {
+		key = TCODConsole::waitForKeypress(false);
 		//SPECIAL KEYS
-		if (kp.vk == TCODK_BACKSPACE) {
+		if (key.vk == TCODK_BACKSPACE) {
 			if (txt.size())
 				txt.pop_back();
 		}
-		else if (kp.vk == TCODK_SHIFT) {
+		else if (key.vk == TCODK_SHIFT || key.vk == TCODK_ENTER) {
 			//do nothing
 		}
-		else
-			txt += kp.c;
+		else if (key.pressed)
+			txt += key.c;
 		//Show what we did
 		clear();
 		write(x, y, '~' + txt + '_', TCODColor::white);
 		refresh();
-		kp = waitForKeypress();
 	}
 	return txt;
 }
