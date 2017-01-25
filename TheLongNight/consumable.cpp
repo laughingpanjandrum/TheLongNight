@@ -38,6 +38,15 @@ consumable * consumable_InvigoratingTea()
 	return c;
 }
 
+consumable * consumable_TinyRedFlower()
+{
+	consumable* c = new consumable("Tiny Red Flower", FLOWER_TILE, TCODColor::crimson,
+		"A small flower of the kind Princess Yulia once wore in her hair. Clears Bleed buildup.");
+	c->addEffect(REMOVE_BLEED);
+	c->setPotency(1);
+	return c;
+}
+
 consumable * ranged_ThrowingKnives()
 {
 	consumable* c = new consumable("Throwing Knives", DAGGER_TILE, TCODColor::lightGrey,

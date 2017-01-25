@@ -92,6 +92,7 @@ public:
 	void takeStatusEffectDamage(statusEffects eType, int damage);
 	counter* getSpecialEffectBuildup(statusEffects eff);
 	int getBleedDuration() { return isBleeding; }
+	void clearBleed() { bleedBuildup.clear(); }
 
 	//Permanent buffs
 	bool canAddBuff(buff* b);

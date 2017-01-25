@@ -59,6 +59,8 @@ typedef std::vector<consumable*> consumableVector;
 consumable* consumable_StarwaterDraught();
 consumable* consumable_InvigoratingTea();
 
+consumable* consumable_TinyRedFlower();
+
 consumable* ranged_ThrowingKnives();
 consumable* ranged_LaceratingKnives();
 consumable* ranged_CorrodingJar();

@@ -49,6 +49,8 @@ item * getItemByHandle(std::string handle)
 		return consumable_StarwaterDraught();
 	else if (handle == "invigorating_tea")
 		return consumable_InvigoratingTea();
+	else if (handle == "tiny_red_flower")
+		return consumable_TinyRedFlower();
 
 	//RANGED WEAPONS
 	else if (handle == "throwing_knives")

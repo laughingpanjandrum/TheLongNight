@@ -1,5 +1,6 @@
 Darkwater Forest
 -items
+tiny_red_flower:20,38
 -enditems
 -codes
 ; floor_stone
@@ -9,8 +10,8 @@ Darkwater Forest
 r floor_road
 % bush
 T tree
-# wall_wood
-W wall_stone
+# wall_stone
+W wall_wood
 ~ water
 ? statue
 + door_stone

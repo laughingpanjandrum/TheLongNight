@@ -1455,6 +1455,8 @@ void game::applyEffectToPerson(person * target, effect eff, int potency, person*
 		target->addDamageResist(DAMAGE_FIRE, potency);
 	else if (eff == GAIN_MAGIC_RESIST)
 		target->addDamageResist(DAMAGE_MAGIC, potency);
+	else if (eff == REMOVE_BLEED)
+		target->clearBleed();
 
 	//Spell buffs
 
