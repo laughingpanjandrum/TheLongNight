@@ -158,6 +158,8 @@ private:
 	//Movement
 	void processMove(TCOD_key_t kp);
 	bool isMovementKey(TCOD_key_t kp);
+	bool isNumberKey(TCOD_key_t kp);
+	int getNumberByKeycode(TCOD_key_t kp);
 	void playerMoveLogic(int xnew, int ynew);
 	void movePerson(person* p, int xnew, int ynew);
 	void standOnTile(person* victim);
@@ -196,6 +198,7 @@ private:
 	void equipItem(item* it);
 
 	//Spellcasting
+	void useAbilityByHotkey(TCOD_key_t kp);
 	void doRangedSpell(spell* sp);
 	void castSpell(spell* sp);
 	void dischargeSpellOnTarget(spell* sp, person* caster, person* target);

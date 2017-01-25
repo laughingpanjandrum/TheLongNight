@@ -291,6 +291,16 @@ void person::setCurrentSpell(spell * sp)
 		cycleSelectedSpell();
 }
 
+
+/*
+Sets current spell by number rather than instance.
+*/
+void person::setCurrentSpell(int sp)
+{
+	if (sp < spellsKnown.size())
+		selectedSpell = sp;
+}
+
 /*
 Cycle to the next spell
 */

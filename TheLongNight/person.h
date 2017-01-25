@@ -122,6 +122,7 @@ public:
 	spellVector getSpellsKnown() { return spellsKnown; }
 	spell* getCurrentSpell();
 	void setCurrentSpell(spell* sp);
+	void setCurrentSpell(int sp);
 	void cycleSelectedSpell();
 	int getSpellPower();
 	int getDivinePower();

@@ -510,12 +510,10 @@ Change menu selection
 */
 void game::navigateMenu(TCOD_key_t kp)
 {
-	if (kp.vk == KEY_NORTH) {
+	if (kp.c == 'w')
 		currentMenu->scrollUp();
-	}
-	else {
+	else
 		currentMenu->scrollDown();
-	}
 }
 
 /*
@@ -756,7 +754,7 @@ void game::drawInterface(int leftx, int topy)
 	}
 	
 	//Spell selected (or menu, if we're in that mode!)
-	if (state == STATE_SELECT_SPELL) {
+	/*if (state == STATE_SELECT_SPELL) {
 		drawMenu(currentMenu, atx, ++aty);
 		aty += currentMenu->getAllElements().size() + 1;
 	}
@@ -767,6 +765,15 @@ void game::drawInterface(int leftx, int topy)
 			win.write(atx + 4, aty, std::to_string(sp->getVigourCost()), TCODColor::green);
 			win.write(atx + 6, aty, sp->getName(), sp->getColor());
 		}
+	}*/
+	//List known spells
+	int s = 0;
+	for (auto sp : player->getSpellsKnown()) {
+		win.write(atx + 1, ++aty, '[' + std::to_string(s) + ']', TCODColor::white);
+		win.write(atx + 5, aty, sp->getName(), sp->getColor());
+		if (sp == player->getCurrentSpell())
+			win.writec(atx, aty, '>', TCODColor::white);
+		s++;
 	}
 
 	//Money
@@ -795,19 +802,19 @@ void game::drawInterface(int leftx, int topy)
 	//List controls
 	atx += 15;
 	aty = MAP_DRAW_Y + 43;
-	win.writec(atx, aty, 'a', TCODColor::green);
+	win.writec(atx, aty, 'x', TCODColor::green);
 	win.write(atx + 2, aty, "Select spell", TCODColor::white);
 	win.writec(atx, ++aty, 'c', TCODColor::green);
 	win.write(atx + 2, aty, "Select consumable", TCODColor::white);
 	win.writec(atx, ++aty, 't', TCODColor::green);
 	win.write(atx + 2, aty, "Toggle targeting mode", TCODColor::white);
-	win.writec(atx, ++aty, 'd', TCODColor::green);
+	win.writec(atx, ++aty, 'f', TCODColor::green);
 	win.write(atx + 2, aty, "Switch to secondary weapon", TCODColor::white);
-	win.writec(atx, ++aty, 's', TCODColor::green);
-	win.write(atx + 2, aty, "Cast current spell", TCODColor::white);
 	win.writec(atx, ++aty, 'q', TCODColor::green);
+	win.write(atx + 2, aty, "Cast current spell", TCODColor::white);
+	win.writec(atx, ++aty, 'e', TCODColor::green);
 	win.write(atx + 2, aty, "Use current consumable", TCODColor::white);
-	win.writec(atx, ++aty, 'T', TCODColor::green);
+	win.writec(atx, ++aty, 'h', TCODColor::green);
 	win.write(atx + 2, aty, "Talk to friendly NPC", TCODColor::white);
 
 	//BOSS HEALTH BAR, if we're fighting a boss
@@ -844,7 +851,7 @@ void game::drawInventory(int atx, int aty)
 	}
 	else {
 		//We can go to the level-up menu from here
-		win.write(atx, aty + 20, "Press [C] to LEVEL UP", TCODColor::white);
+		win.write(atx, aty + 20, "Press [p] to LEVEL UP", TCODColor::white);
 	}
 }
 
@@ -1250,6 +1257,8 @@ void game::drawMiscItemInfo(miscItem * it, int atx, int aty)
 void game::processCommand()
 {
 	if (!key.pressed) {
+
+		//Meta
 		if (key.c == 'Q')
 			isGameOver = true;
 		else if (key.c == 'F')
@@ -1262,7 +1271,7 @@ void game::processCommand()
 			createInventoryMenu();
 		else if (key.vk == KEY_ACCEPT)
 			acceptCurrentMenuIndex();
-		else if (key.c == 'C') {
+		else if (key.c == 'p') {
 			if (state == STATE_VIEW_INVENTORY)
 				setupLevelUpMenu();
 			else
@@ -1271,14 +1280,16 @@ void game::processCommand()
 
 		//Using stuff
 		else if (key.c == 'c')
-			openConsumableMenu();//player->cycleConsumable();
-		else if (key.c == 'a')
-			openSpellMenu();//player->cycleSelectedSpell();
-		else if (key.c == 'q')
+			openConsumableMenu();
+		else if (key.c == 'x')
+			openSpellMenu();
+		else if (isNumberKey(key))
+			useAbilityByHotkey(key);
+		else if (key.c == 'e')
 			useConsumable();
-		else if (key.c == 's')
+		else if (key.c == 'q')
 			castSpell(player->getCurrentSpell());
-		else if (key.c == 'd') {
+		else if (key.c == 'f') {
 			player->swapWeapon();
 			playerTurnDelay += SPEED_NORMAL;
 		}
@@ -1295,7 +1306,7 @@ void game::processCommand()
 				navigateMenu(key);
 
 		//Chitchat
-		else if (key.c == 'T')
+		else if (key.c == 'h')
 			talkToNPC();
 
 		//Debug
@@ -1504,13 +1515,13 @@ void game::processMove(TCOD_key_t kp)
 		ynew = player->gety();
 	}
 	//Find new position
-	if (kp.vk == KEY_NORTH)
+	if (kp.c == 'w')
 		ynew--;
-	else if (kp.vk == KEY_SOUTH)
+	else if (kp.c == 's')
 		ynew++;
-	else if (kp.vk == KEY_EAST)
+	else if (kp.c == 'd')
 		xnew++;
-	else if (kp.vk == KEY_WEST)
+	else if (kp.c == 'a')
 		xnew--;
 	//Are we moving the cursor or the player?
 	if (targetModeOn)
@@ -1524,7 +1535,44 @@ Returns whether the given key is a movement command
 */
 bool game::isMovementKey(TCOD_key_t kp)
 {
-	return kp.vk == KEY_NORTH || kp.vk == KEY_EAST || kp.vk == KEY_SOUTH || kp.vk == KEY_WEST;
+	return kp.c == 'w' || kp.c == 's' || kp.c == 'a' || kp.c == 'd';
+	//return kp.vk == KEY_NORTH || kp.vk == KEY_EAST || kp.vk == KEY_SOUTH || kp.vk == KEY_WEST;
+}
+
+/*
+Returns whether the given key is a number key.
+*/
+bool game::isNumberKey(TCOD_key_t kp)
+{
+	return kp.vk == TCODK_0 || kp.vk == TCODK_1 || kp.vk == TCODK_2 || kp.vk == TCODK_3 || kp.vk == TCODK_4 || kp.vk == TCODK_5 ||
+		kp.vk == TCODK_6 || kp.vk == TCODK_7 || kp.vk == TCODK_8 || kp.vk == TCODK_9;
+}
+
+/*
+Returns numeric value corresponding to the given keypress.
+*/
+int game::getNumberByKeycode(TCOD_key_t kp) {
+	if (kp.vk == TCODK_0)
+		return 0;
+	else if (kp.vk == TCODK_1)
+		return 1;
+	else if (kp.vk == TCODK_2)
+		return 2;
+	else if (kp.vk == TCODK_3)
+		return 3;
+	else if (kp.vk == TCODK_4)
+		return 4;
+	else if (kp.vk == TCODK_5)
+		return 5;
+	else if (kp.vk == TCODK_6)
+		return 6;
+	else if (kp.vk == TCODK_7)
+		return 7;
+	else if (kp.vk == TCODK_8)
+		return 8;
+	else if (kp.vk == TCODK_9)
+		return 9;
+	return -1;
 }
 
 /*
@@ -1977,7 +2025,7 @@ bool game::itemPickupMessage(item * it)
 	win.clearRegion(atx - 1, aty, 42, 18);
 	win.drawBox(atx - 1, aty, 42, 18, TCODColor::darkSepia);
 	//What we can do
-	std::string txt = "[ENTER] Equip  [ESC] Store";
+	std::string txt = "[SPACE] Equip  [ESC] Store";
 	win.write(atx, ++aty, centreText(txt, 40), TCODColor::white);
 	aty += 2;
 	//Fill in with ITEM DEETS
@@ -2064,6 +2112,17 @@ void game::equipItem(item * it)
 
 
 /*
+Push hotkey corresponding to a spell to CAST IT!
+*/
+void game::useAbilityByHotkey(TCOD_key_t kp)
+{
+	int n = getNumberByKeycode(kp);
+	if (n != -1) {
+		player->setCurrentSpell(n);
+	}
+}
+
+/*
 Firing a ranged spell is... COMPLICATED
 */
 void game::doRangedSpell(spell * sp)
@@ -2103,6 +2162,8 @@ Player starts the casting of a spell.
 */
 void game::castSpell(spell * sp)
 {
+	if (sp == nullptr)
+		return;
 	int vcost = sp->getVigourCost();
 	if (player->getVigour().getValue() >= vcost) {
 		//We have enough vig to cast. PROCEED.
@@ -2371,7 +2432,7 @@ void game::doDialogue(monster * target)
 		//Controls
 		int atx = MAP_DRAW_X + 1;
 		int aty = MAP_DRAW_Y + 1;
-		std::string txt = "[ENTER] Chat   [ESCAPE] Goodbye";
+		std::string txt = "[SPACE] Chat   [ESCAPE] Goodbye";
 		win.write(atx, aty, centreText(txt, 38), TCODColor::white);
 
 		//NPC name

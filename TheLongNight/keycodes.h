@@ -13,6 +13,7 @@ keycodeConst KEY_WEST = TCODK_LEFT;
 
 keycodeConst KEY_CYCLE = TCODK_TAB;
 keycodeConst KEY_BACK_OUT = TCODK_ESCAPE;
-keycodeConst KEY_ACCEPT = TCODK_ENTER;
+keycodeConst KEY_ACCEPT = TCODK_SPACE;
+
 
 #endif
