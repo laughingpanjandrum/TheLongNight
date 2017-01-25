@@ -10,7 +10,8 @@ utricToFairweather
 utricToFairweather
 |END_DIALOGUE
 "I'm making my way to the ruins of Old Fairweather... Perhaps I'll see you there!"
-|END_DIALOGUE
+|BACK_UP_AND_END
 [IN_FAIRWEATHER]
 "Aha! Good to see you made it, friend!"
-|END_DIALOGUE
+"Say, are you interested in learning some magic?"
+|SHOP

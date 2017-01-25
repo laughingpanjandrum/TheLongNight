@@ -126,9 +126,9 @@ std::string monster::getNextDialogueLine()
 	if (dialogue.size() == 0)
 		return "";
 	//If we do, figure out what line we're on
-	std::string line = dialogue.at(atChatLine);
 	if (atChatLine < dialogue.size() - 1)
 		atChatLine++;
+	std::string line = dialogue.at(atChatLine);
 	return line;
 }
 
@@ -360,6 +360,10 @@ monster * npc_UtricTheRat()
 	monster* m = new monster("Utric the Rat", GOREM_TILE, TCODColor::lighterSepia);
 	m->setHealth(100);
 	m->isHostile = false;
+	m->isShopkeeper = true;
+	m->addItemToStock(spell_ArcaneBlade(), 50);
+	m->addItemToStock(spell_GottricsArcaneProtection(), 40);
+	m->addItemToStock(spell_Frostbolt(), 25);
 	m->loadDialogue("dialogue/utric_chat.txt");
 	return m;
 }

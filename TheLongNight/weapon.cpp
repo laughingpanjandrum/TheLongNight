@@ -245,8 +245,6 @@ weapon * wand_DriftwoodWand()
 	wp->setSpellPower(100);
 	wp->makeOffhand();
 	wp->setSpecialAttack(ability_PowerSurge());
-	wp->addSpell(spell_GottricsArcaneProtection());
-	wp->addSpell(spell_Frostbolt());
 	return wp;
 }
 

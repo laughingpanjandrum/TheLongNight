@@ -1375,6 +1375,12 @@ void game::applyEffectToPerson(person * target, effect eff, int potency, person*
 		target->takeDamage(potency, DAMAGE_MAGIC);
 	else if (eff == APPLY_ACID_DAMAGE)
 		target->takeDamage(potency, DAMAGE_ACID);
+	else if (eff == APPLY_COLD_DAMAGE)
+		target->takeDamage(potency, DAMAGE_COLD);
+	else if (eff == APPLY_FIRE_DAMAGE)
+		target->takeDamage(potency, DAMAGE_FIRE);
+	else if (eff == APPLY_ELECTRIC_DAMAGE)
+		target->takeDamage(potency, DAMAGE_ELECTRIC);
 	else if (eff == APPLY_BLEED_DAMAGE)
 		target->takeStatusEffectDamage(EFFECT_BLEED, potency);
 
@@ -2222,7 +2228,6 @@ Chitchat with an npc!
 */
 void game::doDialogue(monster * target)
 {
-	std::string currentLine = target->getNextDialogueLine();
 	while (key.vk != KEY_BACK_OUT) {
 		win.clear();
 
@@ -2242,7 +2247,7 @@ void game::doDialogue(monster * target)
 
 		//Write dialogue!
 		aty += 4;
-		win.writeWrapped(atx, aty, 38, currentLine, TCODColor::lightGrey);
+		win.writeWrapped(atx, aty, 38, target->getCurrentDialogueLine(), TCODColor::lightGrey);
 
 		//Done drawing!
 		win.refresh();
@@ -2250,14 +2255,10 @@ void game::doDialogue(monster * target)
 		//Check for input
 		TCODSystem::checkForEvent(TCOD_EVENT_ANY, &key, &mouse);
 		if (!key.pressed && key.vk == KEY_ACCEPT) {
-
-			currentLine = target->getNextDialogueLine();
+			target->getNextDialogueLine();
 			//See if anything special happens (and if we should end the dialogue as well)
-			if (checkForDialogueEvent(currentLine, target))
-				break;
-			//Otherwise, update current line of dialogue to make sure it's correct
-			currentLine = target->getCurrentDialogueLine();
-
+			if (checkForDialogueEvent(target->getCurrentDialogueLine(), target))
+				return;
 		}
 
 	}
@@ -2290,9 +2291,17 @@ bool game::checkForDialogueEvent(std::string line, monster * target)
 			//WE HAVE IT. Now look for the line name
 			while (target->getNextDialogueLine() != lineName) {}
 		}
+		//Progress to next line
+		return checkForDialogueEvent(target->getNextDialogueLine(), target);
 	}
 	else if (line == "|END_DIALOGUE") {
 		//Automatically ends the dialogue
+		target->getNextDialogueLine();
+		return true;
+	}
+	else if (line == "|BACK_UP_AND_END") {
+		//End the dialogue and return to the previous line.
+		target->backUpDialogue();
 		return true;
 	}
 	return false;
