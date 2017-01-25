@@ -70,9 +70,28 @@ struct unlockableStock {
 	item* it;
 	std::string unlockCode;
 };
-
 typedef std::vector<unlockableStock*> stockUnlockVector;
 
+
+/*
+Weapon infusions.
+Keeps track of special effects applied to weapons.
+*/
+struct weaponRune {
+	weaponRune() {}
+	weaponRune(std::string name, std::string nameMod, TCODColor color, statScaling addScalingType) :
+		name(name), nameMod(nameMod), color(color), addScalingType(addScalingType) {}
+	//Flavour
+	std::string nameMod;
+	std::string name;
+	TCODColor color;
+	//Effects
+	statScaling addScalingType;
+};
+typedef std::vector<weaponRune*> weaponRuneVector;
+
+
+//Names of item categories.
 const std::string getItemCategoryName(itemTypes cat);
 
 #endif

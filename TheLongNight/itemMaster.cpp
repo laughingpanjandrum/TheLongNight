@@ -100,6 +100,10 @@ item * getItemByHandle(std::string handle)
 	//SPELLBOOKS
 	else if (handle == "waterlogged_writings")
 		return spellbook_WaterloggedWritings();
+
+	//RUNESTONES
+	else if (handle == "corens_runestone")
+		return runestone_CorensRunestone();
 	
 	//Uh oh, we didn't find anything!
 	return nullptr;

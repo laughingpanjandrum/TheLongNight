@@ -18,6 +18,9 @@ public:
 	weapon(std::string name, int tileCode, TCODColor color, std::string description);
 	~weapon();
 
+	//Override
+	virtual std::string getMenuName();
+
 	//Setting
 	void setBasicAttributes(int damage, int attackDelay);
 	void addDamageType(damageType dtype, int damage);
@@ -57,6 +60,8 @@ public:
 	void setBuff(weaponBuff buff) { currentBuff = buff; }
 	void clearBuff(weaponBuff buff) { currentBuff = weaponBuff(); }
 	weaponBuff getCurrentBuff() { return currentBuff; }
+	void setRune(weaponRune* r) { rune = r; }
+	weaponRune* getRune() { return rune; }
 
 	//Scaling
 	void addScalingType(statScaling st) { scaling.push_back(st); }
@@ -84,6 +89,7 @@ private:
 
 	//Buffing
 	weaponBuff currentBuff;
+	weaponRune* rune;
 
 	//Scaling
 	statScaleVector scaling;

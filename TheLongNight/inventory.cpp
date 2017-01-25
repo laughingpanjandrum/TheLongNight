@@ -40,6 +40,8 @@ bool inventory::equipItem(item * which)
 		equipConsumable(static_cast<consumable*>(which));
 	else if (cat == ITEM_SPELL) //Currently only spells can fail to equip
 		return equipSpell(static_cast<spell*>(which));
+	else if (cat == ITEM_MISC)
+		equipMiscItem(static_cast<miscItem*>(which));
 	return true;
 }
 
@@ -158,6 +160,21 @@ Returns whether the given item is in our HOTBAR.
 bool inventory::isConsumableEquipped(consumable * c)
 {
 	return std::find(equippedConsumables.begin(), equippedConsumables.end(), c) != equippedConsumables.end();
+}
+
+
+/*
+Misc items can do various things when equipped, but usually it's nothing!
+*/
+void inventory::equipMiscItem(miscItem * m)
+{
+	if (m->isRunestone) {
+		//Equip in current weapon, if possible
+		weapon* wp = getWeapon();
+		if (wp != nullptr) {
+			wp->setRune(m->getRune());
+		}
+	}
 }
 
 

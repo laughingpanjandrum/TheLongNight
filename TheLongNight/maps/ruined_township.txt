@@ -1,9 +1,10 @@
 Ruined Township
-start:6,37
+start:0,20
 guardian_golem:23,32
 -items
 void_sigil:30,19
 waterlogged_writings:28,21
+corens_runestone:12,27
 -enditems
 -codes
 . floor_stone

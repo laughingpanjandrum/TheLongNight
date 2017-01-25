@@ -11,6 +11,8 @@ miscItem::~miscItem()
 	Keys
 */
 
+
+
 miscItem * key_WretchsKey()
 {
 	miscItem* m = new miscItem("Wretch's Key", KEY_TILE, TCODColor::green,
@@ -39,9 +41,12 @@ miscItem * key_RuinedTownshipKey()
 }
 
 
+
 /*
 	Spellbooks
 */
+
+
 
 miscItem * spellbook_WaterloggedWritings()
 {
@@ -51,6 +56,26 @@ miscItem * spellbook_WaterloggedWritings()
 	s->isKey = true;
 	return s;
 }
+
+
+
+/*
+	Runestones
+*/
+
+
+
+miscItem * runestone_CorensRunestone()
+{
+	miscItem* r = new miscItem("Coren's Runestone", STATUE_TILE, TCODColor::lightBlue,
+		"Once Coren the Strong laid waste to the lowlands, until all the townships lay under his command. His tomb is \
+here somewhere, beneath the shifting waters.");
+	r->isRunestone = true;
+	r->setRune(new weaponRune("Coren's Runestone", "Strong", TCODColor::lightBlue, SCALE_STR));
+	return r;
+}
+
+
 
 
 /*

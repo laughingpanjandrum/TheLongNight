@@ -22,10 +22,18 @@ public:
 	void setKeyTag(std::string t) { keyTag = t; }
 	std::string getKeyTag() { return keyTag; }
 
+	//For runestones
+	bool isRunestone = false;
+	weaponRune* getRune() { return runeApplied; }
+	void setRune(weaponRune* r) { runeApplied = r; }
+
 private:
 
 	//How this key is identified
 	std::string keyTag;
+
+	//Runestone information
+	weaponRune* runeApplied;
 
 };
 
@@ -41,6 +49,9 @@ miscItem* key_RuinedTownshipKey();
 
 //Spellbooks
 miscItem* spellbook_WaterloggedWritings();
+
+//Runestones
+miscItem* runestone_CorensRunestone();
 
 //Other
 miscItem* misc_VoidSigil();

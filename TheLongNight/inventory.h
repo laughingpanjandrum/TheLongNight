@@ -64,6 +64,9 @@ public:
 	void setSelectedConsumable(consumable* c);
 	bool isConsumableEquipped(consumable* c);
 
+	//Misc items
+	void equipMiscItem(miscItem* m);
+
 	//Keys
 	bool hasKey(std::string keyTag);
 

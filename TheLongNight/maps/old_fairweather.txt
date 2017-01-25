@@ -5,6 +5,7 @@ gorem:15,27
 starwater_draught:24,29
 ruined_knights_helm:21,21
 ruined_knights_armour:20,22
+corens_runestone:18,38
 -enditems
 -codes
 ; floor_stone

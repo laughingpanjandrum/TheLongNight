@@ -17,6 +17,17 @@ weapon::~weapon()
 }
 
 /*
+Can be modified by our runestone.
+*/
+std::string weapon::getMenuName()
+{
+	std::string name = getName();
+	if (rune != nullptr)
+		name = rune->nameMod + " " + name;
+	return name;
+}
+
+/*
 	SETTING
 */
 
@@ -77,10 +88,18 @@ We do more scaling damage the fewer stats we scale with.
 */
 int weapon::getScalingDamage(statScaling st)
 {
+	int dmg = 0;
+	//Inherent to the weapon
 	auto it = std::find(scaling.begin(), scaling.end(), st);
 	if (it != scaling.end())
-		return 5 - scaling.size();
-	return 0;
+		dmg = 5 - scaling.size();
+	//From runestone
+	if (rune != nullptr) {
+		if (rune->addScalingType == st)
+			dmg += 5 - scaling.size();
+	}
+	//Done, return total
+	return dmg;
 }
 
 

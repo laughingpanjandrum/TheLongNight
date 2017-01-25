@@ -1123,6 +1123,13 @@ void game::drawWeaponInfo(weapon * it, int atx, int aty)
 		//Special attack description
 		win.write(atx + 4, ++aty, '(' + atk->description + ')', TCODColor::lightGrey);
 	}
+	//Rune, if any
+	aty += 2;
+	weaponRune* rune = it->getRune();
+	if (rune != nullptr) {
+		win.write(atx, aty, "RUNE:", TCODColor::white);
+		win.write(atx + 5, aty, rune->name, rune->color);
+	}
 }
 
 /*
