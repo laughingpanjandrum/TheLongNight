@@ -25,6 +25,8 @@ item * getItemByHandle(std::string handle)
 		return weapon_NotchedGreatsword();
 	else if (handle == "fishmans_harpoon")
 		return weapon_FishmansHarpoon();
+	else if (handle == "fishmans_knife")
+		return weapon_FishmansKnife();
 
 	//SHIELDS
 	else if (handle == "battered_wooden_shield")
@@ -76,6 +78,11 @@ item * getItemByHandle(std::string handle)
 		return headgear_CrowKnightsHood();
 	else if (handle == "crow_knights_armour")
 		return armour_CrowKnightsArmour();
+
+	else if (handle == "fishpriest_hat")
+		return headgear_FishpriestHat();
+	else if (handle == "fishscale_coat")
+		return armour_FishscaleCoat();
 
 	//CHARMS
 	else if (handle == "bloodstained_charm")

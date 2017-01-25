@@ -4,7 +4,8 @@
 Constructor you should probably use.
 Also sets a default health value, which you'll probably want to change!
 */
-person::person(std::string name, int tileCode, TCODColor color) : element(name, tileCode, color)
+person::person(std::string name, int tileCode, TCODColor color, std::string description) : 
+	element(name, tileCode, color, description)
 {
 	//Default values for stats
 	health.setTo(100);

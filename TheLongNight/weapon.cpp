@@ -267,20 +267,19 @@ weapon * shield_BatteredSteelShield()
 
 weapon * wand_DriftwoodWand()
 {
-	weapon* wp = new weapon("Driftwood Wand", SWORD_TILE, TCODColor::sepia,
+	weapon* wp = new weapon("Driftwood Wand", STAFF_TILE, TCODColor::sepia,
 		"Someone made this chunk of wand in a desparate hurry.");
 	wp->setBasicAttributes(5, SPEED_SLOW);
 	wp->setSpellstoreSize(2);
 	wp->setSpellPower(100);
 	wp->makeOffhand();
 	wp->setSpecialAttack(ability_PowerSurge());
-	wp->addSpell(ability_SinkBeneath());
 	return wp;
 }
 
 weapon * wand_FishmansToadstaff()
 {
-	weapon* wp = new weapon("Fishman's Toadstaff", SWORD_TILE, TCODColor::darkLime,
+	weapon* wp = new weapon("Fishman's Toadstaff", STAFF_TILE, TCODColor::darkLime,
 		"Sometimes the toad impaled on the tip twitches. Is it still alive? Best not to dwell on it.");
 	wp->setBasicAttributes(5, SPEED_NORMAL);
 	wp->setSpellstoreSize(2);
@@ -292,7 +291,7 @@ weapon * wand_FishmansToadstaff()
 
 weapon * chime_ClericsCrackedChime()
 {
-	weapon* wp = new weapon("Cleric's Cracked Chime", SWORD_TILE, TCODColor::darkYellow,
+	weapon* wp = new weapon("Cleric's Cracked Chime", CHIME_TILE, TCODColor::darkYellow,
 		"Ring this broken chime to politely ask favours of the gods.");
 	wp->setBasicAttributes(5, SPEED_SLOW);
 	wp->setSpellstoreSize(1);
@@ -304,7 +303,7 @@ weapon * chime_ClericsCrackedChime()
 
 weapon * chime_WyrdBellbranch()
 {
-	weapon* wp = new weapon("Wyrd Bellbranch", SWORD_TILE, TCODColor::sepia,
+	weapon* wp = new weapon("Wyrd Bellbranch", CHIME_TILE, TCODColor::sepia,
 		"The trees of the Wyrd once grew tiny singing bells on their branches.");
 	wp->setBasicAttributes(5, SPEED_SLOW);
 	wp->setSpellstoreSize(1);

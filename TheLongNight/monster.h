@@ -14,7 +14,7 @@ public:
 
 	//Constructors
 	monster();
-	monster(std::string name, int tileCode, TCODColor color);
+	monster(std::string name, int tileCode, TCODColor color, std::string description = "");
 	monster(const monster& rhs) {} //Copy constructor
 	~monster() {}
 

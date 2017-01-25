@@ -163,7 +163,7 @@ map * mapLoader::loadMapFromFile(std::string filename)
 		ysize++;
 		//And now just remember this line
 		tiles.push_back(line);
-	}
+	} 
 
 	//Done with the file
 	mapfile.close();

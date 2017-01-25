@@ -26,6 +26,7 @@ w wall_wood
 -connections
 south:pilgrims_road_5
 east:flooded_lowlands_2
+north:flooded_lowlands_4
 -endconnections
 .#......................................
 .#...............###..............#.....

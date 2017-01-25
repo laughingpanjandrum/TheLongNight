@@ -83,7 +83,28 @@ armour * armour_CrowKnightsArmour()
 	armour* a = new armour("Crow Knight's Armour", ARMOUR_TILE, TCODColor::lightGrey, ITEM_BODY_ARMOUR,
 		"The feathered armour of the crow knights is thick and warm. Beady eyes are not required.");
 	a->setDefence(10);
-	a->setMoveSpeed(SPEED_FAST);
 	a->setBleedResist(15);
+	a->setMoveSpeed(SPEED_FAST);
+	return a;
+}
+
+armour * headgear_FishpriestHat()
+{
+	armour* a = new armour("Fishpriest Hat", HELMET_TILE, TCODColor::lime, ITEM_HELMET,
+		"Scaly hat of the preachers of doom, whose warnings about the obliteration of Wyrd were ignored.");
+	a->setDefence(5);
+	a->setBleedResist(5);
+	a->setDamageResist(DAMAGE_ACID, 5);
+	return a;
+}
+
+armour * armour_FishscaleCoat()
+{
+	armour* a = new armour("Fishscale Coat", ARMOUR_TILE, TCODColor::lightLime, ITEM_BODY_ARMOUR,
+		"Scaly coat of the preachers of doom, whose pleas for the safety of Wyrd went unanswered.");
+	a->setDefence(10);
+	a->setBleedResist(10);
+	a->setDamageResist(DAMAGE_ACID, 10);
+	a->setMoveSpeed(SPEED_NORMAL);
 	return a;
 }

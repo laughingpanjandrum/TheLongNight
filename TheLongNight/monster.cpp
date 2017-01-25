@@ -4,8 +4,8 @@ monster::monster() : person()
 {
 }
 
-monster::monster(std::string name, int tileCode, TCODColor color) : 
-	person(name, tileCode, color)
+monster::monster(std::string name, int tileCode, TCODColor color, std::string description) : 
+	person(name, tileCode, color, description)
 {
 	//We're not the player! That's kind of our defining feature
 	isPlayer = false;
@@ -179,7 +179,8 @@ Monster definitions
 
 monster * monster_DrownedDead()
 {
-	monster * m = new monster("Drowned Dead", DROWNED_DEAD_TILE, TCODColor::lightGreen);
+	monster * m = new monster("Drowned Dead", DROWNED_DEAD_TILE, TCODColor::lightGreen,
+		"Rotted ruins of a crewmember. How tragic!");
 	m->setMeleeStats(10, SPEED_SLOW);
 	m->setMoveStats(SPEED_NORMAL);
 	m->setHealth(10);
@@ -189,7 +190,8 @@ monster * monster_DrownedDead()
 
 monster * monster_ThinWretch()
 {
-	monster * m = new monster("Thin Wretch", WRETCH_TILE, TCODColor::green);
+	monster * m = new monster("Thin Wretch", WRETCH_TILE, TCODColor::green,
+		"The haggard eyes of this twisted wretch suggests that it knows something you don't.");
 	m->setMeleeStats(10, SPEED_NORMAL);
 	m->setMoveStats(SPEED_NORMAL);
 	m->setHealth(50);
@@ -199,7 +201,8 @@ monster * monster_ThinWretch()
 
 monster * monster_TimidWretch()
 {
-	monster * m = new monster("Timid Wretch", WRETCH_TILE, TCODColor::lightestGreen);
+	monster * m = new monster("Timid Wretch", WRETCH_TILE, TCODColor::lightestGreen,
+		"This wretched creature hangs back, its eyes glowing with wrath.");
 	m->setMeleeStats(15, SPEED_FAST);
 	m->setMoveStats(SPEED_SLOW);
 	m->setHealth(50);
@@ -212,7 +215,8 @@ monster * monster_TimidWretch()
 
 monster * monster_BloatedWretch()
 {
-	monster * m = new monster("Bloated Wretch", BLOATED_WRETCH_TILE, TCODColor::lime);
+	monster * m = new monster("Bloated Wretch", BLOATED_WRETCH_TILE, TCODColor::lime,
+		"This bloated horror is swollen with seawater. Perhaps it was hungrier than the others.");
 	m->setMeleeStats(25, SPEED_SLOW);
 	m->setMoveStats(SPEED_SLOW);
 	m->setHealth(100);
@@ -227,7 +231,9 @@ Coruscating Beach boss
 */
 monster * boss_TheWretchedMass()
 {
-	monster* m = new monster("The Wretched Mass", WRETCHED_MASS_TILE, TCODColor::lightGreen);
+	monster* m = new monster("The Wretched Mass", WRETCHED_MASS_TILE, TCODColor::lightGreen,
+		"A mass of wretches fused together into a gruesome amalgamation. It shrieks and flops towards you, its many limbs \
+flailing.");
 	m->setHealth(400);
 	m->setMoveStats(SPEED_SLOW);
 	m->setMeleeStats(25, SPEED_SLOW);
@@ -245,7 +251,8 @@ Pilgrim's Road
 
 monster * monster_CrowKnight()
 {
-	monster* m = new monster("Crow Knight", CROW_KNIGHT_TILE, TCODColor::lightGrey);
+	monster* m = new monster("Crow Knight", CROW_KNIGHT_TILE, TCODColor::lightGrey,
+		"A knight in dark-feathered armour, holding a broken sword.");
 	m->setHealth(100);
 	m->setMoveStats(SPEED_NORMAL);
 	m->setMeleeStats(20, SPEED_NORMAL);
@@ -257,7 +264,8 @@ monster * monster_CrowKnight()
 
 monster * monster_CrowThief()
 {
-	monster* m = new monster("Crow Thief", CROW_THIEF_TILE, TCODColor::lightGreen);
+	monster* m = new monster("Crow Thief", CROW_THIEF_TILE, TCODColor::lightGreen,
+		"A feathery mask covers this sneakthief's face, and yellow orbs peer through. Surely this is not a human creature?");
 	m->setHealth(50);
 	m->setMoveStats(SPEED_FAST);
 	m->setMeleeStats(10, SPEED_FAST);
@@ -268,7 +276,8 @@ monster * monster_CrowThief()
 
 monster * monster_CrowArcher()
 {
-	monster* m = new monster("Crow Archer", CROW_KNIGHT_TILE, TCODColor::lightBlue);
+	monster* m = new monster("Crow Archer", CROW_KNIGHT_TILE, TCODColor::lightBlue,
+		"A knight in dark-feathered armour, holding a battered crossbow.");
 	m->setHealth(100);
 	m->setMoveStats(SPEED_NORMAL);
 	m->setMeleeStats(10, SPEED_NORMAL);
@@ -281,7 +290,8 @@ monster * monster_CrowArcher()
 
 monster * monster_ForlornCrowKnight()
 {
-	monster* m = new monster("Forlorn Crow Knight", CROW_KNIGHT_TILE, TCODColor::crimson);
+	monster* m = new monster("Forlorn Crow Knight", CROW_KNIGHT_TILE, TCODColor::crimson,
+		"Something has made this knight sad.");
 	m->setHealth(200);
 	m->setMoveStats(SPEED_NORMAL);
 	m->equipItem(weapon_CrowHalfsword());
@@ -295,7 +305,8 @@ monster * monster_ForlornCrowKnight()
 
 monster * monster_TheOldCrow()
 {
-	monster* m = new monster("The Old Crow", THE_OLD_CROW_TILE, TCODColor::lightCrimson);
+	monster* m = new monster("The Old Crow", THE_OLD_CROW_TILE, TCODColor::lightCrimson,
+		"The tallest of the crow knights moves with gaunt grace, and flicks a knife between his long fingers.");
 	m->setHealth(400);
 	m->setMoveStats(SPEED_NORMAL);
 	m->equipItem(weapon_CrowKnife());
@@ -316,7 +327,8 @@ monster * monster_TheOldCrow()
 
 monster * monster_StarvingFishman()
 {
-	monster* m = new monster("Starving Fishman", FISHMAN_TILE, TCODColor::lightGreen);
+	monster* m = new monster("Starving Fishman", FISHMAN_TILE, TCODColor::lightGreen,
+		"Thickly scaled and sunken-eyed. It stalks the ruins as though searching desperately for something.");
 	m->setHealth(50);
 	m->setDefence(DAMAGE_PHYSICAL, 20);
 	m->setMeleeStats(50, SPEED_SLOW);
@@ -331,7 +343,8 @@ monster * monster_StarvingFishman()
 
 monster * monster_FishmanDoomPreacher()
 {
-	monster* m = new monster("Fishman Doom-Preacher", FISHMAN_TILE, TCODColor::lime);
+	monster* m = new monster("Fishman Doom-Preacher", FISHMAN_TILE, TCODColor::lime,
+		"Wields a staff with a toad impaled on the tip.");
 	m->setHealth(100);
 	m->setDefence(DAMAGE_PHYSICAL, 15);
 	m->setBleedResist(60);
@@ -345,7 +358,8 @@ monster * monster_FishmanDoomPreacher()
 
 monster * monster_FishmanSpearfisher()
 {
-	monster* m = new monster("Fishman Spearfisher", FISHMAN_TILE, TCODColor::lightLime);
+	monster* m = new monster("Fishman Spearfisher", FISHMAN_TILE, TCODColor::lightLime,
+		"It wields a barbed harpoon, and its lamplike eyes search for prey.");
 	m->setHealth(75);
 	m->setDefence(DAMAGE_PHYSICAL, 20);
 	m->setBleedResist(60);
@@ -359,7 +373,8 @@ monster * monster_FishmanSpearfisher()
 
 monster * monster_GuardianGolem()
 {
-	monster* m = new monster("Guardian Golem", GOREM_TILE, TCODColor::lightLime);
+	monster* m = new monster("Guardian Golem", GOREM_TILE, TCODColor::lightLime,
+		"A massive stone creature stalks the flooded streets.");
 	m->setHealth(300);
 	m->setDefence(DAMAGE_PHYSICAL, 10);
 	m->setBleedResist(1000);
@@ -372,7 +387,8 @@ monster * monster_GuardianGolem()
 
 monster * monster_DegenerateFishman()
 {
-	monster* m = new monster("Degenerate Fishman", FISHMAN_TILE, TCODColor::lightestLime);
+	monster* m = new monster("Degenerate Fishman", FISHMAN_TILE, TCODColor::lightestLime,
+		"The fishmen were never meant to be, but this one is truly mad.");
 	m->setHealth(25);
 	m->setBleedResist(75);
 	m->setDefence(DAMAGE_PHYSICAL, 15);
@@ -386,7 +402,8 @@ monster * monster_DegenerateFishman()
 
 monster * monster_FishbornGoddess()
 {
-	monster* m = new monster("Fishborn Goddess", FISHMAN_TILE, TCODColor::lighterGreen);
+	monster* m = new monster("Fishborn Goddess", FISHMAN_TILE, TCODColor::lighterGreen,
+		"A woman with trailing seaweed hair, whose unnaturally long arms drip acid.");
 	m->setHealth(800);
 	m->setBleedResist(50);
 	m->setDefence(DAMAGE_PHYSICAL, 15);
@@ -410,7 +427,9 @@ monster * monster_FishbornGoddess()
 
 monster * npc_Gorem()
 {
-	monster* m = new monster("Gorem, Ancient of Wyrd", GOREM_TILE, TCODColor::lighterGrey);
+	monster* m = new monster("Gorem, Ancient of Wyrd", GOREM_TILE, TCODColor::lighterGrey,
+		"At first it looks like a hulking statue, overgrown with flowers and vines, but a light appears in its eyes as \
+you approach.");
 	m->setHealth(800);
 	m->isShopkeeper = true;
 	m->isHostile = false;
@@ -425,7 +444,8 @@ monster * npc_Gorem()
 
 monster * npc_UtricTheRat()
 {
-	monster* m = new monster("Utric the Rat", GOREM_TILE, TCODColor::lighterSepia);
+	monster* m = new monster("Utric the Rat", GOREM_TILE, TCODColor::lighterSepia,
+		"A scrawny man in ragged clothes, with a curiously rat-like visage. He watches you eagerly.");
 	m->setHealth(100);
 	m->isHostile = false;
 	m->isShopkeeper = true;

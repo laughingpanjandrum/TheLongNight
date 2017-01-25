@@ -43,6 +43,9 @@ armour* armour_ClericsVestments();
 armour* headgear_CrowKnightsHood();
 armour* armour_CrowKnightsArmour();
 
+armour* headgear_FishpriestHat();
+armour* armour_FishscaleCoat();
+
 
 #endif
 

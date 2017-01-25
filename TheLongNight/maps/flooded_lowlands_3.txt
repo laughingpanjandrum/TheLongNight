@@ -26,6 +26,7 @@ w wall_wood
 -connections
 south:flooded_lowlands_2
 east:deep_lake
+west:flooded_lowlands_4
 -endconnections
 ................w..w##############......
 .......#########w..w..~~~~~~~~~~~###....

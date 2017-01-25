@@ -973,6 +973,8 @@ void game::drawTargetInfo(person * target, int atx, int aty)
 		if (bleed->getValue() > 0)
 			win.write(atx + 1, ++aty, "BLEED:" + bleed->getAsString(), TCODColor::crimson);
 	}
+	//Text description
+	win.writeWrapped(atx, ++aty, 20, target->description, TCODColor::lightGrey);
 }
 
 
@@ -1243,11 +1245,15 @@ void game::drawMiscItemInfo(miscItem * it, int atx, int aty)
 	COMMAND PROCESSING
 */
 
+
+
 void game::processCommand()
 {
 	if (!key.pressed) {
 		if (key.c == 'Q')
 			isGameOver = true;
+		else if (key.c == 'F')
+			TCODConsole::setFullscreen(!TCODConsole::isFullscreen());
 
 		//Menus
 		else if (key.vk == KEY_BACK_OUT)

@@ -52,7 +52,7 @@ public:
 
 	//Constructors/destructors
 	person(): person("Player", PLAYER_TILE, TCODColor::white) {}
-	person(std::string name, int tileCode, TCODColor color);
+	person(std::string name, int tileCode, TCODColor color, std::string description = "");
 	~person();
 
 	//Stats (if we have any!)
