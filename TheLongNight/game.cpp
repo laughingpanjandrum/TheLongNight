@@ -1043,6 +1043,7 @@ void game::drawItemInfo(item * it, int atx, int aty)
 	case(ITEM_OFFHAND): drawWeaponInfo(static_cast<weapon*>(it), atx, aty); break;
 	case(ITEM_BODY_ARMOUR): drawArmourInfo(static_cast<armour*>(it), atx, aty); break;
 	case(ITEM_HELMET): drawArmourInfo(static_cast<armour*>(it), atx, aty); break;
+	case(ITEM_SPELL): drawSpellInfo(static_cast<spell*>(it), atx, aty); break;
 	}
 }
 
@@ -1153,6 +1154,54 @@ void game::drawArmourInfo(armour * it, int atx, int aty)
 	if (it->getCategory() == ITEM_BODY_ARMOUR) {
 		win.write(atx, ++aty, "SPEED", TCODColor::orange);
 		win.write(atx + offset, aty, getAttackSpeedName(it->getMoveSpeed()), maincol);
+	}
+}
+
+/*
+Spell description.
+*/
+void game::drawSpellInfo(spell * it, int atx, int aty)
+{
+	//Type: arcane or divine
+	if (it->usesSpellPower)
+		win.write(atx, aty, "ARCANE", TCODColor::magenta);
+	else if (it->usesDivinePower)
+		win.write(atx, aty, "DIVINE", TCODColor::darkYellow);
+	//Spell type
+	win.write(atx, ++aty, "Type:", TCODColor::lightBlue);
+	attackType at = it->getAttackType();
+	if (at == ATTACK_BUFF_SELF)
+		win.write(atx + 5, aty, "Buff Self", TCODColor::white);
+	else if (at == ATTACK_BUFF_WEAPON)
+		win.write(atx + 5, aty, "Weapon Buff", TCODColor::white);
+	else if (at == ATTACK_RANGE)
+		win.write(atx + 5, aty, "Ranged Attack", TCODColor::white);
+	else if (at == ATTACK_AOE)
+		win.write(atx + 5, aty, "Area Attack", TCODColor::white);
+	else if (at == ATTACK_MELEE)
+		win.write(atx + 5, aty, "Melee Attack", TCODColor::white);
+	//Spell details
+	if (at == ATTACK_BUFF_WEAPON) {
+		//Buff details
+		win.write(atx + 1, ++aty, "Adds", TCODColor::white);
+		weaponBuff buff = it->getWeaponBuff();
+		std::string txt = std::to_string(buff.bonusDamage) + " " + getDamageTypeName(buff.dtype);
+		win.write(atx + 6, aty, txt, getDamageTypeColor(buff.dtype));
+		win.write(atx + 7 + txt.size(), aty, "damage", TCODColor::white);
+	}
+	else if (at != ATTACK_BUFF_SELF && at != ATTACK_MELEE) {
+		//Range of attack
+		win.write(atx, ++aty, "Range:", TCODColor::lightBlue);
+		win.write(atx + 6, aty, std::to_string(it->getAttackRange()), TCODColor::white);
+	}
+	//Effects conferred
+	for (int i = 0; i < it->getEffectsCount(); i++) {
+		//Effect type and potency
+		effect eType = it->getEffectType(i);
+		int potency = it->getEffectPotency(i);
+		//Display it
+		win.write(atx + 1, ++aty, std::to_string(potency), TCODColor::white);
+		win.write(atx + 4, aty, getEffectName(eType), TCODColor::lightGrey);
 	}
 }
 

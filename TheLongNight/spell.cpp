@@ -156,7 +156,7 @@ spell * ability_WyrdChannel()
 spell * spell_MagicMissile()
 {
 	spell* sp = new spell("Magic Missile", SPELL_TILE, TCODColor::magenta,
-		"Attack deals magic damage.");
+		"Attack deals magic damage. Magic blasting is the simplest kind of magic there is, and perhaps the most useful.");
 	sp->setAttackType(ATTACK_RANGE);
 	sp->addEffect(APPLY_MAGIC_DAMAGE, 25);
 	sp->setAttackRange(5);
@@ -168,7 +168,8 @@ spell * spell_MagicMissile()
 spell * spell_ArcaneRadiance()
 {
 	spell* sp = new spell("Arcane Radiance", SPELL_TILE, TCODColor::darkMagenta,
-		"A blast of magical energy strikes everything within 3 spaces.");
+		"A blast of magical energy strikes everything within 3 spaces. In Sunken Atalundra, when arcane power was harmless, \
+mages used this as a party trick.");
 	sp->setAttackType(ATTACK_AOE);
 	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 25);
 	sp->setAttackRange(3);
@@ -180,7 +181,8 @@ spell * spell_ArcaneRadiance()
 spell * spell_ArcaneBlade()
 {
 	spell* sp = new spell("Arcane Blade", SPELL_TILE, TCODColor::lightMagenta,
-		"Your weapon deals arcane damage.");
+		"Your weapon deals arcane damage. This is an old magick of Sunken Atalundra, which popularized the arcane arts before \
+they sunk beneath the waves.");
 	sp->setAttackType(ATTACK_BUFF_WEAPON);
 	sp->setBuffApplied(DAMAGE_MAGIC, 25);
 	sp->setVigourCost(2);
@@ -191,7 +193,8 @@ spell * spell_ArcaneBlade()
 spell * spell_GottricsArcaneProtection()
 {
 	spell* sp = new spell("Gottric's Arcane Protection", SPELL_TILE, TCODColor::lighterMagenta,
-		"Confers protection from magic damage.");
+		"Confers protection from magic damage. Gottric used this spell to protect himself as he delved ever deeper into the \
+mysteries of Sunken Atalundra.");
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(GAIN_MAGIC_RESIST, 20);
 	sp->setVigourCost(2);
@@ -203,7 +206,8 @@ spell * spell_GottricsArcaneProtection()
 spell * spell_Frostbolt()
 {
 	spell* sp = new spell("Frostbolt", SPELL_TILE, TCODColor::cyan,
-		"Bolt deals cold damage.");
+		"Bolt deals cold damage. The mages of Sunken Atalundra attempted to use ice magic to protect their city from the rising \
+waves, though of course they did not succeed.");
 	sp->setAttackType(ATTACK_RANGE);
 	sp->setAttackRange(5);
 	sp->addEffect(APPLY_COLD_DAMAGE, 25);
@@ -212,12 +216,54 @@ spell * spell_Frostbolt()
 	return sp;
 }
 
+spell * spell_AcidSpit()
+{
+	spell* sp = new spell("Acid Spit", SPELL_TILE, TCODColor::lightGreen,
+		"This spell draws upon the anger of the earth itself towards its despoilers. It was discovered by the Wyrd, who \
+fruitlessly stood against the annihilation of their homeland.");
+	sp->setAttackType(ATTACK_RANGE);
+	sp->setAttackRange(5);
+	sp->addEffect(APPLY_ACID_DAMAGE, 25);
+	sp->setVigourCost(1);
+	sp->usesSpellPower = true;
+	return sp;
+}
+
+spell * spell_AcidBlade()
+{
+	spell* sp = new spell("Acid Blade", SPELL_TILE, TCODColor::lime,
+		"Coat one's blade in corrosive acid to disintegrate the armour of your enemies. The Wyrd discovered this spell and taught \
+it to the angelic visitors who rose from the earth.");
+	sp->setAttackType(ATTACK_BUFF_WEAPON);
+	sp->setBuffApplied(DAMAGE_ACID, 25);
+	sp->setVigourCost(2);
+	sp->usesSpellPower = true;
+	return sp;
+}
+
+spell * spell_AcidBurst()
+{
+	spell* sp = new spell("Acid Burst", SPELL_TILE, TCODColor::darkLime,
+		"Spew a powerful blast of acid to disintegrate armour and burn enemies.");
+	sp->setAttackType(ATTACK_RANGE);
+	sp->setAttackRange(2);
+	sp->addEffect(APPLY_ACID_DAMAGE, 50);
+	sp->setVigourCost(2);
+	sp->usesSpellPower = true;
+	return sp;
+}
+
+
+
 //Prayers
+
+
 
 spell * prayer_Restoration()
 {
 	spell* sp = new spell("Restoration", SPELL_TILE, TCODColor::darkYellow,
-		"Call upon the favour of the old gods to restore life essence.");
+		"Call upon the favour of the old gods to restore life essence. But the old gods are fickle, and help only those who \
+strike their fancy.");
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(RESTORE_HEALTH, 25);
 	sp->setVigourCost(2);
@@ -228,7 +274,7 @@ spell * prayer_Restoration()
 spell * prayer_WyrdChantOfStrength()
 {
 	spell* sp = new spell("Wyrd Chant of Strength", SPELL_TILE, TCODColor::darkGreen,
-		"Increases defence by 10%.");
+		"Increases defence by 10%. During the final days of the Wyrd, this chant filled the forest, though it did no good.");
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(GAIN_DEFENCE, 10);
 	sp->setVigourCost(2);
@@ -264,15 +310,6 @@ spell * ability_CrowArrow()
 	sp->setAttackType(ATTACK_RANGE);
 	sp->setAttackRange(8);
 	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 10);
-	return sp;
-}
-
-spell * ability_AcidSpit()
-{
-	spell* sp = new spell("Acid Spit", SPELL_TILE, TCODColor::lightGreen);
-	sp->setAttackType(ATTACK_RANGE);
-	sp->setAttackRange(5);
-	sp->addEffect(APPLY_ACID_DAMAGE, 15);
 	return sp;
 }
 

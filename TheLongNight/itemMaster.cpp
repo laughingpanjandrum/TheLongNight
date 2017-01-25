@@ -139,3 +139,38 @@ TCODColor getDamageTypeColor(damageType dtype)
 	}
 	return TCODColor::white;
 }
+
+/*
+Names of effects.
+*/
+std::string getEffectName(effect e)
+{
+	switch (e) {
+	case(FULL_RESTORE): return "full restore";
+	case(RESTORE_HEALTH): return "health regain";
+	case(RESTORE_VIGOUR): return "vigour regain";
+	case(GAIN_FREE_MOVES): return "free moves";
+	case(ADD_HEALTH_TRICKLE): return "health restore, 1/turn";
+	case(SCALE_NEXT_ATTACK): return "% damage next attack";
+	case(SCALE_NEXT_SPELL): return "% spell power for next spell";
+	case(SCALE_NEXT_PRAYER): return "% divine power for next prayer";
+	case(SPELL_ACID_INFUSION): return "acid infusion for next spell";
+	case(GAIN_DEFENCE): return "physical defence";
+	case(GAIN_ACID_RESIST): return "acid defence";
+	case(GAIN_COLD_RESIST): return "cold defence";
+	case(GAIN_ELECTRIC_RESIST): return "electric defence";
+	case(GAIN_FIRE_RESIST): return "fire defence";
+	case(GAIN_MAGIC_RESIST): return "magic defence";
+	case(CASTER_MELEE_ATTACK): return "free melee attack";
+	case(APPLY_PHYSICAL_DAMAGE): return "physical damage";
+	case(APPLY_ACID_DAMAGE): return "acid damage";
+	case(APPLY_BLEED_DAMAGE): return "bleed damage";
+	case(APPLY_COLD_DAMAGE): return "cold damage";
+	case(APPLY_ELECTRIC_DAMAGE): return "electric damage";
+	case(APPLY_FIRE_DAMAGE): return "fire damage";
+	case(APPLY_MAGIC_DAMAGE): return "magic damage";
+	case(KNOCKBACK_TARGET): return "knockback target";
+	case(PULL_CLOSER): return "pull target";
+	}
+	return "Unknown";
+}

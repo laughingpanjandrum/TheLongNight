@@ -140,6 +140,7 @@ private:
 	void drawItemInfo(item* it, int atx, int aty);
 	void drawWeaponInfo(weapon* it, int atx, int aty);
 	void drawArmourInfo(armour* it, int atx, int aty);
+	void drawSpellInfo(spell* it, int atx, int aty);
 
 	//Input processing
 	void processCommand();

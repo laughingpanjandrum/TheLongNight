@@ -75,6 +75,9 @@ spell* spell_ArcaneRadiance();
 spell* spell_ArcaneBlade();
 spell* spell_GottricsArcaneProtection();
 spell* spell_Frostbolt();
+spell* spell_AcidSpit();
+spell* spell_AcidBlade();
+spell* spell_AcidBurst();
 
 //Prayers
 spell* prayer_Restoration();
@@ -84,7 +87,6 @@ spell* prayer_WyrdChantOfStrength();
 spell* ability_Charge();
 spell* ability_Burst();
 spell* ability_CrowArrow();
-spell* ability_AcidSpit();
 spell* ability_FeedingFrenzy();
 
 #endif

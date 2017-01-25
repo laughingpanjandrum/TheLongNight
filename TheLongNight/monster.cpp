@@ -319,7 +319,8 @@ monster * monster_StarvingFishman()
 	m->setDefence(DAMAGE_PHYSICAL, 20);
 	m->setMeleeStats(50, SPEED_SLOW);
 	m->setMoveStats(SPEED_NORMAL);
-	m->addSpellKnown(ability_AcidSpit());
+	m->addSpellKnown(spell_AcidSpit());
+	m->setSpellPower(75);
 	m->setSpellCastChance(15);
 	m->setBleedResist(60);
 	m->setFragmentsDropped(25);
@@ -399,7 +400,9 @@ monster * npc_UtricTheRat()
 	m->addItemToStock(spell_GottricsArcaneProtection(), 40);
 	m->addItemToStock(spell_Frostbolt(), 25);
 	//Unlock: Waterlogged Writings
-	m->addStockUnlock(spell_MagicMissile(), 50, "waterlogged_writings");
+	m->addStockUnlock(spell_AcidSpit(), 50, "waterlogged_writings");
+	m->addStockUnlock(spell_AcidBurst(), 75, "waterlogged_writings");
+	m->addStockUnlock(spell_AcidBlade(), 100, "waterlogged_writings");
 	//Dialogue
 	m->loadDialogue("dialogue/utric_chat.txt");
 	return m;
