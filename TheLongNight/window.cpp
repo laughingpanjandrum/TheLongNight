@@ -160,18 +160,20 @@ std::string window::getstr(int x, int y)
 	write(x, y, "~_", TCODColor::white);
 	refresh();
 	TCOD_key_t key = TCODConsole::waitForKeypress(false);
-	while (key.vk != TCODK_ENTER) {
+	while (key.vk != TCODK_ENTER || !key.pressed) {
 		key = TCODConsole::waitForKeypress(false);
 		//SPECIAL KEYS
-		if (key.vk == TCODK_BACKSPACE) {
-			if (txt.size())
-				txt.pop_back();
+		if (key.pressed) {
+			if (key.vk == TCODK_BACKSPACE) {
+				if (txt.size())
+					txt.pop_back();
+			}
+			else if (key.vk == TCODK_SHIFT || key.vk == TCODK_ENTER) {
+				//do nothing
+			}
+			else
+				txt += key.c;
 		}
-		else if (key.vk == TCODK_SHIFT || key.vk == TCODK_ENTER) {
-			//do nothing
-		}
-		else if (key.pressed)
-			txt += key.c;
 		//Show what we did
 		clear();
 		write(x, y, '~' + txt + '_', TCODColor::white);

@@ -48,6 +48,7 @@ miscItem * spellbook_WaterloggedWritings()
 	miscItem* s = new miscItem("Waterlogged Writings", SPELL_TILE, TCODColor::lightLime,
 		"Water-soaked pages filled with sketches of fishmen and descriptions of their scaly magic.");
 	s->setKeyTag("waterlogged_writings");
+	s->isKey = true;
 	return s;
 }
 
