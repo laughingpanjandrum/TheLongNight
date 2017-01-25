@@ -48,6 +48,9 @@ public:
 	float glitterCoef = 0.0;
 	bool ascendingGlitter = true;
 
+	//Special flags
+	bool isWater = false;
+
 private:
 
 	//Uniquely defines a tile using the map loader
@@ -107,6 +110,7 @@ maptile* tile_VoidWarpstone(); //"warpstone"
 maptile* tile_WretchedDoor(); //"wretched_door"
 maptile* tile_CrowDoor(); //"crow_door"
 maptile* tile_RuinedTownshipHallDoor(); //"township_door"
+maptile* tile_WyrdDoor(); //"wyrd_door"
 
 const tileVector ALL_MAPTILES = {	
 	tile_Floor(), tile_MossyFloor(), tile_Sand(), tile_Grass(), tile_Road(),
@@ -117,7 +121,8 @@ const tileVector ALL_MAPTILES = {
 	tile_Bed(), tile_Terminal(),
 	tile_StatueOfRest(), tile_VoidWarpstone(),
 	//Special locked doors
-	tile_WretchedDoor(), tile_CrowDoor(), tile_RuinedTownshipHallDoor()
+	tile_WretchedDoor(), tile_CrowDoor(), tile_RuinedTownshipHallDoor(),
+	tile_WyrdDoor()
 };
 
 #endif

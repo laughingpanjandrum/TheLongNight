@@ -92,8 +92,6 @@ item * getItemByHandle(std::string handle)
 		return prayer_Restoration();
 
 	//MISC ITEMS
-	else if (handle == "wretched_key")
-		return key_WretchsKey();
 	else if (handle == "void_sigil")
 		return misc_VoidSigil();
 
@@ -104,6 +102,8 @@ item * getItemByHandle(std::string handle)
 	//RUNESTONES
 	else if (handle == "corens_runestone")
 		return runestone_CorensRunestone();
+	else if (handle == "siltras_runestone")
+		return runestone_SiltrasRunestone();
 	
 	//Uh oh, we didn't find anything!
 	return nullptr;

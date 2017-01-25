@@ -27,6 +27,7 @@ T tree
 -endcodes
 -connections
 west:flooded_lowlands_2
+north:deep_lake
 -endconnections
 ###..................r..............####
 ##........"..........................###

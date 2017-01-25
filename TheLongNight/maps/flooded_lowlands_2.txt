@@ -26,6 +26,7 @@ w wall_wood
 -connections
 east:ruined_township
 west:flooded_lowlands_1
+north:flooded_lowlands_3
 -endconnections
 .............................#####......
 ................................~##.....

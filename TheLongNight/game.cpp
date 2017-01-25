@@ -1417,6 +1417,8 @@ void game::applyEffectToPerson(person * target, effect eff, int potency, person*
 
 	else if (eff == GAIN_FREE_MOVES)
 		target->gainFreeMoves(potency);
+	else if (eff == GAIN_MULTIPLE_ATTACKS)
+		target->attacksPerHit = potency;
 	else if (eff == SCALE_NEXT_ATTACK)
 		target->scaleNextAttack = potency;
 	else if (eff == ADD_HEALTH_TRICKLE)
@@ -1470,6 +1472,8 @@ void game::applyEffectToPerson(person * target, effect eff, int potency, person*
 		knockbackTarget(caster, target, potency);
 	else if (eff == PULL_CLOSER)
 		pullTarget(caster, target, potency);
+	else if (eff == TELEPORT_VIA_WATER)
+		waterWarp(target, potency);
 
 }
 
@@ -1804,43 +1808,48 @@ One creature attacks another in melee.
 void game::meleeAttack(person * attacker, person * target)
 {
 	addMessage(attacker->getName() + " strikes " + target->getName(), attacker->getColor());
-	
-	//First: NORMAL DAMAGE
-	int damage = attacker->getMeleeDamage();
 
-	//Damage buffs
-	float dbuff = (float)attacker->scaleNextAttack / 100.0;
-	damage += dbuff * (float)damage;
-	if (attacker->scaleNextAttack)
-		//This buff only lasts for 1 attack
-		attacker->scaleNextAttack = 0;
-	
-	//Deal the damage
-	target->takeDamage(damage, DAMAGE_PHYSICAL);
+	//Multiattack?
+	for (int a = 0; a < attacker->attacksPerHit; a++) {
 
-	//Now deal special damage types
-	for (int dt = 0; dt < ALL_DAMAGE_TYPES; dt++) {
-		damageType dtype = static_cast<damageType>(dt);
-		int sdmg = attacker->getDamageOfType(dtype);
-		if (sdmg > 0)
-			target->takeDamage(sdmg, dtype);
-	}
-	
-	//Next: SPELL DISCHARGES, if we have one readied
-	if (attacker->buffNextMelee != nullptr) {
-		dischargeSpellOnTarget(attacker->buffNextMelee, attacker, target);
-		attacker->buffNextMelee = nullptr;
-	}
-	
-	//Animation effect
-	addAnimations(new flashCharacter(target, TCODColor::red));
-	
-	//Next: STATUS EFFECTS
-	weapon* wp = attacker->getWeapon();
-	if (wp != nullptr) {
-		for (int idx = 0; idx < wp->getStatusEffectCount(); idx++) {
-			target->takeStatusEffectDamage(wp->getStatusEffectType(idx), wp->getStatusEffectDamage(idx));
+		//First: NORMAL DAMAGE
+		int damage = attacker->getMeleeDamage();
+
+		//Damage buffs
+		float dbuff = (float)attacker->scaleNextAttack / 100.0;
+		damage += dbuff * (float)damage;
+		if (attacker->scaleNextAttack)
+			//This buff only lasts for 1 attack
+			attacker->scaleNextAttack = 0;
+
+		//Deal the damage
+		target->takeDamage(damage, DAMAGE_PHYSICAL);
+
+		//Now deal special damage types
+		for (int dt = 0; dt < ALL_DAMAGE_TYPES; dt++) {
+			damageType dtype = static_cast<damageType>(dt);
+			int sdmg = attacker->getDamageOfType(dtype);
+			if (sdmg > 0)
+				target->takeDamage(sdmg, dtype);
 		}
+
+		//Next: SPELL DISCHARGES, if we have one readied
+		if (attacker->buffNextMelee != nullptr) {
+			dischargeSpellOnTarget(attacker->buffNextMelee, attacker, target);
+			attacker->buffNextMelee = nullptr;
+		}
+
+		//Animation effect
+		addAnimations(new flashCharacter(target, TCODColor::red));
+
+		//Next: STATUS EFFECTS
+		weapon* wp = attacker->getWeapon();
+		if (wp != nullptr) {
+			for (int idx = 0; idx < wp->getStatusEffectCount(); idx++) {
+				target->takeStatusEffectDamage(wp->getStatusEffectType(idx), wp->getStatusEffectDamage(idx));
+			}
+		}
+
 	}
 	
 	//Update targeting
@@ -1852,6 +1861,9 @@ void game::meleeAttack(person * attacker, person * target)
 	//If we're an AI, this expends all of our free moves
 	if (!target->isPlayer && target->hasFreeMoves())
 		target->clearFreeMoves();
+
+	//Multiattack ends after use
+	attacker->attacksPerHit = 1;
 
 }
 
@@ -1877,6 +1889,38 @@ void game::pullTarget(person * puller, person * target, int distance)
 	for (int i = 0; i < distance; i++) {
 		movePerson(target, target->getx() + xv, target->gety() + yv);
 	}
+}
+
+
+/*
+Teleport from one water tile to another.
+Only works if we're already on a water tile.
+*/
+bool game::waterWarp(person * target, int distance)
+{
+	if (currentMap->getTile(target->getx(), target->gety())->isWater) {
+		//Find another water tile within a certain range
+		coordVector waterPts;
+		for (int x = target->getx() - distance; x <= target->getx() + distance; x++) {
+			for (int y = target->gety() - distance; y <= target->gety() + distance; y++) {
+				//Make sure we're in bounds
+				if (currentMap->inBounds(x, y) && currentMap->isWalkable(x, y) && currentMap->getPerson(x, y) == nullptr) {
+					//See if this point is WATER
+					maptile* t = currentMap->getTile(x, y);
+					if (t->isWater)
+						waterPts.push_back(coord(x, y));
+				}
+			}
+		}
+		//Warp to a point we found
+		if (waterPts.size()) {
+			int i = randrange(waterPts.size());
+			coord pt = waterPts.at(i);
+			movePerson(target, pt.first, pt.second);
+			return true;
+		}
+	}
+	return false;
 }
 
 
@@ -2820,7 +2864,7 @@ void game::debugMenu()
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());
-		player->addItem(wand_FishmansToadstaff());
+		player->addItem(weapon_FishmansKnife());
 		fragments += 700;
 		loadMapFromHandle("maps/flooded_lowlands_1.txt", CONNECT_WARP, player->getx(), player->gety());
 	}

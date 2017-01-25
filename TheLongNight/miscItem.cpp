@@ -40,6 +40,16 @@ miscItem * key_RuinedTownshipKey()
 	return m;
 }
 
+miscItem * key_WyrdKey()
+{
+	miscItem* m = new miscItem("Wyrd Key", KEY_TILE, TCODColor::lightSepia,
+		"The Wyrd were once entrusted with the guardianship of the Winter Court - a duty that they upheld even when their \
+world was destroyed.");
+	m->isKey = true;
+	m->setKeyTag("wyrd_door");
+	return m;
+}
+
 
 
 /*
@@ -72,6 +82,16 @@ miscItem * runestone_CorensRunestone()
 here somewhere, beneath the shifting waters.");
 	r->isRunestone = true;
 	r->setRune(new weaponRune("Coren's Runestone", "Strong", TCODColor::lightBlue, SCALE_STR));
+	return r;
+}
+
+miscItem * runestone_SiltrasRunestone()
+{
+	miscItem* r = new miscItem("Siltra's Runestone", RUNESTONE_TILE, TCODColor::lightCrimson,
+		"Once Siltra the Red-Eyed rode upon the lowlands, wielding her paired blades, and laid waste to its people. Her tomb \
+is here, somewhere beneath the shifting waters.");
+	r->isRunestone = true;
+	r->setRune(new weaponRune("Siltra's Runestone", "Swift", TCODColor::lightCrimson, SCALE_DEX));
 	return r;
 }
 

@@ -107,6 +107,7 @@ public:
 	bool hasFreeMoves() { return freeMoves > 0; }
 	void useFreeMove() { freeMoves--; }
 	int scaleNextAttack = 0; //Percent damage bonus damage added to next attack
+	int attacksPerHit = 1; //Multiattack count, resets to 1 after use
 	int healthTrickle = 0; //We get 1 point of this per tick until it runs out
 
 	//Spell buffs

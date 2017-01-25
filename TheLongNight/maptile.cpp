@@ -121,17 +121,21 @@ maptile * tile_Tree()
 
 maptile * tile_Water()
 {
-	return new maptile("Water", "water", BASIC_WATER_TILE, TCODColor::cyan, TCODColor::blue);
+	maptile* m = new maptile("Water", "water", BASIC_WATER_TILE, TCODColor::cyan, TCODColor::blue);
+	m->isWater = true;
+	return m;
 }
 
 maptile * tile_MossyWater()
 {
-	return new maptile("Water", "water_mossy", MOSS_TILE, TCODColor::green, TCODColor::blue);
+	maptile* m = new maptile("Water", "water_mossy", MOSS_TILE, TCODColor::green, TCODColor::blue);
+	m->isWater = true;
+	return m;
 }
 
 maptile * tile_DeepWater()
 {
-	return new maptile("Deep Water", "water_deep", BASIC_WATER_TILE, TCODColor::cyan, TCODColor::darkBlue, false, true);
+	return new maptile("Deep Water", "water_deep", BASIC_WATER_TILE, TCODColor::cyan, TCODColor::darkerBlue, false, true);
 }
 
 maptile * tile_Acid()
@@ -211,5 +215,15 @@ maptile * tile_RuinedTownshipHallDoor()
 	door->isDoor = true;
 	door->addTouchEffect(CHECK_FOR_UNLOCK);
 	door->isGlittery = true;
+	return door;
+}
+
+maptile * tile_WyrdDoor()
+{
+	maptile* door = new maptile("Wyrd Door", "wyrd_door", BASIC_DOOR_TILE, TCODColor::sepia, TCODColor::darkSepia,
+		false, false);
+	door->unlockCode = "wyrd_door";
+	door->isDoor = true;
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
 	return door;
 }

@@ -219,6 +219,16 @@ weapon * weapon_FishmansHarpoon()
 	return wp;
 }
 
+weapon * weapon_FishmansKnife()
+{
+	weapon* wp = new weapon("Fishman's Knife", DAGGER_TILE, TCODColor::lime,
+		"The short knives of the fishmen are weak but incredibly quick.");
+	wp->setBasicAttributes(15, SPEED_FAST);
+	wp->addScalingType(SCALE_DEX);
+	wp->setSpecialAttack(attack_Fillet());
+	return wp;
+}
+
 //		Shields
 
 weapon * shield_BatteredWoodenShield()
@@ -264,6 +274,7 @@ weapon * wand_DriftwoodWand()
 	wp->setSpellPower(100);
 	wp->makeOffhand();
 	wp->setSpecialAttack(ability_PowerSurge());
+	wp->addSpell(ability_SinkBeneath());
 	return wp;
 }
 

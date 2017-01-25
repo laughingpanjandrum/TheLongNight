@@ -118,6 +118,8 @@ monster* monster_StarvingFishman();
 monster* monster_FishmanDoomPreacher();
 monster* monster_FishmanSpearfisher();
 monster* monster_GuardianGolem();
+monster* monster_DegenerateFishman();
+monster* monster_FishbornGoddess();
 
 //Friendly NPCs
 monster* npc_Gorem();

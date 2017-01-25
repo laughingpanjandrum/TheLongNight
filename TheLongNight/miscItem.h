@@ -46,12 +46,14 @@ Items!
 miscItem* key_WretchsKey();
 miscItem* key_OldCrowsKey();
 miscItem* key_RuinedTownshipKey();
+miscItem* key_WyrdKey();
 
 //Spellbooks
 miscItem* spellbook_WaterloggedWritings();
 
 //Runestones
 miscItem* runestone_CorensRunestone();
+miscItem* runestone_SiltrasRunestone();
 
 //Other
 miscItem* misc_VoidSigil();

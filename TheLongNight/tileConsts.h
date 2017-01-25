@@ -49,7 +49,7 @@ const int SIGIL_TILE = 6;
 const int RUNESTONE_TILE = 15;
 
 //Maptiles
-const int BASIC_FLOOR_TILE = 0;
+const int BASIC_FLOOR_TILE = 288;
 const int BASIC_WALL_TILE = 289;
 const int BASIC_WATER_TILE = 290;
 const int BASIC_DOOR_TILE = 291;

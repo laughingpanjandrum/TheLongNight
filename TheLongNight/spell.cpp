@@ -108,6 +108,16 @@ spell * attack_Spearfishing()
 	return sp;
 }
 
+spell * attack_Fillet()
+{
+	spell* sp = new spell("Fillet", DAGGER_TILE, TCODColor::crimson,
+		"Make multiple attacks at once.");
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->setVigourCost(1);
+	sp->addEffect(GAIN_MULTIPLE_ATTACKS, 3);
+	return sp;
+}
+
 //Wand/chime powers
 
 spell * ability_PowerSurge()
@@ -319,5 +329,13 @@ spell * ability_FeedingFrenzy()
 	sp->setAttackType(ATTACK_AOE);
 	sp->setAttackRange(3);
 	sp->addEffect(GAIN_FREE_MOVES, 1);
+	return sp;
+}
+
+spell * ability_SinkBeneath()
+{
+	spell* sp = new spell("Sink Beneath", SPELL_TILE, TCODColor::cyan);
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(TELEPORT_VIA_WATER, 5);
 	return sp;
 }

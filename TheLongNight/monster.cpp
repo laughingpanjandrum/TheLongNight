@@ -310,7 +310,9 @@ monster * monster_TheOldCrow()
 	return m;
 }
 
+
 //Flooded Lowlands
+
 
 monster * monster_StarvingFishman()
 {
@@ -365,6 +367,38 @@ monster * monster_GuardianGolem()
 	m->setMeleeStats(100, SPEED_SLOW);
 	m->setFragmentsDropped(200);
 	m->addItemDrop(key_RuinedTownshipKey());
+	return m;
+}
+
+monster * monster_DegenerateFishman()
+{
+	monster* m = new monster("Degenerate Fishman", FISHMAN_TILE, TCODColor::lightestLime);
+	m->setHealth(25);
+	m->setBleedResist(75);
+	m->setDefence(DAMAGE_PHYSICAL, 15);
+	m->setMoveStats(SPEED_SLOW);
+	m->setMeleeStats(25, SPEED_FAST);
+	m->addSpellKnown(attack_Quickstep());
+	m->setSpellCastChance(15);
+	m->setFragmentsDropped(25);
+	return m;
+}
+
+monster * monster_FishbornGoddess()
+{
+	monster* m = new monster("Fishborn Goddess", FISHMAN_TILE, TCODColor::lighterGreen);
+	m->setHealth(800);
+	m->setBleedResist(50);
+	m->setDefence(DAMAGE_PHYSICAL, 15);
+	m->setMoveStats(SPEED_NORMAL);
+	m->setMeleeStats(40, SPEED_SLOW);
+	m->addSpellKnown(ability_SinkBeneath());
+	m->addSpellKnown(spell_AcidSpit());
+	m->addSpellKnown(spell_AcidBurst());
+	m->setSpellCastChance(50);
+	m->isBoss = true;
+	m->setFragmentsDropped(600);
+	m->addItemDrop(key_WyrdKey());
 	return m;
 }
 
@@ -449,6 +483,10 @@ monster * getMonsterByHandle(std::string handle)
 		return monster_FishmanSpearfisher();
 	else if (handle == "guardian_golem")
 		return monster_GuardianGolem();
+	else if (handle == "degenerate_fishman")
+		return monster_DegenerateFishman();
+	else if (handle == "fishborn_goddess")
+		return monster_FishbornGoddess();
 
 	//Friendly NPCs
 	else if (handle == "gorem")

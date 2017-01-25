@@ -112,6 +112,7 @@ weapon* weapon_CrowHalfsword();
 
 weapon* weapon_NotchedGreatsword();
 weapon* weapon_FishmansHarpoon();
+weapon* weapon_FishmansKnife();
 
 //Shields
 weapon* shield_BatteredWoodenShield();
