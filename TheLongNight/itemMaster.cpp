@@ -96,6 +96,10 @@ item * getItemByHandle(std::string handle)
 		return key_WretchsKey();
 	else if (handle == "void_sigil")
 		return misc_VoidSigil();
+
+	//SPELLBOOKS
+	else if (handle == "waterlogged_writings")
+		return spellbook_WaterloggedWritings();
 	
 	//Uh oh, we didn't find anything!
 	return nullptr;

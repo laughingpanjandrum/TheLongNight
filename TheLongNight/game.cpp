@@ -2331,6 +2331,9 @@ Create menu for SHOPPING!
 void game::setupShopMenu(person * shopkeeper)
 {
 	monster* m = static_cast<monster*>(shopkeeper);
+	//Update shop inventory
+	m->checkForStockUnlocks(player);
+	//Create shopping menu
 	currentMenu = new menu(shopkeeper->getName());
 	for (auto it : m->getStock()) {
 		currentMenu->addElement(it);
@@ -2616,6 +2619,18 @@ void game::debugMenu()
 		//Load map by NAME
 		txt = makemap.getMapHandle(txt);
 		loadMapFromHandle(txt, CONNECT_WARP, player->getx(), player->gety());
+	}
+	else if (txt == "item") {
+		txt = win.getstr(1, 1);
+		//Get item by name
+		item* it = getItemByHandle(txt);
+		if (it != nullptr)
+			player->addItem(it);
+	}
+	else if (txt == "story") {
+		txt = win.getstr(1, 1);
+		//Add a story flag
+		addStoryFlag(txt);
 	}
 
 	//Set up special game states

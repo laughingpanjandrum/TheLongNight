@@ -18,7 +18,7 @@ public:
 	virtual const int isEquippable() { return false; }
 
 	//For key/lock items
-	bool isKey;
+	bool isKey = true;
 	void setKeyTag(std::string t) { keyTag = t; }
 	std::string getKeyTag() { return keyTag; }
 
@@ -38,6 +38,9 @@ Items!
 miscItem* key_WretchsKey();
 miscItem* key_OldCrowsKey();
 miscItem* key_RuinedTownshipKey();
+
+//Spellbooks
+miscItem* spellbook_WaterloggedWritings();
 
 //Other
 miscItem* misc_VoidSigil();

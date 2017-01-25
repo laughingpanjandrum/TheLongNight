@@ -85,6 +85,16 @@ void monster::addItemToStock(item * it, int price)
 }
 
 /*
+These items are unlocked if the player has a specific key.
+*/
+void monster::addStockUnlock(item * it, int price, std::string unlockCode)
+{
+	it->isGlittery = false;
+	it->setPrice(price);
+	stockUnlocks.push_back(new unlockableStock(it,unlockCode));
+}
+
+/*
 Cause we bought something!
 */
 void monster::removeItemFromStock(item * it)
@@ -92,6 +102,29 @@ void monster::removeItemFromStock(item * it)
 	auto iter = std::find(stock.begin(), stock.end(), it);
 	if (iter != stock.end())
 		stock.erase(iter);
+}
+
+
+/*
+See if the given person has a key that will unlock additional stock items.
+*/
+void monster::checkForStockUnlocks(person * unlocker)
+{
+	//Keep track of stuff to remove, if any
+	stockUnlockVector toRemove;
+	//Have a look
+	for (auto unlock : stockUnlocks) {
+		if (unlocker->hasKey(unlock->unlockCode)) {
+			//Yup, here's one!
+			stock.push_back(unlock->it);
+			toRemove.push_back(unlock);
+		}
+	}
+	//Remove anything that we unlocked from the list to ensure it can't be unlocked twice
+	for (auto rem : toRemove) {
+		auto iter = std::find(stockUnlocks.begin(), stockUnlocks.end(), rem);
+		stockUnlocks.erase(iter);
+	}
 }
 
 
@@ -361,9 +394,13 @@ monster * npc_UtricTheRat()
 	m->setHealth(100);
 	m->isHostile = false;
 	m->isShopkeeper = true;
+	//Starting stock
 	m->addItemToStock(spell_ArcaneBlade(), 50);
 	m->addItemToStock(spell_GottricsArcaneProtection(), 40);
 	m->addItemToStock(spell_Frostbolt(), 25);
+	//Unlock: Waterlogged Writings
+	m->addStockUnlock(spell_MagicMissile(), 50, "waterlogged_writings");
+	//Dialogue
 	m->loadDialogue("dialogue/utric_chat.txt");
 	return m;
 }

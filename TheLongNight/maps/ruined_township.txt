@@ -2,6 +2,8 @@ Ruined Township
 start:6,37
 guardian_golem:23,32
 -items
+void_sigil:30,19
+waterlogged_writings:28,21
 -enditems
 -codes
 . floor_stone
@@ -20,6 +22,7 @@ G glass
 T tree
 % bush
 & township_door
+* warpstone
 -endcodes
 -connections
 west:flooded_lowlands_2
@@ -45,7 +48,7 @@ west:flooded_lowlands_2
 ......r.."".##################GGG##..w..
 .####.r.."..Gsss.....~............#.ww..
 ..."#.r.....#ss.."..~~~...".......#.w...
-......rrrrrr&........~~...........#.w...
+......rrrrrr&........~~.........*.#.w...
 ..~.#.r.....#sss......~"........".#.w...
 .#..~.r.gTg.Gssss..".........."...#.w...
 ......r.ggg.##################GGG##.w...

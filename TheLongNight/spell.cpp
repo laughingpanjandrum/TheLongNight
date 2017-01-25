@@ -158,7 +158,7 @@ spell * spell_MagicMissile()
 	spell* sp = new spell("Magic Missile", SPELL_TILE, TCODColor::magenta,
 		"Attack deals magic damage.");
 	sp->setAttackType(ATTACK_RANGE);
-	sp->addEffect(APPLY_MAGIC_DAMAGE, 50);
+	sp->addEffect(APPLY_MAGIC_DAMAGE, 25);
 	sp->setAttackRange(5);
 	sp->setVigourCost(1);
 	sp->usesSpellPower = true;

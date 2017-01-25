@@ -8,7 +8,7 @@ miscItem::~miscItem()
 
 
 /*
-	SPECIFIC ITEMS
+	Keys
 */
 
 miscItem * key_WretchsKey()
@@ -39,9 +39,22 @@ miscItem * key_RuinedTownshipKey()
 }
 
 
+/*
+	Spellbooks
+*/
 
-//Other
+miscItem * spellbook_WaterloggedWritings()
+{
+	miscItem* s = new miscItem("Waterlogged Writings", SPELL_TILE, TCODColor::lightLime,
+		"Water-soaked pages filled with sketches of fishmen and descriptions of their scaly magic.");
+	s->setKeyTag("waterlogged_writings");
+	return s;
+}
 
+
+/*
+	Other
+*/
 
 
 miscItem * misc_VoidSigil()

@@ -7,6 +7,7 @@
 #include "person.h"
 #include "utility.h"
 
+
 class monster: public person
 {
 public:
@@ -48,8 +49,10 @@ public:
 
 	//Shopkeeping
 	void addItemToStock(item* it, int price);
+	void addStockUnlock(item* it, int price, std::string unlockCode);
 	void removeItemFromStock(item* it);
 	itemVector getStock() { return stock; }
+	void checkForStockUnlocks(person* unlocker);
 
 	//Chatting with ur buddies
 	void loadDialogue(std::string filename);
@@ -78,6 +81,7 @@ protected:
 
 	//Shopkeeping
 	itemVector stock;
+	stockUnlockVector stockUnlocks;
 
 	//Chatting
 	std::vector<std::string> dialogue;

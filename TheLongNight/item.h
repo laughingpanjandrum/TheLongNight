@@ -5,6 +5,8 @@
 #include "element.h"
 #include "categories.h"
 
+
+
 class item: public element
 {
 public:
@@ -56,6 +58,20 @@ protected:
 };
 
 typedef std::vector<item*> itemVector;
+
+
+/*
+For shopkeepers.
+Keeps track of a set of sellable items that are unlocked with a code.
+*/
+struct unlockableStock {
+	unlockableStock(item* it, std::string unlockCode) :
+		it(it), unlockCode(unlockCode) {}
+	item* it;
+	std::string unlockCode;
+};
+
+typedef std::vector<unlockableStock*> stockUnlockVector;
 
 const std::string getItemCategoryName(itemTypes cat);
 
