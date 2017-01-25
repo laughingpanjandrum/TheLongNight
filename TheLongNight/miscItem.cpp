@@ -67,7 +67,7 @@ miscItem * spellbook_WaterloggedWritings()
 
 miscItem * runestone_CorensRunestone()
 {
-	miscItem* r = new miscItem("Coren's Runestone", STATUE_TILE, TCODColor::lightBlue,
+	miscItem* r = new miscItem("Coren's Runestone", RUNESTONE_TILE, TCODColor::lightBlue,
 		"Once Coren the Strong laid waste to the lowlands, until all the townships lay under his command. His tomb is \
 here somewhere, beneath the shifting waters.");
 	r->isRunestone = true;

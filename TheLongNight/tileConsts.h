@@ -46,6 +46,7 @@ const int SPELL_TILE = 274;
 const int KEY_TILE = 275;
 const int CHARM_TILE = 276;
 const int SIGIL_TILE = 6;
+const int RUNESTONE_TILE = 15;
 
 //Maptiles
 const int BASIC_FLOOR_TILE = 0;

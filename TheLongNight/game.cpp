@@ -1044,6 +1044,7 @@ void game::drawItemInfo(item * it, int atx, int aty)
 	case(ITEM_BODY_ARMOUR): drawArmourInfo(static_cast<armour*>(it), atx, aty); break;
 	case(ITEM_HELMET): drawArmourInfo(static_cast<armour*>(it), atx, aty); break;
 	case(ITEM_SPELL): drawSpellInfo(static_cast<spell*>(it), atx, aty); break;
+	case(ITEM_MISC): drawMiscItemInfo(static_cast<miscItem*>(it), atx, aty); break;
 	}
 }
 
@@ -1209,6 +1210,29 @@ void game::drawSpellInfo(spell * it, int atx, int aty)
 		//Display it
 		win.write(atx + 1, ++aty, std::to_string(potency), TCODColor::white);
 		win.write(atx + 4, aty, getEffectName(eType), TCODColor::lightGrey);
+	}
+}
+
+
+/*
+Miscellaneous item info
+*/
+void game::drawMiscItemInfo(miscItem * it, int atx, int aty)
+{
+	if (it->isRunestone) {
+		win.write(atx, aty, "Equip to slot into your current weapon.", TCODColor::white);
+		//Specific effects
+		weaponRune* rune = it->getRune();
+		if (rune != nullptr) {
+			std::string scaleType;
+			switch (rune->addScalingType) {
+			case(SCALE_STR): scaleType = "Strength"; break;
+			case(SCALE_DEX): scaleType = "Dexterity"; break;
+			case(SCALE_ARC): scaleType = "Arcane"; break;
+			case(SCALE_DEV) : scaleType = "Devotion"; break;
+			}
+			win.write(atx, ++aty, "Improves scaling with " + scaleType + ".", rune->color);
+		}
 	}
 }
 
