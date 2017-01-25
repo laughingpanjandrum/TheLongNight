@@ -121,7 +121,7 @@ private:
 	void menuBackOut();
 
 	//General drawing functions
-	void drawScreen();
+	void drawScreen(bool doRefresh = true);
 	void drawMap(int atx, int aty);
 	drawData getDrawData(int x, int y);
 	void drawInterface(int atx, int aty);

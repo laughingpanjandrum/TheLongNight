@@ -1,4 +1,4 @@
-"Hello, hello! How nice to see a friendly face!"
+"Hello, hello!"
 |STORY_FLAG_SKIP
 utricToFairweather
 [IN_FAIRWEATHER]
@@ -12,6 +12,6 @@ utricToFairweather
 "I'm making my way to the ruins of Old Fairweather... Perhaps I'll see you there!"
 |BACK_UP_AND_END
 [IN_FAIRWEATHER]
-"Aha! Good to see you made it, friend!"
+"Good to see you made it, friend!"
 "Say, are you interested in learning some magic?"
 |SHOP

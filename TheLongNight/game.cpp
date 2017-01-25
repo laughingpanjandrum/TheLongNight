@@ -576,7 +576,7 @@ void game::menuBackOut()
 /*
 Clears, draws the entire screen, then refreshes.
 */
-void game::drawScreen() 
+void game::drawScreen(bool doRefresh) 
 {
 	win.clear();
 	//Figure out what to draw
@@ -594,7 +594,8 @@ void game::drawScreen()
 	//Always draw the interface
 	drawInterface(MAP_DRAW_X + 43, MAP_DRAW_Y);
 	//win.drawFont();
-	win.refresh();
+	if (doRefresh)
+		win.refresh();
 }
 
 /*
@@ -2229,11 +2230,13 @@ Chitchat with an npc!
 void game::doDialogue(monster * target)
 {
 	while (key.vk != KEY_BACK_OUT) {
-		win.clear();
+
+		//Draw the screen underneath
+		drawScreen(false);
 
 		//Box it in
-		win.clearRegion(MAP_DRAW_X, MAP_DRAW_Y, 40, 40);
-		win.drawBox(MAP_DRAW_X, MAP_DRAW_Y, 40, 40, TCODColor::sepia);
+		win.clearRegion(MAP_DRAW_X, MAP_DRAW_Y, 40, 15);
+		win.drawBox(MAP_DRAW_X, MAP_DRAW_Y, 40, 15, TCODColor::sepia);
 
 		//Controls
 		int atx = MAP_DRAW_X + 1;
