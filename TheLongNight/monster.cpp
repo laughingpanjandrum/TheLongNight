@@ -11,6 +11,7 @@ monster::monster(std::string name, int tileCode, TCODColor color, std::string de
 	isPlayer = false;
 	//Default to 100% spell power
 	setSpellPower(100);
+	setDivinePower(100);
 }
 
 /*
@@ -299,7 +300,9 @@ monster * monster_ForlornCrowKnight()
 	m->setSpellCastChance(20);
 	m->setFragmentsDropped(100);
 	m->setDefence(DAMAGE_PHYSICAL, 10);
-	m->respawns = false;
+	m->isBoss = true;
+	m->showBossHealthBar = false;
+	m->addItemDrop(weapon_CrowHalfsword());
 	return m;
 }
 
@@ -397,6 +400,20 @@ monster * monster_DegenerateFishman()
 	m->addSpellKnown(attack_Quickstep());
 	m->setSpellCastChance(15);
 	m->setFragmentsDropped(25);
+	return m;
+}
+
+monster * monster_SkinlessKnight()
+{
+	monster* m = new monster("Skinless Knight", CROW_KNIGHT_TILE, TCODColor::lightPink,
+		"The armour stained and dented, and beneath the slitted helm, two bloated eyes sit in a skinless skull.");
+	m->setHealth(200);
+	m->setDefence(DAMAGE_PHYSICAL, 15);
+	m->setDefence(DAMAGE_MAGIC, 25);
+	m->setMoveStats(SPEED_SLOW);
+	m->setMeleeStats(50, SPEED_NORMAL);
+	m->addSpellKnown(prayer_ProfaneRadiance());
+	m->setSpellCastChance(15);
 	return m;
 }
 
@@ -505,6 +522,8 @@ monster * getMonsterByHandle(std::string handle)
 		return monster_GuardianGolem();
 	else if (handle == "degenerate_fishman")
 		return monster_DegenerateFishman();
+	else if (handle == "skinless_knight")
+		return monster_SkinlessKnight();
 	else if (handle == "fishborn_goddess")
 		return monster_FishbornGoddess();
 

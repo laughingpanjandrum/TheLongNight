@@ -142,6 +142,7 @@ Standard damage. Kills us if we run out of health.
 */
 void person::takeDamage(int amount, damageType dtype)
 {
+	
 	//Armour reduces damage
 	int resist = 0;
 	if (dtype == DAMAGE_PHYSICAL)
@@ -150,9 +151,15 @@ void person::takeDamage(int amount, damageType dtype)
 		resist = getDamageResist(dtype);
 	int def = ((float)resist / 100) * (float)amount;
 	amount -= def;
+
+	//Susceptibility
+	if (dtype == DAMAGE_BLESSED && isProfane())
+		amount *= 2;
+	
 	//Minimum 1 damage
 	if (amount < 1)
 		amount = 1;
+	
 	//Take the rest
 	health.decrease(amount);
 	if (health.isEmpty())

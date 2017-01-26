@@ -60,6 +60,9 @@ public:
 	int getNextLevelCost() { return stats->level * 100; }
 	int getScalingDamage(weapon* wp);
 
+	//Special attributes
+	bool isProfane() { return profane; }
+
 	//Getters
 	counter getHealth() { return health; }
 	counter getVigour() { return vigour; }
@@ -175,6 +178,8 @@ protected:
 	int baseMeleeDamage = 1; //how much damage we do bare-handed
 	int baseAttackSpeed = SPEED_NORMAL; //how quickly we attack bare-handed
 	int baseMoveSpeed = SPEED_FAST; //how quickly we move if unarmoured
+
+	bool profane;
 
 	//Resistances/defence
 	int baseDefence = 0;

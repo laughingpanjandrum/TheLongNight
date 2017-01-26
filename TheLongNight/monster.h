@@ -28,6 +28,7 @@ public:
 	void setBleedResist(int br) { bleedBuildup.setMaxValue(br); }
 	void setHealth(int hp);
 	void setSpellPower(int power) { baseSpellPower = power; }
+	void setDivinePower(int power) { baseDivinePower = power; }
 
 	//Setting/getting behaviours
 	bool keepsDistance = false;
@@ -64,7 +65,7 @@ public:
 
 	//Flags
 	bool isBoss = false;
-	bool respawns = true;
+	bool showBossHealthBar = true; //only if we're actually a boss, of course!
 
 protected:
 
@@ -119,6 +120,7 @@ monster* monster_FishmanDoomPreacher();
 monster* monster_FishmanSpearfisher();
 monster* monster_GuardianGolem();
 monster* monster_DegenerateFishman();
+monster* monster_SkinlessKnight();
 monster* monster_FishbornGoddess();
 
 //Friendly NPCs

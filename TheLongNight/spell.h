@@ -36,6 +36,7 @@ public:
 	bool usesSpellPower = false;
 	bool usesDivinePower = false;
 	bool addPermanentBuff = false;
+	bool isAcidSpell = false; //Determines whether acid infusions are super-effective
 
 private:
 
@@ -83,6 +84,7 @@ spell* spell_AcidBurst();
 //Prayers
 spell* prayer_Restoration();
 spell* prayer_WyrdChantOfStrength();
+spell* prayer_ProfaneRadiance();
 
 //Monster abilities
 spell* ability_Charge();

@@ -282,7 +282,7 @@ weapon * wand_FishmansToadstaff()
 	weapon* wp = new weapon("Fishman's Toadstaff", STAFF_TILE, TCODColor::darkLime,
 		"Sometimes the toad impaled on the tip twitches. Is it still alive? Best not to dwell on it.");
 	wp->setBasicAttributes(5, SPEED_NORMAL);
-	wp->setSpellstoreSize(2);
+	wp->setSpellstoreSize(4);
 	wp->setSpellPower(75);
 	wp->setSpecialAttack(ability_AcidInfusion());
 	wp->makeOffhand();

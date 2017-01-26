@@ -820,7 +820,7 @@ void game::drawInterface(int leftx, int topy)
 	//BOSS HEALTH BAR, if we're fighting a boss
 	atx = MAP_DRAW_X;
 	aty = MAP_DRAW_Y + 42;
-	if (currentBoss != nullptr) {
+	if (currentBoss != nullptr && currentBoss->showBossHealthBar) {
 		win.write(atx, aty, currentBoss->getName(), currentBoss->getColor());
 		win.drawCounter(currentBoss->getHealth(), "", atx, aty + 1, TCODColor::red, TCODColor::darkGrey, 40);
 	}
@@ -1483,6 +1483,10 @@ void game::applyEffectToPerson(person * target, effect eff, int potency, person*
 		target->takeDamage(potency, DAMAGE_FIRE);
 	else if (eff == APPLY_ELECTRIC_DAMAGE)
 		target->takeDamage(potency, DAMAGE_ELECTRIC);
+	else if (eff == APPLY_PROFANE_DAMAGE)
+		target->takeDamage(potency, DAMAGE_PROFANE);
+	else if (eff == APPLY_BLESSED_DAMAGE)
+		target->takeDamage(potency, DAMAGE_BLESSED);
 	else if (eff == APPLY_BLEED_DAMAGE)
 		target->takeStatusEffectDamage(EFFECT_BLEED, potency);
 
@@ -2187,13 +2191,13 @@ void game::castSpell(spell * sp)
 			//Hits everything within its radius
 			doAOE(sp, player);
 			//Time taken
-			playerTurnDelay += player->getOffhand()->getAttackDelay();
+			playerTurnDelay += SPEED_NORMAL;
 		}
 		else if (aType == ATTACK_RANGE) {
 			//Hits target marked with the cursor
 			doRangedSpell(sp);
 			//Time taken is the attack delay of our OFFHAND item (which will usually be e.g. a wand)
-			playerTurnDelay += player->getOffhand()->getAttackDelay();
+			playerTurnDelay += SPEED_NORMAL;
 		}
 	}
 }
@@ -2238,29 +2242,38 @@ void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 
 		//Permanent buff or temporary?
 		if (sp->addPermanentBuff) {
+			
 			//Permanent buffs need to be tracked
 			if (target->addBuff(sp->getName(), sp->getColor(), sp->getEffectType(idx), potency)) {
 				applyEffectToPerson(target, sp->getEffectType(idx), potency);
-				//This is when the caster expends their vigour
-				caster->loseVigour(sp->getVigourCost());
 			}
 			else {
 				addMessage("You cannot stack this buff!", TCODColor::white);
 			}
 		}
 		else {
+
 			//Just a normal spell casting
 			applyEffectToPerson(target, sp->getEffectType(idx), potency, caster);
+			
 			//Infusions apply extra effects
 			if (caster->spellAcidInfusion && target != caster) {
-				target->takeDamage(caster->spellAcidInfusion, DAMAGE_ACID);
+				//Bonus if this is an acid spell
+				int power = caster->spellAcidInfusion;
+				if (sp->isAcidSpell)
+					power = power * 2;
+				//Apply effect
+				target->takeDamage(power, DAMAGE_ACID);
 				caster->spellAcidInfusion = 0;
 			}
-			//This is when the caster expends their vigour
-			caster->loseVigour(sp->getVigourCost());
+
 		}
 	
 	}
+
+	//This is when the caster expends their vigour
+	caster->loseVigour(sp->getVigourCost());
+
 }
 
 /*
@@ -2707,7 +2720,10 @@ void game::clearDeadCreatures()
 			currentMap->removePerson(p);
 			//If this was the BOSS, then this BOSS FIGHT is over
 			if (p == currentBoss) {
-				bossKillMessage();
+				monster* b = static_cast<monster*>(p);
+				if (b->showBossHealthBar) {
+					bossKillMessage();
+				}
 				currentBoss = nullptr;
 				//Toggle setting on map so the boss won't respawn
 				currentMap->bossDestroyed = true;
@@ -2936,5 +2952,17 @@ void game::debugMenu()
 		player->addItem(weapon_FishmansKnife());
 		fragments += 700;
 		loadMapFromHandle("maps/flooded_lowlands_1.txt", CONNECT_WARP, player->getx(), player->gety());
+	}
+	else if (txt == "lowlands_boss") {
+		player->addItem(weapon_FishmansHarpoon());
+		player->addItem(weapon_FishmansKnife());
+		player->addItem(wand_FishmansToadstaff());
+		player->addItem(spell_AcidBlade());
+		player->addItem(spell_AcidBurst());
+		player->addItem(spell_AcidSpit());
+		player->addItem(armour_FishscaleCoat());
+		player->addItem(headgear_FishpriestHat());
+		fragments += 1200;
+		loadMapFromHandle("maps/flooded_lowlands_3.txt", CONNECT_WARP, player->getx(), player->gety());
 	}
 }

@@ -126,6 +126,22 @@ void map::addMonsterSpawner(std::string monsterTag, coord xy)
 
 
 /*
+DEPRECATED - don't use this!
+*/
+void map::removeMonsterSpawner(std::string monsterTag)
+{
+	for (int i = 0; i < monsterSpawnTags.size(); i++) {
+		if (monsterSpawnTags.at(i) == monsterTag) {
+			//Found, delete it
+			monsterSpawnTags.erase(monsterSpawnTags.begin() + i);
+			monsterSpawnCoords.erase(monsterSpawnCoords.begin() + i);
+			return;
+		}
+	}
+}
+
+
+/*
 Update datamap properties - walkable & seethru - at the given point.
 Call whenever things change at a specific point.
 */

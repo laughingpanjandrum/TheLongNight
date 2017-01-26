@@ -62,6 +62,7 @@ public:
 	void removeItem(item* it);
 	void setStartPoint(coord sp) { startPt = sp; }
 	void addMonsterSpawner(std::string monsterTag, coord xy);
+	void removeMonsterSpawner(std::string monsterTag);
 
 	//Datamap
 	void updateDatamapAtPoint(int x, int y);
@@ -114,6 +115,7 @@ private:
 
 	//Saved list of monsters to respawn
 	std::vector<std::string> monsterSpawnTags;
+	std::vector<std::string> noRespawnList;
 	coordVector monsterSpawnCoords;
 
 	//TCOD map data - for FOV, pathfinding, etc.

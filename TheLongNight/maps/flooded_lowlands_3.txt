@@ -1,9 +1,6 @@
 Flooded Lowlands
 start:16,22
-fishman_spearfisher:20,30
-fishman_spearfisher:19,30
-starving_fishman:17,30
-fishman_doom_preacher:18,29
+skinless_knight:20,30
 fishborn_goddess:3,6
 -items
 fishmans_harpoon:31,37

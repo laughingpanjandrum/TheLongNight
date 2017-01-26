@@ -236,6 +236,7 @@ fruitlessly stood against the annihilation of their homeland.");
 	sp->addEffect(APPLY_ACID_DAMAGE, 25);
 	sp->setVigourCost(1);
 	sp->usesSpellPower = true;
+	sp->isAcidSpell = true;
 	return sp;
 }
 
@@ -260,6 +261,7 @@ spell * spell_AcidBurst()
 	sp->addEffect(APPLY_ACID_DAMAGE, 50);
 	sp->setVigourCost(2);
 	sp->usesSpellPower = true;
+	sp->isAcidSpell = true;
 	return sp;
 }
 
@@ -290,6 +292,18 @@ spell * prayer_WyrdChantOfStrength()
 	sp->setVigourCost(2);
 	sp->usesDivinePower = true;
 	sp->addPermanentBuff = true;
+	return sp;
+}
+
+spell * prayer_ProfaneRadiance()
+{
+	spell* sp = new spell("Profane Radiance", SPELL_TILE, TCODColor::purple,
+		"Spell deals profane damage in a blast around you.");
+	sp->setAttackType(ATTACK_AOE);
+	sp->setAttackRange(2);
+	sp->setVigourCost(2);
+	sp->addEffect(APPLY_PROFANE_DAMAGE, 25);
+	sp->usesDivinePower = true;
 	return sp;
 }
 
