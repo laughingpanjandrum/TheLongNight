@@ -47,6 +47,7 @@ miscItem* key_WretchsKey();
 miscItem* key_OldCrowsKey();
 miscItem* key_RuinedTownshipKey();
 miscItem* key_WyrdKey();
+miscItem* key_GreenChapelGardenKey();
 
 //Spellbooks
 miscItem* spellbook_WaterloggedWritings();

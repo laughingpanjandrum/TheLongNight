@@ -101,6 +101,8 @@ item * getItemByHandle(std::string handle)
 		return prayer_Restoration();
 
 	//MISC ITEMS
+	else if (handle == "green_chapel_garden_key")
+		return key_GreenChapelGardenKey();
 	else if (handle == "void_sigil")
 		return misc_VoidSigil();
 

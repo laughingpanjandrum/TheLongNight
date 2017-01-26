@@ -50,6 +50,15 @@ world was destroyed.");
 	return m;
 }
 
+miscItem * key_GreenChapelGardenKey()
+{
+	miscItem* m = new miscItem("Green Chapel Garden Key", KEY_TILE, TCODColor::lightGreen,
+		"A key with its handle carved in the shape of a rose.");
+	m->isKey = true;
+	m->setKeyTag("green_chapel_door");
+	return m;
+}
+
 
 
 /*

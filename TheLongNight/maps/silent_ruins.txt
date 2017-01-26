@@ -3,6 +3,7 @@ start:0,23
 forlorn_crow_knight:15,25
 utric:29,24
 -items
+green_chapel_garden_key:14,31
 -enditems
 -codes
 . floor_grass

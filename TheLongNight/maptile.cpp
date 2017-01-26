@@ -33,14 +33,22 @@ bool maptile::hasTouchEffect(effect te)
 	return std::find(touchEffects.begin(), touchEffects.end(), te) != touchEffects.end();
 }
 
+
+
+/*
+	All tiles
+*/
+
+
+
 maptile * tile_Floor()
 {
-	return new maptile("Floor", "floor_stone", BASIC_FLOOR_TILE, TCODColor::grey, TCODColor::darkerGrey);
+	return new maptile("Floor", "floor_stone", BASIC_FLOOR_TILE, TCODColor(47,45,43), TCODColor(23,23,23));
 }
 
 maptile * tile_MossyFloor()
 {
-	return new maptile("Floor", "floor_mossy_stone", MOSS_TILE, TCODColor::darkGreen, TCODColor::darkerGrey);
+	return new maptile("Floor", "floor_mossy_stone", MOSS_TILE, LIGHT_GRASS_COLOR, DARK_STONE_COLOR);
 }
 
 maptile * tile_Sand()
@@ -50,7 +58,7 @@ maptile * tile_Sand()
 
 maptile * tile_Grass()
 {
-	return new maptile("Grass", "floor_grass", BASIC_FLOOR_TILE, TCODColor::green, TCODColor::darkerGreen);
+	return new maptile("Grass", "floor_grass", BASIC_FLOOR_TILE, LIGHT_GRASS_COLOR, DARK_GRASS_COLOR);
 }
 
 maptile * tile_Road()
@@ -65,7 +73,7 @@ maptile * tile_SandyRock()
 
 maptile * tile_Wall()
 {
-	return new maptile("Wall", "wall_stone", BASIC_WALL_TILE, TCODColor::darkGrey, TCODColor::darkestGrey, false, false);
+	return new maptile("Wall", "wall_stone", BASIC_WALL_TILE, LIGHT_STONE_COLOR, DARK_STONE_COLOR, false, false);
 }
 
 maptile * tile_WoodenWall()
@@ -75,7 +83,7 @@ maptile * tile_WoodenWall()
 
 maptile * tile_Door()
 {
-	maptile* d = new maptile("Door", "door_stone", BASIC_DOOR_TILE, TCODColor::darkerGrey, TCODColor::grey, true, false);
+	maptile* d = new maptile("Door", "door_stone", BASIC_DOOR_TILE, LIGHT_STONE_COLOR, DARK_STONE_COLOR, true, false);
 	return d;
 }
 
@@ -111,31 +119,31 @@ maptile * tile_Glass()
 
 maptile * tile_Bush()
 {
-	return new maptile("Bush", "bush", BUSH_TILE, TCODColor::green, TCODColor::darkerGreen, true, false);
+	return new maptile("Bush", "bush", BUSH_TILE, LIGHT_GRASS_COLOR, DARK_GRASS_COLOR, true, false);
 }
 
 maptile * tile_Tree()
 {
-	return new maptile("Tree", "tree", TREE_TILE, TCODColor::lightSepia, TCODColor::darkerGreen, false, false);
+	return new maptile("Tree", "tree", TREE_TILE, TCODColor::lightSepia, DARK_GRASS_COLOR, false, false);
 }
 
 maptile * tile_Water()
 {
-	maptile* m = new maptile("Water", "water", BASIC_WATER_TILE, TCODColor::cyan, TCODColor::blue);
+	maptile* m = new maptile("Water", "water", BASIC_WATER_TILE, LIGHT_WATER_COLOR, DARK_WATER_COLOR);
 	m->isWater = true;
 	return m;
 }
 
 maptile * tile_MossyWater()
 {
-	maptile* m = new maptile("Water", "water_mossy", MOSS_TILE, TCODColor::green, TCODColor::blue);
+	maptile* m = new maptile("Water", "water_mossy", MOSS_TILE, LIGHT_GRASS_COLOR, DARK_WATER_COLOR);
 	m->isWater = true;
 	return m;
 }
 
 maptile * tile_DeepWater()
 {
-	return new maptile("Deep Water", "water_deep", BASIC_WATER_TILE, TCODColor::cyan, TCODColor::darkerBlue, false, true);
+	return new maptile("Deep Water", "water_deep", BASIC_WATER_TILE, LIGHT_WATER_COLOR, DARKEST_WATER_COLOR, false, true);
 }
 
 maptile * tile_Acid()
@@ -148,12 +156,12 @@ maptile * tile_Acid()
 
 maptile * tile_Bed()
 {
-	return new maptile("Bed", "bed", BED_TILE, TCODColor::darkRed, TCODColor::darkerGrey);
+	return new maptile("Bed", "bed", BED_TILE, TCODColor::darkRed, DARK_STONE_COLOR);
 }
 
 maptile * tile_Terminal()
 {
-	return new maptile("Terminal", "terminal", TERMINAL_TILE, TCODColor::darkGreen, TCODColor::darkerGrey);
+	return new maptile("Terminal", "terminal", TERMINAL_TILE, TCODColor::green, DARK_STONE_COLOR);
 }
 
 /*
@@ -223,6 +231,16 @@ maptile * tile_WyrdDoor()
 	maptile* door = new maptile("Wyrd Door", "wyrd_door", BASIC_DOOR_TILE, TCODColor::sepia, TCODColor::darkSepia,
 		false, false);
 	door->unlockCode = "wyrd_door";
+	door->isDoor = true;
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	return door;
+}
+
+maptile * tile_GreenChapelGardenDoor()
+{
+	maptile* door = new maptile("Green Chapel Garden Door", "green_chapel_door", BASIC_DOOR_TILE, TCODColor::lightSepia, TCODColor::darkSepia,
+		false, false);
+	door->unlockCode = "green_chapel_door";
 	door->isDoor = true;
 	door->addTouchEffect(CHECK_FOR_UNLOCK);
 	return door;

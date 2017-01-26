@@ -9,6 +9,19 @@
 #include "categories.h"
 #include "utility.h"
 
+//	Colour constants
+
+
+#define LIGHT_GRASS_COLOR TCODColor(46, 58, 20)
+#define DARK_GRASS_COLOR TCODColor(40, 53, 13)
+
+#define LIGHT_WATER_COLOR TCODColor(16, 42, 96)
+#define DARK_WATER_COLOR TCODColor(14, 37, 87)
+#define DARKEST_WATER_COLOR TCODColor(13, 34, 78)
+
+#define LIGHT_STONE_COLOR TCODColor(57, 57, 57)
+#define DARK_STONE_COLOR TCODColor(23, 23, 23)
+
 class maptile
 {
 public:
@@ -74,7 +87,9 @@ private:
 
 typedef std::vector<maptile*> tileVector;
 
-//	Constants
+//	Tiles
+
+
 
 maptile* tile_Floor();	//"floor_stone"
 maptile* tile_MossyFloor(); //"floor_mossy_stone"
@@ -111,6 +126,7 @@ maptile* tile_WretchedDoor(); //"wretched_door"
 maptile* tile_CrowDoor(); //"crow_door"
 maptile* tile_RuinedTownshipHallDoor(); //"township_door"
 maptile* tile_WyrdDoor(); //"wyrd_door"
+maptile* tile_GreenChapelGardenDoor(); //"green_chapel_door"
 
 const tileVector ALL_MAPTILES = {	
 	tile_Floor(), tile_MossyFloor(), tile_Sand(), tile_Grass(), tile_Road(),
@@ -122,7 +138,7 @@ const tileVector ALL_MAPTILES = {
 	tile_StatueOfRest(), tile_VoidWarpstone(),
 	//Special locked doors
 	tile_WretchedDoor(), tile_CrowDoor(), tile_RuinedTownshipHallDoor(),
-	tile_WyrdDoor()
+	tile_WyrdDoor(), tile_GreenChapelGardenDoor()
 };
 
 #endif

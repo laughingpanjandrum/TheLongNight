@@ -1,5 +1,5 @@
 Ruined Township
-start:0,20
+start:20,20
 guardian_golem:23,32
 -items
 void_sigil:30,19

@@ -619,11 +619,14 @@ Returns what to draw at the given point.
 */
 drawData game::getDrawData(int x, int y)
 {
+	
 	//Basic data comes from the map tile
 	maptile* m = currentMap->getTile(x, y);
 	drawData toDraw(m->getTileCode(), m->getColor(), m->getBgColor());
+	
 	//If this point isn't visible, don't draw it!
 	if (!currentMap->isPointInFOV(x, y)) {
+		
 		//What to draw if out of FOV
 		if (currentMap->inMemoryMap(x, y)) {
 			toDraw.color = win.mixColors(toDraw.color, TCODColor::black, 0.9);
@@ -634,16 +637,21 @@ drawData game::getDrawData(int x, int y)
 			toDraw.color = TCODColor::black;
 			toDraw.bgcolor = TCODColor::black;
 		}
+	
 	}
 	else {
+		
 		//If we can see it, add it to the memory map
 		currentMap->addToMemoryMap(x, y);
+		
 		//Is there a player here?
 		person* p = currentMap->getPerson(x, y);
+		
 		if (p != nullptr) {
 			toDraw.tileCode = p->getTileCode();
 			toDraw.color = p->getColor();
 		}
+		
 		else {
 			//Is there an item here?
 			item* it = currentMap->getItem(x, y);
@@ -652,23 +660,30 @@ drawData game::getDrawData(int x, int y)
 				toDraw.color = it->getColor();
 			}
 		}
+		
 		//Allow animations to adjust draw data
 		toDraw = getAnimationDataOverride(&toDraw, x, y);
+		
 		//Darken tiles that are further away
 		int distance = hypot(x - player->getx(), y - player->gety());
-		float modifier = distance * 0.07;
+		float modifier = 1.0 - distance * 0.07;
 		if (modifier > 0.85)
 			modifier = 0.85;
 		else if (modifier < 0.1)
 			modifier = 0.1;
-		toDraw.color = win.mixColors(toDraw.color, TCODColor::black, modifier);
-		toDraw.bgcolor = win.mixColors(toDraw.bgcolor, TCODColor::black, modifier);
+		toDraw.color.scaleHSV(1.0, modifier);
+		toDraw.bgcolor.scaleHSV(1.0, modifier);
+		//toDraw.color = win.mixColors(toDraw.color, TCODColor::black, modifier);
+		//toDraw.bgcolor = win.mixColors(toDraw.bgcolor, TCODColor::black, modifier);
+	
 	}
+
 	//Highlight cursor position
 	if (targetModeOn && x == targetPt.first && y == targetPt.second)
 		toDraw.bgcolor = TCODColor::pink;
 	//Done! Return it all
 	return toDraw;
+
 }
 
 /*
@@ -1807,6 +1822,7 @@ Warp between warp stones.
 */
 void game::setupWarpMenu()
 {
+	
 	//Add our current warp point, if it's not in there already
 	savePoint currentPt(currentMap, coord(player->getx(), player->gety()));
 	addWarpPoint(currentPt);
@@ -1815,31 +1831,37 @@ void game::setupWarpMenu()
 		addMessage("This mysterious stone does not respond to your presence.", TCODColor::white);
 		return;
 	}
+	
 	//Menu of known save points
 	menu* warpMenu = new menu("WARP STONES DISCOVERED");
 	for (auto warpPt : warpPoints) {
 		element* e = new element(warpPt.name, 0, TCODColor::white);
 		warpMenu->addElement(e);
 	}
+	
 	//Ready to rock
 	currentMenu = warpMenu;
 	setState(STATE_WARP);
 }
+
 
 /*
 Only adds it if it's not already in there
 */
 void game::addWarpPoint(savePoint pt)
 {
+	
 	//See if it's already in here
 	for (auto otherPt : warpPoints) {
-		if (otherPt == pt)
+		if (otherPt.name == currentMap->getName())
 			return;
 	}
+	
 	//ADD NEW ONE!
 	pt.name = currentMap->getName();
 	warpPoints.push_back(pt);
 }
+
 
 /*
 Actually warp us to a selected point
