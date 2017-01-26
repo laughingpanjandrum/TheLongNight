@@ -3,3 +3,9 @@ map:maps/old_fairweather.txt
 npc:utric
 spt:15,14
 !end
+
+!muiraToFairweather
+map:maps/old_fairweather.txt
+npc:muira
+spt:15,13
+!end

@@ -1,0 +1,16 @@
+"Oh?"
+|STORY_FLAG_SKIP
+muiraToFairweather
+[IN_FAIRWEATHER]
+"Well, a pilgrim... Where did you fall from?"
+"If you must know, I am on a quest! I set out to venture beyond the Green Chapel..."
+"But the road has been quite a bit more dangerous than I expected!"
+|STORY_FLAG
+muiraToFairweather
+"Perhaps we'll meet in the old village."
+|BACK_UP_AND_END
+[IN_FAIRWEATHER]
+"Well, well, hello!"
+"I am a Cleric of the Rose, of course, and I will be happy to teach you what prayers I know..."
+"But be careful! The lands beyond the Rose Court are no longer safe!"
+|SHOP

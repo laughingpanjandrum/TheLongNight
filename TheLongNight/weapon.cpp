@@ -294,10 +294,11 @@ weapon * chime_ClericsCrackedChime()
 	weapon* wp = new weapon("Cleric's Cracked Chime", CHIME_TILE, TCODColor::darkYellow,
 		"Ring this broken chime to politely ask favours of the gods.");
 	wp->setBasicAttributes(5, SPEED_SLOW);
-	wp->setSpellstoreSize(1);
+	wp->setSpellstoreSize(2);
 	wp->setDivinePower(100);
 	wp->makeOffhand();
 	wp->setSpecialAttack(ability_DivineFavour());
+	wp->addSpell(prayer_BlessedRadiance());
 	return wp;
 }
 
@@ -306,7 +307,7 @@ weapon * chime_WyrdBellbranch()
 	weapon* wp = new weapon("Wyrd Bellbranch", CHIME_TILE, TCODColor::sepia,
 		"The trees of the Wyrd once grew tiny singing bells on their branches.");
 	wp->setBasicAttributes(5, SPEED_SLOW);
-	wp->setSpellstoreSize(1);
+	wp->setSpellstoreSize(2);
 	wp->setDivinePower(100);
 	wp->setSpecialAttack(ability_WyrdChannel());
 	wp->makeOffhand();

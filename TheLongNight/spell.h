@@ -71,19 +71,26 @@ spell* ability_AcidInfusion();
 spell* ability_DivineFavour();
 spell* ability_WyrdChannel();
 
-//Arcane spells
+//	Arcane spells
 spell* spell_MagicMissile();
 spell* spell_ArcaneRadiance();
+//Utric, basic
 spell* spell_ArcaneBlade();
 spell* spell_GottricsArcaneProtection();
 spell* spell_Frostbolt();
+//Utric, with waterlogged writings
 spell* spell_AcidSpit();
 spell* spell_AcidBlade();
 spell* spell_AcidBurst();
 
-//Prayers
+//	Prayers
 spell* prayer_Restoration();
+//Sold by Gorem
 spell* prayer_WyrdChantOfStrength();
+//Muira, basic
+spell* prayer_RayOfLight();
+spell* prayer_BlessedRadiance();
+//Misc
 spell* prayer_ProfaneRadiance();
 
 //Monster abilities

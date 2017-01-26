@@ -189,6 +189,7 @@ std::string getEffectName(effect e)
 	case(RESTORE_HEALTH): return "health regain";
 	case(RESTORE_VIGOUR): return "vigour regain";
 	case(GAIN_FREE_MOVES): return "free moves";
+	case(GAIN_MAX_HEALTH): return "max health";
 	case(ADD_HEALTH_TRICKLE): return "health restore, 1/turn";
 	case(SCALE_NEXT_ATTACK): return "% damage next attack";
 	case(SCALE_NEXT_SPELL): return "% spell power for next spell";
@@ -208,6 +209,8 @@ std::string getEffectName(effect e)
 	case(APPLY_ELECTRIC_DAMAGE): return "electric damage";
 	case(APPLY_FIRE_DAMAGE): return "fire damage";
 	case(APPLY_MAGIC_DAMAGE): return "magic damage";
+	case(APPLY_BLESSED_DAMAGE): return "blessed damage";
+	case(APPLY_PROFANE_DAMAGE): return "profane damage";
 	case(KNOCKBACK_TARGET): return "knockback target";
 	case(PULL_CLOSER): return "pull target";
 	}

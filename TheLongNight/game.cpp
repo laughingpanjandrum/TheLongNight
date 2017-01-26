@@ -467,6 +467,11 @@ void game::doMonsterTurn(person * p)
 	//Likewise, if we're non-hostile, we don't do anything
 	if (!ai->isHostile)
 		return;
+	//If we're blind, we skip our turn
+	if (ai->isBlind()) {
+		turns.addEntity(ai, SPEED_NORMAL);
+		return;
+	}
 	//Do we have a target?
 	person* target = ai->getTarget();
 	if (target == nullptr)
@@ -993,7 +998,11 @@ void game::drawTargetInfo(person * target, int atx, int aty)
 		//Bleed building up but not proc'd
 		counter* bleed = target->getSpecialEffectBuildup(EFFECT_BLEED);
 		if (bleed->getValue() > 0)
-			win.write(atx + 1, ++aty, "BLEED:" + bleed->getAsString(), TCODColor::crimson);
+			win.write(atx + 1, ++aty, "Bleed buildup" + bleed->getAsString(), TCODColor::crimson);
+	}
+	//Blinding
+	if (target->isBlind()) {
+		win.write(atx + 1, ++aty, "Blinded (" + std::to_string(target->getBlindnessDuration()) + ")", TCODColor::lightestYellow);
 	}
 	//Text description
 	win.writeWrapped(atx, ++aty, 20, target->description, TCODColor::lightGrey);

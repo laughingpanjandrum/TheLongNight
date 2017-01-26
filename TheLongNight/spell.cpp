@@ -295,6 +295,31 @@ spell * prayer_WyrdChantOfStrength()
 	return sp;
 }
 
+spell * prayer_RayOfLight()
+{
+	spell* sp = new spell("Ray of Light", SPELL_TILE, TCODColor::lightYellow,
+		"Fires a ray of blessed energy.");
+	sp->setAttackType(ATTACK_RANGE);
+	sp->setAttackRange(8);
+	sp->addEffect(APPLY_BLESSED_DAMAGE, 25);
+	sp->setVigourCost(1);
+	sp->usesDivinePower = true;
+	return sp;
+}
+
+spell * prayer_BlessedRadiance()
+{
+	spell* sp = new spell("Blessed Radiance", SPELL_TILE, TCODColor::lighterYellow,
+		"Blind nearby creatures with holy radiance.");
+	sp->setAttackType(ATTACK_AOE);
+	sp->setAttackRange(3);
+	sp->addEffect(APPLY_BLESSED_DAMAGE, 20);
+	sp->addEffect(APPLY_BLINDING, 2);
+	sp->setVigourCost(2);
+	sp->usesDivinePower = true;
+	return sp;
+}
+
 spell * prayer_ProfaneRadiance()
 {
 	spell* sp = new spell("Profane Radiance", SPELL_TILE, TCODColor::purple,

@@ -96,6 +96,9 @@ public:
 	counter* getSpecialEffectBuildup(statusEffects eff);
 	int getBleedDuration() { return isBleeding; }
 	void clearBleed() { bleedBuildup.clear(); }
+	void blind(int duration) { blinding += duration; }
+	bool isBlind() { return blinding; }
+	int getBlindnessDuration() { return blinding; }
 
 	//Permanent buffs
 	bool canAddBuff(buff* b);
@@ -191,6 +194,7 @@ protected:
 	//Status effects
 	int isBleeding = 0;
 	counter bleedBuildup;
+	int blinding = 0;
 
 	//Buffs
 	buffVector buffs;

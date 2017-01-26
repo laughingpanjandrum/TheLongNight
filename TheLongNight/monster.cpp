@@ -479,6 +479,21 @@ monster * npc_UtricTheRat()
 	return m;
 }
 
+monster * npc_MuiraClericOfTheRose()
+{
+	monster* m = new monster("Muira, Cleric of the Rose", PLAYER_TILE, TCODColor::darkPink,
+		"A narrow-faced woman dressed in stained red robes.");
+	m->setHealth(120);
+	m->isHostile = false;
+	m->isShopkeeper = true;
+	//Starting stock
+	m->addItemToStock(prayer_RayOfLight(), 25);
+	m->addItemToStock(prayer_BlessedRadiance(), 50);
+	//Dialogue
+	m->loadDialogue("dialogue/muira_chat.txt");
+	return m;
+}
+
 /*
 This giant nightmare is how monsters are defined in map files.
 */
@@ -532,6 +547,8 @@ monster * getMonsterByHandle(std::string handle)
 		return npc_Gorem();
 	else if (handle == "utric")
 		return npc_UtricTheRat();
+	else if (handle == "muira")
+		return npc_MuiraClericOfTheRose();
 
 	//LET'S HOPE WE NEVER GET HERE!
 	return nullptr;

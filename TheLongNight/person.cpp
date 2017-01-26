@@ -339,6 +339,9 @@ void person::applyEffect(effect eff, int potency)
 
 	else if (eff == APPLY_BLEED_DAMAGE)
 		takeStatusEffectDamage(EFFECT_BLEED, potency);
+	else if (eff == APPLY_BLINDING)
+		blind(potency);
+
 }
 
 
@@ -719,6 +722,9 @@ void person::applyStatusEffects()
 		isBleeding--;
 		takeDamage(25);
 	}
+	//Blinding: just ticks down
+	if (blinding)
+		blinding--;
 }
 
 /*
