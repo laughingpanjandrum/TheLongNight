@@ -1076,6 +1076,13 @@ void game::drawWeaponInfo(weapon * it, int atx, int aty)
 			win.write(atx + offset, aty, '+' + std::to_string(dmg), TCODColor::white);
 		}
 	}
+	//Status effects
+	for (int idx = 0; idx < it->getStatusEffectCount(); idx++) {
+		statusEffects sType = it->getStatusEffectType(idx);
+		int sdmg = it->getStatusEffectDamage(idx);
+		win.write(atx + offset, ++aty, std::to_string(sdmg), TCODColor::white);
+		win.write(atx + 1, aty, getStatusEffectName(sType), getStatusEffectColor(sType));
+	}
 	//Scaling
 	win.write(atx, ++aty, "SCALING:", TCODColor::red);
 	std::string scaling = "";

@@ -3,7 +3,6 @@ start:0,23
 forlorn_crow_knight:15,25
 utric:29,24
 -items
-crow_half_sword:16,30
 -enditems
 -codes
 . floor_grass

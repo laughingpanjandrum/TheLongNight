@@ -153,6 +153,26 @@ TCODColor getDamageTypeColor(damageType dtype)
 	return TCODColor::white;
 }
 
+std::string getStatusEffectName(statusEffects stype)
+{
+	switch (stype) {
+	case(EFFECT_BLEED): return "Bleed";
+	case(EFFECT_POISON): return "Poison";
+	case(EFFECT_PLAGUE): return "Plague";
+	}
+	return "Unknown";
+}
+
+TCODColor getStatusEffectColor(statusEffects stype)
+{
+	switch (stype) {
+	case(EFFECT_BLEED): return TCODColor::crimson;
+	case(EFFECT_POISON): return TCODColor::lime;
+	case(EFFECT_PLAGUE): return TCODColor::amber;
+	}
+	return TCODColor::white;
+}
+
 /*
 Names of effects.
 */
