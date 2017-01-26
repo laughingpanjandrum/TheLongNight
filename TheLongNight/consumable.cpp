@@ -82,3 +82,11 @@ consumable * ranged_PyromancersFlask()
 	c->add(3);
 	return c;
 }
+
+consumable * oil_PyromancersOil()
+{
+	consumable* c = new consumable("Pyromancer's Oil", VIAL_TILE, TCODColor::darkFlame,
+		"If properly treated, pyromancer's oil can be convinced to burn rather than explode.");
+	c->setWeaponBuff(new weaponBuff(DAMAGE_FIRE, 25));
+	return c;
+}

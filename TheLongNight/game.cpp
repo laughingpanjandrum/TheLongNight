@@ -1365,6 +1365,12 @@ void game::useConsumable()
 				//We're basically casting a SPELL here
 				doRangedSpell(toUse->getRangedAttack());
 			}
+			else if (toUse->getWeaponBuff() != nullptr) {
+				//Buffs a weapon
+				weapon* wp = player->getWeapon();
+				if (wp != nullptr)
+					wp->setBuff(*toUse->getWeaponBuff());
+			}
 			else {
 				//All effects are applied to PERSON
 				for (auto eff : toUse->getEffects()) {

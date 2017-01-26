@@ -52,6 +52,10 @@ item * getItemByHandle(std::string handle)
 	else if (handle == "tiny_red_flower")
 		return consumable_TinyRedFlower();
 
+	//OILS
+	else if (handle == "pyromancers_oil")
+		return oil_PyromancersOil();
+
 	//RANGED WEAPONS
 	else if (handle == "throwing_knives")
 		return ranged_ThrowingKnives();

@@ -4,6 +4,7 @@ crow_thief:9,22
 crow_archer:6,22
 crow_archer:9,26
 skinless_knight:31,13
+muira:21,14
 -items
 pyromancers_flask:32,21
 -enditems
