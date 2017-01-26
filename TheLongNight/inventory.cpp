@@ -236,6 +236,7 @@ item * inventory::getEquipped(itemTypes category)
 	case(ITEM_OFFHAND): return getOffhand();
 	case(ITEM_BODY_ARMOUR): return getArmour();
 	case(ITEM_HELMET): return getHelmet();
+	case(ITEM_CHARM): return getCharm();
 	}
 	return nullptr;
 }

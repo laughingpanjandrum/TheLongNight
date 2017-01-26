@@ -288,7 +288,7 @@ void person::applyEffect(effect eff, int potency)
 	else if (eff == ADD_HEALTH_TRICKLE)
 		healthTrickle += potency;
 	else if (eff = GAIN_MAX_HEALTH)
-		health.increaseMaxValue(potency, false);
+		health.increaseMaxValue(potency, true);
 
 	//Defensive buffs
 
@@ -506,6 +506,19 @@ void person::equipItem(item * which)
 		
 		}
 
+		if (cat == ITEM_CHARM) {
+
+			charm* c = static_cast<charm*>(which);
+
+			//Special effects from charms
+			for (int i = 0; i < c->getAllEffects().size(); i++) {
+				effect eType = c->getAllEffects().at(i);
+				int potency = c->getAllPotencies().at(i);
+				applyEffect(eType, potency);
+			}
+
+		}
+
 	}
 	else {
 
@@ -554,6 +567,16 @@ void person::unequipItem(item * which)
 				removeSpellKnown(wp->getSpecialAttack());
 			for (auto sp : wp->getSpells())
 				removeSpellKnown(sp);
+		}
+
+		if (cat == ITEM_CHARM) {
+			charm* c = static_cast<charm*>(which);
+			//Special effects from charms
+			for (int i = 0; i < c->getAllEffects().size(); i++) {
+				effect eType = c->getAllEffects().at(i);
+				int potency = c->getAllPotencies().at(i);
+				applyEffect(eType, -potency);
+			}
 		}
 
 		//Lose damage resistances
@@ -650,6 +673,7 @@ bool person::hasItemEquipped(item * it)
 	case(ITEM_OFFHAND): return it == getOffhand();
 	case(ITEM_BODY_ARMOUR): return it == getArmour();
 	case(ITEM_HELMET): return it == getHelmet();
+	case(ITEM_CHARM): return it == getCharm();
 	case(ITEM_SPELL): return items.isSpellEquipped(static_cast<spell*>(it));
 	case(ITEM_CONSUMABLE): return items.isConsumableEquipped(static_cast<consumable*>(it));
 	}
