@@ -19,6 +19,7 @@ D water_deep
 ? statue
 -endcodes
 -connections
+north:darkwater_forest_2
 south:pilgrims_road_2
 east:pilgrims_road_4
 west:old_fairweather

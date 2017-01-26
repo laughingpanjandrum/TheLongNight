@@ -12,8 +12,9 @@
 //	Colour constants
 
 
-#define LIGHT_GRASS_COLOR TCODColor(46, 58, 20)
-#define DARK_GRASS_COLOR TCODColor(40, 53, 13)
+#define LIGHT_GRASS_COLOR TCODColor(68, 87, 30)
+#define DARK_GRASS_COLOR TCODColor(46, 58, 20)
+#define DARKEST_GRASS_COLOR TCODColor(40, 53, 13)
 
 #define LIGHT_WATER_COLOR TCODColor(16, 42, 96)
 #define DARK_WATER_COLOR TCODColor(14, 37, 87)

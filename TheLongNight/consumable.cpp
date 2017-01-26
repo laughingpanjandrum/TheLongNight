@@ -73,3 +73,12 @@ consumable * ranged_CorrodingJar()
 	c->add(3);
 	return c;
 }
+
+consumable * ranged_PyromancersFlask()
+{
+	consumable* c = new consumable("Pyromancer's Flask", VIAL_TILE, TCODColor::flame,
+		"A jar of volatile oil, ready to burst into flame on contact.");
+	c->setRangedAttack(new spell(5, 5, APPLY_FIRE_DAMAGE, 20));
+	c->add(3);
+	return c;
+}

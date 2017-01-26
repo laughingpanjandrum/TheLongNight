@@ -263,6 +263,85 @@ void person::removeBuff(buff* b)
 }
 
 
+/*
+	Effects
+*/
+void person::applyEffect(effect eff, int potency)
+{
+	//Restoratives
+
+	if (eff == FULL_RESTORE)
+		fullRestore();
+	else if (eff == RESTORE_HEALTH)
+		addHealth(potency);
+	else if (eff == RESTORE_VIGOUR)
+		addVigour(potency);
+
+	//Buffs
+
+	else if (eff == GAIN_FREE_MOVES)
+		gainFreeMoves(potency);
+	else if (eff == GAIN_MULTIPLE_ATTACKS)
+		attacksPerHit = potency;
+	else if (eff == SCALE_NEXT_ATTACK)
+		scaleNextAttack = potency;
+	else if (eff == ADD_HEALTH_TRICKLE)
+		healthTrickle += potency;
+	else if (eff = GAIN_MAX_HEALTH)
+		health.increaseMaxValue(potency, false);
+
+	//Defensive buffs
+
+	else if (eff == GAIN_DEFENCE)
+		addDefence(potency);
+	else if (eff == GAIN_ACID_RESIST)
+		addDamageResist(DAMAGE_ACID, potency);
+	else if (eff == GAIN_COLD_RESIST)
+		addDamageResist(DAMAGE_COLD, potency);
+	else if (eff == GAIN_ELECTRIC_RESIST)
+		addDamageResist(DAMAGE_ELECTRIC, potency);
+	else if (eff == GAIN_FIRE_RESIST)
+		addDamageResist(DAMAGE_FIRE, potency);
+	else if (eff == GAIN_MAGIC_RESIST)
+		addDamageResist(DAMAGE_MAGIC, potency);
+	else if (eff == REMOVE_BLEED)
+		clearBleed();
+
+	//Spell buffs
+
+	else if (eff == SCALE_NEXT_SPELL)
+		scaleNextSpell = potency;
+	else if (eff == SCALE_NEXT_PRAYER)
+		scaleNextPrayer = potency;
+	else if (eff == SPELL_ACID_INFUSION)
+		spellAcidInfusion = potency;
+
+	//Damage effects
+
+	else if (eff == APPLY_PHYSICAL_DAMAGE)
+		takeDamage(potency, DAMAGE_PHYSICAL);
+	else if (eff == APPLY_MAGIC_DAMAGE)
+		takeDamage(potency, DAMAGE_MAGIC);
+	else if (eff == APPLY_ACID_DAMAGE)
+		takeDamage(potency, DAMAGE_ACID);
+	else if (eff == APPLY_COLD_DAMAGE)
+		takeDamage(potency, DAMAGE_COLD);
+	else if (eff == APPLY_FIRE_DAMAGE)
+		takeDamage(potency, DAMAGE_FIRE);
+	else if (eff == APPLY_ELECTRIC_DAMAGE)
+		takeDamage(potency, DAMAGE_ELECTRIC);
+	else if (eff == APPLY_PROFANE_DAMAGE)
+		takeDamage(potency, DAMAGE_PROFANE);
+	else if (eff == APPLY_BLESSED_DAMAGE)
+		takeDamage(potency, DAMAGE_BLESSED);
+
+	// Status effects
+
+	else if (eff == APPLY_BLEED_DAMAGE)
+		takeStatusEffectDamage(EFFECT_BLEED, potency);
+}
+
+
 
 /*
 	MAGIC
@@ -475,22 +554,18 @@ void person::unequipItem(item * which)
 				removeSpellKnown(wp->getSpecialAttack());
 			for (auto sp : wp->getSpells())
 				removeSpellKnown(sp);
-			//Remove resistances
-			bleedBuildup.increaseMaxValue(-wp->getBleedResist(), false);
 		}
 
-		else if (cat == ITEM_BODY_ARMOUR || cat == ITEM_HELMET) {
-			armour* ar = static_cast<armour*>(which); 
-			//Damage resistances
-			for (int r = 0; r != ALL_DAMAGE_TYPES; r++) {
-				damageType dr = static_cast<damageType>(r);
-				addDamageResist(dr, -ar->getDamageResist(dr));
-			}
-			//Lose status effect resistances
-			int bleedResist = ar->getBleedResist();
-			if (bleedResist)
-				bleedBuildup.increaseMaxValue(-bleedResist, false);
+		//Lose damage resistances
+		for (int r = 0; r != ALL_DAMAGE_TYPES; r++) {
+			damageType dr = static_cast<damageType>(r);
+			addDamageResist(dr, -which->getDamageResist(dr));
 		}
+
+		//Lose status effect resistances
+		int bleedResist = which->getBleedResist();
+		if (bleedResist)
+			bleedBuildup.increaseMaxValue(-bleedResist, false);
 
 	}
 }

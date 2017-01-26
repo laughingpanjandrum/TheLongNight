@@ -105,6 +105,9 @@ public:
 	void clearBuffs() { buffs.clear(); }
 	buffVector getAllBuffs() { return buffs; }
 
+	//Effects
+	void applyEffect(effect eff, int potency);
+
 	//Buffing attacks
 	void clearFreeMoves() { freeMoves = 0; }
 	void gainFreeMoves(int f) { freeMoves += f; }

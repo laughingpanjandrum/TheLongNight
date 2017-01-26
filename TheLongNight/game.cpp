@@ -1443,74 +1443,9 @@ void game::applyEffectToPerson(person * target, effect eff, int potency, person*
 	else if (eff == DO_WARP && target->isPlayer)
 		setupWarpMenu();
 
-	//Restoratives
-
-	else if (eff == FULL_RESTORE)
-		target->fullRestore();
-	else if (eff == RESTORE_HEALTH)
-		target->addHealth(potency);
-	else if (eff == RESTORE_VIGOUR)
-		target->addVigour(potency);
-
-	//Buffs
-
-	else if (eff == GAIN_FREE_MOVES)
-		target->gainFreeMoves(potency);
-	else if (eff == GAIN_MULTIPLE_ATTACKS)
-		target->attacksPerHit = potency;
-	else if (eff == SCALE_NEXT_ATTACK)
-		target->scaleNextAttack = potency;
-	else if (eff == ADD_HEALTH_TRICKLE)
-		target->healthTrickle += potency;
-
-	//Defensive buffs
-
-	else if (eff == GAIN_DEFENCE)
-		target->addDefence(potency);
-	else if (eff == GAIN_ACID_RESIST)
-		target->addDamageResist(DAMAGE_ACID, potency);
-	else if (eff == GAIN_COLD_RESIST)
-		target->addDamageResist(DAMAGE_COLD, potency);
-	else if (eff == GAIN_ELECTRIC_RESIST)
-		target->addDamageResist(DAMAGE_ELECTRIC, potency);
-	else if (eff == GAIN_FIRE_RESIST)
-		target->addDamageResist(DAMAGE_FIRE, potency);
-	else if (eff == GAIN_MAGIC_RESIST)
-		target->addDamageResist(DAMAGE_MAGIC, potency);
-	else if (eff == REMOVE_BLEED)
-		target->clearBleed();
-
-	//Spell buffs
-
-	else if (eff == SCALE_NEXT_SPELL)
-		target->scaleNextSpell = potency;
-	else if (eff == SCALE_NEXT_PRAYER)
-		target->scaleNextPrayer = potency;
-	else if (eff == SPELL_ACID_INFUSION)
-		target->spellAcidInfusion = potency;
-
-	//Damage effects
-
+	//Special spell effect
 	else if (eff == CASTER_MELEE_ATTACK)
 		meleeAttack(caster, target);
-	else if (eff == APPLY_PHYSICAL_DAMAGE)
-		target->takeDamage(potency, DAMAGE_PHYSICAL);
-	else if (eff == APPLY_MAGIC_DAMAGE)
-		target->takeDamage(potency, DAMAGE_MAGIC);
-	else if (eff == APPLY_ACID_DAMAGE)
-		target->takeDamage(potency, DAMAGE_ACID);
-	else if (eff == APPLY_COLD_DAMAGE)
-		target->takeDamage(potency, DAMAGE_COLD);
-	else if (eff == APPLY_FIRE_DAMAGE)
-		target->takeDamage(potency, DAMAGE_FIRE);
-	else if (eff == APPLY_ELECTRIC_DAMAGE)
-		target->takeDamage(potency, DAMAGE_ELECTRIC);
-	else if (eff == APPLY_PROFANE_DAMAGE)
-		target->takeDamage(potency, DAMAGE_PROFANE);
-	else if (eff == APPLY_BLESSED_DAMAGE)
-		target->takeDamage(potency, DAMAGE_BLESSED);
-	else if (eff == APPLY_BLEED_DAMAGE)
-		target->takeStatusEffectDamage(EFFECT_BLEED, potency);
 
 	//Special effects, other
 	else if (eff == KNOCKBACK_TARGET)
@@ -1519,6 +1454,10 @@ void game::applyEffectToPerson(person * target, effect eff, int potency, person*
 		pullTarget(caster, target, potency);
 	else if (eff == TELEPORT_VIA_WATER)
 		waterWarp(target, potency);
+
+	//Some effect that the person should take care of
+	else
+		target->applyEffect(eff, potency);
 
 }
 
@@ -1868,6 +1807,7 @@ Actually warp us to a selected point
 */
 void game::doWarp(std::string warpPointName)
 {
+
 	//Find warp point matching the given name
 	savePoint* warp = nullptr;
 	for (auto warpPt : warpPoints) {
@@ -1876,11 +1816,13 @@ void game::doWarp(std::string warpPointName)
 			break;
 		}
 	}
+
 	//Make sure we actually got one
 	if (warp != nullptr) {
 		restoreFromSavePoint(warp);
 		menuBackOut();
 	}
+
 }
 
 

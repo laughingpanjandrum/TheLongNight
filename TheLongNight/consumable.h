@@ -64,5 +64,6 @@ consumable* consumable_TinyRedFlower();
 consumable* ranged_ThrowingKnives();
 consumable* ranged_LaceratingKnives();
 consumable* ranged_CorrodingJar();
+consumable* ranged_PyromancersFlask();
 
 #endif
