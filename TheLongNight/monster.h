@@ -30,6 +30,7 @@ public:
 	void setHealth(int hp);
 	void setSpellPower(int power) { baseSpellPower = power; }
 	void setDivinePower(int power) { baseDivinePower = power; }
+	void makeProfane() { profane = true; }
 
 	//Setting/getting behaviours
 	bool keepsDistance = false;
@@ -126,6 +127,7 @@ monster* monster_FishbornGoddess();
 
 //Darkwater Forest
 monster* monster_GiantRat();
+monster* monster_ProfaneRatPriest();
 
 //Friendly NPCs
 monster* npc_Gorem();

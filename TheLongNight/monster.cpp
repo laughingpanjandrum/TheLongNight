@@ -414,6 +414,7 @@ monster * monster_SkinlessKnight()
 	m->setMeleeStats(50, SPEED_NORMAL);
 	m->addSpellKnown(prayer_ProfaneRadiance());
 	m->setSpellCastChance(15);
+	m->makeProfane();
 	return m;
 }
 
@@ -449,6 +450,24 @@ monster * monster_GiantRat()
 	m->setPoisonResist(1000);
 	m->setMoveStats(SPEED_FAST);
 	m->equipItem(new weapon(5, SPEED_FAST, EFFECT_POISON, 5));
+	m->setFragmentsDropped(5);
+	return m;
+}
+
+monster * monster_ProfaneRatPriest()
+{
+	monster* m = new monster("Profane Rat Priest", RAT_TILE, TCODColor::lightestSepia,
+		"You can see a rat's snout protruding from beneath the cowl of this hooded figure.");
+	m->setHealth(100);
+	m->setPoisonResist(1000);
+	m->addDamageResist(DAMAGE_MAGIC, 50);
+	m->setMoveStats(SPEED_SLOW);
+	m->setMeleeStats(10, SPEED_SLOW);
+	m->addSpawnableCreature("giant_rat");
+	m->setSpawnChance(20);
+	m->keepsDistance = true;
+	m->makeProfane();
+	m->setFragmentsDropped(50);
 	return m;
 }
 
@@ -561,6 +580,8 @@ monster * getMonsterByHandle(std::string handle)
 	//Darkwater Forest
 	else if (handle == "giant_rat")
 		return monster_GiantRat();
+	else if (handle == "profane_rat_priest")
+		return monster_ProfaneRatPriest();
 
 	//Friendly NPCs
 	else if (handle == "gorem")

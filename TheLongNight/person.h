@@ -102,7 +102,7 @@ public:
 	void clearPoison() { poisonBuildup.clear(); }
 	//Blindness
 	void blind(int duration) { blinding += duration; }
-	bool isBlind() { return blinding; }
+	bool isBlind() { return blinding > 0; }
 	int getBlindnessDuration() { return blinding; }
 
 	//Permanent buffs

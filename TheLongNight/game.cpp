@@ -310,13 +310,15 @@ bool game::aiMoveToTarget(monster * ai)
 	person* t = ai->getTarget();
 	coord bestPt = pts.at(0);
 	int bestDist = hypot(bestPt.first - t->getx(), bestPt.second - t->gety());
+
 	//Look for the shortest distance (or the greatest distance, if we're the timid type)
 	for (int i = 1; i < pts.size(); i++) {
 		coord pt = pts.at(i);
 		int newDist = hypot(pt.first - t->getx(), pt.second - t->gety());
+
 		//Figure out what we want - to get closer or further away
 		bool cond;
-		if (ai->keepsDistance && !ai->hasFreeMoves())
+		if (ai->keepsDistance && !ai->hasFreeMoves() && randint(1, 3) == 1)
 			cond = newDist > bestDist;
 		else
 			cond = newDist < bestDist;
