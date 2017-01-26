@@ -55,6 +55,8 @@ item * getItemByHandle(std::string handle)
 	//OILS
 	else if (handle == "pyromancers_oil")
 		return oil_PyromancersOil();
+	else if (handle == "corrosive_oil")
+		return oil_CorrosiveOil();
 
 	//RANGED WEAPONS
 	else if (handle == "throwing_knives")
@@ -123,6 +125,8 @@ item * getItemByHandle(std::string handle)
 		return runestone_CorensRunestone();
 	else if (handle == "siltras_runestone")
 		return runestone_SiltrasRunestone();
+	else if (handle == "khalles_runestone")
+		return runestone_KhallesRunestone();
 	
 	//Uh oh, we didn't find anything!
 	return nullptr;

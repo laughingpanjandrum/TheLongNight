@@ -12,6 +12,7 @@ person::person(std::string name, int tileCode, TCODColor color, std::string desc
 	vigour.setTo(10);
 	//Status effects
 	bleedBuildup.setTo(20, 0);
+	poisonBuildup.setTo(20, 0);
 	//Resistances
 	for (int r = 0; r < ALL_DAMAGE_TYPES; r++)
 		damageResist.push_back(0);
@@ -179,6 +180,14 @@ void person::takeStatusEffectDamage(statusEffects eType, int damage)
 			isBleeding += 2;
 		}
 	}
+	else if (eType == EFFECT_POISON) {
+		poisonBuildup.increase(damage);
+		if (poisonBuildup.isFull()) {
+			//We are POISONED
+			poisonBuildup.clear();
+			isPoisoned += 1;
+		}
+	}
 }
 
 /*
@@ -191,7 +200,9 @@ void person::fullRestore()
 	vigour.restore();
 	//Remove status effects
 	bleedBuildup.clear();
+	poisonBuildup.clear();
 	isBleeding = 0;
+	isPoisoned = 0;
 	//Replenish items
 	restoreItemsToMax();
 }
@@ -213,6 +224,7 @@ counter* person::getSpecialEffectBuildup(statusEffects eff)
 {
 	switch (eff) {
 	case(EFFECT_BLEED): return &bleedBuildup;
+	case(EFFECT_POISON): return &poisonBuildup;
 	}
 	return new counter();
 }
@@ -721,6 +733,11 @@ void person::applyStatusEffects()
 	if (isBleeding) {
 		isBleeding--;
 		takeDamage(25);
+	}
+	//Poison: constant damage, never goes away on its own
+	poisonBuildup.decrease();
+	if (isPoisoned) {
+		takeDamage(isPoisoned);
 	}
 	//Blinding: just ticks down
 	if (blinding)

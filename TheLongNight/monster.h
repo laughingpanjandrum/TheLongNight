@@ -26,6 +26,7 @@ public:
 	void setMoveStats(int speed);
 	void setDefence(damageType dtype, int defence);
 	void setBleedResist(int br) { bleedBuildup.setMaxValue(br); }
+	void setPoisonResist(int pois) { poisonBuildup.setMaxValue(pois); }
 	void setHealth(int hp);
 	void setSpellPower(int power) { baseSpellPower = power; }
 	void setDivinePower(int power) { baseDivinePower = power; }
@@ -122,6 +123,9 @@ monster* monster_GuardianGolem();
 monster* monster_DegenerateFishman();
 monster* monster_SkinlessKnight();
 monster* monster_FishbornGoddess();
+
+//Darkwater Forest
+monster* monster_GiantRat();
 
 //Friendly NPCs
 monster* npc_Gorem();

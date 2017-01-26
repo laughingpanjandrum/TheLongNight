@@ -805,7 +805,7 @@ void game::drawInterface(int leftx, int topy)
 		win.write(atx, ++aty, "CHARGE!", TCODColor::yellow);
 	}
 	
-	//Status effects
+	//Status effects: BLEED
 	if (player->getBleedDuration()) {
 		win.write(atx, ++aty, "BLEEDING " + std::to_string(player->getBleedDuration()), TCODColor::crimson);
 	}
@@ -813,6 +813,16 @@ void game::drawInterface(int leftx, int topy)
 		auto bl = player->getSpecialEffectBuildup(EFFECT_BLEED);
 		if (bl->getValue() > 0)
 			win.drawCounter(*bl, "BLEED", atx, ++aty, TCODColor::crimson, TCODColor::darkGrey, 10);
+	}
+
+	//Status effects: POISON
+	if (player->getPoisonDuration()) {
+		win.write(atx, ++aty, "POISONED x" + std::to_string(player->getPoisonDuration()), TCODColor::lime);
+	}
+	else {
+		auto pois = player->getSpecialEffectBuildup(EFFECT_POISON);
+		if (pois->getValue() > 0)
+			win.drawCounter(*pois, "POISON", atx, ++aty, TCODColor::lime, TCODColor::darkGrey, 10);
 	}
 
 	//Draws whatever we have HIGHLIGHTED

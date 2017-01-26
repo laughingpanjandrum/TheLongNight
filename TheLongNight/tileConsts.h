@@ -32,6 +32,8 @@ const int THE_OLD_CROW_TILE = 264; //boss crow knight
 
 const int FISHMAN_TILE = 265;
 
+const int RAT_TILE = 114;
+
 const int GOREM_TILE = 266; //This is a golem-dude
 
 //Items

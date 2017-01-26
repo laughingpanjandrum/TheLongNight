@@ -72,5 +72,6 @@ consumable* ranged_CorrodingJar();
 consumable* ranged_PyromancersFlask();
 
 consumable* oil_PyromancersOil();
+consumable* oil_CorrosiveOil();
 
 #endif

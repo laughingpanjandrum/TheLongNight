@@ -91,11 +91,16 @@ public:
 	void fullRestore();
 	void die();
 
-	//Special damage types
+	//	Special damage types
 	void takeStatusEffectDamage(statusEffects eType, int damage);
 	counter* getSpecialEffectBuildup(statusEffects eff);
+	//Bleed
 	int getBleedDuration() { return isBleeding; }
 	void clearBleed() { bleedBuildup.clear(); }
+	//Poison
+	int getPoisonDuration() { return isPoisoned; }
+	void clearPoison() { poisonBuildup.clear(); }
+	//Blindness
 	void blind(int duration) { blinding += duration; }
 	bool isBlind() { return blinding; }
 	int getBlindnessDuration() { return blinding; }
@@ -194,6 +199,8 @@ protected:
 	//Status effects
 	int isBleeding = 0;
 	counter bleedBuildup;
+	int isPoisoned = 0;
+	counter poisonBuildup;
 	int blinding = 0;
 
 	//Buffs

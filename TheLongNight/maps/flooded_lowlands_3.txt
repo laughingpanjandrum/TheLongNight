@@ -4,6 +4,7 @@ skinless_knight:20,30
 fishborn_goddess:3,6
 -items
 fishmans_harpoon:31,37
+corrosive_oil:14,35
 -enditems
 -codes
 . floor_stone

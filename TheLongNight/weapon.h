@@ -14,8 +14,10 @@ class weapon : public item
 public:
 
 	//Item categories
-	weapon(): item() {}
+	weapon(): weapon("", 0, TCODColor::white, "") {}
 	weapon(std::string name, int tileCode, TCODColor color, std::string description);
+	//Just for monsters: creates a weapon that applies a status effect
+	weapon(int baseDamage, const int attackSpeed, statusEffects eType, int statusEffectDamage);
 	~weapon();
 
 	//Override

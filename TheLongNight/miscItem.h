@@ -55,6 +55,7 @@ miscItem* spellbook_WaterloggedWritings();
 //Runestones
 miscItem* runestone_CorensRunestone();
 miscItem* runestone_SiltrasRunestone();
+miscItem* runestone_KhallesRunestone();
 
 //Other
 miscItem* misc_VoidSigil();

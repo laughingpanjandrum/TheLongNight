@@ -12,6 +12,17 @@ weapon::weapon(std::string name, int tileCode, TCODColor color, std::string desc
 	}
 }
 
+
+/*
+Special constructor just for monsters: adds status effect damage
+*/
+weapon::weapon(int baseDamage, const int attackSpeed, statusEffects eType, int statusEffectDamage) :
+	weapon()
+{
+	setBasicAttributes(baseDamage, attackSpeed);
+	addStatusEffect(eType, statusEffectDamage);
+}
+
 weapon::~weapon()
 {
 }

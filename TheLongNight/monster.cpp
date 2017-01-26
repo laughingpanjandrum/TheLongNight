@@ -438,6 +438,22 @@ monster * monster_FishbornGoddess()
 
 
 /*
+	Darkwater Forest
+*/
+
+monster * monster_GiantRat()
+{
+	monster* m = new monster("Giant Rat", RAT_TILE, TCODColor::lightSepia,
+		"A dog-sized rat with venom dripping from its teeth.");
+	m->setHealth(25);
+	m->setPoisonResist(1000);
+	m->setMoveStats(SPEED_FAST);
+	m->equipItem(new weapon(5, SPEED_FAST, EFFECT_POISON, 5));
+	return m;
+}
+
+
+/*
 	FRIENDLIES
 */
 
@@ -541,6 +557,10 @@ monster * getMonsterByHandle(std::string handle)
 		return monster_SkinlessKnight();
 	else if (handle == "fishborn_goddess")
 		return monster_FishbornGoddess();
+
+	//Darkwater Forest
+	else if (handle == "giant_rat")
+		return monster_GiantRat();
 
 	//Friendly NPCs
 	else if (handle == "gorem")

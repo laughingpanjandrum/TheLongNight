@@ -87,6 +87,14 @@ consumable * oil_PyromancersOil()
 {
 	consumable* c = new consumable("Pyromancer's Oil", VIAL_TILE, TCODColor::darkFlame,
 		"If properly treated, pyromancer's oil can be convinced to burn rather than explode.");
-	c->setWeaponBuff(new weaponBuff(DAMAGE_FIRE, 25));
+	c->setWeaponBuff(new weaponBuff(DAMAGE_FIRE, 15));
+	return c;
+}
+
+consumable * oil_CorrosiveOil()
+{
+	consumable* c = new consumable("Corrosive Oil", VIAL_TILE, TCODColor::lime,
+		"Somehow, rather than corrode the blade, this oil coats targets in caustic acid.");
+	c->setWeaponBuff(new weaponBuff(DAMAGE_ACID, 15));
 	return c;
 }

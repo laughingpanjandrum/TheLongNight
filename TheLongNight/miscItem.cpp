@@ -104,6 +104,16 @@ is here, somewhere beneath the shifting waters.");
 	return r;
 }
 
+miscItem * runestone_KhallesRunestone()
+{
+	miscItem* r = new miscItem("Khalle's Runestone", RUNESTONE_TILE, TCODColor::darkYellow,
+		"Khalle's church prayed for the downfall of the void and was wholly swallowed as a consequence. This runestone is the \
+only remnant of her memory.");
+	r->isRunestone = true;
+	r->setRune(new weaponRune("Khalle's Runestone", "Divine", TCODColor::darkYellow, SCALE_DEV));
+	return r;
+}
+
 
 
 
