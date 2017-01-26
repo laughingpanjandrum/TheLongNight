@@ -1,5 +1,5 @@
 Darkwater Forest
-start:0,36
+start:0,14
 crow_thief:9,22
 crow_archer:6,22
 crow_archer:9,26

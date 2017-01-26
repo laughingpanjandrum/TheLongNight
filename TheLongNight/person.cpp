@@ -287,7 +287,7 @@ void person::applyEffect(effect eff, int potency)
 		scaleNextAttack = potency;
 	else if (eff == ADD_HEALTH_TRICKLE)
 		healthTrickle += potency;
-	else if (eff = GAIN_MAX_HEALTH)
+	else if (eff == GAIN_MAX_HEALTH)
 		health.increaseMaxValue(potency, true);
 
 	//Defensive buffs

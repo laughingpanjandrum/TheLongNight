@@ -2,6 +2,7 @@ Pilgrim's Road
 start:20,39
 the_old_crow:23,11
 -items
+khalles_headband:7,36
 -enditems
 -codes
 . floor_grass
