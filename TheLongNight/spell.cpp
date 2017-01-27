@@ -320,6 +320,17 @@ spell * prayer_BlessedRadiance()
 	return sp;
 }
 
+spell * prayer_RemovePoison()
+{
+	spell* sp = new spell("Remove Poison", SPELL_TILE, TCODColor::green,
+		"Cleanses the body of poison.");
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(REMOVE_POISON, 1);
+	sp->setVigourCost(1);
+	sp->usesDivinePower = true;
+	return sp;
+}
+
 spell * prayer_ProfaneRadiance()
 {
 	spell* sp = new spell("Profane Radiance", SPELL_TILE, TCODColor::purple,

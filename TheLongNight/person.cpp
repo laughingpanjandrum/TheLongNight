@@ -301,6 +301,8 @@ void person::applyEffect(effect eff, int potency)
 		healthTrickle += potency;
 	else if (eff == GAIN_MAX_HEALTH)
 		health.increaseMaxValue(potency, true);
+	else if (eff == CHANGE_FRAGMENT_PICKUP_MULT)
+		fragmentPickupMultiplier = potency;
 
 	//Defensive buffs
 

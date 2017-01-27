@@ -90,6 +90,7 @@ spell* prayer_WyrdChantOfStrength();
 //Muira, basic
 spell* prayer_RayOfLight();
 spell* prayer_BlessedRadiance();
+spell* prayer_RemovePoison();
 //Misc
 spell* prayer_ProfaneRadiance();
 

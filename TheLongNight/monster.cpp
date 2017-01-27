@@ -524,6 +524,7 @@ monster * npc_MuiraClericOfTheRose()
 	//Starting stock
 	m->addItemToStock(prayer_RayOfLight(), 25);
 	m->addItemToStock(prayer_BlessedRadiance(), 50);
+	m->addItemToStock(prayer_RemovePoison(), 25);
 	//Dialogue
 	m->loadDialogue("dialogue/muira_chat.txt");
 	return m;

@@ -35,3 +35,11 @@ charm * charm_KhallesHeadband()
 	c->addEffect(GAIN_MAX_HEALTH, 20);
 	return c;
 }
+
+charm * charm_IdolOfPash()
+{
+	charm* c = new charm("Idol of Pash", CHARM_TILE, TCODColor::lightAmber,
+		"A small statue depicting a gaping mouth. Increases fragments gained.");
+	c->addEffect(CHANGE_FRAGMENT_PICKUP_MULT, 2);
+	return c;
+}

@@ -440,6 +440,8 @@ void game::aiDoCombatAction(monster * ai)
 		while (!aiMoveToTarget(ai)) {}
 }
 
+
+
 /*
 AI tries to find something to kill.
 */
@@ -456,6 +458,8 @@ void game::aiFindTarget(monster * ai)
 		}
 	}
 }
+
+
 
 /*
 Monster does its turn and then is placed back into the turn tracker.
@@ -2096,7 +2100,8 @@ void game::getDeathDrops(monster * m)
 		pickUpItem(it);
 	}
 	//Fragments
-	fragments += m->getFragmentsDropped();
+	int amount = m->getFragmentsDropped() * player->getFragmentPickupMult();
+	fragments += amount;
 }
 
 

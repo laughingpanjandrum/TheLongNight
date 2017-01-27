@@ -103,6 +103,8 @@ item * getItemByHandle(std::string handle)
 		return charm_BloodstainedCharm();
 	else if (handle == "khalles_headband")
 		return charm_KhallesHeadband();
+	else if (handle == "idol_of_pash")
+		return charm_IdolOfPash();
 
 	//SPELLS
 	else if (handle == "magic_missile")

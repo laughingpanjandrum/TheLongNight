@@ -116,7 +116,7 @@ public:
 	//Effects
 	void applyEffect(effect eff, int potency);
 
-	//Buffing attacks
+	//Other buffs
 	void clearFreeMoves() { freeMoves = 0; }
 	void gainFreeMoves(int f) { freeMoves += f; }
 	bool hasFreeMoves() { return freeMoves > 0; }
@@ -124,6 +124,7 @@ public:
 	int scaleNextAttack = 0; //Percent damage bonus damage added to next attack
 	int attacksPerHit = 1; //Multiattack count, resets to 1 after use
 	int healthTrickle = 0; //We get 1 point of this per tick until it runs out
+	int getFragmentPickupMult() { return fragmentPickupMultiplier; }
 
 	//Spell buffs
 	int scaleNextSpell = 0; //Buff to next spell cast
@@ -206,6 +207,7 @@ protected:
 	//Buffs
 	buffVector buffs;
 	int freeMoves = 0; //While this is >0, our move delay is zero; this ticks down each time we move.
+	int fragmentPickupMultiplier = 1; //For PC only; increases number of fragments gained.
 
 	//Equipment
 	inventory items;
@@ -214,7 +216,7 @@ protected:
 	spellVector spellsKnown; //List of spells we have stored in our weapon/wand/etc
 	int selectedSpell = 0; //Highlighted spell
 	int baseSpellPower = 0; //Flat bonus to spell power
-	int baseDivinePower = 0;
+	int baseDivinePower = 0; //Flat bonus to divine power
 
 	//Current thing we're trying to kill
 	person* target;

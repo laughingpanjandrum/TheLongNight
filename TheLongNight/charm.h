@@ -34,5 +34,6 @@ private:
 //Defined items
 charm* charm_BloodstainedCharm();
 charm* charm_KhallesHeadband();
+charm* charm_IdolOfPash();
 
 #endif
