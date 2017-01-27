@@ -38,8 +38,16 @@ charm * charm_KhallesHeadband()
 
 charm * charm_IdolOfPash()
 {
-	charm* c = new charm("Idol of Pash", CHARM_TILE, TCODColor::lightAmber,
+	charm* c = new charm("Idol of Thirst", CHARM_TILE, TCODColor::lightAmber,
 		"A small statue depicting a gaping mouth. Increases fragments gained.");
 	c->addEffect(CHANGE_FRAGMENT_PICKUP_MULT, 2);
+	return c;
+}
+
+charm * charm_EvisceratingRing()
+{
+	charm* c = new charm("Eviscerating Ring", CHARM_TILE, TCODColor::darkRed,
+		"This ring depicts the thirsty face of Pash, who is constantly seeking victims to devour.");
+	c->addEffect(GAIN_HEALTH_ON_KILL, 15);
 	return c;
 }

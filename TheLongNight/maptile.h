@@ -88,6 +88,9 @@ private:
 
 typedef std::vector<maptile*> tileVector;
 
+
+
+
 //	Tiles
 
 
@@ -97,6 +100,7 @@ maptile* tile_MossyFloor(); //"floor_mossy_stone"
 maptile* tile_Sand(); //"floor_sand"
 maptile* tile_Grass(); //"floor_grass"
 maptile* tile_Road(); //"floor_road"
+maptile* tile_Void(); //"floor_void"
 
 maptile* tile_SandyRock(); //"wall_sand"
 maptile* tile_Wall(); //"wall_stone"
@@ -111,11 +115,16 @@ maptile* tile_Glass(); //"glass"
 maptile* tile_Bush(); //"bush"
 maptile* tile_Rosebush(); //"rosebush"
 maptile* tile_Tree(); //"tree"
+maptile* tile_VoidTree(); //"void_tree"
 
 maptile* tile_Water(); //"water"
 maptile* tile_MossyWater(); //"water_mossy"
 maptile* tile_DeepWater(); //"water_deep"
 maptile* tile_Acid(); //"acid"
+
+maptile* tile_Ooze(); //"ooze"
+maptile* tile_Bloodstain(); //"bloodstain"
+maptile* tile_Corpse(); //"corpse"
 
 maptile* tile_Bed(); //"bed"
 maptile* tile_Terminal(); //"terminal"
@@ -129,18 +138,21 @@ maptile* tile_CrowDoor(); //"crow_door"
 maptile* tile_RuinedTownshipHallDoor(); //"township_door"
 maptile* tile_WyrdDoor(); //"wyrd_door"
 maptile* tile_GreenChapelGardenDoor(); //"green_chapel_door"
+maptile* tile_SordidChapelDoor(); //"sordid door"
 
-const tileVector ALL_MAPTILES = {	
-	tile_Floor(), tile_MossyFloor(), tile_Sand(), tile_Grass(), tile_Road(),
+const tileVector ALL_MAPTILES = {
+	tile_Floor(), tile_MossyFloor(), tile_Sand(), tile_Grass(), tile_Road(), tile_Void(),
 	tile_Wall(), tile_WoodenWall(), tile_SandyRock(),
 	tile_Door(), tile_WoodenDoor(), tile_LockedDoor(), tile_DoorUnlocker(),
-	tile_Glass(), tile_Bush(), tile_Rosebush(), tile_Tree(),
+	tile_Glass(), tile_Bush(), tile_Rosebush(), tile_Tree(), tile_VoidTree(),
 	tile_Water(), tile_MossyWater(), tile_DeepWater(), tile_Acid(),
+	tile_Ooze(),
+	tile_Bloodstain(), tile_Corpse(),
 	tile_Bed(), tile_Terminal(),
 	tile_StatueOfRest(), tile_VoidWarpstone(),
 	//Special locked doors
 	tile_WretchedDoor(), tile_CrowDoor(), tile_RuinedTownshipHallDoor(),
-	tile_WyrdDoor(), tile_GreenChapelGardenDoor()
+	tile_WyrdDoor(), tile_GreenChapelGardenDoor(), tile_SordidChapelDoor()
 };
 
 #endif

@@ -66,6 +66,14 @@ maptile * tile_Road()
 	return new maptile("Road", "floor_road", BASIC_FLOOR_TILE, TCODColor::sepia, TCODColor::darkerSepia);
 }
 
+maptile * tile_Void()
+{
+	maptile* v = new maptile("Void", "floor_void", BASIC_FLOOR_TILE, TCODColor::darkestPurple, TCODColor::black);
+	v->addTouchEffect(APPLY_PROFANE_DAMAGE);
+	v->setPotency(50);
+	return v;
+}
+
 maptile * tile_SandyRock()
 {
 	return new maptile("Sandy Rock", "wall_sand", BASIC_WALL_TILE, TCODColor::darkAmber, TCODColor::amber, false, false);
@@ -132,6 +140,11 @@ maptile * tile_Tree()
 	return new maptile("Tree", "tree", TREE_TILE, TCODColor::lightSepia, DARK_GRASS_COLOR, false, false);
 }
 
+maptile * tile_VoidTree()
+{
+	return new maptile("Withered Void Tree", "void_tree", TREE_TILE, TCODColor::purple, DARK_STONE_COLOR, false, false);
+}
+
 maptile * tile_Water()
 {
 	maptile* m = new maptile("Water", "water", BASIC_WATER_TILE, LIGHT_WATER_COLOR, DARK_WATER_COLOR);
@@ -157,6 +170,24 @@ maptile * tile_Acid()
 	a->addTouchEffect(APPLY_PHYSICAL_DAMAGE);
 	a->setPotency(5);
 	return a;
+}
+
+maptile * tile_Ooze()
+{
+	maptile* o = new maptile("Ooze", "ooze", BASIC_WATER_TILE, TCODColor::lightSepia, TCODColor::darkSepia);
+	o->addTouchEffect(SLOWDOWN);
+	o->setPotency(1);
+	return o;
+}
+
+maptile * tile_Bloodstain()
+{
+	return new maptile("Bloodstain", "bloodstain", BASIC_FLOOR_TILE, TCODColor::darkCrimson, DARK_STONE_COLOR);
+}
+
+maptile * tile_Corpse()
+{
+	return new maptile("Corpse", "corpse", CORPSE_TILE, TCODColor::darkCrimson, DARK_STONE_COLOR);
 }
 
 maptile * tile_Bed()
@@ -243,10 +274,21 @@ maptile * tile_WyrdDoor()
 
 maptile * tile_GreenChapelGardenDoor()
 {
-	maptile* door = new maptile("Green Chapel Garden Door", "green_chapel_door", BASIC_DOOR_TILE, TCODColor::lightSepia, TCODColor::darkSepia,
+	maptile* door = new maptile("Green Chapel Garden Door", "green_chapel_door", BASIC_DOOR_TILE, 
+		TCODColor::lightSepia, TCODColor::darkSepia,
 		false, false);
 	door->unlockCode = "green_chapel_door";
 	door->isDoor = true;
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	return door;
+}
+
+maptile * tile_SordidChapelDoor()
+{
+	maptile* door = new maptile("Sordid Chapel Door", "sordid_door", BASIC_DOOR_TILE,
+		TCODColor::darkGrey, TCODColor::darkCrimson, false, false);
+	door->isDoor = true;
+	door->unlockCode = "sordid_door";
 	door->addTouchEffect(CHECK_FOR_UNLOCK);
 	return door;
 }

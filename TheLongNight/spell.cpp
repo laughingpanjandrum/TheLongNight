@@ -118,6 +118,17 @@ spell * attack_Fillet()
 	return sp;
 }
 
+spell * attack_DivineSmite()
+{
+	spell* sp = new spell("Divine Smite", HAMMER_TILE, TCODColor::darkYellow,
+		"Smite target with holy fury.");
+	sp->setAttackType(ATTACK_MELEE);
+	sp->setVigourCost(3);
+	sp->addEffect(APPLY_BLESSED_DAMAGE, 100);
+	sp->addEffect(APPLY_BLINDING, 1);
+	return sp;
+}
+
 //Wand/chime powers
 
 spell * ability_PowerSurge()
@@ -265,6 +276,18 @@ spell * spell_AcidBurst()
 	return sp;
 }
 
+spell * spell_SpitFire()
+{
+	spell* sp = new spell("Spit Fire", SPELL_TILE, TCODColor::flame,
+		"Discharge a stream of fire.");
+	sp->setAttackType(ATTACK_RANGE);
+	sp->setAttackRange(8);
+	sp->addEffect(APPLY_FIRE_DAMAGE, 20);
+	sp->setVigourCost(1);
+	sp->usesSpellPower = true;
+	return sp;
+}
+
 
 
 //Prayers
@@ -343,6 +366,18 @@ spell * prayer_ProfaneRadiance()
 	return sp;
 }
 
+spell * prayer_ProfaneRay()
+{
+	spell* sp = new spell("Profane Ray", SPELL_TILE, TCODColor::lightPurple,
+		"Fire a ray of profane energy, drawing upon the forbidden power of the Void.");
+	sp->setAttackType(ATTACK_RANGE);
+	sp->setAttackRange(8);
+	sp->setVigourCost(1);
+	sp->addEffect(APPLY_PROFANE_DAMAGE, 25);
+	sp->usesDivinePower = true;
+	return sp;
+}
+
 //Monster abilities
 
 
@@ -387,5 +422,21 @@ spell * ability_SinkBeneath()
 	spell* sp = new spell("Sink Beneath", SPELL_TILE, TCODColor::cyan);
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(TELEPORT_VIA_WATER, 5);
+	return sp;
+}
+
+spell * ability_DropOoze()
+{
+	spell* sp = new spell("Drop Ooze", SPELL_TILE, TCODColor::sepia);
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(DROP_OOZE, 1);
+	return sp;
+}
+
+spell * ability_ShadowWalk()
+{
+	spell* sp = new spell("Shadow Walk", SPELL_TILE, TCODColor::purple);
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(BECOME_INVISIBLE, 2);
 	return sp;
 }

@@ -67,6 +67,9 @@ private:
 	
 	window win;
 
+	//Constants
+	const static std::string VOID_EDGE_MAP;
+
 	//Character/state/etc
 	map* currentMap;
 	person* player;
@@ -183,6 +186,7 @@ private:
 	void knockbackTarget(person* knocker, person* target, int distance);
 	void pullTarget(person* puller, person* target, int distance);
 	bool waterWarp(person* target, int distance);
+	void teleportToVoid(); //Player only, special map jump!
 
 	//Boss fights
 	monster* currentBoss;

@@ -27,6 +27,9 @@ item * getItemByHandle(std::string handle)
 		return weapon_FishmansHarpoon();
 	else if (handle == "fishmans_knife")
 		return weapon_FishmansKnife();
+	//Crumbling City
+	else if (handle == "city_guardian_warhammer")
+		return weapon_CityGuardianWarhammer();
 
 	//SHIELDS
 	else if (handle == "battered_wooden_shield")
@@ -35,6 +38,8 @@ item * getItemByHandle(std::string handle)
 		return shield_WoodenWyrdShield();
 	else if (handle == "battered_steel_shield")
 		return shield_BatteredSteelShield();
+	else if (handle == "city_guardian_shield")
+		return shield_CityGuardianShield();
 
 	//WANDS/CHIMES
 	else if (handle == "driftwood_wand")
@@ -65,6 +70,8 @@ item * getItemByHandle(std::string handle)
 		return ranged_ThrowingKnives();
 	else if (handle == "lacerating_knives")
 		return ranged_LaceratingKnives();
+	else if (handle == "heavy_javelin")
+		return ranged_HeavyJavelin();
 	else if (handle == "corroding_jar")
 		return ranged_CorrodingJar();
 	else if (handle == "pyromancers_flask")
@@ -98,6 +105,16 @@ item * getItemByHandle(std::string handle)
 	else if (handle == "fishscale_coat")
 		return armour_FishscaleCoat();
 
+	else if (handle == "city_guard_helm")
+		return headgear_CityGuardHelm();
+	else if (handle == "city_guard_armour")
+		return armour_CityGuardArmour();
+
+	else if (handle == "pash_hood")
+		return headgear_PashHood();
+	else if (handle == "pash_robes")
+		return headgear_PashRobes();
+
 	//CHARMS
 	else if (handle == "bloodstained_charm")
 		return charm_BloodstainedCharm();
@@ -105,6 +122,8 @@ item * getItemByHandle(std::string handle)
 		return charm_KhallesHeadband();
 	else if (handle == "idol_of_pash")
 		return charm_IdolOfPash();
+	else if (handle == "eviscerating_ring")
+		return charm_EvisceratingRing();
 
 	//SPELLS
 	else if (handle == "magic_missile")

@@ -2,6 +2,9 @@
 
 
 
+const std::string game::VOID_EDGE_MAP = "maps/void_edge.txt";
+
+
 game::game()
 {
 	
@@ -659,8 +662,11 @@ drawData game::getDrawData(int x, int y)
 		person* p = currentMap->getPerson(x, y);
 		
 		if (p != nullptr) {
-			toDraw.tileCode = p->getTileCode();
-			toDraw.color = p->getColor();
+			//Invisible? IF SO, CANNOT SEE PERSON!
+			if (p->invisibility < 1) {
+				toDraw.tileCode = p->getTileCode();
+				toDraw.color = p->getColor();
+			}
 		}
 		
 		else {
@@ -779,19 +785,6 @@ void game::drawInterface(int leftx, int topy)
 		}
 	}
 	
-	//Spell selected (or menu, if we're in that mode!)
-	/*if (state == STATE_SELECT_SPELL) {
-		drawMenu(currentMenu, atx, ++aty);
-		aty += currentMenu->getAllElements().size() + 1;
-	}
-	else {
-		spell* sp = player->getCurrentSpell();
-		if (sp != nullptr) {
-			win.writec(atx + 3, ++aty, VIGOUR_GLYPH, TCODColor::darkGreen);
-			win.write(atx + 4, aty, std::to_string(sp->getVigourCost()), TCODColor::green);
-			win.write(atx + 6, aty, sp->getName(), sp->getColor());
-		}
-	}*/
 	//List known spells
 	int s = 0;
 	for (auto sp : player->getSpellsKnown()) {
@@ -830,6 +823,10 @@ void game::drawInterface(int leftx, int topy)
 		if (pois->getValue() > 0)
 			win.drawCounter(*pois, "POISON", atx, ++aty, TCODColor::lime, TCODColor::darkGrey, 10);
 	}
+
+	//Status effect: SLOWED!
+	if (player->slowdown > 0)
+		win.write(atx, ++aty, "SLOWED", TCODColor::sepia);
 
 	//Draws whatever we have HIGHLIGHTED
 	aty += 2;
@@ -1373,7 +1370,8 @@ void game::useConsumable()
 		//Make sure we have enough
 		if (toUse->getAmountLeft() > 0) {
 			//Use it!
-			toUse->lose();
+			if (toUse->consumeOnUse)
+				toUse->lose();
 			//And perform the proper effect
 			int potency = toUse->getPotency();
 			//Is this a ranged-attack item?
@@ -1425,9 +1423,16 @@ void game::selectConsumableFromMenu()
 	setState(STATE_VIEW_MAP);
 }
 
+
+
+
+
 /*
 	EFFECTS
 */
+
+
+
 
 /*
 Discharge an AOE spell.
@@ -1473,6 +1478,8 @@ void game::applyEffectToPerson(person * target, effect eff, int potency, person*
 		tryUnlockDoor(target->getx(), target->gety());
 	else if (eff == DO_WARP && target->isPlayer)
 		setupWarpMenu();
+	else if (eff == TELEPORT_TO_VOID)
+		teleportToVoid();
 
 	//Special spell effect
 	else if (eff == CASTER_MELEE_ATTACK)
@@ -1485,6 +1492,8 @@ void game::applyEffectToPerson(person * target, effect eff, int potency, person*
 		pullTarget(caster, target, potency);
 	else if (eff == TELEPORT_VIA_WATER)
 		waterWarp(target, potency);
+	else if (eff == DROP_OOZE)
+		currentMap->setTile(tile_Ooze(), target->getx(), target->gety());
 
 	//Some effect that the person should take care of
 	else
@@ -1920,6 +1929,10 @@ void game::meleeAttack(person * attacker, person * target)
 	else
 		attacker->setTarget(target);
 
+	//Dead target may restore HP!
+	if (target->isDead)
+		attacker->addHealth(attacker->healthOnKill);
+
 	//If we're an AI, this expends all of our free moves
 	if (!target->isPlayer && target->hasFreeMoves())
 		target->clearFreeMoves();
@@ -1983,6 +1996,17 @@ bool game::waterWarp(person * target, int distance)
 		}
 	}
 	return false;
+}
+
+
+/*
+Player warps to the VOID EDGE.
+Yeah, this is hardcoded.
+*/
+void game::teleportToVoid()
+{
+	loadMapFromHandle(VOID_EDGE_MAP, CONNECT_WARP, player->getx(), player->gety());
+	setSavePoint();
 }
 
 
@@ -2706,8 +2730,14 @@ Removes all dead creatures from the map.
 void game::clearDeadCreatures()
 {
 	//If the player is dead, SPECIAL STUFF happens
-	if (player->isDead)
+	if (player->isDead) {
+		//Message about our death
+		win.write(MAP_DRAW_X + 15, MAP_DRAW_Y + 20, "Y O U   D I E D", TCODColor::lightestRed);
+		win.refresh();
+		while (win.getkey().vk != KEY_ACCEPT) {}
+		//Reload game
 		restoreFromSavePoint();
+	}
 	else {
 		
 		//Otherwise, check for dead NPCs
@@ -2967,5 +2997,35 @@ void game::debugMenu()
 		player->addItem(headgear_FishpriestHat());
 		fragments += 1200;
 		loadMapFromHandle("maps/flooded_lowlands_3.txt", CONNECT_WARP, player->getx(), player->gety());
+	}
+	else if (txt == "city") {
+		player->addItem(weapon_NotchedGreatsword());
+		player->addItem(weapon_FishmansHarpoon());
+		player->addItem(weapon_FishmansKnife());
+		player->addItem(wand_FishmansToadstaff());
+		player->addItem(chime_ClericsCrackedChime());
+		player->addItem(prayer_BlessedRadiance());
+		player->addItem(prayer_RayOfLight());
+		player->addItem(prayer_Restoration());
+		player->addItem(spell_AcidBlade());
+		player->addItem(spell_AcidBurst());
+		player->addItem(spell_AcidSpit());
+		player->addItem(armour_FishscaleCoat());
+		player->addItem(headgear_FishpriestHat());
+		player->addItem(armour_RuinedKnightsArmour());
+		player->addItem(headgear_RuinedKnightsHelm());
+		player->addItem(armour_ClericsVestments());
+		player->addItem(headgear_ClericsHood());
+		player->addItem(consumable_StarwaterDraught());
+		player->addItem(consumable_StarwaterDraught());
+		player->addItem(consumable_StarwaterDraught());
+		player->addItem(consumable_StarwaterDraught());
+		player->addItem(consumable_StarwaterDraught());
+		player->addItem(bell_VoidwalkersDancingBell());
+		fragments += 3000;
+		addStoryFlag("utricToFairweather");
+		addStoryFlag("muiraToFairweather");
+		addStoryFlag("elenaToFairweather");
+		loadMapFromHandle("maps/crumbling_city_1.txt", CONNECT_WARP, player->getx(), player->gety());
 	}
 }

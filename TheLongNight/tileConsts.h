@@ -34,6 +34,9 @@ const int FISHMAN_TILE = 265;
 
 const int RAT_TILE = 114;
 
+const int ZOMBIE_TILE = 122;
+const int PRIEST_TILE = 80;
+
 const int GOREM_TILE = 266; //This is a golem-dude
 
 //Items
@@ -52,6 +55,7 @@ const int CHARM_TILE = 276;
 const int SIGIL_TILE = 6;
 const int RUNESTONE_TILE = 15;
 const int FLOWER_TILE = 42;
+const int BELL_TILE = 237;
 
 //Maptiles
 const int BASIC_FLOOR_TILE = 288;
@@ -64,6 +68,7 @@ const int MOSS_TILE = 293;
 const int BUSH_TILE = 294;
 const int TREE_TILE = 295;
 const int TERMINAL_TILE = 296; //ie a computer terminal
+const int CORPSE_TILE = 37;
 
 const int STATUE_TILE = 297;
 const int WARPSTONE_TILE = 11;

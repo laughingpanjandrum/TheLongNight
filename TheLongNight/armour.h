@@ -46,6 +46,11 @@ armour* armour_CrowKnightsArmour();
 armour* headgear_FishpriestHat();
 armour* armour_FishscaleCoat();
 
+armour* headgear_CityGuardHelm();
+armour* armour_CityGuardArmour();
+
+armour* headgear_PashHood();
+armour* headgear_PashRobes();
 
 #endif
 

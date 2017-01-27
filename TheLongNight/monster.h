@@ -129,6 +129,13 @@ monster* monster_FishbornGoddess();
 monster* monster_GiantRat();
 monster* monster_ProfaneRatPriest();
 
+//Crumbling City
+monster* monster_CrawlingZombie();
+monster* monster_FirespitterZombie();
+monster* monster_OozingZombie();
+monster* monster_DevoteeOfPash();
+monster* monster_VoidwalkerMinas();
+
 //Friendly NPCs
 monster* npc_Gorem();
 monster* npc_UtricTheRat();

@@ -65,6 +65,15 @@ consumable * ranged_ThrowingKnives()
 	return c;
 }
 
+consumable * ranged_HeavyJavelin()
+{
+	consumable* c = new consumable("Heavy Javelin", DAGGER_TILE, TCODColor::sepia,
+		"Deadly javelin for throwing at your nemesis.");
+	c->setRangedAttack(new spell(8, 75));
+	c->add(1);
+	return c;
+}
+
 consumable * ranged_LaceratingKnives()
 {
 	consumable* c = new consumable("Lacerating Knives", DAGGER_TILE, TCODColor::lightCrimson,
@@ -114,5 +123,14 @@ consumable * oil_CorrosiveOil()
 	consumable* c = new consumable("Corrosive Oil", VIAL_TILE, TCODColor::lime,
 		"Somehow, rather than corrode the blade, this oil coats targets in caustic acid.");
 	c->setWeaponBuff(new weaponBuff(DAMAGE_ACID, 15));
+	return c;
+}
+
+consumable * bell_VoidwalkersDancingBell()
+{
+	consumable* c = new consumable("Voidwalker's Dancing Bell", BELL_TILE, TCODColor::purple,
+		"This bell pulses with the energy of the Void. You sense that to use it would be a dire sin.");
+	c->consumeOnUse = false;
+	c->addEffect(TELEPORT_TO_VOID);
 	return c;
 }

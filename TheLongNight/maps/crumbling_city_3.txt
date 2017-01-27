@@ -1,0 +1,85 @@
+Crumbling City
+start:18,39
+devotee_of_pash:38,28
+oozing_zombie:36,34
+crawling_zombie:2,37
+crawling_zombie:2,38
+crawling_zombie:3,37
+crawling_zombie:3,38
+crawling_zombie:4,36
+firespitter_zombie:11,18
+firespitter_zombie:3,3
+crawling_zombie:6,3
+devotee_of_pash:36,20
+devotee_of_pash:37,19
+devotee_of_pash:35,21
+-items
+city_guardian_warhammer:34,19
+city_guardian_shield:24,29
+witchs_jar:37,6
+throwing_knives:2,2
+pash_hood:6,9
+pash_robes:7,10
+-enditems
+-codes
+. floor_stone
+g floor_grass
+r floor_road
+" floor_mossy_stone
+% bush
+~ water
+D water_deep
+T tree
+: water_mossy
+? statue
+# wall_stone
+w wall_wood
+G glass
++ door_stone
+* warpstone
+o ooze
+-endcodes
+-connections
+west:crumbling_city_1
+east:sordid_chapel
+-endconnections
+########################################
+#"........"#gggggggggggggggggggggg#..."#
+#....".....+......................#....#
+#."..."....#.rrrrrrrrrrrrrrrrrrrr.#."..#
+############.r..................r.#....#
+.............r.################.r.#"...#
+rrrrrrrrrrr..r.#".............#.r.#....#
+..........r..r.#....."......".#.r.#..".#
+#########.rrrr.#..."......"...#.r.#....#
+#"....".#......#."....".......#.r.##+###
+#.......###+#######+###.".....#.r......#
+#.."...."#...#..."....#...."..#.rrrrr..#
+#........#...#"..."...#...."..#........#
+#"...."..#...#......."####+#########+###
+#....."..+...+........#~~~~~~~~~~~~~~~~#
+#...."...#...#..".....G~~~~~~~~~~~~~~~~#
+#........#...#...."...G~~~~~~~~~~~~~~~~#
+#."....".#...#."......G~~~~~~~~~~~~~~~~#
+#.."...."#...#......".#~~~~~~~~~~~~~~~~#
+###########+###########~~~~~~~~~~~~~~~D#
+#.....................#~~~~~~~~~~~~~~DD#
+.rrrrrrrrrrrrrrrrrrrr.#~~~~~~~~~~~~~DDD#
+rr..................r.#~~~~~~~~~~~~DDDD#
+...################.r.##################
+####."...+......".#.r...................
+#."....."#."..?...+.rrrrrrrrrrrrrrrrrrrr
+#..".."..#"..."...#.....................
+#####+##############+###################
+#ggggggggg"...ggggGg.gG...#oooo........#
+#gTg%gggg..."..TggGg.gG...#ooo.........#
+#ggTggg%g.."...g%gGg.gG...#oo..........#
+#g%g~gggTg."...gTgG%.gG...#o...........#
+#gg~~~g%gg...."g%gGg.gG...#oo..........#
+#ggg~gTggg"..".gggGg.%G...#ooo.........#
+#gg%gggg%gg.".gTggGgggG...+oooo........#
+############+#####GGGGG...#ooooo.......#
+#.................#...############+#####
+#......................................#
+#.................#####................#
+###################...##################

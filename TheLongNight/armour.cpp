@@ -108,3 +108,48 @@ armour * armour_FishscaleCoat()
 	a->setMoveSpeed(SPEED_NORMAL);
 	return a;
 }
+
+armour * headgear_CityGuardHelm()
+{
+	armour* a = new armour("City Guard Helm", HELMET_TILE, TCODColor::darkYellow, ITEM_HELMET,
+		"In the final days of the Winter Court, the faces of the guards were stripped of flesh, and their bare bone was \
+exposed to the devouring gaze of Pash.");
+	a->setDefence(15);
+	a->setDamageResist(DAMAGE_ELECTRIC, 10);
+	a->setDamageResist(DAMAGE_FIRE, 10);
+	return a;
+}
+
+armour * armour_CityGuardArmour()
+{
+	armour* a = new armour("City Guard Armour", ARMOUR_TILE, TCODColor::darkYellow, ITEM_BODY_ARMOUR,
+		"The guards of the city infused their armour to protect themselves against the profaned slaves of Pash.");
+	a->setDefence(30);
+	a->setDamageResist(DAMAGE_ELECTRIC, 20);
+	a->setDamageResist(DAMAGE_FIRE, 25);
+	a->setMoveSpeed(SPEED_SLOW);
+	return a;
+}
+
+armour * headgear_PashHood()
+{
+	armour* a = new armour("Pash Hood", HELMET_TILE, TCODColor::lightPurple, ITEM_HELMET,
+		"Hood that shields the eyes of the devotees of Pash. According to certain storytellers, in the final days of the Winter \
+Court, the face of Pash itself appeared in the sky, devouring the stars.");
+	a->setDefence(5);
+	a->setDamageResist(DAMAGE_COLD, 10);
+	a->setDamageResist(DAMAGE_BLESSED, 10);
+	return a;
+}
+
+armour * headgear_PashRobes()
+{
+	armour* a = new armour("Pash Robes", ARMOUR_TILE, TCODColor::lightPurple, ITEM_BODY_ARMOUR,
+		"Robe of the devotees of Pash. When the Void first reached the Winter Court, these devotees began to appear in the \
+streets, though none knew their origins.");
+	a->setDefence(5);
+	a->setDamageResist(DAMAGE_COLD, 15);
+	a->setDamageResist(DAMAGE_BLESSED, 15);
+	a->setMoveSpeed(SPEED_FAST);
+	return a;
+}

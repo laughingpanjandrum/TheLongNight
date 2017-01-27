@@ -58,6 +58,12 @@ Based on our equipped body armour.
 */
 int person::getMoveDelay()
 {
+	//Slowdown effect?
+	if (slowdown > 0) {
+		slowdown--;
+		return SPEED_SLOW;
+	}
+	//Otherwise, from armour
 	armour* a = getArmour();
 	if (a != nullptr)
 		return a->getMoveSpeed();
@@ -150,12 +156,23 @@ void person::takeDamage(int amount, damageType dtype)
 		resist = getDefence();
 	else if (dtype != DAMAGE_UNTYPED)
 		resist = getDamageResist(dtype);
+
 	int def = ((float)resist / 100) * (float)amount;
 	amount -= def;
 
 	//Susceptibility
-	if (dtype == DAMAGE_BLESSED && isProfane())
-		amount *= 2;
+	if (dtype == DAMAGE_BLESSED) {
+		if (isProfane())
+			amount *= 2;
+		else
+			amount /= 2;
+	}
+	else if (dtype == DAMAGE_PROFANE) {
+		if (isBlessed())
+			amount *= 2;
+		else
+			amount /= 2;
+	}
 	
 	//Minimum 1 damage
 	if (amount < 1)
@@ -301,8 +318,17 @@ void person::applyEffect(effect eff, int potency)
 		healthTrickle += potency;
 	else if (eff == GAIN_MAX_HEALTH)
 		health.increaseMaxValue(potency, true);
+	else if (eff == GAIN_HEALTH_ON_KILL)
+		healthOnKill += potency;
+	else if (eff == BECOME_INVISIBLE)
+		invisibility += potency;
 	else if (eff == CHANGE_FRAGMENT_PICKUP_MULT)
 		fragmentPickupMultiplier = potency;
+
+	//Debuffs
+
+	else if (eff == SLOWDOWN)
+		slowdown += potency;
 
 	//Defensive buffs
 
@@ -750,6 +776,9 @@ void person::applyStatusEffects()
 	//Blinding: just ticks down
 	if (blinding)
 		blinding--;
+	//Invisibility fades
+	if (invisibility)
+		invisibility--;
 }
 
 /*

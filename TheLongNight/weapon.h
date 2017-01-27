@@ -116,10 +116,15 @@ weapon* weapon_NotchedGreatsword();
 weapon* weapon_FishmansHarpoon();
 weapon* weapon_FishmansKnife();
 
+weapon* weapon_CityGuardianWarhammer();
+
+weapon* weapon_ProfaneGreatsword();
+
 //Shields
 weapon* shield_BatteredWoodenShield();
 weapon* shield_WoodenWyrdShield();
 weapon* shield_BatteredSteelShield();
+weapon* shield_CityGuardianShield();
 
 //Wands/chimes
 weapon* wand_DriftwoodWand();

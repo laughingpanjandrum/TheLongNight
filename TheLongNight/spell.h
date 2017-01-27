@@ -64,6 +64,7 @@ spell* attack_Knockback();
 spell* attack_MightyCleave();
 spell* attack_Spearfishing();
 spell* attack_Fillet();
+spell* attack_DivineSmite();
 
 //Wand/chime powers
 spell* ability_PowerSurge();
@@ -83,6 +84,8 @@ spell* spell_AcidSpit();
 spell* spell_AcidBlade();
 spell* spell_AcidBurst();
 
+spell* spell_SpitFire();
+
 //	Prayers
 spell* prayer_Restoration();
 //Sold by Gorem
@@ -93,6 +96,7 @@ spell* prayer_BlessedRadiance();
 spell* prayer_RemovePoison();
 //Misc
 spell* prayer_ProfaneRadiance();
+spell* prayer_ProfaneRay();
 
 //Monster abilities
 spell* ability_Charge();
@@ -100,5 +104,7 @@ spell* ability_Burst();
 spell* ability_CrowArrow();
 spell* ability_FeedingFrenzy();
 spell* ability_SinkBeneath();
+spell* ability_DropOoze();
+spell* ability_ShadowWalk();
 
 #endif

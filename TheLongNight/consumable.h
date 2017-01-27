@@ -38,6 +38,9 @@ public:
 	void setRangedAttack(spell* at) { rangedAttack = at; }
 	void setWeaponBuff(weaponBuff* b) { buff = b; }
 
+	//Flags
+	bool consumeOnUse = true; //Doesn't have to get USED UP!
+
 private:
 
 	//Quantity!
@@ -68,6 +71,7 @@ consumable* consumable_TinyRedFlower();
 consumable* consumable_TinyGreenFlower();
 
 consumable* ranged_ThrowingKnives();
+consumable* ranged_HeavyJavelin();
 consumable* ranged_LaceratingKnives();
 consumable* ranged_CorrodingJar();
 consumable* ranged_PyromancersFlask();
@@ -75,5 +79,7 @@ consumable* ranged_WitchsJar();
 
 consumable* oil_PyromancersOil();
 consumable* oil_CorrosiveOil();
+
+consumable* bell_VoidwalkersDancingBell();
 
 #endif

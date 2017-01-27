@@ -1,7 +1,13 @@
 Crumbling City
 start:18,39
+crawling_zombie:27,28
+crawling_zombie:27,31
+crawling_zombie:6,12
+crawling_zombie:7,13
+crawling_zombie:9,16
 -items
 idol_of_pash:22,33
+heavy_javelin:8,14
 -enditems
 -codes
 . floor_stone
@@ -19,9 +25,12 @@ w wall_wood
 G glass
 + door_stone
 * warpstone
+o ooze
 -endcodes
 -connections
 south:flooded_lowlands_3
+west:crumbling_city_2
+east:crumbling_city_3
 -endconnections
 ########################################
 #......................................#
@@ -40,8 +49,8 @@ south:flooded_lowlands_3
 #.#.........#.########.r..#...~~~....#.#
 #.#.........#.#........r..#....~."...#.#
 #.#.........#.#.rrrrrrrr..#..".......#.#
-#.######+####.#.rg%ggggTg.############.#
-#.#...........#.rgggg%ggg..............#
+#.######+####o#.rg%ggggTg.############.#
+#.#.......oooo#.rgggg%ggg..............#
 #.#############.rrrrrrrrrrrrrrrrrrrrr..#
 ................r...................r..#
 rrrrrrrrrrrrrrrrr..ggg..###########.r...

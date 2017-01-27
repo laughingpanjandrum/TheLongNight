@@ -62,6 +62,7 @@ public:
 
 	//Special attributes
 	bool isProfane() { return profane; }
+	bool isBlessed() { return blessed; }
 
 	//Getters
 	counter getHealth() { return health; }
@@ -124,7 +125,12 @@ public:
 	int scaleNextAttack = 0; //Percent damage bonus damage added to next attack
 	int attacksPerHit = 1; //Multiattack count, resets to 1 after use
 	int healthTrickle = 0; //We get 1 point of this per tick until it runs out
+	int healthOnKill = 0; //Health restored when we kill something
+	int invisibility = 0;
 	int getFragmentPickupMult() { return fragmentPickupMultiplier; }
+
+	//Debuffs
+	int slowdown = 0;
 
 	//Spell buffs
 	int scaleNextSpell = 0; //Buff to next spell cast
@@ -191,7 +197,8 @@ protected:
 	int baseAttackSpeed = SPEED_NORMAL; //how quickly we attack bare-handed
 	int baseMoveSpeed = SPEED_FAST; //how quickly we move if unarmoured
 
-	bool profane;
+	bool profane = false;
+	bool blessed = false;
 
 	//Resistances/defence
 	int baseDefence = 0;

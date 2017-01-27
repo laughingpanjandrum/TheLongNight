@@ -240,6 +240,29 @@ weapon * weapon_FishmansKnife()
 	return wp;
 }
 
+weapon * weapon_CityGuardianWarhammer()
+{
+	weapon* wp = new weapon("City Guardian Warhammer", HAMMER_TILE, TCODColor::darkYellow,
+		"Warhammer wielded by the divine guards of the Winter Court.");
+	wp->setBasicAttributes(75, SPEED_SLOW);
+	wp->addDamageType(DAMAGE_BLESSED, 25);
+	wp->addScalingType(SCALE_STR);
+	wp->addScalingType(SCALE_DEV);
+	wp->setSpecialAttack(attack_DivineSmite());
+	return wp;
+}
+
+weapon * weapon_ProfaneGreatsword()
+{
+	weapon* wp = new weapon("Profane Greatsword", SWORD_TILE, TCODColor::purple,
+		"A greatsword charged with the profane energy of the Void.");
+	wp->setBasicAttributes(50, SPEED_SLOW);
+	wp->addDamageType(DAMAGE_PROFANE, 25);
+	wp->addScalingType(SCALE_STR);
+	wp->addScalingType(SCALE_DEV);
+	return wp;
+}
+
 //		Shields
 
 weapon * shield_BatteredWoodenShield()
@@ -271,6 +294,17 @@ weapon * shield_BatteredSteelShield()
 	wp->setDamageResist(DAMAGE_ELECTRIC, 5);
 	wp->setDamageResist(DAMAGE_COLD, 5);
 	wp->makeOffhand();
+	return wp;
+}
+
+weapon * shield_CityGuardianShield()
+{
+	weapon* wp = new weapon("City Guardian Shield", SHIELD_TILE, TCODColor::darkYellow,
+		"Round shield of the guards of the Winter Court. They were meant to protect the city against the onslaught of the Void, \
+but not a single knight survived.");
+	wp->setDefence(15);
+	wp->setDamageResist(DAMAGE_PROFANE, 15);
+	wp->setDamageResist(DAMAGE_FIRE, 10);
 	return wp;
 }
 
@@ -309,7 +343,6 @@ weapon * chime_ClericsCrackedChime()
 	wp->setDivinePower(100);
 	wp->makeOffhand();
 	wp->setSpecialAttack(ability_DivineFavour());
-	wp->addSpell(prayer_BlessedRadiance());
 	return wp;
 }
 

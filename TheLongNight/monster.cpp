@@ -473,6 +473,87 @@ monster * monster_ProfaneRatPriest()
 
 
 /*
+	Crumbling City
+*/
+
+
+monster * monster_CrawlingZombie()
+{
+	monster* m = new monster("Crawling Zombie", ZOMBIE_TILE, TCODColor::darkGreen,
+		"A half-rotten creature, missing both of its legs, which crawls along the ground.");
+	m->setHealth(150);
+	m->setMoveStats(SPEED_SLOW);
+	m->setMeleeStats(50, SPEED_SLOW);
+	m->setPoisonResist(1000);
+	m->setFragmentsDropped(15);
+	return m;
+}
+
+monster * monster_FirespitterZombie()
+{
+	monster* m = new monster("Firespitter Zombie", ZOMBIE_TILE, TCODColor::flame,
+		"A half-rotten creature imbued with a mysterious inner fire.");
+	m->setHealth(150);
+	m->setPoisonResist(1000);
+	m->addDamageResist(DAMAGE_FIRE, 25);
+	m->setMoveStats(SPEED_SLOW);
+	m->setMeleeStats(50, SPEED_SLOW);
+	m->setFragmentsDropped(75);
+	m->addSpellKnown(spell_SpitFire());
+	m->setSpellCastChance(20);
+	return m;
+}
+
+monster * monster_OozingZombie()
+{
+	monster* m = new monster("Oozing Zombie", ZOMBIE_TILE, TCODColor::sepia,
+		"A half-rotten creature oozing slime from its pores.");
+	m->setHealth(150);
+	m->setPoisonResist(1000);
+	m->setMoveStats(SPEED_SLOW);
+	m->setMeleeStats(50, SPEED_SLOW);
+	m->setFragmentsDropped(75);
+	m->addSpellKnown(ability_DropOoze());
+	m->setSpellCastChance(50);
+	return m;
+}
+
+monster * monster_DevoteeOfPash()
+{
+	monster* m = new monster("Devotee of Pash", PRIEST_TILE, TCODColor::purple,
+		"A tall figure in robes marked with profane symbols. It clutches an idol of Pash, wreathed in evil energy.");
+	m->setHealth(200);
+	m->addDamageResist(DAMAGE_MAGIC, 25);
+	m->setMoveStats(SPEED_SLOW);
+	m->setMeleeStats(25, SPEED_SLOW);
+	m->addSpellKnown(prayer_ProfaneRay());
+	m->setSpellCastChance(25);
+	m->keepsDistance = true;
+	m->setFragmentsDropped(100);
+	return m;
+}
+
+monster * monster_VoidwalkerMinas()
+{
+	monster* m = new monster("Voidwalker Minas", PLAYER_TILE, TCODColor::lightPurple,
+		"His armour glows with profane radiance, and his jet-black sword pulses with dark radiance.");
+	m->setHealth(250);
+	m->setMoveStats(SPEED_SLOW);
+	m->setDefence(DAMAGE_PHYSICAL, 30);
+	m->addDamageResist(DAMAGE_COLD, 50);
+	m->makeProfane();
+	m->equipItem(weapon_ProfaneGreatsword());
+	m->addSpellKnown(ability_ShadowWalk());
+	m->setSpellCastChance(25);
+	m->isBoss = true;
+	m->showBossHealthBar = false;
+	m->setFragmentsDropped(300);
+	m->addItemDrop(bell_VoidwalkersDancingBell());
+	return m;
+}
+
+
+/*
 	FRIENDLIES
 */
 
@@ -602,6 +683,18 @@ monster * getMonsterByHandle(std::string handle)
 		return monster_GiantRat();
 	else if (handle == "profane_rat_priest")
 		return monster_ProfaneRatPriest();
+
+	//Crumbling City
+	else if (handle == "crawling_zombie")
+		return monster_CrawlingZombie();
+	else if (handle == "firespitter_zombie")
+		return monster_FirespitterZombie();
+	else if (handle == "oozing_zombie")
+		return monster_OozingZombie();
+	else if (handle == "devotee_of_pash")
+		return monster_DevoteeOfPash();
+	else if (handle == "voidwalker_minas")
+		return monster_VoidwalkerMinas();
 
 	//Friendly NPCs
 	else if (handle == "gorem")
