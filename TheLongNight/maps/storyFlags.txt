@@ -9,3 +9,9 @@ map:maps/old_fairweather.txt
 npc:muira
 spt:15,13
 !end
+
+!elenaToFairweather
+map:maps/old_fairweather.txt
+npc:elena
+spt:20,22
+!end

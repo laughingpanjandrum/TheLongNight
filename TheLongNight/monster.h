@@ -133,6 +133,7 @@ monster* monster_ProfaneRatPriest();
 monster* npc_Gorem();
 monster* npc_UtricTheRat();
 monster* npc_MuiraClericOfTheRose();
+monster* npc_ElenaThePilgrim();
 
 
 //For map files

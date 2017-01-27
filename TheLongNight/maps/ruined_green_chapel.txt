@@ -1,5 +1,6 @@
 Ruined Green Chapel
 start:20,39
+elena:14,30
 -items
 clerics_hood:14,3
 clerics_vestments:15,4
@@ -25,10 +26,11 @@ G glass
 -endcodes
 -connections
 south:darkwater_forest_1
+north:darkwater_forest_3
 -endconnections
 ###WWWWWWWWWWWWWWW#WWWWW&WWWWWWWW#######
 ##.W.......%..........T........%W...####
-#..W.%...T......................W....###
+#..W.%...T................?.....W....###
 #..W.T.....T.%......%........T..W....###
 #..W....%...............T......%W.....##
 #..W.....########++########%....W......#

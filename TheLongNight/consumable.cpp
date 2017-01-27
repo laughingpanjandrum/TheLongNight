@@ -47,6 +47,15 @@ consumable * consumable_TinyRedFlower()
 	return c;
 }
 
+consumable * consumable_TinyGreenFlower()
+{
+	consumable* c = new consumable("Tiny Green Flower", FLOWER_TILE, TCODColor::green,
+		"These gentle green flowers purge toxins from the body.");
+	c->addEffect(REMOVE_POISON);
+	c->setPotency(1);
+	return c;
+}
+
 consumable * ranged_ThrowingKnives()
 {
 	consumable* c = new consumable("Throwing Knives", DAGGER_TILE, TCODColor::lightGrey,
@@ -69,7 +78,7 @@ consumable * ranged_CorrodingJar()
 {
 	consumable* c = new consumable("Corroding Jar", VIAL_TILE, TCODColor::lime,
 		"A jar filled with acid. Throw at armoured enemies to penetrate their defences.");
-	c->setRangedAttack(new spell(5, 5, APPLY_ACID_DAMAGE, 20));
+	c->setRangedAttack(new spell(5, 5, APPLY_ACID_DAMAGE, 40));
 	c->add(3);
 	return c;
 }
@@ -78,7 +87,16 @@ consumable * ranged_PyromancersFlask()
 {
 	consumable* c = new consumable("Pyromancer's Flask", VIAL_TILE, TCODColor::flame,
 		"A jar of volatile oil, ready to burst into flame on contact.");
-	c->setRangedAttack(new spell(5, 5, APPLY_FIRE_DAMAGE, 20));
+	c->setRangedAttack(new spell(5, 5, APPLY_FIRE_DAMAGE, 40));
+	c->add(3);
+	return c;
+}
+
+consumable * ranged_WitchsJar()
+{
+	consumable* c = new consumable("Witch's Jar", VIAL_TILE, TCODColor::magenta,
+		"Jars of magical oil, often carried by wizards for use as a last resort.");
+	c->setRangedAttack(new spell(5, 5, APPLY_MAGIC_DAMAGE, 40));
 	c->add(3);
 	return c;
 }

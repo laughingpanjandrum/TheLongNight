@@ -122,6 +122,11 @@ maptile * tile_Bush()
 	return new maptile("Bush", "bush", BUSH_TILE, LIGHT_GRASS_COLOR, DARK_GRASS_COLOR, true, false);
 }
 
+maptile * tile_Rosebush()
+{
+	return new maptile("Rosebush", "rosebush", BUSH_TILE, TCODColor::pink, DARK_GRASS_COLOR, true, false);
+}
+
 maptile * tile_Tree()
 {
 	return new maptile("Tree", "tree", TREE_TILE, TCODColor::lightSepia, DARK_GRASS_COLOR, false, false);

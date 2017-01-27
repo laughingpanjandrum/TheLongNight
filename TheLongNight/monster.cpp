@@ -529,6 +529,25 @@ monster * npc_MuiraClericOfTheRose()
 	return m;
 }
 
+monster * npc_ElenaThePilgrim()
+{
+	monster* m = new monster("Elena the Pilgrim", PLAYER_TILE, TCODColor::lightBlue,
+		"A woman in travel-worn robes, dragging a cart piled with goods.");
+	m->setHealth(80);
+	m->isHostile = false;
+	m->isShopkeeper = true;
+	//Starting stock
+	m->addItemToStock(ranged_ThrowingKnives(), 50);
+	m->addItemToStock(ranged_LaceratingKnives(), 75);
+	m->addItemToStock(ranged_WitchsJar(), 75);
+	m->addItemToStock(ranged_PyromancersFlask(), 75);
+	m->addItemToStock(consumable_TinyGreenFlower(), 25);
+	m->addItemToStock(consumable_InvigoratingTea(), 150);
+	//Dialogue
+	m->loadDialogue("dialogue/elena_chat.txt");
+	return m;
+}
+
 /*
 This giant nightmare is how monsters are defined in map files.
 */
@@ -590,6 +609,8 @@ monster * getMonsterByHandle(std::string handle)
 		return npc_UtricTheRat();
 	else if (handle == "muira")
 		return npc_MuiraClericOfTheRose();
+	else if (handle == "elena")
+		return npc_ElenaThePilgrim();
 
 	//LET'S HOPE WE NEVER GET HERE!
 	return nullptr;

@@ -65,11 +65,13 @@ consumable* consumable_StarwaterDraught();
 consumable* consumable_InvigoratingTea();
 
 consumable* consumable_TinyRedFlower();
+consumable* consumable_TinyGreenFlower();
 
 consumable* ranged_ThrowingKnives();
 consumable* ranged_LaceratingKnives();
 consumable* ranged_CorrodingJar();
 consumable* ranged_PyromancersFlask();
+consumable* ranged_WitchsJar();
 
 consumable* oil_PyromancersOil();
 consumable* oil_CorrosiveOil();

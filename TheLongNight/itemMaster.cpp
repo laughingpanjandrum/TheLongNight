@@ -51,6 +51,8 @@ item * getItemByHandle(std::string handle)
 		return consumable_InvigoratingTea();
 	else if (handle == "tiny_red_flower")
 		return consumable_TinyRedFlower();
+	else if (handle == "tiny_green_flower")
+		return consumable_TinyGreenFlower();
 
 	//OILS
 	else if (handle == "pyromancers_oil")
@@ -67,6 +69,8 @@ item * getItemByHandle(std::string handle)
 		return ranged_CorrodingJar();
 	else if (handle == "pyromancers_flask")
 		return ranged_PyromancersFlask();
+	else if (handle == "witchs_jar")
+		return ranged_WitchsJar();
 
 	//ARMOUR
 	else if (handle == "captains_tricorn")
@@ -198,6 +202,8 @@ std::string getEffectName(effect e)
 	case(RESTORE_VIGOUR): return "vigour regain";
 	case(GAIN_FREE_MOVES): return "free moves";
 	case(GAIN_MAX_HEALTH): return "max health";
+	case(REMOVE_BLEED): return "cures bleed buildup";
+	case(REMOVE_POISON): return "cures poisoning";
 	case(ADD_HEALTH_TRICKLE): return "health restore, 1/turn";
 	case(SCALE_NEXT_ATTACK): return "% damage next attack";
 	case(SCALE_NEXT_SPELL): return "% spell power for next spell";

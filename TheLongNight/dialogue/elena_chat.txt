@@ -1,0 +1,14 @@
+"Oh, hello, hello..."
+|STORY_FLAG_SKIP
+elenaToFairweather
+[IN_FAIRWEATHER]
+"Don't worry about me, kiddo! I'm just an old pilgrim from long ago."
+"Hm? What's that? You want to see what I've got?"
+|STORY_FLAG
+elenaToFairweather
+"Sure, sure..."
+|SHOP
+[IN_FAIRWEATHER]
+"Aha! Good to see you here too, kiddo."
+"Have a look, have a look..."
+|SHOP

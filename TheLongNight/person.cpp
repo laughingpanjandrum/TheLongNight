@@ -316,8 +316,14 @@ void person::applyEffect(effect eff, int potency)
 		addDamageResist(DAMAGE_FIRE, potency);
 	else if (eff == GAIN_MAGIC_RESIST)
 		addDamageResist(DAMAGE_MAGIC, potency);
-	else if (eff == REMOVE_BLEED)
+	else if (eff == REMOVE_BLEED) {
+		isBleeding = 0;
 		clearBleed();
+	}
+	else if (eff == REMOVE_POISON) {
+		isPoisoned = 0;
+		poisonBuildup.clear();
+	}
 
 	//Spell buffs
 

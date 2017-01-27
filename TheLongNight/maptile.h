@@ -109,6 +109,7 @@ maptile* tile_DoorUnlocker(); //"door_unlocker"
 
 maptile* tile_Glass(); //"glass"
 maptile* tile_Bush(); //"bush"
+maptile* tile_Rosebush(); //"rosebush"
 maptile* tile_Tree(); //"tree"
 
 maptile* tile_Water(); //"water"
@@ -133,7 +134,7 @@ const tileVector ALL_MAPTILES = {
 	tile_Floor(), tile_MossyFloor(), tile_Sand(), tile_Grass(), tile_Road(),
 	tile_Wall(), tile_WoodenWall(), tile_SandyRock(),
 	tile_Door(), tile_WoodenDoor(), tile_LockedDoor(), tile_DoorUnlocker(),
-	tile_Glass(), tile_Bush(), tile_Tree(),
+	tile_Glass(), tile_Bush(), tile_Rosebush(), tile_Tree(),
 	tile_Water(), tile_MossyWater(), tile_DeepWater(), tile_Acid(),
 	tile_Bed(), tile_Terminal(),
 	tile_StatueOfRest(), tile_VoidWarpstone(),
