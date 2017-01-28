@@ -59,6 +59,15 @@ miscItem * key_GreenChapelGardenKey()
 	return m;
 }
 
+miscItem * key_SordidChapelKey()
+{
+	miscItem* m = new miscItem("Sordid Chapel Key", KEY_TILE, TCODColor::purple,
+		"This key is so soaked with blood that its material is unrecognizable. Whatever it unlocks is probably best left alone.");
+	m->isKey = true;
+	m->setKeyTag("sordid_chapel_door");
+	return m;
+}
+
 
 
 /*
@@ -72,6 +81,15 @@ miscItem * spellbook_WaterloggedWritings()
 	miscItem* s = new miscItem("Waterlogged Writings", SPELL_TILE, TCODColor::lightLime,
 		"Water-soaked pages filled with sketches of fishmen and descriptions of their scaly magic.");
 	s->setKeyTag("waterlogged_writings");
+	s->isKey = true;
+	return s;
+}
+
+miscItem * spellbook_MinasProfanedWritings()
+{
+	miscItem* s = new miscItem("Minas's Profaned Writings", SPELL_TILE, TCODColor::purple,
+		"This filthy scroll is marked with profane runes, scrawled in blood.");
+	s->setKeyTag("minas_profaned_writings");
 	s->isKey = true;
 	return s;
 }

@@ -552,6 +552,20 @@ monster * monster_VoidwalkerMinas()
 	return m;
 }
 
+monster * monster_VoidTouched()
+{
+	monster* m = new monster("Void-Touched", GHOST_TILE, TCODColor::lighterPurple,
+		"These figures seem to shift in and out of existence, their faces contorted in agony.");
+	m->setHealth(25);
+	m->setDefence(DAMAGE_PHYSICAL, 100);
+	m->setMoveStats(SPEED_NORMAL);
+	m->setMeleeStats(25, SPEED_NORMAL);
+	m->addSpellKnown(ability_ShadowWalk());
+	m->setSpellCastChance(50);
+	m->setFragmentsDropped(50);
+	return m;
+}
+
 
 /*
 	FRIENDLIES
@@ -590,6 +604,8 @@ monster * npc_UtricTheRat()
 	m->addStockUnlock(spell_AcidSpit(), 50, "waterlogged_writings");
 	m->addStockUnlock(spell_AcidBurst(), 75, "waterlogged_writings");
 	m->addStockUnlock(spell_AcidBlade(), 100, "waterlogged_writings");
+	//Unlock: Minas's Profaned Writings
+	m->addStockUnlock(spell_ProfanedBlade(), 100, "minas_profaned_writings");
 	//Dialogue
 	m->loadDialogue("dialogue/utric_chat.txt");
 	return m;
@@ -627,6 +643,17 @@ monster * npc_ElenaThePilgrim()
 	m->addItemToStock(consumable_InvigoratingTea(), 150);
 	//Dialogue
 	m->loadDialogue("dialogue/elena_chat.txt");
+	return m;
+}
+
+monster * npc_VoidwalkerDaedelus()
+{
+	monster* m = new monster("Voidwalker Daedelus", PLAYER_TILE, TCODColor::purple,
+		"A mournful-looking man in purple robes. He seems to be listening intently.");
+	m->setHealth(200);
+	m->isHostile = false;
+	//Dialogue
+	m->loadDialogue("dialogue/daedelus_chat.txt");
 	return m;
 }
 
@@ -696,6 +723,10 @@ monster * getMonsterByHandle(std::string handle)
 	else if (handle == "voidwalker_minas")
 		return monster_VoidwalkerMinas();
 
+	//The Void
+	else if (handle == "void_touched")
+		return monster_VoidTouched();
+
 	//Friendly NPCs
 	else if (handle == "gorem")
 		return npc_Gorem();
@@ -705,6 +736,8 @@ monster * getMonsterByHandle(std::string handle)
 		return npc_MuiraClericOfTheRose();
 	else if (handle == "elena")
 		return npc_ElenaThePilgrim();
+	else if (handle == "daedelus")
+		return npc_VoidwalkerDaedelus();
 
 	//LET'S HOPE WE NEVER GET HERE!
 	return nullptr;

@@ -276,6 +276,17 @@ spell * spell_AcidBurst()
 	return sp;
 }
 
+spell * spell_ProfanedBlade()
+{
+	spell* sp = new spell("Profaned Blade", SPELL_TILE, TCODColor::darkPurple,
+		"A blade touched by this spell briefly ceases to exist, replaced by a sucking portal that draws flesh into the Void.");
+	sp->setAttackType(ATTACK_BUFF_WEAPON);
+	sp->setBuffApplied(DAMAGE_PROFANE, 15);
+	sp->setVigourCost(2);
+	sp->usesSpellPower = true;
+	return sp;
+}
+
 spell * spell_SpitFire()
 {
 	spell* sp = new spell("Spit Fire", SPELL_TILE, TCODColor::flame,

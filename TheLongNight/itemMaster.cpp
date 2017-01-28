@@ -140,10 +140,16 @@ item * getItemByHandle(std::string handle)
 		return key_GreenChapelGardenKey();
 	else if (handle == "void_sigil")
 		return misc_VoidSigil();
+	else if (handle == "sordid_chapel_key")
+		return key_SordidChapelKey();
+	else if (handle == "voidwalkers_returning_bell")
+		return bell_VoidwalkersReturningBell();
 
 	//SPELLBOOKS
 	else if (handle == "waterlogged_writings")
 		return spellbook_WaterloggedWritings();
+	else if (handle == "minas_profaned_writings")
+		return spellbook_MinasProfanedWritings();
 
 	//RUNESTONES
 	else if (handle == "corens_runestone")

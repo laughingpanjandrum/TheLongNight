@@ -83,6 +83,10 @@ spell* spell_Frostbolt();
 spell* spell_AcidSpit();
 spell* spell_AcidBlade();
 spell* spell_AcidBurst();
+//Utric, with profaned writings
+spell* spell_ProfanedBlade();
+spell* spell_VoidJaunt();
+spell* spell_DevouringVoidCloud();
 
 spell* spell_SpitFire();
 

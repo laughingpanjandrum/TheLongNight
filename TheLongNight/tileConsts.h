@@ -37,6 +37,8 @@ const int RAT_TILE = 114;
 const int ZOMBIE_TILE = 122;
 const int PRIEST_TILE = 80;
 
+const int GHOST_TILE = 86;
+
 const int GOREM_TILE = 266; //This is a golem-dude
 
 //Items

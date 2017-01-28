@@ -134,3 +134,13 @@ consumable * bell_VoidwalkersDancingBell()
 	c->addEffect(TELEPORT_TO_VOID);
 	return c;
 }
+
+consumable * bell_VoidwalkersReturningBell()
+{
+	consumable* c = new consumable("Voidwalker's Returning Bell", BELL_TILE, TCODColor::lightPurple,
+		"This bell radiates warmth. From within the void, it whispers to every walker of the dark, promising them that \
+they will return home someday.");
+	c->consumeOnUse = false;
+	c->addEffect(TELEPORT_BACK_FROM_VOID);
+	return c;
+}

@@ -288,7 +288,7 @@ maptile * tile_SordidChapelDoor()
 	maptile* door = new maptile("Sordid Chapel Door", "sordid_door", BASIC_DOOR_TILE,
 		TCODColor::darkGrey, TCODColor::darkCrimson, false, false);
 	door->isDoor = true;
-	door->unlockCode = "sordid_door";
+	door->unlockCode = "sordid_chapel_door";
 	door->addTouchEffect(CHECK_FOR_UNLOCK);
 	return door;
 }

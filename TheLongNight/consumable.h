@@ -81,5 +81,6 @@ consumable* oil_PyromancersOil();
 consumable* oil_CorrosiveOil();
 
 consumable* bell_VoidwalkersDancingBell();
+consumable* bell_VoidwalkersReturningBell();
 
 #endif

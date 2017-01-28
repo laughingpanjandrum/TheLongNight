@@ -48,9 +48,11 @@ miscItem* key_OldCrowsKey();
 miscItem* key_RuinedTownshipKey();
 miscItem* key_WyrdKey();
 miscItem* key_GreenChapelGardenKey();
+miscItem* key_SordidChapelKey();
 
 //Spellbooks
 miscItem* spellbook_WaterloggedWritings();
+miscItem* spellbook_MinasProfanedWritings();
 
 //Runestones
 miscItem* runestone_CorensRunestone();

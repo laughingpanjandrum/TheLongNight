@@ -69,6 +69,7 @@ private:
 
 	//Constants
 	const static std::string VOID_EDGE_MAP;
+	const static std::string VOID_RETURN_MAP;
 
 	//Character/state/etc
 	map* currentMap;
@@ -148,6 +149,13 @@ private:
 
 	//Input processing
 	void processCommand();
+	void processMouseClick();
+
+	//Auto-walking for the PC
+	bool isAutoWalking = false;
+	void startAutoWalk();
+	void playerAutoWalk();
+	TCODPath* playerAutoPath;
 
 	//Consumables
 	void useConsumable();
@@ -186,7 +194,10 @@ private:
 	void knockbackTarget(person* knocker, person* target, int distance);
 	void pullTarget(person* puller, person* target, int distance);
 	bool waterWarp(person* target, int distance);
-	void teleportToVoid(); //Player only, special map jump!
+
+	//Player-only SPECIAL MAP JUMPS
+	void teleportToVoid();
+	void teleportOutOfVoid();
 
 	//Boss fights
 	monster* currentBoss;

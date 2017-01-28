@@ -3,6 +3,7 @@
 
 
 const std::string game::VOID_EDGE_MAP = "maps/void_edge.txt";
+const std::string game::VOID_RETURN_MAP = "maps/sordid_chapel.txt";
 
 
 game::game()
@@ -45,6 +46,8 @@ game::~game()
 {
 }
 
+
+
 /*
 	MAIN GAME LOOP
 */
@@ -62,8 +65,13 @@ void game::mainGameLoop()
 		}
 		//Events
 		TCODSystem::checkForEvent(TCOD_EVENT_ANY, &key, &mouse);
-		//Process player action
-		processCommand();
+		//Process player action, unless AUTO-WALKING
+		if (isAutoWalking)
+			playerAutoWalk();
+		else {
+			processCommand();
+			processMouseClick();
+		}
 	}
 }
 
@@ -1307,6 +1315,8 @@ void game::processCommand()
 			isGameOver = true;
 		else if (key.c == 'F')
 			TCODConsole::setFullscreen(!TCODConsole::isFullscreen());
+		else if (key.c == 'l')
+			startAutoWalk();
 
 		//Menus
 		else if (key.vk == KEY_BACK_OUT)
@@ -1358,6 +1368,51 @@ void game::processCommand()
 			debugMenu();
 
 	}
+}
+
+void game::processMouseClick()
+{
+	if (mouse.lbutton) {
+		//Start autowalking to here
+		startAutoWalk();
+	}
+}
+
+
+
+/*
+		AUTO-WALKING ALONG A PATH
+*/
+
+
+/*
+Set up an auto-walk!
+*/
+void game::startAutoWalk()
+{
+	coord pos = screenToMapCoords(coord(mouse.cx, mouse.cy));
+	if (currentMap->inBounds(pos.first, pos.second)) {
+		isAutoWalking = true;
+		playerAutoPath = getPathToCoord(player->getPosition(), pos);
+	}
+}
+
+/*
+Move along a predetermined path.
+Stops if player fails to move or if the path ends.
+*/
+void game::playerAutoWalk()
+{
+	if (!playerAutoPath->isEmpty()) {
+		int x = player->getx();
+		int y = player->gety();
+		if (!playerAutoPath->walk(&x, &y, false))
+			isAutoWalking = false;
+		else
+			movePerson(player, x, y);
+	}
+	else
+		isAutoWalking = false;
 }
 
 /*
@@ -1480,6 +1535,8 @@ void game::applyEffectToPerson(person * target, effect eff, int potency, person*
 		setupWarpMenu();
 	else if (eff == TELEPORT_TO_VOID)
 		teleportToVoid();
+	else if (eff == TELEPORT_BACK_FROM_VOID)
+		teleportOutOfVoid();
 
 	//Special spell effect
 	else if (eff == CASTER_MELEE_ATTACK)
@@ -2006,6 +2063,15 @@ Yeah, this is hardcoded.
 void game::teleportToVoid()
 {
 	loadMapFromHandle(VOID_EDGE_MAP, CONNECT_WARP, player->getx(), player->gety());
+	setSavePoint();
+}
+
+/*
+Warp AWAY from the Void!
+*/
+void game::teleportOutOfVoid()
+{
+	loadMapFromHandle(VOID_RETURN_MAP, CONNECT_WARP, player->getx(), player->gety());
 	setSavePoint();
 }
 

@@ -1,0 +1,7 @@
+"...Hm? I suspect you don't belong here!"
+"This is the edge of the Void... Don't walk upon the Void itself, I implore you, lest you be utterly obliterated!"
+"Its abyssal depths hunger eternally for the flesh of those who walk upon the waking world."
+"The gateways of the Void have widened, and terrible things begin to emerge -"
+"The god Pash, who devours all, and Qom, the Gibbering Spider, whose visage brings vacuous insanity to those who behold it..."
+"I implore you, seek the hiding place of the old gods, and tell them to restore the world to its proper form!"
+|BACK_UP_AND_END

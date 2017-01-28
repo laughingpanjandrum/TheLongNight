@@ -136,11 +136,15 @@ monster* monster_OozingZombie();
 monster* monster_DevoteeOfPash();
 monster* monster_VoidwalkerMinas();
 
+//The Void
+monster* monster_VoidTouched();
+
 //Friendly NPCs
 monster* npc_Gorem();
 monster* npc_UtricTheRat();
 monster* npc_MuiraClericOfTheRose();
 monster* npc_ElenaThePilgrim();
+monster* npc_VoidwalkerDaedelus();
 
 
 //For map files
