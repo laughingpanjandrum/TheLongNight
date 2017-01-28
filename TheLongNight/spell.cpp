@@ -134,9 +134,9 @@ spell * attack_DivineSmite()
 spell * ability_PowerSurge()
 {
 	spell* sp = new spell("Power Surge", SWORD_TILE, TCODColor::magenta,
-		"Your next spell gains +50% power.");
+		"Your next spell gains +100% power.");
 	sp->setAttackType(ATTACK_BUFF_SELF);
-	sp->addEffect(SCALE_NEXT_SPELL, 50);
+	sp->addEffect(SCALE_NEXT_SPELL, 100);
 	sp->setVigourCost(1);
 	return sp;
 }
@@ -144,7 +144,7 @@ spell * ability_PowerSurge()
 spell * ability_AcidInfusion()
 {
 	spell* sp = new spell("Acid Infusion", SWORD_TILE, TCODColor::darkLime,
-		"Infuses next spell with acid.");
+		"Next attack spell deals acid damage. This is especially effective using acid-based spells.");
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(SPELL_ACID_INFUSION, 25);
 	sp->setVigourCost(1);

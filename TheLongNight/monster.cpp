@@ -422,11 +422,12 @@ monster * monster_FishbornGoddess()
 {
 	monster* m = new monster("Fishborn Goddess", FISHMAN_TILE, TCODColor::lighterGreen,
 		"A woman with trailing seaweed hair, whose unnaturally long arms drip acid.");
-	m->setHealth(800);
+	m->setHealth(700);
 	m->setBleedResist(50);
-	m->setDefence(DAMAGE_PHYSICAL, 15);
+	m->setDefence(DAMAGE_PHYSICAL, 10);
+	m->setDefence(DAMAGE_ACID, 10);
 	m->setMoveStats(SPEED_NORMAL);
-	m->setMeleeStats(40, SPEED_SLOW);
+	m->setMeleeStats(30, SPEED_SLOW);
 	m->addSpellKnown(ability_SinkBeneath());
 	m->addSpellKnown(spell_AcidSpit());
 	m->addSpellKnown(spell_AcidBurst());

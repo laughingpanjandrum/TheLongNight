@@ -13,5 +13,5 @@ spt:15,13
 !elenaToFairweather
 map:maps/old_fairweather.txt
 npc:elena
-spt:20,22
+spt:20,17
 !end

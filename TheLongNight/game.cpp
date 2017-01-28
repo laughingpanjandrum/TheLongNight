@@ -228,9 +228,11 @@ Returns the first person we find walking along the given path vector.
 person * game::getTargetOnPath(pathVector path)
 {
 	for (auto pt : path) {
-		person* target = currentMap->getPerson(pt.first, pt.second);
-		if (target != nullptr)
-			return target;
+		if (currentMap->isWalkable(pt.first, pt.second)) {
+			person* target = currentMap->getPerson(pt.first, pt.second);
+			if (target != nullptr)
+				return target;
+		}
 	}
 	return nullptr;
 }
@@ -1372,7 +1374,7 @@ void game::processCommand()
 
 void game::processMouseClick()
 {
-	if (mouse.lbutton) {
+	if (mouse.lbutton_pressed) {
 		//Start autowalking to here
 		startAutoWalk();
 	}
