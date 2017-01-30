@@ -191,7 +191,7 @@ monster * monster_DrownedDead()
 
 monster * monster_ThinWretch()
 {
-	monster * m = new monster("Thin Wretch", WRETCH_TILE, TCODColor::green,
+	monster * m = new monster("Thin Wretch", WRETCH_TILE, TCODColor::darkGreen,
 		"The haggard eyes of this twisted wretch suggests that it knows something you don't.");
 	m->setMeleeStats(10, SPEED_NORMAL);
 	m->setMoveStats(SPEED_NORMAL);
@@ -202,7 +202,7 @@ monster * monster_ThinWretch()
 
 monster * monster_TimidWretch()
 {
-	monster * m = new monster("Timid Wretch", WRETCH_TILE, TCODColor::lightestGreen,
+	monster * m = new monster("Timid Wretch", WRETCH_TILE, TCODColor::darkerGreen,
 		"This wretched creature hangs back, its eyes glowing with wrath.");
 	m->setMeleeStats(15, SPEED_FAST);
 	m->setMoveStats(SPEED_SLOW);
@@ -216,7 +216,7 @@ monster * monster_TimidWretch()
 
 monster * monster_BloatedWretch()
 {
-	monster * m = new monster("Bloated Wretch", BLOATED_WRETCH_TILE, TCODColor::lime,
+	monster * m = new monster("Bloated Wretch", BLOATED_WRETCH_TILE, TCODColor::darkLime,
 		"This bloated horror is swollen with seawater. Perhaps it was hungrier than the others.");
 	m->setMeleeStats(25, SPEED_SLOW);
 	m->setMoveStats(SPEED_SLOW);
@@ -232,7 +232,7 @@ Coruscating Beach boss
 */
 monster * boss_TheWretchedMass()
 {
-	monster* m = new monster("The Wretched Mass", WRETCHED_MASS_TILE, TCODColor::lightGreen,
+	monster* m = new monster("The Wretched Mass", WRETCHED_MASS_TILE, TCODColor::darkestGreen,
 		"A mass of wretches fused together into a gruesome amalgamation. It shrieks and flops towards you, its many limbs \
 flailing.");
 	m->setHealth(400);
@@ -553,6 +553,32 @@ monster * monster_VoidwalkerMinas()
 	return m;
 }
 
+monster * monster_BloodthirstyHound()
+{
+	monster* m = new monster("Bloodthirsty Hound", HOUND_TILE, TCODColor::crimson,
+		"A skeletal hound whose serrated teeth drip blood.");
+	m->setHealth(50);
+	m->setMoveStats(SPEED_FAST);
+	m->equipItem(new weapon(5, SPEED_FAST, EFFECT_BLEED, 15));
+	m->setFragmentsDropped(20);
+	return m;
+}
+
+monster * monster_BloodstarvedZombie()
+{
+	monster* m = new monster("Bloodstarved Zombie", ZOMBIE_TILE, TCODColor::crimson,
+		"This rotted creature's distended jaw drips with fresh blood.");
+	m->setHealth(150);
+	m->setMoveStats(SPEED_NORMAL);
+	m->equipItem(new weapon(10, SPEED_FAST, EFFECT_BLEED, 10));
+	m->bleedScaling = 25;
+	m->setBleedResist(60);
+	m->addSpellKnown(attack_BloodFeast());
+	m->setSpellCastChance(25);
+	m->setFragmentsDropped(50);
+	return m;
+}
+
 monster * monster_VoidTouched()
 {
 	monster* m = new monster("Void-Touched", GHOST_TILE, TCODColor::lighterPurple,
@@ -642,6 +668,13 @@ monster * npc_ElenaThePilgrim()
 	m->addItemToStock(ranged_PyromancersFlask(), 75);
 	m->addItemToStock(consumable_TinyGreenFlower(), 25);
 	m->addItemToStock(consumable_InvigoratingTea(), 150);
+	//With Piece of Jade
+	m->addStockUnlock(consumable_TinyRedFlower(), 50, "piece_of_jade");
+	m->addStockUnlock(consumable_TinyGreenFlower(), 50, "piece_of_jade");
+	m->addStockUnlock(ranged_CorrodingJar(), 50, "piece_of_jade");
+	m->addStockUnlock(ranged_HeavyJavelin(), 50, "piece_of_jade");
+	m->addStockUnlock(ranged_LightingJavelin(), 75, "piece_of_jade");
+	m->addStockUnlock(ranged_FrostKnives(), 75, "piece_of_jade");
 	//Dialogue
 	m->loadDialogue("dialogue/elena_chat.txt");
 	return m;
@@ -723,6 +756,10 @@ monster * getMonsterByHandle(std::string handle)
 		return monster_DevoteeOfPash();
 	else if (handle == "voidwalker_minas")
 		return monster_VoidwalkerMinas();
+	else if (handle == "bloodthirsty_hound")
+		return monster_BloodthirstyHound();
+	else if (handle == "bloodstarved_zombie")
+		return  monster_BloodstarvedZombie();
 
 	//The Void
 	else if (handle == "void_touched")

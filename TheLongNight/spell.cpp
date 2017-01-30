@@ -129,6 +129,16 @@ spell * attack_DivineSmite()
 	return sp;
 }
 
+spell * attack_BloodFeast()
+{
+	spell* sp = new spell("Blood Feast", SPELL_TILE, TCODColor::crimson,
+		"Inflict bleed on oneself. Next attack deals +15 damage.");
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(APPLY_BLEED_DAMAGE, 10);
+	sp->addEffect(SCALE_NEXT_ATTACK, 15);
+	return sp;
+}
+
 //Wand/chime powers
 
 spell * ability_PowerSurge()

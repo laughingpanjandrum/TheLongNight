@@ -30,6 +30,8 @@ item * getItemByHandle(std::string handle)
 	//Crumbling City
 	else if (handle == "city_guardian_warhammer")
 		return weapon_CityGuardianWarhammer();
+	else if (handle == "blood_drinkers_knife")
+		return weapon_BloodDrinkersKnife();
 
 	//SHIELDS
 	else if (handle == "battered_wooden_shield")
@@ -78,6 +80,10 @@ item * getItemByHandle(std::string handle)
 		return ranged_PyromancersFlask();
 	else if (handle == "witchs_jar")
 		return ranged_WitchsJar();
+	else if (handle == "lightning_javelins")
+		return ranged_LightingJavelin();
+	else if (handle == "frost_knives")
+		return ranged_FrostKnives();
 
 	//ARMOUR
 	else if (handle == "captains_tricorn")
@@ -113,7 +119,7 @@ item * getItemByHandle(std::string handle)
 	else if (handle == "pash_hood")
 		return headgear_PashHood();
 	else if (handle == "pash_robes")
-		return headgear_PashRobes();
+		return armour_PashRobes();
 
 	//CHARMS
 	else if (handle == "bloodstained_charm")
@@ -124,6 +130,8 @@ item * getItemByHandle(std::string handle)
 		return charm_IdolOfPash();
 	else if (handle == "eviscerating_ring")
 		return charm_EvisceratingRing();
+	else if (handle == "blood_drinkers_band")
+		return charm_BloodDrinkersBand();
 
 	//SPELLS
 	else if (handle == "magic_missile")
@@ -150,6 +158,8 @@ item * getItemByHandle(std::string handle)
 		return spellbook_WaterloggedWritings();
 	else if (handle == "minas_profaned_writings")
 		return spellbook_MinasProfanedWritings();
+	else if (handle == "piece_of_jade")
+		return misc_PieceOfJade();
 
 	//RUNESTONES
 	else if (handle == "corens_runestone")

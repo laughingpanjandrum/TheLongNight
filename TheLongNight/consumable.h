@@ -76,6 +76,8 @@ consumable* ranged_LaceratingKnives();
 consumable* ranged_CorrodingJar();
 consumable* ranged_PyromancersFlask();
 consumable* ranged_WitchsJar();
+consumable* ranged_LightingJavelin();
+consumable* ranged_FrostKnives();
 
 consumable* oil_PyromancersOil();
 consumable* oil_CorrosiveOil();

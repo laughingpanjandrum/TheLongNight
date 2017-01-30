@@ -117,6 +117,7 @@ weapon* weapon_FishmansHarpoon();
 weapon* weapon_FishmansKnife();
 
 weapon* weapon_CityGuardianWarhammer();
+weapon* weapon_BloodDrinkersKnife();
 
 weapon* weapon_ProfaneGreatsword();
 

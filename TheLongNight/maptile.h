@@ -12,16 +12,30 @@
 //	Colour constants
 
 
-#define LIGHT_GRASS_COLOR TCODColor(68, 87, 30)
-#define DARK_GRASS_COLOR TCODColor(46, 58, 20)
-#define DARKEST_GRASS_COLOR TCODColor(40, 53, 13)
+#define LIGHT_GRASS_COLOR TCODColor(76, 76, 35)
+#define DARK_GRASS_COLOR TCODColor(68, 77, 21)
+#define DARKEST_GRASS_COLOR TCODColor(60, 71, 11)
 
-#define LIGHT_WATER_COLOR TCODColor(16, 42, 96)
-#define DARK_WATER_COLOR TCODColor(14, 37, 87)
+#define LIGHT_WATER_COLOR TCODColor(25, 65, 148)
+#define DARK_WATER_COLOR TCODColor(22, 58, 135)
 #define DARKEST_WATER_COLOR TCODColor(4, 12, 28)
 
-#define LIGHT_STONE_COLOR TCODColor(57, 57, 57)
+#define LIGHT_STONE_COLOR TCODColor(134, 129, 186)
 #define DARK_STONE_COLOR TCODColor(23, 23, 23)
+
+#define TREE_COLOR TCODColor(122, 92, 44)
+
+#define LIGHT_SAND_COLOR TCODColor(242, 234, 189)
+#define DARK_SAND_COLOR TCODColor(222, 210, 161)
+#define DARKEST_SAND_COLOR TCODColor(202, 192, 149)
+
+#define LIGHT_WOOD_COLOR TCODColor(87, 73, 34)
+#define DARK_WOOD_COLOR TCODColor(38, 29, 10)
+
+#define LIGHT_GLASS_COLOR TCODColor(209, 227, 226)
+#define DARK_GLASS_COLOR TCODColor(134, 165, 189)
+
+
 
 class maptile
 {
@@ -140,6 +154,15 @@ maptile* tile_WyrdDoor(); //"wyrd_door"
 maptile* tile_GreenChapelGardenDoor(); //"green_chapel_door"
 maptile* tile_SordidChapelDoor(); //"sordid door"
 
+//Furniture
+maptile* tile_Chair1(); //"chair1"
+maptile* tile_Chair2(); //"chair2"
+maptile* tile_Table1(); //"table1"
+maptile* tile_Table2(); //"table2"
+maptile* tile_Table3(); //"table3"
+maptile* tile_Table4(); //"table4"
+
+
 const tileVector ALL_MAPTILES = {
 	tile_Floor(), tile_MossyFloor(), tile_Sand(), tile_Grass(), tile_Road(), tile_Void(),
 	tile_Wall(), tile_WoodenWall(), tile_SandyRock(),
@@ -150,6 +173,9 @@ const tileVector ALL_MAPTILES = {
 	tile_Bloodstain(), tile_Corpse(),
 	tile_Bed(), tile_Terminal(),
 	tile_StatueOfRest(), tile_VoidWarpstone(),
+	//Furniture
+	tile_Chair1(), tile_Chair2(),
+	tile_Table1(), tile_Table2(), tile_Table3(), tile_Table4(),
 	//Special locked doors
 	tile_WretchedDoor(), tile_CrowDoor(), tile_RuinedTownshipHallDoor(),
 	tile_WyrdDoor(), tile_GreenChapelGardenDoor(), tile_SordidChapelDoor()

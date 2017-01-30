@@ -25,6 +25,7 @@ w wall_wood
 south:flooded_lowlands_2
 east:deep_lake
 west:flooded_lowlands_4
+north:crumbling_city_1
 -endconnections
 ................w..w##############......
 .......#########w..w..~~~~~~~~~~~###....

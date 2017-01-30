@@ -148,3 +148,12 @@ miscItem * misc_VoidSigil()
 	m->setKeyTag("warpstone");
 	return m;
 }
+
+miscItem * misc_PieceOfJade()
+{
+	miscItem* m = new miscItem("Piece of Jade", FRAGMENT_GLYPH, TCODColor::lightGreen,
+		"A chunk of jade that sparkles with surprising radiance. It reminds you of home.");
+	m->isKey = true;
+	m->setKeyTag("piece_of_jade");
+	return m;
+}

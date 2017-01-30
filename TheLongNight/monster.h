@@ -135,6 +135,8 @@ monster* monster_FirespitterZombie();
 monster* monster_OozingZombie();
 monster* monster_DevoteeOfPash();
 monster* monster_VoidwalkerMinas();
+monster* monster_BloodthirstyHound();
+monster* monster_BloodstarvedZombie();
 
 //The Void
 monster* monster_VoidTouched();

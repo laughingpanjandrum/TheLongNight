@@ -43,7 +43,7 @@ bool maptile::hasTouchEffect(effect te)
 
 maptile * tile_Floor()
 {
-	return new maptile("Floor", "floor_stone", BASIC_FLOOR_TILE, TCODColor(47,45,43), TCODColor(23,23,23));
+	return new maptile("Floor", "floor_stone", BASIC_FLOOR_TILE, LIGHT_STONE_COLOR, DARK_STONE_COLOR);
 }
 
 maptile * tile_MossyFloor()
@@ -53,7 +53,7 @@ maptile * tile_MossyFloor()
 
 maptile * tile_Sand()
 {
-	return new maptile("Sand", "floor_sand", BASIC_FLOOR_TILE, TCODColor::amber, TCODColor::darkerAmber);
+	return new maptile("Sand", "floor_sand", SAND_TILE, LIGHT_SAND_COLOR, DARK_SAND_COLOR);
 }
 
 maptile * tile_Grass()
@@ -76,17 +76,17 @@ maptile * tile_Void()
 
 maptile * tile_SandyRock()
 {
-	return new maptile("Sandy Rock", "wall_sand", BASIC_WALL_TILE, TCODColor::darkAmber, TCODColor::amber, false, false);
+	return new maptile("Sandy Rock", "wall_sand", STONE_WALL_TILE, DARKEST_SAND_COLOR, LIGHT_SAND_COLOR, false, false);
 }
 
 maptile * tile_Wall()
 {
-	return new maptile("Wall", "wall_stone", BASIC_WALL_TILE, LIGHT_STONE_COLOR, DARK_STONE_COLOR, false, false);
+	return new maptile("Wall", "wall_stone", BASIC_WALL_TILE, DARK_STONE_COLOR, LIGHT_STONE_COLOR, false, false);
 }
 
 maptile * tile_WoodenWall()
 {
-	return new maptile("Wall", "wall_wood", BASIC_WALL_TILE, TCODColor::lightSepia, TCODColor::darkerSepia, false, false);
+	return new maptile("Wall", "wall_wood", WOODEN_WALL, LIGHT_WOOD_COLOR, DARK_WOOD_COLOR, false, false);
 }
 
 maptile * tile_Door()
@@ -97,7 +97,7 @@ maptile * tile_Door()
 
 maptile * tile_WoodenDoor()
 {
-	return new maptile("Door", "door_wood", BASIC_DOOR_TILE, TCODColor::darkerSepia, TCODColor::lightSepia, true, false);
+	return new maptile("Door", "door_wood", BASIC_DOOR_TILE, DARK_WOOD_COLOR, LIGHT_WOOD_COLOR, true, false);
 }
 
 /*
@@ -105,7 +105,7 @@ Door is initially locked (but can be unlocked later)
 */
 maptile * tile_LockedDoor()
 {
-	maptile* d = new maptile("Door", "locked_door", BASIC_DOOR_TILE, TCODColor::darkerGrey, TCODColor::grey, false, false);
+	maptile* d = new maptile("Door", "locked_door", BASIC_DOOR_TILE, DARK_STONE_COLOR, LIGHT_STONE_COLOR, false, false);
 	d->isDoor = true;
 	return d;
 }
@@ -122,7 +122,7 @@ maptile * tile_DoorUnlocker()
 
 maptile * tile_Glass()
 {
-	return new maptile("Glass", "glass", BASIC_WALL_TILE, TCODColor::cyan, TCODColor::black, false, true);
+	return new maptile("Glass", "glass", GLASS_TILE, LIGHT_GLASS_COLOR, DARK_GLASS_COLOR, false, true);
 }
 
 maptile * tile_Bush()
@@ -137,7 +137,7 @@ maptile * tile_Rosebush()
 
 maptile * tile_Tree()
 {
-	return new maptile("Tree", "tree", TREE_TILE, TCODColor::lightSepia, DARK_GRASS_COLOR, false, false);
+	return new maptile("Tree", "tree", TREE_TILE, TREE_COLOR, DARK_GRASS_COLOR, false, false);
 }
 
 maptile * tile_VoidTree()
@@ -231,7 +231,7 @@ maptile * tile_VoidWarpstone()
 
 maptile * tile_WretchedDoor()
 {
-	maptile* door = new maptile("Wretched Door", "wretched_door", BASIC_DOOR_TILE, TCODColor::lightAmber, TCODColor::darkAmber, 
+	maptile* door = new maptile("Wretched Door", "wretched_door", BASIC_DOOR_TILE, DARK_SAND_COLOR, LIGHT_SAND_COLOR, 
 		false, false);
 	door->unlockCode = "wretched_door";
 	door->isDoor = true;
@@ -291,4 +291,40 @@ maptile * tile_SordidChapelDoor()
 	door->unlockCode = "sordid_chapel_door";
 	door->addTouchEffect(CHECK_FOR_UNLOCK);
 	return door;
+}
+
+maptile * tile_Chair1()
+{
+	return new maptile("Chair", "chair1", CHAIR_TILE_1,
+		TREE_COLOR, DARK_STONE_COLOR, true, false);
+}
+
+maptile * tile_Chair2()
+{
+	return new maptile("Chair", "chair2", CHAIR_TILE_2,
+		TREE_COLOR, DARK_STONE_COLOR, true, false);
+}
+
+maptile * tile_Table1()
+{
+	return new maptile("Table", "table1", TABLE_TILE_1,
+		TREE_COLOR, DARK_STONE_COLOR, true, false);
+}
+
+maptile * tile_Table2()
+{
+	return new maptile("Table", "table2", TABLE_TILE_2,
+		TREE_COLOR, DARK_STONE_COLOR, true, false);
+}
+
+maptile * tile_Table3()
+{
+	return new maptile("Table", "table3", TABLE_TILE_3,
+		TREE_COLOR, DARK_STONE_COLOR, true, false);
+}
+
+maptile * tile_Table4()
+{
+	return new maptile("Table", "table4", TABLE_TILE_4,
+		TREE_COLOR, DARK_STONE_COLOR, true, false);
 }

@@ -187,9 +187,9 @@ weapon * weapon_CrowKnightSword()
 
 weapon * weapon_CrowKnife()
 {
-	weapon* wp = new weapon("Crow Knife", SWORD_TILE, TCODColor::lightGrey,
+	weapon* wp = new weapon("Crow Knife", DAGGER_TILE, TCODColor::lightGrey,
 		"The short blade of this knife is barbed to inflict bleeding.");
-	wp->setBasicAttributes(15, SPEED_NORMAL);
+	wp->setBasicAttributes(15, SPEED_FAST);
 	wp->addStatusEffect(EFFECT_BLEED, 10);
 	wp->setSpecialAttack(attack_Splintering());
 	wp->addScalingType(SCALE_DEX);
@@ -220,7 +220,7 @@ weapon * weapon_NotchedGreatsword()
 
 weapon * weapon_FishmansHarpoon()
 {
-	weapon* wp = new weapon("Fishman's Harpoon", SWORD_TILE, TCODColor::lime,
+	weapon* wp = new weapon("Fishman's Harpoon", SPEAR_TILE, TCODColor::lime,
 		"Its point is barbed to induce bleeding and to drag the victim.");
 	wp->setBasicAttributes(40, SPEED_NORMAL);
 	wp->addStatusEffect(EFFECT_BLEED, 10);
@@ -249,6 +249,19 @@ weapon * weapon_CityGuardianWarhammer()
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEV);
 	wp->setSpecialAttack(attack_DivineSmite());
+	return wp;
+}
+
+weapon * weapon_BloodDrinkersKnife()
+{
+	weapon* wp = new weapon("Blood Drinker's Knife", DAGGER_TILE, TCODColor::crimson,
+		"This knife is serrated on both the blade and the grip, for the profane scriptures of Pash decree that to bleed is to \
+see the true shape of all things.");
+	wp->setBasicAttributes(10, SPEED_FAST);
+	wp->addStatusEffect(EFFECT_BLEED, 20);
+	wp->addScalingType(SCALE_DEX);
+	wp->addScalingType(SCALE_DEV);
+	wp->setSpecialAttack(attack_BloodFeast());
 	return wp;
 }
 
@@ -305,6 +318,7 @@ but not a single knight survived.");
 	wp->setDefence(15);
 	wp->setDamageResist(DAMAGE_PROFANE, 15);
 	wp->setDamageResist(DAMAGE_FIRE, 10);
+	wp->makeOffhand();
 	return wp;
 }
 

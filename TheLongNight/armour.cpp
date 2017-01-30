@@ -52,7 +52,7 @@ armour * armour_RuinedKnightsArmour()
 
 armour * headgear_ClericsHood()
 {
-	armour* a = new armour("Cleric's Hood", HELMET_TILE, TCODColor::darkYellow, ITEM_HELMET,
+	armour* a = new armour("Cleric's Hood", HOOD_TILE, TCODColor::lighterYellow, ITEM_HELMET,
 		"It's important to remember your prayers.");
 	a->setDefence(0);
 	a->setDamageResist(DAMAGE_PROFANE, 5);
@@ -61,7 +61,7 @@ armour * headgear_ClericsHood()
 
 armour * armour_ClericsVestments()
 {
-	armour* a = new armour("Cleric's Vestments", ARMOUR_TILE, TCODColor::darkYellow, ITEM_BODY_ARMOUR,
+	armour* a = new armour("Cleric's Vestments", ROBE_TILE, TCODColor::lighterYellow, ITEM_BODY_ARMOUR,
 		"The clerics of the Lady of the Rose were blessed with certain protections against profane powers, though, of course, that did not save them.");
 	a->setDefence(10);
 	a->setDamageResist(DAMAGE_PROFANE, 10);
@@ -71,7 +71,7 @@ armour * armour_ClericsVestments()
 
 armour * headgear_CrowKnightsHood()
 {
-	armour* a = new armour("Crow Knight's Hood", HELMET_TILE, TCODColor::lightGrey, ITEM_HELMET,
+	armour* a = new armour("Crow Knight's Hood", HOOD_TILE, TCODColor::lightGrey, ITEM_HELMET,
 		"The hood of a crow knight is black, and interlaced with singular white feathers.");
 	a->setDefence(5);
 	a->setBleedResist(10);
@@ -90,7 +90,7 @@ armour * armour_CrowKnightsArmour()
 
 armour * headgear_FishpriestHat()
 {
-	armour* a = new armour("Fishpriest Hat", HELMET_TILE, TCODColor::lime, ITEM_HELMET,
+	armour* a = new armour("Fishpriest Hat", HOOD_TILE, TCODColor::lime, ITEM_HELMET,
 		"Scaly hat of the preachers of doom, whose warnings about the obliteration of Wyrd were ignored.");
 	a->setDefence(5);
 	a->setBleedResist(5);
@@ -100,7 +100,7 @@ armour * headgear_FishpriestHat()
 
 armour * armour_FishscaleCoat()
 {
-	armour* a = new armour("Fishscale Coat", ARMOUR_TILE, TCODColor::lightLime, ITEM_BODY_ARMOUR,
+	armour* a = new armour("Fishscale Coat", ROBE_TILE, TCODColor::lightLime, ITEM_BODY_ARMOUR,
 		"Scaly coat of the preachers of doom, whose pleas for the safety of Wyrd went unanswered.");
 	a->setDefence(10);
 	a->setBleedResist(10);
@@ -133,7 +133,7 @@ armour * armour_CityGuardArmour()
 
 armour * headgear_PashHood()
 {
-	armour* a = new armour("Pash Hood", HELMET_TILE, TCODColor::lightPurple, ITEM_HELMET,
+	armour* a = new armour("Pash Hood", HOOD_TILE, TCODColor::lightPurple, ITEM_HELMET,
 		"Hood that shields the eyes of the devotees of Pash. According to certain storytellers, in the final days of the Winter \
 Court, the face of Pash itself appeared in the sky, devouring the stars.");
 	a->setDefence(5);
@@ -142,9 +142,9 @@ Court, the face of Pash itself appeared in the sky, devouring the stars.");
 	return a;
 }
 
-armour * headgear_PashRobes()
+armour * armour_PashRobes()
 {
-	armour* a = new armour("Pash Robes", ARMOUR_TILE, TCODColor::lightPurple, ITEM_BODY_ARMOUR,
+	armour* a = new armour("Pash Robes", ROBE_TILE, TCODColor::lightPurple, ITEM_BODY_ARMOUR,
 		"Robe of the devotees of Pash. When the Void first reached the Winter Court, these devotees began to appear in the \
 streets, though none knew their origins.");
 	a->setDefence(5);

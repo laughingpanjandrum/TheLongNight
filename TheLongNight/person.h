@@ -127,6 +127,7 @@ public:
 	int healthTrickle = 0; //We get 1 point of this per tick until it runs out
 	int healthOnKill = 0; //Health restored when we kill something
 	int invisibility = 0;
+	int bleedScaling = 0; //Extra damage dealt when we have bleed
 	int getFragmentPickupMult() { return fragmentPickupMultiplier; }
 
 	//Debuffs

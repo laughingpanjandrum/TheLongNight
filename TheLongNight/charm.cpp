@@ -51,3 +51,12 @@ charm * charm_EvisceratingRing()
 	c->addEffect(GAIN_HEALTH_ON_KILL, 15);
 	return c;
 }
+
+charm * charm_BloodDrinkersBand()
+{
+	charm* c = new charm("Blood Drinker's Band", CHARM_TILE, TCODColor::crimson,
+		"This band is covered in thorns to elicit perpetual bleeding. The devotees of Pash believe that this glorious agony \
+will draw one closer to godhood.");
+	c->addEffect(GAIN_BLEED_SCALING, 25);
+	return c;
+}

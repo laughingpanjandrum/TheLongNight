@@ -119,6 +119,10 @@ int person::getMeleeDamage()
 		//Scaling damage
 		int scalingPercent = getScalingDamage(wp);
 		damage += (float)scalingPercent / 100.0 * (float)damage;
+		//Bonus from bleed, if any
+		if (isBleeding || !bleedBuildup.isEmpty()) {
+			damage += bleedScaling;
+		}
 	}
 	return damage;
 }
@@ -320,6 +324,8 @@ void person::applyEffect(effect eff, int potency)
 		health.increaseMaxValue(potency, true);
 	else if (eff == GAIN_HEALTH_ON_KILL)
 		healthOnKill += potency;
+	else if (eff == GAIN_BLEED_SCALING)
+		bleedScaling += potency;
 	else if (eff == BECOME_INVISIBLE)
 		invisibility += potency;
 	else if (eff == CHANGE_FRAGMENT_PICKUP_MULT)

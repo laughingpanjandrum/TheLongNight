@@ -61,6 +61,7 @@ miscItem* runestone_KhallesRunestone();
 
 //Other
 miscItem* misc_VoidSigil();
+miscItem* misc_PieceOfJade();
 
 
 #endif

@@ -7,6 +7,7 @@ firespitter_zombie:35,35
 -items
 city_guard_helm:20,16
 city_guard_armour:31,34
+piece_of_jade:16,30
 -enditems
 -codes
 . floor_stone

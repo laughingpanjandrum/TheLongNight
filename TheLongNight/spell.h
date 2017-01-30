@@ -65,6 +65,7 @@ spell* attack_MightyCleave();
 spell* attack_Spearfishing();
 spell* attack_Fillet();
 spell* attack_DivineSmite();
+spell* attack_BloodFeast();
 
 //Wand/chime powers
 spell* ability_PowerSurge();

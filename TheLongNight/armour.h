@@ -50,7 +50,7 @@ armour* headgear_CityGuardHelm();
 armour* armour_CityGuardArmour();
 
 armour* headgear_PashHood();
-armour* headgear_PashRobes();
+armour* armour_PashRobes();
 
 #endif
 

@@ -1976,7 +1976,14 @@ void game::meleeAttack(person * attacker, person * target)
 		weapon* wp = attacker->getWeapon();
 		if (wp != nullptr) {
 			for (int idx = 0; idx < wp->getStatusEffectCount(); idx++) {
-				target->takeStatusEffectDamage(wp->getStatusEffectType(idx), wp->getStatusEffectDamage(idx));
+				//Values
+				statusEffects sType = wp->getStatusEffectType(idx);
+				int sdmg = wp->getStatusEffectDamage(idx);
+				//Buffs
+				if (sType == EFFECT_BLEED && attacker->getBleedDuration() > 0)
+					sdmg += attacker->bleedScaling;
+				//Deal the damage
+				target->takeStatusEffectDamage(sType, sdmg);
 			}
 		}
 
@@ -2916,6 +2923,96 @@ coord game::screenToMapCoords(coord pt)
 */
 
 
+void getAllItems(person* player) {
+	
+	player->addItem(weapon_BloodDrinkersKnife());
+	player->addItem(weapon_CityGuardianWarhammer());
+	player->addItem(weapon_CrowHalfsword());
+	player->addItem(weapon_CrowKnife());
+	player->addItem(weapon_CrowKnightSword());
+	player->addItem(weapon_FishmansHarpoon());
+	player->addItem(weapon_FishmansKnife());
+	player->addItem(weapon_NotchedGreatsword());
+	player->addItem(weapon_SplinteredSword());
+	player->addItem(weapon_StraightSword());
+	player->addItem(weapon_ThinKnife());
+	player->addItem(weapon_Warhammer());
+
+	player->addItem(shield_BatteredSteelShield());
+	player->addItem(shield_BatteredWoodenShield());
+	player->addItem(shield_CityGuardianShield());
+	player->addItem(shield_WoodenWyrdShield());
+
+	player->addItem(chime_ClericsCrackedChime());
+	player->addItem(chime_WyrdBellbranch());
+
+	player->addItem(wand_DriftwoodWand());
+	player->addItem(wand_FishmansToadstaff());
+
+	player->addItem(headgear_CaptainsTricorn());
+	player->addItem(armour_RuinedUniform());
+	player->addItem(headgear_RuinedKnightsHelm());
+	player->addItem(armour_RuinedKnightsArmour());
+	player->addItem(headgear_CrowKnightsHood());
+	player->addItem(armour_CrowKnightsArmour());
+	player->addItem(headgear_FishpriestHat());
+	player->addItem(armour_FishscaleCoat());
+	player->addItem(headgear_ClericsHood());
+	player->addItem(armour_ClericsVestments());
+	player->addItem(headgear_CityGuardHelm());
+	player->addItem(armour_CityGuardArmour());
+	player->addItem(headgear_PashHood());
+	player->addItem(armour_PashRobes());
+
+	player->addItem(charm_BloodstainedCharm());
+	player->addItem(charm_EvisceratingRing());
+	player->addItem(charm_IdolOfPash());
+	player->addItem(charm_KhallesHeadband());
+	player->addItem(charm_BloodDrinkersBand());
+
+	player->addItem(spell_AcidBlade());
+	player->addItem(spell_AcidBurst());
+	player->addItem(spell_AcidSpit());
+	player->addItem(spell_ArcaneBlade());
+	player->addItem(spell_ArcaneRadiance());
+	player->addItem(spell_Frostbolt());
+	player->addItem(spell_GottricsArcaneProtection());
+	player->addItem(spell_MagicMissile());
+	player->addItem(spell_ProfanedBlade());
+
+	player->addItem(prayer_BlessedRadiance());
+	player->addItem(prayer_ProfaneRay());
+	player->addItem(prayer_RayOfLight());
+	player->addItem(prayer_RemovePoison());
+	player->addItem(prayer_Restoration());
+	player->addItem(prayer_WyrdChantOfStrength());
+
+	player->addItem(consumable_InvigoratingTea());
+	player->addItem(consumable_TinyGreenFlower());
+	player->addItem(consumable_TinyRedFlower());
+
+	player->addItem(ranged_CorrodingJar());
+	player->addItem(ranged_FrostKnives());
+	player->addItem(ranged_HeavyJavelin());
+	player->addItem(ranged_LaceratingKnives());
+	player->addItem(ranged_LightingJavelin());
+	player->addItem(ranged_PyromancersFlask());
+	player->addItem(ranged_ThrowingKnives());
+	player->addItem(ranged_WitchsJar());
+
+	player->addItem(oil_CorrosiveOil());
+	player->addItem(oil_PyromancersOil());
+	player->addItem(misc_VoidSigil());
+
+	player->addItem(runestone_CorensRunestone());
+	player->addItem(runestone_KhallesRunestone());
+	player->addItem(runestone_SiltrasRunestone());
+
+	for (int i = 0; i <= 5; i++)
+		player->addItem(consumable_StarwaterDraught());
+}
+
+
 /*
 FOR DEBUGGING, IDIOT
 */
@@ -3096,4 +3193,6 @@ void game::debugMenu()
 		addStoryFlag("elenaToFairweather");
 		loadMapFromHandle("maps/crumbling_city_1.txt", CONNECT_WARP, player->getx(), player->gety());
 	}
+	else if (txt == "allitems")
+		getAllItems(player);
 }

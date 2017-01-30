@@ -67,7 +67,7 @@ consumable * ranged_ThrowingKnives()
 
 consumable * ranged_HeavyJavelin()
 {
-	consumable* c = new consumable("Heavy Javelin", DAGGER_TILE, TCODColor::sepia,
+	consumable* c = new consumable("Heavy Javelin", SPEAR_TILE, TCODColor::sepia,
 		"Deadly javelin for throwing at your nemesis.");
 	c->setRangedAttack(new spell(8, 75));
 	c->add(1);
@@ -107,6 +107,24 @@ consumable * ranged_WitchsJar()
 		"Jars of magical oil, often carried by wizards for use as a last resort.");
 	c->setRangedAttack(new spell(5, 5, APPLY_MAGIC_DAMAGE, 40));
 	c->add(3);
+	return c;
+}
+
+consumable * ranged_LightingJavelin()
+{
+	consumable* c = new consumable("Lightning Javelin", SPEAR_TILE, TCODColor::yellow,
+		"Javelin tipped with electric oil.");
+	c->setRangedAttack(new spell(5, 25, APPLY_ELECTRIC_DAMAGE, 25));
+	c->add(3);
+	return c;
+}
+
+consumable * ranged_FrostKnives()
+{
+	consumable* c = new consumable("Frost Knives", DAGGER_TILE, TCODColor::cyan,
+		"Knives tipped with frozen oil to chill the bones.");
+	c->setRangedAttack(new spell(5, 5, APPLY_COLD_DAMAGE, 20));
+	c->add(4);
 	return c;
 }
 
