@@ -634,16 +634,20 @@ void person::unequipItem(item * which)
 			}
 		}
 
-		//Lose damage resistances
-		for (int r = 0; r != ALL_DAMAGE_TYPES; r++) {
-			damageType dr = static_cast<damageType>(r);
-			addDamageResist(dr, -which->getDamageResist(dr));
-		}
+		if (cat != ITEM_CONSUMABLE || cat != ITEM_SPELL) {
 
-		//Lose status effect resistances
-		int bleedResist = which->getBleedResist();
-		if (bleedResist)
-			bleedBuildup.increaseMaxValue(-bleedResist, false);
+			//Lose damage resistances
+			for (int r = 0; r != ALL_DAMAGE_TYPES; r++) {
+				damageType dr = static_cast<damageType>(r);
+				addDamageResist(dr, -which->getDamageResist(dr));
+			}
+
+			//Lose status effect resistances
+			int bleedResist = which->getBleedResist();
+			if (bleedResist)
+				bleedBuildup.increaseMaxValue(-bleedResist, false);
+
+		}
 
 	}
 }

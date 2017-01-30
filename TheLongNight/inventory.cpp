@@ -36,7 +36,7 @@ bool inventory::equipItem(item * which)
 		equippedHelmet = static_cast<armour*>(which);
 	else if (cat == ITEM_CHARM)
 		equippedCharm = static_cast<charm*>(which);
-	else if (cat == ITEM_CONSUMABLE && equippedConsumables.size() < MAX_CONSUMABLE_SLOTS)
+	else if (cat == ITEM_CONSUMABLE)
 		equipConsumable(static_cast<consumable*>(which));
 	else if (cat == ITEM_SPELL) //Currently only spells can fail to equip
 		return equipSpell(static_cast<spell*>(which));
@@ -125,23 +125,25 @@ Equip a consumable to our CONSUMABLES HOTBAR.
 */
 void inventory::equipConsumable(consumable * c)
 {
-	//See if we have room in the hotbar
-	if (equippedConsumables.size() < MAX_CONSUMABLE_SLOTS) {
-		//Make sure we're not equipped it twice
-		auto f = std::find(equippedConsumables.begin(), equippedConsumables.end(), c);
-		if (f == equippedConsumables.end()) {
+	//Iterator to item
+	auto f = std::find(equippedConsumables.begin(), equippedConsumables.end(), c);
+	//Is it already equipped?
+	if (f != equippedConsumables.end()) {
+		//If it's already equipped, let's UNEQUIP it!
+		equippedConsumables.erase(f);
+		//If this is our selected consumable, deselect it
+		if (selectedConsumable == c)
+			selectedConsumable = nullptr;
+	}
+	else {
+		//See if we have room in the hotbar
+		if (equippedConsumables.size() < MAX_CONSUMABLE_SLOTS) {
 			//Yup, we're not equipping it twice
 			equippedConsumables.push_back(c);
 			//If we don't have a SELECTED CONSUMABLE, make it this one
-			if (selectedConsumable == nullptr)
+			if (selectedConsumable == nullptr) {
 				selectedConsumable = c;
-		}
-		else {
-			//If it's already equipped, let's UNEQUIP it!
-			equippedConsumables.erase(f);
-			//If this is our selected consumable, deselect it
-			if (selectedConsumable == c)
-				selectedConsumable = nullptr;
+			}
 		}
 	}
 }
