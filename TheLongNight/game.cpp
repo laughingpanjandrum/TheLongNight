@@ -516,7 +516,8 @@ Just displays a menu! It's pretty simple.
 void game::drawMenu(menu * m, int atx, int aty)
 {
 	//Title
-	win.write(atx, aty, m->getTitle(), TCODColor::white);
+	win.write(atx, aty++, m->getTitle(), TCODColor::white);
+
 	//Elements
 	auto elements = m->getAllElements();
 	for (auto it = elements.begin(); it != elements.end(); it++) {
@@ -855,8 +856,6 @@ void game::drawInterface(int leftx, int topy)
 	//List controls
 	atx += 15;
 	aty = MAP_DRAW_Y + 43;
-	win.writec(atx, aty, 'x', TCODColor::green);
-	win.write(atx + 2, aty, "Select spell", TCODColor::white);
 	win.writec(atx, ++aty, 'c', TCODColor::green);
 	win.write(atx + 2, aty, "Select consumable", TCODColor::white);
 	win.writec(atx, ++aty, 't', TCODColor::green);
@@ -899,7 +898,7 @@ void game::drawInventory(int atx, int aty)
 		if (currentMenu->getSelectedItem() != nullptr) {
 			//Selected menu object should be an ITEM
 			item* sel = static_cast<item*>(currentMenu->getSelectedItem());
-			drawItemInfo(sel, atx, aty + 20);
+			drawItemInfo(sel, atx, aty + 40);
 		}
 	}
 	else {
@@ -1110,6 +1109,7 @@ void game::drawItemInfo(item * it, int atx, int aty)
 	case(ITEM_BODY_ARMOUR): drawArmourInfo(static_cast<armour*>(it), atx, aty); break;
 	case(ITEM_HELMET): drawArmourInfo(static_cast<armour*>(it), atx, aty); break;
 	case(ITEM_SPELL): drawSpellInfo(static_cast<spell*>(it), atx, aty); break;
+	case(ITEM_CONSUMABLE): drawConsumableInfo(static_cast<consumable*>(it), atx, aty); break;
 	case(ITEM_MISC): drawMiscItemInfo(static_cast<miscItem*>(it), atx, aty); break;
 	}
 }
@@ -1121,45 +1121,55 @@ void game::drawWeaponInfo(weapon * it, int atx, int aty)
 {
 	int offset = 13;
 	TCODColor maincol = TCODColor::white;
-	//Damage
-	win.write(atx, aty, "DAMAGE:", TCODColor::darkRed);
-	win.write(atx + offset, aty, std::to_string(it->getDamage()), maincol);
-	//Special damage types
-	for (int d = 0; d < ALL_DAMAGE_TYPES; d++) {
-		damageType dt = static_cast<damageType>(d);
-		int dmg = it->getDamageOfType(dt);
-		if (dmg > 0) {
-			win.write(atx, ++aty, " " + getDamageTypeName(dt), getDamageTypeColor(dt));
-			win.write(atx + offset, aty, '+' + std::to_string(dmg), TCODColor::white);
+	
+	//Stuff only relevant to weapons
+	if (it->getCategory() == ITEM_WEAPON) {
+		
+		//Damage
+		win.write(atx, aty, "DAMAGE:", TCODColor::darkRed);
+		win.write(atx + offset, aty, std::to_string(it->getDamage()), maincol);
+		
+		//Special damage types
+		for (int d = 0; d < ALL_DAMAGE_TYPES; d++) {
+			damageType dt = static_cast<damageType>(d);
+			int dmg = it->getDamageOfType(dt);
+			if (dmg > 0) {
+				win.write(atx, ++aty, " " + getDamageTypeName(dt), getDamageTypeColor(dt));
+				win.write(atx + offset, aty, '+' + std::to_string(dmg), TCODColor::white);
+			}
 		}
+		
+		//Status effects applied
+		for (int idx = 0; idx < it->getStatusEffectCount(); idx++) {
+			statusEffects sType = it->getStatusEffectType(idx);
+			int sdmg = it->getStatusEffectDamage(idx);
+			win.write(atx + offset, ++aty, std::to_string(sdmg), TCODColor::white);
+			win.write(atx + 1, aty, getStatusEffectName(sType), getStatusEffectColor(sType));
+		}
+		
+		//Scaling
+		win.write(atx, ++aty, "SCALING:", TCODColor::red);
+		std::string scaling = "";
+		if (it->getScalingDamage(SCALE_STR))
+			scaling += "Str ";
+		if (it->getScalingDamage(SCALE_DEX))
+			scaling += "Dex ";
+		if (it->getScalingDamage(SCALE_ARC))
+			scaling += "Arc ";
+		if (it->getScalingDamage(SCALE_DEV))
+			scaling += "Dev ";
+		win.write(atx + offset, aty, scaling, maincol);
+		//Rate
+		win.write(atx, ++aty, "SPEED", TCODColor::yellow);
+		win.write(atx + offset, aty, getAttackSpeedName(it->getAttackDelay()), maincol);
 	}
-	//Status effects
-	for (int idx = 0; idx < it->getStatusEffectCount(); idx++) {
-		statusEffects sType = it->getStatusEffectType(idx);
-		int sdmg = it->getStatusEffectDamage(idx);
-		win.write(atx + offset, ++aty, std::to_string(sdmg), TCODColor::white);
-		win.write(atx + 1, aty, getStatusEffectName(sType), getStatusEffectColor(sType));
-	}
-	//Scaling
-	win.write(atx, ++aty, "SCALING:", TCODColor::red);
-	std::string scaling = "";
-	if (it->getScalingDamage(SCALE_STR))
-		scaling += "Str ";
-	if (it->getScalingDamage(SCALE_DEX))
-		scaling += "Dex ";
-	if (it->getScalingDamage(SCALE_ARC))
-		scaling += "Arc ";
-	if (it->getScalingDamage(SCALE_DEV))
-		scaling += "Dev ";
-	win.write(atx + offset, aty, scaling, maincol);
-	//Rate
-	win.write(atx, ++aty, "SPEED", TCODColor::yellow);
-	win.write(atx + offset, aty, getAttackSpeedName(it->getAttackDelay()), maincol);
+
 	//Defence, if any
 	if (it->getDefence() > 0) {
 		win.write(atx, ++aty, "DEFENCE", TCODColor::sepia);
 		win.write(atx + offset, aty, std::to_string(it->getDefence()), maincol);
 	}
+
 	//Damage resistances
 	for (int r = 0; r != ALL_DAMAGE_TYPES; r++) {
 		damageType dr = static_cast<damageType>(r);
@@ -1169,11 +1179,13 @@ void game::drawWeaponInfo(weapon * it, int atx, int aty)
 			win.write(atx + offset, aty, std::to_string(res), maincol);
 		}
 	}
+
 	//Bleed resist
 	if (it->getBleedResist() > 0) {
 		win.write(atx, ++aty, "BLEED Resist", TCODColor::crimson);
 		win.write(atx + offset, aty, std::to_string(it->getBleedResist()), maincol);
 	}
+
 	//Magic attributes, if any
 	if (it->getSpellstoreSize()) {
 		win.write(atx, ++aty, "SPELLSTORE", TCODColor::magenta);
@@ -1187,6 +1199,7 @@ void game::drawWeaponInfo(weapon * it, int atx, int aty)
 		win.write(atx, ++aty, "DIVINE POWER", TCODColor::darkYellow);
 		win.write(atx + offset, aty, std::to_string(it->getDivinePower()), maincol);
 	}
+
 	//Special attack, if any
 	spell* atk = it->getSpecialAttack();
 	if (atk != nullptr) {
@@ -1195,8 +1208,9 @@ void game::drawWeaponInfo(weapon * it, int atx, int aty)
 		win.write(atx + 1, aty, std::to_string(atk->getVigourCost()), TCODColor::green);
 		win.write(atx + 4, aty, atk->getName(), atk->getColor());
 		//Special attack description
-		win.write(atx + 4, ++aty, '(' + atk->description + ')', TCODColor::lightGrey);
+		win.writeWrapped(atx + 4, ++aty, 30, atk->description, TCODColor::lightGrey);
 	}
+
 	//Rune, if any
 	aty += 2;
 	weaponRune* rune = it->getRune();
@@ -1283,6 +1297,34 @@ void game::drawSpellInfo(spell * it, int atx, int aty)
 		//Display it
 		win.write(atx + 1, ++aty, std::to_string(potency), TCODColor::white);
 		win.write(atx + 4, aty, getEffectName(eType), TCODColor::lightGrey);
+	}
+}
+
+
+/*
+Consumables info
+*/
+void game::drawConsumableInfo(consumable * it, int atx, int aty)
+{
+	if (it->isRangedAttackItem()) {
+		//This is just a container for a spell attack!
+		drawSpellInfo(it->getRangedAttack(), atx, aty);
+	}
+	else if (it->getWeaponBuff() != nullptr) {
+		//This is a weapon buff.
+		auto buff = it->getWeaponBuff();
+		std::string txt1 = "Weapon deals +" + std::to_string(buff->bonusDamage) + " ";
+		win.write(atx, aty, txt1, TCODColor::white);
+		std::string txt2 = getDamageTypeName(buff->dtype);
+		win.write(atx + txt1.size(), aty, txt2, getDamageTypeColor(buff->dtype));
+		win.write(atx + txt1.size() + txt2.size(), aty, " damage.", TCODColor::white);
+	}
+	else {
+		//Just applies some sort of effect.
+		for (auto eff : it->getEffects()) {
+			win.write(atx, aty, std::to_string(it->getPotency()), TCODColor::white);
+			win.write(atx + 3, aty, getEffectName(eff), TCODColor::lightGrey);
+		}
 	}
 }
 

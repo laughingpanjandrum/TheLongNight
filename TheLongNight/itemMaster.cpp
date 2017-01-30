@@ -262,6 +262,7 @@ std::string getEffectName(effect e)
 	case(APPLY_MAGIC_DAMAGE): return "magic damage";
 	case(APPLY_BLESSED_DAMAGE): return "blessed damage";
 	case(APPLY_PROFANE_DAMAGE): return "profane damage";
+	case(APPLY_BLINDING): return "blind target";
 	case(KNOCKBACK_TARGET): return "knockback target";
 	case(PULL_CLOSER): return "pull target";
 	}
