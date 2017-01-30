@@ -520,12 +520,22 @@ void game::drawMenu(menu * m, int atx, int aty)
 	//Elements
 	auto elements = m->getAllElements();
 	for (auto it = elements.begin(); it != elements.end(); it++) {
-		//SHOW NAME
-		win.write(atx + 2, ++aty, (*it)->getName(), (*it)->getColor());
+
+		//SHOW NAME and tile
+		win.write(atx + 4, ++aty, (*it)->getName(), (*it)->getColor());
+		win.writec(atx + 3, aty, (*it)->getTileCode(), (*it)->getColor());
+
 		//Indicate whether this is the highlighted element
 		if (m->getSelectedItem() == (*it)) {
 			win.writec(atx + 1, aty, '>', TCODColor::white);
 		}
+
+		//Special context-sensitive attributes
+		if (state == STATE_VIEW_INVENTORY_CATEGORY) {
+			if (player->hasItemEquipped(static_cast<item*>(*it)))
+				win.writec(atx + 2, aty, '{', TCODColor::white);
+		}
+
 	}
 }
 
