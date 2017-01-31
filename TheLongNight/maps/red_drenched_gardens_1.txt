@@ -4,7 +4,7 @@ bloodstarved_zombie:9,9
 bloodthirsty_hound:8,10
 bloodthirsty_hound:8,12
 devotee_of_pash:14,27
-bloodstarved_zombie:8,23
+bloodstarved_zombie:10,20
 bloodstarved_zombie:15,28
 bloodstarved_zombie:34,22
 bloodstarved_zombie:34,22
@@ -12,6 +12,8 @@ bloodthirsty_hound:24,26
 -items
 starwater_draught:7,24
 blood_drinkers_band:5,20
+blood_drinkers_knife:26,35
+blood_drinkers_eyes:16,31
 -enditems
 -codes
 . floor_stone
@@ -30,7 +32,7 @@ T tree
 w wall_wood
 G glass
 + door_stone
-c chair
+c chair1
 t table3
 -endcodes
 -connections

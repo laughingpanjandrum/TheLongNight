@@ -660,7 +660,7 @@ drawData game::getDrawData(int x, int y)
 	drawData toDraw(m->getTileCode(), m->getColor(), m->getBgColor());
 	
 	//If this point isn't visible, don't draw it!
-	if (!currentMap->isPointInFOV(x, y)) {
+	if (!currentMap->isPointInFOV(x, y) || player->isBlind()) {
 		
 		//What to draw if out of FOV
 		if (currentMap->inMemoryMap(x, y)) {
@@ -2034,6 +2034,7 @@ void game::meleeAttack(person * attacker, person * target)
 				//Buffs
 				if (sType == EFFECT_BLEED && attacker->getBleedDuration() > 0)
 					sdmg += attacker->bleedScaling;
+				sdmg = sdmg * attacker->bleedDamageFactor;
 				//Deal the damage
 				target->takeStatusEffectDamage(sType, sdmg);
 			}
@@ -2529,7 +2530,8 @@ void game::drawLevelUpMenu(int atx, int aty)
 	drawMenu(currentMenu, atx, aty);
 	//Stat levels
 	TCODColor statCol = TCODColor::green;
-	int offset = 12;
+	int offset = 15;
+	aty++;
 	win.write(atx + offset, ++aty, std::to_string(player->stats->health), statCol);
 	win.write(atx + offset, ++aty, std::to_string(player->stats->vigour), statCol);
 	win.write(atx + offset, ++aty, std::to_string(player->stats->strength), statCol);
@@ -3244,6 +3246,18 @@ void game::debugMenu()
 		addStoryFlag("muiraToFairweather");
 		addStoryFlag("elenaToFairweather");
 		loadMapFromHandle("maps/crumbling_city_1.txt", CONNECT_WARP, player->getx(), player->gety());
+	}
+	else if (txt == "red_gardens") {
+		player->equipItem(weapon_NotchedGreatsword());
+		player->equipItem(shield_WoodenWyrdShield());
+		player->equipItem(headgear_CrowKnightsHood());
+		player->equipItem(armour_CrowKnightsArmour());
+		player->equipItem(consumable_StarwaterDraught());
+		for (int i = 0; i < 8; i++)
+			player->addItem(consumable_StarwaterDraught());
+		player->stats->health = 6;
+		player->stats->strength = 12;
+		loadMapFromHandle("maps/red_drenched_gardens_1.txt", CONNECT_WARP, player->getx(), player->gety());
 	}
 	else if (txt == "allitems")
 		getAllItems(player);

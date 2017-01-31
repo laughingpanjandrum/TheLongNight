@@ -137,6 +137,7 @@ monster* monster_DevoteeOfPash();
 monster* monster_VoidwalkerMinas();
 monster* monster_BloodthirstyHound();
 monster* monster_BloodstarvedZombie();
+monster* monster_HighClericOrsylTheProfaned();
 
 //The Void
 monster* monster_VoidTouched();

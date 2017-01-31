@@ -37,6 +37,7 @@ const int RAT_TILE = 114;
 const int ZOMBIE_TILE = 122;
 const int PRIEST_TILE = 80;
 const int HOUND_TILE = 104;
+const int ORSYL_TILE = 335;
 
 const int GHOST_TILE = 86;
 

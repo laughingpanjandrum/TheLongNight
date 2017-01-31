@@ -383,6 +383,7 @@ spell * prayer_ProfaneRadiance()
 	sp->setAttackRange(2);
 	sp->setVigourCost(2);
 	sp->addEffect(APPLY_PROFANE_DAMAGE, 25);
+	sp->addEffect(APPLY_BLINDING, 2);
 	sp->usesDivinePower = true;
 	return sp;
 }

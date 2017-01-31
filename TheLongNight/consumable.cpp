@@ -56,6 +56,16 @@ consumable * consumable_TinyGreenFlower()
 	return c;
 }
 
+consumable * consumable_BloodDrinkersEyes()
+{
+	consumable* c = new consumable("Blood Drinker's Eyes", CHARM_TILE, TCODColor::crimson,
+		"The reddened eyes of one who has consumed too much blood. According to the profane scriptures of Pash, these eyes \
+contain profound power when eaten.");
+	c->addEffect(BLEED_DAMAGE_FACTOR);
+	c->setPotency(2);
+	return c;
+}
+
 consumable * ranged_ThrowingKnives()
 {
 	consumable* c = new consumable("Throwing Knives", DAGGER_TILE, TCODColor::lightGrey,

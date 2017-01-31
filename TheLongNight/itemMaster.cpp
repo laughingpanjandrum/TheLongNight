@@ -60,6 +60,8 @@ item * getItemByHandle(std::string handle)
 		return consumable_TinyRedFlower();
 	else if (handle == "tiny_green_flower")
 		return consumable_TinyGreenFlower();
+	else if (handle == "blood_drinkers_eyes")
+		return consumable_BloodDrinkersEyes();
 
 	//OILS
 	else if (handle == "pyromancers_oil")
@@ -234,24 +236,29 @@ Names of effects.
 std::string getEffectName(effect e)
 {
 	switch (e) {
+
 	case(FULL_RESTORE): return "full restore";
 	case(RESTORE_HEALTH): return "health regain";
 	case(RESTORE_VIGOUR): return "vigour regain";
 	case(GAIN_FREE_MOVES): return "free moves";
 	case(GAIN_MAX_HEALTH): return "max health";
+
 	case(REMOVE_BLEED): return "cures bleed buildup";
 	case(REMOVE_POISON): return "cures poisoning";
 	case(ADD_HEALTH_TRICKLE): return "health restore, 1/turn";
+
 	case(SCALE_NEXT_ATTACK): return "% damage next attack";
 	case(SCALE_NEXT_SPELL): return "% spell power for next spell";
 	case(SCALE_NEXT_PRAYER): return "% divine power for next prayer";
 	case(SPELL_ACID_INFUSION): return "acid infusion for next spell";
+
 	case(GAIN_DEFENCE): return "physical defence";
 	case(GAIN_ACID_RESIST): return "acid defence";
 	case(GAIN_COLD_RESIST): return "cold defence";
 	case(GAIN_ELECTRIC_RESIST): return "electric defence";
 	case(GAIN_FIRE_RESIST): return "fire defence";
 	case(GAIN_MAGIC_RESIST): return "magic defence";
+
 	case(CASTER_MELEE_ATTACK): return "free melee attack";
 	case(APPLY_PHYSICAL_DAMAGE): return "physical damage";
 	case(APPLY_ACID_DAMAGE): return "acid damage";
@@ -262,9 +269,13 @@ std::string getEffectName(effect e)
 	case(APPLY_MAGIC_DAMAGE): return "magic damage";
 	case(APPLY_BLESSED_DAMAGE): return "blessed damage";
 	case(APPLY_PROFANE_DAMAGE): return "profane damage";
+
 	case(APPLY_BLINDING): return "blind target";
 	case(KNOCKBACK_TARGET): return "knockback target";
 	case(PULL_CLOSER): return "pull target";
+	case(BLEED_DAMAGE_FACTOR): return "times bleed damage dealt and taken";
+
 	}
+
 	return "Unknown";
 }

@@ -128,6 +128,7 @@ public:
 	int healthOnKill = 0; //Health restored when we kill something
 	int invisibility = 0;
 	int bleedScaling = 0; //Extra damage dealt when we have bleed
+	int bleedDamageFactor = 1; //Multiplies both bleed damage taken and given
 	int getFragmentPickupMult() { return fragmentPickupMultiplier; }
 
 	//Debuffs

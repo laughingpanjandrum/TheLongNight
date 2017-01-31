@@ -194,6 +194,7 @@ Applies special effects, e.g. bleed, poison.
 void person::takeStatusEffectDamage(statusEffects eType, int damage)
 {
 	if (eType == EFFECT_BLEED) {
+		damage *= bleedDamageFactor;
 		bleedBuildup.increase(damage);
 		if (bleedBuildup.isFull()) {
 			//We BLEED!
@@ -464,12 +465,12 @@ int person::getSpellPower()
 
 	//From weapon
 	if (wp != nullptr)
-		spellPower = wp->getSpellPower();
+		spellPower += wp->getSpellPower();
 
 	//See if offhand is higher
 	if (offhand != nullptr)
 		if (offhand->getSpellPower() > spellPower)
-			spellPower = offhand->getSpellPower();
+			spellPower += offhand->getSpellPower();
 
 	//Bonus from arcane scaling (if we use stats)
 	if (stats != nullptr)
@@ -488,16 +489,16 @@ int person::getDivinePower()
 {
 	weapon* wp = getWeapon();
 	weapon* offhand = getOffhand();
-	int divinePower = 0;// baseDivinePower;
+	int divinePower = baseDivinePower;
 
 	//From weapon
 	if (wp != nullptr)
-		divinePower = wp->getDivinePower();
+		divinePower += wp->getDivinePower();
 
 	//See if offhand is higher
 	if (offhand != nullptr)
 		if (offhand->getDivinePower() > divinePower)
-			divinePower = offhand->getDivinePower();
+			divinePower += offhand->getDivinePower();
 
 	//Bonus from arcane scaling (if we use stats)
 	if (stats != nullptr)
@@ -784,7 +785,7 @@ void person::applyStatusEffects()
 		takeDamage(isPoisoned);
 	}
 	//Blinding: just ticks down
-	if (blinding)
+	if (blinding > 0)
 		blinding--;
 	//Invisibility fades
 	if (invisibility)

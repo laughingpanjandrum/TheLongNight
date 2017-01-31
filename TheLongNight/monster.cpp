@@ -579,6 +579,23 @@ monster * monster_BloodstarvedZombie()
 	return m;
 }
 
+monster * monster_HighClericOrsylTheProfaned()
+{
+	monster* m = new monster("High Cleric Orsyl the Profaned", ORSYL_TILE, TCODColor::silver,
+		"The High Clerics robes are tattered and blood-drenched; his eyes are blank, and putrid tendrils of the Void crawl up \
+his flesh.");
+	m->setHealth(800);
+	m->bleedScaling = 50;
+	m->setDefence(DAMAGE_PHYSICAL, 10);
+	m->setDefence(DAMAGE_BLESSED, 25);
+	m->setMoveStats(SPEED_NORMAL);
+	m->equipItem(new weapon(10, SPEED_NORMAL, EFFECT_BLEED, 15));
+	m->addSpellKnown(prayer_ProfaneRadiance());
+	m->setSpellCastChance(90);
+	m->setDivinePower(120);
+	return m;
+}
+
 monster * monster_VoidTouched()
 {
 	monster* m = new monster("Void-Touched", GHOST_TILE, TCODColor::lighterPurple,
@@ -760,6 +777,8 @@ monster * getMonsterByHandle(std::string handle)
 		return monster_BloodthirstyHound();
 	else if (handle == "bloodstarved_zombie")
 		return  monster_BloodstarvedZombie();
+	else if (handle == "orsyl_the_profaned")
+		return monster_HighClericOrsylTheProfaned();
 
 	//The Void
 	else if (handle == "void_touched")

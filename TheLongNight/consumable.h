@@ -69,6 +69,7 @@ consumable* consumable_InvigoratingTea();
 
 consumable* consumable_TinyRedFlower();
 consumable* consumable_TinyGreenFlower();
+consumable* consumable_BloodDrinkersEyes();
 
 consumable* ranged_ThrowingKnives();
 consumable* ranged_HeavyJavelin();
