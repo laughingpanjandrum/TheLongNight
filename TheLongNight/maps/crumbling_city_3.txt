@@ -46,8 +46,9 @@ c chair2
 -connections
 west:crumbling_city_1
 east:sordid_chapel
+north:crumbling_city_4
 -endconnections
-########################################
+#####################gggg###############
 #"........"#gggggggggggggggggggggg#..."#
 #....".....+......................#....#
 #."..."....#.rrrrrrrrrrrrrrrrrrrr.#."..#
@@ -72,7 +73,7 @@ rrrrrrrrrrr..r.#".............#.r.#....#
 rr..................r.#~~~~~~~~~~~~DDDD#
 ...################.r.##################
 ####."...+......".#.r...................
-#."....."#."..?...+.rrrrrrrrrrrrrrrrrrrr
+#."....."#."......+.rrrrrrrrrrrrrrrrrrrr
 #..".."..#"..."...#.....................
 #####+##############+###################
 #ggggggggg"...ggggGg.gG...#oooo........#

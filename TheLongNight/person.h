@@ -105,6 +105,11 @@ public:
 	void blind(int duration) { blinding += duration; }
 	bool isBlind() { return blinding > 0; }
 	int getBlindnessDuration() { return blinding; }
+	//Entangled
+	void entangle(int duration) { entangling += duration; }
+	bool isEntangled() { return entangling > 0; }
+	int getEntangleDuration() { return entangling; }
+	void struggle() { entangling--; }
 
 	//Permanent buffs
 	bool canAddBuff(buff* b);
@@ -212,6 +217,7 @@ protected:
 	int isPoisoned = 0;
 	counter poisonBuildup;
 	int blinding = 0;
+	int entangling = 0;
 
 	//Buffs
 	buffVector buffs;

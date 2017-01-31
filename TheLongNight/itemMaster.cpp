@@ -286,6 +286,7 @@ std::string getEffectName(effect e)
 	case(APPLY_PROFANE_DAMAGE): return "profane damage";
 
 	case(APPLY_BLINDING): return "blind target";
+	case(APPLY_ENTANGLING): return "entangle target";
 	case(KNOCKBACK_TARGET): return "knockback target";
 	case(PULL_CLOSER): return "pull target";
 	case(BLEED_DAMAGE_FACTOR): return "times bleed damage dealt and taken";

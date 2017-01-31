@@ -675,8 +675,14 @@ tentacles emerge from the ruin of his head, and at the centre of his chest sits 
 	m->setDefence(DAMAGE_ACID, 25);
 	m->setDefence(DAMAGE_MAGIC, 25);
 	m->setMeleeStats(50, SPEED_NORMAL);
-	m->setMoveStats(SPEED_SLOW);
+	m->setMoveStats(SPEED_NORMAL);
 	m->makeProfane();
+	m->addSpellKnown(ability_Throw());
+	m->addSpellKnown(ability_VoidStep());
+	m->addSpellKnown(ability_TentacleSwarm());
+	m->setSpellCastChance(60);
+	m->isBoss = true;
+	m->setFragmentsDropped(1200);
 	return m;
 }
 
@@ -889,6 +895,8 @@ monster * getMonsterByHandle(std::string handle)
 		return monster_CursedArcher();
 	else if (handle == "enkidu")
 		return monster_Enkidu();
+	else if (handle == "duke_vorten")
+		return monster_DukeVortenTheWatchful();
 
 	//The Void
 	else if (handle == "void_touched")

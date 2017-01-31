@@ -74,6 +74,11 @@ maptile * tile_Void()
 	return v;
 }
 
+maptile * tile_Carpet()
+{
+	return new maptile("Carpet", "floor_carpet", CARPET_TILE, TCODColor::darkerRed, TCODColor::black);
+}
+
 maptile * tile_SandyRock()
 {
 	return new maptile("Sandy Rock", "wall_sand", STONE_WALL_TILE, DARKEST_SAND_COLOR, LIGHT_SAND_COLOR, false, false);

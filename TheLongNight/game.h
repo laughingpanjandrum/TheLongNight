@@ -196,6 +196,7 @@ private:
 	void knockbackTarget(person* knocker, person* target, int distance);
 	void pullTarget(person* puller, person* target, int distance);
 	bool waterWarp(person* target, int distance);
+	void teleport(person* target, int distance);
 
 	//Player-only SPECIAL MAP JUMPS
 	void teleportToVoid();

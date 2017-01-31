@@ -853,6 +853,10 @@ void game::drawInterface(int leftx, int topy)
 	if (player->isBlind())
 		win.write(atx, ++aty, "BLIND", TCODColor::white);
 
+	//Status effect: ENTANGLED!
+	if (player->isEntangled())
+		win.write(atx, ++aty, "ENTANGLED " + std::to_string(player->getEntangleDuration()), TCODColor::lightGrey);
+
 	//Draws whatever we have HIGHLIGHTED
 	aty += 2;
 	drawMouseover(atx, aty);
@@ -1627,6 +1631,8 @@ void game::applyEffectToPerson(person * target, effect eff, int potency, person*
 		pullTarget(caster, target, potency);
 	else if (eff == TELEPORT_VIA_WATER)
 		waterWarp(target, potency);
+	else if (eff == TELEPORT)
+		teleport(target, potency);
 	else if (eff == DROP_OOZE)
 		currentMap->setTile(tile_Ooze(), target->getx(), target->gety());
 
@@ -1737,12 +1743,22 @@ Change player character's position, if the move is valid.
 */
 void game::movePerson(person* p, int xnew, int ynew)
 {
+	
+	//If we're entangled, this just reduces it - but we don't get to move
+	if (p->isEntangled()) {
+		p->struggle();
+		return;
+	}
+
 	//In bounds?
 	if (currentMap->inBounds(xnew, ynew)) {
+		
 		//Possible to walk on?
 		if (currentMap->isWalkable(xnew, ynew)) {
+		
 			//Is someone already here?
 			person* here = currentMap->getPerson(xnew, ynew);
+			
 			if (here != nullptr) {
 				//Player delay, if this is the player
 				if (p->isPlayer)
@@ -1750,10 +1766,12 @@ void game::movePerson(person* p, int xnew, int ynew)
 				//We attack
 				meleeAttack(p, here);
 			}
+			
 			else {
 				//Adjust position and deal with the consequences
 				p->setPosition(xnew, ynew);
 				standOnTile(p);
+				
 				//If this is the player, update the FOV
 				if (p->isPlayer) {
 					currentMap->updateFOV(player->getx(), player->gety());
@@ -1765,6 +1783,7 @@ void game::movePerson(person* p, int xnew, int ynew)
 				}
 			}
 		}
+		
 		else {
 			//If we try to step onto a non-walkable tile, try TOUCHING IT instead
 			coord oldPos = p->getPosition();
@@ -1772,6 +1791,7 @@ void game::movePerson(person* p, int xnew, int ynew)
 			standOnTile(p);
 			p->setPosition(oldPos);
 		}
+	
 	}
 }
 
@@ -2139,6 +2159,30 @@ bool game::waterWarp(person * target, int distance)
 		}
 	}
 	return false;
+}
+
+
+/*
+Warp to a random point within the given radius.
+*/
+void game::teleport(person * target, int distance)
+{
+	//Make list of warp-able points
+	coordVector pts;
+	for (int x = target->getx() - distance; x <= target->getx() + distance; x++) {
+		for (int y = target->gety() - distance; y <= target->gety() + distance; y++) {
+			if (currentMap->inBounds(x, y) && currentMap->isWalkable(x, y) && currentMap->getPerson(x, y) == nullptr) {
+				pts.push_back(coord(x, y));
+			}
+		}
+	}
+	//Make sure we actually found at least one viable point
+	if (pts.size() > 0) {
+		//And then jump to one!
+		int idx = randrange(pts.size());
+		coord pt = pts.at(idx);
+		movePerson(target, pt.first, pt.second);
+	}
 }
 
 

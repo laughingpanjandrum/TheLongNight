@@ -1,0 +1,74 @@
+Crumbling City
+start:22,39
+duke_vorten:15,5
+cursed_knight:14,7
+cursed_knight:16,7
+-items
+-enditems
+-codes
+. floor_stone
+g floor_grass
+r floor_road
+" floor_mossy_stone
+% bush
+~ water
+D water_deep
+T tree
+: water_mossy
+? statue
+# wall_stone
+w wall_wood
+G glass
++ door_stone
+* warpstone
+o ooze
+& sordid_door
+! corpse
+t table3
+c chair2
+m floor_carpet
+-endcodes
+-connections
+south:crumbling_city_2
+-endconnections
+........................................
+..####################################..
+..#................mm................#..
+..#................mm................#..
+..#..####..........mm..........####..#..
+..#..####..........mm..........####..#..
+..#..####..........mm..........####..#..
+..#..####..........mm..........####..#..
+..#..............mmmmmm..............#..
+..#..ct..........m....m.........ct...#..
+..#..............m.~~.m..............#..
+..#..............m.~~.m..............#..
+..#..............m....m..............#..
+..#..ct..........mmmmmm.........ct...#..
+..#................mm................#..
+..#..####........T.mm.T........####..#..
+..#..####..........mm..........####..#..
+..#..####........T.mm.T........####..#..
+..#..####..........mm..........####..#..
+..#..............T.mm.T..............#..
+..#................mm................#..
+..#######.mmmmmmmmmmmmmmmmmmmm.#######..
+........#.m..................m.#........
+........#.m.#######GG#######.m.#........
+........#.m.#?.............#.m.#........
+........#.m.#.mmmmmmmmmmmm.#.m.#........
+........#.m.#.m..........m.#.m.#........
+........#.m.#.m.########.m.#.m.#........
+........#.mm+mm.#t....t#.mm+mm.#........
+........#...#.mm+mmmmmm+mm.#...#........
+........#...#...#..mm..#...#...#........
+###################++###################
+##ggggggggggggggggrrrrgggggggggggggggg##
+##gggggggggggggggrr~~rrgggTggggggggggg##
+##gggggggggTggggrr~~~~rrggggggTggggggg##
+##ggTgggggggggggr~~~~~~rgggggggggggTgg##
+##ggggggggggggggr~~~~~~rgggggggggTgggg##
+##ggggggggggggggrr~~~~rrgggggggggggggg##
+##gggggTgggggggggrr~~rrggggggTgggggggg##
+##ggggggggggggggggrrrrgggggggggggggggg##
+#####################gggg###############

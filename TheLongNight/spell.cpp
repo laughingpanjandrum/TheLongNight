@@ -516,3 +516,30 @@ spell * ability_ShadowWalk()
 	sp->addEffect(BECOME_INVISIBLE, 2);
 	return sp;
 }
+
+spell * ability_TentacleSwarm()
+{
+	spell* sp = new spell("Tentacle Swarm", SPELL_TILE, TCODColor::green);
+	sp->setAttackType(ATTACK_RANGE);
+	sp->setAttackRange(3);
+	sp->addEffect(APPLY_ENTANGLING, 3);
+	return sp;
+}
+
+spell * ability_Throw()
+{
+	spell* sp = new spell("Throw", SPELL_TILE, TCODColor::green);
+	sp->setAttackType(ATTACK_RANGE);
+	sp->setAttackRange(1);
+	sp->addEffect(KNOCKBACK_TARGET, 5);
+	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 25);
+	return sp;
+}
+
+spell * ability_VoidStep()
+{
+	spell* sp = new spell("Void Step", SPELL_TILE, TCODColor::purple);
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(TELEPORT, 5);
+	return sp;
+}

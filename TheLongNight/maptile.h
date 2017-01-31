@@ -115,6 +115,7 @@ maptile* tile_Sand(); //"floor_sand"
 maptile* tile_Grass(); //"floor_grass"
 maptile* tile_Road(); //"floor_road"
 maptile* tile_Void(); //"floor_void"
+maptile* tile_Carpet(); //"floor_carpet"
 
 maptile* tile_SandyRock(); //"wall_sand"
 maptile* tile_Wall(); //"wall_stone"
@@ -165,7 +166,7 @@ maptile* tile_Table4(); //"table4"
 
 
 const tileVector ALL_MAPTILES = {
-	tile_Floor(), tile_MossyFloor(), tile_Sand(), tile_Grass(), tile_Road(), tile_Void(),
+	tile_Floor(), tile_MossyFloor(), tile_Sand(), tile_Grass(), tile_Road(), tile_Void(), tile_Carpet(),
 	tile_Wall(), tile_WoodenWall(), tile_SandyRock(),
 	tile_Door(), tile_WoodenDoor(), tile_LockedDoor(), tile_DoorUnlocker(),
 	tile_Glass(), tile_Bush(), tile_Rosebush(), tile_Tree(), tile_VoidTree(),

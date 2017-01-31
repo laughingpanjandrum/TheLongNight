@@ -122,4 +122,9 @@ spell* ability_FeedingFrenzy();
 spell* ability_DropOoze();
 spell* ability_ShadowWalk();
 
+//Duke Vorten
+spell* ability_TentacleSwarm();
+spell* ability_Throw();
+spell* ability_VoidStep();
+
 #endif
