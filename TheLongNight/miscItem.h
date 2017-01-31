@@ -53,6 +53,9 @@ miscItem* key_SpinalColumnShard();
 
 //Monster hearts
 miscItem* heart_WretchedHeart();
+miscItem* heart_OldCrowsHeart();
+miscItem* heart_FishBornGoddessesHeart();
+miscItem* heart_OrsylsShriveledHeart();
 
 //Spellbooks
 miscItem* spellbook_WaterloggedWritings();

@@ -69,3 +69,12 @@ could go no further than Coruscating Beach.");
 	c->addEffect(GAIN_HEALTH_ON_KILL, 10);
 	return c;
 }
+
+charm * charm_WretchedFleshmask()
+{
+	charm* c = new charm("Wretched Fleshmask", CHARM_TILE, TCODColor::lightPink,
+		"Drape a tattered skin across your face, and perhaps you will forget your troubles. Such was the motto of the wretched \
+who fled the downfall of the Winter Court.");
+	c->addEffect(HEALING_FACTOR, 25);
+	return c;
+}

@@ -146,6 +146,7 @@ private:
 	void drawArmourInfo(armour* it, int atx, int aty);
 	void drawSpellInfo(spell* it, int atx, int aty);
 	void drawConsumableInfo(consumable* it, int atx, int aty);
+	void drawCharmInfo(charm* it, int atx, int aty);
 	void drawMiscItemInfo(miscItem* it, int atx, int aty);
 
 	//Input processing

@@ -274,6 +274,15 @@ std::string getEffectName(effect e)
 	case(KNOCKBACK_TARGET): return "knockback target";
 	case(PULL_CLOSER): return "pull target";
 	case(BLEED_DAMAGE_FACTOR): return "times bleed damage dealt and taken";
+	case(GAIN_BLEED_SCALING): return "extra damage dealt when bleeding";
+	case(HEALING_FACTOR): return "percent healing boost";
+	case(BECOME_INVISIBLE): return "invisibility";
+	case(GAIN_HEALTH_ON_KILL): return "health restored on kill";
+	case(CHANGE_FRAGMENT_PICKUP_MULT): return "times fragments gained";
+
+	case(TELEPORT_VIA_WATER): return "water warp";
+	case(TELEPORT_TO_VOID): return "warp to void";
+	case(TELEPORT_BACK_FROM_VOID): return "escape void";
 
 	}
 

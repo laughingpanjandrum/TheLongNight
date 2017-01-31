@@ -20,6 +20,7 @@ public:
 	void addEffect(effect e, int pot);
 
 	//Getting
+	int getEffectsCount() { return effects.size(); }
 	effectVector getAllEffects() { return effects; }
 	std::vector<int> getAllPotencies() { return effectPotency; }
 
@@ -38,5 +39,6 @@ charm* charm_IdolOfPash();
 charm* charm_EvisceratingRing();
 charm* charm_BloodDrinkersBand();
 charm* charm_WretchedFleshBand();
+charm* charm_WretchedFleshmask();
 
 #endif

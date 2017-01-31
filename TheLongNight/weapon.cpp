@@ -208,6 +208,18 @@ weapon * weapon_CrowHalfsword()
 	return wp;
 }
 
+weapon * weapon_OldCrowsLongKnife()
+{
+	weapon* wp = new weapon("Old Crow's Long Knife", DAGGER_TILE, TCODColor::lightCrimson,
+		"Long, serrated knife wielded by the Old Crow. Once he swore an oath to protect the pilgrims who ventured past the Wyrd, \
+but over the years his promise was forgotten.");
+	wp->setBasicAttributes(15, SPEED_FAST);
+	wp->addStatusEffect(EFFECT_BLEED, 15);
+	wp->setSpecialAttack(attack_Quickstep());
+	wp->addScalingType(SCALE_DEX);
+	return wp;
+}
+
 weapon * weapon_NotchedGreatsword()
 {
 	weapon* wp = new weapon("Notched Greatsword", SWORD_TILE, TCODColor::grey,
@@ -368,6 +380,18 @@ weapon * chime_WyrdBellbranch()
 	wp->setSpellstoreSize(2);
 	wp->setDivinePower(100);
 	wp->setSpecialAttack(ability_WyrdChannel());
+	wp->makeOffhand();
+	return wp;
+}
+
+weapon * chime_OrsylsProfaneChime()
+{
+	weapon* wp = new weapon("Orsyl's Profane Chime", CHIME_TILE, TCODColor::lightPurple,
+		"Once-holy chime of Orsyl, who stood against the Void for as long as he could. As the nightmare consumed him, he prayed to \
+the old gods, but they did not answer.");
+	wp->setSpellstoreSize(4);
+	wp->setDivinePower(100);
+	wp->setSpecialAttack(prayer_ProfaneRadiance());
 	wp->makeOffhand();
 	return wp;
 }

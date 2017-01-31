@@ -94,6 +94,34 @@ miscItem * heart_WretchedHeart()
 	return h;
 }
 
+miscItem * heart_OldCrowsHeart()
+{
+	miscItem* h = new miscItem("Old Crow's Heart", HEART_TILE, TCODColor::lightCrimson,
+		"Within the Old Crow's breast sat this small, black heart. It beats softly in your palm.");
+	h->setKeyTag("old_crows_heart");
+	h->isKey = true;
+	return h;
+}
+
+miscItem * heart_FishBornGoddessesHeart()
+{
+	miscItem* h = new miscItem("Fishborn Goddess's Heart", HEART_TILE, TCODColor::darkSea,
+		"Within the breast of the Fish-born Goddess sat this scaly green heart, dripping with seawater.");
+	h->setKeyTag("fishborn_heart");
+	h->isKey = true;
+	return h;
+}
+
+miscItem * heart_OrsylsShriveledHeart()
+{
+	miscItem* h = new miscItem("Orsyl's Shriveled Heart", HEART_TILE, TCODColor::purple,
+		"Ruined heart of High Cleric Orsyl, who stood against the Void for as long as he could. It pulses with the awful light \
+of the Void.");
+	h->setKeyTag("orsyls_heart");
+	h->isKey = true;
+	return h;
+}
+
 
 
 /*

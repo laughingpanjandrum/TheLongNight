@@ -62,7 +62,7 @@ spell * attack_Quickstep()
 		"Quickly leap one space.");
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->setVigourCost(1);
-	sp->addEffect(GAIN_FREE_MOVES, 1);
+	sp->addEffect(GAIN_FREE_MOVES, 2);
 	return sp;
 }
 
@@ -400,6 +400,20 @@ spell * prayer_ProfaneRay()
 	return sp;
 }
 
+spell * prayer_SinkBeneath()
+{
+	spell* sp = new spell("Sink Beneath", SPELL_TILE, TCODColor::cyan,
+		"Plunge below the waves and re-emerge somewhere unknown.");
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(TELEPORT_VIA_WATER, 5);
+	sp->usesDivinePower = true;
+	sp->setVigourCost(1);
+	return sp;
+}
+
+
+
+
 //Monster abilities
 
 
@@ -436,14 +450,6 @@ spell * ability_FeedingFrenzy()
 	sp->setAttackType(ATTACK_AOE);
 	sp->setAttackRange(3);
 	sp->addEffect(GAIN_FREE_MOVES, 1);
-	return sp;
-}
-
-spell * ability_SinkBeneath()
-{
-	spell* sp = new spell("Sink Beneath", SPELL_TILE, TCODColor::cyan);
-	sp->setAttackType(ATTACK_BUFF_SELF);
-	sp->addEffect(TELEPORT_VIA_WATER, 5);
 	return sp;
 }
 

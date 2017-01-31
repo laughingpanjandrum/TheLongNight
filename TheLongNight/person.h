@@ -217,6 +217,7 @@ protected:
 	buffVector buffs;
 	int freeMoves = 0; //While this is >0, our move delay is zero; this ticks down each time we move.
 	int fragmentPickupMultiplier = 1; //For PC only; increases number of fragments gained.
+	int healingFactor = 1;
 
 	//Equipment
 	inventory items;

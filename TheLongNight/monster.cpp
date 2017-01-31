@@ -118,6 +118,7 @@ void monster::checkForStockUnlocks(person * unlocker)
 		if (unlocker->hasKey(unlock->unlockCode)) {
 			//Yup, here's one!
 			stock.push_back(unlock->it);
+			//And make sure we only add it once!
 			toRemove.push_back(unlock);
 		}
 	}
@@ -322,6 +323,7 @@ monster * monster_TheOldCrow()
 	m->isBoss = true;
 	m->setFragmentsDropped(400);
 	m->addItemDrop(key_OldCrowsKey());
+	m->addItemDrop(heart_OldCrowsHeart());
 	return m;
 }
 
@@ -429,13 +431,14 @@ monster * monster_FishbornGoddess()
 	m->setDefence(DAMAGE_ACID, 10);
 	m->setMoveStats(SPEED_NORMAL);
 	m->setMeleeStats(30, SPEED_SLOW);
-	m->addSpellKnown(ability_SinkBeneath());
+	m->addSpellKnown(prayer_SinkBeneath());
 	m->addSpellKnown(spell_AcidSpit());
 	m->addSpellKnown(spell_AcidBurst());
 	m->setSpellCastChance(50);
 	m->isBoss = true;
 	m->setFragmentsDropped(600);
 	m->addItemDrop(key_WyrdKey());
+	m->addItemDrop(heart_FishBornGoddessesHeart());
 	return m;
 }
 
@@ -599,6 +602,7 @@ his flesh.");
 	m->isBoss = true;
 	m->setFragmentsDropped(1000);
 	m->addItemDrop(key_SpinalColumnShard());
+	m->addItemDrop(heart_OrsylsShriveledHeart());
 	return m;
 }
 
@@ -723,7 +727,11 @@ monster * npc_Ydella()
 	m->isShopkeeper = true;
 	m->loadDialogue("dialogue/ydella_chat.txt");
 	//Items are all acquired via HEART-TRADING
-	m->addStockUnlock(charm_WretchedFleshBand(), 100, "wretched_heart");
+	m->addStockUnlock(charm_WretchedFleshBand(), 200, "wretched_heart");
+	m->addStockUnlock(charm_WretchedFleshmask(), 200, "wretched_heart");
+	m->addStockUnlock(prayer_SinkBeneath(), 200, "fishborn_heart");
+	m->addStockUnlock(weapon_OldCrowsLongKnife(), 200, "old_crows_heart");
+	m->addStockUnlock(chime_OrsylsProfaneChime(), 200, "orsyls_heart");
 	return m;
 }
 

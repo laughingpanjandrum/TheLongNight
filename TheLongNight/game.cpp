@@ -373,7 +373,7 @@ bool game::aiTryUseSpell(monster * ai)
 			//Ranged spell - do we have the reach for it?
 			pathVector path = getLine(ai->getPosition(), target->getPosition());
 			person* willHit = getTargetOnPath(path);
-			if (willHit == target) {
+			if (willHit == target && currentMap->isPointInFOV(ai->getx(),ai->gety())) {
 				//Check spell range
 				int dist = hypot(ai->getx() - target->getx(), ai->gety() - target->gety());
 				if (dist <= sp->getAttackRange()) {
@@ -1114,6 +1114,7 @@ void game::drawItemInfo(item * it, int atx, int aty)
 	case(ITEM_HELMET): drawArmourInfo(static_cast<armour*>(it), atx, aty); break;
 	case(ITEM_SPELL): drawSpellInfo(static_cast<spell*>(it), atx, aty); break;
 	case(ITEM_CONSUMABLE): drawConsumableInfo(static_cast<consumable*>(it), atx, aty); break;
+	case(ITEM_CHARM): drawCharmInfo(static_cast<charm*>(it), atx, aty); break;
 	case(ITEM_MISC): drawMiscItemInfo(static_cast<miscItem*>(it), atx, aty); break;
 	}
 }
@@ -1329,6 +1330,23 @@ void game::drawConsumableInfo(consumable * it, int atx, int aty)
 			win.write(atx, aty, std::to_string(it->getPotency()), TCODColor::white);
 			win.write(atx + 3, aty, getEffectName(eff), TCODColor::lightGrey);
 		}
+	}
+}
+
+
+/*
+Charm info.
+*/
+void game::drawCharmInfo(charm * it, int atx, int aty)
+{
+	//List effects
+	auto allEffects = it->getAllEffects();
+	auto allPotencies = it->getAllPotencies();
+	for (int i = 0; i < allEffects.size(); i++) {
+		effect eff = allEffects.at(i);
+		int pot = allPotencies.at(i);
+		win.write(atx, ++aty, std::to_string(pot), TCODColor::white);
+		win.write(atx + 3, aty, getEffectName(eff), TCODColor::lightGrey);
 	}
 }
 
@@ -3075,6 +3093,10 @@ void getAllItems(person* player) {
 	player->addItem(key_WyrdKey());
 	player->addItem(misc_VoidSigil());
 
+	player->addItem(heart_FishBornGoddessesHeart());
+	player->addItem(heart_OldCrowsHeart());
+	player->addItem(heart_WretchedHeart());
+
 	for (int i = 0; i <= 7; i++)
 		player->addItem(consumable_StarwaterDraught());
 
@@ -3122,36 +3144,7 @@ void game::debugMenu()
 		player->addItem(consumable_StarwaterDraught());
 		loadMapFromHandle("maps/cbeach_2.txt", CONNECT_WARP, player->getx(), player->gety());
 	}
-	else if (txt == "wretch") {
-		player->addItem(weapon_SplinteredSword());
-		player->addItem(armour_RuinedUniform());
-		player->addItem(headgear_CaptainsTricorn());
-		player->addItem(spell_MagicMissile());
-		player->addItem(spell_ArcaneRadiance());
-		player->addItem(wand_DriftwoodWand());
-		player->addItem(shield_BatteredWoodenShield());
-		player->addItem(consumable_StarwaterDraught());
-		player->addItem(consumable_StarwaterDraught());
-		player->addItem(consumable_StarwaterDraught());
-		loadMapFromHandle("maps/wretch_cave.txt", CONNECT_WARP, player->getx(), player->gety());
-	}
 	else if (txt == "fairweather") {
-		player->addItem(weapon_SplinteredSword());
-		player->addItem(weapon_ThinKnife());
-		player->addItem(weapon_StraightSword());
-		player->addItem(weapon_Warhammer());
-		player->addItem(armour_RuinedUniform());
-		player->addItem(headgear_CaptainsTricorn());
-		player->addItem(spell_MagicMissile());
-		player->addItem(spell_ArcaneRadiance());
-		player->addItem(wand_DriftwoodWand());
-		player->addItem(ranged_ThrowingKnives());
-		player->addItem(shield_BatteredWoodenShield());
-		player->addItem(chime_ClericsCrackedChime());
-		player->addItem(prayer_Restoration());
-		player->addItem(consumable_StarwaterDraught());
-		player->addItem(consumable_StarwaterDraught());
-		player->addItem(consumable_StarwaterDraught());
 		fragments += 420;
 		loadMapFromHandle("maps/old_fairweather.txt", CONNECT_WARP, player->getx(), player->gety());
 	}

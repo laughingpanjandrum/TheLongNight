@@ -99,6 +99,8 @@ spell* prayer_WyrdChantOfStrength();
 spell* prayer_RayOfLight();
 spell* prayer_BlessedRadiance();
 spell* prayer_RemovePoison();
+//Sold by Ydella
+spell* prayer_SinkBeneath();
 //Misc
 spell* prayer_ProfaneRadiance();
 spell* prayer_ProfaneRay();
@@ -108,7 +110,6 @@ spell* ability_Charge();
 spell* ability_Burst();
 spell* ability_CrowArrow();
 spell* ability_FeedingFrenzy();
-spell* ability_SinkBeneath();
 spell* ability_DropOoze();
 spell* ability_ShadowWalk();
 spell* ability_DrawOutTheBlood();

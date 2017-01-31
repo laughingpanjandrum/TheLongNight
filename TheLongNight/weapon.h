@@ -111,6 +111,7 @@ weapon* weapon_Warhammer();
 weapon* weapon_CrowKnightSword();
 weapon* weapon_CrowKnife();
 weapon* weapon_CrowHalfsword();
+weapon* weapon_OldCrowsLongKnife();
 
 weapon* weapon_NotchedGreatsword();
 weapon* weapon_FishmansHarpoon();
@@ -127,10 +128,13 @@ weapon* shield_WoodenWyrdShield();
 weapon* shield_BatteredSteelShield();
 weapon* shield_CityGuardianShield();
 
-//Wands/chimes
+//Wands
 weapon* wand_DriftwoodWand();
 weapon* wand_FishmansToadstaff();
+
+//Chimes
 weapon* chime_ClericsCrackedChime();
 weapon* chime_WyrdBellbranch();
+weapon* chime_OrsylsProfaneChime();
 
 #endif

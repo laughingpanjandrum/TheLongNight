@@ -145,6 +145,8 @@ int person::getDamageOfType(damageType dtype)
 
 void person::addHealth(int amount)
 {
+	//Buffs can up this
+	amount *= healingFactor;
 	health.increase(amount);
 }
 
