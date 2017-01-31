@@ -325,6 +325,20 @@ weapon * weapon_VoidCrystalGreatsword()
 	return wp;
 }
 
+weapon * weapon_ArmOfTheDuke()
+{
+	weapon* wp = new weapon("Arm of the Duke", SWORD_TILE, TCODColor::lightGreen,
+		"The arms of the Duke were rubbery and numerous. Serves as both a weapon and a catalyst of obscene prayer.");
+	wp->setBasicAttributes(25, SPEED_SLOW);
+	wp->addDamageType(DAMAGE_PROFANE, 25);
+	wp->addScalingType(SCALE_STR);
+	wp->addScalingType(SCALE_DEV);
+	wp->setSpellstoreSize(2);
+	wp->setDivinePower(80);
+	wp->setSpecialAttack(ability_TentacleSwarm());
+	return wp;
+}
+
 weapon * weapon_ProfaneGreatsword()
 {
 	weapon* wp = new weapon("Profane Greatsword", SWORD_TILE, TCODColor::purple,

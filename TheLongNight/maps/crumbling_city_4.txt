@@ -22,17 +22,17 @@ G glass
 + door_stone
 * warpstone
 o ooze
-& sordid_door
 ! corpse
 t table3
 c chair2
 m floor_carpet
+& door_of_winter
 -endcodes
 -connections
-south:crumbling_city_2
+south:crumbling_city_3
 -endconnections
-........................................
-..####################################..
+..................#mm#..................
+..#################&&#################..
 ..#................mm................#..
 ..#................mm................#..
 ..#..####..........mm..........####..#..

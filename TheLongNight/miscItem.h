@@ -50,12 +50,14 @@ miscItem* key_WyrdKey();
 miscItem* key_GreenChapelGardenKey();
 miscItem* key_SordidChapelKey();
 miscItem* key_SpinalColumnShard();
+miscItem* key_WatchfulEyestalk();
 
 //Monster hearts
 miscItem* heart_WretchedHeart();
 miscItem* heart_OldCrowsHeart();
 miscItem* heart_FishBornGoddessesHeart();
 miscItem* heart_OrsylsShriveledHeart();
+miscItem* heart_VortensShriveledHeart();
 
 //Spellbooks
 miscItem* spellbook_WaterloggedWritings();

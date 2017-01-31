@@ -78,6 +78,16 @@ memories of one's ancestors.");
 	return m;
 }
 
+miscItem * key_WatchfulEyestalk()
+{
+	miscItem* m = new miscItem("Watchful Eyestalk", KEY_TILE, TCODColor::darkGreen,
+		"According to the Ritual of Khull-Kallen, the first article of summoning is the Watchful Eyestalk. 'The Eye of the Lord \
+behold his subjects, and lets their most profound desires be known to him. Offer it at the altar in honour of his knowledge.'");
+	m->isKey = true;
+	m->setKeyTag("watchful_eyestalk");
+	return m;
+}
+
 
 
 /*
@@ -118,6 +128,16 @@ miscItem * heart_OrsylsShriveledHeart()
 		"Ruined heart of High Cleric Orsyl, who stood against the Void for as long as he could. It pulses with the awful light \
 of the Void.");
 	h->setKeyTag("orsyls_heart");
+	h->isKey = true;
+	return h;
+}
+
+miscItem * heart_VortensShriveledHeart()
+{
+	miscItem* h = new miscItem("Vorten's Shriveled Heart", HEART_TILE, TCODColor::darkGreen,
+		"Duke Vorten welcomed the Void, and was cast out of the Winter Court as a consequence. He remained at the gates while the \
+Void gnawed at him, begging to be allowed back in, but the gates never opened.");
+	h->setKeyTag("vortens_heart");
 	h->isKey = true;
 	return h;
 }

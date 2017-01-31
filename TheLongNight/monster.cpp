@@ -683,6 +683,8 @@ tentacles emerge from the ruin of his head, and at the centre of his chest sits 
 	m->setSpellCastChance(60);
 	m->isBoss = true;
 	m->setFragmentsDropped(1200);
+	m->addItemDrop(heart_VortensShriveledHeart());
+	m->addItemDrop(key_WatchfulEyestalk());
 	return m;
 }
 

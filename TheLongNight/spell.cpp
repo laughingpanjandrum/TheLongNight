@@ -519,10 +519,12 @@ spell * ability_ShadowWalk()
 
 spell * ability_TentacleSwarm()
 {
-	spell* sp = new spell("Tentacle Swarm", SPELL_TILE, TCODColor::green);
+	spell* sp = new spell("Tentacle Swarm", SPELL_TILE, TCODColor::green,
+		"Entangles target, preventing them from moving.");
 	sp->setAttackType(ATTACK_RANGE);
 	sp->setAttackRange(3);
 	sp->addEffect(APPLY_ENTANGLING, 3);
+	sp->setVigourCost(2);
 	return sp;
 }
 

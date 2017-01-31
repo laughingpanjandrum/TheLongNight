@@ -1743,12 +1743,6 @@ Change player character's position, if the move is valid.
 */
 void game::movePerson(person* p, int xnew, int ynew)
 {
-	
-	//If we're entangled, this just reduces it - but we don't get to move
-	if (p->isEntangled()) {
-		p->struggle();
-		return;
-	}
 
 	//In bounds?
 	if (currentMap->inBounds(xnew, ynew)) {
@@ -1760,17 +1754,26 @@ void game::movePerson(person* p, int xnew, int ynew)
 			person* here = currentMap->getPerson(xnew, ynew);
 			
 			if (here != nullptr) {
+
 				//Player delay, if this is the player
 				if (p->isPlayer)
 					playerTurnDelay = p->getAttackDelay();
+				
 				//We attack
 				meleeAttack(p, here);
 			}
 			
 			else {
-				//Adjust position and deal with the consequences
-				p->setPosition(xnew, ynew);
-				standOnTile(p);
+
+				//If we're entangled, this just reduces it - but we don't get to move
+				if (p->isEntangled()) {
+					p->struggle();
+				}
+				else {
+					//Adjust position and deal with the consequences
+					p->setPosition(xnew, ynew);
+					standOnTile(p);
+				}
 				
 				//If this is the player, update the FOV
 				if (p->isPlayer) {
@@ -3154,6 +3157,7 @@ void getAllItems(person* player)
 	player->addItem(heart_FishBornGoddessesHeart());
 	player->addItem(heart_OldCrowsHeart());
 	player->addItem(heart_OrsylsShriveledHeart());
+	player->addItem(heart_VortensShriveledHeart());
 	player->addItem(heart_WretchedHeart());
 
 	for (int i = 0; i <= 7; i++)

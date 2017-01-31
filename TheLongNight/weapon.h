@@ -122,6 +122,7 @@ weapon* weapon_BloodDrinkersKnife();
 weapon* weapon_KythielsScythe();
 weapon* weapon_VoidTouchedKnife();
 weapon* weapon_VoidCrystalGreatsword();
+weapon* weapon_ArmOfTheDuke();
 
 weapon* weapon_ProfaneGreatsword();
 

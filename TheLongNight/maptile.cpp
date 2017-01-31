@@ -308,6 +308,16 @@ maptile * tile_VoidDrenchedDoor()
 	return door;
 }
 
+maptile * tile_DoorOfWinter()
+{
+	maptile* door = new maptile("Door of Winter", "door_of_winter", BASIC_DOOR_TILE,
+		TCODColor::lightGrey, TCODColor::white, false, false);
+	door->isDoor = true;
+	door->unlockCode = "watchful_eyestalk";
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	return door;
+}
+
 maptile * tile_Chair1()
 {
 	return new maptile("Chair", "chair1", CHAIR_TILE_1,

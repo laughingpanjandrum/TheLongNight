@@ -155,6 +155,7 @@ maptile* tile_WyrdDoor(); //"wyrd_door"
 maptile* tile_GreenChapelGardenDoor(); //"green_chapel_door"
 maptile* tile_SordidChapelDoor(); //"sordid door"
 maptile* tile_VoidDrenchedDoor(); //"void_drenched_door"
+maptile* tile_DoorOfWinter(); //"door_of_winter"
 
 //Furniture
 maptile* tile_Chair1(); //"chair1"
@@ -181,7 +182,7 @@ const tileVector ALL_MAPTILES = {
 	//Special locked doors
 	tile_WretchedDoor(), tile_CrowDoor(), tile_RuinedTownshipHallDoor(),
 	tile_WyrdDoor(), tile_GreenChapelGardenDoor(), tile_SordidChapelDoor(),
-	tile_VoidDrenchedDoor()
+	tile_VoidDrenchedDoor(), tile_DoorOfWinter()
 };
 
 #endif
