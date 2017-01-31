@@ -148,6 +148,7 @@ monster* npc_UtricTheRat();
 monster* npc_MuiraClericOfTheRose();
 monster* npc_ElenaThePilgrim();
 monster* npc_VoidwalkerDaedelus();
+monster* npc_Ydella();
 
 
 //For map files

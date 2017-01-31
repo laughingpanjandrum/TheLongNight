@@ -68,6 +68,32 @@ miscItem * key_SordidChapelKey()
 	return m;
 }
 
+miscItem * key_SpinalColumnShard()
+{
+	miscItem* m = new miscItem("Spinal Column Shard", KEY_TILE, TCODColor::lighterGrey,
+		"A fragment of Orsyl's spinal column. According to the writings of Saint Lucina, one's spinal column contains the \
+memories of one's ancestors.");
+	m->isKey = true;
+	m->setKeyTag("spinal_column_shard");
+	return m;
+}
+
+
+
+/*
+	Hearts
+*/
+
+
+miscItem * heart_WretchedHeart()
+{
+	miscItem* h = new miscItem("Wretched Heart", HEART_TILE, TCODColor::darkRed,
+		"This small, putrid heart lay at the centre of the wretched mass, apparently conferring life to the putrid thing.");
+	h->setKeyTag("wretched_heart");
+	h->isKey = true;
+	return h;
+}
+
 
 
 /*

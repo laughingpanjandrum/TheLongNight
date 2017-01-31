@@ -49,6 +49,10 @@ miscItem* key_RuinedTownshipKey();
 miscItem* key_WyrdKey();
 miscItem* key_GreenChapelGardenKey();
 miscItem* key_SordidChapelKey();
+miscItem* key_SpinalColumnShard();
+
+//Monster hearts
+miscItem* heart_WretchedHeart();
 
 //Spellbooks
 miscItem* spellbook_WaterloggedWritings();

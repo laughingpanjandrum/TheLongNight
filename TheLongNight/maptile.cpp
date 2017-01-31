@@ -293,6 +293,16 @@ maptile * tile_SordidChapelDoor()
 	return door;
 }
 
+maptile * tile_VoidDrenchedDoor()
+{
+	maptile* door = new maptile("Void Drenched Door", "void_drenched_door", BASIC_DOOR_TILE,
+		TCODColor::lightPurple, TCODColor::darkPurple, false, false);
+	door->isDoor = true;
+	door->unlockCode = "spinal_column_shard";
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	return door;
+}
+
 maptile * tile_Chair1()
 {
 	return new maptile("Chair", "chair1", CHAIR_TILE_1,

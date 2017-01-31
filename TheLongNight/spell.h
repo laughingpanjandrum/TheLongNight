@@ -111,5 +111,6 @@ spell* ability_FeedingFrenzy();
 spell* ability_SinkBeneath();
 spell* ability_DropOoze();
 spell* ability_ShadowWalk();
+spell* ability_DrawOutTheBlood();
 
 #endif

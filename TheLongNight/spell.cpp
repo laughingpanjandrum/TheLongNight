@@ -462,3 +462,11 @@ spell * ability_ShadowWalk()
 	sp->addEffect(BECOME_INVISIBLE, 2);
 	return sp;
 }
+
+spell * ability_DrawOutTheBlood()
+{
+	spell* sp = new spell("Draw Out the Blood", SPELL_TILE, TCODColor::crimson);
+	sp->setAttackType(ATTACK_RANGE);
+	sp->addEffect(HURT_BLEEDER, 50);
+	return sp;
+}

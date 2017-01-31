@@ -63,6 +63,7 @@ const int SIGIL_TILE = 6;
 const int RUNESTONE_TILE = 283;
 const int FLOWER_TILE = 284;
 const int BELL_TILE = 278;
+const int HEART_TILE = 3;
 
 //Maptiles
 const int BASIC_FLOOR_TILE = 288;

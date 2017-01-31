@@ -241,6 +241,7 @@ flailing.");
 	m->addSpawnableCreature("thin_wretch");
 	m->setSpawnChance(25);
 	m->addItemDrop(key_WretchsKey());
+	m->addItemDrop(heart_WretchedHeart());
 	m->isBoss = true;
 	m->setFragmentsDropped(200);
 	return m;
@@ -591,8 +592,13 @@ his flesh.");
 	m->setMoveStats(SPEED_NORMAL);
 	m->equipItem(new weapon(10, SPEED_NORMAL, EFFECT_BLEED, 15));
 	m->addSpellKnown(prayer_ProfaneRadiance());
+	m->addSpellKnown(attack_BloodFeast());
+	m->addSpellKnown(ability_DrawOutTheBlood());
 	m->setSpellCastChance(90);
 	m->setDivinePower(120);
+	m->isBoss = true;
+	m->setFragmentsDropped(1000);
+	m->addItemDrop(key_SpinalColumnShard());
 	return m;
 }
 
@@ -635,7 +641,7 @@ you approach.");
 
 monster * npc_UtricTheRat()
 {
-	monster* m = new monster("Utric the Rat", GOREM_TILE, TCODColor::lighterSepia,
+	monster* m = new monster("Utric the Rat", PLAYER_TILE, TCODColor::lighterSepia,
 		"A scrawny man in ragged clothes, with a curiously rat-like visage. He watches you eagerly.");
 	m->setHealth(100);
 	m->isHostile = false;
@@ -705,6 +711,19 @@ monster * npc_VoidwalkerDaedelus()
 	m->isHostile = false;
 	//Dialogue
 	m->loadDialogue("dialogue/daedelus_chat.txt");
+	return m;
+}
+
+monster * npc_Ydella()
+{
+	monster* m = new monster("Ydella, Ancient of Wyrd", GOREM_TILE, TCODColor::lightestGreen,
+		"This figure of a woman seems to be made of stone, until a sudden light shines in her eyes.");
+	m->setHealth(500);
+	m->isHostile = false;
+	m->isShopkeeper = true;
+	m->loadDialogue("dialogue/ydella_chat.txt");
+	//Items are all acquired via HEART-TRADING
+	m->addStockUnlock(charm_WretchedFleshBand(), 100, "wretched_heart");
 	return m;
 }
 
@@ -795,6 +814,8 @@ monster * getMonsterByHandle(std::string handle)
 		return npc_ElenaThePilgrim();
 	else if (handle == "daedelus")
 		return npc_VoidwalkerDaedelus();
+	else if (handle == "ydella")
+		return npc_Ydella();
 
 	//LET'S HOPE WE NEVER GET HERE!
 	return nullptr;

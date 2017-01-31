@@ -37,5 +37,6 @@ charm* charm_KhallesHeadband();
 charm* charm_IdolOfPash();
 charm* charm_EvisceratingRing();
 charm* charm_BloodDrinkersBand();
+charm* charm_WretchedFleshBand();
 
 #endif

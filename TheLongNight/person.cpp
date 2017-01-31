@@ -359,6 +359,12 @@ void person::applyEffect(effect eff, int potency)
 		isPoisoned = 0;
 		poisonBuildup.clear();
 	}
+	else if (eff == HURT_BLEEDER) {
+		//This only affects bleeding targets
+		if (isBleeding > 0) {
+			takeDamage(potency, DAMAGE_PROFANE);
+		}
+	}
 
 	//Spell buffs
 

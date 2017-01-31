@@ -60,3 +60,12 @@ will draw one closer to godhood.");
 	c->addEffect(GAIN_BLEED_SCALING, 25);
 	return c;
 }
+
+charm * charm_WretchedFleshBand()
+{
+	charm* c = new charm("Wretched Fleshband", CHARM_TILE, TCODColor::pink,
+		"This band of quivering flesh confers a sense of profound unease. Of course, such is the fate of the wretched, who \
+could go no further than Coruscating Beach.");
+	c->addEffect(GAIN_HEALTH_ON_KILL, 10);
+	return c;
+}

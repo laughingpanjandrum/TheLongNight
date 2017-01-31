@@ -849,6 +849,10 @@ void game::drawInterface(int leftx, int topy)
 	if (player->slowdown > 0)
 		win.write(atx, ++aty, "SLOWED", TCODColor::sepia);
 
+	//Status effect: BLINDED!
+	if (player->isBlind())
+		win.write(atx, ++aty, "BLIND", TCODColor::white);
+
 	//Draws whatever we have HIGHLIGHTED
 	aty += 2;
 	drawMouseover(atx, aty);
@@ -3044,6 +3048,7 @@ void getAllItems(person* player) {
 	player->addItem(consumable_InvigoratingTea());
 	player->addItem(consumable_TinyGreenFlower());
 	player->addItem(consumable_TinyRedFlower());
+	player->addItem(consumable_BloodDrinkersEyes());
 
 	player->addItem(ranged_CorrodingJar());
 	player->addItem(ranged_FrostKnives());
@@ -3056,14 +3061,23 @@ void getAllItems(person* player) {
 
 	player->addItem(oil_CorrosiveOil());
 	player->addItem(oil_PyromancersOil());
-	player->addItem(misc_VoidSigil());
 
 	player->addItem(runestone_CorensRunestone());
 	player->addItem(runestone_KhallesRunestone());
 	player->addItem(runestone_SiltrasRunestone());
 
-	for (int i = 0; i <= 5; i++)
+	player->addItem(key_GreenChapelGardenKey());
+	player->addItem(key_OldCrowsKey());
+	player->addItem(key_RuinedTownshipKey());
+	player->addItem(key_SordidChapelKey());
+	player->addItem(key_SpinalColumnShard());
+	player->addItem(key_WretchsKey());
+	player->addItem(key_WyrdKey());
+	player->addItem(misc_VoidSigil());
+
+	for (int i = 0; i <= 7; i++)
 		player->addItem(consumable_StarwaterDraught());
+
 }
 
 
@@ -3259,6 +3273,8 @@ void game::debugMenu()
 		player->stats->strength = 12;
 		loadMapFromHandle("maps/red_drenched_gardens_1.txt", CONNECT_WARP, player->getx(), player->gety());
 	}
-	else if (txt == "allitems")
+	else if (txt == "allitems") {
 		getAllItems(player);
+		fragments += 8000;
+	}
 }
