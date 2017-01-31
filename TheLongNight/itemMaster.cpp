@@ -32,6 +32,10 @@ item * getItemByHandle(std::string handle)
 		return weapon_CityGuardianWarhammer();
 	else if (handle == "blood_drinkers_knife")
 		return weapon_BloodDrinkersKnife();
+	else if (handle == "kythiels_scythe")
+		return weapon_KythielsScythe();
+	else if (handle == "void_touched_knife")
+		return weapon_VoidTouchedKnife();
 
 	//SHIELDS
 	else if (handle == "battered_wooden_shield")
@@ -42,6 +46,8 @@ item * getItemByHandle(std::string handle)
 		return shield_BatteredSteelShield();
 	else if (handle == "city_guardian_shield")
 		return shield_CityGuardianShield();
+	else if (handle == "void_touched_shield")
+		return shield_VoidTouchedShield();
 
 	//WANDS/CHIMES
 	else if (handle == "driftwood_wand")
@@ -78,6 +84,8 @@ item * getItemByHandle(std::string handle)
 		return ranged_HeavyJavelin();
 	else if (handle == "corroding_jar")
 		return ranged_CorrodingJar();
+	else if (handle == "void_essence_jar")
+		return ranged_VoidEssenceJar();
 	else if (handle == "pyromancers_flask")
 		return ranged_PyromancersFlask();
 	else if (handle == "witchs_jar")
@@ -123,6 +131,11 @@ item * getItemByHandle(std::string handle)
 	else if (handle == "pash_robes")
 		return armour_PashRobes();
 
+	else if (handle == "cursed_knights_helm")
+		return headgear_CursedKnightsHelm();
+	else if (handle == "cursed_knights_armour")
+		return armour_CursedKnightsArmour();
+
 	//CHARMS
 	else if (handle == "bloodstained_charm")
 		return charm_BloodstainedCharm();
@@ -160,6 +173,8 @@ item * getItemByHandle(std::string handle)
 		return spellbook_WaterloggedWritings();
 	else if (handle == "minas_profaned_writings")
 		return spellbook_MinasProfanedWritings();
+	else if (handle == "orsyls_tome_of_prayer")
+		return spellbook_OrsylsTomeOfPrayer();
 	else if (handle == "piece_of_jade")
 		return misc_PieceOfJade();
 
@@ -275,6 +290,7 @@ std::string getEffectName(effect e)
 	case(PULL_CLOSER): return "pull target";
 	case(BLEED_DAMAGE_FACTOR): return "times bleed damage dealt and taken";
 	case(GAIN_BLEED_SCALING): return "extra damage dealt when bleeding";
+	case(HURT_BLEEDER): return "profane damage dealt to bleeding target";
 	case(HEALING_FACTOR): return "percent healing boost";
 	case(BECOME_INVISIBLE): return "invisibility";
 	case(GAIN_HEALTH_ON_KILL): return "health restored on kill";

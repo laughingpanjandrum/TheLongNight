@@ -52,5 +52,8 @@ armour* armour_CityGuardArmour();
 armour* headgear_PashHood();
 armour* armour_PashRobes();
 
+armour* headgear_CursedKnightsHelm();
+armour* armour_CursedKnightsArmour();
+
 #endif
 

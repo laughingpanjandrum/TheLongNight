@@ -136,6 +136,42 @@ spell * attack_BloodFeast()
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(APPLY_BLEED_DAMAGE, 10);
 	sp->addEffect(SCALE_NEXT_ATTACK, 15);
+	sp->setVigourCost(1);
+	return sp;
+}
+
+spell * attack_HolySummons()
+{
+	spell* sp = new spell("Holy Summons", SPELL_TILE, TCODColor::darkYellow,
+		"Pull target closer and deal 25 holy damage.");
+	sp->setAttackType(ATTACK_RANGE);
+	sp->setAttackRange(3);
+	sp->addEffect(APPLY_BLESSED_DAMAGE, 25);
+	sp->addEffect(PULL_CLOSER, 2);
+	sp->setVigourCost(3);
+	return sp;
+}
+
+spell * attack_VoidSlash()
+{
+	spell* sp = new spell("Void Slash", DAGGER_TILE, TCODColor::lightPurple,
+		"Damage target and fling away.");
+	sp->setAttackType(ATTACK_RANGE);
+	sp->setAttackRange(2);
+	sp->addEffect(APPLY_PROFANE_DAMAGE, 25);
+	sp->addEffect(KNOCKBACK_TARGET, 1);
+	sp->setVigourCost(2);
+	return sp;
+}
+
+spell * attack_VoidSurge()
+{
+	spell* sp = new spell("Void Surge", SWORD_TILE, TCODColor::lightFuchsia,
+		"Weapon surges with profane power, but damages you.");
+	sp->setAttackType(ATTACK_BUFF_WEAPON);
+	sp->setBuffApplied(DAMAGE_PROFANE, 50);
+	sp->setVigourCost(3);
+	sp->setDamageToCaster(20);
 	return sp;
 }
 
@@ -411,6 +447,18 @@ spell * prayer_SinkBeneath()
 	return sp;
 }
 
+spell * prayer_DrawOutTheBlood()
+{
+	spell* sp = new spell("Draw Out the Blood", SPELL_TILE, TCODColor::crimson,
+		"Certain adherents of the Void acquired a great interest in blood. Orsyl was convinced that a secret power lay in \
+the blood of the living, but he never found it.");
+	sp->setAttackType(ATTACK_RANGE);
+	sp->addEffect(HURT_BLEEDER, 50);
+	sp->usesDivinePower = true;
+	sp->setVigourCost(2);
+	return sp;
+}
+
 
 
 
@@ -466,13 +514,5 @@ spell * ability_ShadowWalk()
 	spell* sp = new spell("Shadow Walk", SPELL_TILE, TCODColor::purple);
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(BECOME_INVISIBLE, 2);
-	return sp;
-}
-
-spell * ability_DrawOutTheBlood()
-{
-	spell* sp = new spell("Draw Out the Blood", SPELL_TILE, TCODColor::crimson);
-	sp->setAttackType(ATTACK_RANGE);
-	sp->addEffect(HURT_BLEEDER, 50);
 	return sp;
 }

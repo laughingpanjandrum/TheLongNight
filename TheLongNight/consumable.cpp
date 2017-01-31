@@ -102,6 +102,15 @@ consumable * ranged_CorrodingJar()
 	return c;
 }
 
+consumable * ranged_VoidEssenceJar()
+{
+	consumable* c = new consumable("Void-Essence Jar", VIAL_TILE, TCODColor::purple,
+		"A jar filled with cursed oil, designed to shatter on contact.");
+	c->setRangedAttack(new spell(5, 5, APPLY_PROFANE_DAMAGE, 45));
+	c->add(2);
+	return c;
+}
+
 consumable * ranged_PyromancersFlask()
 {
 	consumable* c = new consumable("Pyromancer's Flask", VIAL_TILE, TCODColor::flame,

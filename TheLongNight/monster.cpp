@@ -596,13 +596,87 @@ his flesh.");
 	m->equipItem(new weapon(10, SPEED_NORMAL, EFFECT_BLEED, 15));
 	m->addSpellKnown(prayer_ProfaneRadiance());
 	m->addSpellKnown(attack_BloodFeast());
-	m->addSpellKnown(ability_DrawOutTheBlood());
+	m->addSpellKnown(prayer_DrawOutTheBlood());
 	m->setSpellCastChance(90);
 	m->setDivinePower(120);
 	m->isBoss = true;
 	m->setFragmentsDropped(1000);
 	m->addItemDrop(key_SpinalColumnShard());
 	m->addItemDrop(heart_OrsylsShriveledHeart());
+	return m;
+}
+
+monster * monster_CursedKnight()
+{
+	monster* m = new monster("Cursed Knight", KNIGHT_TILE, TCODColor::purple,
+		"The holy symbols on its armour are drenched in the Void.");
+	m->setHealth(200);
+	m->setDefence(DAMAGE_PHYSICAL, 50);
+	m->setDefence(DAMAGE_ELECTRIC, 20);
+	m->setDefence(DAMAGE_FIRE, 20);
+	m->setDefence(DAMAGE_COLD, 20);
+	m->makeProfane();
+	m->setMeleeStats(50, SPEED_NORMAL);
+	m->setMoveStats(SPEED_SLOW);
+	m->addSpellKnown(attack_Quickstep());
+	m->setSpellCastChance(25);
+	m->setFragmentsDropped(150);
+	return m;
+}
+
+monster * monster_CursedArcher()
+{
+	monster* m = new monster("Cursed Archer", KNIGHT_TILE, TCODColor::lightPurple,
+		"Archers armoured in the garb of the knights of the Winter Court.");
+	m->setHealth(200);
+	m->setDefence(DAMAGE_PHYSICAL, 50);
+	m->setDefence(DAMAGE_ELECTRIC, 20);
+	m->setDefence(DAMAGE_FIRE, 20);
+	m->setDefence(DAMAGE_COLD, 20);
+	m->makeProfane();
+	m->setMeleeStats(15, SPEED_NORMAL);
+	m->setMoveStats(SPEED_SLOW);
+	m->keepsDistance = true;
+	m->addSpellKnown(new spell(8, 10, APPLY_PROFANE_DAMAGE, 15));
+	m->setSpellCastChance(50);
+	m->setFragmentsDropped(150);
+	return m;
+}
+
+monster * monster_Enkidu()
+{
+	monster* m = new monster("Enkidu, Seeker of the Deathless", KNIGHT_TILE, TCODColor::lightFuchsia,
+		"His armour glows with the symbols of the Void. From beneath his mask, a single eye glows with furious \
+determination.");
+	m->setHealth(300);
+	m->setDefence(DAMAGE_PHYSICAL, 60);
+	m->setDefence(DAMAGE_FIRE, 25);
+	m->setDefence(DAMAGE_ELECTRIC, 25);
+	m->makeProfane();
+	m->setMoveStats(SPEED_SLOW);
+	m->equipItem(weapon_VoidCrystalGreatsword());
+	m->setFragmentsDropped(500);
+	m->addItemDrop(weapon_VoidCrystalGreatsword());
+	m->addSpellKnown(prayer_ProfaneRay());
+	m->addSpellKnown(attack_VoidSurge());
+	m->setSpellCastChance(20);
+	m->isBoss = true;
+	m->showBossHealthBar = false;
+	return m;
+}
+
+monster * monster_DukeVortenTheWatchful()
+{
+	monster* m = new monster("Duke Vorten the Watchful", DUKE_TILE, TCODColor::lightFuchsia,
+		"A bloated figure rises from the floor. His flesh is a mass of eyestalks and protruding shards of bone; a swarm of \
+tentacles emerge from the ruin of his head, and at the centre of his chest sits a gaping maw.");
+	m->setHealth(800);
+	m->setDefence(DAMAGE_PHYSICAL, 10);
+	m->setDefence(DAMAGE_ACID, 25);
+	m->setDefence(DAMAGE_MAGIC, 25);
+	m->setMeleeStats(50, SPEED_NORMAL);
+	m->setMoveStats(SPEED_SLOW);
+	m->makeProfane();
 	return m;
 }
 
@@ -676,6 +750,9 @@ monster * npc_MuiraClericOfTheRose()
 	m->addItemToStock(prayer_RayOfLight(), 25);
 	m->addItemToStock(prayer_BlessedRadiance(), 50);
 	m->addItemToStock(prayer_RemovePoison(), 25);
+	//With Orsyl's Tome
+	m->addStockUnlock(prayer_ProfaneRadiance(), 50, "orsyls_tome_of_prayer");
+	m->addStockUnlock(prayer_DrawOutTheBlood(), 75, "orsyls_tome_of_prayer");
 	//Dialogue
 	m->loadDialogue("dialogue/muira_chat.txt");
 	return m;
@@ -806,6 +883,12 @@ monster * getMonsterByHandle(std::string handle)
 		return  monster_BloodstarvedZombie();
 	else if (handle == "orsyl_the_profaned")
 		return monster_HighClericOrsylTheProfaned();
+	else if (handle == "cursed_knight")
+		return monster_CursedKnight();
+	else if (handle == "cursed_archer")
+		return monster_CursedArcher();
+	else if (handle == "enkidu")
+		return monster_Enkidu();
 
 	//The Void
 	else if (handle == "void_touched")

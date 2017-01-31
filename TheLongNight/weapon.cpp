@@ -93,6 +93,18 @@ void weapon::removeSpell(spell * sp)
 }
 
 
+
+/*
+	Status Effects
+*/
+
+
+int weapon::getStatusEffectDamage(int idx)
+{
+	return statusEffectDamage.at(idx);
+}
+
+
 /*
 Returns how much bonus damage per stat point we deal for the given stat.
 We do more scaling damage the fewer stats we scale with.
@@ -277,6 +289,42 @@ see the true shape of all things.");
 	return wp;
 }
 
+weapon * weapon_KythielsScythe()
+{
+	weapon* wp = new weapon("Kythiel's Scythe", SPEAR_TILE, TCODColor::lightYellow,
+		"Kythiel, last priestess of the Winter Court, was the only one who stood against the Void when the city fell.");
+	wp->setBasicAttributes(50, SPEED_NORMAL);
+	wp->addDamageType(DAMAGE_BLESSED, 25);
+	wp->addScalingType(SCALE_STR);
+	wp->addScalingType(SCALE_DEX);
+	wp->addScalingType(SCALE_DEV);
+	wp->setSpecialAttack(attack_HolySummons());
+	return wp;
+}
+
+weapon * weapon_VoidTouchedKnife()
+{
+	weapon* wp = new weapon("Void-Touched Knife", DAGGER_TILE, TCODColor::lightPurple,
+		"The blade of this knife phases in and out of reality, pulsing with the raging heart of the Void.");
+	wp->setBasicAttributes(0, SPEED_FAST);
+	wp->addDamageType(DAMAGE_PROFANE, 20);
+	wp->addScalingType(SCALE_DEX);
+	wp->setSpecialAttack(attack_VoidSlash());
+	return wp;
+}
+
+weapon * weapon_VoidCrystalGreatsword()
+{
+	weapon* wp = new weapon("Void Crystal Greatsword", SWORD_TILE, TCODColor::lightFuchsia,
+		"The blade of this enormous sword is forged from pure voidcrystal and phases in and out of existence.");
+	wp->setBasicAttributes(50, SPEED_SLOW);
+	wp->addDamageType(DAMAGE_PROFANE, 50);
+	wp->addScalingType(SCALE_STR);
+	wp->addScalingType(SCALE_DEV);
+	wp->setSpecialAttack(attack_VoidSurge());
+	return wp;
+}
+
 weapon * weapon_ProfaneGreatsword()
 {
 	weapon* wp = new weapon("Profane Greatsword", SWORD_TILE, TCODColor::purple,
@@ -330,6 +378,16 @@ but not a single knight survived.");
 	wp->setDefence(15);
 	wp->setDamageResist(DAMAGE_PROFANE, 15);
 	wp->setDamageResist(DAMAGE_FIRE, 10);
+	wp->makeOffhand();
+	return wp;
+}
+
+weapon * shield_VoidTouchedShield()
+{
+	weapon* wp = new weapon("Void-Touched Shield", SHIELD_TILE, TCODColor::darkPurple,
+		"This shield phases in and out of reality, forming fissures into the Void.");
+	wp->setDefence(5);
+	wp->setDamageResist(DAMAGE_PROFANE, 50);
 	wp->makeOffhand();
 	return wp;
 }

@@ -38,6 +38,8 @@ const int ZOMBIE_TILE = 122;
 const int PRIEST_TILE = 80;
 const int HOUND_TILE = 104;
 const int ORSYL_TILE = 335;
+const int KNIGHT_TILE = 363;
+const int DUKE_TILE = 324;
 
 const int GHOST_TILE = 86;
 

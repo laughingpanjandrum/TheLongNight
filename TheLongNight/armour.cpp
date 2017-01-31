@@ -153,3 +153,22 @@ streets, though none knew their origins.");
 	a->setMoveSpeed(SPEED_FAST);
 	return a;
 }
+
+armour * headgear_CursedKnightsHelm()
+{
+	armour* a = new armour("Cursed Knight's Helm", HELMET_TILE, TCODColor::lightPurple, ITEM_HELMET,
+		"Helm of the knights of the Winter Court, who stood guard over Kythiel until her final moments.");
+	a->setDefence(15);
+	a->setDamageResist(DAMAGE_BLESSED, 15);
+	return a;
+}
+
+armour * armour_CursedKnightsArmour()
+{
+	armour* a = new armour("Cursed Knight's Armour", ARMOUR_TILE, TCODColor::lightPurple, ITEM_BODY_ARMOUR,
+		"Armour of the knights of the Winter Court, who stood guard over Kythiel until her final moments.");
+	a->setDefence(30);
+	a->setDamageResist(DAMAGE_BLESSED, 30);
+	a->setMoveSpeed(SPEED_SLOW);
+	return a;
+}

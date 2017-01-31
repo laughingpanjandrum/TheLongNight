@@ -60,6 +60,7 @@ miscItem* heart_OrsylsShriveledHeart();
 //Spellbooks
 miscItem* spellbook_WaterloggedWritings();
 miscItem* spellbook_MinasProfanedWritings();
+miscItem* spellbook_OrsylsTomeOfPrayer();
 
 //Runestones
 miscItem* runestone_CorensRunestone();

@@ -75,6 +75,7 @@ consumable* ranged_ThrowingKnives();
 consumable* ranged_HeavyJavelin();
 consumable* ranged_LaceratingKnives();
 consumable* ranged_CorrodingJar();
+consumable* ranged_VoidEssenceJar();
 consumable* ranged_PyromancersFlask();
 consumable* ranged_WitchsJar();
 consumable* ranged_LightingJavelin();

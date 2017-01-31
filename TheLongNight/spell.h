@@ -22,6 +22,8 @@ public:
 	void setVigourCost(int v) { vigourCost = v; }
 	void setAttackRange(int r) { attackRange = r; }
 	void setBuffApplied(damageType dtype, int damage) { buffApplied = weaponBuff(dtype, damage); }
+	void setStatusEffectBuff(statusEffects etype, int damage) { buffApplied = weaponBuff(etype, damage); }
+	void setDamageToCaster(int d) { damageToCaster = d; }
 
 	//Getting
 	int getEffectsCount() { return effectsApplied.size(); }
@@ -31,6 +33,7 @@ public:
 	attackType getAttackType() { return aType; }
 	int getAttackRange() { return attackRange; }
 	int getVigourCost() { return vigourCost; }
+	int getDamageToCaster() { return damageToCaster; }
 
 	//Flags
 	bool usesSpellPower = false;
@@ -53,6 +56,7 @@ private:
 
 	//Casting cost
 	int vigourCost = 1;
+	int damageToCaster = 0;
 
 };
 
@@ -66,6 +70,9 @@ spell* attack_Spearfishing();
 spell* attack_Fillet();
 spell* attack_DivineSmite();
 spell* attack_BloodFeast();
+spell* attack_HolySummons();
+spell* attack_VoidSlash();
+spell* attack_VoidSurge();
 
 //Wand/chime powers
 spell* ability_PowerSurge();
@@ -99,6 +106,8 @@ spell* prayer_WyrdChantOfStrength();
 spell* prayer_RayOfLight();
 spell* prayer_BlessedRadiance();
 spell* prayer_RemovePoison();
+//Orsyl's Tome of Prayer
+spell* prayer_DrawOutTheBlood();
 //Sold by Ydella
 spell* prayer_SinkBeneath();
 //Misc
@@ -112,6 +121,5 @@ spell* ability_CrowArrow();
 spell* ability_FeedingFrenzy();
 spell* ability_DropOoze();
 spell* ability_ShadowWalk();
-spell* ability_DrawOutTheBlood();
 
 #endif

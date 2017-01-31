@@ -56,7 +56,7 @@ public:
 	//Status effects
 	int getStatusEffectCount() { return statusEffectType.size(); } //Returns number of status effects we apply
 	statusEffects getStatusEffectType(int idx) { return statusEffectType.at(idx); }
-	int getStatusEffectDamage(int idx) { return statusEffectDamage.at(idx); }
+	int getStatusEffectDamage(int idx);
 
 	//Buffing
 	void setBuff(weaponBuff buff) { currentBuff = buff; }
@@ -119,6 +119,9 @@ weapon* weapon_FishmansKnife();
 
 weapon* weapon_CityGuardianWarhammer();
 weapon* weapon_BloodDrinkersKnife();
+weapon* weapon_KythielsScythe();
+weapon* weapon_VoidTouchedKnife();
+weapon* weapon_VoidCrystalGreatsword();
 
 weapon* weapon_ProfaneGreatsword();
 
@@ -127,6 +130,7 @@ weapon* shield_BatteredWoodenShield();
 weapon* shield_WoodenWyrdShield();
 weapon* shield_BatteredSteelShield();
 weapon* shield_CityGuardianShield();
+weapon* shield_VoidTouchedShield();
 
 //Wands
 weapon* wand_DriftwoodWand();

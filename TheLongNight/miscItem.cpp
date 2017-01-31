@@ -148,6 +148,15 @@ miscItem * spellbook_MinasProfanedWritings()
 	return s;
 }
 
+miscItem * spellbook_OrsylsTomeOfPrayer()
+{
+	miscItem* s = new miscItem("Orsyl's Tome of Prayer", SPELL_TILE, TCODColor::lightPurple,
+		"In his final days, Orsyl's holy prayers were profaned by his contact with the Void.");
+	s->setKeyTag("orsyls_tome_of_prayer");
+	s->isKey = true;
+	return s;
+}
+
 
 
 /*

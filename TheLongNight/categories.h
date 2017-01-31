@@ -86,7 +86,8 @@ enum effect {
 //Damage types
 
 enum statusEffects {
-	EFFECT_BLEED, EFFECT_POISON, EFFECT_PLAGUE
+	EFFECT_BLEED, EFFECT_POISON, EFFECT_PLAGUE,
+	EFFECT_NONE
 };
 
 enum damageType {
@@ -113,7 +114,9 @@ typedef std::vector<effect> effectVector;
 struct weaponBuff {
 	weaponBuff() {}
 	weaponBuff(damageType dtype, int bonusDamage) : dtype(dtype), bonusDamage(bonusDamage) {}
-	damageType dtype;
+	weaponBuff(statusEffects etype, int bonusDamage) : etype(etype), bonusDamage(bonusDamage) {}
+	damageType dtype = DAMAGE_UNTYPED;
+	statusEffects etype = EFFECT_NONE;
 	int bonusDamage = 0;
 };
 

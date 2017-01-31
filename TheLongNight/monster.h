@@ -138,6 +138,10 @@ monster* monster_VoidwalkerMinas();
 monster* monster_BloodthirstyHound();
 monster* monster_BloodstarvedZombie();
 monster* monster_HighClericOrsylTheProfaned();
+monster* monster_CursedKnight();
+monster* monster_CursedArcher();
+monster* monster_Enkidu();
+monster* monster_DukeVortenTheWatchful();
 
 //The Void
 monster* monster_VoidTouched();

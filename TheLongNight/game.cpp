@@ -612,7 +612,9 @@ Clears, draws the entire screen, then refreshes.
 void game::drawScreen(bool doRefresh) 
 {
 	win.clear();
-	//Figure out what to draw
+	//Always draw the interface
+	drawInterface(MAP_DRAW_X + 43, MAP_DRAW_Y);
+	//Figure out else what to draw
 	if (state == STATE_VIEW_INVENTORY || state == STATE_VIEW_INVENTORY_CATEGORY) {
 		drawInventory(MAP_DRAW_X, MAP_DRAW_Y);
 	}
@@ -624,8 +626,6 @@ void game::drawScreen(bool doRefresh)
 		drawMenu(currentMenu, MAP_DRAW_X, MAP_DRAW_Y);
 	else
 		drawMap(MAP_DRAW_X, MAP_DRAW_Y);
-	//Always draw the interface
-	drawInterface(MAP_DRAW_X + 43, MAP_DRAW_Y);
 	//win.drawFont();
 	if (doRefresh)
 		win.refresh();
@@ -1086,6 +1086,8 @@ This just figures out which particular info-drawing function to use.
 */
 void game::drawItemInfo(item * it, int atx, int aty)
 {
+	//Clear region
+	win.clearRegion(atx, aty, 40, 19);
 	//Tile and name
 	win.writec(atx, aty, it->getTileCode(), it->getColor());
 	win.write(atx + 2, aty, it->getName(), it->getColor());
@@ -2448,8 +2450,10 @@ void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 	
 	}
 
-	//This is when the caster expends their vigour
+	//This is when the caster expends their vigour/takes damage
 	caster->loseVigour(sp->getVigourCost());
+	if (sp->getDamageToCaster() > 0)
+		caster->takeDamage(sp->getDamageToCaster());
 
 }
 
@@ -2462,6 +2466,8 @@ void game::dischargeSpellOnWeapon(spell * sp, person * caster, weapon * target)
 	if (target != nullptr) {
 		target->setBuff(sp->getWeaponBuff());
 		caster->loseVigour(sp->getVigourCost());
+		if (sp->getDamageToCaster() > 0)
+			caster->takeDamage(sp->getDamageToCaster());
 	}
 }
 
@@ -2999,7 +3005,8 @@ coord game::screenToMapCoords(coord pt)
 */
 
 
-void getAllItems(person* player) {
+void getAllItems(person* player) 
+{
 	
 	player->addItem(weapon_BloodDrinkersKnife());
 	player->addItem(weapon_CityGuardianWarhammer());
@@ -3008,15 +3015,19 @@ void getAllItems(person* player) {
 	player->addItem(weapon_CrowKnightSword());
 	player->addItem(weapon_FishmansHarpoon());
 	player->addItem(weapon_FishmansKnife());
+	player->addItem(weapon_KythielsScythe());
 	player->addItem(weapon_NotchedGreatsword());
 	player->addItem(weapon_SplinteredSword());
 	player->addItem(weapon_StraightSword());
 	player->addItem(weapon_ThinKnife());
+	player->addItem(weapon_VoidCrystalGreatsword());
+	player->addItem(weapon_VoidTouchedKnife());
 	player->addItem(weapon_Warhammer());
 
 	player->addItem(shield_BatteredSteelShield());
 	player->addItem(shield_BatteredWoodenShield());
 	player->addItem(shield_CityGuardianShield());
+	player->addItem(shield_VoidTouchedShield());
 	player->addItem(shield_WoodenWyrdShield());
 
 	player->addItem(chime_ClericsCrackedChime());
@@ -3039,6 +3050,8 @@ void getAllItems(person* player) {
 	player->addItem(armour_CityGuardArmour());
 	player->addItem(headgear_PashHood());
 	player->addItem(armour_PashRobes());
+	player->addItem(headgear_CursedKnightsHelm());
+	player->addItem(armour_CursedKnightsArmour());
 
 	player->addItem(charm_BloodstainedCharm());
 	player->addItem(charm_EvisceratingRing());
@@ -3076,6 +3089,7 @@ void getAllItems(person* player) {
 	player->addItem(ranged_PyromancersFlask());
 	player->addItem(ranged_ThrowingKnives());
 	player->addItem(ranged_WitchsJar());
+	player->addItem(ranged_VoidEssenceJar());
 
 	player->addItem(oil_CorrosiveOil());
 	player->addItem(oil_PyromancersOil());
@@ -3095,6 +3109,7 @@ void getAllItems(person* player) {
 
 	player->addItem(heart_FishBornGoddessesHeart());
 	player->addItem(heart_OldCrowsHeart());
+	player->addItem(heart_OrsylsShriveledHeart());
 	player->addItem(heart_WretchedHeart());
 
 	for (int i = 0; i <= 7; i++)

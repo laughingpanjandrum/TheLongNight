@@ -7,7 +7,7 @@ spt:15,14
 !muiraToFairweather
 map:maps/old_fairweather.txt
 npc:muira
-spt:15,13
+spt:13,10
 !end
 
 !elenaToFairweather
