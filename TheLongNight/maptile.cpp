@@ -53,7 +53,7 @@ maptile * tile_MossyFloor()
 
 maptile * tile_Sand()
 {
-	return new maptile("Sand", "floor_sand", SAND_TILE, LIGHT_SAND_COLOR, DARK_SAND_COLOR);
+	return new maptile("Sand", "floor_sand", SAND_TILE, DARK_SAND_COLOR, DARKEST_SAND_COLOR);
 }
 
 maptile * tile_Grass()

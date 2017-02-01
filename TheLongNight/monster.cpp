@@ -768,7 +768,7 @@ monster * npc_MuiraClericOfTheRose()
 
 monster * npc_ElenaThePilgrim()
 {
-	monster* m = new monster("Elena the Pilgrim", PLAYER_TILE, TCODColor::lightBlue,
+	monster* m = new monster("Elena the Pilgrim", PLAYER_TILE, TCODColor::lightCyan,
 		"A woman in travel-worn robes, dragging a cart piled with goods.");
 	m->setHealth(80);
 	m->isHostile = false;
@@ -817,6 +817,7 @@ monster * npc_Ydella()
 	m->addStockUnlock(prayer_SinkBeneath(), 200, "fishborn_heart");
 	m->addStockUnlock(weapon_OldCrowsLongKnife(), 200, "old_crows_heart");
 	m->addStockUnlock(chime_OrsylsProfaneChime(), 200, "orsyls_heart");
+	m->addStockUnlock(weapon_ArmOfTheDuke(), 300, "vortens_heart");
 	return m;
 }
 

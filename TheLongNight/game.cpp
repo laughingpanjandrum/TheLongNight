@@ -2253,11 +2253,11 @@ bool game::itemPickupMessage(item * it)
 {
 	int atx = MAP_DRAW_X;
 	int aty = MAP_DRAW_Y + 10;
-	win.clearRegion(atx - 1, aty, 42, 18);
-	win.drawBox(atx - 1, aty, 42, 18, TCODColor::darkSepia);
+	win.clearRegion(atx - 1, aty, 42, 20);
+	win.drawBox(atx - 1, aty, 42, 25, TCODColor::darkSepia);
 	//What we can do
 	std::string txt = "[SPACE] Equip  [ESC] Store";
-	win.write(atx, ++aty, centreText(txt, 40), TCODColor::white);
+	win.write(atx, ++aty, centreText(txt, 20), TCODColor::white);
 	aty += 2;
 	//Fill in with ITEM DEETS
 	drawItemInfo(it, atx, aty + 1);
@@ -2377,7 +2377,8 @@ void game::doRangedSpell(spell * sp)
 				//We hit!
 				dischargeSpellOnTarget(sp, player, target);
 				//Bullet animation!
-				addAnimations(new bulletPath(path, BULLET_TILE, sp->getColor()));
+				//addAnimations(new bulletPath(path, BULLET_TILE, sp->getColor()));
+				addAnimations(new glowPath(path, sp->getColor(), TCODColor::white));
 			}
 			else {
 				addMessage("Out of range!", TCODColor::white);

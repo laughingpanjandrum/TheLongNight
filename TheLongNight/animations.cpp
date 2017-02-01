@@ -12,11 +12,12 @@ flashCharacter::flashCharacter(person* p, TCODColor color) :
 /*
 Changes player's color
 */
-drawData flashCharacter::getDrawData(drawData * baseData, int x, int y)
+drawData flashCharacter::getDrawData(const drawData * baseData, const int x, const int y)
 {
+	drawData data = *baseData;
 	if (x == p->getx() && y == p->gety())
-		baseData->color = color;
-	return *baseData;
+		data.color = color;
+	return data;
 }
 
 
@@ -39,13 +40,14 @@ explosion::explosion(coord ctr, int radius, TCODColor col1, TCODColor col2) :
 /*
 Explosion fades from col1 to col2 as we go outward
 */
-drawData explosion::getDrawData(drawData * baseData, int x, int y)
+drawData explosion::getDrawData(const drawData * baseData, const int x, const int y)
 {
+	drawData data = *baseData;
 	int dist = hypot(x - ctr.first, y - ctr.second);
 	if (dist <= atPoint && atPoint <= radius) {
-		baseData->bgcolor = colArray[atPoint - 1];
+		data.bgcolor = colArray[atPoint - 1];
 	}
-	return *baseData;
+	return data;
 }
 
 /*
@@ -72,19 +74,56 @@ bulletPath::bulletPath(coordVector pts, int tileCode, TCODColor color) :
 {
 }
 
-drawData bulletPath::getDrawData(drawData * baseData, int x, int y)
+drawData bulletPath::getDrawData(const drawData * baseData, const int x, const int y)
 {
+	drawData data = *baseData;
 	if (atIdx < pts.size()) {
 		coord pt = pts.at(atIdx);
 		if (pt.first == x && pt.second == y) {
-			baseData->tileCode = tileCode;
-			baseData->color = color;
+			data.tileCode = tileCode;
+			data.color = color;
 		}
 	}
-	return *baseData;
+	return data;
 }
 
 void bulletPath::tick()
+{
+	atIdx++;
+}
+
+
+
+/*
+	GLOW PATH
+*/
+
+
+glowPath::glowPath(coordVector pts, TCODColor col1, TCODColor col2) :
+	pts(pts)
+{
+	//Colors fade from col1 to col2
+	int idx[] = { 0, pts.size() };
+	TCODColor cols[] = { col1, col2 };
+	colors = new TCODColor[pts.size()];
+	TCODColor::genMap(colors, 2, cols, idx);
+}
+
+drawData glowPath::getDrawData(const drawData * baseData, const int x, const int y)
+{
+	drawData data = *baseData;
+	//Each point up to idx has a different color.
+	for (int i = 0; i < atIdx; i++) {
+		coord pt = pts.at(i);
+		if (pt.first == x && pt.second == y) {
+			data.bgcolor = colors[i];
+			return data;
+		}
+	}
+	return data;
+}
+
+void glowPath::tick()
 {
 	atIdx++;
 }

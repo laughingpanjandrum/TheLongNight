@@ -17,6 +17,9 @@ struct drawData {
 	drawData() {}
 	drawData(int tileCode, TCODColor color, TCODColor bgcolor) :
 		tileCode(tileCode), color(color), bgcolor(bgcolor) {}
+	//Copy constructor
+	drawData(const drawData &rhs) :
+		drawData(rhs.tileCode, rhs.color, rhs.bgcolor) {}
 	int tileCode;
 	TCODColor color;
 	TCODColor bgcolor;
@@ -34,7 +37,7 @@ public:
 	~animations() {}
 
 	//Progressing and playing
-	virtual drawData getDrawData(drawData* baseData, int x, int y) { return *baseData; }
+	virtual drawData getDrawData(const drawData* baseData, const int x, const int y) { return *baseData; }
 	virtual void tick() {}
 	virtual bool isDone() { return false; }
 
@@ -49,7 +52,7 @@ class flashCharacter : public animations
 {
 public:
 	flashCharacter(person* p, TCODColor color);
-	virtual drawData getDrawData(drawData* baseData, int x, int y);
+	virtual drawData getDrawData(const drawData* baseData, const int x, const int y);
 	virtual void tick() { timeLeft--; }
 	virtual bool isDone() { return timeLeft < 1; }
 protected:
@@ -66,7 +69,7 @@ class explosion : public animations
 {
 public:
 	explosion(coord ctr, int radius, TCODColor col1, TCODColor col2);
-	virtual drawData getDrawData(drawData* baseData, int x, int y);
+	virtual drawData getDrawData(const drawData* baseData, const int x, const int y);
 	virtual void tick();
 	virtual bool isDone() { return atPoint > radius; }
 protected:
@@ -85,7 +88,7 @@ class bulletPath : public animations
 {
 public:
 	bulletPath(coordVector pts, int tileCode, TCODColor color);
-	virtual drawData getDrawData(drawData* baseData, int x, int y);
+	virtual drawData getDrawData(const drawData* baseData, const int x, const int y);
 	virtual void tick();
 	virtual bool isDone() { return atIdx >= pts.size(); }
 private:
@@ -93,6 +96,22 @@ private:
 	coordVector pts;
 	int tileCode;
 	TCODColor color;
+};
+
+/*
+Bullet path effect, but tiles glow all along the trail.
+*/
+class glowPath : public animations
+{
+public:
+	glowPath(coordVector pts, TCODColor col1, TCODColor col2);
+	virtual drawData getDrawData(const drawData* baseData, const int x, const int y);
+	virtual void tick();
+	virtual bool isDone() { return atIdx >= pts.size(); }
+private:
+	int atIdx = 0;
+	coordVector pts;
+	TCODColor* colors;
 };
 
 #endif
