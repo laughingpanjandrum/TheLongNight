@@ -655,20 +655,20 @@ drawData game::getDrawData(int x, int y)
 	
 	//Basic data comes from the map tile
 	maptile* m = currentMap->getTile(x, y);
-	drawData toDraw(m->getTileCode(), m->getColor(), m->getBgColor());
+	drawData* toDraw = new drawData(m->getTileCode(), m->getColor(), m->getBgColor());
 	
 	//If this point isn't visible, don't draw it!
 	if (!currentMap->isPointInFOV(x, y) || player->isBlind()) {
 		
 		//What to draw if out of FOV
 		if (currentMap->inMemoryMap(x, y)) {
-			toDraw.color = win.mixColors(toDraw.color, TCODColor::black, 0.9);
-			toDraw.bgcolor = win.mixColors(toDraw.bgcolor, TCODColor::black, 0.9);
+			toDraw->color = win.mixColors(toDraw->color, TCODColor::black, 0.9);
+			toDraw->bgcolor = win.mixColors(toDraw->bgcolor, TCODColor::black, 0.9);
 		}
 		else {
-			toDraw.tileCode = EMPTY_TILE;
-			toDraw.color = TCODColor::black;
-			toDraw.bgcolor = TCODColor::black;
+			toDraw->tileCode = EMPTY_TILE;
+			toDraw->color = TCODColor::black;
+			toDraw->bgcolor = TCODColor::black;
 		}
 	
 	}
@@ -683,8 +683,8 @@ drawData game::getDrawData(int x, int y)
 		if (p != nullptr) {
 			//Invisible? IF SO, CANNOT SEE PERSON!
 			if (p->invisibility < 1) {
-				toDraw.tileCode = p->getTileCode();
-				toDraw.color = p->getColor();
+				toDraw->tileCode = p->getTileCode();
+				toDraw->color = p->getColor();
 			}
 		}
 		
@@ -692,13 +692,13 @@ drawData game::getDrawData(int x, int y)
 			//Is there an item here?
 			item* it = currentMap->getItem(x, y);
 			if (it != nullptr) {
-				toDraw.tileCode = it->getTileCode();
-				toDraw.color = it->getColor();
+				toDraw->tileCode = it->getTileCode();
+				toDraw->color = it->getColor();
 			}
 		}
 		
 		//Allow animations to adjust draw data
-		toDraw = getAnimationDataOverride(&toDraw, x, y);
+		toDraw = getAnimationDataOverride(toDraw, x, y);
 		
 		//Darken tiles that are further away
 		int distance = hypot(x - player->getx(), y - player->gety());
@@ -707,8 +707,8 @@ drawData game::getDrawData(int x, int y)
 			modifier = 0.85;
 		else if (modifier < 0.1)
 			modifier = 0.1;
-		toDraw.color.scaleHSV(1.0, modifier);
-		toDraw.bgcolor.scaleHSV(1.0, modifier);
+		toDraw->color.scaleHSV(1.0, modifier);
+		toDraw->bgcolor.scaleHSV(1.0, modifier);
 		//toDraw.color = win.mixColors(toDraw.color, TCODColor::black, modifier);
 		//toDraw.bgcolor = win.mixColors(toDraw.bgcolor, TCODColor::black, modifier);
 	
@@ -716,9 +716,9 @@ drawData game::getDrawData(int x, int y)
 
 	//Highlight cursor position
 	if (targetModeOn && x == targetPt.first && y == targetPt.second)
-		toDraw.bgcolor = TCODColor::pink;
+		toDraw->bgcolor = TCODColor::pink;
 	//Done! Return it all
-	return toDraw;
+	return *toDraw;
 
 }
 
@@ -1050,12 +1050,13 @@ void game::drawTargetInfo(person * target, int atx, int aty)
 /*
 Allows animations to adjust draw data when drawing the map.
 */
-drawData game::getAnimationDataOverride(drawData * baseData, int x, int y)
+drawData* game::getAnimationDataOverride(drawData * baseData, int x, int y)
 {
+	drawData* newData = new drawData(*baseData);
 	for (auto a : playingAnimations) {
-		baseData = &a->getDrawData(baseData, x, y);
+		newData = a->getDrawData(baseData, x, y);
 	}
-	return *baseData;
+	return newData;
 }
 
 /*
@@ -2436,15 +2437,14 @@ void game::castSpell(spell * sp)
 		else if (aType == ATTACK_AOE) {
 			//Hits everything within its radius
 			doAOE(sp, player);
-			//Time taken
-			playerTurnDelay += SPEED_NORMAL;
 		}
 		else if (aType == ATTACK_RANGE) {
 			//Hits target marked with the cursor
 			doRangedSpell(sp);
-			//Time taken is the attack delay of our OFFHAND item (which will usually be e.g. a wand)
-			playerTurnDelay += SPEED_NORMAL;
 		}
+		//Time taken
+		playerTurnDelay += SPEED_NORMAL;
+		player->paySpellCost(sp);
 	}
 }
 
@@ -2530,11 +2530,6 @@ void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 		}
 	}
 
-	//This is when the caster expends their vigour/takes damage
-	caster->loseVigour(sp->getVigourCost());
-	if (sp->getDamageToCaster() > 0)
-		caster->takeDamage(sp->getDamageToCaster());
-
 }
 
 /*
@@ -2546,9 +2541,7 @@ void game::dischargeSpellOnWeapon(spell * sp, person * caster, weapon * target)
 	if (target != nullptr) {
 		target->setBuff(sp->getWeaponBuff());
 		//Expend vigour
-		caster->loseVigour(sp->getVigourCost());
-		if (sp->getDamageToCaster() > 0)
-			caster->takeDamage(sp->getDamageToCaster());
+		caster->paySpellCost(sp);
 		//Animation
 		coordVector pts;
 		pts.push_back(caster->getPosition());

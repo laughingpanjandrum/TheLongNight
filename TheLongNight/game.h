@@ -137,7 +137,7 @@ private:
 	//Animations
 	animVector playingAnimations;
 	void addAnimations(animations* a) { playingAnimations.push_back(a); }
-	drawData getAnimationDataOverride(drawData* baseData, int x, int y);
+	drawData* getAnimationDataOverride(drawData* baseData, int x, int y);
 	void updateAnimations();
 
 	//Drawing item information

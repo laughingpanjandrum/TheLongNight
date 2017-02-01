@@ -155,6 +155,7 @@ public:
 	void cycleSelectedSpell();
 	int getSpellPower();
 	int getDivinePower();
+	void paySpellCost(spell* sp);
 
 	//Equipping and unequipping items
 	std::vector<item*> getItemsOfType(itemTypes category) { return items.getItemList(category); }

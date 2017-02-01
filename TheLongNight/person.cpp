@@ -519,6 +519,19 @@ int person::getDivinePower()
 }
 
 
+/*
+Expend resources to cast a spell.
+*/
+void person::paySpellCost(spell * sp)
+{
+	//Vigour cost
+	loseVigour(sp->getVigourCost());
+	//Life cost
+	if (sp->getDamageToCaster() > 0)
+		takeDamage(sp->getDamageToCaster());
+}
+
+
 
 /*
 	INVENTORY, EQUIPMENT
