@@ -698,7 +698,7 @@ drawData game::getDrawData(int x, int y)
 		}
 		
 		//Allow animations to adjust draw data
-		toDraw = getAnimationDataOverride(toDraw, x, y);
+		getAnimationDataOverride(toDraw, x, y);
 		
 		//Darken tiles that are further away
 		int distance = hypot(x - player->getx(), y - player->gety());
@@ -807,8 +807,14 @@ void game::drawInterface(int leftx, int topy)
 	//List known spells
 	int s = 1;
 	for (auto sp : player->getSpellsKnown()) {
+		//Spell numeral
 		win.write(atx + 1, ++aty, '[' + std::to_string(s) + ']', TCODColor::white);
-		win.write(atx + 5, aty, sp->getName(), sp->getColor());
+		//Vigour cost
+		win.writec(atx + 5, aty, VIGOUR_GLYPH, TCODColor::green);
+		win.write(atx + 6, aty, std::to_string(sp->getVigourCost()), TCODColor::green);
+		//Spell name
+		win.write(atx + 8, aty, sp->getName(), sp->getColor());
+		//Indicate whether this is the selected spell
 		if (sp == player->getCurrentSpell())
 			win.writec(atx, aty, '>', TCODColor::white);
 		s++;
@@ -1058,11 +1064,10 @@ Allows animations to adjust draw data when drawing the map.
 */
 drawData* game::getAnimationDataOverride(drawData * baseData, int x, int y)
 {
-	drawData* newData = new drawData(*baseData);
 	for (auto a : playingAnimations) {
-		newData = a->getDrawData(baseData, x, y);
+		a->getDrawData(baseData, x, y);
 	}
-	return newData;
+	return baseData;
 }
 
 /*
@@ -1070,6 +1075,7 @@ Progresses animations and checks to see if any are done and should be deleted.
 */
 void game::updateAnimations()
 {
+
 	animVector toDelete;
 	//Progress and check for deletions
 	for (auto a : playingAnimations) {
@@ -1077,12 +1083,14 @@ void game::updateAnimations()
 		if (a->isDone())
 			toDelete.push_back(a);
 	}
+
 	//And delete anything that's expired
 	for (auto a : toDelete) {
 		auto it = std::find(playingAnimations.begin(), playingAnimations.end(), a);
 		if (it != playingAnimations.end())
 			playingAnimations.erase(it);
 	}
+
 }
 
 
@@ -1592,7 +1600,19 @@ Discharge an AOE spell.
 */
 void game::doAOE(spell * sp, person * caster)
 {
+	
+	//Animation of the event; colour goes from spell colour to a lighter version on the outside
 	int r = sp->getAttackRange();
+	TCODColor col1 = sp->getColor();
+	TCODColor col2 = win.mixColors(col1, TCODColor::white, 0.5);
+	/*if (sp->useAlternateAnimation) {
+		addAnimations(new explosion(caster->getPosition(), r, col1, col2));
+	}
+	else {
+		addAnimations(new shockwave(caster->getx(), caster->gety(), col1, col2));
+	}*/
+	
+	//Execute the spell
 	for (int x = caster->getx() - r; x <= caster->getx() + r; x++) {
 		for (int y = caster->gety() - r; y <= caster->gety() + r; y++) {
 			//Check for target here
@@ -1602,15 +1622,6 @@ void game::doAOE(spell * sp, person * caster)
 				dischargeSpellOnTarget(sp, caster, target);
 			}
 		}
-	}
-	//Animation of the event; colour goes from spell colour to a lighter version on the outside
-	TCODColor col1 = sp->getColor();
-	TCODColor col2 = win.mixColors(col1, TCODColor::white, 0.5);
-	if (sp->useAlternateAnimation) {
-		addAnimations(new explosion(caster->getPosition(), r, col1, col2));
-	}
-	else {
-		addAnimations(new shockwave(caster->getx(), caster->gety(), col1, col2));
 	}
 	//addAnimations(new explosion(caster->getPosition(), r, col1, col2));
 }
@@ -2090,9 +2101,6 @@ void game::meleeAttack(person * attacker, person * target)
 			attacker->buffNextMelee = nullptr;
 		}
 
-		//Animation effect
-		addAnimations(new flashCharacter(target, TCODColor::red));
-
 		//Next: STATUS EFFECTS
 		weapon* wp = attacker->getWeapon();
 		if (wp != nullptr) {
@@ -2381,31 +2389,42 @@ Firing a ranged spell is... COMPLICATED
 */
 void game::doRangedSpell(spell * sp)
 {
+	
+	//Figure out where we're aiming
 	coord tp;
 	if (targetModeOn)
 		tp = targetPt;
 	else
 		tp = screenToMapCoords(coord(mouse.cx, mouse.cy));
+	
 	//Make sure this point is in bounds
 	if (currentMap->inBounds(tp.first, tp.second)) {
+		
 		//Get a path to the target
 		pathVector path = getLine(player->getPosition(), tp);
+
+		//Bullet animation!
+		/*if (sp->useAlternateAnimation) {
+			addAnimations(new bulletPath(&path, BULLET_TILE, sp->getColor()));
+		}
+		else {
+			addAnimations(new glowPath(&path, sp->getColor(), TCODColor::white));
+		}*/
+		
 		//See if there's something to hit on the path
 		person* target = getTargetOnPath(path);
 		if (target != nullptr) {
+			
 			//Is it in range?
 			int dist = hypot(player->getx() - target->getx(), player->gety() - target->gety());
+			
 			if (dist <= sp->getAttackRange()) {
+				
 				//We hit!
 				dischargeSpellOnTarget(sp, player, target);
-				//Bullet animation!
-				if (sp->useAlternateAnimation) {
-					addAnimations(new bulletPath(path, BULLET_TILE, sp->getColor()));
-				}
-				else {
-					addAnimations(new glowPath(path, sp->getColor(), TCODColor::white));
-				}
+			
 			}
+			
 			else {
 				addMessage("Out of range!", TCODColor::white);
 			}
@@ -2556,7 +2575,7 @@ void game::dischargeSpellOnWeapon(spell * sp, person * caster, weapon * target)
 		//Animation
 		coordVector pts;
 		pts.push_back(caster->getPosition());
-		addAnimations(new glyphCycle(pts, sp->getColor(), target->getColor()));
+		//addAnimations(new glyphCycle(pts, sp->getColor(), target->getColor()));
 	}
 }
 
@@ -3037,6 +3056,8 @@ Returns player to save point.
 */
 void game::restoreFromSavePoint(savePoint* warpTo)
 {
+	//Clear all animations
+	playingAnimations.clear();
 	//If no point is provided, we warp to our main save point
 	if (warpTo == nullptr)
 		warpTo = &ourSavePt;

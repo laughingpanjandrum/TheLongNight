@@ -98,6 +98,10 @@ spell* spell_AcidBurst();
 spell* spell_ProfanedBlade();
 spell* spell_VoidJaunt();
 spell* spell_DevouringVoidCloud();
+//Utric, with frostbitten writings
+spell* spell_FrostBlast();
+spell* spell_FrozenBlade();
+spell* spell_Chillbite();
 
 spell* spell_SpitFire();
 
@@ -124,6 +128,7 @@ spell* ability_CrowArrow();
 spell* ability_FeedingFrenzy();
 spell* ability_DropOoze();
 spell* ability_ShadowWalk();
+spell* ability_WinterBlast();
 
 //Duke Vorten
 spell* ability_TentacleSwarm();

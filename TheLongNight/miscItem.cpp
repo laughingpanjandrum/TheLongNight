@@ -168,6 +168,16 @@ miscItem * spellbook_MinasProfanedWritings()
 	return s;
 }
 
+miscItem * spellbook_FrostbittenWritings()
+{
+	miscItem* s = new miscItem("Frostbitten Writings", SPELL_TILE, TCODColor::cyan,
+		"These pages are brittle and cold, marked with runes and sketches of frostbitten shades. Perhaps a trained wizard could \
+make some sense of them.");
+	s->isKey = true;
+	s->setKeyTag("frostbitten_writings");
+	return s;
+}
+
 miscItem * spellbook_OrsylsTomeOfPrayer()
 {
 	miscItem* s = new miscItem("Orsyl's Tome of Prayer", SPELL_TILE, TCODColor::lightPurple,
@@ -212,6 +222,16 @@ miscItem * runestone_KhallesRunestone()
 only remnant of her memory.");
 	r->isRunestone = true;
 	r->setRune(new weaponRune("Khalle's Runestone", "Divine", TCODColor::darkYellow, SCALE_DEV));
+	return r;
+}
+
+miscItem * runestone_IetrasRunestone()
+{
+	miscItem* r = new miscItem("Ietra's Runestone", RUNESTONE_TILE, TCODColor::magenta,
+		"Ietra, last wizard of the Winter Court, once rode among the stars and sought knowledge of the ancient seers. Her tomb \
+was swallowed by the Void.");
+	r->isRunestone = true;
+	r->setRune(new weaponRune("Ietra's Runestone", "Arcane", TCODColor::magenta, SCALE_ARC));
 	return r;
 }
 

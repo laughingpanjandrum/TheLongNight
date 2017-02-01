@@ -62,12 +62,14 @@ miscItem* heart_VortensShriveledHeart();
 //Spellbooks
 miscItem* spellbook_WaterloggedWritings();
 miscItem* spellbook_MinasProfanedWritings();
+miscItem* spellbook_FrostbittenWritings();
 miscItem* spellbook_OrsylsTomeOfPrayer();
 
 //Runestones
 miscItem* runestone_CorensRunestone();
 miscItem* runestone_SiltrasRunestone();
 miscItem* runestone_KhallesRunestone();
+miscItem* runestone_IetrasRunestone();
 
 //Other
 miscItem* misc_VoidSigil();

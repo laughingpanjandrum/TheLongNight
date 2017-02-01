@@ -175,6 +175,8 @@ item * getItemByHandle(std::string handle)
 		return spellbook_WaterloggedWritings();
 	else if (handle == "minas_profaned_writings")
 		return spellbook_MinasProfanedWritings();
+	else if (handle == "frostbitten_writings")
+		return spellbook_FrostbittenWritings();
 	else if (handle == "orsyls_tome_of_prayer")
 		return spellbook_OrsylsTomeOfPrayer();
 	else if (handle == "piece_of_jade")
@@ -187,6 +189,8 @@ item * getItemByHandle(std::string handle)
 		return runestone_SiltrasRunestone();
 	else if (handle == "khalles_runestone")
 		return runestone_KhallesRunestone();
+	else if (handle == "ietras_runestone")
+		return runestone_IetrasRunestone();
 	
 	//Uh oh, we didn't find anything!
 	return nullptr;

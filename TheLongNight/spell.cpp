@@ -334,6 +334,43 @@ spell * spell_ProfanedBlade()
 	return sp;
 }
 
+spell * spell_FrostBlast()
+{
+	spell* sp = new spell("Frost Blast", SPELL_TILE, TCODColor::cyan,
+		"Spell discovered by the Winter Court, whose reign of ice chilled the surrounding lands.");
+	sp->setAttackType(ATTACK_AOE, 3);
+	sp->addEffect(APPLY_COLD_DAMAGE, 50);
+	sp->setVigourCost(2);
+	sp->usesSpellPower = true;
+	sp->isColdSpell = true;
+	return sp;
+}
+
+spell * spell_FrozenBlade()
+{
+	spell* sp = new spell("Frozen Blade", SPELL_TILE, TCODColor::darkCyan,
+		"The Winter Court coated their blades in ice and froze their enemies to death.");
+	sp->setAttackType(ATTACK_BUFF_WEAPON);
+	sp->setBuffApplied(DAMAGE_COLD, 15);
+	sp->setVigourCost(2);
+	sp->usesSpellPower = true;
+	sp->isColdSpell = true;
+	return sp;
+}
+
+spell * spell_Chillbite()
+{
+	spell* sp = new spell("Chillbite", SPELL_TILE, TCODColor::lightCyan,
+		"An illusory jaw of ice closes around your foe, freezing them solid.");
+	sp->setAttackType(ATTACK_RANGE, 6);
+	sp->addEffect(APPLY_COLD_DAMAGE, 20);
+	sp->addEffect(APPLY_ENTANGLING, 3);
+	sp->setVigourCost(2);
+	sp->usesSpellPower = true;
+	sp->isColdSpell = true;
+	return sp;
+}
+
 spell * spell_SpitFire()
 {
 	spell* sp = new spell("Spit Fire", SPELL_TILE, TCODColor::flame,
@@ -515,6 +552,14 @@ spell * ability_ShadowWalk()
 	spell* sp = new spell("Shadow Walk", SPELL_TILE, TCODColor::purple);
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(BECOME_INVISIBLE, 2);
+	return sp;
+}
+
+spell * ability_WinterBlast()
+{
+	spell* sp = new spell("Winter Blast", SPELL_TILE, TCODColor::cyan);
+	sp->setAttackType(ATTACK_AOE, 3);
+	sp->addEffect(APPLY_COLD_DAMAGE, 25);
 	return sp;
 }
 

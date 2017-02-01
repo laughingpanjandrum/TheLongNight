@@ -145,6 +145,7 @@ monster* monster_DukeVortenTheWatchful();
 
 //The Winter Court
 monster* monster_WinterShade();
+monster* monster_HollowfacedKnight();
 
 //The Void
 monster* monster_VoidTouched();

@@ -12,12 +12,11 @@ flashCharacter::flashCharacter(person* p, TCODColor color) :
 /*
 Changes player's color
 */
-drawData* flashCharacter::getDrawData(const drawData * baseData, const int x, const int y)
+drawData* flashCharacter::getDrawData(drawData * baseData, const int x, const int y)
 {
-	drawData* data = new drawData(*baseData);
 	if (x == p->getx() && y == p->gety())
-		data->color = color;
-	return data;
+		baseData->color = color;
+	return baseData;
 }
 
 
@@ -40,14 +39,13 @@ explosion::explosion(coord ctr, int radius, TCODColor col1, TCODColor col2) :
 /*
 Explosion fades from col1 to col2 as we go outward
 */
-drawData* explosion::getDrawData(const drawData * baseData, const int x, const int y)
+drawData* explosion::getDrawData(drawData * baseData, const int x, const int y)
 {
-	drawData* data = new drawData(*baseData);
 	int dist = hypot(x - ctr.first, y - ctr.second);
 	if (dist <= atPoint && atPoint <= radius) {
-		data->bgcolor = colArray[atPoint - 1];
+		baseData->bgcolor = colArray[atPoint - 1];
 	}
-	return data;
+	return baseData;
 }
 
 /*
@@ -69,22 +67,26 @@ void explosion::tick()
 */
 
 
-bulletPath::bulletPath(coordVector pts, int tileCode, TCODColor color) :
-	pts(pts), tileCode(tileCode), color(color)
+bulletPath::bulletPath(coordVector* pts, int tileCode, TCODColor color) :
+	tileCode(tileCode), color(color)
 {
+	//Create a brand-new path
+	this->pts = new coordVector();
+	for (auto iter = pts->begin(); iter != pts->end(); iter++) {
+		this->pts->push_back(coord(iter->first, iter->second));
+	}
 }
 
-drawData* bulletPath::getDrawData(const drawData * baseData, const int x, const int y)
+drawData* bulletPath::getDrawData(drawData * baseData, const int x, const int y)
 {
-	drawData* data = new drawData(*baseData);
-	if (atIdx < pts.size()) {
-		coord pt = pts.at(atIdx);
-		if (pt.first == x && pt.second == y) {
-			data->tileCode = tileCode;
-			data->color = color;
+	if (atIdx < pts->size()) {
+		coord* pt = new coord(pts->at(atIdx));
+		if (pt->first == x && pt->second == y) {
+			baseData->tileCode = tileCode;
+			baseData->color = color;
 		}
 	}
-	return data;
+	return baseData;
 }
 
 void bulletPath::tick()
@@ -99,28 +101,31 @@ void bulletPath::tick()
 */
 
 
-glowPath::glowPath(coordVector pts, TCODColor col1, TCODColor col2) :
-	pts(pts)
+glowPath::glowPath(coordVector* pts, TCODColor col1, TCODColor col2)
 {
+	//Create a brand-new path
+	this->pts = new coordVector();
+	for (auto iter = pts->begin(); iter != pts->end(); iter++) {
+		this->pts->push_back(coord(iter->first, iter->second));
+	}
 	//Colors fade from col1 to col2
-	int idx[] = { 0, pts.size() };
+	int idx[] = { 0, pts->size() };
 	TCODColor cols[] = { col1, col2 };
-	colors = new TCODColor[pts.size()];
+	colors = new TCODColor[pts->size()];
 	TCODColor::genMap(colors, 2, cols, idx);
 }
 
-drawData* glowPath::getDrawData(const drawData * baseData, const int x, const int y)
+drawData* glowPath::getDrawData(drawData * baseData, const int x, const int y)
 {
-	drawData* data = new drawData(*baseData);
 	//Each point up to idx has a different color.
 	for (int i = 0; i < atIdx; i++) {
-		coord pt = pts.at(i);
-		if (pt.first == x && pt.second == y) {
-			data->bgcolor = colors[i];
+		coord* pt = new coord(pts->at(i));
+		if (pt->first == x && pt->second == y) {
+			baseData->bgcolor = colors[i];
 			break;
 		}
 	}
-	return data;
+	return baseData;
 }
 
 void glowPath::tick()
@@ -144,24 +149,23 @@ glyphCycle::glyphCycle(coordVector pts, TCODColor col1, TCODColor col2):
 	TCODColor::genMap(colors, 2, cols, idx);
 }
 
-drawData* glyphCycle::getDrawData(const drawData * baseData, const int x, const int y)
+drawData* glyphCycle::getDrawData(drawData * baseData, const int x, const int y)
 {
-	drawData* data = new drawData(*baseData);
 	for (auto pt : pts) 
 	{
 		if (pt.first == x && pt.second == y)
 		{
 			//Pick a random glyph
 			int glyph = randint(128, 175);
-			data->tileCode = glyph;
+			baseData->tileCode = glyph;
 			//Pick a random color
 			int idx = randrange(10);
-			data->color = colors[idx];
+			baseData->color = colors[idx];
 			break;
 		}
 	}
 	//None of our points correspond
-	return data;
+	return baseData;
 }
 
 
@@ -179,13 +183,13 @@ shockwave::shockwave(int x, int y, TCODColor col1, TCODColor col2) :
 	TCODColor::genMap(colors, 2, cols, idx);
 }
 
-drawData* shockwave::getDrawData(const drawData * baseData, const int x, const int y)
+drawData* shockwave::getDrawData(drawData * baseData, const int x, const int y)
 {
 	drawData* data = new drawData(*baseData);
 	int dist = hypot(x - this->x, y - this->y);
 	if (dist == atIdx + 1) {
 		//This is one of our spaces!
-		data->bgcolor = colors[atIdx];
+		baseData->bgcolor = colors[atIdx];
 	}
-	return data;
+	return baseData;
 }

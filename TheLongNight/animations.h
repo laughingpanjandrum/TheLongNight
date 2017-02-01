@@ -46,7 +46,7 @@ public:
 	~animations() {}
 
 	//Progressing and playing
-	virtual drawData* getDrawData (const drawData* baseData, const int x, const int y) { return new drawData(*baseData); }
+	virtual drawData* getDrawData (drawData* baseData, const int x, const int y) { return new drawData(*baseData); }
 	virtual void tick() {}
 	virtual bool isDone() { return false; }
 
@@ -61,7 +61,7 @@ class flashCharacter : public animations
 {
 public:
 	flashCharacter(person* p, TCODColor color);
-	virtual drawData* getDrawData(const drawData* baseData, const int x, const int y);
+	virtual drawData* getDrawData(drawData* baseData, const int x, const int y);
 	virtual void tick() { timeLeft--; }
 	virtual bool isDone() { return timeLeft < 1; }
 protected:
@@ -78,7 +78,7 @@ class explosion : public animations
 {
 public:
 	explosion(coord ctr, int radius, TCODColor col1, TCODColor col2);
-	virtual drawData* getDrawData(const drawData* baseData, const int x, const int y);
+	virtual drawData* getDrawData(drawData* baseData, const int x, const int y);
 	virtual void tick();
 	virtual bool isDone() { return atPoint > radius; }
 protected:
@@ -96,13 +96,13 @@ Bullet path effect - traces path with some kind of tile.
 class bulletPath : public animations
 {
 public:
-	bulletPath(coordVector pts, int tileCode, TCODColor color);
-	virtual drawData* getDrawData(const drawData* baseData, const int x, const int y);
+	bulletPath(coordVector* pts, int tileCode, TCODColor color);
+	virtual drawData* getDrawData(drawData* baseData, const int x, const int y);
 	virtual void tick();
-	virtual bool isDone() { return atIdx >= pts.size(); }
+	virtual bool isDone() { return atIdx >= pts->size(); }
 private:
 	int atIdx = 0;
-	coordVector pts;
+	coordVector* pts;
 	int tileCode;
 	TCODColor color;
 };
@@ -113,13 +113,13 @@ Bullet path effect, but tiles glow all along the trail.
 class glowPath : public animations
 {
 public:
-	glowPath(coordVector pts, TCODColor col1, TCODColor col2);
-	virtual drawData* getDrawData(const drawData* baseData, const int x, const int y);
+	glowPath(coordVector* pts, TCODColor col1, TCODColor col2);
+	virtual drawData* getDrawData(drawData* baseData, const int x, const int y);
 	virtual void tick();
-	virtual bool isDone() { return atIdx >= pts.size(); }
+	virtual bool isDone() { return atIdx >= pts->size(); }
 private:
 	int atIdx = 0;
-	coordVector pts;
+	coordVector* pts;
 	TCODColor* colors;
 };
 
@@ -131,7 +131,7 @@ class glyphCycle : public animations
 {
 public:
 	glyphCycle(coordVector pts, TCODColor col1, TCODColor col2);
-	virtual drawData* getDrawData(const drawData* baseData, const int x, const int y);
+	virtual drawData* getDrawData(drawData* baseData, const int x, const int y);
 	virtual void tick() { timeLeft--; }
 	virtual bool isDone() { return timeLeft < 1; }
 private:
@@ -148,7 +148,7 @@ class shockwave : public animations
 {
 public:
 	shockwave (int x, int y, TCODColor col1, TCODColor col2);
-	virtual drawData* getDrawData (const drawData* baseData, const int x, const int y);
+	virtual drawData* getDrawData (drawData* baseData, const int x, const int y);
 	virtual void tick() { atIdx++; }
 	virtual bool isDone() { return atIdx >= RADIUS; }
 private:

@@ -702,6 +702,25 @@ monster * monster_WinterShade()
 	m->setDefence(DAMAGE_COLD, 100);
 	m->setMoveStats(SPEED_NORMAL);
 	m->equipItem(new weapon(0, SPEED_NORMAL, DAMAGE_COLD, 50));
+	m->addSpellKnown(ability_WinterBlast());
+	m->setSpellCastChance(20);
+	m->setFragmentsDropped(75);
+	return m;
+}
+
+monster * monster_HollowfacedKnight()
+{
+	monster* m = new monster("Hollowfaced Knight", KNIGHT_TILE, TCODColor::lightCyan,
+		"This knight is in shambles, its frozen mace drooping limply from one hand. Only the sight of an intruder seems to \
+arouse its rage; its eyes glow red for an instant.");
+	m->setHealth(150);
+	m->setDefence(DAMAGE_PHYSICAL, 40);
+	m->setDefence(DAMAGE_COLD, 50);
+	m->setMoveStats(SPEED_NORMAL);
+	m->equipItem(new weapon(25, SPEED_SLOW, DAMAGE_COLD, 25));
+	m->addSpellKnown(new spell(1, 25, KNOCKBACK_TARGET, 3));
+	m->setSpellCastChance(20);
+	m->setFragmentsDropped(100);
 	return m;
 }
 
@@ -764,6 +783,10 @@ monster * npc_UtricTheRat()
 	m->addStockUnlock(spell_AcidBlade(), 100, "waterlogged_writings");
 	//Unlock: Minas's Profaned Writings
 	m->addStockUnlock(spell_ProfanedBlade(), 100, "minas_profaned_writings");
+	//Unlock: Frostbitten Writings
+	m->addStockUnlock(spell_FrostBlast(), 100, "frostbitten_writings");
+	m->addStockUnlock(spell_FrozenBlade(), 100, "frostbitten_writings");
+	m->addStockUnlock(spell_Chillbite(), 100, "frostbitten_writings");
 	//Dialogue
 	m->loadDialogue("dialogue/utric_chat.txt");
 	return m;
@@ -926,6 +949,8 @@ monster * getMonsterByHandle(std::string handle)
 	//Winter Court
 	else if (handle == "winter_shade")
 		return monster_WinterShade();
+	else if (handle == "hollowfaced_knight")
+		return monster_HollowfacedKnight();
 
 	//The Void
 	else if (handle == "void_touched")
