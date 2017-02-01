@@ -4,7 +4,6 @@
 
 #include "item.h"
 
-
 class spell : public item
 {
 public:
@@ -34,6 +33,9 @@ public:
 	int getAttackRange() { return attackRange; }
 	int getVigourCost() { return vigourCost; }
 	int getDamageToCaster() { return damageToCaster; }
+
+	//Animation data
+	bool useAlternateAnimation = false;
 
 	//Flags
 	bool usesSpellPower = false;

@@ -247,6 +247,8 @@ void game::endPlayerTurn()
 	//Timer effects happen
 	tick();
 	player->checkTargetValidity();
+	//Make sure dead things are removed from the map
+	clearDeadCreatures();
 	//Add player to turn tracker
 	turns.addEntity(player, playerTurnDelay);
 	playerTurnDelay = 0;
@@ -256,8 +258,6 @@ void game::endPlayerTurn()
 		doMonsterTurn(nextTurn);
 		nextTurn = turns.getNext();
 	}
-	//Make sure dead things are removed from the map
-	clearDeadCreatures();
 }
 
 
@@ -377,8 +377,6 @@ bool game::aiTryUseSpell(monster * ai)
 				//Check spell range
 				int dist = hypot(ai->getx() - target->getx(), ai->gety() - target->gety());
 				if (dist <= sp->getAttackRange()) {
-					//animation
-					addAnimations(new bulletPath(path, BULLET_TILE, sp->getColor()));
 					//We hit!
 					dischargeSpellOnTarget(sp, ai, target);
 					//Time passes
@@ -1601,7 +1599,13 @@ void game::doAOE(spell * sp, person * caster)
 	//Animation of the event; colour goes from spell colour to a lighter version on the outside
 	TCODColor col1 = sp->getColor();
 	TCODColor col2 = win.mixColors(col1, TCODColor::white, 0.5);
-	addAnimations(new explosion(caster->getPosition(), r, col1, col2));
+	if (sp->useAlternateAnimation) {
+		addAnimations(new explosion(caster->getPosition(), r, col1, col2));
+	}
+	else {
+		addAnimations(new shockwave(caster->getx(), caster->gety(), col1, col2));
+	}
+	//addAnimations(new explosion(caster->getPosition(), r, col1, col2));
 }
 
 /*
@@ -2388,8 +2392,12 @@ void game::doRangedSpell(spell * sp)
 				//We hit!
 				dischargeSpellOnTarget(sp, player, target);
 				//Bullet animation!
-				//addAnimations(new bulletPath(path, BULLET_TILE, sp->getColor()));
-				addAnimations(new glowPath(path, sp->getColor(), TCODColor::white));
+				if (sp->useAlternateAnimation) {
+					addAnimations(new bulletPath(path, BULLET_TILE, sp->getColor()));
+				}
+				else {
+					addAnimations(new glowPath(path, sp->getColor(), TCODColor::white));
+				}
 			}
 			else {
 				addMessage("Out of range!", TCODColor::white);
@@ -2420,9 +2428,6 @@ void game::castSpell(spell * sp)
 		else if (aType == ATTACK_BUFF_SELF) {
 			//Spell is applied to self
 			dischargeSpellOnTarget(sp, player, player);
-			coordVector pts;
-			pts.push_back(coord(player->getx(), player->gety()));
-			addAnimations(new glyphCycle(pts, sp->getColor(), TCODColor::white));
 		}
 		else if (aType == ATTACK_BUFF_WEAPON) {
 			//Spell is applied to our current weapon
@@ -2512,6 +2517,19 @@ void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 	
 	}
 
+	//Certain animations will be played here
+	auto attackType = sp->getAttackType();
+	if (attackType == ATTACK_BUFF_SELF) {
+		if (sp->useAlternateAnimation) {
+			addAnimations(new flashCharacter(target, sp->getColor()));
+		}
+		else {
+			coordVector pts;
+			pts.push_back(target->getPosition());
+			addAnimations(new glyphCycle(pts, sp->getColor(), target->getColor()));
+		}
+	}
+
 	//This is when the caster expends their vigour/takes damage
 	caster->loseVigour(sp->getVigourCost());
 	if (sp->getDamageToCaster() > 0)
@@ -2527,9 +2545,14 @@ void game::dischargeSpellOnWeapon(spell * sp, person * caster, weapon * target)
 	//Make sure the weapon actually exists
 	if (target != nullptr) {
 		target->setBuff(sp->getWeaponBuff());
+		//Expend vigour
 		caster->loseVigour(sp->getVigourCost());
 		if (sp->getDamageToCaster() > 0)
 			caster->takeDamage(sp->getDamageToCaster());
+		//Animation
+		coordVector pts;
+		pts.push_back(caster->getPosition());
+		addAnimations(new glyphCycle(pts, sp->getColor(), target->getColor()));
 	}
 }
 
@@ -2939,8 +2962,6 @@ void game::tick()
 	for (auto p : currentMap->getAllPeople()) {
 		p->tick();
 	}
-	//Clear out any lingering death
-	clearDeadCreatures();
 }
 
 /*
@@ -2948,6 +2969,7 @@ Removes all dead creatures from the map.
 */
 void game::clearDeadCreatures()
 {
+
 	//If the player is dead, SPECIAL STUFF happens
 	if (player->isDead) {
 		//Message about our death

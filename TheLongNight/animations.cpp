@@ -163,3 +163,29 @@ drawData glyphCycle::getDrawData(const drawData * baseData, const int x, const i
 	//None of our points correspond
 	return *data;
 }
+
+
+/*
+	SHOCKWAVE
+*/
+
+shockwave::shockwave(int x, int y, TCODColor col1, TCODColor col2) :
+	x(x), y(y)
+{
+	//Color map traveling outward
+	int idx[] = { 0, RADIUS };
+	TCODColor cols[] = { col1, col2 };
+	colors = new TCODColor[RADIUS];
+	TCODColor::genMap(colors, 2, cols, idx);
+}
+
+drawData shockwave::getDrawData(const drawData * baseData, const int x, const int y)
+{
+	drawData* data = new drawData(*baseData);
+	int dist = hypot(x - this->x, y - this->y);
+	if (dist == atIdx + 1) {
+		//This is one of our spaces!
+		data->bgcolor = colors[atIdx];
+	}
+	return *data;
+}

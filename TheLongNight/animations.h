@@ -26,6 +26,15 @@ struct drawData {
 };
 
 
+//For differentiating which type of animation to use
+enum animationType {
+	ANIMATION_BULLET_PATH, ANIMATION_GLOW_PATH,
+	ANIMATION_EXPLOSION, ANIMATION_SHOCKWAVE,
+	ANIMATION_FLASH_CHARACTER, ANIMATION_GLYPH_SCRAMBLE,
+	ANIMATION_NONE
+};
+
+
 
 //Base class
 class animations
@@ -37,7 +46,7 @@ public:
 	~animations() {}
 
 	//Progressing and playing
-	virtual drawData getDrawData(const drawData* baseData, const int x, const int y) { return *baseData; }
+	virtual drawData getDrawData (const drawData* baseData, const int x, const int y) { return *baseData; }
 	virtual void tick() {}
 	virtual bool isDone() { return false; }
 
@@ -128,7 +137,25 @@ public:
 private:
 	coordVector pts;
 	TCODColor* colors;
-	int timeLeft = 25;
+	int timeLeft = 20;
+};
+
+
+/*
+Like an explosion, but creates a ring instead of a circle.
+*/
+class shockwave : public animations
+{
+public:
+	shockwave (int x, int y, TCODColor col1, TCODColor col2);
+	virtual drawData getDrawData (const drawData* baseData, const int x, const int y);
+	virtual void tick() { atIdx++; }
+	virtual bool isDone() { return atIdx >= RADIUS; }
+private:
+	int x, y;
+	int atIdx = 0;
+	TCODColor* colors;
+	const static int RADIUS = 4;
 };
 
 
