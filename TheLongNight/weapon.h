@@ -27,6 +27,7 @@ public:
 
 	//Setting
 	void setBasicAttributes(int damage, int attackDelay);
+	void setDamagePenalty(int dp) { damagePenalty = dp; }
 	void addDamageType(damageType dtype, int damage);
 	void setDefence(int def) { defence = def; }
 	void setBleedResist(int br) { bleedResist = br; }
@@ -36,6 +37,7 @@ public:
 
 	//Getting
 	int getDamage() { return damage; }
+	int getDamagePenalty() { return damagePenalty; }
 	int getDamageOfType(damageType dtype);
 	int getAttackDelay() { return attackDelay; }
 	spell* getSpecialAttack() { return specialAttack; }
@@ -76,6 +78,7 @@ private:
 	//Weapon deetz
 	int damage;
 	int attackDelay;
+	int damagePenalty; //Mostly applies to shields and such
 
 	//Special attack
 	spell* specialAttack;

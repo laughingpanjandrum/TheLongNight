@@ -390,6 +390,7 @@ weapon * shield_WoodenWyrdShield()
 		"The Wyrd hid behind these shields when the Blind King's arrows rained down on them.");
 	wp->setDefence(10);
 	wp->setBleedResist(15);
+	wp->setDamagePenalty(5);
 	wp->makeOffhand();
 	return wp;
 }
@@ -403,6 +404,7 @@ weapon * shield_BatteredSteelShield()
 	wp->setDamageResist(DAMAGE_FIRE, 5);
 	wp->setDamageResist(DAMAGE_ELECTRIC, 5);
 	wp->setDamageResist(DAMAGE_COLD, 5);
+	wp->setDamagePenalty(10);
 	wp->makeOffhand();
 	return wp;
 }
@@ -415,6 +417,7 @@ but not a single knight survived.");
 	wp->setDefence(15);
 	wp->setDamageResist(DAMAGE_PROFANE, 15);
 	wp->setDamageResist(DAMAGE_FIRE, 10);
+	wp->setDamagePenalty(10);
 	wp->makeOffhand();
 	return wp;
 }
@@ -425,6 +428,7 @@ weapon * shield_VoidTouchedShield()
 		"This shield phases in and out of reality, forming fissures into the Void.");
 	wp->setDefence(5);
 	wp->setDamageResist(DAMAGE_PROFANE, 50);
+	wp->setDamagePenalty(5);
 	wp->makeOffhand();
 	return wp;
 }
@@ -435,6 +439,7 @@ weapon * shield_DragonboneShield()
 		"This shield, forged from the bones of an ancient dragon, confers powerful protection from fire.");
 	wp->setDefence(20);
 	wp->setDamageResist(DAMAGE_FIRE, 50);
+	wp->setDamagePenalty(15);
 	wp->makeOffhand();
 	return wp;
 }

@@ -114,15 +114,24 @@ int person::getMeleeDamage()
 	weapon* wp = getWeapon();
 	int damage = baseMeleeDamage;
 	if (wp != nullptr) {
+		
 		//Base damage
 		damage = wp->getDamage();
+		
 		//Scaling damage
 		int scalingPercent = getScalingDamage(wp);
 		damage += (float)scalingPercent / 100.0 * (float)damage;
+		
 		//Bonus from bleed, if any
 		if (isBleeding || !bleedBuildup.isEmpty()) {
 			damage += bleedScaling;
 		}
+
+		//Penalty
+		int penalty = (float)damage * (float)damagePenalty / 100.0;
+		if (penalty > 0)
+			damage -= penalty;
+
 	}
 	return damage;
 }
@@ -649,6 +658,8 @@ void person::unequipItem(item * which)
 
 		if (cat == ITEM_WEAPON || cat == ITEM_OFFHAND) {
 			weapon* wp = static_cast<weapon*>(which);
+			//Regain damage penalty
+			damagePenalty -= wp->getDamagePenalty();
 			//We forget any spells/special attacks this item conferred
 			if (wp->getSpecialAttack() != nullptr)
 				removeSpellKnown(wp->getSpecialAttack());
@@ -701,17 +712,24 @@ Sets up a newly-equipped weapon.
 */
 void person::doWeaponEquip(weapon * wp)
 {
+	
 	//Special weapon attack is a spell
 	if (wp->getSpecialAttack() != nullptr)
 		addSpellKnown(wp->getSpecialAttack());
+	
 	//See if it contains any spells we can memorize
 	for (auto sp : wp->getSpells())
 		addSpellKnown(sp);
+	
 	//Reset selected spell, just in case the number of spells changed
 	selectedSpell = 0;
+	
 	//Resistances conferred
 	if (wp->getBleedResist() > 0)
 		bleedBuildup.increaseMaxValue(wp->getBleedResist(), false);
+
+	//Damage penalty
+	damagePenalty += wp->getDamagePenalty();
 }
 
 /*

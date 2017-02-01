@@ -1210,6 +1210,13 @@ void game::drawWeaponInfo(weapon * it, int atx, int aty)
 		win.write(atx + offset, aty, std::to_string(it->getBleedResist()), maincol);
 	}
 
+	//Damage penalty
+	int dp = it->getDamagePenalty();
+	if (dp > 0) {
+		win.write(atx, ++aty, "DMG Penalty", TCODColor::red);
+		win.write(atx + offset, aty, std::to_string(dp) + '%', maincol);
+	}
+
 	//Magic attributes, if any
 	if (it->getSpellstoreSize()) {
 		win.write(atx, ++aty, "SPELLSTORE", TCODColor::magenta);

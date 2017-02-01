@@ -866,6 +866,18 @@ monster * npc_Ydella()
 	return m;
 }
 
+monster * npc_TheEyelessQueen()
+{
+	monster* m = new monster("The Eyeless Queen", PLAYER_TILE, TCODColor::darkCyan,
+		"Her regal finery is encrusted with ice, her eye sockets are empty, and her lips are curled in the faintest \
+of smiles.");
+	m->setHealth(100);
+	m->isHostile = false;
+	m->isShopkeeper = true;
+	m->loadDialogue("dialogue/eyeless_queen_chat.txt");
+	return m;
+}
+
 /*
 This giant nightmare is how monsters are defined in map files.
 */
@@ -969,6 +981,8 @@ monster * getMonsterByHandle(std::string handle)
 		return npc_VoidwalkerDaedelus();
 	else if (handle == "ydella")
 		return npc_Ydella();
+	else if (handle == "eyeless_queen")
+		return npc_TheEyelessQueen();
 
 	//LET'S HOPE WE NEVER GET HERE!
 	return nullptr;

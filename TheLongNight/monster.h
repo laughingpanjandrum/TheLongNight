@@ -157,6 +157,7 @@ monster* npc_MuiraClericOfTheRose();
 monster* npc_ElenaThePilgrim();
 monster* npc_VoidwalkerDaedelus();
 monster* npc_Ydella();
+monster* npc_TheEyelessQueen();
 
 
 //For map files

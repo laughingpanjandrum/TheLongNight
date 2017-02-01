@@ -1,0 +1,5 @@
+"Aha! Another pilgrim seeking the true way of things!"
+"Well, you won't learn anything here, my friend! The Winter Court is finished."
+"He who strode from the Void, the Lord of Fallow Fields, walks upon the earth, laying waste to all."
+"Goodbye, goodbye, and do not return to this forsaken land."
+|BACK_UP_AND_END

@@ -5,6 +5,7 @@ hollowfaced_knight:4,22
 winter_shade:20,10
 winter_shade:21,11
 winter_shade:19,11
+eyeless_queen:20,28
 -items
 frozen_flower_charm:3,20
 dragonbone_sword:13,24
