@@ -1473,11 +1473,20 @@ Set up an auto-walk!
 void game::startAutoWalk()
 {
 	coord pos = screenToMapCoords(coord(mouse.cx, mouse.cy));
+	//Make sure we're going to a valid space
 	if (currentMap->inBounds(pos.first, pos.second)) {
-		isAutoWalking = true;
-		playerAutoPath = getPathToCoord(player->getPosition(), pos);
+		//We can only walk to spaces we can see
+		if (currentMap->isPointInFOV(pos.first, pos.second)) {
+			//And we can't walk into enemies
+			if (currentMap->getPerson(pos.first, pos.second) == nullptr) {
+				isAutoWalking = true;
+				playerAutoPath = getPathToCoord(player->getPosition(), pos);
+			}
+		}
 	}
 }
+
+
 
 /*
 Move along a predetermined path.
@@ -1486,8 +1495,10 @@ Stops if player fails to move or if the path ends.
 void game::playerAutoWalk()
 {
 	if (!playerAutoPath->isEmpty()) {
+		//New coordinates
 		int x = player->getx();
 		int y = player->gety();
+		//If the move fails, give up
 		if (!playerAutoPath->walk(&x, &y, false))
 			isAutoWalking = false;
 		else
@@ -3005,6 +3016,7 @@ void game::restoreFromSavePoint(savePoint* warpTo)
 	player->fullRestore();
 	player->isDead = false;
 	player->setTarget(nullptr);
+	isAutoWalking = false; //Make sure we don't keep autowalking on death!
 	//Return us to our save point
 	loadNewMap(warpTo->saveMap, CONNECT_VERTICAL, warpTo->savePt.first, warpTo->savePt.second);
 	//Put us back in the clock
