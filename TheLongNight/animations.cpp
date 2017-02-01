@@ -117,7 +117,7 @@ drawData glowPath::getDrawData(const drawData * baseData, const int x, const int
 		coord pt = pts.at(i);
 		if (pt.first == x && pt.second == y) {
 			data.bgcolor = colors[i];
-			return data;
+			break;
 		}
 	}
 	return data;
@@ -126,4 +126,40 @@ drawData glowPath::getDrawData(const drawData * baseData, const int x, const int
 void glowPath::tick()
 {
 	atIdx++;
+}
+
+
+/*
+	GLYPH CYCLE
+*/
+
+
+glyphCycle::glyphCycle(coordVector pts, TCODColor col1, TCODColor col2):
+	pts(pts)
+{
+	//Make a colour map for us to cycle through
+	int idx[] = { 0, 10 };
+	TCODColor cols[] = { col1, col2 };
+	colors = new TCODColor[10];
+	TCODColor::genMap(colors, 2, cols, idx);
+}
+
+drawData glyphCycle::getDrawData(const drawData * baseData, const int x, const int y)
+{
+	drawData* data = new drawData(*baseData);
+	for (auto pt : pts) 
+	{
+		if (pt.first == x && pt.second == y)
+		{
+			//Pick a random glyph
+			int glyph = randint(180, 220);
+			data->tileCode = glyph;
+			//Pick a random color
+			int idx = randrange(10);
+			data->color = colors[idx];
+			break;
+		}
+	}
+	//None of our points correspond
+	return *data;
 }

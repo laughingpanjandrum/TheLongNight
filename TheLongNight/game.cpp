@@ -2420,6 +2420,9 @@ void game::castSpell(spell * sp)
 		else if (aType == ATTACK_BUFF_SELF) {
 			//Spell is applied to self
 			dischargeSpellOnTarget(sp, player, player);
+			coordVector pts;
+			pts.push_back(coord(player->getx(), player->gety()));
+			addAnimations(new glyphCycle(pts, sp->getColor(), TCODColor::white));
 		}
 		else if (aType == ATTACK_BUFF_WEAPON) {
 			//Spell is applied to our current weapon

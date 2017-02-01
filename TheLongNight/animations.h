@@ -114,4 +114,23 @@ private:
 	TCODColor* colors;
 };
 
+
+/*
+Rapidly cycles through random glyphs.
+*/
+class glyphCycle : public animations
+{
+public:
+	glyphCycle(coordVector pts, TCODColor col1, TCODColor col2);
+	virtual drawData getDrawData(const drawData* baseData, const int x, const int y);
+	virtual void tick() { timeLeft--; }
+	virtual bool isDone() { return timeLeft < 1; }
+private:
+	coordVector pts;
+	TCODColor* colors;
+	int timeLeft = 25;
+};
+
+
+
 #endif
