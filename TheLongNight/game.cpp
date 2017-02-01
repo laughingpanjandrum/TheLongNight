@@ -807,7 +807,7 @@ void game::drawInterface(int leftx, int topy)
 	}
 	
 	//List known spells
-	int s = 0;
+	int s = 1;
 	for (auto sp : player->getSpellsKnown()) {
 		win.write(atx + 1, ++aty, '[' + std::to_string(s) + ']', TCODColor::white);
 		win.write(atx + 5, aty, sp->getName(), sp->getColor());
@@ -2359,7 +2359,7 @@ Push hotkey corresponding to a spell to CAST IT!
 */
 void game::useAbilityByHotkey(TCOD_key_t kp)
 {
-	int n = getNumberByKeycode(kp);
+	int n = getNumberByKeycode(kp) - 1;
 	if (n != -1) {
 		player->setCurrentSpell(n);
 	}

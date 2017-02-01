@@ -152,7 +152,7 @@ drawData glyphCycle::getDrawData(const drawData * baseData, const int x, const i
 		if (pt.first == x && pt.second == y)
 		{
 			//Pick a random glyph
-			int glyph = randint(180, 220);
+			int glyph = randint(128, 175);
 			data->tileCode = glyph;
 			//Pick a random color
 			int idx = randrange(10);
