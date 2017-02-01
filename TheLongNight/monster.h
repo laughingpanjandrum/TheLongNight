@@ -143,6 +143,9 @@ monster* monster_CursedArcher();
 monster* monster_Enkidu();
 monster* monster_DukeVortenTheWatchful();
 
+//The Winter Court
+monster* monster_WinterShade();
+
 //The Void
 monster* monster_VoidTouched();
 

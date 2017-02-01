@@ -18,6 +18,8 @@ public:
 	weapon(std::string name, int tileCode, TCODColor color, std::string description);
 	//Just for monsters: creates a weapon that applies a status effect
 	weapon(int baseDamage, const int attackSpeed, statusEffects eType, int statusEffectDamage);
+	//Just for monsters: a weapon with a special damage type
+	weapon(int baseDamage, const int attackSpeed, damageType dtype, int specialDamage);
 	~weapon();
 
 	//Override

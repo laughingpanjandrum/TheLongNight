@@ -143,6 +143,8 @@ public:
 	int scaleNextSpell = 0; //Buff to next spell cast
 	int scaleNextPrayer = 0; //Buff to next prayer cast
 	int spellAcidInfusion = 0;
+	int spellColdInfusion = 0;
+	int coldDamageAppliesInfusion = 0; //If this is >0, taking cold damage gives us a cold infusion boost
 
 	//Magic
 	spell* buffNextMelee; //This spell is automatically discharged onto the next thing we attack in melee.

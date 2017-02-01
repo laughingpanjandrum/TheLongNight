@@ -42,6 +42,7 @@ public:
 	bool usesDivinePower = false;
 	bool addPermanentBuff = false;
 	bool isAcidSpell = false; //Determines whether acid infusions are super-effective
+	bool isColdSpell = false;
 
 private:
 

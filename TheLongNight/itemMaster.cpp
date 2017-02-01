@@ -147,6 +147,8 @@ item * getItemByHandle(std::string handle)
 		return charm_EvisceratingRing();
 	else if (handle == "blood_drinkers_band")
 		return charm_BloodDrinkersBand();
+	else if (handle == "frozen_flower_charm")
+		return charm_FrozenFlowerCharm();
 
 	//SPELLS
 	else if (handle == "magic_missile")
@@ -266,6 +268,8 @@ std::string getEffectName(effect e)
 	case(SCALE_NEXT_SPELL): return "% spell power for next spell";
 	case(SCALE_NEXT_PRAYER): return "% divine power for next prayer";
 	case(SPELL_ACID_INFUSION): return "acid infusion for next spell";
+	case(SPELL_COLD_INFUSION): return "cold infusion for next spell";
+	case(COLD_DAMAGE_ADDS_INFUSION): return "cold infusion upon taking cold damage";
 
 	case(GAIN_DEFENCE): return "physical defence";
 	case(GAIN_ACID_RESIST): return "acid defence";

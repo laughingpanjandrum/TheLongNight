@@ -688,6 +688,28 @@ tentacles emerge from the ruin of his head, and at the centre of his chest sits 
 	return m;
 }
 
+
+/*
+	The Winter Court
+*/
+
+monster * monster_WinterShade()
+{
+	monster* m = new monster("Winter Shade", GHOST_TILE, TCODColor::cyan,
+		"The spectre of a noble, trailing frost from its tattered robes.");
+	m->setHealth(50);
+	m->setDefence(DAMAGE_PHYSICAL, 90);
+	m->setDefence(DAMAGE_COLD, 100);
+	m->setMoveStats(SPEED_NORMAL);
+	m->equipItem(new weapon(0, SPEED_NORMAL, DAMAGE_COLD, 50));
+	return m;
+}
+
+
+/*
+	The Void
+*/
+
 monster * monster_VoidTouched()
 {
 	monster* m = new monster("Void-Touched", GHOST_TILE, TCODColor::lighterPurple,
@@ -900,6 +922,10 @@ monster * getMonsterByHandle(std::string handle)
 		return monster_Enkidu();
 	else if (handle == "duke_vorten")
 		return monster_DukeVortenTheWatchful();
+
+	//Winter Court
+	else if (handle == "winter_shade")
+		return monster_WinterShade();
 
 	//The Void
 	else if (handle == "void_touched")

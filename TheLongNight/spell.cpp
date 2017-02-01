@@ -280,6 +280,7 @@ waves, though of course they did not succeed.");
 	sp->addEffect(APPLY_COLD_DAMAGE, 25);
 	sp->setVigourCost(1);
 	sp->usesSpellPower = true;
+	sp->isColdSpell = true;
 	return sp;
 }
 

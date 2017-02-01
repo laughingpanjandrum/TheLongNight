@@ -78,3 +78,11 @@ who fled the downfall of the Winter Court.");
 	c->addEffect(HEALING_FACTOR, 25);
 	return c;
 }
+
+charm * charm_FrozenFlowerCharm()
+{
+	charm* c = new charm("Frozen Flower Charm", CHARM_TILE, TCODColor::cyan,
+		"This charm is made of unmelting ice shaped like a tiny flower.");
+	c->addEffect(COLD_DAMAGE_ADDS_INFUSION, 25);
+	return c;
+}

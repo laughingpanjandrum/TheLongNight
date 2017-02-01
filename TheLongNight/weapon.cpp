@@ -23,6 +23,16 @@ weapon::weapon(int baseDamage, const int attackSpeed, statusEffects eType, int s
 	addStatusEffect(eType, statusEffectDamage);
 }
 
+/*
+Special constructor just for monsters: adds additional damage type
+*/
+weapon::weapon(int baseDamage, const int attackSpeed, damageType dtype, int specialDamage) :
+	weapon()
+{
+	setBasicAttributes(baseDamage, attackSpeed);
+	addDamageType(dtype, specialDamage);
+}
+
 weapon::~weapon()
 {
 }

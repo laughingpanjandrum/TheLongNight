@@ -29,6 +29,7 @@ m floor_carpet
 & door_of_winter
 -endcodes
 -connections
+north:winter_court_1
 south:crumbling_city_3
 -endconnections
 ..................#mm#..................

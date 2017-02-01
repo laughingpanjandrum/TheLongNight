@@ -179,6 +179,10 @@ void person::takeDamage(int amount, damageType dtype)
 		else
 			amount /= 2;
 	}
+
+	//Special effects: gain spell power upon taking cold damage
+	if (dtype == DAMAGE_COLD)
+		spellColdInfusion += coldDamageAppliesInfusion;
 	
 	//Minimum 1 damage
 	if (amount < 1)
@@ -378,6 +382,10 @@ void person::applyEffect(effect eff, int potency)
 		scaleNextPrayer = potency;
 	else if (eff == SPELL_ACID_INFUSION)
 		spellAcidInfusion = potency;
+	else if (eff == SPELL_COLD_INFUSION)
+		spellColdInfusion = potency;
+	else if (eff == COLD_DAMAGE_ADDS_INFUSION)
+		coldDamageAppliesInfusion += potency;
 
 	//Damage effects
 

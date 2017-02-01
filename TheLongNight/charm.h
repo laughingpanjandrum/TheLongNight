@@ -40,5 +40,6 @@ charm* charm_EvisceratingRing();
 charm* charm_BloodDrinkersBand();
 charm* charm_WretchedFleshBand();
 charm* charm_WretchedFleshmask();
+charm* charm_FrozenFlowerCharm();
 
 #endif

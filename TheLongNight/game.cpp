@@ -855,6 +855,12 @@ void game::drawInterface(int leftx, int topy)
 	if (player->isEntangled())
 		win.write(atx, ++aty, "ENTANGLED " + std::to_string(player->getEntangleDuration()), TCODColor::lightGrey);
 
+	//Infusions
+	if (player->spellAcidInfusion > 0)
+		win.write(atx, ++aty, "Infusion: ACID " + std::to_string(player->spellAcidInfusion), TCODColor::lime);
+	if (player->spellColdInfusion > 0)
+		win.write(atx, ++aty, "Infusion: COLD " + std::to_string(player->spellColdInfusion), TCODColor::cyan);
+
 	//Draws whatever we have HIGHLIGHTED
 	aty += 2;
 	drawMouseover(atx, aty);
@@ -2504,13 +2510,18 @@ void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 			
 			//Infusions apply extra effects
 			if (caster->spellAcidInfusion && target != caster) {
-				//Bonus if this is an acid spell
 				int power = caster->spellAcidInfusion;
 				if (sp->isAcidSpell)
 					power = power * 2;
-				//Apply effect
 				target->takeDamage(power, DAMAGE_ACID);
 				caster->spellAcidInfusion = 0;
+			}
+			if (caster->spellColdInfusion && target != caster) {
+				int power = caster->spellColdInfusion;
+				if (sp->isColdSpell)
+					power = power * 2;
+				target->takeDamage(power, DAMAGE_COLD);
+				caster->spellColdInfusion = 0;
 			}
 
 		}
@@ -3131,11 +3142,12 @@ void getAllItems(person* player)
 	player->addItem(headgear_CursedKnightsHelm());
 	player->addItem(armour_CursedKnightsArmour());
 
+	player->addItem(charm_BloodDrinkersBand());
 	player->addItem(charm_BloodstainedCharm());
 	player->addItem(charm_EvisceratingRing());
+	player->addItem(charm_FrozenFlowerCharm());
 	player->addItem(charm_IdolOfPash());
 	player->addItem(charm_KhallesHeadband());
-	player->addItem(charm_BloodDrinkersBand());
 
 	player->addItem(spell_AcidBlade());
 	player->addItem(spell_AcidBurst());
