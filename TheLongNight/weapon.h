@@ -126,6 +126,8 @@ weapon* weapon_VoidTouchedKnife();
 weapon* weapon_VoidCrystalGreatsword();
 weapon* weapon_ArmOfTheDuke();
 
+weapon* weapon_DragonboneSword();
+
 weapon* weapon_ProfaneGreatsword();
 
 //Shields
@@ -134,6 +136,7 @@ weapon* shield_WoodenWyrdShield();
 weapon* shield_BatteredSteelShield();
 weapon* shield_CityGuardianShield();
 weapon* shield_VoidTouchedShield();
+weapon* shield_DragonboneShield();
 
 //Wands
 weapon* wand_DriftwoodWand();

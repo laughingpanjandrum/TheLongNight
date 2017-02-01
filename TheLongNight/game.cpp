@@ -2550,14 +2550,14 @@ void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 	//Certain animations will be played here
 	auto attackType = sp->getAttackType();
 	if (attackType == ATTACK_BUFF_SELF) {
-		if (sp->useAlternateAnimation) {
+		/*if (sp->useAlternateAnimation) {
 			addAnimations(new flashCharacter(target, sp->getColor()));
 		}
 		else {
 			coordVector pts;
 			pts.push_back(target->getPosition());
 			addAnimations(new glyphCycle(pts, sp->getColor(), target->getColor()));
-		}
+		}*/
 	}
 
 }

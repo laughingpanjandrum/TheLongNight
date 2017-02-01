@@ -76,6 +76,7 @@ spell* attack_BloodFeast();
 spell* attack_HolySummons();
 spell* attack_VoidSlash();
 spell* attack_VoidSurge();
+spell* attack_FlameSwathe();
 
 //Wand/chime powers
 spell* ability_PowerSurge();

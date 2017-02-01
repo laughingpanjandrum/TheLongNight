@@ -349,6 +349,19 @@ weapon * weapon_ArmOfTheDuke()
 	return wp;
 }
 
+weapon * weapon_DragonboneSword()
+{
+	weapon* wp = new weapon("Dragonbone Sword", SWORD_TILE, TCODColor::darkFlame,
+		"The bones of dragons are known to possess a profound affinity for fire, and swords forged with this rare material \
+contain some of that power.");
+	wp->setBasicAttributes(30, SPEED_NORMAL);
+	wp->addDamageType(DAMAGE_FIRE, 20);
+	wp->addScalingType(SCALE_STR);
+	wp->addScalingType(SCALE_DEX);
+	wp->setSpecialAttack(attack_FlameSwathe());
+	return wp;
+}
+
 weapon * weapon_ProfaneGreatsword()
 {
 	weapon* wp = new weapon("Profane Greatsword", SWORD_TILE, TCODColor::purple,
@@ -412,6 +425,16 @@ weapon * shield_VoidTouchedShield()
 		"This shield phases in and out of reality, forming fissures into the Void.");
 	wp->setDefence(5);
 	wp->setDamageResist(DAMAGE_PROFANE, 50);
+	wp->makeOffhand();
+	return wp;
+}
+
+weapon * shield_DragonboneShield()
+{
+	weapon* wp = new weapon("Dragonbone Shield", SHIELD_TILE, TCODColor::darkFlame,
+		"This shield, forged from the bones of an ancient dragon, confers powerful protection from fire.");
+	wp->setDefence(20);
+	wp->setDamageResist(DAMAGE_FIRE, 50);
 	wp->makeOffhand();
 	return wp;
 }

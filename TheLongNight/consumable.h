@@ -83,6 +83,7 @@ consumable* ranged_FrostKnives();
 
 consumable* oil_PyromancersOil();
 consumable* oil_CorrosiveOil();
+consumable* oil_FrozenOil();
 
 consumable* bell_VoidwalkersDancingBell();
 consumable* bell_VoidwalkersReturningBell();

@@ -79,6 +79,11 @@ maptile * tile_Carpet()
 	return new maptile("Carpet", "floor_carpet", CARPET_TILE, TCODColor::darkerRed, TCODColor::black);
 }
 
+maptile * tile_SnowFloor()
+{
+	return new maptile("Snow", "floor_snow", BASIC_FLOOR_TILE, TCODColor::cyan, TCODColor::lighterGrey);
+}
+
 maptile * tile_SandyRock()
 {
 	return new maptile("Sandy Rock", "wall_sand", STONE_WALL_TILE, DARKEST_SAND_COLOR, LIGHT_SAND_COLOR, false, false);
@@ -92,6 +97,11 @@ maptile * tile_Wall()
 maptile * tile_WoodenWall()
 {
 	return new maptile("Wall", "wall_wood", WOODEN_WALL, LIGHT_WOOD_COLOR, DARK_WOOD_COLOR, false, false);
+}
+
+maptile * tile_MarbleWall()
+{
+	return new maptile("Marble Wall", "wall_marble", BASIC_WALL_TILE, TCODColor::darkCyan, TCODColor::white, false, false);
 }
 
 maptile * tile_Door()

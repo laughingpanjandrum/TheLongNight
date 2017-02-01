@@ -36,6 +36,9 @@ item * getItemByHandle(std::string handle)
 		return weapon_KythielsScythe();
 	else if (handle == "void_touched_knife")
 		return weapon_VoidTouchedKnife();
+	//Winter Court
+	else if (handle == "dragonbone_sword")
+		return weapon_DragonboneSword();
 
 	//SHIELDS
 	else if (handle == "battered_wooden_shield")
@@ -48,6 +51,8 @@ item * getItemByHandle(std::string handle)
 		return shield_CityGuardianShield();
 	else if (handle == "void_touched_shield")
 		return shield_VoidTouchedShield();
+	else if (handle == "dragonbone_shield")
+		return shield_DragonboneShield();
 
 	//WANDS/CHIMES
 	else if (handle == "driftwood_wand")
@@ -74,6 +79,8 @@ item * getItemByHandle(std::string handle)
 		return oil_PyromancersOil();
 	else if (handle == "corrosive_oil")
 		return oil_CorrosiveOil();
+	else if (handle == "frozen_oil")
+		return oil_FrozenOil();
 
 	//RANGED WEAPONS
 	else if (handle == "throwing_knives")

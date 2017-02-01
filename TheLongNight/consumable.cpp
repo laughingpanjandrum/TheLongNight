@@ -163,6 +163,14 @@ consumable * oil_CorrosiveOil()
 	return c;
 }
 
+consumable * oil_FrozenOil()
+{
+	consumable* c = new consumable("Frozen Oil", VIAL_TILE, TCODColor::lightBlue,
+		"The alchemists of the Winter Court created this curious oil, which coats a blade in ice.");
+	c->setWeaponBuff(new weaponBuff(DAMAGE_COLD, 15));
+	return c;
+}
+
 consumable * bell_VoidwalkersDancingBell()
 {
 	consumable* c = new consumable("Voidwalker's Dancing Bell", BELL_TILE, TCODColor::purple,

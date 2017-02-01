@@ -175,6 +175,16 @@ spell * attack_VoidSurge()
 	return sp;
 }
 
+spell * attack_FlameSwathe()
+{
+	spell* sp = new spell("Flame Swathe", SPELL_TILE, TCODColor::darkFlame,
+		"Adjacent targets take fire damage.");
+	sp->setAttackType(ATTACK_AOE, 2);
+	sp->addEffect(APPLY_FIRE_DAMAGE, 25);
+	sp->setVigourCost(2);
+	return sp;
+}
+
 //Wand/chime powers
 
 spell * ability_PowerSurge()
@@ -351,7 +361,7 @@ spell * spell_FrozenBlade()
 	spell* sp = new spell("Frozen Blade", SPELL_TILE, TCODColor::darkCyan,
 		"The Winter Court coated their blades in ice and froze their enemies to death.");
 	sp->setAttackType(ATTACK_BUFF_WEAPON);
-	sp->setBuffApplied(DAMAGE_COLD, 15);
+	sp->setBuffApplied(DAMAGE_COLD, 25);
 	sp->setVigourCost(2);
 	sp->usesSpellPower = true;
 	sp->isColdSpell = true;

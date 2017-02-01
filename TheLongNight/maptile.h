@@ -116,10 +116,12 @@ maptile* tile_Grass(); //"floor_grass"
 maptile* tile_Road(); //"floor_road"
 maptile* tile_Void(); //"floor_void"
 maptile* tile_Carpet(); //"floor_carpet"
+maptile* tile_SnowFloor(); //"floor_snow"
 
 maptile* tile_SandyRock(); //"wall_sand"
 maptile* tile_Wall(); //"wall_stone"
 maptile* tile_WoodenWall(); //"wall_wood";
+maptile* tile_MarbleWall(); //"wall_marble"
 
 maptile* tile_Door(); //"door_stone"
 maptile* tile_WoodenDoor(); //"door_wood"
@@ -167,8 +169,8 @@ maptile* tile_Table4(); //"table4"
 
 
 const tileVector ALL_MAPTILES = {
-	tile_Floor(), tile_MossyFloor(), tile_Sand(), tile_Grass(), tile_Road(), tile_Void(), tile_Carpet(),
-	tile_Wall(), tile_WoodenWall(), tile_SandyRock(),
+	tile_Floor(), tile_MossyFloor(), tile_Sand(), tile_Grass(), tile_Road(), tile_Void(), tile_Carpet(), tile_SnowFloor(),
+	tile_Wall(), tile_WoodenWall(), tile_SandyRock(), tile_MarbleWall(),
 	tile_Door(), tile_WoodenDoor(), tile_LockedDoor(), tile_DoorUnlocker(),
 	tile_Glass(), tile_Bush(), tile_Rosebush(), tile_Tree(), tile_VoidTree(),
 	tile_Water(), tile_MossyWater(), tile_DeepWater(), tile_Acid(),
