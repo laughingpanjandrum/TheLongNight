@@ -700,6 +700,7 @@ monster * monster_WinterShade()
 	m->setHealth(50);
 	m->setDefence(DAMAGE_PHYSICAL, 90);
 	m->setDefence(DAMAGE_COLD, 100);
+	m->addWeakness(DAMAGE_FIRE);
 	m->setMoveStats(SPEED_NORMAL);
 	m->equipItem(new weapon(0, SPEED_NORMAL, DAMAGE_COLD, 50));
 	m->addSpellKnown(ability_WinterBlast());
@@ -716,6 +717,7 @@ arouse its rage; its eyes glow red for an instant.");
 	m->setHealth(150);
 	m->setDefence(DAMAGE_PHYSICAL, 40);
 	m->setDefence(DAMAGE_COLD, 50);
+	m->addWeakness(DAMAGE_FIRE);
 	m->setMoveStats(SPEED_NORMAL);
 	m->equipItem(new weapon(25, SPEED_SLOW, DAMAGE_COLD, 25));
 	m->addSpellKnown(new spell(1, 25, KNOCKBACK_TARGET, 3));

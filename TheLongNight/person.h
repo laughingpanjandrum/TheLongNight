@@ -75,6 +75,7 @@ public:
 	int getBaseMeleeDamage() { return baseMeleeDamage; }
 	int getDefence();
 	int getDamageResist(damageType dr) { return damageResist.at(dr); }
+	bool isWeakTo(damageType dr) { return damageWeakness.at(dr); }
 	int getMeleeDamage();
 	int getDamageOfType(damageType dtype);
 
@@ -85,6 +86,7 @@ public:
 	void setMaxVigour(int v) { vigour.setTo(v); }
 	void addDamageResist(damageType dtype, int amount) { damageResist.at(dtype) += amount; }
 	void addDefence(int amount) { baseDefence += amount; }
+	void addWeakness(int dtype) { damageWeakness.at(dtype) = true; }
 
 	//Taking damage and healing
 	void addHealth(int amount);
@@ -216,6 +218,7 @@ protected:
 	//Resistances/defence
 	int baseDefence = 0;
 	std::vector<int> damageResist;
+	std::vector<bool> damageWeakness;
 
 	//Status effects
 	int isBleeding = 0;

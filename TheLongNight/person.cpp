@@ -13,9 +13,11 @@ person::person(std::string name, int tileCode, TCODColor color, std::string desc
 	//Status effects
 	bleedBuildup.setTo(20, 0);
 	poisonBuildup.setTo(20, 0);
-	//Resistances
-	for (int r = 0; r < ALL_DAMAGE_TYPES; r++)
+	//Resistances/vulnerabilities
+	for (int r = 0; r < ALL_DAMAGE_TYPES; r++) {
 		damageResist.push_back(0);
+		damageWeakness.push_back(false);
+	}
 }
 
 person::~person()
@@ -188,6 +190,8 @@ void person::takeDamage(int amount, damageType dtype)
 		else
 			amount /= 2;
 	}
+	if (dtype < ALL_DAMAGE_TYPES && isWeakTo(dtype))
+		amount = amount * 2;
 
 	//Special effects: gain spell power upon taking cold damage
 	if (dtype == DAMAGE_COLD)
