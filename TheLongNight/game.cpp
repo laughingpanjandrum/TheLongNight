@@ -1690,6 +1690,15 @@ void game::useConsumable()
 				if (wp != nullptr)
 					wp->setBuff(*toUse->getWeaponBuff());
 			}
+
+			else if (toUse->addsPermanentBuff) {
+				//We add some kind of permanent buff that has to be tracked
+				for (auto eff : toUse->getEffects()) {
+					std::string effName = toUse->getName() + " - " + getEffectName(eff);
+					if (player->addBuff(effName, toUse->getColor(), eff, potency))
+						applyEffectToPerson(player, eff, potency);
+				}
+			}
 			
 			else {
 				//All effects are applied to PERSON
@@ -3318,6 +3327,8 @@ void getAllItems(person* player)
 	player->addItem(armour_PashRobes());
 	player->addItem(headgear_CursedKnightsHelm());
 	player->addItem(armour_CursedKnightsArmour());
+	player->addItem(headgear_GreyThiefsHood());
+	player->addItem(armour_GreyThiefsRags());
 
 	player->addItem(charm_ArcanaDrenchedCharm());
 	player->addItem(charm_BloodDrinkersBand());
@@ -3327,6 +3338,7 @@ void getAllItems(person* player)
 	player->addItem(charm_FrozenFlowerCharm());
 	player->addItem(charm_IdolOfPash());
 	player->addItem(charm_KhallesHeadband());
+	player->addItem(charm_ToxicantsCharm());
 	player->addItem(charm_WretchedFleshBand());
 	player->addItem(charm_WretchedFleshmask());
 
@@ -3353,16 +3365,18 @@ void getAllItems(person* player)
 	player->addItem(prayer_Restoration());
 	player->addItem(prayer_WyrdChantOfStrength());
 
+	player->addItem(consumable_BloodDrinkersEyes());
+	player->addItem(consumable_IntoxicatingWine());
 	player->addItem(consumable_InvigoratingTea());
 	player->addItem(consumable_TinyGreenFlower());
 	player->addItem(consumable_TinyRedFlower());
-	player->addItem(consumable_BloodDrinkersEyes());
 
 	player->addItem(ranged_CorrodingJar());
 	player->addItem(ranged_FrostKnives());
 	player->addItem(ranged_HeavyJavelin());
 	player->addItem(ranged_LaceratingKnives());
 	player->addItem(ranged_LightingJavelin());
+	player->addItem(ranged_PoisonThrowingKnives());
 	player->addItem(ranged_PyromancersFlask());
 	player->addItem(ranged_ThrowingKnives());
 	player->addItem(ranged_WitchsJar());
@@ -3370,9 +3384,11 @@ void getAllItems(person* player)
 
 	player->addItem(oil_CorrosiveOil());
 	player->addItem(oil_FrozenOil());
+	player->addItem(oil_HolyWater());
 	player->addItem(oil_PyromancersOil());
 
 	player->addItem(runestone_CorensRunestone());
+	player->addItem(runestone_IetrasRunestone());
 	player->addItem(runestone_KhallesRunestone());
 	player->addItem(runestone_SiltrasRunestone());
 

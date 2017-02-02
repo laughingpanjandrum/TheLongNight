@@ -15,6 +15,7 @@ wisp:15,15
 -items
 grey_thiefs_rags:3,13
 grey_thiefs_hood:4,13
+intoxicating_wine:13,20
 -enditems
 -codes
 ; floor_stone

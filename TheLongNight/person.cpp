@@ -378,6 +378,8 @@ void person::applyEffect(effect eff, int potency)
 		slowdown += potency;
 	else if (eff == APPLY_ENTANGLING)
 		entangle(potency);
+	else if (eff == APPLY_DAMAGE_PENALTY)
+		damagePenalty += potency;
 
 	//Defensive buffs
 

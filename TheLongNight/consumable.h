@@ -40,6 +40,7 @@ public:
 
 	//Flags
 	bool consumeOnUse = true; //Doesn't have to get USED UP!
+	bool addsPermanentBuff = false;
 
 private:
 
@@ -70,6 +71,7 @@ consumable* consumable_InvigoratingTea();
 consumable* consumable_TinyRedFlower();
 consumable* consumable_TinyGreenFlower();
 consumable* consumable_BloodDrinkersEyes();
+consumable* consumable_IntoxicatingWine();
 
 consumable* ranged_ThrowingKnives();
 consumable* ranged_HeavyJavelin();

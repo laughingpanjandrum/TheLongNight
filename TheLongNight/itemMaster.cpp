@@ -73,6 +73,8 @@ item * getItemByHandle(std::string handle)
 		return consumable_TinyGreenFlower();
 	else if (handle == "blood_drinkers_eyes")
 		return consumable_BloodDrinkersEyes();
+	else if (handle == "intoxicating_wine")
+		return consumable_IntoxicatingWine();
 
 	//OILS
 	else if (handle == "pyromancers_oil")
@@ -317,6 +319,7 @@ std::string getEffectName(effect e)
 
 	case(APPLY_BLINDING): return "blind target";
 	case(APPLY_ENTANGLING): return "entangle target";
+	case(APPLY_DAMAGE_PENALTY): return "attack damage penalty";
 	case(KNOCKBACK_TARGET): return "knockback target";
 	case(PULL_CLOSER): return "pull target";
 	case(BLEED_DAMAGE_FACTOR): return "times bleed damage dealt and taken";
