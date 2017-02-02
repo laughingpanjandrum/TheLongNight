@@ -1,5 +1,19 @@
 #include "animations.h"
 
+
+
+//Converts the given vector of coordinates into a vector of pointers to coordinates.
+pathVectorP * animations::getPointerPath(coordVector * pts)
+{
+	pathVectorP* vec = new pathVectorP();
+	for (auto iter = pts->begin(); iter != pts->end(); iter++) {
+		vec->push_back(new coord(iter->first, iter->second));
+	}
+	return vec;
+}
+
+
+
 /*
 Given person briefly changes to the given color, then changes back.
 */
@@ -139,7 +153,7 @@ void glowPath::tick()
 */
 
 
-glyphCycle::glyphCycle(coordVector pts, TCODColor col1, TCODColor col2):
+glyphCycle::glyphCycle(coordVector* pts, TCODColor col1, TCODColor col2):
 	pts(pts)
 {
 	//Make a colour map for us to cycle through
@@ -151,9 +165,9 @@ glyphCycle::glyphCycle(coordVector pts, TCODColor col1, TCODColor col2):
 
 drawData* glyphCycle::getDrawData(drawData * baseData, const int x, const int y)
 {
-	for (auto pt : pts) 
+	for (auto pt = pts->begin(); pt != pts->end(); pt++) 
 	{
-		if (pt.first == x && pt.second == y)
+		if (pt->first == x && pt->second == y)
 		{
 			//Pick a random glyph
 			int glyph = randint(128, 175);

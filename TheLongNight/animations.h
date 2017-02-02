@@ -8,10 +8,6 @@
 #include "map.h"
 #include "person.h"
 
-typedef std::vector<coord> pathVector;
-typedef std::vector<TCODColor> colorVector;
-
-
 //Draw data - useful little chunk of data that defines what to draw at a point on the map
 struct drawData {
 	drawData() {}
@@ -36,6 +32,11 @@ enum animationType {
 
 
 
+typedef std::vector<coord*> pathVectorP; //Path vector with pointers to coords instead of values
+typedef std::vector<coord> pathVector;
+typedef std::vector<TCODColor> colorVector;
+
+
 //Base class
 class animations
 {
@@ -50,9 +51,19 @@ public:
 	virtual void tick() {}
 	virtual bool isDone() { return false; }
 
+protected:
+
+	pathVectorP* getPointerPath(coordVector* pts);
+
 };
 
+
+//Types
+
 typedef std::vector<animations*> animVector;
+
+
+
 
 /*
 Briefly changes a person's colour.
@@ -130,12 +141,12 @@ Rapidly cycles through random glyphs.
 class glyphCycle : public animations
 {
 public:
-	glyphCycle(coordVector pts, TCODColor col1, TCODColor col2);
+	glyphCycle(coordVector* pts, TCODColor col1, TCODColor col2);
 	virtual drawData* getDrawData(drawData* baseData, const int x, const int y);
 	virtual void tick() { timeLeft--; }
 	virtual bool isDone() { return timeLeft < 1; }
 private:
-	coordVector pts;
+	coordVector* pts;
 	TCODColor* colors;
 	int timeLeft = 20;
 };

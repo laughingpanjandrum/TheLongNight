@@ -547,6 +547,7 @@ spell * ability_Charge()
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(GAIN_FREE_MOVES, 3);
 	sp->usesSpellPower = false;
+	sp->useAlternateAnimation = true;
 	return sp;
 }
 
@@ -556,6 +557,7 @@ spell* ability_Burst()
 	sp->setAttackType(ATTACK_AOE);
 	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 25);
 	sp->setAttackRange(2);
+	sp->useAlternateAnimation = true;
 	return sp;
 }
 
@@ -565,6 +567,7 @@ spell * ability_CrowArrow()
 	sp->setAttackType(ATTACK_RANGE);
 	sp->setAttackRange(8);
 	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 10);
+	sp->useAlternateAnimation = true;
 	return sp;
 }
 
@@ -574,6 +577,7 @@ spell * ability_FeedingFrenzy()
 	sp->setAttackType(ATTACK_AOE);
 	sp->setAttackRange(3);
 	sp->addEffect(GAIN_FREE_MOVES, 1);
+	sp->useAlternateAnimation = true;
 	return sp;
 }
 
@@ -582,6 +586,7 @@ spell * ability_DropOoze()
 	spell* sp = new spell("Drop Ooze", SPELL_TILE, TCODColor::sepia);
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(DROP_OOZE, 1);
+	sp->useAlternateAnimation = true;
 	return sp;
 }
 
@@ -590,6 +595,7 @@ spell * ability_ShadowWalk()
 	spell* sp = new spell("Shadow Walk", SPELL_TILE, TCODColor::purple);
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(BECOME_INVISIBLE, 2);
+	sp->useAlternateAnimation = true;
 	return sp;
 }
 
@@ -598,6 +604,7 @@ spell * ability_WinterBlast()
 	spell* sp = new spell("Winter Blast", SPELL_TILE, TCODColor::cyan);
 	sp->setAttackType(ATTACK_AOE, 3);
 	sp->addEffect(APPLY_COLD_DAMAGE, 25);
+	sp->useAlternateAnimation = true;
 	return sp;
 }
 
@@ -619,6 +626,7 @@ spell * ability_Throw()
 	sp->setAttackRange(1);
 	sp->addEffect(KNOCKBACK_TARGET, 5);
 	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 25);
+	sp->useAlternateAnimation = true;
 	return sp;
 }
 

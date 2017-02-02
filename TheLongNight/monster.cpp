@@ -877,7 +877,6 @@ monster * npc_TheEyelessQueen()
 of smiles.");
 	m->setHealth(100);
 	m->isHostile = false;
-	m->isShopkeeper = true;
 	m->loadDialogue("dialogue/eyeless_queen_chat.txt");
 	return m;
 }

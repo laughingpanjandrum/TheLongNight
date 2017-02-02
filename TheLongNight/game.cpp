@@ -2085,7 +2085,7 @@ One creature attacks another in melee.
 */
 void game::meleeAttack(person * attacker, person * target)
 {
-	addMessage(attacker->getName() + " strikes " + target->getName(), attacker->getColor());
+	addMessage(attacker->getName() + " strikes " + target->getName() + '!', attacker->getColor());
 
 	//Multiattack?
 	for (int a = 0; a < attacker->attacksPerHit; a++) {
@@ -2107,8 +2107,9 @@ void game::meleeAttack(person * attacker, person * target)
 		for (int dt = 0; dt < ALL_DAMAGE_TYPES; dt++) {
 			damageType dtype = static_cast<damageType>(dt);
 			int sdmg = attacker->getDamageOfType(dtype);
-			if (sdmg > 0)
+			if (sdmg > 0) {
 				target->takeDamage(sdmg, dtype);
+			}
 		}
 
 		//Next: SPELL DISCHARGES, if we have one readied
@@ -2136,8 +2137,10 @@ void game::meleeAttack(person * attacker, person * target)
 	}
 	
 	//Update targeting
-	if (target->isDead)
+	if (target->isDead) {
 		attacker->clearTarget();
+		addMessage(target->getName() + " dies!", TCODColor::white);
+	}
 	else
 		attacker->setTarget(target);
 
@@ -2420,12 +2423,12 @@ void game::doRangedSpell(spell * sp)
 		pathVector path = getLine(player->getPosition(), tp);
 
 		//Bullet animation!
-		/*if (sp->useAlternateAnimation) {
+		if (sp->useAlternateAnimation) {
 			addAnimations(new bulletPath(&path, BULLET_TILE, sp->getColor()));
 		}
 		else {
 			addAnimations(new glowPath(&path, sp->getColor(), TCODColor::white));
-		}*/
+		}
 		
 		//See if there's something to hit on the path
 		person* target = getTargetOnPath(path);
@@ -2573,14 +2576,14 @@ void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 	//Certain animations will be played here
 	auto attackType = sp->getAttackType();
 	if (attackType == ATTACK_BUFF_SELF) {
-		/*if (sp->useAlternateAnimation) {
+		if (sp->useAlternateAnimation) {
 			addAnimations(new flashCharacter(target, sp->getColor()));
 		}
 		else {
-			coordVector pts;
-			pts.push_back(target->getPosition());
+			pathVector* pts = new pathVector();
+			pts->push_back(target->getPosition());
 			addAnimations(new glyphCycle(pts, sp->getColor(), target->getColor()));
-		}*/
+		}
 	}
 
 }
