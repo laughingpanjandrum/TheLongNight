@@ -81,12 +81,16 @@ item * getItemByHandle(std::string handle)
 		return oil_CorrosiveOil();
 	else if (handle == "frozen_oil")
 		return oil_FrozenOil();
+	else if (handle == "holy_water")
+		return oil_HolyWater();
 
 	//RANGED WEAPONS
 	else if (handle == "throwing_knives")
 		return ranged_ThrowingKnives();
 	else if (handle == "lacerating_knives")
 		return ranged_LaceratingKnives();
+	else if (handle == "poison_throwing_knives")
+		return ranged_PoisonThrowingKnives();
 	else if (handle == "heavy_javelin")
 		return ranged_HeavyJavelin();
 	else if (handle == "corroding_jar")
@@ -143,6 +147,11 @@ item * getItemByHandle(std::string handle)
 	else if (handle == "cursed_knights_armour")
 		return armour_CursedKnightsArmour();
 
+	else if (handle == "grey_thiefs_hood")
+		return headgear_GreyThiefsHood();
+	else if (handle == "grey_thiefs_rags")
+		return armour_GreyThiefsRags();
+
 	//CHARMS
 	else if (handle == "bloodstained_charm")
 		return charm_BloodstainedCharm();
@@ -156,6 +165,8 @@ item * getItemByHandle(std::string handle)
 		return charm_BloodDrinkersBand();
 	else if (handle == "frozen_flower_charm")
 		return charm_FrozenFlowerCharm();
+	else if (handle == "toxicants_charm")
+		return charm_ToxicantsCharm();
 
 	//SPELLS
 	else if (handle == "magic_missile")
@@ -296,6 +307,7 @@ std::string getEffectName(effect e)
 	case(APPLY_PHYSICAL_DAMAGE): return "physical damage";
 	case(APPLY_ACID_DAMAGE): return "acid damage";
 	case(APPLY_BLEED_DAMAGE): return "bleed damage";
+	case(APPLY_POISON_DAMAGE): return "poison damage";
 	case(APPLY_COLD_DAMAGE): return "cold damage";
 	case(APPLY_ELECTRIC_DAMAGE): return "electric damage";
 	case(APPLY_FIRE_DAMAGE): return "fire damage";
@@ -309,6 +321,7 @@ std::string getEffectName(effect e)
 	case(PULL_CLOSER): return "pull target";
 	case(BLEED_DAMAGE_FACTOR): return "times bleed damage dealt and taken";
 	case(GAIN_BLEED_SCALING): return "extra damage dealt when bleeding";
+	case(PHYS_RESIST_WHILE_POISONED): return "defence when poisoned";
 	case(HURT_BLEEDER): return "profane damage dealt to bleeding target";
 	case(HEALING_FACTOR): return "percent healing boost";
 	case(BECOME_INVISIBLE): return "invisibility";

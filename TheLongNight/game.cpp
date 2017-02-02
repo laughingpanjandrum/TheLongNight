@@ -953,46 +953,51 @@ void game::drawPlayerInfo(int atx, int aty)
 	win.writec(atx, aty, VIGOUR_GLYPH, TCODColor::green);
 	aty++;
 	
-//Defence
-win.write(atx, ++aty, "DEFENCE", mainCol);
-win.write(atx + offset, aty, std::to_string(player->getDefence()), TCODColor::lightBlue);
-//Damage resistances
-for (int r = 0; r != ALL_DAMAGE_TYPES; r++) {
-	damageType dr = static_cast<damageType>(r);
-	int res = player->getDamageResist(dr);
-	win.write(atx + 1, ++aty, getDamageTypeName(dr), mainCol);
-	win.write(atx + offset, aty, std::to_string(res), getDamageTypeColor(dr));
-}
-aty++;
+	//Defence
+	win.write(atx, ++aty, "DEFENCE", mainCol);
+	win.write(atx + offset, aty, std::to_string(player->getDefence()), TCODColor::lightBlue);
+	//Damage resistances
+	for (int r = 0; r != ALL_DAMAGE_TYPES; r++) {
+		damageType dr = static_cast<damageType>(r);
+		int res = player->getDamageResist(dr);
+		win.write(atx + 1, ++aty, getDamageTypeName(dr), mainCol);
+		win.write(atx + offset, aty, std::to_string(res), getDamageTypeColor(dr));
+	}
+	aty++;
 
-//Bleed resist
-win.write(atx, ++aty, "BLEED Resist", mainCol);
-win.write(atx + offset, aty, std::to_string(player->getSpecialEffectBuildup(EFFECT_BLEED)->getMaxValue()), TCODColor::crimson);
-aty++;
+	//Bleed resist
+	win.write(atx, ++aty, "BLEED Resist", mainCol);
+	win.write(atx + offset, aty, std::to_string(player->getSpecialEffectBuildup(EFFECT_BLEED)->getMaxValue()), TCODColor::crimson);
 
-//Magic stuff
-win.write(atx, ++aty, "SPELL POWER", mainCol);
-win.write(atx + offset, aty, std::to_string(player->getSpellPower()), TCODColor::magenta);
-win.write(atx, ++aty, "DIVINE POWER", mainCol);
-win.write(atx + offset, aty, std::to_string(player->getDivinePower()), TCODColor::darkYellow);
-aty++;
+	//Poison resist
+	win.write(atx, ++aty, "POIS Resist", mainCol);
+	win.write(atx + offset, aty, std::to_string(player->getSpecialEffectBuildup(EFFECT_POISON)->getMaxValue()), TCODColor::lime);
 
-//Attacks/movement
-win.write(atx, ++aty, "Move Speed", mainCol);
-win.write(atx + offset, aty, getAttackSpeedName(player->getMoveDelay()), TCODColor::white);
-win.write(atx, ++aty, "Attack Speed", mainCol);
-win.write(atx + offset, aty, getAttackSpeedName(player->getAttackDelay()), TCODColor::white);
-win.write(atx, ++aty, "Melee DMG", mainCol);
-win.write(atx + offset, aty, std::to_string(player->getMeleeDamage()), TCODColor::darkRed);
+	aty++;
 
-//List buffs
-for (auto b : player->getAllBuffs()) {
-	win.write(atx, ++aty, b->name, b->color);
-}
+	//Magic stuff
+	win.write(atx, ++aty, "SPELL POWER", mainCol);
+	win.write(atx + offset, aty, std::to_string(player->getSpellPower()), TCODColor::magenta);
+	win.write(atx, ++aty, "DIVINE POWER", mainCol);
+	win.write(atx + offset, aty, std::to_string(player->getDivinePower()), TCODColor::darkYellow);
+	aty++;
 
-//Done! Wait for input
-win.refresh();
-while (win.getkey().vk != KEY_BACK_OUT) {}
+	//Attacks/movement
+	win.write(atx, ++aty, "Move Speed", mainCol);
+	win.write(atx + offset, aty, getAttackSpeedName(player->getMoveDelay()), TCODColor::white);
+	win.write(atx, ++aty, "Attack Speed", mainCol);
+	win.write(atx + offset, aty, getAttackSpeedName(player->getAttackDelay()), TCODColor::white);
+	win.write(atx, ++aty, "Melee DMG", mainCol);
+	win.write(atx + offset, aty, std::to_string(player->getMeleeDamage()), TCODColor::darkRed);
+
+	//List buffs
+	for (auto b : player->getAllBuffs()) {
+		win.write(atx, ++aty, b->name, b->color);
+	}
+
+	//Done! Wait for input
+	win.refresh();
+	while (win.getkey().vk != KEY_BACK_OUT) {}
 }
 
 
@@ -1312,6 +1317,11 @@ void game::drawWeaponInfo(weapon * it, int atx, int aty)
 		win.write(atx, ++aty, "BLEED Resist", TCODColor::crimson);
 		win.write(atx + offset, aty, std::to_string(it->getBleedResist()), maincol);
 	}
+	//Poison resist
+	if (it->getPoisonResist() > 0) {
+		win.write(atx, ++aty, "POISON Resist", TCODColor::lime);
+		win.write(atx + offset, aty, std::to_string(it->getPoisonResist()), maincol);
+	}
 
 	//Damage penalty
 	int dp = it->getDamagePenalty();
@@ -1378,6 +1388,12 @@ void game::drawArmourInfo(armour * it, int atx, int aty)
 	if (br) {
 		win.write(atx, ++aty, "BLEED RES", TCODColor::crimson);
 		win.write(atx + offset, aty, std::to_string(br), maincol);
+	}
+	//Poison resist
+	int pr = it->getPoisonResist();
+	if (pr) {
+		win.write(atx, ++aty, "POISON RES", TCODColor::lime);
+		win.write(atx + offset, aty, std::to_string(pr), maincol);
 	}
 	//Move speed adjustment, if body armour
 	if (it->getCategory() == ITEM_BODY_ARMOUR) {
@@ -1735,12 +1751,12 @@ void game::doAOE(spell * sp, person * caster)
 	int r = sp->getAttackRange();
 	TCODColor col1 = sp->getColor();
 	TCODColor col2 = win.mixColors(col1, TCODColor::white, 0.5);
-	/*if (sp->useAlternateAnimation) {
+	if (sp->useAlternateAnimation) {
 		addAnimations(new explosion(caster->getPosition(), r, col1, col2));
 	}
 	else {
 		addAnimations(new shockwave(caster->getx(), caster->gety(), col1, col2));
-	}*/
+	}
 	
 	//Execute the spell
 	for (int x = caster->getx() - r; x <= caster->getx() + r; x++) {

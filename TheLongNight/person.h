@@ -110,7 +110,7 @@ public:
 	bool isBlind() { return blinding > 0; }
 	int getBlindnessDuration() { return blinding; }
 	//Entangled
-	void entangle(int duration) { entangling += duration; }
+	void entangle(int duration);
 	bool isEntangled() { return entangling > 0; }
 	int getEntangleDuration() { return entangling; }
 	void struggle() { entangling--; }
@@ -137,8 +137,10 @@ public:
 	int healthOnKill = 0; //Health restored when we kill something
 	int invisibility = 0;
 	int bleedScaling = 0; //Extra damage dealt when we have bleed
+	int defenceWhenPoisoned = 0; //Buff to defence when we're poisoned
 	int bleedDamageFactor = 1; //Multiplies both bleed damage taken and given
 	int getFragmentPickupMult() { return fragmentPickupMultiplier; }
+	bool immuneToEntangle = false;
 
 	//Debuffs
 	int slowdown = 0;

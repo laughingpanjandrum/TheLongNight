@@ -89,20 +89,30 @@ Returns reduction to physical damage as an int out of 100%.
 */
 int person::getDefence()
 {
+	
 	//Base reduction
 	int base = baseDefence;
+	
 	//Bonus from armour
 	armour* ar = getArmour();
 	if (ar != nullptr)
 		base += ar->getDefence();
+	
 	//Bonus from headgear
 	armour* helm = getHelmet();
 	if (helm != nullptr)
 		base += helm->getDefence();
+	
 	//Bonus from offhand item
 	weapon* offhand = getOffhand();
 	if (offhand != nullptr)
 		base += offhand->getDefence();
+
+	//Special buffs
+	if (isPoisoned > 0) {
+		base += defenceWhenPoisoned;
+	}
+	
 	//Done!
 	return base;
 }
@@ -277,6 +287,15 @@ counter* person::getSpecialEffectBuildup(statusEffects eff)
 */
 
 
+void person::entangle(int duration)
+{
+	if (!immuneToEntangle) {
+		entangling += duration;
+		if (entangling > 5)
+			entangling = 5;
+	}
+}
+
 /*
 We can't add a new buff if we already have one with the same name.
 */
@@ -346,6 +365,8 @@ void person::applyEffect(effect eff, int potency)
 		healthOnKill += potency;
 	else if (eff == GAIN_BLEED_SCALING)
 		bleedScaling += potency;
+	else if (eff == PHYS_RESIST_WHILE_POISONED)
+		defenceWhenPoisoned += potency;
 	else if (eff == BECOME_INVISIBLE)
 		invisibility += potency;
 	else if (eff == CHANGE_FRAGMENT_PICKUP_MULT)
@@ -427,6 +448,8 @@ void person::applyEffect(effect eff, int potency)
 
 	else if (eff == APPLY_BLEED_DAMAGE)
 		takeStatusEffectDamage(EFFECT_BLEED, potency);
+	else if (eff == APPLY_POISON_DAMAGE)
+		takeStatusEffectDamage(EFFECT_POISON, potency);
 	else if (eff == APPLY_BLINDING)
 		blind(potency);
 
@@ -603,10 +626,14 @@ void person::equipItem(item * which)
 				addDamageResist(dr, which->getDamageResist(dr));
 			}
 
-			//Status effect resistances
+			//Status effect resistances: BLEED
 			int bleedResist = which->getBleedResist();
-			if (bleedResist)
+			if (bleedResist > 0)
 				bleedBuildup.increaseMaxValue(bleedResist, false);
+			//And resistance: POISON
+			int poisonResist = which->getPoisonResist();
+			if (poisonResist > 0)
+				poisonBuildup.increaseMaxValue(poisonResist, false);
 		
 		}
 
@@ -695,8 +722,11 @@ void person::unequipItem(item * which)
 
 			//Lose status effect resistances
 			int bleedResist = which->getBleedResist();
-			if (bleedResist)
+			if (bleedResist > 0)
 				bleedBuildup.increaseMaxValue(-bleedResist, false);
+			int poisonResist = which->getPoisonResist();
+			if (poisonResist > 0)
+				poisonBuildup.increaseMaxValue(-poisonResist, false);
 
 		}
 

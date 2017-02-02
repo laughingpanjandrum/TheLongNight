@@ -102,3 +102,12 @@ charm * charm_FrozenFlowerCharm()
 	c->addEffect(COLD_DAMAGE_ADDS_INFUSION, 25);
 	return c;
 }
+
+charm * charm_ToxicantsCharm()
+{
+	charm* c = new charm("Toxicant's Charm", CHARM_TILE, TCODColor::lime,
+		"This charm slowly dissolves toxins into the wearer's skin, enhancing your strength when poison \
+grips you.");
+	c->addEffect(PHYS_RESIST_WHILE_POISONED, 20);
+	return c;
+}

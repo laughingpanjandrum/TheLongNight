@@ -132,6 +132,9 @@ spell* ability_FeedingFrenzy();
 spell* ability_DropOoze();
 spell* ability_ShadowWalk();
 spell* ability_WinterBlast();
+spell* ability_WreatheInFlame();
+spell* ability_DragBelow();
+spell* ability_SpitWeb();
 
 //Duke Vorten
 spell* ability_TentacleSwarm();

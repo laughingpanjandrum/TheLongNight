@@ -142,7 +142,7 @@ maptile * tile_Glass()
 
 maptile * tile_Bush()
 {
-	return new maptile("Bush", "bush", BUSH_TILE, LIGHT_GRASS_COLOR, DARK_GRASS_COLOR, true, false);
+	return new maptile("Bush", "bush", BUSH_TILE, TCODColor::lightestGreen, DARK_GRASS_COLOR, true, false);
 }
 
 maptile * tile_Rosebush()
@@ -193,6 +193,14 @@ maptile * tile_Ooze()
 	o->addTouchEffect(SLOWDOWN);
 	o->setPotency(1);
 	return o;
+}
+
+maptile * tile_Web()
+{
+	maptile* web = new maptile("Web", "web", WEB_TILE, TCODColor::white, DARK_GRASS_COLOR);
+	web->addTouchEffect(APPLY_ENTANGLING);
+	web->setPotency(1);
+	return web;
 }
 
 maptile * tile_Bloodstain()

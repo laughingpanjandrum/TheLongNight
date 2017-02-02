@@ -101,7 +101,7 @@ typedef std::vector<monster*> monsterVector;
 
 
 //Stardrift Wreckage
-monster* monster_DrownedDead();
+monster* monster_DrownedCrew();
 
 //Coruscating Beach
 monster* monster_ThinWretch();
@@ -146,6 +146,11 @@ monster* monster_DukeVortenTheWatchful();
 //The Winter Court
 monster* monster_WinterShade();
 monster* monster_HollowfacedKnight();
+
+//The Murdermire
+monster* monster_Wisp();
+monster* monster_DrownedDead();
+monster* monster_SwampSpider();
 
 //The Void
 monster* monster_VoidTouched();

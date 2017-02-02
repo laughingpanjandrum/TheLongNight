@@ -93,6 +93,15 @@ consumable * ranged_LaceratingKnives()
 	return c;
 }
 
+consumable * ranged_PoisonThrowingKnives()
+{
+	consumable* c = new consumable("Poison Throwing Knives", DAGGER_TILE, TCODColor::green,
+		"Knives coated in poison. Preferred weapon of the grey thieves that escaped from Hightower.");
+	c->setRangedAttack(new spell("Poison Throwing Knives", c->getColor(), 5, 10, APPLY_POISON_DAMAGE, 15));
+	c->add(4);
+	return c;
+}
+
 consumable * ranged_CorrodingJar()
 {
 	consumable* c = new consumable("Corroding Jar", VIAL_TILE, TCODColor::lime,
@@ -168,6 +177,14 @@ consumable * oil_FrozenOil()
 	consumable* c = new consumable("Frozen Oil", VIAL_TILE, TCODColor::lightBlue,
 		"The alchemists of the Winter Court created this curious oil, which coats a blade in ice.");
 	c->setWeaponBuff(new weaponBuff(DAMAGE_COLD, 15));
+	return c;
+}
+
+consumable * oil_HolyWater()
+{
+	consumable* c = new consumable("Holy Water", VIAL_TILE, TCODColor::lightestBlue,
+		"This vial of blessed water adds a sheen of pure holy energy to a blade.");
+	c->setWeaponBuff(new weaponBuff(DAMAGE_BLESSED, 15));
 	return c;
 }
 

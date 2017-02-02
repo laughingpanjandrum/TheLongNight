@@ -1,10 +1,10 @@
 Stardrift Wreckage
 start:19,19
-drowned_dead:19,10
-drowned_dead:11,9
-drowned_dead:10,7
-drowned_dead:15,25
-drowned_dead:14,24
+drowned_crew:19,10
+drowned_crew:11,9
+drowned_crew:10,7
+drowned_crew:15,25
+drowned_crew:14,24
 -items
 splintered_sword:17,17
 starwater_draught:16,9

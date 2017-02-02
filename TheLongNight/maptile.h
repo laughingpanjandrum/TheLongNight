@@ -140,6 +140,7 @@ maptile* tile_DeepWater(); //"water_deep"
 maptile* tile_Acid(); //"acid"
 
 maptile* tile_Ooze(); //"ooze"
+maptile* tile_Web(); //"web"
 maptile* tile_Bloodstain(); //"bloodstain"
 maptile* tile_Corpse(); //"corpse"
 
@@ -174,7 +175,7 @@ const tileVector ALL_MAPTILES = {
 	tile_Door(), tile_WoodenDoor(), tile_LockedDoor(), tile_DoorUnlocker(),
 	tile_Glass(), tile_Bush(), tile_Rosebush(), tile_Tree(), tile_VoidTree(),
 	tile_Water(), tile_MossyWater(), tile_DeepWater(), tile_Acid(),
-	tile_Ooze(),
+	tile_Ooze(), tile_Web(),
 	tile_Bloodstain(), tile_Corpse(),
 	tile_Bed(), tile_Terminal(),
 	tile_StatueOfRest(), tile_VoidWarpstone(),

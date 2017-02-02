@@ -43,6 +43,9 @@ const int DUKE_TILE = 324;
 
 const int GHOST_TILE = 86;
 
+const int WISP_TILE = 119;
+const int SPIDER_TILE = 77;
+
 const int GOREM_TILE = 327; //This is a golem-dude
 
 //Items
@@ -83,6 +86,7 @@ const int TREE_TILE = 295;
 const int TERMINAL_TILE = 296; //ie a computer terminal
 const int CORPSE_TILE = 37;
 const int CARPET_TILE = 177;
+const int WEB_TILE = 37;
 
 const int STATUE_TILE = 297;
 const int WARPSTONE_TILE = 298;

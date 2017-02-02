@@ -74,6 +74,7 @@ consumable* consumable_BloodDrinkersEyes();
 consumable* ranged_ThrowingKnives();
 consumable* ranged_HeavyJavelin();
 consumable* ranged_LaceratingKnives();
+consumable* ranged_PoisonThrowingKnives();
 consumable* ranged_CorrodingJar();
 consumable* ranged_VoidEssenceJar();
 consumable* ranged_PyromancersFlask();
@@ -84,6 +85,7 @@ consumable* ranged_FrostKnives();
 consumable* oil_PyromancersOil();
 consumable* oil_CorrosiveOil();
 consumable* oil_FrozenOil();
+consumable* oil_HolyWater();
 
 consumable* bell_VoidwalkersDancingBell();
 consumable* bell_VoidwalkersReturningBell();

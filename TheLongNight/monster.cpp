@@ -179,9 +179,9 @@ Monster definitions
 
 
 
-monster * monster_DrownedDead()
+monster * monster_DrownedCrew()
 {
-	monster * m = new monster("Drowned Dead", DROWNED_DEAD_TILE, TCODColor::lightGreen,
+	monster * m = new monster("Drowned Crew", DROWNED_DEAD_TILE, TCODColor::lightGreen,
 		"Rotted ruins of a crewmember. How tragic!");
 	m->setMeleeStats(10, SPEED_SLOW);
 	m->setMoveStats(SPEED_NORMAL);
@@ -727,6 +727,64 @@ arouse its rage; its eyes glow red for an instant.");
 }
 
 
+
+
+/*
+	The Murdermire
+*/
+
+
+
+monster * monster_Wisp()
+{
+	monster* m = new monster("Wisp", WISP_TILE, TCODColor::flame,
+		"A point of drifting light.");
+	m->setHealth(25);
+	m->setDefence(DAMAGE_PHYSICAL, 100);
+	m->setDefence(DAMAGE_FIRE, 90);
+	m->setBleedResist(1000);
+	m->setPoisonResist(1000);
+	m->addWeakness(DAMAGE_ELECTRIC);
+	m->addWeakness(DAMAGE_COLD);
+	m->setMeleeStats(5, SPEED_SLOW);
+	m->setMoveStats(SPEED_NORMAL);
+	m->keepsDistance = true;
+	m->addSpellKnown(ability_WreatheInFlame());
+	m->setSpellCastChance(20);
+	return m;
+}
+
+monster * monster_DrownedDead()
+{
+	monster* m = new monster("Drowned Dead", DROWNED_DEAD_TILE, TCODColor::sea,
+		"A rotten and barnacle-encrusted figure.");
+	m->setHealth(100);
+	m->setDefence(DAMAGE_PHYSICAL, 20);
+	m->setPoisonResist(1000);
+	m->addWeakness(DAMAGE_FIRE);
+	m->addWeakness(DAMAGE_BLESSED);
+	m->setMoveStats(SPEED_SLOW);
+	m->equipItem(new weapon(25, SPEED_SLOW, EFFECT_POISON, 10));
+	m->addSpellKnown(ability_DragBelow());
+	m->setSpellCastChance(25);
+	return m;
+}
+
+monster * monster_SwampSpider()
+{
+	monster* m = new monster("Swamp Spider", SPIDER_TILE, TCODColor::sea,
+		"A bloated body the size of a dog sits upon eight spindly legs. A mass of pale green eyes regard you hungrily.");
+	m->setHealth(100);
+	m->setPoisonResist(1000);
+	m->addWeakness(DAMAGE_FIRE);
+	m->setMoveStats(SPEED_FAST);
+	m->equipItem(new weapon(10, SPEED_NORMAL, EFFECT_POISON, 25));
+	m->addSpellKnown(ability_SpitWeb());
+	m->setSpellCastChance(25);
+	return m;
+}
+
+
 /*
 	The Void
 */
@@ -890,8 +948,8 @@ monster * getMonsterByHandle(std::string handle)
 {
 
 	//Stardrift Wreckage
-	if (handle == "drowned_dead")
-		return monster_DrownedDead();
+	if (handle == "drowned_crew")
+		return monster_DrownedCrew();
 
 	//Coruscating Beach
 	else if (handle == "thin_wretch")
@@ -968,6 +1026,14 @@ monster * getMonsterByHandle(std::string handle)
 		return monster_WinterShade();
 	else if (handle == "hollowfaced_knight")
 		return monster_HollowfacedKnight();
+
+	//Murdermire
+	else if (handle == "wisp")
+		return monster_Wisp();
+	else if (handle == "drowned_dead")
+		return monster_DrownedDead();
+	else if (handle == "swamp_spider")
+		return monster_SwampSpider();
 
 	//The Void
 	else if (handle == "void_touched")

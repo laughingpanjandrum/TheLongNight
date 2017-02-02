@@ -21,6 +21,7 @@ public:
 	//Setters
 	void setDefence(int def) { this->defence = def; }
 	void setBleedResist(int r) { bleedResist = r; }
+	void setPoisonResist(int r) { poisonResist = r; }
 	void setDamageResist(damageType dtype, int def) { damageResist.at(dtype) = def; }
 
 	//Getters
@@ -32,6 +33,7 @@ public:
 	int getDefence() { return defence; }
 	int getDamageResist(damageType dtype) { return damageResist.at(dtype); }
 	int getBleedResist() { return bleedResist; }
+	int getPoisonResist() { return poisonResist; }
 
 	//Stacking
 	virtual const bool isStackable() { return false; }
@@ -53,6 +55,7 @@ protected:
 	//Any item can have these attributes
 	int defence = 0;
 	int bleedResist = 0;
+	int poisonResist = 0;
 	std::vector<int> damageResist;
 
 };

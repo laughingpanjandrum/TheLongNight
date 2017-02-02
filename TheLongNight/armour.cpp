@@ -172,3 +172,25 @@ armour * armour_CursedKnightsArmour()
 	a->setMoveSpeed(SPEED_SLOW);
 	return a;
 }
+
+armour * headgear_GreyThiefsHood()
+{
+	armour* a = new armour("Grey Thief's Hood", HOOD_TILE, TCODColor::lightGrey, ITEM_HELMET,
+		"The thieves that haunt the Deadmarsh prefer to conceal their faces. Who knows \
+what awful and well-deserved disfigurements they received at the hands of Hightower's sadistic jailors?");
+	a->setDefence(0);
+	a->setBleedResist(10);
+	a->setPoisonResist(10);
+	return a;
+}
+
+armour * armour_GreyThiefsRags()
+{
+	armour* a = new armour("Grey Thief's Rags", ROBE_TILE, TCODColor::lightGrey, ITEM_BODY_ARMOUR,
+		"Rags worn by a thief. These sallow-eyed villians escaped from the dungeons of Hightower, where they had recieved their \
+well-deserved punishment.");
+	a->setDefence(5);
+	a->setBleedResist(20);
+	a->setPoisonResist(20);
+	return a;
+}

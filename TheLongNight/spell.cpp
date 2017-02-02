@@ -612,6 +612,30 @@ spell * ability_WinterBlast()
 	return sp;
 }
 
+spell * ability_WreatheInFlame()
+{
+	spell* sp = new spell("Wreathe In Flame", SPELL_TILE, TCODColor::flame);
+	sp->setAttackType(ATTACK_AOE, 3);
+	sp->addEffect(APPLY_FIRE_DAMAGE, 25);
+	return sp;
+}
+
+spell * ability_DragBelow()
+{
+	spell* sp = new spell("Drag Below", SPELL_TILE, TCODColor::sea);
+	sp->setAttackType(ATTACK_RANGE, 1);
+	sp->addEffect(APPLY_ENTANGLING, 4);
+	return sp;
+}
+
+spell * ability_SpitWeb()
+{
+	spell* sp = new spell("Spit Web", SPELL_TILE, TCODColor::white);
+	sp->setAttackType(ATTACK_RANGE, 8);
+	sp->addEffect(APPLY_ENTANGLING, 5);
+	return sp;
+}
+
 spell * ability_TentacleSwarm()
 {
 	spell* sp = new spell("Tentacle Swarm", SPELL_TILE, TCODColor::green,
