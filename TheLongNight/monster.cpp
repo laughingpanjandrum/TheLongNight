@@ -637,7 +637,7 @@ monster * monster_CursedArcher()
 	m->setMeleeStats(15, SPEED_NORMAL);
 	m->setMoveStats(SPEED_SLOW);
 	m->keepsDistance = true;
-	m->addSpellKnown(new spell(8, 10, APPLY_PROFANE_DAMAGE, 15));
+	m->addSpellKnown(new spell("Profane Arrow", TCODColor::lightPurple, 8, 10, APPLY_PROFANE_DAMAGE, 15));
 	m->setSpellCastChance(50);
 	m->setFragmentsDropped(150);
 	return m;
@@ -720,7 +720,7 @@ arouse its rage; its eyes glow red for an instant.");
 	m->addWeakness(DAMAGE_FIRE);
 	m->setMoveStats(SPEED_NORMAL);
 	m->equipItem(new weapon(25, SPEED_SLOW, DAMAGE_COLD, 25));
-	m->addSpellKnown(new spell(1, 25, KNOCKBACK_TARGET, 3));
+	m->addSpellKnown(new spell("Punch", TCODColor::lightCyan, 1, 25, KNOCKBACK_TARGET, 3));
 	m->setSpellCastChance(20);
 	m->setFragmentsDropped(100);
 	return m;

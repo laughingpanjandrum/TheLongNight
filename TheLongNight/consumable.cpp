@@ -70,7 +70,7 @@ consumable * ranged_ThrowingKnives()
 {
 	consumable* c = new consumable("Throwing Knives", DAGGER_TILE, TCODColor::lightGrey,
 		"Short knives to chuck at your enemies.");
-	c->setRangedAttack(new spell(5, 25));
+	c->setRangedAttack(new spell("Throwing Knife", c->getColor(), 5, 25));
 	c->add(4); //Comes in a stack
 	return c;
 }
@@ -79,7 +79,7 @@ consumable * ranged_HeavyJavelin()
 {
 	consumable* c = new consumable("Heavy Javelin", SPEAR_TILE, TCODColor::sepia,
 		"Deadly javelin for throwing at your nemesis.");
-	c->setRangedAttack(new spell(8, 75));
+	c->setRangedAttack(new spell(c->getName(), c->getColor(), 8, 75));
 	c->add(1);
 	return c;
 }
@@ -88,7 +88,7 @@ consumable * ranged_LaceratingKnives()
 {
 	consumable* c = new consumable("Lacerating Knives", DAGGER_TILE, TCODColor::lightCrimson,
 		"Short knives with lacerating spines, designed to carve the flesh of your enemies.");
-	c->setRangedAttack(new spell(5, 10, APPLY_BLEED_DAMAGE, 15));
+	c->setRangedAttack(new spell("Lacerating Knife", c->getColor(), 5, 10, APPLY_BLEED_DAMAGE, 15));
 	c->add(4);
 	return c;
 }
@@ -97,7 +97,7 @@ consumable * ranged_CorrodingJar()
 {
 	consumable* c = new consumable("Corroding Jar", VIAL_TILE, TCODColor::lime,
 		"A jar filled with acid. Throw at armoured enemies to penetrate their defences.");
-	c->setRangedAttack(new spell(5, 5, APPLY_ACID_DAMAGE, 40));
+	c->setRangedAttack(new spell(c->getName(), c->getColor(), 5, 5, APPLY_ACID_DAMAGE, 40));
 	c->add(3);
 	return c;
 }
@@ -106,7 +106,7 @@ consumable * ranged_VoidEssenceJar()
 {
 	consumable* c = new consumable("Void-Essence Jar", VIAL_TILE, TCODColor::purple,
 		"A jar filled with cursed oil, designed to shatter on contact.");
-	c->setRangedAttack(new spell(5, 5, APPLY_PROFANE_DAMAGE, 45));
+	c->setRangedAttack(new spell(c->getName(), c->getColor(), 5, 5, APPLY_PROFANE_DAMAGE, 45));
 	c->add(2);
 	return c;
 }
@@ -115,7 +115,7 @@ consumable * ranged_PyromancersFlask()
 {
 	consumable* c = new consumable("Pyromancer's Flask", VIAL_TILE, TCODColor::flame,
 		"A jar of volatile oil, ready to burst into flame on contact.");
-	c->setRangedAttack(new spell(5, 5, APPLY_FIRE_DAMAGE, 40));
+	c->setRangedAttack(new spell(c->getName(), c->getColor(), 5, 5, APPLY_FIRE_DAMAGE, 40));
 	c->add(3);
 	return c;
 }
@@ -124,7 +124,7 @@ consumable * ranged_WitchsJar()
 {
 	consumable* c = new consumable("Witch's Jar", VIAL_TILE, TCODColor::magenta,
 		"Jars of magical oil, often carried by wizards for use as a last resort.");
-	c->setRangedAttack(new spell(5, 5, APPLY_MAGIC_DAMAGE, 40));
+	c->setRangedAttack(new spell(c->getName(), c->getColor(), 5, 5, APPLY_MAGIC_DAMAGE, 40));
 	c->add(3);
 	return c;
 }
@@ -133,7 +133,7 @@ consumable * ranged_LightingJavelin()
 {
 	consumable* c = new consumable("Lightning Javelin", SPEAR_TILE, TCODColor::yellow,
 		"Javelin tipped with electric oil.");
-	c->setRangedAttack(new spell(5, 25, APPLY_ELECTRIC_DAMAGE, 25));
+	c->setRangedAttack(new spell(c->getName(), c->getColor(), 5, 25, APPLY_ELECTRIC_DAMAGE, 25));
 	c->add(3);
 	return c;
 }
@@ -142,7 +142,7 @@ consumable * ranged_FrostKnives()
 {
 	consumable* c = new consumable("Frost Knives", DAGGER_TILE, TCODColor::cyan,
 		"Knives tipped with frozen oil to chill the bones.");
-	c->setRangedAttack(new spell(5, 5, APPLY_COLD_DAMAGE, 20));
+	c->setRangedAttack(new spell(c->getName(), c->getColor(), 5, 5, APPLY_COLD_DAMAGE, 20));
 	c->add(4);
 	return c;
 }

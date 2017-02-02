@@ -953,46 +953,144 @@ void game::drawPlayerInfo(int atx, int aty)
 	win.writec(atx, aty, VIGOUR_GLYPH, TCODColor::green);
 	aty++;
 	
+//Defence
+win.write(atx, ++aty, "DEFENCE", mainCol);
+win.write(atx + offset, aty, std::to_string(player->getDefence()), TCODColor::lightBlue);
+//Damage resistances
+for (int r = 0; r != ALL_DAMAGE_TYPES; r++) {
+	damageType dr = static_cast<damageType>(r);
+	int res = player->getDamageResist(dr);
+	win.write(atx + 1, ++aty, getDamageTypeName(dr), mainCol);
+	win.write(atx + offset, aty, std::to_string(res), getDamageTypeColor(dr));
+}
+aty++;
+
+//Bleed resist
+win.write(atx, ++aty, "BLEED Resist", mainCol);
+win.write(atx + offset, aty, std::to_string(player->getSpecialEffectBuildup(EFFECT_BLEED)->getMaxValue()), TCODColor::crimson);
+aty++;
+
+//Magic stuff
+win.write(atx, ++aty, "SPELL POWER", mainCol);
+win.write(atx + offset, aty, std::to_string(player->getSpellPower()), TCODColor::magenta);
+win.write(atx, ++aty, "DIVINE POWER", mainCol);
+win.write(atx + offset, aty, std::to_string(player->getDivinePower()), TCODColor::darkYellow);
+aty++;
+
+//Attacks/movement
+win.write(atx, ++aty, "Move Speed", mainCol);
+win.write(atx + offset, aty, getAttackSpeedName(player->getMoveDelay()), TCODColor::white);
+win.write(atx, ++aty, "Attack Speed", mainCol);
+win.write(atx + offset, aty, getAttackSpeedName(player->getAttackDelay()), TCODColor::white);
+win.write(atx, ++aty, "Melee DMG", mainCol);
+win.write(atx + offset, aty, std::to_string(player->getMeleeDamage()), TCODColor::darkRed);
+
+//List buffs
+for (auto b : player->getAllBuffs()) {
+	win.write(atx, ++aty, b->name, b->color);
+}
+
+//Done! Wait for input
+win.refresh();
+while (win.getkey().vk != KEY_BACK_OUT) {}
+}
+
+
+/*
+Display detailed stats on a monster.
+*/
+void game::drawMonsterInfo(monster * m, int atx, int aty)
+{
+
+	//Box it in!
+	TCODColor maincol = TCODColor::white;
+	int offset = 12;
+	int w = 40;
+	int h = 40;
+	win.clearRegion(atx, aty, w, h);
+	win.drawBox(atx, aty, w, h, TCODColor::sepia);
+
+	//Monster name + description
+	atx += 1;
+	win.write(atx, ++aty, m->getName(), m->getColor());
+	aty = win.writeWrapped(atx, ++aty, 35, m->description, TCODColor::lighterGrey);
+	aty += 2;
+
+	//Movement
+	win.write(atx, ++aty, "Move Rate", maincol);
+	win.write(atx + offset, aty, getAttackSpeedName(m->getMoveDelay()), TCODColor::orange);
+	aty++;
+
+	//Melee stats
+	win.write(atx, ++aty, "Melee Rate", maincol);
+	win.write(atx + offset, aty, getAttackSpeedName(m->getAttackDelay()), TCODColor::orange);
+	win.write(atx, ++aty, "Melee DMG", maincol);
+	win.write(atx + offset, aty, std::to_string(m->getMeleeDamage()), TCODColor::red);
+
+	//Special damage types
+	for (int dt = 0; dt < ALL_DAMAGE_TYPES; dt++) {
+		damageType dtype = static_cast<damageType>(dt);
+		int sdmg = m->getDamageOfType(dtype);
+		if (sdmg > 0) {
+			win.write(atx, ++aty, " +" + getDamageTypeName(dtype), maincol);
+			win.write(atx + offset, aty, std::to_string(sdmg), getDamageTypeColor(dtype));
+		}
+	}
+
+	//Status effects
+	weapon* wp = m->getWeapon();
+	if (wp != nullptr) {
+		for (int idx = 0; idx < wp->getStatusEffectCount(); idx++) {
+			//Values
+			statusEffects sType = wp->getStatusEffectType(idx);
+			int sdmg = wp->getStatusEffectDamage(idx);
+			//Display
+			if (sdmg > 0) {
+				win.write(atx, ++aty, " +" + getStatusEffectName(sType), maincol);
+				win.write(atx + offset, aty, std::to_string(sdmg), getStatusEffectColor(sType));
+			}
+		}
+	}
+
+	aty++;
+
 	//Defence
-	win.write(atx, ++aty, "DEFENCE", mainCol);
-	win.write(atx + offset, aty, std::to_string(player->getDefence()), TCODColor::lightBlue);
-	//Damage resistances
-	for (int r = 0; r != ALL_DAMAGE_TYPES; r++) {
-		damageType dr = static_cast<damageType>(r);
-		int res = player->getDamageResist(dr);
-		win.write(atx + 1, ++aty, getDamageTypeName(dr), mainCol);
-		win.write(atx + offset, aty, std::to_string(res), getDamageTypeColor(dr));
+	int df = m->getDefence();
+	win.write(atx, ++aty, "Defence", maincol);
+	win.write(atx + offset, aty, std::to_string(df), TCODColor::sepia);
+
+	//Other resistances, if any
+	for (int dt = 0; dt < ALL_DAMAGE_TYPES; dt++) {
+		damageType dtype = static_cast<damageType>(dt);
+		int res = m->getDamageResist(dtype);
+		if (res > 0) {
+			win.write(atx + 1, ++aty, "RES:" + getDamageTypeName(dtype), maincol);
+			win.write(atx + offset, aty, std::to_string(res), getDamageTypeColor(dtype));
+		}
 	}
-	aty++;
 
-	//Bleed resist
-	win.write(atx, ++aty, "BLEED Resist", mainCol);
-	win.write(atx + offset, aty, std::to_string(player->getSpecialEffectBuildup(EFFECT_BLEED)->getMaxValue()), TCODColor::crimson);
-	aty++;
-
-	//Magic stuff
-	win.write(atx, ++aty, "SPELL POWER", mainCol);
-	win.write(atx + offset, aty, std::to_string(player->getSpellPower()), TCODColor::magenta);
-	win.write(atx, ++aty, "DIVINE POWER", mainCol);
-	win.write(atx + offset, aty, std::to_string(player->getDivinePower()), TCODColor::darkYellow);
-	aty++;
-
-	//Attacks/movement
-	win.write(atx, ++aty, "Move Speed", mainCol);
-	win.write(atx + offset, aty, getAttackSpeedName(player->getMoveDelay()), TCODColor::white);
-	win.write(atx, ++aty, "Attack Speed", mainCol);
-	win.write(atx + offset, aty, getAttackSpeedName(player->getAttackDelay()), TCODColor::white);
-	win.write(atx, ++aty, "Melee DMG", mainCol);
-	win.write(atx + offset, aty, std::to_string(player->getMeleeDamage()), TCODColor::darkRed);
-
-	//List buffs
-	for (auto b : player->getAllBuffs()) {
-		win.write(atx, ++aty, b->name, b->color);
+	//Weaknesses
+	for (int dt = 0; dt < ALL_DAMAGE_TYPES; dt++) {
+		damageType dtype = static_cast<damageType>(dt);
+		if (m->isWeakTo(dtype)) {
+			win.write(atx, ++aty, "Weak to " + getDamageTypeName(dtype), getDamageTypeColor(dtype));
+		}
 	}
-	
-	//Done! Wait for input
+
+	aty++;
+
+	//Special abilities
+	if (m->getSpellsKnown().size() > 0) {
+		win.write(atx, ++aty, "Special abilities:", maincol);
+		for (auto sp : m->getSpellsKnown()) {
+			win.write(atx + 1, ++aty, sp->getName(), sp->getColor());
+		}
+	}
+
+	//Wait for player to finish!
 	win.refresh();
-	while (win.getkey().vk != KEY_BACK_OUT) {}
+	while (win.getkey().vk != KEY_ACCEPT && win.getkey().vk != KEY_BACK_OUT) {}
+
 }
 
 
@@ -1487,6 +1585,16 @@ void game::processMouseClick()
 		//Start autowalking to here
 		startAutoWalk();
 	}
+	else if (mouse.rbutton_pressed) {
+		//View monster info
+		coord clk = screenToMapCoords(coord(mouse.cx, mouse.cy));
+		if (currentMap->inBounds(clk.first, clk.second)) {
+			person* m = currentMap->getPerson(clk.first, clk.second);
+			if (m != nullptr && !m->isPlayer) {
+				drawMonsterInfo(static_cast<monster*>(m), MAP_DRAW_X, MAP_DRAW_Y);
+			}
+		}
+	}
 }
 
 
@@ -1546,28 +1654,34 @@ void game::useConsumable()
 	if (toUse != nullptr) {
 		//Make sure we have enough
 		if (toUse->getAmountLeft() > 0) {
+			
 			//Use it!
 			if (toUse->consumeOnUse)
 				toUse->lose();
+			
 			//And perform the proper effect
 			int potency = toUse->getPotency();
+
 			//Is this a ranged-attack item?
 			if (toUse->isRangedAttackItem()) {
 				//We're basically casting a SPELL here
 				doRangedSpell(toUse->getRangedAttack());
 			}
+			
 			else if (toUse->getWeaponBuff() != nullptr) {
 				//Buffs a weapon
 				weapon* wp = player->getWeapon();
 				if (wp != nullptr)
 					wp->setBuff(*toUse->getWeaponBuff());
 			}
+			
 			else {
 				//All effects are applied to PERSON
 				for (auto eff : toUse->getEffects()) {
 					applyEffectToPerson(player, eff, potency);
 				}
 			}
+			
 			//TIME PASSAGE DUDE
 			playerTurnDelay += SPEED_NORMAL;
 		}

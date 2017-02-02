@@ -8,7 +8,7 @@ spell::spell(std::string name, int tileCode, TCODColor color, std::string descri
 }
 
 //Quick-and-dirty constructor for creating ranged-weapon-attack spells
-spell::spell(int attackRange, int physDamage, effect otherEffect, int otherEffectPotency) :
+spell::spell(std::string name, TCODColor color, int attackRange, int physDamage, effect otherEffect, int otherEffectPotency) :
 	attackRange(attackRange), aType(ATTACK_RANGE)
 {
 	if (physDamage > 0)
@@ -16,6 +16,10 @@ spell::spell(int attackRange, int physDamage, effect otherEffect, int otherEffec
 	if (otherEffect != NULL_EFFECT)
 		addEffect(otherEffect, otherEffectPotency);
 	this->vigourCost = 0;
+	//We use the "projectile" type animation
+	useAlternateAnimation = true;
+	this->name = name;
+	this->color = color;
 }
 
 spell::~spell()

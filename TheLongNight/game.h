@@ -131,6 +131,7 @@ private:
 	void drawInterface(int atx, int aty);
 	void drawInventory(int atx, int aty);
 	void drawPlayerInfo(int atx, int aty);
+	void drawMonsterInfo(monster* m, int atx, int aty);
 	void drawMouseover(int atx, int aty);
 	void drawTargetInfo(person* target, int atx, int aty);
 
