@@ -33,6 +33,8 @@ private:
 };
 
 //Defined items
+charm* charm_ArcanaDrenchedCharm();
+charm* charm_ClericsHolyPendant();
 charm* charm_BloodstainedCharm();
 charm* charm_KhallesHeadband();
 charm* charm_IdolOfPash();

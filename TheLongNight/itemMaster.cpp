@@ -275,6 +275,9 @@ std::string getEffectName(effect e)
 	case(REMOVE_POISON): return "cures poisoning";
 	case(ADD_HEALTH_TRICKLE): return "health restore, 1/turn";
 
+	case(INCREASE_SPELL_POWER): return "arcane power";
+	case(INCREASE_PRAYER_POWER): return "divine power";
+
 	case(SCALE_NEXT_ATTACK): return "% damage next attack";
 	case(SCALE_NEXT_SPELL): return "% spell power for next spell";
 	case(SCALE_NEXT_PRAYER): return "% divine power for next prayer";

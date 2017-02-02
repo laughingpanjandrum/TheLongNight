@@ -19,6 +19,22 @@ void charm::addEffect(effect e, int pot)
 */
 
 
+charm * charm_ArcanaDrenchedCharm()
+{
+	charm* c = new charm("Arcana-drenched Charm", CHARM_TILE, TCODColor::magenta,
+		"No arcanist would be caught dead without this charm, which draws upon ancient and forgotten powers.");
+	c->addEffect(INCREASE_SPELL_POWER, 25);
+	return c;
+}
+
+charm * charm_ClericsHolyPendant()
+{
+	charm* c = new charm("Cleric's Holy Pendant", CHARM_TILE, TCODColor::lightYellow,
+		"All clerics of the Rose wear this pendant, which draws upon the incomprehensible power of the old gods.");
+	c->addEffect(INCREASE_PRAYER_POWER, 25);
+	return c;
+}
+
 charm * charm_BloodstainedCharm()
 {
 	charm* c = new charm("Blood-stained Charm", CHARM_TILE, TCODColor::crimson,

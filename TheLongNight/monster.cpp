@@ -774,6 +774,7 @@ monster * npc_UtricTheRat()
 	m->isHostile = false;
 	m->isShopkeeper = true;
 	//Starting stock
+	m->addItemToStock(charm_ArcanaDrenchedCharm(), 100);
 	m->addItemToStock(spell_ArcaneBlade(), 50);
 	m->addItemToStock(spell_GottricsArcaneProtection(), 40);
 	m->addItemToStock(spell_Frostbolt(), 25);
@@ -802,6 +803,7 @@ monster * npc_MuiraClericOfTheRose()
 	m->isHostile = false;
 	m->isShopkeeper = true;
 	//Starting stock
+	m->addItemToStock(charm_ClericsHolyPendant(), 100);
 	m->addItemToStock(prayer_RayOfLight(), 25);
 	m->addItemToStock(prayer_BlessedRadiance(), 50);
 	m->addItemToStock(prayer_RemovePoison(), 25);

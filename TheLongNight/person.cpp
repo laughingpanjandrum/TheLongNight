@@ -395,6 +395,10 @@ void person::applyEffect(effect eff, int potency)
 		spellColdInfusion = potency;
 	else if (eff == COLD_DAMAGE_ADDS_INFUSION)
 		coldDamageAppliesInfusion += potency;
+	else if (eff == INCREASE_SPELL_POWER)
+		baseSpellPower += potency;
+	else if (eff == INCREASE_PRAYER_POWER)
+		baseDivinePower += potency;
 
 	//Damage effects
 
