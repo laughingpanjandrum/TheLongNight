@@ -59,6 +59,8 @@ public:
 	statline* stats;
 	int getNextLevelCost() { return stats->level * 100; }
 	int getScalingDamage(weapon* wp);
+	void increaseMaxHealth(int amount) { health.increaseMaxValue(amount, true); }
+	void increaseMaxVigour(int amount) { vigour.increaseMaxValue(amount, true); }
 
 	//Special attributes
 	bool isProfane() { return profane; }

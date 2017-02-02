@@ -2664,10 +2664,14 @@ void game::doLevelUp()
 	if (fragments >= player->getNextLevelCost()) {
 		fragments -= player->getNextLevelCost();
 		//Buff selected stat
-		if (name == "HEALTH")
+		if (name == "HEALTH") {
 			player->stats->health++;
-		else if (name == "VIGOUR")
+			player->increaseMaxHealth(10);
+		}
+		else if (name == "VIGOUR") {
 			player->stats->vigour++;
+			player->increaseMaxVigour(2);
+		}
 		else if (name == "STRENGTH")
 			player->stats->strength++;
 		else if (name == "DEXTERITY")
@@ -2678,11 +2682,6 @@ void game::doLevelUp()
 			player->stats->devotion++;
 		//Increase overall level
 		player->stats->level++;
-		//Adjust stats that increase passively
-		int maxHealth = 90 + 10 * player->stats->health;
-		int maxVigour = 8 + 2 * player->stats->vigour;
-		player->setMaxHealth(maxHealth);
-		player->setMaxVigour(maxVigour);
 	}
 }
 
@@ -3190,12 +3189,16 @@ void getAllItems(person* player)
 	player->addItem(headgear_CursedKnightsHelm());
 	player->addItem(armour_CursedKnightsArmour());
 
+	player->addItem(charm_ArcanaDrenchedCharm());
 	player->addItem(charm_BloodDrinkersBand());
 	player->addItem(charm_BloodstainedCharm());
+	player->addItem(charm_ClericsHolyPendant());
 	player->addItem(charm_EvisceratingRing());
 	player->addItem(charm_FrozenFlowerCharm());
 	player->addItem(charm_IdolOfPash());
 	player->addItem(charm_KhallesHeadband());
+	player->addItem(charm_WretchedFleshBand());
+	player->addItem(charm_WretchedFleshmask());
 
 	player->addItem(spell_AcidBlade());
 	player->addItem(spell_AcidBurst());
@@ -3213,7 +3216,8 @@ void getAllItems(person* player)
 	player->addItem(spell_VoidJaunt());
 
 	player->addItem(prayer_BlessedRadiance());
-	player->addItem(prayer_ProfaneRay());
+	player->addItem(prayer_DrawOutTheBlood());
+	player->addItem(prayer_ProfaneRadiance());
 	player->addItem(prayer_RayOfLight());
 	player->addItem(prayer_RemovePoison());
 	player->addItem(prayer_Restoration());
@@ -3235,6 +3239,7 @@ void getAllItems(person* player)
 	player->addItem(ranged_VoidEssenceJar());
 
 	player->addItem(oil_CorrosiveOil());
+	player->addItem(oil_FrozenOil());
 	player->addItem(oil_PyromancersOil());
 
 	player->addItem(runestone_CorensRunestone());
@@ -3332,17 +3337,6 @@ void game::debugMenu()
 		player->addItem(consumable_StarwaterDraught());
 		fragments += 600;
 		loadMapFromHandle("maps/pilgrims_road_5.txt", CONNECT_WARP, player->getx(), player->gety());
-	}
-	else if (txt == "forlorn") {
-		fragments += 600;
-		player->addItem(weapon_NotchedGreatsword());
-		player->addItem(armour_CrowKnightsArmour());
-		player->addItem(headgear_CrowKnightsHood());
-		player->addItem(consumable_StarwaterDraught());
-		player->addItem(consumable_StarwaterDraught());
-		player->addItem(consumable_StarwaterDraught());
-		player->addItem(consumable_StarwaterDraught());
-		loadMapFromHandle("maps/silent_ruins.txt", CONNECT_WARP, player->getx(), player->gety());
 	}
 	else if (txt == "lowlands") {
 		player->addItem(weapon_SplinteredSword());
