@@ -72,6 +72,7 @@ public:
 	//Scaling
 	void addScalingType(statScaling st) { scaling.push_back(st); }
 	int getScalingDamage(statScaling st);
+	bool isProfane = false; //Determines interactions with other profane stuff
 
 private:
 

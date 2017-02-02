@@ -783,6 +783,8 @@ monster * npc_UtricTheRat()
 	m->addStockUnlock(spell_AcidBlade(), 100, "waterlogged_writings");
 	//Unlock: Minas's Profaned Writings
 	m->addStockUnlock(spell_ProfanedBlade(), 100, "minas_profaned_writings");
+	m->addStockUnlock(spell_VoidJaunt(), 100, "minas_profaned_writings");
+	m->addStockUnlock(spell_DevouringVoidCloud(), 150, "minas_profaned_writings");
 	//Unlock: Frostbitten Writings
 	m->addStockUnlock(spell_FrostBlast(), 100, "frostbitten_writings");
 	m->addStockUnlock(spell_FrozenBlade(), 100, "frostbitten_writings");

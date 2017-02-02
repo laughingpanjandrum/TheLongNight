@@ -43,6 +43,7 @@ public:
 	bool addPermanentBuff = false;
 	bool isAcidSpell = false; //Determines whether acid infusions are super-effective
 	bool isColdSpell = false;
+	bool isProfane = false; //Buffed by profane items, bad for blessed people
 
 private:
 

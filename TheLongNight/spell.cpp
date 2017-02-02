@@ -341,6 +341,32 @@ spell * spell_ProfanedBlade()
 	sp->setBuffApplied(DAMAGE_PROFANE, 15);
 	sp->setVigourCost(2);
 	sp->usesSpellPower = true;
+	sp->isProfane = true;
+	return sp;
+}
+
+spell * spell_VoidJaunt()
+{
+	spell* sp = new spell("Void Jaunt", SPELL_TILE, TCODColor::purple,
+		"Total immersion in the Void is known to cause madness, disintegration, or a particularly unpleasant combination of the \
+two. Luckily, this spell is only temporary.");
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(BECOME_INVISIBLE, 3);
+	sp->setVigourCost(2);
+	sp->usesSpellPower = true;
+	sp->isProfane = true;
+	return sp;
+}
+
+spell * spell_DevouringVoidCloud()
+{
+	spell* sp = new spell("Devouring Void Cloud", SPELL_TILE, TCODColor::darkViolet,
+		"Opening pathways to the Void is a dangerous act that only the mad would entertain.");
+	sp->setAttackType(ATTACK_AOE, 10);
+	sp->addEffect(APPLY_PROFANE_DAMAGE, 50);
+	sp->setVigourCost(5);
+	sp->usesSpellPower = true;
+	sp->isProfane = true;
 	return sp;
 }
 
@@ -469,6 +495,7 @@ spell * prayer_ProfaneRadiance()
 	sp->addEffect(APPLY_PROFANE_DAMAGE, 25);
 	sp->addEffect(APPLY_BLINDING, 2);
 	sp->usesDivinePower = true;
+	sp->isProfane = true;
 	return sp;
 }
 
@@ -481,6 +508,7 @@ spell * prayer_ProfaneRay()
 	sp->setVigourCost(1);
 	sp->addEffect(APPLY_PROFANE_DAMAGE, 25);
 	sp->usesDivinePower = true;
+	sp->isProfane = true;
 	return sp;
 }
 

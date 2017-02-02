@@ -1148,6 +1148,11 @@ void game::drawWeaponInfo(weapon * it, int atx, int aty)
 	
 	//Stuff only relevant to weapons
 	if (it->getCategory() == ITEM_WEAPON) {
+
+		//Profane?
+		if (it->isProfane) {
+			win.write(atx, aty++, "*PROFANE*", TCODColor::purple);
+		}
 		
 		//Damage
 		win.write(atx, aty, "DAMAGE:", TCODColor::darkRed);
@@ -1288,11 +1293,15 @@ Spell description.
 */
 void game::drawSpellInfo(spell * it, int atx, int aty)
 {
+	
 	//Type: arcane or divine
 	if (it->usesSpellPower)
 		win.write(atx, aty, "ARCANE", TCODColor::magenta);
 	else if (it->usesDivinePower)
 		win.write(atx, aty, "DIVINE", TCODColor::darkYellow);
+	if (it->isProfane)
+		win.write(atx + 7, aty, "(Profane)", TCODColor::purple);
+	
 	//Spell type
 	win.write(atx, ++aty, "Type:", TCODColor::lightBlue);
 	attackType at = it->getAttackType();
@@ -2518,6 +2527,13 @@ void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 			potency = (float)potency * ((float)divPower / 100);
 		}
 
+		//Additional potency if profane spell is cast from a profane object
+		if (sp->isProfane) {
+			weapon* offhand = caster->getOffhand();
+			if (offhand->isProfane)
+				potency += potency / 2;
+		}
+
 		//Permanent buff or temporary?
 		if (sp->addPermanentBuff) {
 			
@@ -3148,6 +3164,7 @@ void getAllItems(person* player)
 	player->addItem(shield_WoodenWyrdShield());
 
 	player->addItem(chime_ClericsCrackedChime());
+	player->addItem(chime_OrsylsProfaneChime());
 	player->addItem(chime_WyrdBellbranch());
 
 	player->addItem(wand_DriftwoodWand());
@@ -3182,10 +3199,15 @@ void getAllItems(person* player)
 	player->addItem(spell_AcidSpit());
 	player->addItem(spell_ArcaneBlade());
 	player->addItem(spell_ArcaneRadiance());
+	player->addItem(spell_Chillbite());
+	player->addItem(spell_DevouringVoidCloud());
+	player->addItem(spell_FrostBlast());
 	player->addItem(spell_Frostbolt());
+	player->addItem(spell_FrozenBlade());
 	player->addItem(spell_GottricsArcaneProtection());
 	player->addItem(spell_MagicMissile());
 	player->addItem(spell_ProfanedBlade());
+	player->addItem(spell_VoidJaunt());
 
 	player->addItem(prayer_BlessedRadiance());
 	player->addItem(prayer_ProfaneRay());

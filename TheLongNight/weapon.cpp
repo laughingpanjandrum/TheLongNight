@@ -346,6 +346,7 @@ weapon * weapon_ArmOfTheDuke()
 	wp->setSpellstoreSize(2);
 	wp->setDivinePower(80);
 	wp->setSpecialAttack(ability_TentacleSwarm());
+	wp->isProfane = true;
 	return wp;
 }
 
@@ -503,5 +504,6 @@ the old gods, but they did not answer.");
 	wp->setDivinePower(100);
 	wp->setSpecialAttack(prayer_ProfaneRadiance());
 	wp->makeOffhand();
+	wp->isProfane = true;
 	return wp;
 }
