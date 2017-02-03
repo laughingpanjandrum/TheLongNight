@@ -119,12 +119,13 @@ spell* prayer_BlessedRadiance();
 spell* prayer_RemovePoison();
 //Orsyl's Tome of Prayer
 spell* prayer_DrawOutTheBlood();
+spell* prayer_ProfaneRadiance();
 //Divine Moonspark Tome
 spell* prayer_DivineRetribution();
+spell* prayer_YutriasDivineSpark();
 //Sold by Ydella
 spell* prayer_SinkBeneath();
 //Misc
-spell* prayer_ProfaneRadiance();
 spell* prayer_ProfaneRay();
 
 //Monster abilities

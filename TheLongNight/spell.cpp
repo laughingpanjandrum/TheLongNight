@@ -561,6 +561,18 @@ spell * prayer_DivineRetribution()
 	return sp;
 }
 
+spell * prayer_YutriasDivineSpark()
+{
+	spell *sp = new spell("Yutria's Divine Spark", SPELL_TILE, TCODColor::lightestBlue,
+		"Evildoers did not dare tread upon the footprints of Saint Yutria, for those who did were swiftly struck with divine fire.");
+	sp->setAttackType(ATTACK_RANGE, 8);
+	sp->addEffect(APPLY_BLESSED_DAMAGE, 20);
+	sp->addEffect(APPLY_FIRE_DAMAGE, 20);
+	sp->setVigourCost(2);
+	sp->usesDivinePower = true;
+	return sp;
+}
+
 
 
 

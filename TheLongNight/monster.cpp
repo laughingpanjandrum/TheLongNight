@@ -751,6 +751,7 @@ monster * monster_Wisp()
 	m->keepsDistance = true;
 	m->addSpellKnown(ability_WreatheInFlame());
 	m->setSpellCastChance(20);
+	m->setFragmentsDropped(15);
 	return m;
 }
 
@@ -767,6 +768,7 @@ monster * monster_DrownedDead()
 	m->equipItem(new weapon(25, SPEED_SLOW, EFFECT_POISON, 10));
 	m->addSpellKnown(ability_DragBelow());
 	m->setSpellCastChance(25);
+	m->setFragmentsDropped(25);
 	return m;
 }
 
@@ -781,6 +783,44 @@ monster * monster_SwampSpider()
 	m->equipItem(new weapon(10, SPEED_NORMAL, EFFECT_POISON, 25));
 	m->addSpellKnown(ability_SpitWeb());
 	m->setSpellCastChance(25);
+	m->setFragmentsDropped(50);
+	return m;
+}
+
+monster * monster_AdherentOfGlug()
+{
+	monster* m = new monster("Adherent of Glug", TOAD_TILE, TCODColor::sea,
+		"Under the mud-soaked hood, a toad's bulging eyes leer at you. The \
+creature rings a filth-stained chime and chants in an unknown tongue.");
+	m->setHealth(100);
+	m->setPoisonResist(1000);
+	m->setBleedResist(60);
+	m->makeProfane();
+	m->setMoveStats(SPEED_NORMAL);
+	m->setMeleeStats(10, SPEED_SLOW);
+	m->addSpellKnown(new spell("Poison Spit", TCODColor::lime, 5, 0, APPLY_POISON_DAMAGE, 25));
+	m->setSpellCastChance(50);
+	m->setFragmentsDropped(40);
+	return m;
+}
+
+monster * monster_GhorthTheBloatedSpider()
+{
+	monster* m = new monster("Ghorth the Bloated Spider", SPIDER_TILE, TCODColor::purple,
+		"This monstrous creature has a body the size of a horse, on which rest a dozen egg-sized green eyes. \
+Venom drips from its fangs, and it drags itself along the ground with eight spindly arms.");
+	m->setHealth(600);
+	m->setMoveStats(SPEED_FAST);
+	m->equipItem(new weapon(25, SPEED_SLOW, EFFECT_POISON, 25));
+	m->setDefence(DAMAGE_PHYSICAL, 10);
+	m->setPoisonResist(1000);
+	m->addWeakness(DAMAGE_FIRE);
+	m->addSpawnableCreature("swamp_spider");
+	m->setSpawnChance(40);
+	m->immuneToEntangle = true;
+	m->keepsDistance = true;
+	m->isBoss = true;
+	m->setFragmentsDropped(500);
 	return m;
 }
 
@@ -872,6 +912,7 @@ monster * npc_MuiraClericOfTheRose()
 	m->addStockUnlock(prayer_DrawOutTheBlood(), 75, "orsyls_tome_of_prayer");
 	//With Divine Moonspark Tome
 	m->addStockUnlock(prayer_DivineRetribution(), 100, "divine_moonspark_tome");
+	m->addStockUnlock(prayer_YutriasDivineSpark(), 100, "divine_moonspark_tome");
 	//Dialogue
 	m->loadDialogue("dialogue/muira_chat.txt");
 	return m;
@@ -1036,6 +1077,10 @@ monster * getMonsterByHandle(std::string handle)
 		return monster_DrownedDead();
 	else if (handle == "swamp_spider")
 		return monster_SwampSpider();
+	else if (handle == "adherent_of_glug")
+		return monster_AdherentOfGlug();
+	else if (handle == "ghorth")
+		return monster_GhorthTheBloatedSpider();
 
 	//The Void
 	else if (handle == "void_touched")

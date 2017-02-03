@@ -38,6 +38,8 @@ map * mapLoader::loadMapFromFile(std::string filename)
 	//Tracks CONNECTIONS that should appear on the map
 	connectionVector connectionPoints;
 	stringVector connectionHandles;
+	//Lightning
+	float darknessAdjustment = 0.0;
 	
 	/*
 	Now we can actually load info from the file
@@ -93,6 +95,10 @@ map * mapLoader::loadMapFromFile(std::string filename)
 				startPt.first = x;
 				startPt.second = y;
 			}
+			else if (chunk == "darkness") {
+				//Set darkness level
+				darknessAdjustment = std::stof(xcoord);
+			}
 			else if (loadingItems) {
 				//New item!
 				item* it = getItemByHandle(chunk);
@@ -101,9 +107,6 @@ map * mapLoader::loadMapFromFile(std::string filename)
 			}
 			else {
 				//New monster!
-				//monster* m = getMonsterByHandle(chunk);
-				//m->setPosition(x, y);
-				//monsters.push_back(m);
 				monsterSpawnTags.push_back(chunk);
 				monsterSpawnCoords.push_back(coord(x, y));
 			}
@@ -197,9 +200,6 @@ map * mapLoader::loadMapFromFile(std::string filename)
 	m->setMapTag(filename);
 
 	//Add monster spawners to map
-	/*for (auto monst : monsters) {
-		m->addPerson(monst, monst->getx(), monst->gety());
-	}*/
 	for (int i = 0; i < monsterSpawnTags.size(); i++) {
 		m->addMonsterSpawner(monsterSpawnTags.at(i), monsterSpawnCoords.at(i));
 	}
@@ -212,6 +212,9 @@ map * mapLoader::loadMapFromFile(std::string filename)
 	//Add connections
 	for (int i = 0; i < connectionPoints.size(); i++)
 		m->addConnection(connectionPoints.at(i), connectionHandles.at(i));
+
+	//Adjust lighting
+	m->setDarknessAdjustment(darknessAdjustment);
 
 	//Return final map
 	return m;

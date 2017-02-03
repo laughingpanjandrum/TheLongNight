@@ -91,6 +91,10 @@ public:
 	bool isPointInFOV(int x, int y);
 	TCODPath* getPath();
 
+	//Lighting
+	void setDarknessAdjustment(float f) { darknessAdjustment = f; }
+	float getDarknessAdjustment() { return darknessAdjustment; }
+
 	//Memory map
 	void addToMemoryMap(int x, int y) { memoryMap.at(x).at(y) = true; }
 	bool inMemoryMap(int x, int y) { return memoryMap.at(x).at(y); }
@@ -120,6 +124,9 @@ private:
 
 	//TCOD map data - for FOV, pathfinding, etc.
 	TCODMap* datamap;
+
+	//Lighting
+	float darknessAdjustment;
 
 };
 

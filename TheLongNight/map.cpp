@@ -26,6 +26,8 @@ map::map(int xsize, int ysize)
 	//Also build a datamap for FOV/etc
 	datamap = new TCODMap(xsize, ysize);
 	datamap->clear(true, true);
+	//Default darkness
+	darknessAdjustment = 0;
 }
 
 

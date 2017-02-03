@@ -151,6 +151,8 @@ monster* monster_HollowfacedKnight();
 monster* monster_Wisp();
 monster* monster_DrownedDead();
 monster* monster_SwampSpider();
+monster* monster_AdherentOfGlug();
+monster* monster_GhorthTheBloatedSpider();
 
 //The Void
 monster* monster_VoidTouched();

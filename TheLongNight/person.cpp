@@ -291,8 +291,8 @@ void person::entangle(int duration)
 {
 	if (!immuneToEntangle) {
 		entangling += duration;
-		if (entangling > 5)
-			entangling = 5;
+		if (entangling > 1)
+			entangling = 1;
 	}
 }
 

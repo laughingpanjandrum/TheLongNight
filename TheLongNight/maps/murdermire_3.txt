@@ -1,4 +1,5 @@
 The Murdermire
+darkness:0.4,0
 start:20,0
 drowned_dead:23,5
 drowned_dead:22,6
@@ -12,6 +13,7 @@ drowned_dead:22,36
 drowned_dead:18,35
 -items
 serpents_tooth:37,15
+divine_moonspark_tome:20,38
 -enditems
 -codes
 ; floor_stone
@@ -33,6 +35,7 @@ x web
 -endcodes
 -connections
 north:murdermire_1
+west:murdermire_4
 -endconnections
 ##......%.......................########
 #...T.................~..%.........#####

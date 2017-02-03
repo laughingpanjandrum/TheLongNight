@@ -1,4 +1,5 @@
 The Murdermire
+darkness:0.4,0
 start:39,20
 drowned_dead:15,19
 drowned_dead:14,18

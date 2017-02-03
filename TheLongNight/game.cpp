@@ -702,15 +702,18 @@ drawData game::getDrawData(int x, int y)
 		
 		//Darken tiles that are further away
 		int distance = hypot(x - player->getx(), y - player->gety());
+		//Basic adjustment
 		float modifier = 1.0 - distance * 0.07;
-		if (modifier > 0.85)
-			modifier = 0.85;
+		//Additional darkness adjustment
+		modifier -= currentMap->getDarknessAdjustment();
+		//Cap values
+		if (modifier > 0.9)
+			modifier = 0.9;
 		else if (modifier < 0.1)
 			modifier = 0.1;
+		//Scale lighting appropriately
 		toDraw->color.scaleHSV(1.0, modifier);
 		toDraw->bgcolor.scaleHSV(1.0, modifier);
-		//toDraw.color = win.mixColors(toDraw.color, TCODColor::black, modifier);
-		//toDraw.bgcolor = win.mixColors(toDraw.bgcolor, TCODColor::black, modifier);
 	
 	}
 
@@ -3370,6 +3373,7 @@ void getAllItems(person* player)
 	player->addItem(prayer_RemovePoison());
 	player->addItem(prayer_Restoration());
 	player->addItem(prayer_WyrdChantOfStrength());
+	player->addItem(prayer_YutriasDivineSpark());
 
 	player->addItem(consumable_BloodDrinkersEyes());
 	player->addItem(consumable_IntoxicatingWine());

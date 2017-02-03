@@ -203,6 +203,14 @@ maptile * tile_Web()
 	return web;
 }
 
+maptile * tile_WebOnFloor()
+{
+	maptile* web = new maptile("Web", "web_floor", WEB_TILE, TCODColor::white, DARK_STONE_COLOR);
+	web->addTouchEffect(APPLY_ENTANGLING);
+	web->setPotency(1);
+	return web;
+}
+
 maptile * tile_Bloodstain()
 {
 	return new maptile("Bloodstain", "bloodstain", BASIC_FLOOR_TILE, TCODColor::darkCrimson, DARK_STONE_COLOR);

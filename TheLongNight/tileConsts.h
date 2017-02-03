@@ -45,6 +45,7 @@ const int GHOST_TILE = 86;
 
 const int WISP_TILE = 119;
 const int SPIDER_TILE = 77;
+const int TOAD_TILE = 84;
 
 const int GOREM_TILE = 327; //This is a golem-dude
 

@@ -1,4 +1,5 @@
 The Murdermire
+darkness:0.4,0
 start:39,20
 wisp:18,18
 wisp:25,26
