@@ -133,6 +133,7 @@ maptile* tile_Bush(); //"bush"
 maptile* tile_Rosebush(); //"rosebush"
 maptile* tile_Tree(); //"tree"
 maptile* tile_VoidTree(); //"void_tree"
+maptile* tile_DeadTree(); //"dead_tree"
 
 maptile* tile_Water(); //"water"
 maptile* tile_MossyWater(); //"water_mossy"
@@ -160,6 +161,7 @@ maptile* tile_GreenChapelGardenDoor(); //"green_chapel_door"
 maptile* tile_SordidChapelDoor(); //"sordid door"
 maptile* tile_VoidDrenchedDoor(); //"void_drenched_door"
 maptile* tile_DoorOfWinter(); //"door_of_winter"
+maptile* tile_OldValleyDoor(); //"old_valley_door"
 
 //Furniture
 maptile* tile_Chair1(); //"chair1"
@@ -174,7 +176,7 @@ const tileVector ALL_MAPTILES = {
 	tile_Floor(), tile_MossyFloor(), tile_Sand(), tile_Grass(), tile_Road(), tile_Void(), tile_Carpet(), tile_SnowFloor(),
 	tile_Wall(), tile_WoodenWall(), tile_SandyRock(), tile_MarbleWall(),
 	tile_Door(), tile_WoodenDoor(), tile_LockedDoor(), tile_DoorUnlocker(),
-	tile_Glass(), tile_Bush(), tile_Rosebush(), tile_Tree(), tile_VoidTree(),
+	tile_Glass(), tile_Bush(), tile_Rosebush(), tile_Tree(), tile_VoidTree(), tile_DeadTree(),
 	tile_Water(), tile_MossyWater(), tile_DeepWater(), tile_Acid(),
 	tile_Ooze(), tile_Web(), tile_WebOnFloor(),
 	tile_Bloodstain(), tile_Corpse(),
@@ -186,7 +188,7 @@ const tileVector ALL_MAPTILES = {
 	//Special locked doors
 	tile_WretchedDoor(), tile_CrowDoor(), tile_RuinedTownshipHallDoor(),
 	tile_WyrdDoor(), tile_GreenChapelGardenDoor(), tile_SordidChapelDoor(),
-	tile_VoidDrenchedDoor(), tile_DoorOfWinter()
+	tile_VoidDrenchedDoor(), tile_DoorOfWinter(), tile_OldValleyDoor()
 };
 
 #endif

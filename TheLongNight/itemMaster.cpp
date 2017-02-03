@@ -223,6 +223,8 @@ item * getItemByHandle(std::string handle)
 		return runestone_KhallesRunestone();
 	else if (handle == "ietras_runestone")
 		return runestone_IetrasRunestone();
+	else if (handle == "charred_runestone")
+		return runestone_CharredRunestone();
 	
 	//Uh oh, we didn't find anything!
 	return nullptr;

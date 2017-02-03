@@ -160,6 +160,11 @@ maptile * tile_VoidTree()
 	return new maptile("Withered Void Tree", "void_tree", TREE_TILE, TCODColor::purple, DARK_STONE_COLOR, false, false);
 }
 
+maptile * tile_DeadTree()
+{
+	return new maptile("Dead Tree", "dead_tree", TREE_TILE, DARK_WOOD_COLOR, DARK_SAND_COLOR);
+}
+
 maptile * tile_Water()
 {
 	maptile* m = new maptile("Water", "water", BASIC_WATER_TILE, LIGHT_WATER_COLOR, DARK_WATER_COLOR);
@@ -340,6 +345,16 @@ maptile * tile_DoorOfWinter()
 		TCODColor::lightGrey, TCODColor::white, false, false);
 	door->isDoor = true;
 	door->unlockCode = "watchful_eyestalk";
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	return door;
+}
+
+maptile * tile_OldValleyDoor()
+{
+	maptile* door = new maptile("Old Valley Door", "old_valley_door", BASIC_DOOR_TILE,
+		TCODColor::lightBlue, TCODColor::darkerBlue, false, false);
+	door->isDoor = true;
+	door->unlockCode = "old_valley_door";
 	door->addTouchEffect(CHECK_FOR_UNLOCK);
 	return door;
 }

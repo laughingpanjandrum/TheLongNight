@@ -74,11 +74,19 @@ void weapon::addStatusEffect(statusEffects eType, int damage)
 
 int weapon::getDamageOfType(damageType dtype)
 {
+	
 	//Base
 	int dmg = damageTypes.at(dtype);
+	
 	//Bonus from buff?
 	if (currentBuff.dtype == dtype)
 		dmg += currentBuff.bonusDamage;
+
+	//Bonus from runestone
+	if (getRunestoneDamage(dtype)) {
+		dmg += (float)getDamage() * 0.2;
+	}
+	
 	//Done
 	return dmg;
 }
@@ -133,6 +141,20 @@ int weapon::getScalingDamage(statScaling st)
 	}
 	//Done, return total
 	return dmg;
+}
+
+
+/*
+Returns how much bonus damage of the given type we do based on our equipped runestone.
+*/
+bool weapon::getRunestoneDamage(damageType dtype)
+{
+	auto runestone = getRune();
+	if (runestone != nullptr) {
+		if (runestone->addScalingType == SCALE_FIRE && dtype == DAMAGE_FIRE)
+			return true;
+	}
+	return false;
 }
 
 

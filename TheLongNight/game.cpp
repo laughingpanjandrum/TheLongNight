@@ -1531,14 +1531,22 @@ void game::drawMiscItemInfo(miscItem * it, int atx, int aty)
 		//Specific effects
 		weaponRune* rune = it->getRune();
 		if (rune != nullptr) {
-			std::string scaleType;
-			switch (rune->addScalingType) {
-			case(SCALE_STR): scaleType = "Strength"; break;
-			case(SCALE_DEX): scaleType = "Dexterity"; break;
-			case(SCALE_ARC): scaleType = "Arcane"; break;
-			case(SCALE_DEV) : scaleType = "Devotion"; break;
+			//Description
+			if (rune->addScalingType == SCALE_FIRE) {
+				//Add fire damage
+				win.write(atx, ++aty, "Weapon deals additional Fire damage.", rune->color);
 			}
-			win.write(atx, ++aty, "Improves scaling with " + scaleType + ".", rune->color);
+			else {
+				//Changes scaling
+				std::string scaleType;
+				switch (rune->addScalingType) {
+				case(SCALE_STR): scaleType = "Strength"; break;
+				case(SCALE_DEX): scaleType = "Dexterity"; break;
+				case(SCALE_ARC): scaleType = "Arcane"; break;
+				case(SCALE_DEV): scaleType = "Devotion"; break;
+				}
+				win.write(atx, ++aty, "Improves scaling with " + scaleType + ".", rune->color);
+			}
 		}
 	}
 }
@@ -3426,6 +3434,7 @@ void getAllItems(person* player)
 	player->addItem(runestone_IetrasRunestone());
 	player->addItem(runestone_KhallesRunestone());
 	player->addItem(runestone_SiltrasRunestone());
+	player->addItem(runestone_CharredRunestone());
 
 	player->addItem(key_GreenChapelGardenKey());
 	player->addItem(key_OldCrowsKey());

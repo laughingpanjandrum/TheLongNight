@@ -50,6 +50,7 @@ miscItem* key_WyrdKey();
 miscItem* key_GreenChapelGardenKey();
 miscItem* key_SordidChapelKey();
 miscItem* key_SpinalColumnShard();
+miscItem* key_OldValleyKey();
 miscItem* key_WatchfulEyestalk();
 
 //Monster hearts
@@ -72,6 +73,7 @@ miscItem* runestone_CorensRunestone();
 miscItem* runestone_SiltrasRunestone();
 miscItem* runestone_KhallesRunestone();
 miscItem* runestone_IetrasRunestone();
+miscItem* runestone_CharredRunestone();
 
 //Bone keys
 miscItem* bones_KhallesBones();

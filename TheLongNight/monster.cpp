@@ -823,6 +823,7 @@ Venom drips from its fangs, and it drags itself along the ground with eight spin
 	m->isBoss = true;
 	m->setFragmentsDropped(500);
 	m->addItemDrop(heart_VenomousSpiderHeart());
+	m->addItemDrop(key_OldValleyKey());
 	return m;
 }
 

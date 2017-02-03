@@ -23,6 +23,7 @@ enum gameState {
 
 enum statScaling {
 	SCALE_STR, SCALE_DEX, SCALE_ARC, SCALE_DEV,
+	SCALE_FIRE,
 	SCALE_NONE
 };
 

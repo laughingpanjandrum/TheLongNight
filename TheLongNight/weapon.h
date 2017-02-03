@@ -72,6 +72,7 @@ public:
 	//Scaling
 	void addScalingType(statScaling st) { scaling.push_back(st); }
 	int getScalingDamage(statScaling st);
+	bool getRunestoneDamage(damageType dtype);
 	bool isProfane = false; //Determines interactions with other profane stuff
 	bool scaleWithDamage = false; //Gains bonus damage when hp is lower.
 

@@ -20,12 +20,14 @@ magic_missile:23,34
 : water_mossy
 ? statue
 T terminal
+D water_deep
 -endcodes
 -connections
 west:stardrift_wreckage_1
 east:cbeach_2
+north:tear_stained_river_1
 -endconnections
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~.................................
 ..~~~~~~................................
 ...~~~~~~......######...................

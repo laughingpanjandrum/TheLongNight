@@ -78,6 +78,16 @@ memories of one's ancestors.");
 	return m;
 }
 
+miscItem * key_OldValleyKey()
+{
+	miscItem* m = new miscItem("Old Valley Key", KEY_TILE, TCODColor::white,
+		"This bone-white key unlocks the door of the Tear-Stained Valley. Who knows how it the bloated spider absorbed it into \
+its grisly bulk?");
+	m->isKey = true;
+	m->setKeyTag("old_valley_door");
+	return m;
+}
+
 miscItem * key_WatchfulEyestalk()
 {
 	miscItem* m = new miscItem("Watchful Eyestalk", KEY_TILE, TCODColor::darkGreen,
@@ -250,6 +260,15 @@ miscItem * runestone_IetrasRunestone()
 was swallowed by the Void.");
 	r->isRunestone = true;
 	r->setRune(new weaponRune("Ietra's Runestone", "Arcane", TCODColor::magenta, SCALE_ARC));
+	return r;
+}
+
+miscItem * runestone_CharredRunestone()
+{
+	miscItem* r = new miscItem("Charred Runestone", RUNESTONE_TILE, TCODColor::darkFlame,
+		"Horribly burnt runestone, perhaps seared in Lady Tvert's cleansing fire.");
+	r->isRunestone = true;
+	r->setRune(new weaponRune("Charred Runestone", "Flaming", TCODColor::darkFlame, SCALE_FIRE));
 	return r;
 }
 
