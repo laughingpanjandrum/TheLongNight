@@ -245,6 +245,21 @@ was swallowed by the Void.");
 }
 
 
+/*
+	Bones
+*/
+
+miscItem * bones_KhallesBones()
+{
+	miscItem* b = new miscItem("Khalle's Bones", KEY_TILE, TCODColor::lightestYellow,
+		"All that remains of Khalle, who prayed to the old gods for the downfall of the void. Her prayers were met with silence, \
+and her congregation was swallowed by the rising mud.");
+	b->isKey = true;
+	b->setKeyTag("khalles_bones");
+	return b;
+}
+
+
 
 
 /*

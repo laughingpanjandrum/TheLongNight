@@ -42,6 +42,8 @@ item * getItemByHandle(std::string handle)
 	//Murdermire
 	else if (handle == "serpents_tooth")
 		return weapon_SerpentsTooth();
+	else if (handle == "crimson_nail")
+		return weapon_CrimsonNail();
 
 	//SHIELDS
 	else if (handle == "battered_wooden_shield")
@@ -157,6 +159,9 @@ item * getItemByHandle(std::string handle)
 	else if (handle == "grey_thiefs_rags")
 		return armour_GreyThiefsRags();
 
+	else if (handle == "sir_percivels_helm")
+		return headgear_SirPercivelsHelm();
+
 	//CHARMS
 	else if (handle == "bloodstained_charm")
 		return charm_BloodstainedCharm();
@@ -192,6 +197,8 @@ item * getItemByHandle(std::string handle)
 		return key_SordidChapelKey();
 	else if (handle == "voidwalkers_returning_bell")
 		return bell_VoidwalkersReturningBell();
+	else if (handle == "khalles_bones")
+		return bones_KhallesBones();
 
 	//SPELLBOOKS
 	else if (handle == "waterlogged_writings")

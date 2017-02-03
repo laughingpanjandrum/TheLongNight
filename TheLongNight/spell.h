@@ -80,6 +80,7 @@ spell* attack_VoidSlash();
 spell* attack_VoidSurge();
 spell* attack_FlameSwathe();
 spell* attack_DripVenom();
+spell* attack_SuckOutLife();
 
 //Wand/chime powers
 spell* ability_PowerSurge();

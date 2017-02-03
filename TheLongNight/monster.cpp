@@ -985,6 +985,16 @@ of smiles.");
 	return m;
 }
 
+monster * npc_ToadPriestGhulluk()
+{
+	monster* m = new monster("Toad Priest Ghulluk", TOAD_TILE, TCODColor::lighterSea,
+		"This tiny, toadlike man clutches a gnarled wooden staff, and leers at your from under his mud-stained hood.");
+	m->setHealth(500);
+	m->isHostile = false;
+	m->loadDialogue("dialogue/ghulluk_chat.txt");
+	return m;
+}
+
 /*
 This giant nightmare is how monsters are defined in map files.
 */
@@ -1102,6 +1112,8 @@ monster * getMonsterByHandle(std::string handle)
 		return npc_Ydella();
 	else if (handle == "eyeless_queen")
 		return npc_TheEyelessQueen();
+	else if (handle == "ghulluk")
+		return npc_ToadPriestGhulluk();
 
 	//LET'S HOPE WE NEVER GET HERE!
 	return nullptr;

@@ -199,6 +199,17 @@ spell * attack_DripVenom()
 	return sp;
 }
 
+spell * attack_SuckOutLife()
+{
+	spell* sp = new spell("Suck Out Life", DAGGER_TILE, TCODColor::lightCrimson,
+		"The agony dealt by the knife pours life into you.");
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(RESTORE_HEALTH, 10);
+	sp->usesDivinePower = true;
+	sp->setVigourCost(2);
+	return sp;
+}
+
 //Wand/chime powers
 
 spell * ability_PowerSurge()

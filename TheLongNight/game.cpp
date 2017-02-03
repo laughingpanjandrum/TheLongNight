@@ -1228,7 +1228,7 @@ This just figures out which particular info-drawing function to use.
 void game::drawItemInfo(item * it, int atx, int aty)
 {
 	//Clear region
-	win.clearRegion(atx, aty, 40, 19);
+	win.clearRegion(atx, aty, 40, 21);
 	//Tile and name
 	win.writec(atx, aty, it->getTileCode(), it->getColor());
 	win.write(atx + 2, aty, it->getName(), it->getColor());

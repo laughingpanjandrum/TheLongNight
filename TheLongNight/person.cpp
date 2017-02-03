@@ -36,16 +36,25 @@ int person::getScalingDamage(weapon * wp)
 	int total = 0;
 	//Bonus from each stat
 	if (stats != nullptr) {
+		
 		//Value of each scaling type
 		int str = wp->getScalingDamage(SCALE_STR);
 		int dex = wp->getScalingDamage(SCALE_DEX);
 		int arc = wp->getScalingDamage(SCALE_ARC);
 		int dev = wp->getScalingDamage(SCALE_DEV);
+		
 		//Sum up bonus damage
 		total += str * stats->strength;
 		total += dex * stats->dexterity;
 		total += arc * stats->arcana;
 		total += dev * stats->devotion;
+		
+		//Additional bonuses!
+		if (wp->scaleWithDamage) {
+			int healthPercent = (float)health.getValue() / (float)health.getMaxValue() * 100.0;
+			total += wp->getDamage() * (100 - healthPercent);
+		}
+	
 	}
 	return total;
 }

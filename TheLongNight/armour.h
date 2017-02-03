@@ -58,5 +58,7 @@ armour* armour_CursedKnightsArmour();
 armour* headgear_GreyThiefsHood();
 armour* armour_GreyThiefsRags();
 
+armour* headgear_SirPercivelsHelm();
+
 #endif
 

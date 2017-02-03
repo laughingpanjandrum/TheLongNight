@@ -73,6 +73,7 @@ public:
 	void addScalingType(statScaling st) { scaling.push_back(st); }
 	int getScalingDamage(statScaling st);
 	bool isProfane = false; //Determines interactions with other profane stuff
+	bool scaleWithDamage = false; //Gains bonus damage when hp is lower.
 
 private:
 
@@ -133,6 +134,7 @@ weapon* weapon_ArmOfTheDuke();
 weapon* weapon_DragonboneSword();
 
 weapon* weapon_SerpentsTooth();
+weapon* weapon_CrimsonNail();
 
 weapon* weapon_ProfaneGreatsword();
 

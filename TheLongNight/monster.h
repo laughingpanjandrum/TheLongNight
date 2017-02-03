@@ -165,6 +165,7 @@ monster* npc_ElenaThePilgrim();
 monster* npc_VoidwalkerDaedelus();
 monster* npc_Ydella();
 monster* npc_TheEyelessQueen();
+monster* npc_ToadPriestGhulluk();
 
 
 //For map files

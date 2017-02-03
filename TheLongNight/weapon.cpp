@@ -374,6 +374,17 @@ weapon * weapon_SerpentsTooth()
 	return wp;
 }
 
+weapon * weapon_CrimsonNail()
+{
+	weapon* wp = new weapon("Crimson Nail", DAGGER_TILE, TCODColor::lightCrimson,
+		"This tiny nail is stained a deep red and is deadly sharp.");
+	wp->setBasicAttributes(10, SPEED_FAST);
+	wp->addScalingType(SCALE_DEX);
+	wp->scaleWithDamage = true;
+	wp->setSpecialAttack(attack_SuckOutLife());
+	return wp;
+}
+
 weapon * weapon_ProfaneGreatsword()
 {
 	weapon* wp = new weapon("Profane Greatsword", SWORD_TILE, TCODColor::purple,

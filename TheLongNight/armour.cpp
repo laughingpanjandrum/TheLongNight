@@ -194,3 +194,13 @@ well-deserved punishment.");
 	a->setPoisonResist(20);
 	return a;
 }
+
+armour * headgear_SirPercivelsHelm()
+{
+	armour* a = new armour("Sir Percivel's Helm", HELMET_TILE, TCODColor::lightGreen, ITEM_HELMET,
+		"Sir Percivel sought the truth of the Rose's decline. His search brought him first to the depths of the Deadmarsh, where he learned \
+obscure wisdom from the rotten folk that lurked in the mud.");
+	a->setDefence(10);
+	a->setPoisonResist(25);
+	return a;
+}

@@ -72,6 +72,9 @@ miscItem* runestone_SiltrasRunestone();
 miscItem* runestone_KhallesRunestone();
 miscItem* runestone_IetrasRunestone();
 
+//Bone keys
+miscItem* bones_KhallesBones();
+
 //Other
 miscItem* misc_VoidSigil();
 miscItem* misc_PieceOfJade();
