@@ -58,6 +58,7 @@ miscItem* heart_OldCrowsHeart();
 miscItem* heart_FishBornGoddessesHeart();
 miscItem* heart_OrsylsShriveledHeart();
 miscItem* heart_VortensShriveledHeart();
+miscItem* heart_VenomousSpiderHeart();
 
 //Spellbooks
 miscItem* spellbook_WaterloggedWritings();

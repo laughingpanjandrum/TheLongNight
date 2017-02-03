@@ -142,6 +142,15 @@ Void gnawed at him, begging to be allowed back in, but the gates never opened.")
 	return h;
 }
 
+miscItem * heart_VenomousSpiderHeart()
+{
+	miscItem* h = new miscItem("Venomous Spider Heart", HEART_TILE, TCODColor::lime,
+		"This venom-drenched heart lay deep within Ghorth, the monstrous lord of spiders.");
+	h->setKeyTag("venomous_spider_heart");
+	h->isKey = true;
+	return h;
+}
+
 
 
 /*

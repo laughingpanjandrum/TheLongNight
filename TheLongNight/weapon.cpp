@@ -385,6 +385,17 @@ weapon * weapon_CrimsonNail()
 	return wp;
 }
 
+weapon * weapon_SpiderboneShard()
+{
+	weapon* wp = new weapon("Spiderbone Shard", DAGGER_TILE, TCODColor::white,
+		"A sharpened piece of spider bone, infused with the ancient rage of Qom.");
+	wp->setBasicAttributes(20, SPEED_FAST);
+	wp->addStatusEffect(EFFECT_POISON, 20);
+	wp->addScalingType(SCALE_DEX);
+	wp->setSpecialAttack(attack_SpiderStrike());
+	return wp;
+}
+
 weapon * weapon_ProfaneGreatsword()
 {
 	weapon* wp = new weapon("Profane Greatsword", SWORD_TILE, TCODColor::purple,

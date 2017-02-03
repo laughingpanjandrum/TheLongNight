@@ -81,6 +81,7 @@ spell* attack_VoidSurge();
 spell* attack_FlameSwathe();
 spell* attack_DripVenom();
 spell* attack_SuckOutLife();
+spell* attack_SpiderStrike();
 
 //Wand/chime powers
 spell* ability_PowerSurge();
@@ -126,6 +127,7 @@ spell* prayer_DivineRetribution();
 spell* prayer_YutriasDivineSpark();
 //Sold by Ydella
 spell* prayer_SinkBeneath();
+spell* prayer_SpidersPrayer();
 //Misc
 spell* prayer_ProfaneRay();
 

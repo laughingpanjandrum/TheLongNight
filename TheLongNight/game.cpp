@@ -1844,6 +1844,8 @@ void game::applyEffectToPerson(person * target, effect eff, int potency, person*
 		teleport(target, potency);
 	else if (eff == DROP_OOZE)
 		currentMap->setTile(tile_Ooze(), target->getx(), target->gety());
+	else if (eff == DROP_WEB)
+		currentMap->setTile(tile_Web(), target->getx(), target->gety());
 
 	//Some effect that the person should take care of
 	else
@@ -3308,8 +3310,10 @@ coord game::screenToMapCoords(coord pt)
 void getAllItems(person* player) 
 {
 	
+	player->addItem(weapon_ArmOfTheDuke());
 	player->addItem(weapon_BloodDrinkersKnife());
 	player->addItem(weapon_CityGuardianWarhammer());
+	player->addItem(weapon_CrimsonNail());
 	player->addItem(weapon_CrowHalfsword());
 	player->addItem(weapon_CrowKnife());
 	player->addItem(weapon_CrowKnightSword());
@@ -3317,6 +3321,8 @@ void getAllItems(person* player)
 	player->addItem(weapon_FishmansKnife());
 	player->addItem(weapon_KythielsScythe());
 	player->addItem(weapon_NotchedGreatsword());
+	player->addItem(weapon_SerpentsTooth());
+	player->addItem(weapon_SpiderboneShard());
 	player->addItem(weapon_SplinteredSword());
 	player->addItem(weapon_StraightSword());
 	player->addItem(weapon_ThinKnife());
@@ -3390,6 +3396,7 @@ void getAllItems(person* player)
 	player->addItem(prayer_RayOfLight());
 	player->addItem(prayer_RemovePoison());
 	player->addItem(prayer_Restoration());
+	player->addItem(prayer_SpidersPrayer());
 	player->addItem(prayer_WyrdChantOfStrength());
 	player->addItem(prayer_YutriasDivineSpark());
 
@@ -3432,6 +3439,7 @@ void getAllItems(person* player)
 	player->addItem(heart_FishBornGoddessesHeart());
 	player->addItem(heart_OldCrowsHeart());
 	player->addItem(heart_OrsylsShriveledHeart());
+	player->addItem(heart_VenomousSpiderHeart());
 	player->addItem(heart_VortensShriveledHeart());
 	player->addItem(heart_WretchedHeart());
 

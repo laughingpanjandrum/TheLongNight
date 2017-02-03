@@ -135,6 +135,7 @@ weapon* weapon_DragonboneSword();
 
 weapon* weapon_SerpentsTooth();
 weapon* weapon_CrimsonNail();
+weapon* weapon_SpiderboneShard();
 
 weapon* weapon_ProfaneGreatsword();
 

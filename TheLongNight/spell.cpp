@@ -210,6 +210,17 @@ spell * attack_SuckOutLife()
 	return sp;
 }
 
+spell * attack_SpiderStrike()
+{
+	spell* sp = new spell("Spider Strike", WEB_TILE, TCODColor::lightestGrey,
+		"Ensnares target in a sticky web.");
+	sp->setAttackType(ATTACK_RANGE, 1);
+	sp->addEffect(CASTER_MELEE_ATTACK, 1);
+	sp->addEffect(APPLY_ENTANGLING, 1);
+	sp->setVigourCost(1);
+	return sp;
+}
+
 //Wand/chime powers
 
 spell * ability_PowerSurge()
@@ -543,6 +554,17 @@ spell * prayer_SinkBeneath()
 		"Plunge below the waves and re-emerge somewhere unknown.");
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(TELEPORT_VIA_WATER, 5);
+	sp->usesDivinePower = true;
+	sp->setVigourCost(1);
+	return sp;
+}
+
+spell * prayer_SpidersPrayer()
+{
+	spell* sp = new spell("Spider's Prayer", SPELL_TILE, TCODColor::white,
+		"According to certain storytellers, the old gods gave power to the spiders to keep humanity from overrunning the earth.");
+	sp->setAttackType(ATTACK_RANGE, 10);
+	sp->addEffect(DROP_WEB, 1);
 	sp->usesDivinePower = true;
 	sp->setVigourCost(1);
 	return sp;

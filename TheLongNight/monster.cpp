@@ -822,6 +822,7 @@ Venom drips from its fangs, and it drags itself along the ground with eight spin
 	m->keepsDistance = true;
 	m->isBoss = true;
 	m->setFragmentsDropped(500);
+	m->addItemDrop(heart_VenomousSpiderHeart());
 	return m;
 }
 
@@ -971,6 +972,8 @@ monster * npc_Ydella()
 	m->addStockUnlock(weapon_OldCrowsLongKnife(), 200, "old_crows_heart");
 	m->addStockUnlock(chime_OrsylsProfaneChime(), 200, "orsyls_heart");
 	m->addStockUnlock(weapon_ArmOfTheDuke(), 300, "vortens_heart");
+	m->addStockUnlock(weapon_SpiderboneShard(), 200, "venomous_spider_heart");
+	m->addStockUnlock(prayer_SpidersPrayer(), 100, "venomous_spider_heart");
 	return m;
 }
 
