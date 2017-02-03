@@ -127,6 +127,7 @@ private:
 	//General drawing functions
 	void drawScreen(bool doRefresh = true);
 	void drawMap(int atx, int aty);
+	float getLightEmitters(int x, int y);
 	drawData getDrawData(int x, int y);
 	void drawInterface(int atx, int aty);
 	void drawInventory(int atx, int aty);

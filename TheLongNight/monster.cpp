@@ -752,6 +752,7 @@ monster * monster_Wisp()
 	m->addSpellKnown(ability_WreatheInFlame());
 	m->setSpellCastChance(20);
 	m->setFragmentsDropped(15);
+	m->setLightEmitted(0.5);
 	return m;
 }
 

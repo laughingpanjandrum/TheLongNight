@@ -647,6 +647,22 @@ void game::drawMap(int leftx, int topy)
 	}
 }
 
+
+/*
+Returns adjustment to light level at the given point based on the presence of nearby light-emitters.
+*/
+float game::getLightEmitters(int x, int y)
+{
+	float mod = 0.0f;
+	for (auto p : currentMap->getAllPeople()) {
+		if (p->getLightEmitted() != 0) {
+			float dist = hypot(x - p->getx(), y - p->gety());
+			mod += p->getLightEmitted() / (dist / 2);
+		}
+	}
+	return mod;
+}
+
 /*
 Returns what to draw at the given point.
 */
@@ -706,6 +722,8 @@ drawData game::getDrawData(int x, int y)
 		float modifier = 1.0 - distance * 0.07;
 		//Additional darkness adjustment
 		modifier -= currentMap->getDarknessAdjustment();
+		modifier += getLightEmitters(x, y);
+		//Check for nearby light-emitters
 		//Cap values
 		if (modifier > 0.9)
 			modifier = 0.9;

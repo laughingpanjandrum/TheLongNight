@@ -200,6 +200,10 @@ public:
 	void applyStatusEffects();
 	void tick();
 
+	//Lighting
+	void setLightEmitted(float e) { emitsLight = e; }
+	float getLightEmitted() { return emitsLight; }
+
 	//Flags
 	bool isDead = false;
 	bool isPlayer = true;
@@ -248,6 +252,9 @@ protected:
 
 	//Current thing we're trying to kill
 	person* target;
+
+	//Lighting
+	float emitsLight = 0;
 
 };
 
