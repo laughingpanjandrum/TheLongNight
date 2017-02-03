@@ -79,6 +79,7 @@ spell* attack_HolySummons();
 spell* attack_VoidSlash();
 spell* attack_VoidSurge();
 spell* attack_FlameSwathe();
+spell* attack_DripVenom();
 
 //Wand/chime powers
 spell* ability_PowerSurge();
@@ -118,6 +119,8 @@ spell* prayer_BlessedRadiance();
 spell* prayer_RemovePoison();
 //Orsyl's Tome of Prayer
 spell* prayer_DrawOutTheBlood();
+//Divine Moonspark Tome
+spell* prayer_DivineRetribution();
 //Sold by Ydella
 spell* prayer_SinkBeneath();
 //Misc

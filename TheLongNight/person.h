@@ -141,6 +141,7 @@ public:
 	int bleedDamageFactor = 1; //Multiplies both bleed damage taken and given
 	int getFragmentPickupMult() { return fragmentPickupMultiplier; }
 	bool immuneToEntangle = false;
+	int divineRetribution = 0; //Melee attackers take damage in return
 
 	//Debuffs
 	int slowdown = 0;

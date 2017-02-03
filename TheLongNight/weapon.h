@@ -132,6 +132,8 @@ weapon* weapon_ArmOfTheDuke();
 
 weapon* weapon_DragonboneSword();
 
+weapon* weapon_SerpentsTooth();
+
 weapon* weapon_ProfaneGreatsword();
 
 //Shields

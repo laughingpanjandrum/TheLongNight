@@ -2274,6 +2274,11 @@ void game::meleeAttack(person * attacker, person * target)
 		}
 
 	}
+
+	//Enemy turns it back on us
+	if (target->divineRetribution > 0) {
+		attacker->takeDamage(target->divineRetribution, DAMAGE_BLESSED);
+	}
 	
 	//Update targeting
 	if (target->isDead) {
@@ -3358,6 +3363,7 @@ void getAllItems(person* player)
 	player->addItem(spell_VoidJaunt());
 
 	player->addItem(prayer_BlessedRadiance());
+	player->addItem(prayer_DivineRetribution());
 	player->addItem(prayer_DrawOutTheBlood());
 	player->addItem(prayer_ProfaneRadiance());
 	player->addItem(prayer_RayOfLight());

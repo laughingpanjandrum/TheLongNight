@@ -39,6 +39,9 @@ item * getItemByHandle(std::string handle)
 	//Winter Court
 	else if (handle == "dragonbone_sword")
 		return weapon_DragonboneSword();
+	//Murdermire
+	else if (handle == "serpents_tooth")
+		return weapon_SerpentsTooth();
 
 	//SHIELDS
 	else if (handle == "battered_wooden_shield")
@@ -199,6 +202,8 @@ item * getItemByHandle(std::string handle)
 		return spellbook_FrostbittenWritings();
 	else if (handle == "orsyls_tome_of_prayer")
 		return spellbook_OrsylsTomeOfPrayer();
+	else if (handle == "divine_moonspark_tome")
+		return spellbook_DivineMoonsparkTome();
 	else if (handle == "piece_of_jade")
 		return misc_PieceOfJade();
 
@@ -330,6 +335,7 @@ std::string getEffectName(effect e)
 	case(BECOME_INVISIBLE): return "invisibility";
 	case(GAIN_HEALTH_ON_KILL): return "health restored on kill";
 	case(CHANGE_FRAGMENT_PICKUP_MULT): return "times fragments gained";
+	case(GAIN_DIVINE_RETRIBUTION): return "divine retribution";
 
 	case(TELEPORT_VIA_WATER): return "water warp";
 	case(TELEPORT_TO_VOID): return "warp to void";

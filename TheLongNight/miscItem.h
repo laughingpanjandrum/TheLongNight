@@ -64,6 +64,7 @@ miscItem* spellbook_WaterloggedWritings();
 miscItem* spellbook_MinasProfanedWritings();
 miscItem* spellbook_FrostbittenWritings();
 miscItem* spellbook_OrsylsTomeOfPrayer();
+miscItem* spellbook_DivineMoonsparkTome();
 
 //Runestones
 miscItem* runestone_CorensRunestone();

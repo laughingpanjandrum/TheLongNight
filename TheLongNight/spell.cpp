@@ -189,6 +189,16 @@ spell * attack_FlameSwathe()
 	return sp;
 }
 
+spell * attack_DripVenom()
+{
+	spell* sp = new spell("Drip Venom", DAGGER_TILE, TCODColor::lime,
+		"Blade drips with thick acid.");
+	sp->setAttackType(ATTACK_BUFF_WEAPON);
+	sp->setBuffApplied(DAMAGE_ACID, 25);
+	sp->setVigourCost(3);
+	return sp;
+}
+
 //Wand/chime powers
 
 spell * ability_PowerSurge()
@@ -536,6 +546,18 @@ the blood of the living, but he never found it.");
 	sp->addEffect(HURT_BLEEDER, 50);
 	sp->usesDivinePower = true;
 	sp->setVigourCost(2);
+	return sp;
+}
+
+spell * prayer_DivineRetribution()
+{
+	spell* sp = new spell("Divine Retribution", SPELL_TILE, TCODColor::lightBlue,
+		"Saint Yutria was surrounded by a divine aura wherever she went, such that the nightmare could never touch her.");
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addPermanentBuff = true;
+	sp->addEffect(GAIN_DIVINE_RETRIBUTION, 10);
+	sp->setVigourCost(4);
+	sp->usesDivinePower = true;
 	return sp;
 }
 

@@ -187,6 +187,15 @@ miscItem * spellbook_OrsylsTomeOfPrayer()
 	return s;
 }
 
+miscItem * spellbook_DivineMoonsparkTome()
+{
+	miscItem* s = new miscItem("Divine Moonspark Tome", SPELL_TILE, TCODColor::lighterYellow,
+		"This tome, encrusted with mud, contains the divine knowledge of the lost saint Yutria.");
+	s->setKeyTag("divine_moonspark_tome");
+	s->isKey = true;
+	return s;
+}
+
 
 
 /*

@@ -371,6 +371,8 @@ void person::applyEffect(effect eff, int potency)
 		invisibility += potency;
 	else if (eff == CHANGE_FRAGMENT_PICKUP_MULT)
 		fragmentPickupMultiplier = potency;
+	else if (eff == GAIN_DIVINE_RETRIBUTION)
+		divineRetribution += potency;
 
 	//Debuffs
 

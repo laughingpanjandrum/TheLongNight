@@ -870,6 +870,8 @@ monster * npc_MuiraClericOfTheRose()
 	//With Orsyl's Tome
 	m->addStockUnlock(prayer_ProfaneRadiance(), 50, "orsyls_tome_of_prayer");
 	m->addStockUnlock(prayer_DrawOutTheBlood(), 75, "orsyls_tome_of_prayer");
+	//With Divine Moonspark Tome
+	m->addStockUnlock(prayer_DivineRetribution(), 100, "divine_moonspark_tome");
 	//Dialogue
 	m->loadDialogue("dialogue/muira_chat.txt");
 	return m;

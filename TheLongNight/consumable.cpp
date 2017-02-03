@@ -69,7 +69,7 @@ contain profound power when eaten.");
 
 consumable * consumable_IntoxicatingWine()
 {
-	consumable* c = new consumable("Intoxicating Wine", CHARM_TILE, TCODColor::darkRed,
+	consumable* c = new consumable("Intoxicating Wine", VIAL_TILE, TCODColor::darkRed,
 		"This heady draught is said to purge the mind of material desires while enhancing one's will.");
 	c->addEffect(INCREASE_PRAYER_POWER);
 	c->addEffect(APPLY_DAMAGE_PENALTY);

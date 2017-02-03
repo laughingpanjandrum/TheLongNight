@@ -363,6 +363,17 @@ contain some of that power.");
 	return wp;
 }
 
+weapon * weapon_SerpentsTooth()
+{
+	weapon* wp = new weapon("Serpent's Tooth", DAGGER_TILE, TCODColor::lime,
+		"Tiny dagger made from the tooth of a poisonous serpent. Ideal for slipping between an unsuspecting suspect's ribs.");
+	wp->setBasicAttributes(15, SPEED_FAST);
+	wp->addStatusEffect(EFFECT_POISON, 15);
+	wp->addScalingType(SCALE_DEX);
+	wp->setSpecialAttack(attack_DripVenom());
+	return wp;
+}
+
 weapon * weapon_ProfaneGreatsword()
 {
 	weapon* wp = new weapon("Profane Greatsword", SWORD_TILE, TCODColor::purple,
