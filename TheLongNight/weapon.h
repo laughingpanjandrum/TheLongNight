@@ -76,6 +76,13 @@ public:
 	bool isProfane = false; //Determines interactions with other profane stuff
 	bool scaleWithDamage = false; //Gains bonus damage when hp is lower.
 
+	//Special effects
+	int getDamageToSelf() { return damageToSelf; }
+	int getDamageReservoir() { return damageReservoir; }
+	void addToDamageReservoir(int a) { damageReservoir += a; }
+	void clearDamageReservoir() { damageReservoir = 0; }
+	void setDamageToSelf(int d) { damageToSelf = d; }
+
 private:
 
 	//Weapon deetz
@@ -96,6 +103,8 @@ private:
 	std::vector<int> damageTypes;
 	statusEffectVector statusEffectType;
 	std::vector<int> statusEffectDamage;
+	int damageReservoir = 0; //Built-up damage is restored to you on a kill.
+	int damageToSelf = 0;  //Damage dealt to attacker on hit.
 
 	//Buffing
 	weaponBuff currentBuff;
@@ -137,6 +146,8 @@ weapon* weapon_DragonboneSword();
 weapon* weapon_SerpentsTooth();
 weapon* weapon_CrimsonNail();
 weapon* weapon_SpiderboneShard();
+
+weapon* weapon_SacrificialKnife();
 
 weapon* weapon_ProfaneGreatsword();
 

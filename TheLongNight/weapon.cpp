@@ -418,6 +418,18 @@ weapon * weapon_SpiderboneShard()
 	return wp;
 }
 
+weapon * weapon_SacrificialKnife()
+{
+	weapon* wp = new weapon("Sacrificial Knife", DAGGER_TILE, TCODColor::orange,
+		"Lady Tvert sent the Emissaries to bring the word of the gods to the people of the Valley. \
+Those who refused to heed the call were sacrificed to the Gaping Maw to the benefit of the living.");
+	wp->setBasicAttributes(15, SPEED_FAST);
+	wp->addScalingType(SCALE_DEX);
+	wp->setDamageToSelf(5);
+	wp->setSpecialAttack(attack_DeepCut());
+	return wp;
+}
+
 weapon * weapon_ProfaneGreatsword()
 {
 	weapon* wp = new weapon("Profane Greatsword", SWORD_TILE, TCODColor::purple,

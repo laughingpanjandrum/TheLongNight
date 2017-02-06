@@ -44,6 +44,9 @@ item * getItemByHandle(std::string handle)
 		return weapon_SerpentsTooth();
 	else if (handle == "crimson_nail")
 		return weapon_CrimsonNail();
+	//Tear-Stained Valley
+	else if (handle == "sacrificial_knife")
+		return weapon_SacrificialKnife();
 
 	//SHIELDS
 	else if (handle == "battered_wooden_shield")
@@ -330,6 +333,7 @@ std::string getEffectName(effect e)
 	case(APPLY_MAGIC_DAMAGE): return "magic damage";
 	case(APPLY_BLESSED_DAMAGE): return "blessed damage";
 	case(APPLY_PROFANE_DAMAGE): return "profane damage";
+	case(HURT_CASTER): return "damage to caster";
 
 	case(APPLY_BLINDING): return "blind target";
 	case(APPLY_ENTANGLING): return "entangle target";

@@ -221,6 +221,17 @@ spell * attack_SpiderStrike()
 	return sp;
 }
 
+spell * attack_DeepCut()
+{
+	spell* sp = new spell("Deep Cut", DAGGER_TILE, TCODColor::orange,
+		"Deal 100 damage to target and 25 damage to self.");
+	sp->setAttackType(ATTACK_RANGE, 1);
+	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 100);
+	sp->addEffect(HURT_CASTER, 25);
+	sp->setVigourCost(3);
+	return sp;
+}
+
 //Wand/chime powers
 
 spell * ability_PowerSurge()

@@ -1318,6 +1318,14 @@ void game::drawWeaponInfo(weapon * it, int atx, int aty)
 		win.write(atx + offset, aty, getAttackSpeedName(it->getAttackDelay()), maincol);
 	}
 
+	//Damage to self
+	int dmgToSelf = it->getDamageToSelf();
+	if (dmgToSelf > 0) {
+		win.write(atx, ++aty, "DMG TO SELF", TCODColor::red);
+		win.write(atx + offset, aty, std::to_string(dmgToSelf), maincol);
+		win.write(atx, ++aty, "  (Damage to self is restored upon kill)", maincol);
+	}
+
 	//Defence, if any
 	if (it->getDefence() > 0) {
 		win.write(atx, ++aty, "DEFENCE", TCODColor::sepia);
@@ -1841,6 +1849,8 @@ void game::applyEffectToPerson(person * target, effect eff, int potency, person*
 	//Special spell effect
 	else if (eff == CASTER_MELEE_ATTACK)
 		meleeAttack(caster, target);
+	else if (eff == HURT_CASTER)
+		caster->takeDamage(potency);
 
 	//Special effects, other
 	else if (eff == KNOCKBACK_TARGET)
@@ -2298,9 +2308,11 @@ void game::meleeAttack(person * attacker, person * target)
 			attacker->buffNextMelee = nullptr;
 		}
 
-		//Next: STATUS EFFECTS
+		//Next: STATUS EFFECTS and SPECIAL EFFECTS
 		weapon* wp = attacker->getWeapon();
 		if (wp != nullptr) {
+
+			//Status effects applied
 			for (int idx = 0; idx < wp->getStatusEffectCount(); idx++) {
 				//Values
 				statusEffects sType = wp->getStatusEffectType(idx);
@@ -2312,6 +2324,14 @@ void game::meleeAttack(person * attacker, person * target)
 				//Deal the damage
 				target->takeStatusEffectDamage(sType, sdmg);
 			}
+
+			//Damage to self
+			int dmgToSelf = wp->getDamageToSelf();
+			if (dmgToSelf > 0) {
+				attacker->takeDamage(dmgToSelf);
+				wp->addToDamageReservoir(dmgToSelf);
+			}
+		
 		}
 
 	}
@@ -2323,8 +2343,18 @@ void game::meleeAttack(person * attacker, person * target)
 	
 	//Update targeting
 	if (target->isDead) {
+		
+		//Remove target data
 		attacker->clearTarget();
 		addMessage(target->getName() + " dies!", TCODColor::white);
+		
+		//Possible health restoration on kill!
+		weapon* wp = attacker->getWeapon();
+		if (wp != nullptr) {
+			attacker->addHealth(wp->getDamageReservoir());
+			wp->clearDamageReservoir();
+		}
+	
 	}
 	else
 		attacker->setTarget(target);
@@ -2647,6 +2677,7 @@ void game::castSpell(spell * sp)
 	if (sp == nullptr)
 		return;
 	int vcost = sp->getVigourCost();
+	
 	if (player->getVigour().getValue() >= vcost) {
 		//We have enough vig to cast. PROCEED.
 		attackType aType = sp->getAttackType();

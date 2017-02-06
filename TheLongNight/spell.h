@@ -82,6 +82,7 @@ spell* attack_FlameSwathe();
 spell* attack_DripVenom();
 spell* attack_SuckOutLife();
 spell* attack_SpiderStrike();
+spell* attack_DeepCut();
 
 //Wand/chime powers
 spell* ability_PowerSurge();

@@ -3,6 +3,7 @@ start:20,39
 profane_rat_priest:20,30
 -items
 tiny_red_flower:20,38
+starwater_draught:2,12
 -enditems
 -codes
 , floor_sand
@@ -25,7 +26,7 @@ D water_deep
 south:old_fairweather
 north:ruined_green_chapel
 east:darkwater_forest_2
-west:tear_stained_river_2
+west:tear_stained_valley_2
 -endconnections
 ######.............r......##............
 #####........T.....r.%.....#............

@@ -26,7 +26,7 @@ D water_deep
 north:darkwater_forest_1
 south:wretch_cave
 east:pilgrims_road_1
-west:inmost_river_2
+west:tear_stained_river_2
 -endconnections
 W..............r.....%.................W
 W..............r............%..........W
