@@ -1627,7 +1627,7 @@ void game::processCommand()
 
 void game::processMouseClick()
 {
-	if (mouse.lbutton_pressed) {
+	if (mouse.lbutton) {
 		//Start autowalking to here
 		startAutoWalk();
 	}
@@ -2141,12 +2141,16 @@ The coordinates are our position on the old map, which define where we'll end up
 */
 void game::loadNewMap(map * newMap, connectionPoint connect, int oldx, int oldy)
 {
+	
 	//Remove player from current map
 	currentMap->removePerson(player);
+	
 	//Set new map
 	setCurrentMap(newMap);
+	
 	//Respawn monsters on map
 	newMap->respawnAllMonsters(storyEventsReady);
+	
 	//Figure our what our new coordinates will be, based on where we moved from
 	int xnew = oldx;
 	int ynew = oldy;
@@ -2163,13 +2167,16 @@ void game::loadNewMap(map * newMap, connectionPoint connect, int oldx, int oldy)
 		xnew = pt.first;
 		ynew = pt.second;
 	}
+	
 	//Add player to new map
 	newMap->addPerson(player, xnew, ynew);
+	
 	//Set up new clock for the new map
 	turns.clear();
 	for (auto person : newMap->getAllPeople())
 		if (!person->isPlayer)
 			turns.addEntity(person, 1);
+	
 	//Update FOV for new map
 	currentMap->updateFOV(player->getx(), player->gety());
 }
@@ -3345,21 +3352,27 @@ Returns player to save point.
 */
 void game::restoreFromSavePoint(savePoint* warpTo)
 {
+	
 	//Clear all animations
 	playingAnimations.clear();
+	
 	//If no point is provided, we warp to our main save point
 	if (warpTo == nullptr)
 		warpTo = &ourSavePt;
+	
 	//Resurrect player
 	deletePlayerBuffs();
 	player->fullRestore();
 	player->isDead = false;
 	player->setTarget(nullptr);
 	isAutoWalking = false; //Make sure we don't keep autowalking on death!
+	
 	//Return us to our save point
 	loadNewMap(warpTo->saveMap, CONNECT_VERTICAL, warpTo->savePt.first, warpTo->savePt.second);
+	
 	//Put us back in the clock
 	turns.addEntity(player, 0);
+
 }
 
 

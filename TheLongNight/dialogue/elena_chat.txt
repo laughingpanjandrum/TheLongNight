@@ -7,7 +7,7 @@ elenaToFairweather
 |STORY_FLAG
 elenaToFairweather
 "Sure, sure..."
-|SHOP
+|BACK_UP_AND_END
 [IN_FAIRWEATHER]
 "Aha! Good to see you here too, kiddo."
 "Have a look, have a look..."

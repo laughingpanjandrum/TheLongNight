@@ -32,6 +32,7 @@ x web
 -connections
 east:darkwater_forest_3
 west:murdermire_2
+south:murdermire_3
 -endconnections
 ########################################
 ...............................x.x######

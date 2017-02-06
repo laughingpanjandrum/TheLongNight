@@ -1,6 +1,15 @@
+"Hrmmmmmm..."
+|STORY_FLAG_SKIP
+metGorem
+[GOREM_SUBSEQUENT_HELLO]
 "Mm? A visitor to Fairweather, after all this time?"
 "Gorem was my name... The Wyrd built me to serve, but I haven't seen any of them for a long time."
 "Yes, the brothers and sisters of the Wyrd, whose lands these once were... Do you know where they've gone?"
 "My purpose was to safekeep the sigils of the old world... If you find any, even fragments, will you bring them to me?"
+|STORY_FLAG
+metGorem
 "I have scraps of the old world I can exchange..."
+|SHOP
+[GOREM_SUBSEQUENT_HELLO]
+"If you find the Wyrd, tell me! How I miss their counsel!"
 |SHOP

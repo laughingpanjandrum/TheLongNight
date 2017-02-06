@@ -418,6 +418,8 @@ monster * monster_SkinlessKnight()
 	m->addSpellKnown(prayer_ProfaneRadiance());
 	m->setSpellCastChance(15);
 	m->makeProfane();
+	m->isBoss = true;
+	m->showBossHealthBar = false;
 	return m;
 }
 
@@ -863,7 +865,6 @@ you approach.");
 	m->addItemToStock(shield_WoodenWyrdShield(), 25);
 	m->addItemToStock(chime_WyrdBellbranch(), 50);
 	m->addItemToStock(prayer_WyrdChantOfStrength(), 25);
-	m->addItemToStock(charm_BloodstainedCharm(), 100);
 	//Chatting
 	m->loadDialogue("dialogue/gorem_chat.txt");
 	return m;

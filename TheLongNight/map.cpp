@@ -200,13 +200,14 @@ Also deletes the PC so make sure they get re-added if you want them to exist!
 */
 void map::respawnAllMonsters(storyEventVector eventsToWatch)
 {
+	
 	//Remove existing creatures
 	people.clear();
 
 	//Check for new creatures that need to be added
 	addMovingMonster(eventsToWatch);
 
-	//Create a list of creatures to remove from the spawn list
+	//Create a list of creatures to remove from the spawn list, if necessary
 	std::vector<std::string> spawnTagsToRemove;
 	coordVector spawnCoordsToRemove;
 
@@ -233,7 +234,7 @@ void map::respawnAllMonsters(storyEventVector eventsToWatch)
 
 	}
 
-	//Remove everything that shouldn't be here
+	//Remove everything that shouldn't be here, both tags and coords
 	for (auto toRemove : spawnTagsToRemove) {
 		auto iter = std::find(monsterSpawnTags.begin(), monsterSpawnTags.end(), toRemove);
 		monsterSpawnTags.erase(iter);
@@ -253,13 +254,16 @@ void map::addMovingMonster(storyEventVector eventsToWatch)
 {
 	for (auto ev : eventsToWatch) {
 		if (ev.mapFlag == mapTag) {
+	
 			//Make sure this guy isn't already in here
 			auto iter = std::find(monsterSpawnTags.begin(), monsterSpawnTags.end(), ev.monsterTag);
-			if (iter == monsterSpawnTags.end()) {
-				//He's not! EMPLACE
-				monsterSpawnTags.push_back(ev.monsterTag);
-				monsterSpawnCoords.push_back(ev.spawnPt);
-			}
+			if (iter != monsterSpawnTags.end())
+				return;
+
+			//He's not! EMPLACE
+			monsterSpawnTags.push_back(ev.monsterTag);
+			monsterSpawnCoords.push_back(ev.spawnPt);
+		
 		}
 	}
 }

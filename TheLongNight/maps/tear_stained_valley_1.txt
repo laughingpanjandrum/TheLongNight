@@ -22,6 +22,7 @@ G glass
 -connections
 north:murdermire_4
 south:tear_stained_river_1
+east:tear_stained_valley_2
 -endconnections
 ###############........#################
 ###........###..........####.....;######

@@ -25,7 +25,7 @@ D water_deep
 -connections
 west:stardrift_wreckage_1
 east:cbeach_2
-north:tear_stained_river_1
+north:inmost_river_1
 -endconnections
 D~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~.................................
