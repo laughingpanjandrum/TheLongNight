@@ -44,9 +44,21 @@ struct savePoint {
 	std::string name;
 };
 
+//A little chunk of flavour text to display when an area is first loaded.
+struct areaText {
+	areaText() {}
+	areaText(std::string mapTag, std::string title, std::string text) :
+		mapTag(mapTag), title(title), text(text) {}
+	std::string title; //Title displayed
+	std::string text; //Text displayed
+	std::string mapTag; //Name of map we are tied to
+};
+
 
 typedef std::vector<message> messageVector;
 typedef std::vector<savePoint> savePointVector;
+typedef std::vector<std::string> stringVector;
+typedef std::vector<areaText*> areaTextVector;
 
 
 
@@ -250,6 +262,12 @@ private:
 	storyEventVector storyEventsWaiting;
 	void saveStoryEvent(storyEvent e) { storyEventsWaiting.push_back(e); }
 	void queueStoryEvent(storyEvent e) { storyEventsReady.push_back(e); }
+
+	//Text dumps displayed when certain maps load.
+	void loadTextDumps(std::string filename);
+	areaTextVector areaTextList;
+	void checkForAreaText(std::string mapTag);
+	areaText* findAreaText(std::string mapTag);
 
 	//Keeping the world up to date
 	void tick();

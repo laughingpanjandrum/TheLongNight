@@ -76,7 +76,7 @@ public:
 	virtual void tick() { timeLeft--; }
 	virtual bool isDone() { return timeLeft < 1; }
 protected:
-	person* p;
+	coord xy;
 	const TCODColor color;
 	int timeLeft = 3;
 };

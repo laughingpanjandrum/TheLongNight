@@ -18,7 +18,7 @@ pathVectorP * animations::getPointerPath(coordVector * pts)
 Given person briefly changes to the given color, then changes back.
 */
 flashCharacter::flashCharacter(person* p, TCODColor color) :
-	p(p), color(color)
+	xy(p->getPosition()), color(color)
 {
 
 }
@@ -28,7 +28,7 @@ Changes player's color
 */
 drawData* flashCharacter::getDrawData(drawData * baseData, const int x, const int y)
 {
-	if (x == p->getx() && y == p->gety())
+	if (x == xy.first && y == xy.second)
 		baseData->color = color;
 	return baseData;
 }

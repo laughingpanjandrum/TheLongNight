@@ -20,6 +20,7 @@ game::game()
 
 	//Load in story events
 	loadStoryEvents("maps/storyFlags.txt");
+	loadTextDumps("dialogue/journalText.txt");
 	
 	//Character create
 	player = new person();
@@ -636,7 +637,7 @@ Input: Coordinates to start drawing at (the top left corner of the map)
 void game::drawMap(int leftx, int topy)
 {
 	//Draw map name just above
-	win.write(leftx + 10, topy - 1, centreText(currentMap->getName(), 40), TCODColor::white);
+	win.write(leftx, topy - 1, centreText(currentMap->getName(), 38), TCODColor::white);
 	//Draw entire map, left to right & top to bottom
 	for (int x = 0; x < currentMap->getXSize(); x++) {
 		for (int y = 0; y < currentMap->getYSize(); y++) {
@@ -2122,8 +2123,10 @@ void game::loadMapFromHandle(std::string handle, connectionPoint connect, int ol
 {
 	//Find corresponding map, should one exist
 	map* newMap = getKnownMap(handle);
-	if (newMap == nullptr)
+	if (newMap == nullptr) {
 		newMap = makemap.loadMapFromFile(handle);
+		checkForAreaText(handle);
+	}
 	//Make sure we actually ended up with a map
 	if (newMap != nullptr) {
 		loadNewMap(newMap, connect, oldx, oldy);
@@ -3166,6 +3169,92 @@ void game::loadStoryEvents(std::string filename)
 	//Done, close file
 	storyfile.close();
 }
+
+
+
+
+/*
+Loads up the blocks of text that are displayed when certain maps load.
+*/
+void game::loadTextDumps(std::string filename)
+{
+	std::ifstream txtfile(filename);
+	std::string line;
+	//Text we're currently constructing
+	areaText* txt = new areaText();
+	//Read em in
+	while (getline(txtfile, line)) {
+		if (line.size() > 0) {
+			//End of chunk?
+			if (line == "!end") {
+				areaTextList.push_back(txt);
+				txt = new areaText();
+			}
+			//New chunk?
+			else if (line.at(0) == '!') {
+				//The rest of the line is the name of the map file
+				std::string mapTag = line.substr(1, line.size());
+				//Convert to proper file name & save
+				mapTag = makemap.getMapHandle(mapTag);
+				txt->mapTag = mapTag;
+			}
+			//Title?
+			else if (line.at(0) == '+') {
+				std::string title = line.substr(1, line.size());
+				txt->title = title;
+			}
+			//Otherwise, text chunk
+			else {
+				txt->text = line;
+			}
+		}
+	}
+	//Done, close file
+	txtfile.close();
+}
+
+
+/*
+Checks for & displays area text, if relevant!
+*/
+void game::checkForAreaText(std::string mapTag)
+{
+	areaText* txt = findAreaText(mapTag);
+	if (txt != nullptr) {
+		//Display it!
+		int atx = MAP_DRAW_X;
+		int aty = MAP_DRAW_Y;
+		win.clearRegion(atx, aty, 40, 40);
+		win.drawBox(atx, aty, 40, 40, TCODColor::sepia);
+		//Title
+		atx += 1;
+		aty += 1;
+		win.write(atx, aty, centreText(txt->title, 38), TCODColor::lighterBlue);
+		//Text itself
+		aty += 2;
+		aty = win.writeWrapped(atx, aty, 38, txt->text, TCODColor::lighterGrey);
+		//Refresh and wait
+		aty = MAP_DRAW_Y + 38;
+		win.write(atx, aty, centreText("[PRESS ESC]", 38), TCODColor::white);
+		win.refresh();
+		while (win.getkey().vk != KEY_BACK_OUT) {}
+	}
+}
+
+
+/*
+Returns area text for the given area, if it exists.
+*/
+areaText* game::findAreaText(std::string mapTag)
+{
+	for (auto txt : areaTextList) {
+		if (txt->mapTag == mapTag)
+			return txt;
+	}
+	return nullptr;
+}
+
+
 
 
 /*

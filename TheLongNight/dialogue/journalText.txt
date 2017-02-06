@@ -1,0 +1,64 @@
+!cbeach_1
++STARDRIFT LOG: WRECKAGE
+The crash left us with few resources, though our directive is unchanged: to halt the scourge of the dead. Venture northeast and seek the queen of the Winter Court.
+!end
+
+!wretch_cave
++STARDRIFT LOG: WRETCHCAVE
+Word reached us of certain wretches who fled the Winter Court, prophesying its downfall. Certainly they were all mad, as none of their bizarre prophecies have come true!
+!end
+
+!old_fairweather
++STARDRIFT LOG: FAIRWEATHER
+Former homeland of the Wyrd, a curious but kind people who will no doubt be pleased to help you with your plight.
+!end
+
+!darkwater_forest_1
++STARDRIFT LOG: DARKWATER
+These forests are far older than the flourishing civilizations of the north, and house the ruins of long-lost kingdoms. Luckily, the Winter Court purged them of evil long ago, and now they are a safe haven for travelers.
+!end
+
+!pilgrims_road_1
++STARDRIFT LOG: PILGRIM'S ROAD
+The northward road that leads to the great city and the Winter Court. Have no fear on your journey - the road is guarded by the Crow Knights, employed by the Queen to assure the safety of all pilgrims.
+!end
+
+!flooded_lowlands_1
++STARDRIFT LOG: LOWLANDS
+Here the Wyrd still skulk among the old ruins. Some say they search for ancient knowledge. They tend to dislike travelers, but have no fear - they are a peaceful people and would not dare harm a pilgrim.
+!end
+
+!ruined_township
++STARDRIFT LOG: LOWLANDS TOWNSHIP
+If our records are correct, this township was a popular resting place for pilgrims. Occasional incursions by raiders were always swiftly thrown back by the guardian golem, to whom the town's safety was entrusted.
+!end
+
+!crumbling_city_1
++STARDRIFT LOG: THE CITY OF GLORY
+Once you reach this point, you can breathe a sigh of relief. The walls of the City keep out trespassers and brigands, and you are sure to recieve a warm welcome and an invitation to the Winter Court.
+!end
+
+!sordid_chapel
++STARDRIFT LOG: CHAPEL OF LIGHT
+Though southerners are sometimes put off by the frigid nature of the gods of the City, they have nothing to fear. After all, the old gods are united in their kindly love for all living things.
+!end
+
+!red_drenched_gardens_1
++STARDRIFT LOG: THE HIGH CLERIC
+Should you have time to wander the eastern gardens, you may have the fortune of meeting the High Cleric - the blessed head of the City's shining church.
+!end
+
+!winter_court_1
++STARDRIFT LOG: THE WINTER COURT
+Seat of power in the North, the Winter Court is a safe haven untouched by the storms that wrack the south. Seek the wise counsel of the Queen.
+!end
+
+!murdermire_1
++STARDRIFT LOG: THE MURDERMIRE
+We do not recommend visiting the aptly-named Murdermire. Rumours whisper of toad-worshipers, and the depravity of Lady Tvert is well known.
+!end
+
+!ruined_green_chapel
++STARDRIFT LOG: THE GREEN CHAPEL
+Should you have the good fortune to meet any of the green knights, beg them to send your regards to the Lady of the Rose, who keeps watch over all these forsaken lands.
+!end
