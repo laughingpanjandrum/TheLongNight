@@ -38,49 +38,54 @@ private:
 };
 
 
+typedef std::shared_ptr<miscItem> miscItemSharedPtr;
+
 /*
 Items!
 */
 
 //Keys
-miscItem* key_WretchsKey();
-miscItem* key_OldCrowsKey();
-miscItem* key_RuinedTownshipKey();
-miscItem* key_WyrdKey();
-miscItem* key_GreenChapelGardenKey();
-miscItem* key_SordidChapelKey();
-miscItem* key_SpinalColumnShard();
-miscItem* key_OldValleyKey();
-miscItem* key_WatchfulEyestalk();
+miscItemSharedPtr key_WretchsKey();
+miscItemSharedPtr key_OldCrowsKey();
+miscItemSharedPtr key_RuinedTownshipKey();
+miscItemSharedPtr key_WyrdKey();
+miscItemSharedPtr key_GreenChapelGardenKey();
+miscItemSharedPtr key_SordidChapelKey();
+miscItemSharedPtr key_SpinalColumnShard();
+miscItemSharedPtr key_OldValleyKey();
+miscItemSharedPtr key_BartonsKey();
+
+miscItemSharedPtr key_WatchfulEyestalk();
 
 //Monster hearts
-miscItem* heart_WretchedHeart();
-miscItem* heart_OldCrowsHeart();
-miscItem* heart_FishBornGoddessesHeart();
-miscItem* heart_OrsylsShriveledHeart();
-miscItem* heart_VortensShriveledHeart();
-miscItem* heart_VenomousSpiderHeart();
+miscItemSharedPtr heart_WretchedHeart();
+miscItemSharedPtr heart_OldCrowsHeart();
+miscItemSharedPtr heart_FishBornGoddessesHeart();
+miscItemSharedPtr heart_OrsylsShriveledHeart();
+miscItemSharedPtr heart_VortensShriveledHeart();
+miscItemSharedPtr heart_VenomousSpiderHeart();
 
 //Spellbooks
-miscItem* spellbook_WaterloggedWritings();
-miscItem* spellbook_MinasProfanedWritings();
-miscItem* spellbook_FrostbittenWritings();
-miscItem* spellbook_OrsylsTomeOfPrayer();
-miscItem* spellbook_DivineMoonsparkTome();
+miscItemSharedPtr spellbook_WaterloggedWritings();
+miscItemSharedPtr spellbook_MinasProfanedWritings();
+miscItemSharedPtr spellbook_FrostbittenWritings();
+miscItemSharedPtr spellbook_OrsylsTomeOfPrayer();
+miscItemSharedPtr spellbook_DivineMoonsparkTome();
+miscItemSharedPtr spellbook_DivineTomeOfTheEmissary();
 
 //Runestones
-miscItem* runestone_CorensRunestone();
-miscItem* runestone_SiltrasRunestone();
-miscItem* runestone_KhallesRunestone();
-miscItem* runestone_IetrasRunestone();
-miscItem* runestone_CharredRunestone();
+miscItemSharedPtr runestone_CorensRunestone();
+miscItemSharedPtr runestone_SiltrasRunestone();
+miscItemSharedPtr runestone_KhallesRunestone();
+miscItemSharedPtr runestone_IetrasRunestone();
+miscItemSharedPtr runestone_CharredRunestone();
 
 //Bone keys
-miscItem* bones_KhallesBones();
+miscItemSharedPtr bones_KhallesBones();
 
 //Other
-miscItem* misc_VoidSigil();
-miscItem* misc_PieceOfJade();
+miscItemSharedPtr misc_VoidSigil();
+miscItemSharedPtr misc_PieceOfJade();
 
 
 #endif

@@ -84,7 +84,7 @@ void map::setTile(maptile * t, int x, int y)
 /*
 Insert a person into the map at the given position.
 */
-void map::addPerson(person * p, int x, int y)
+void map::addPerson(personSharedPtr p, int x, int y)
 {
 	people.push_back(p);
 	p->setPosition(x, y);
@@ -93,7 +93,7 @@ void map::addPerson(person * p, int x, int y)
 /*
 Delete a character from the map.
 */
-void map::removePerson(person * p)
+void map::removePerson(personSharedPtr p)
 {
 	people.erase(std::find(people.begin(), people.end(), p));
 }
@@ -101,7 +101,7 @@ void map::removePerson(person * p)
 /*
 Add an item to the map.
 */
-void map::addItem(item * it, int x, int y)
+void map::addItem(itemSharedPtr it, int x, int y)
 {
 	items.push_back(it);
 	it->setPosition(x, y);
@@ -110,7 +110,7 @@ void map::addItem(item * it, int x, int y)
 /*
 Delete an item from the map.
 */
-void map::removeItem(item * it)
+void map::removeItem(itemSharedPtr it)
 {
 	auto iter = std::find(items.begin(), items.end(), it);
 	items.erase(iter);
@@ -169,7 +169,7 @@ maptile * map::getTile(int x, int y)
 /*
 Returns the person at the given coordinate, or nullptr if there is none.
 */
-person * map::getPerson(int x, int y)
+personSharedPtr map::getPerson(int x, int y)
 {
 	for (auto p : people) {
 		if (p->isAtPosition(x, y))
@@ -178,7 +178,7 @@ person * map::getPerson(int x, int y)
 	return nullptr;
 }
 
-item * map::getItem(int x, int y)
+itemSharedPtr map::getItem(int x, int y)
 {
 	for (auto i : items) {
 		if (i->isAtPosition(x, y))
@@ -217,7 +217,7 @@ void map::respawnAllMonsters(storyEventVector eventsToWatch)
 		if (!checkForMonsterMovement(eventsToWatch, monsterSpawnTags.at(i))) {
 
 			//Get monster corresponding to this tag
-			monster* m = getMonsterByHandle(monsterSpawnTags.at(i));
+			monsterSharedPtr m = getMonsterByHandle(monsterSpawnTags.at(i));
 
 			//Make sure we don't respawn the boss!
 			if ((!bossDestroyed || !m->isBoss)) {

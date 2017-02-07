@@ -8,13 +8,14 @@ It keeps a list of persons and the delay until their turn comes up again.
 #define TURN_TRACKER_H
 
 #include <vector>
+#include "map.h"
 #include "person.h"
 
 struct trackedEntity {
-	trackedEntity(person* entity, int delayLeft):
+	trackedEntity(personSharedPtr entity, int delayLeft):
 		entity(entity), delayLeft(delayLeft) {}
 	void reduceDelay() { delayLeft--; }
-	person* entity;
+	personSharedPtr entity;
 	int delayLeft;
 };
 
@@ -28,11 +29,11 @@ public:
 	~turnTracker();
 
 	//Setting
-	void addEntity(person* entity, int atDelay);
+	void addEntity(personSharedPtr entity, int atDelay);
 	void clear() { tracking.clear(); }
 
 	//Getting
-	person* getNext();
+	personSharedPtr getNext();
 
 private:
 	trackedEntityVector tracking;

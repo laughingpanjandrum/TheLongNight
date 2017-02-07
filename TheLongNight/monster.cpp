@@ -1,5 +1,8 @@
 #include "monster.h"
 
+
+
+
 monster::monster() : person()
 {
 }
@@ -67,7 +70,7 @@ bool monster::wantsToSpawn()
 /*
 Pick a random monster from our spawn list.
 */
-monster * monster::getRandomSpawn()
+monsterSharedPtr monster::getRandomSpawn()
 {
 	int i = randrange(spawnList.size());
 	std::string handle = spawnList.at(i);
@@ -78,7 +81,7 @@ monster * monster::getRandomSpawn()
 /*
 For shopkeeper NPCs.
 */
-void monster::addItemToStock(item * it, int price)
+void monster::addItemToStock(itemSharedPtr it, int price)
 {
 	it->isGlittery = false;
 	it->setPrice(price);
@@ -88,7 +91,7 @@ void monster::addItemToStock(item * it, int price)
 /*
 These items are unlocked if the player has a specific key.
 */
-void monster::addStockUnlock(item * it, int price, std::string unlockCode)
+void monster::addStockUnlock(itemSharedPtr it, int price, std::string unlockCode)
 {
 	it->isGlittery = false;
 	it->setPrice(price);
@@ -98,7 +101,7 @@ void monster::addStockUnlock(item * it, int price, std::string unlockCode)
 /*
 Cause we bought something!
 */
-void monster::removeItemFromStock(item * it)
+void monster::removeItemFromStock(itemSharedPtr it)
 {
 	auto iter = std::find(stock.begin(), stock.end(), it);
 	if (iter != stock.end())
@@ -109,7 +112,7 @@ void monster::removeItemFromStock(item * it)
 /*
 See if the given person has a key that will unlock additional stock items.
 */
-void monster::checkForStockUnlocks(person * unlocker)
+void monster::checkForStockUnlocks(personSharedPtr unlocker)
 {
 	//Keep track of stuff to remove, if any
 	stockUnlockVector toRemove;
@@ -179,10 +182,10 @@ Monster definitions
 
 
 
-monster * monster_DrownedCrew()
+monsterSharedPtr monster_DrownedCrew()
 {
-	monster * m = new monster("Drowned Crew", DROWNED_DEAD_TILE, TCODColor::lightGreen,
-		"Rotted ruins of a crewmember. How tragic!");
+	monsterSharedPtr m(new monster("Drowned Crew", DROWNED_DEAD_TILE, TCODColor::lightGreen,
+		"Rotted ruins of a crewmember. How tragic!"));
 	m->setMeleeStats(10, SPEED_SLOW);
 	m->setMoveStats(SPEED_NORMAL);
 	m->setHealth(10);
@@ -190,10 +193,10 @@ monster * monster_DrownedCrew()
 	return m;
 }
 
-monster * monster_ThinWretch()
+monsterSharedPtr monster_ThinWretch()
 {
-	monster * m = new monster("Thin Wretch", WRETCH_TILE, TCODColor::darkGreen,
-		"The haggard eyes of this twisted wretch suggests that it knows something you don't.");
+	monsterSharedPtr m(new monster("Thin Wretch", WRETCH_TILE, TCODColor::darkGreen,
+		"The haggard eyes of this twisted wretch suggests that it knows something you don't."));
 	m->setMeleeStats(10, SPEED_NORMAL);
 	m->setMoveStats(SPEED_NORMAL);
 	m->setHealth(50);
@@ -201,10 +204,10 @@ monster * monster_ThinWretch()
 	return m;
 }
 
-monster * monster_TimidWretch()
+monsterSharedPtr monster_TimidWretch()
 {
-	monster * m = new monster("Timid Wretch", WRETCH_TILE, TCODColor::darkerGreen,
-		"This wretched creature hangs back, its eyes glowing with wrath.");
+	monsterSharedPtr m(new monster("Timid Wretch", WRETCH_TILE, TCODColor::darkerGreen,
+		"This wretched creature hangs back, its eyes glowing with wrath."));
 	m->setMeleeStats(15, SPEED_FAST);
 	m->setMoveStats(SPEED_SLOW);
 	m->setHealth(50);
@@ -215,10 +218,10 @@ monster * monster_TimidWretch()
 	return m;
 }
 
-monster * monster_BloatedWretch()
+monsterSharedPtr monster_BloatedWretch()
 {
-	monster * m = new monster("Bloated Wretch", BLOATED_WRETCH_TILE, TCODColor::darkLime,
-		"This bloated horror is swollen with seawater. Perhaps it was hungrier than the others.");
+	monsterSharedPtr m(new monster("Bloated Wretch", BLOATED_WRETCH_TILE, TCODColor::darkLime,
+		"This bloated horror is swollen with seawater. Perhaps it was hungrier than the others."));
 	m->setMeleeStats(25, SPEED_SLOW);
 	m->setMoveStats(SPEED_SLOW);
 	m->setHealth(100);
@@ -231,11 +234,11 @@ monster * monster_BloatedWretch()
 /*
 Coruscating Beach boss
 */
-monster * boss_TheWretchedMass()
+monsterSharedPtr boss_TheWretchedMass()
 {
-	monster* m = new monster("The Wretched Mass", WRETCHED_MASS_TILE, TCODColor::darkestGreen,
+	monsterSharedPtr m(new monster("The Wretched Mass", WRETCHED_MASS_TILE, TCODColor::darkestGreen,
 		"A mass of wretches fused together into a gruesome amalgamation. It shrieks and flops towards you, its many limbs \
-flailing.");
+flailing."));
 	m->setHealth(400);
 	m->setMoveStats(SPEED_SLOW);
 	m->setMeleeStats(25, SPEED_SLOW);
@@ -252,10 +255,10 @@ flailing.");
 Pilgrim's Road
 */
 
-monster * monster_CrowKnight()
+monsterSharedPtr monster_CrowKnight()
 {
-	monster* m = new monster("Crow Knight", CROW_KNIGHT_TILE, TCODColor::lightGrey,
-		"A knight in dark-feathered armour, holding a broken sword.");
+	monsterSharedPtr m(new monster("Crow Knight", CROW_KNIGHT_TILE, TCODColor::lightGrey,
+		"A knight in dark-feathered armour, holding a broken sword."));
 	m->setHealth(100);
 	m->setMoveStats(SPEED_NORMAL);
 	m->setMeleeStats(20, SPEED_NORMAL);
@@ -265,10 +268,10 @@ monster * monster_CrowKnight()
 	return m;
 }
 
-monster * monster_CrowThief()
+monsterSharedPtr monster_CrowThief()
 {
-	monster* m = new monster("Crow Thief", CROW_THIEF_TILE, TCODColor::lightGreen,
-		"A feathery mask covers this sneakthief's face, and yellow orbs peer through. Surely this is not a human creature?");
+	monsterSharedPtr m(new monster("Crow Thief", CROW_THIEF_TILE, TCODColor::lightGreen,
+		"A feathery mask covers this sneakthief's face, and yellow orbs peer through. Surely this is not a human creature?"));
 	m->setHealth(50);
 	m->setMoveStats(SPEED_FAST);
 	m->setMeleeStats(10, SPEED_FAST);
@@ -277,10 +280,10 @@ monster * monster_CrowThief()
 	return m;
 }
 
-monster * monster_CrowArcher()
+monsterSharedPtr monster_CrowArcher()
 {
-	monster* m = new monster("Crow Archer", CROW_KNIGHT_TILE, TCODColor::lightBlue,
-		"A knight in dark-feathered armour, holding a battered crossbow.");
+	monsterSharedPtr m(new monster("Crow Archer", CROW_KNIGHT_TILE, TCODColor::lightBlue,
+		"A knight in dark-feathered armour, holding a battered crossbow."));
 	m->setHealth(100);
 	m->setMoveStats(SPEED_NORMAL);
 	m->setMeleeStats(10, SPEED_NORMAL);
@@ -291,10 +294,10 @@ monster * monster_CrowArcher()
 	return m;
 }
 
-monster * monster_ForlornCrowKnight()
+monsterSharedPtr monster_ForlornCrowKnight()
 {
-	monster* m = new monster("Forlorn Crow Knight", CROW_KNIGHT_TILE, TCODColor::crimson,
-		"Something has made this knight sad.");
+	monsterSharedPtr m(new monster("Forlorn Crow Knight", CROW_KNIGHT_TILE, TCODColor::crimson,
+		"Something has made this knight sad."));
 	m->setHealth(200);
 	m->setMoveStats(SPEED_NORMAL);
 	m->equipItem(weapon_CrowHalfsword());
@@ -308,10 +311,10 @@ monster * monster_ForlornCrowKnight()
 	return m;
 }
 
-monster * monster_TheOldCrow()
+monsterSharedPtr monster_TheOldCrow()
 {
-	monster* m = new monster("The Old Crow", THE_OLD_CROW_TILE, TCODColor::lightCrimson,
-		"The tallest of the crow knights moves with gaunt grace, and flicks a knife between his long fingers.");
+	monsterSharedPtr m(new monster("The Old Crow", THE_OLD_CROW_TILE, TCODColor::lightCrimson,
+		"The tallest of the crow knights moves with gaunt grace, and flicks a knife between his long fingers."));
 	m->setHealth(400);
 	m->setMoveStats(SPEED_NORMAL);
 	m->equipItem(weapon_CrowKnife());
@@ -331,10 +334,10 @@ monster * monster_TheOldCrow()
 //Flooded Lowlands
 
 
-monster * monster_StarvingFishman()
+monsterSharedPtr monster_StarvingFishman()
 {
-	monster* m = new monster("Starving Fishman", FISHMAN_TILE, TCODColor::lightGreen,
-		"Thickly scaled and sunken-eyed. It stalks the ruins as though searching desperately for something.");
+	monsterSharedPtr m(new monster("Starving Fishman", FISHMAN_TILE, TCODColor::lightGreen,
+		"Thickly scaled and sunken-eyed. It stalks the ruins as though searching desperately for something."));
 	m->setHealth(50);
 	m->setDefence(DAMAGE_PHYSICAL, 20);
 	m->setMeleeStats(50, SPEED_SLOW);
@@ -347,10 +350,10 @@ monster * monster_StarvingFishman()
 	return m;
 }
 
-monster * monster_FishmanDoomPreacher()
+monsterSharedPtr monster_FishmanDoomPreacher()
 {
-	monster* m = new monster("Fishman Doom-Preacher", FISHMAN_TILE, TCODColor::lime,
-		"Wields a staff with a toad impaled on the tip.");
+	monsterSharedPtr m(new monster("Fishman Doom-Preacher", FISHMAN_TILE, TCODColor::lime,
+		"Wields a staff with a toad impaled on the tip."));
 	m->setHealth(100);
 	m->setDefence(DAMAGE_PHYSICAL, 15);
 	m->setBleedResist(60);
@@ -362,10 +365,10 @@ monster * monster_FishmanDoomPreacher()
 	return m;
 }
 
-monster * monster_FishmanSpearfisher()
+monsterSharedPtr monster_FishmanSpearfisher()
 {
-	monster* m = new monster("Fishman Spearfisher", FISHMAN_TILE, TCODColor::lightLime,
-		"It wields a barbed harpoon, and its lamplike eyes search for prey.");
+	monsterSharedPtr m(new monster("Fishman Spearfisher", FISHMAN_TILE, TCODColor::lightLime,
+		"It wields a barbed harpoon, and its lamplike eyes search for prey."));
 	m->setHealth(75);
 	m->setDefence(DAMAGE_PHYSICAL, 20);
 	m->setBleedResist(60);
@@ -377,10 +380,10 @@ monster * monster_FishmanSpearfisher()
 	return m;
 }
 
-monster * monster_GuardianGolem()
+monsterSharedPtr monster_GuardianGolem()
 {
-	monster* m = new monster("Guardian Golem", GOREM_TILE, TCODColor::lightLime,
-		"A massive stone creature stalks the flooded streets.");
+	monsterSharedPtr m(new monster("Guardian Golem", GOREM_TILE, TCODColor::lightLime,
+		"A massive stone creature stalks the flooded streets."));
 	m->setHealth(300);
 	m->setDefence(DAMAGE_PHYSICAL, 10);
 	m->setBleedResist(1000);
@@ -391,10 +394,10 @@ monster * monster_GuardianGolem()
 	return m;
 }
 
-monster * monster_DegenerateFishman()
+monsterSharedPtr monster_DegenerateFishman()
 {
-	monster* m = new monster("Degenerate Fishman", FISHMAN_TILE, TCODColor::lightestLime,
-		"The fishmen were never meant to be, but this one is truly mad.");
+	monsterSharedPtr m(new monster("Degenerate Fishman", FISHMAN_TILE, TCODColor::lightestLime,
+		"The fishmen were never meant to be, but this one is truly mad."));
 	m->setHealth(25);
 	m->setBleedResist(75);
 	m->setDefence(DAMAGE_PHYSICAL, 15);
@@ -406,10 +409,10 @@ monster * monster_DegenerateFishman()
 	return m;
 }
 
-monster * monster_SkinlessKnight()
+monsterSharedPtr monster_SkinlessKnight()
 {
-	monster* m = new monster("Skinless Knight", CROW_KNIGHT_TILE, TCODColor::lightPink,
-		"The armour stained and dented, and beneath the slitted helm, two bloated eyes sit in a skinless skull.");
+	monsterSharedPtr m(new monster("Skinless Knight", CROW_KNIGHT_TILE, TCODColor::lightPink,
+		"The armour stained and dented, and beneath the slitted helm, two bloated eyes sit in a skinless skull."));
 	m->setHealth(200);
 	m->setDefence(DAMAGE_PHYSICAL, 15);
 	m->setDefence(DAMAGE_MAGIC, 25);
@@ -423,10 +426,10 @@ monster * monster_SkinlessKnight()
 	return m;
 }
 
-monster * monster_FishbornGoddess()
+monsterSharedPtr monster_FishbornGoddess()
 {
-	monster* m = new monster("Fishborn Goddess", FISHMAN_TILE, TCODColor::lighterGreen,
-		"A woman with trailing seaweed hair, whose unnaturally long arms drip acid.");
+	monsterSharedPtr m(new monster("Fishborn Goddess", FISHMAN_TILE, TCODColor::lighterGreen,
+		"A woman with trailing seaweed hair, whose unnaturally long arms drip acid."));
 	m->setHealth(700);
 	m->setBleedResist(50);
 	m->setDefence(DAMAGE_PHYSICAL, 10);
@@ -449,22 +452,22 @@ monster * monster_FishbornGoddess()
 	Darkwater Forest
 */
 
-monster * monster_GiantRat()
+monsterSharedPtr monster_GiantRat()
 {
-	monster* m = new monster("Giant Rat", RAT_TILE, TCODColor::lightSepia,
-		"A dog-sized rat with venom dripping from its teeth.");
+	monsterSharedPtr m(new monster("Giant Rat", RAT_TILE, TCODColor::lightSepia,
+		"A dog-sized rat with venom dripping from its teeth."));
 	m->setHealth(25);
 	m->setPoisonResist(1000);
 	m->setMoveStats(SPEED_FAST);
-	m->equipItem(new weapon(5, SPEED_FAST, EFFECT_POISON, 5));
+	m->equipItem(weaponSharedPtr(new weapon(5, SPEED_FAST, EFFECT_POISON, 5)));
 	m->setFragmentsDropped(5);
 	return m;
 }
 
-monster * monster_ProfaneRatPriest()
+monsterSharedPtr monster_ProfaneRatPriest()
 {
-	monster* m = new monster("Profane Rat Priest", RAT_TILE, TCODColor::lightestSepia,
-		"You can see a rat's snout protruding from beneath the cowl of this hooded figure.");
+	monsterSharedPtr m(new monster("Profane Rat Priest", RAT_TILE, TCODColor::lightestSepia,
+		"You can see a rat's snout protruding from beneath the cowl of this hooded figure."));
 	m->setHealth(100);
 	m->setPoisonResist(1000);
 	m->addDamageResist(DAMAGE_MAGIC, 50);
@@ -484,10 +487,10 @@ monster * monster_ProfaneRatPriest()
 */
 
 
-monster * monster_CrawlingZombie()
+monsterSharedPtr monster_CrawlingZombie()
 {
-	monster* m = new monster("Crawling Zombie", ZOMBIE_TILE, TCODColor::darkGreen,
-		"A half-rotten creature, missing both of its legs, which crawls along the ground.");
+	monsterSharedPtr m(new monster("Crawling Zombie", ZOMBIE_TILE, TCODColor::darkGreen,
+		"A half-rotten creature, missing both of its legs, which crawls along the ground."));
 	m->setHealth(150);
 	m->setMoveStats(SPEED_SLOW);
 	m->setMeleeStats(50, SPEED_SLOW);
@@ -496,10 +499,10 @@ monster * monster_CrawlingZombie()
 	return m;
 }
 
-monster * monster_FirespitterZombie()
+monsterSharedPtr monster_FirespitterZombie()
 {
-	monster* m = new monster("Firespitter Zombie", ZOMBIE_TILE, TCODColor::flame,
-		"A half-rotten creature imbued with a mysterious inner fire.");
+	monsterSharedPtr m(new monster("Firespitter Zombie", ZOMBIE_TILE, TCODColor::flame,
+		"A half-rotten creature imbued with a mysterious inner fire."));
 	m->setHealth(150);
 	m->setPoisonResist(1000);
 	m->addDamageResist(DAMAGE_FIRE, 25);
@@ -511,10 +514,10 @@ monster * monster_FirespitterZombie()
 	return m;
 }
 
-monster * monster_OozingZombie()
+monsterSharedPtr monster_OozingZombie()
 {
-	monster* m = new monster("Oozing Zombie", ZOMBIE_TILE, TCODColor::sepia,
-		"A half-rotten creature oozing slime from its pores.");
+	monsterSharedPtr m(new monster("Oozing Zombie", ZOMBIE_TILE, TCODColor::sepia,
+		"A half-rotten creature oozing slime from its pores."));
 	m->setHealth(150);
 	m->setPoisonResist(1000);
 	m->setMoveStats(SPEED_SLOW);
@@ -525,10 +528,10 @@ monster * monster_OozingZombie()
 	return m;
 }
 
-monster * monster_DevoteeOfPash()
+monsterSharedPtr monster_DevoteeOfPash()
 {
-	monster* m = new monster("Devotee of Pash", PRIEST_TILE, TCODColor::purple,
-		"A tall figure in robes marked with profane symbols. It clutches an idol of Pash, wreathed in evil energy.");
+	monsterSharedPtr m(new monster("Devotee of Pash", PRIEST_TILE, TCODColor::purple,
+		"A tall figure in robes marked with profane symbols. It clutches an idol of Pash, wreathed in evil energy."));
 	m->setHealth(200);
 	m->addDamageResist(DAMAGE_MAGIC, 25);
 	m->setMoveStats(SPEED_SLOW);
@@ -540,10 +543,10 @@ monster * monster_DevoteeOfPash()
 	return m;
 }
 
-monster * monster_VoidwalkerMinas()
+monsterSharedPtr monster_VoidwalkerMinas()
 {
-	monster* m = new monster("Voidwalker Minas", PLAYER_TILE, TCODColor::lightPurple,
-		"His armour glows with profane radiance, and his jet-black sword pulses with dark radiance.");
+	monsterSharedPtr m(new monster("Voidwalker Minas", PLAYER_TILE, TCODColor::lightPurple,
+		"His armour glows with profane radiance, and his jet-black sword pulses with dark radiance."));
 	m->setHealth(250);
 	m->setMoveStats(SPEED_SLOW);
 	m->setDefence(DAMAGE_PHYSICAL, 30);
@@ -559,24 +562,24 @@ monster * monster_VoidwalkerMinas()
 	return m;
 }
 
-monster * monster_BloodthirstyHound()
+monsterSharedPtr monster_BloodthirstyHound()
 {
-	monster* m = new monster("Bloodthirsty Hound", HOUND_TILE, TCODColor::crimson,
-		"A skeletal hound whose serrated teeth drip blood.");
+	monsterSharedPtr m(new monster("Bloodthirsty Hound", HOUND_TILE, TCODColor::crimson,
+		"A skeletal hound whose serrated teeth drip blood."));
 	m->setHealth(50);
 	m->setMoveStats(SPEED_FAST);
-	m->equipItem(new weapon(5, SPEED_FAST, EFFECT_BLEED, 15));
+	m->equipItem(weaponSharedPtr(new weapon(5, SPEED_FAST, EFFECT_BLEED, 15)));
 	m->setFragmentsDropped(20);
 	return m;
 }
 
-monster * monster_BloodstarvedZombie()
+monsterSharedPtr monster_BloodstarvedZombie()
 {
-	monster* m = new monster("Bloodstarved Zombie", ZOMBIE_TILE, TCODColor::crimson,
-		"This rotted creature's distended jaw drips with fresh blood.");
+	monsterSharedPtr m(new monster("Bloodstarved Zombie", ZOMBIE_TILE, TCODColor::crimson,
+		"This rotted creature's distended jaw drips with fresh blood."));
 	m->setHealth(150);
 	m->setMoveStats(SPEED_NORMAL);
-	m->equipItem(new weapon(10, SPEED_FAST, EFFECT_BLEED, 10));
+	m->equipItem(weaponSharedPtr(new weapon(10, SPEED_FAST, EFFECT_BLEED, 10)));
 	m->bleedScaling = 25;
 	m->setBleedResist(60);
 	m->addSpellKnown(attack_BloodFeast());
@@ -585,17 +588,17 @@ monster * monster_BloodstarvedZombie()
 	return m;
 }
 
-monster * monster_HighClericOrsylTheProfaned()
+monsterSharedPtr monster_HighClericOrsylTheProfaned()
 {
-	monster* m = new monster("High Cleric Orsyl the Profaned", ORSYL_TILE, TCODColor::silver,
+	monsterSharedPtr m(new monster("High Cleric Orsyl the Profaned", ORSYL_TILE, TCODColor::silver,
 		"The High Clerics robes are tattered and blood-drenched; his eyes are blank, and putrid tendrils of the Void crawl up \
-his flesh.");
+his flesh."));
 	m->setHealth(800);
 	m->bleedScaling = 50;
 	m->setDefence(DAMAGE_PHYSICAL, 10);
 	m->setDefence(DAMAGE_BLESSED, 25);
 	m->setMoveStats(SPEED_NORMAL);
-	m->equipItem(new weapon(10, SPEED_NORMAL, EFFECT_BLEED, 15));
+	m->equipItem(weaponSharedPtr(new weapon(10, SPEED_NORMAL, EFFECT_BLEED, 15)));
 	m->addSpellKnown(prayer_ProfaneRadiance());
 	m->addSpellKnown(attack_BloodFeast());
 	m->addSpellKnown(prayer_DrawOutTheBlood());
@@ -608,10 +611,10 @@ his flesh.");
 	return m;
 }
 
-monster * monster_CursedKnight()
+monsterSharedPtr monster_CursedKnight()
 {
-	monster* m = new monster("Cursed Knight", KNIGHT_TILE, TCODColor::purple,
-		"The holy symbols on its armour are drenched in the Void.");
+	monsterSharedPtr m(new monster("Cursed Knight", KNIGHT_TILE, TCODColor::purple,
+		"The holy symbols on its armour are drenched in the Void."));
 	m->setHealth(200);
 	m->setDefence(DAMAGE_PHYSICAL, 50);
 	m->setDefence(DAMAGE_ELECTRIC, 20);
@@ -626,10 +629,10 @@ monster * monster_CursedKnight()
 	return m;
 }
 
-monster * monster_CursedArcher()
+monsterSharedPtr monster_CursedArcher()
 {
-	monster* m = new monster("Cursed Archer", KNIGHT_TILE, TCODColor::lightPurple,
-		"Archers armoured in the garb of the knights of the Winter Court.");
+	monsterSharedPtr m(new monster("Cursed Archer", KNIGHT_TILE, TCODColor::lightPurple,
+		"Archers armoured in the garb of the knights of the Winter Court."));
 	m->setHealth(200);
 	m->setDefence(DAMAGE_PHYSICAL, 50);
 	m->setDefence(DAMAGE_ELECTRIC, 20);
@@ -639,17 +642,17 @@ monster * monster_CursedArcher()
 	m->setMeleeStats(15, SPEED_NORMAL);
 	m->setMoveStats(SPEED_SLOW);
 	m->keepsDistance = true;
-	m->addSpellKnown(new spell("Profane Arrow", TCODColor::lightPurple, 8, 10, APPLY_PROFANE_DAMAGE, 15));
+	m->addSpellKnown(spellSharedPtr(new spell("Profane Arrow", TCODColor::lightPurple, 8, 10, APPLY_PROFANE_DAMAGE, 15)));
 	m->setSpellCastChance(50);
 	m->setFragmentsDropped(150);
 	return m;
 }
 
-monster * monster_Enkidu()
+monsterSharedPtr monster_Enkidu()
 {
-	monster* m = new monster("Enkidu, Seeker of the Deathless", KNIGHT_TILE, TCODColor::lightFuchsia,
+	monsterSharedPtr m(new monster("Enkidu, Seeker of the Deathless", KNIGHT_TILE, TCODColor::lightFuchsia,
 		"His armour glows with the symbols of the Void. From beneath his mask, a single eye glows with furious \
-determination.");
+determination."));
 	m->setHealth(300);
 	m->setDefence(DAMAGE_PHYSICAL, 60);
 	m->setDefence(DAMAGE_FIRE, 25);
@@ -667,11 +670,11 @@ determination.");
 	return m;
 }
 
-monster * monster_DukeVortenTheWatchful()
+monsterSharedPtr monster_DukeVortenTheWatchful()
 {
-	monster* m = new monster("Duke Vorten the Watchful", DUKE_TILE, TCODColor::lightFuchsia,
+	monsterSharedPtr m(new monster("Duke Vorten the Watchful", DUKE_TILE, TCODColor::lightFuchsia,
 		"A bloated figure rises from the floor. His flesh is a mass of eyestalks and protruding shards of bone; a swarm of \
-tentacles emerge from the ruin of his head, and at the centre of his chest sits a gaping maw.");
+tentacles emerge from the ruin of his head, and at the centre of his chest sits a gaping maw."));
 	m->setHealth(800);
 	m->setDefence(DAMAGE_PHYSICAL, 10);
 	m->setDefence(DAMAGE_ACID, 25);
@@ -695,34 +698,34 @@ tentacles emerge from the ruin of his head, and at the centre of his chest sits 
 	The Winter Court
 */
 
-monster * monster_WinterShade()
+monsterSharedPtr monster_WinterShade()
 {
-	monster* m = new monster("Winter Shade", GHOST_TILE, TCODColor::cyan,
-		"The spectre of a noble, trailing frost from its tattered robes.");
+	monsterSharedPtr m(new monster("Winter Shade", GHOST_TILE, TCODColor::cyan,
+		"The spectre of a noble, trailing frost from its tattered robes."));
 	m->setHealth(50);
 	m->setDefence(DAMAGE_PHYSICAL, 90);
 	m->setDefence(DAMAGE_COLD, 100);
 	m->addWeakness(DAMAGE_FIRE);
 	m->setMoveStats(SPEED_NORMAL);
-	m->equipItem(new weapon(0, SPEED_NORMAL, DAMAGE_COLD, 50));
+	m->equipItem(weaponSharedPtr(new weapon(0, SPEED_NORMAL, DAMAGE_COLD, 50)));
 	m->addSpellKnown(ability_WinterBlast());
 	m->setSpellCastChance(20);
 	m->setFragmentsDropped(75);
 	return m;
 }
 
-monster * monster_HollowfacedKnight()
+monsterSharedPtr monster_HollowfacedKnight()
 {
-	monster* m = new monster("Hollowfaced Knight", KNIGHT_TILE, TCODColor::lightCyan,
+	monsterSharedPtr m(new monster("Hollowfaced Knight", KNIGHT_TILE, TCODColor::lightCyan,
 		"This knight is in shambles, its frozen mace drooping limply from one hand. Only the sight of an intruder seems to \
-arouse its rage; its eyes glow red for an instant.");
+arouse its rage; its eyes glow red for an instant."));
 	m->setHealth(150);
 	m->setDefence(DAMAGE_PHYSICAL, 40);
 	m->setDefence(DAMAGE_COLD, 50);
 	m->addWeakness(DAMAGE_FIRE);
 	m->setMoveStats(SPEED_NORMAL);
-	m->equipItem(new weapon(25, SPEED_SLOW, DAMAGE_COLD, 25));
-	m->addSpellKnown(new spell("Punch", TCODColor::lightCyan, 1, 25, KNOCKBACK_TARGET, 3));
+	m->equipItem(weaponSharedPtr(new weapon(25, SPEED_SLOW, DAMAGE_COLD, 25)));
+	m->addSpellKnown(spellSharedPtr(new spell("Punch", TCODColor::lightCyan, 1, 25, KNOCKBACK_TARGET, 3)));
 	m->setSpellCastChance(20);
 	m->setFragmentsDropped(100);
 	return m;
@@ -737,10 +740,10 @@ arouse its rage; its eyes glow red for an instant.");
 
 
 
-monster * monster_Wisp()
+monsterSharedPtr monster_Wisp()
 {
-	monster* m = new monster("Wisp", WISP_TILE, TCODColor::flame,
-		"A point of drifting light.");
+	monsterSharedPtr m(new monster("Wisp", WISP_TILE, TCODColor::flame,
+		"A point of drifting light."));
 	m->setHealth(25);
 	m->setDefence(DAMAGE_PHYSICAL, 100);
 	m->setDefence(DAMAGE_FIRE, 90);
@@ -758,63 +761,63 @@ monster * monster_Wisp()
 	return m;
 }
 
-monster * monster_DrownedDead()
+monsterSharedPtr monster_DrownedDead()
 {
-	monster* m = new monster("Drowned Dead", DROWNED_DEAD_TILE, TCODColor::sea,
-		"A rotten and barnacle-encrusted figure.");
+	monsterSharedPtr m(new monster("Drowned Dead", DROWNED_DEAD_TILE, TCODColor::sea,
+		"A rotten and barnacle-encrusted figure."));
 	m->setHealth(100);
 	m->setDefence(DAMAGE_PHYSICAL, 20);
 	m->setPoisonResist(1000);
 	m->addWeakness(DAMAGE_FIRE);
 	m->addWeakness(DAMAGE_BLESSED);
 	m->setMoveStats(SPEED_SLOW);
-	m->equipItem(new weapon(25, SPEED_SLOW, EFFECT_POISON, 10));
+	m->equipItem(weaponSharedPtr(new weapon(25, SPEED_SLOW, EFFECT_POISON, 10)));
 	m->addSpellKnown(ability_DragBelow());
 	m->setSpellCastChance(25);
 	m->setFragmentsDropped(25);
 	return m;
 }
 
-monster * monster_SwampSpider()
+monsterSharedPtr monster_SwampSpider()
 {
-	monster* m = new monster("Swamp Spider", SPIDER_TILE, TCODColor::sea,
-		"A bloated body the size of a dog sits upon eight spindly legs. A mass of pale green eyes regard you hungrily.");
+	monsterSharedPtr m(new monster("Swamp Spider", SPIDER_TILE, TCODColor::sea,
+		"A bloated body the size of a dog sits upon eight spindly legs. A mass of pale green eyes regard you hungrily."));
 	m->setHealth(100);
 	m->setPoisonResist(1000);
 	m->addWeakness(DAMAGE_FIRE);
 	m->setMoveStats(SPEED_FAST);
-	m->equipItem(new weapon(10, SPEED_NORMAL, EFFECT_POISON, 25));
+	m->equipItem(weaponSharedPtr(new weapon(10, SPEED_NORMAL, EFFECT_POISON, 25)));
 	m->addSpellKnown(ability_SpitWeb());
 	m->setSpellCastChance(25);
 	m->setFragmentsDropped(50);
 	return m;
 }
 
-monster * monster_AdherentOfGlug()
+monsterSharedPtr monster_AdherentOfGlug()
 {
-	monster* m = new monster("Adherent of Glug", TOAD_TILE, TCODColor::sea,
+	monsterSharedPtr m(new monster("Adherent of Glug", TOAD_TILE, TCODColor::sea,
 		"Under the mud-soaked hood, a toad's bulging eyes leer at you. The \
-creature rings a filth-stained chime and chants in an unknown tongue.");
+creature rings a filth-stained chime and chants in an unknown tongue."));
 	m->setHealth(100);
 	m->setPoisonResist(1000);
 	m->setBleedResist(60);
 	m->makeProfane();
 	m->setMoveStats(SPEED_NORMAL);
 	m->setMeleeStats(10, SPEED_SLOW);
-	m->addSpellKnown(new spell("Poison Spit", TCODColor::lime, 5, 0, APPLY_POISON_DAMAGE, 25));
+	m->addSpellKnown(spellSharedPtr(new spell("Poison Spit", TCODColor::lime, 5, 0, APPLY_POISON_DAMAGE, 25)));
 	m->setSpellCastChance(50);
 	m->setFragmentsDropped(40);
 	return m;
 }
 
-monster * monster_GhorthTheBloatedSpider()
+monsterSharedPtr monster_GhorthTheBloatedSpider()
 {
-	monster* m = new monster("Ghorth the Bloated Spider", SPIDER_TILE, TCODColor::purple,
+	monsterSharedPtr m(new monster("Ghorth the Bloated Spider", SPIDER_TILE, TCODColor::purple,
 		"This monstrous creature has a body the size of a horse, on which rest a dozen egg-sized green eyes. \
-Venom drips from its fangs, and it drags itself along the ground with eight spindly arms.");
+Venom drips from its fangs, and it drags itself along the ground with eight spindly arms."));
 	m->setHealth(600);
 	m->setMoveStats(SPEED_FAST);
-	m->equipItem(new weapon(25, SPEED_SLOW, EFFECT_POISON, 25));
+	m->equipItem(weaponSharedPtr(new weapon(25, SPEED_SLOW, EFFECT_POISON, 25)));
 	m->setDefence(DAMAGE_PHYSICAL, 10);
 	m->setPoisonResist(1000);
 	m->addWeakness(DAMAGE_FIRE);
@@ -830,14 +833,99 @@ Venom drips from its fangs, and it drags itself along the ground with eight spin
 }
 
 
+
+/*
+	Tear-Stained Valley
+*/
+
+
+
+monsterSharedPtr monster_UndeadPrisoner()
+{
+	monsterSharedPtr m(new monster("Undead Prisoner", UNDEAD_TILE, TCODColor::lightGreen,
+		"Undying prisoner, restrained by heavy iron chains."));
+	m->setHealth(150);
+	m->setDefence(DAMAGE_PHYSICAL, 10);
+	m->setDefence(DAMAGE_COLD, 50);
+	m->setMeleeStats(50, SPEED_SLOW);
+	m->setMoveStats(SPEED_SLOW);
+	m->makeProfane();
+	m->addSpellKnown(spellSharedPtr(new spell("Chain Whip", TCODColor::grey, 3, 25)));
+	m->setSpellCastChance(50);
+	m->setFragmentsDropped(25);
+	return m;
+}
+
+monsterSharedPtr monster_BloatedSlaveDriver()
+{
+	monsterSharedPtr m(new monster("Bloated Slave Driver", JAILOR_TILE, TCODColor::lightGrey,
+		"A driver of slaves, fat with overindulgence, who leers and wields a wicked whip."));
+	m->setHealth(200);
+	m->setDefence(DAMAGE_PHYSICAL, 10);
+	m->setMoveStats(SPEED_NORMAL);
+	m->addSpellKnown(spellSharedPtr(new spell("Lash", TCODColor::red, 3, 5, APPLY_BLEED_DAMAGE, 15)));
+	m->addSpellKnown(ability_FeedingFrenzy());
+	m->setSpellCastChance(50);
+	m->setFragmentsDropped(100);
+	return m;
+}
+
+monsterSharedPtr monster_SlaveringHound()
+{
+	monsterSharedPtr m(new monster("Slavering Hound", HOUND_TILE, TCODColor::red,
+		"A starving dog, its jaw stained with blood, its eyes betraying a ravenous hunger."));
+	m->setHealth(50);
+	m->setMoveStats(SPEED_FAST);
+	m->equipItem(weaponSharedPtr(new weapon(15, SPEED_FAST, EFFECT_BLEED, 10)));
+	m->setFragmentsDropped(25);
+	return m;
+}
+
+monsterSharedPtr monster_Emissary()
+{
+	monsterSharedPtr m(new monster("Emissary", EMISSARY_TILE, TCODColor::flame,
+		"A gaunt figure in a silver robe. He holds up a charred holy symbol and utters words of blessed fire."));
+	m->setHealth(150);
+	m->setDefence(DAMAGE_FIRE, 25);
+	m->setMoveStats(SPEED_NORMAL);
+	m->setMeleeStats(10, SPEED_NORMAL);
+	m->addSpellKnown(spellSharedPtr(new spell("Holy Fire", TCODColor::flame, 5, 0, APPLY_FIRE_DAMAGE, 25)));
+	m->addSpellKnown(prayer_DivineRestoration());
+	m->setSpellCastChance(75);
+	m->keepsDistance = true;
+	m->setFragmentsDropped(200);
+	return m;
+}
+
+monsterSharedPtr monster_BartonTheProwlingMinister()
+{
+	monsterSharedPtr m(new monster("Barton the Prowling Minister", EMISSARY_TILE, TCODColor::purple,
+		"The grinning minister sways above his supplicant congregation, clutching a holy symbol and whispering \
+prayers through emaciated lips."));
+	m->setHealth(800);
+	m->setDefence(DAMAGE_FIRE, 25);
+	m->setDefence(DAMAGE_ELECTRIC, 25);
+	m->setMeleeStats(10, SPEED_SLOW);
+	m->setMoveStats(SPEED_NORMAL);
+	m->addSpellKnown(prayer_DivineRetribution());
+	m->addSpellKnown(prayer_DivineJudgement());
+	m->setSpellCastChance(50);
+	m->keepsDistance = true;
+	m->isBoss = true;
+	m->setFragmentsDropped(1000);
+	m->addItemDrop(key_BartonsKey());
+	return m;
+}
+
+
 /*
 	The Void
 */
 
-monster * monster_VoidTouched()
+monsterSharedPtr monster_VoidTouched()
 {
-	monster* m = new monster("Void-Touched", GHOST_TILE, TCODColor::lighterPurple,
-		"These figures seem to shift in and out of existence, their faces contorted in agony.");
+	monsterSharedPtr m(new monster("Void-Touched", GHOST_TILE, TCODColor::lighterPurple,
+		"These figures seem to shift in and out of existence, their faces contorted in agony."));
 	m->setHealth(25);
 	m->setDefence(DAMAGE_PHYSICAL, 100);
 	m->setMoveStats(SPEED_NORMAL);
@@ -854,11 +942,11 @@ monster * monster_VoidTouched()
 */
 
 
-monster * npc_Gorem()
+monsterSharedPtr npc_Gorem()
 {
-	monster* m = new monster("Gorem, Ancient of Wyrd", GOREM_TILE, TCODColor::lighterGrey,
+	monsterSharedPtr m(new monster("Gorem, Ancient of Wyrd", GOREM_TILE, TCODColor::lighterGrey,
 		"At first it looks like a hulking statue, overgrown with flowers and vines, but a light appears in its eyes as \
-you approach.");
+you approach."));
 	m->setHealth(800);
 	m->isShopkeeper = true;
 	m->isHostile = false;
@@ -870,10 +958,10 @@ you approach.");
 	return m;
 }
 
-monster * npc_UtricTheRat()
+monsterSharedPtr npc_UtricTheRat()
 {
-	monster* m = new monster("Utric the Rat", PLAYER_TILE, TCODColor::lighterSepia,
-		"A scrawny man in ragged clothes, with a curiously rat-like visage. He watches you eagerly.");
+	monsterSharedPtr m(new monster("Utric the Rat", PLAYER_TILE, TCODColor::lighterSepia,
+		"A scrawny man in ragged clothes, with a curiously rat-like visage. He watches you eagerly."));
 	m->setHealth(100);
 	m->isHostile = false;
 	m->isShopkeeper = true;
@@ -899,10 +987,10 @@ monster * npc_UtricTheRat()
 	return m;
 }
 
-monster * npc_MuiraClericOfTheRose()
+monsterSharedPtr npc_MuiraClericOfTheRose()
 {
-	monster* m = new monster("Muira, Cleric of the Rose", PLAYER_TILE, TCODColor::darkPink,
-		"A narrow-faced woman dressed in stained red robes.");
+	monsterSharedPtr m(new monster("Muira, Cleric of the Rose", PLAYER_TILE, TCODColor::darkPink,
+		"A narrow-faced woman dressed in stained red robes."));
 	m->setHealth(120);
 	m->isHostile = false;
 	m->isShopkeeper = true;
@@ -917,15 +1005,18 @@ monster * npc_MuiraClericOfTheRose()
 	//With Divine Moonspark Tome
 	m->addStockUnlock(prayer_DivineRetribution(), 100, "divine_moonspark_tome");
 	m->addStockUnlock(prayer_YutriasDivineSpark(), 100, "divine_moonspark_tome");
+	//With Divine Tome of the Emissary
+	m->addStockUnlock(prayer_DivineRestoration(), 100, "divine_tome_of_the_emissary");
+	m->addStockUnlock(prayer_DivineJudgement(), 100, "divine_tome_of_the_emissary");
 	//Dialogue
 	m->loadDialogue("dialogue/muira_chat.txt");
 	return m;
 }
 
-monster * npc_ElenaThePilgrim()
+monsterSharedPtr npc_ElenaThePilgrim()
 {
-	monster* m = new monster("Elena the Pilgrim", PLAYER_TILE, TCODColor::lightCyan,
-		"A woman in travel-worn robes, dragging a cart piled with goods.");
+	monsterSharedPtr m(new monster("Elena the Pilgrim", PLAYER_TILE, TCODColor::lightCyan,
+		"A woman in travel-worn robes, dragging a cart piled with goods."));
 	m->setHealth(80);
 	m->isHostile = false;
 	m->isShopkeeper = true;
@@ -948,10 +1039,10 @@ monster * npc_ElenaThePilgrim()
 	return m;
 }
 
-monster * npc_VoidwalkerDaedelus()
+monsterSharedPtr npc_VoidwalkerDaedelus()
 {
-	monster* m = new monster("Voidwalker Daedelus", PLAYER_TILE, TCODColor::purple,
-		"A mournful-looking man in purple robes. He seems to be listening intently.");
+	monsterSharedPtr m(new monster("Voidwalker Daedelus", PLAYER_TILE, TCODColor::purple,
+		"A mournful-looking man in purple robes. He seems to be listening intently."));
 	m->setHealth(200);
 	m->isHostile = false;
 	//Dialogue
@@ -959,10 +1050,10 @@ monster * npc_VoidwalkerDaedelus()
 	return m;
 }
 
-monster * npc_Ydella()
+monsterSharedPtr npc_Ydella()
 {
-	monster* m = new monster("Ydella, Ancient of Wyrd", GOREM_TILE, TCODColor::lightestGreen,
-		"This figure of a woman seems to be made of stone, until a sudden light shines in her eyes.");
+	monsterSharedPtr m(new monster("Ydella, Ancient of Wyrd", GOREM_TILE, TCODColor::lightestGreen,
+		"This figure of a woman seems to be made of stone, until a sudden light shines in her eyes."));
 	m->setHealth(500);
 	m->isHostile = false;
 	m->isShopkeeper = true;
@@ -979,21 +1070,21 @@ monster * npc_Ydella()
 	return m;
 }
 
-monster * npc_TheEyelessQueen()
+monsterSharedPtr npc_TheEyelessQueen()
 {
-	monster* m = new monster("The Eyeless Queen", PLAYER_TILE, TCODColor::darkCyan,
+	monsterSharedPtr m(new monster("The Eyeless Queen", PLAYER_TILE, TCODColor::darkCyan,
 		"Her regal finery is encrusted with ice, her eye sockets are empty, and her lips are curled in the faintest \
-of smiles.");
+of smiles."));
 	m->setHealth(100);
 	m->isHostile = false;
 	m->loadDialogue("dialogue/eyeless_queen_chat.txt");
 	return m;
 }
 
-monster * npc_ToadPriestGhulluk()
+monsterSharedPtr npc_ToadPriestGhulluk()
 {
-	monster* m = new monster("Toad Priest Ghulluk", TOAD_TILE, TCODColor::lighterSea,
-		"This tiny, toadlike man clutches a gnarled wooden staff, and leers at your from under his mud-stained hood.");
+	monsterSharedPtr m(new monster("Toad Priest Ghulluk", TOAD_TILE, TCODColor::lighterSea,
+		"This tiny, toadlike man clutches a gnarled wooden staff, and leers at your from under his mud-stained hood."));
 	m->setHealth(500);
 	m->isHostile = false;
 	m->loadDialogue("dialogue/ghulluk_chat.txt");
@@ -1003,7 +1094,7 @@ monster * npc_ToadPriestGhulluk()
 /*
 This giant nightmare is how monsters are defined in map files.
 */
-monster * getMonsterByHandle(std::string handle)
+monsterSharedPtr getMonsterByHandle(std::string handle)
 {
 
 	//Stardrift Wreckage
@@ -1097,6 +1188,18 @@ monster * getMonsterByHandle(std::string handle)
 		return monster_AdherentOfGlug();
 	else if (handle == "ghorth")
 		return monster_GhorthTheBloatedSpider();
+
+	//Tear-Stained Valley
+	else if (handle == "undead_prisoner")
+		return monster_UndeadPrisoner();
+	else if (handle == "bloated_slave_driver")
+		return monster_BloatedSlaveDriver();
+	else if (handle == "slavering_hound")
+		return monster_SlaveringHound();
+	else if (handle == "emissary")
+		return monster_Emissary();
+	else if (handle == "barton")
+		return monster_BartonTheProwlingMinister();
 
 	//The Void
 	else if (handle == "void_touched")

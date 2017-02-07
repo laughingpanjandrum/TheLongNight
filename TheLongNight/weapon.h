@@ -7,7 +7,6 @@
 #include "utility.h"
 
 typedef std::vector<statusEffects> statusEffectVector;
-typedef std::vector<spell*> spellVector;
 
 class weapon : public item
 {
@@ -32,7 +31,7 @@ public:
 	void setDefence(int def) { defence = def; }
 	void setBleedResist(int br) { bleedResist = br; }
 	void addStatusEffect(statusEffects eType, int damage);
-	void setSpecialAttack(spell* sp) { specialAttack = sp; }
+	void setSpecialAttack(spellSharedPtr sp) { specialAttack = sp; }
 	void makeOffhand() { category = ITEM_OFFHAND; } //Make this an offhand weapon
 
 	//Getting
@@ -40,20 +39,20 @@ public:
 	int getDamagePenalty() { return damagePenalty; }
 	int getDamageOfType(damageType dtype);
 	int getAttackDelay() { return attackDelay; }
-	spell* getSpecialAttack() { return specialAttack; }
+	spellSharedPtr getSpecialAttack() { return specialAttack; }
 
 	//Spell stuff: Getting
 	spellVector getSpells() { return spellstore; }
 	bool canAddSpell() { return spellstore.size() < spellstoreSize; }
-	bool hasSpellStored(spell* sp);
+	bool hasSpellStored(spellSharedPtr sp);
 	int getSpellstoreSize() { return spellstoreSize; }
 	int getSpellPower() { return spellPower; }
 	int getDivinePower() { return divinePower; }
 
 	//Spell stuff: Setting
 	void setSpellstoreSize(int size) { spellstoreSize = size; }
-	void addSpell(spell* sp) { spellstore.push_back(sp); }
-	void removeSpell(spell* sp);
+	void addSpell(spellSharedPtr sp) { spellstore.push_back(sp); }
+	void removeSpell(spellSharedPtr sp);
 	void setSpellPower(int power) { spellPower = power; }
 	void setDivinePower(int power) { divinePower = power; }
 
@@ -91,7 +90,7 @@ private:
 	int damagePenalty; //Mostly applies to shields and such
 
 	//Special attack
-	spell* specialAttack;
+	spellSharedPtr specialAttack;
 
 	//Spell storage
 	spellVector spellstore;
@@ -115,57 +114,60 @@ private:
 
 };
 
+
 std::string getAttackSpeedName(int del);
+
+typedef std::shared_ptr<weapon> weaponSharedPtr;
 
 //	Weapons
 
 //Starter weapons
-weapon* weapon_SplinteredSword();
-weapon* weapon_ThinKnife();
-weapon* weapon_StraightSword();
-weapon* weapon_Warhammer();
+weaponSharedPtr weapon_SplinteredSword();
+weaponSharedPtr weapon_ThinKnife();
+weaponSharedPtr weapon_StraightSword();
+weaponSharedPtr weapon_Warhammer();
 
-weapon* weapon_CrowKnightSword();
-weapon* weapon_CrowKnife();
-weapon* weapon_CrowHalfsword();
-weapon* weapon_OldCrowsLongKnife();
+weaponSharedPtr weapon_CrowKnightSword();
+weaponSharedPtr weapon_CrowKnife();
+weaponSharedPtr weapon_CrowHalfsword();
+weaponSharedPtr weapon_OldCrowsLongKnife();
 
-weapon* weapon_NotchedGreatsword();
-weapon* weapon_FishmansHarpoon();
-weapon* weapon_FishmansKnife();
+weaponSharedPtr weapon_NotchedGreatsword();
+weaponSharedPtr weapon_FishmansHarpoon();
+weaponSharedPtr weapon_FishmansKnife();
 
-weapon* weapon_CityGuardianWarhammer();
-weapon* weapon_BloodDrinkersKnife();
-weapon* weapon_KythielsScythe();
-weapon* weapon_VoidTouchedKnife();
-weapon* weapon_VoidCrystalGreatsword();
-weapon* weapon_ArmOfTheDuke();
+weaponSharedPtr weapon_CityGuardianWarhammer();
+weaponSharedPtr weapon_BloodDrinkersKnife();
+weaponSharedPtr weapon_KythielsScythe();
+weaponSharedPtr weapon_VoidTouchedKnife();
+weaponSharedPtr weapon_VoidCrystalGreatsword();
+weaponSharedPtr weapon_ArmOfTheDuke();
 
-weapon* weapon_DragonboneSword();
+weaponSharedPtr weapon_DragonboneSword();
 
-weapon* weapon_SerpentsTooth();
-weapon* weapon_CrimsonNail();
-weapon* weapon_SpiderboneShard();
+weaponSharedPtr weapon_SerpentsTooth();
+weaponSharedPtr weapon_CrimsonNail();
+weaponSharedPtr weapon_SpiderboneShard();
 
-weapon* weapon_SacrificialKnife();
+weaponSharedPtr weapon_SacrificialKnife();
 
-weapon* weapon_ProfaneGreatsword();
+weaponSharedPtr weapon_ProfaneGreatsword();
 
 //Shields
-weapon* shield_BatteredWoodenShield();
-weapon* shield_WoodenWyrdShield();
-weapon* shield_BatteredSteelShield();
-weapon* shield_CityGuardianShield();
-weapon* shield_VoidTouchedShield();
-weapon* shield_DragonboneShield();
+weaponSharedPtr shield_BatteredWoodenShield();
+weaponSharedPtr shield_WoodenWyrdShield();
+weaponSharedPtr shield_BatteredSteelShield();
+weaponSharedPtr shield_CityGuardianShield();
+weaponSharedPtr shield_VoidTouchedShield();
+weaponSharedPtr shield_DragonboneShield();
 
 //Wands
-weapon* wand_DriftwoodWand();
-weapon* wand_FishmansToadstaff();
+weaponSharedPtr wand_DriftwoodWand();
+weaponSharedPtr wand_FishmansToadstaff();
 
 //Chimes
-weapon* chime_ClericsCrackedChime();
-weapon* chime_WyrdBellbranch();
-weapon* chime_OrsylsProfaneChime();
+weaponSharedPtr chime_ClericsCrackedChime();
+weaponSharedPtr chime_WyrdBellbranch();
+weaponSharedPtr chime_OrsylsProfaneChime();
 
 #endif

@@ -1,7 +1,7 @@
 Wretchcave
 start:2,35
 timid_wretch:4,21
-thin_wretch:13,12
+thin_wretch:12,12
 bloated_wretch:10,27
 bloated_wretch:12,28
 timid_wretch:22,20

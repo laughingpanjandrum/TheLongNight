@@ -47,6 +47,10 @@ const int WISP_TILE = 119;
 const int SPIDER_TILE = 77;
 const int TOAD_TILE = 84;
 
+const int UNDEAD_TILE = 117;
+const int JAILOR_TILE = 74;
+const int EMISSARY_TILE = 69;
+
 const int GOREM_TILE = 327; //This is a golem-dude
 
 //Items
@@ -98,5 +102,6 @@ const int TABLE_TILE_1 = 303;
 const int TABLE_TILE_2 = 304;
 const int TABLE_TILE_3 = 305;
 const int TABLE_TILE_4 = 306;
+const int TOMBSTONE_TILE = 320;
 
 #endif

@@ -1,6 +1,6 @@
 #include "itemMaster.h"
 
-item * getItemByHandle(std::string handle)
+itemSharedPtr getItemByHandle(std::string handle)
 {
 	
 	//	WEAPONS
@@ -93,6 +93,8 @@ item * getItemByHandle(std::string handle)
 		return oil_FrozenOil();
 	else if (handle == "holy_water")
 		return oil_HolyWater();
+	else if (handle == "cursed_water")
+		return oil_CursedWater();
 
 	//RANGED WEAPONS
 	else if (handle == "throwing_knives")
@@ -162,6 +164,11 @@ item * getItemByHandle(std::string handle)
 	else if (handle == "grey_thiefs_rags")
 		return armour_GreyThiefsRags();
 
+	else if (handle == "silver_plated_hood")
+		return headgear_SilverPlatedHood();
+	else if (handle == "silver_plated_armour")
+		return armour_SilverPlatedArmour();
+
 	else if (handle == "sir_percivels_helm")
 		return headgear_SirPercivelsHelm();
 
@@ -214,6 +221,8 @@ item * getItemByHandle(std::string handle)
 		return spellbook_OrsylsTomeOfPrayer();
 	else if (handle == "divine_moonspark_tome")
 		return spellbook_DivineMoonsparkTome();
+	else if (handle == "divine_tome_of_the_emissary")
+		return spellbook_DivineTomeOfTheEmissary();
 	else if (handle == "piece_of_jade")
 		return misc_PieceOfJade();
 

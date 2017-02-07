@@ -26,7 +26,7 @@ flashCharacter::flashCharacter(person* p, TCODColor color) :
 /*
 Changes player's color
 */
-drawData* flashCharacter::getDrawData(drawData * baseData, const int x, const int y)
+drawDataSharedPtr flashCharacter::getDrawData(drawDataSharedPtr baseData, const int x, const int y)
 {
 	if (x == xy.first && y == xy.second)
 		baseData->color = color;
@@ -53,7 +53,7 @@ explosion::explosion(coord ctr, int radius, TCODColor col1, TCODColor col2) :
 /*
 Explosion fades from col1 to col2 as we go outward
 */
-drawData* explosion::getDrawData(drawData * baseData, const int x, const int y)
+drawDataSharedPtr explosion::getDrawData(drawDataSharedPtr baseData, const int x, const int y)
 {
 	int dist = hypot(x - ctr.first, y - ctr.second);
 	if (dist <= atPoint && atPoint <= radius) {
@@ -91,7 +91,7 @@ bulletPath::bulletPath(coordVector* pts, int tileCode, TCODColor color) :
 	}
 }
 
-drawData* bulletPath::getDrawData(drawData * baseData, const int x, const int y)
+drawDataSharedPtr bulletPath::getDrawData(drawDataSharedPtr baseData, const int x, const int y)
 {
 	if (atIdx < pts->size()) {
 		coord* pt = new coord(pts->at(atIdx));
@@ -129,7 +129,7 @@ glowPath::glowPath(coordVector* pts, TCODColor col1, TCODColor col2)
 	TCODColor::genMap(colors, 2, cols, idx);
 }
 
-drawData* glowPath::getDrawData(drawData * baseData, const int x, const int y)
+drawDataSharedPtr glowPath::getDrawData(drawDataSharedPtr baseData, const int x, const int y)
 {
 	//Each point up to idx has a different color.
 	for (int i = 0; i < atIdx; i++) {
@@ -163,7 +163,7 @@ glyphCycle::glyphCycle(coordVector* pts, TCODColor col1, TCODColor col2):
 	TCODColor::genMap(colors, 2, cols, idx);
 }
 
-drawData* glyphCycle::getDrawData(drawData * baseData, const int x, const int y)
+drawDataSharedPtr glyphCycle::getDrawData(drawDataSharedPtr baseData, const int x, const int y)
 {
 	for (auto pt = pts->begin(); pt != pts->end(); pt++) 
 	{
@@ -197,7 +197,7 @@ shockwave::shockwave(int x, int y, TCODColor col1, TCODColor col2) :
 	TCODColor::genMap(colors, 2, cols, idx);
 }
 
-drawData* shockwave::getDrawData(drawData * baseData, const int x, const int y)
+drawDataSharedPtr shockwave::getDrawData(drawDataSharedPtr baseData, const int x, const int y)
 {
 	drawData* data = new drawData(*baseData);
 	int dist = hypot(x - this->x, y - this->y);

@@ -9,6 +9,8 @@ characters, items, and so on.
 
 #include <vector>
 #include <string>
+#include <memory>
+
 #include "libtcod.hpp"
 #include "tileConsts.h"
 #include "utility.h"
@@ -63,7 +65,9 @@ protected:
 
 };
 
-typedef std::vector<element*> elementVector;
+
+typedef std::shared_ptr<element> elementSharedPtr;
+typedef std::vector<elementSharedPtr> elementVector;
 
 #endif
 

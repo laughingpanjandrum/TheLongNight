@@ -94,7 +94,7 @@ int weapon::getDamageOfType(damageType dtype)
 /*
 Returns whether we're currently holding the given spell.
 */
-bool weapon::hasSpellStored(spell * sp)
+bool weapon::hasSpellStored(spellSharedPtr sp)
 {
 	auto it = std::find(spellstore.begin(), spellstore.end(), sp);
 	return it != spellstore.end();
@@ -103,7 +103,7 @@ bool weapon::hasSpellStored(spell * sp)
 /*
 Remove a spell from here.
 */
-void weapon::removeSpell(spell * sp)
+void weapon::removeSpell(spellSharedPtr sp)
 {
 	auto iter = std::find(spellstore.begin(), spellstore.end(), sp);
 	if (iter != spellstore.end())
@@ -178,29 +178,29 @@ std::string getAttackSpeedName(int del)
 
 //		Weapons
 
-weapon * weapon_SplinteredSword()
+weaponSharedPtr weapon_SplinteredSword()
 {
-	weapon* wp = new weapon("Splintered Sword", SWORD_TILE, TCODColor::grey,
-		"Once a treasured heirloom. Now it's just a broken sword, decent at serration, but certainly unfit for a stardrift captain.");
+	weaponSharedPtr wp(new weapon("Splintered Sword", SWORD_TILE, TCODColor::grey,
+		"Once a treasured heirloom. Now it's just a broken sword, decent at serration, but certainly unfit for a stardrift captain."));
 	wp->setBasicAttributes(25, SPEED_NORMAL);
 	wp->addScalingType(SCALE_STR);
 	return wp;
 }
 
-weapon * weapon_ThinKnife()
+weaponSharedPtr weapon_ThinKnife()
 {
-	weapon* wp = new weapon("Thin Knife", DAGGER_TILE, TCODColor::lightGrey,
-		"A weapon for small, quick folks.");
+	weaponSharedPtr wp(new weapon("Thin Knife", DAGGER_TILE, TCODColor::lightGrey,
+		"A weapon for small, quick folks."));
 	wp->setBasicAttributes(15, SPEED_FAST);
 	wp->setSpecialAttack(attack_Quickstep());
 	wp->addScalingType(SCALE_DEX);
 	return wp;
 }
 
-weapon * weapon_StraightSword()
+weaponSharedPtr weapon_StraightSword()
 {
-	weapon* wp = new weapon("Straight Sword", SWORD_TILE, TCODColor::lightGrey,
-		"It's just a simple sword, but the haft has a nice little dragon face carved in it.");
+	weaponSharedPtr wp(new weapon("Straight Sword", SWORD_TILE, TCODColor::lightGrey,
+		"It's just a simple sword, but the haft has a nice little dragon face carved in it."));
 	wp->setBasicAttributes(25, SPEED_NORMAL);
 	wp->setSpecialAttack(attack_StrongAttack());
 	wp->addScalingType(SCALE_STR);
@@ -208,20 +208,20 @@ weapon * weapon_StraightSword()
 	return wp;
 }
 
-weapon * weapon_Warhammer()
+weaponSharedPtr weapon_Warhammer()
 {
-	weapon* wp = new weapon("Warhammer", HAMMER_TILE, TCODColor::lightSepia,
-		"A big ole hammer for smashing things.");
+	weaponSharedPtr wp(new weapon("Warhammer", HAMMER_TILE, TCODColor::lightSepia,
+		"A big ole hammer for smashing things."));
 	wp->setBasicAttributes(50, SPEED_SLOW);
 	wp->setSpecialAttack(attack_Knockback());
 	wp->addScalingType(SCALE_STR);
 	return wp;
 }
 
-weapon * weapon_CrowKnightSword()
+weaponSharedPtr weapon_CrowKnightSword()
 {
-	weapon* wp = new weapon("Crow Knight Sword", SWORD_TILE, TCODColor::lightGrey,
-		"The hilt is carved in the shape of a crow's head, and the blade is tinted black. The crow knights are certainly dedicated to a theme.");
+	weaponSharedPtr wp(new weapon("Crow Knight Sword", SWORD_TILE, TCODColor::lightGrey,
+		"The hilt is carved in the shape of a crow's head, and the blade is tinted black. The crow knights are certainly dedicated to a theme."));
 	wp->setBasicAttributes(50, SPEED_NORMAL);
 	wp->setSpecialAttack(attack_Splintering());
 	wp->addScalingType(SCALE_STR);
@@ -229,10 +229,10 @@ weapon * weapon_CrowKnightSword()
 	return wp;
 }
 
-weapon * weapon_CrowKnife()
+weaponSharedPtr weapon_CrowKnife()
 {
-	weapon* wp = new weapon("Crow Knife", DAGGER_TILE, TCODColor::lightGrey,
-		"The short blade of this knife is barbed to inflict bleeding.");
+	weaponSharedPtr wp(new weapon("Crow Knife", DAGGER_TILE, TCODColor::lightGrey,
+		"The short blade of this knife is barbed to inflict bleeding."));
 	wp->setBasicAttributes(15, SPEED_FAST);
 	wp->addStatusEffect(EFFECT_BLEED, 10);
 	wp->setSpecialAttack(attack_Splintering());
@@ -240,10 +240,10 @@ weapon * weapon_CrowKnife()
 	return wp;
 }
 
-weapon * weapon_CrowHalfsword()
+weaponSharedPtr weapon_CrowHalfsword()
 {
-	weapon* wp = new weapon("Crow Half-sword", SWORD_TILE, TCODColor::darkCrimson,
-		"Serrated half-sword of a crow knight, thirsting for blood.");
+	weaponSharedPtr wp(new weapon("Crow Half-sword", SWORD_TILE, TCODColor::darkCrimson,
+		"Serrated half-sword of a crow knight, thirsting for blood."));
 	wp->setBasicAttributes(25, SPEED_NORMAL);
 	wp->addStatusEffect(EFFECT_BLEED, 25);
 	wp->setSpecialAttack(attack_Splintering());
@@ -252,11 +252,11 @@ weapon * weapon_CrowHalfsword()
 	return wp;
 }
 
-weapon * weapon_OldCrowsLongKnife()
+weaponSharedPtr weapon_OldCrowsLongKnife()
 {
-	weapon* wp = new weapon("Old Crow's Long Knife", DAGGER_TILE, TCODColor::lightCrimson,
+	weaponSharedPtr wp(new weapon("Old Crow's Long Knife", DAGGER_TILE, TCODColor::lightCrimson,
 		"Long, serrated knife wielded by the Old Crow. Once he swore an oath to protect the pilgrims who ventured past the Wyrd, \
-but over the years his promise was forgotten.");
+but over the years his promise was forgotten."));
 	wp->setBasicAttributes(15, SPEED_FAST);
 	wp->addStatusEffect(EFFECT_BLEED, 15);
 	wp->setSpecialAttack(attack_Quickstep());
@@ -264,20 +264,20 @@ but over the years his promise was forgotten.");
 	return wp;
 }
 
-weapon * weapon_NotchedGreatsword()
+weaponSharedPtr weapon_NotchedGreatsword()
 {
-	weapon* wp = new weapon("Notched Greatsword", SWORD_TILE, TCODColor::grey,
-		"The blade of this huge sword is notched and marred, but it should still work.");
+	weaponSharedPtr wp(new weapon("Notched Greatsword", SWORD_TILE, TCODColor::grey,
+		"The blade of this huge sword is notched and marred, but it should still work."));
 	wp->setBasicAttributes(100, SPEED_SLOW);
 	wp->addScalingType(SCALE_STR);
 	wp->setSpecialAttack(attack_MightyCleave());
 	return wp;
 }
 
-weapon * weapon_FishmansHarpoon()
+weaponSharedPtr weapon_FishmansHarpoon()
 {
-	weapon* wp = new weapon("Fishman's Harpoon", SPEAR_TILE, TCODColor::lime,
-		"Its point is barbed to induce bleeding and to drag the victim.");
+	weaponSharedPtr wp(new weapon("Fishman's Harpoon", SPEAR_TILE, TCODColor::lime,
+		"Its point is barbed to induce bleeding and to drag the victim."));
 	wp->setBasicAttributes(40, SPEED_NORMAL);
 	wp->addStatusEffect(EFFECT_BLEED, 10);
 	wp->addScalingType(SCALE_STR);
@@ -286,20 +286,20 @@ weapon * weapon_FishmansHarpoon()
 	return wp;
 }
 
-weapon * weapon_FishmansKnife()
+weaponSharedPtr weapon_FishmansKnife()
 {
-	weapon* wp = new weapon("Fishman's Knife", DAGGER_TILE, TCODColor::lime,
-		"The short knives of the fishmen are weak but incredibly quick.");
+	weaponSharedPtr wp(new weapon("Fishman's Knife", DAGGER_TILE, TCODColor::lime,
+		"The short knives of the fishmen are weak but incredibly quick."));
 	wp->setBasicAttributes(15, SPEED_FAST);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_Fillet());
 	return wp;
 }
 
-weapon * weapon_CityGuardianWarhammer()
+weaponSharedPtr weapon_CityGuardianWarhammer()
 {
-	weapon* wp = new weapon("City Guardian Warhammer", HAMMER_TILE, TCODColor::darkYellow,
-		"Warhammer wielded by the divine guards of the Winter Court.");
+	weaponSharedPtr wp(new weapon("City Guardian Warhammer", HAMMER_TILE, TCODColor::darkYellow,
+		"Warhammer wielded by the divine guards of the Winter Court."));
 	wp->setBasicAttributes(75, SPEED_SLOW);
 	wp->addDamageType(DAMAGE_BLESSED, 25);
 	wp->addScalingType(SCALE_STR);
@@ -308,11 +308,11 @@ weapon * weapon_CityGuardianWarhammer()
 	return wp;
 }
 
-weapon * weapon_BloodDrinkersKnife()
+weaponSharedPtr weapon_BloodDrinkersKnife()
 {
-	weapon* wp = new weapon("Blood Drinker's Knife", DAGGER_TILE, TCODColor::crimson,
+	weaponSharedPtr wp(new weapon("Blood Drinker's Knife", DAGGER_TILE, TCODColor::crimson,
 		"This knife is serrated on both the blade and the grip, for the profane scriptures of Pash decree that to bleed is to \
-see the true shape of all things.");
+see the true shape of all things."));
 	wp->setBasicAttributes(10, SPEED_FAST);
 	wp->addStatusEffect(EFFECT_BLEED, 20);
 	wp->addScalingType(SCALE_DEX);
@@ -321,10 +321,10 @@ see the true shape of all things.");
 	return wp;
 }
 
-weapon * weapon_KythielsScythe()
+weaponSharedPtr weapon_KythielsScythe()
 {
-	weapon* wp = new weapon("Kythiel's Scythe", SPEAR_TILE, TCODColor::lightYellow,
-		"Kythiel, last priestess of the Winter Court, was the only one who stood against the Void when the city fell.");
+	weaponSharedPtr wp(new weapon("Kythiel's Scythe", SPEAR_TILE, TCODColor::lightYellow,
+		"Kythiel, last priestess of the Winter Court, was the only one who stood against the Void when the city fell."));
 	wp->setBasicAttributes(50, SPEED_NORMAL);
 	wp->addDamageType(DAMAGE_BLESSED, 25);
 	wp->addScalingType(SCALE_STR);
@@ -334,10 +334,10 @@ weapon * weapon_KythielsScythe()
 	return wp;
 }
 
-weapon * weapon_VoidTouchedKnife()
+weaponSharedPtr weapon_VoidTouchedKnife()
 {
-	weapon* wp = new weapon("Void-Touched Knife", DAGGER_TILE, TCODColor::lightPurple,
-		"The blade of this knife phases in and out of reality, pulsing with the raging heart of the Void.");
+	weaponSharedPtr wp(new weapon("Void-Touched Knife", DAGGER_TILE, TCODColor::lightPurple,
+		"The blade of this knife phases in and out of reality, pulsing with the raging heart of the Void."));
 	wp->setBasicAttributes(0, SPEED_FAST);
 	wp->addDamageType(DAMAGE_PROFANE, 20);
 	wp->addScalingType(SCALE_DEX);
@@ -345,10 +345,10 @@ weapon * weapon_VoidTouchedKnife()
 	return wp;
 }
 
-weapon * weapon_VoidCrystalGreatsword()
+weaponSharedPtr weapon_VoidCrystalGreatsword()
 {
-	weapon* wp = new weapon("Void Crystal Greatsword", SWORD_TILE, TCODColor::lightFuchsia,
-		"The blade of this enormous sword is forged from pure voidcrystal and phases in and out of existence.");
+	weaponSharedPtr wp(new weapon("Void Crystal Greatsword", SWORD_TILE, TCODColor::lightFuchsia,
+		"The blade of this enormous sword is forged from pure voidcrystal and phases in and out of existence."));
 	wp->setBasicAttributes(50, SPEED_SLOW);
 	wp->addDamageType(DAMAGE_PROFANE, 50);
 	wp->addScalingType(SCALE_STR);
@@ -357,10 +357,10 @@ weapon * weapon_VoidCrystalGreatsword()
 	return wp;
 }
 
-weapon * weapon_ArmOfTheDuke()
+weaponSharedPtr weapon_ArmOfTheDuke()
 {
-	weapon* wp = new weapon("Arm of the Duke", SWORD_TILE, TCODColor::lightGreen,
-		"The arms of the Duke were rubbery and numerous. Serves as both a weapon and a catalyst of obscene prayer.");
+	weaponSharedPtr wp(new weapon("Arm of the Duke", SWORD_TILE, TCODColor::lightGreen,
+		"The arms of the Duke were rubbery and numerous. Serves as both a weapon and a catalyst of obscene prayer."));
 	wp->setBasicAttributes(25, SPEED_SLOW);
 	wp->addDamageType(DAMAGE_PROFANE, 25);
 	wp->addScalingType(SCALE_STR);
@@ -372,11 +372,11 @@ weapon * weapon_ArmOfTheDuke()
 	return wp;
 }
 
-weapon * weapon_DragonboneSword()
+weaponSharedPtr weapon_DragonboneSword()
 {
-	weapon* wp = new weapon("Dragonbone Sword", SWORD_TILE, TCODColor::darkFlame,
+	weaponSharedPtr wp(new weapon("Dragonbone Sword", SWORD_TILE, TCODColor::darkFlame,
 		"The bones of dragons are known to possess a profound affinity for fire, and swords forged with this rare material \
-contain some of that power.");
+contain some of that power."));
 	wp->setBasicAttributes(30, SPEED_NORMAL);
 	wp->addDamageType(DAMAGE_FIRE, 20);
 	wp->addScalingType(SCALE_STR);
@@ -385,10 +385,10 @@ contain some of that power.");
 	return wp;
 }
 
-weapon * weapon_SerpentsTooth()
+weaponSharedPtr weapon_SerpentsTooth()
 {
-	weapon* wp = new weapon("Serpent's Tooth", DAGGER_TILE, TCODColor::lime,
-		"Tiny dagger made from the tooth of a poisonous serpent. Ideal for slipping between an unsuspecting suspect's ribs.");
+	weaponSharedPtr wp(new weapon("Serpent's Tooth", DAGGER_TILE, TCODColor::lime,
+		"Tiny dagger made from the tooth of a poisonous serpent. Ideal for slipping between an unsuspecting suspect's ribs."));
 	wp->setBasicAttributes(15, SPEED_FAST);
 	wp->addStatusEffect(EFFECT_POISON, 15);
 	wp->addScalingType(SCALE_DEX);
@@ -396,10 +396,10 @@ weapon * weapon_SerpentsTooth()
 	return wp;
 }
 
-weapon * weapon_CrimsonNail()
+weaponSharedPtr weapon_CrimsonNail()
 {
-	weapon* wp = new weapon("Crimson Nail", DAGGER_TILE, TCODColor::lightCrimson,
-		"This tiny nail is stained a deep red and is deadly sharp.");
+	weaponSharedPtr wp(new weapon("Crimson Nail", DAGGER_TILE, TCODColor::lightCrimson,
+		"This tiny nail is stained a deep red and is deadly sharp."));
 	wp->setBasicAttributes(10, SPEED_FAST);
 	wp->addScalingType(SCALE_DEX);
 	wp->scaleWithDamage = true;
@@ -407,10 +407,10 @@ weapon * weapon_CrimsonNail()
 	return wp;
 }
 
-weapon * weapon_SpiderboneShard()
+weaponSharedPtr weapon_SpiderboneShard()
 {
-	weapon* wp = new weapon("Spiderbone Shard", DAGGER_TILE, TCODColor::white,
-		"A sharpened piece of spider bone, infused with the ancient rage of Qom.");
+	weaponSharedPtr wp(new weapon("Spiderbone Shard", DAGGER_TILE, TCODColor::white,
+		"A sharpened piece of spider bone, infused with the ancient rage of Qom."));
 	wp->setBasicAttributes(20, SPEED_FAST);
 	wp->addStatusEffect(EFFECT_POISON, 20);
 	wp->addScalingType(SCALE_DEX);
@@ -418,11 +418,11 @@ weapon * weapon_SpiderboneShard()
 	return wp;
 }
 
-weapon * weapon_SacrificialKnife()
+weaponSharedPtr weapon_SacrificialKnife()
 {
-	weapon* wp = new weapon("Sacrificial Knife", DAGGER_TILE, TCODColor::orange,
+	weaponSharedPtr wp(new weapon("Sacrificial Knife", DAGGER_TILE, TCODColor::orange,
 		"Lady Tvert sent the Emissaries to bring the word of the gods to the people of the Valley. \
-Those who refused to heed the call were sacrificed to the Gaping Maw to the benefit of the living.");
+Those who refused to heed the call were sacrificed to the Gaping Maw to the benefit of the living."));
 	wp->setBasicAttributes(15, SPEED_FAST);
 	wp->addScalingType(SCALE_DEX);
 	wp->setDamageToSelf(5);
@@ -430,10 +430,10 @@ Those who refused to heed the call were sacrificed to the Gaping Maw to the bene
 	return wp;
 }
 
-weapon * weapon_ProfaneGreatsword()
+weaponSharedPtr weapon_ProfaneGreatsword()
 {
-	weapon* wp = new weapon("Profane Greatsword", SWORD_TILE, TCODColor::purple,
-		"A greatsword charged with the profane energy of the Void.");
+	weaponSharedPtr wp(new weapon("Profane Greatsword", SWORD_TILE, TCODColor::purple,
+		"A greatsword charged with the profane energy of the Void."));
 	wp->setBasicAttributes(50, SPEED_SLOW);
 	wp->addDamageType(DAMAGE_PROFANE, 25);
 	wp->addScalingType(SCALE_STR);
@@ -443,19 +443,19 @@ weapon * weapon_ProfaneGreatsword()
 
 //		Shields
 
-weapon * shield_BatteredWoodenShield()
+weaponSharedPtr shield_BatteredWoodenShield()
 {
-	weapon* wp = new weapon("Battered Wooden Shield", SHIELD_TILE, TCODColor::sepia,
-		"It's just a scrap of wood, but it might still save your life.");
+	weaponSharedPtr wp(new weapon("Battered Wooden Shield", SHIELD_TILE, TCODColor::sepia,
+		"It's just a scrap of wood, but it might still save your life."));
 	wp->setDefence(10);
 	wp->makeOffhand();
 	return wp;
 }
 
-weapon * shield_WoodenWyrdShield()
+weaponSharedPtr shield_WoodenWyrdShield()
 {
-	weapon* wp = new weapon("Wooden Wyrd Shield", SHIELD_TILE, TCODColor::darkSepia,
-		"The Wyrd hid behind these shields when the Blind King's arrows rained down on them.");
+	weaponSharedPtr wp(new weapon("Wooden Wyrd Shield", SHIELD_TILE, TCODColor::darkSepia,
+		"The Wyrd hid behind these shields when the Blind King's arrows rained down on them."));
 	wp->setDefence(10);
 	wp->setBleedResist(15);
 	wp->setDamagePenalty(5);
@@ -463,10 +463,10 @@ weapon * shield_WoodenWyrdShield()
 	return wp;
 }
 
-weapon * shield_BatteredSteelShield()
+weaponSharedPtr shield_BatteredSteelShield()
 {
-	weapon* wp = new weapon("Battered Steel Shield", SHIELD_TILE, TCODColor::grey,
-		"Aged, but perhaps still useful, if you can look past the dents.");
+	weaponSharedPtr wp(new weapon("Battered Steel Shield", SHIELD_TILE, TCODColor::grey,
+		"Aged, but perhaps still useful, if you can look past the dents."));
 	wp->setDefence(10);
 	wp->setDamageResist(DAMAGE_ACID, 5);
 	wp->setDamageResist(DAMAGE_FIRE, 5);
@@ -477,11 +477,11 @@ weapon * shield_BatteredSteelShield()
 	return wp;
 }
 
-weapon * shield_CityGuardianShield()
+weaponSharedPtr shield_CityGuardianShield()
 {
-	weapon* wp = new weapon("City Guardian Shield", SHIELD_TILE, TCODColor::darkYellow,
+	weaponSharedPtr wp(new weapon("City Guardian Shield", SHIELD_TILE, TCODColor::darkYellow,
 		"Round shield of the guards of the Winter Court. They were meant to protect the city against the onslaught of the Void, \
-but not a single knight survived.");
+but not a single knight survived."));
 	wp->setDefence(15);
 	wp->setDamageResist(DAMAGE_PROFANE, 15);
 	wp->setDamageResist(DAMAGE_FIRE, 10);
@@ -490,10 +490,10 @@ but not a single knight survived.");
 	return wp;
 }
 
-weapon * shield_VoidTouchedShield()
+weaponSharedPtr shield_VoidTouchedShield()
 {
-	weapon* wp = new weapon("Void-Touched Shield", SHIELD_TILE, TCODColor::darkPurple,
-		"This shield phases in and out of reality, forming fissures into the Void.");
+	weaponSharedPtr wp(new weapon("Void-Touched Shield", SHIELD_TILE, TCODColor::darkPurple,
+		"This shield phases in and out of reality, forming fissures into the Void."));
 	wp->setDefence(5);
 	wp->setDamageResist(DAMAGE_PROFANE, 50);
 	wp->setDamagePenalty(5);
@@ -501,10 +501,10 @@ weapon * shield_VoidTouchedShield()
 	return wp;
 }
 
-weapon * shield_DragonboneShield()
+weaponSharedPtr shield_DragonboneShield()
 {
-	weapon* wp = new weapon("Dragonbone Shield", SHIELD_TILE, TCODColor::darkFlame,
-		"This shield, forged from the bones of an ancient dragon, confers powerful protection from fire.");
+	weaponSharedPtr wp(new weapon("Dragonbone Shield", SHIELD_TILE, TCODColor::darkFlame,
+		"This shield, forged from the bones of an ancient dragon, confers powerful protection from fire."));
 	wp->setDefence(20);
 	wp->setDamageResist(DAMAGE_FIRE, 50);
 	wp->setDamagePenalty(15);
@@ -514,10 +514,10 @@ weapon * shield_DragonboneShield()
 
 //		Wands
 
-weapon * wand_DriftwoodWand()
+weaponSharedPtr wand_DriftwoodWand()
 {
-	weapon* wp = new weapon("Driftwood Wand", STAFF_TILE, TCODColor::sepia,
-		"Someone made this chunk of wand in a desparate hurry.");
+	weaponSharedPtr wp(new weapon("Driftwood Wand", STAFF_TILE, TCODColor::sepia,
+		"Someone made this chunk of wand in a desparate hurry."));
 	wp->setBasicAttributes(5, SPEED_SLOW);
 	wp->setSpellstoreSize(2);
 	wp->setSpellPower(100);
@@ -526,10 +526,10 @@ weapon * wand_DriftwoodWand()
 	return wp;
 }
 
-weapon * wand_FishmansToadstaff()
+weaponSharedPtr wand_FishmansToadstaff()
 {
-	weapon* wp = new weapon("Fishman's Toadstaff", STAFF_TILE, TCODColor::darkLime,
-		"Sometimes the toad impaled on the tip twitches. Is it still alive? Best not to dwell on it.");
+	weaponSharedPtr wp(new weapon("Fishman's Toadstaff", STAFF_TILE, TCODColor::darkLime,
+		"Sometimes the toad impaled on the tip twitches. Is it still alive? Best not to dwell on it."));
 	wp->setBasicAttributes(5, SPEED_NORMAL);
 	wp->setSpellstoreSize(4);
 	wp->setSpellPower(75);
@@ -538,10 +538,10 @@ weapon * wand_FishmansToadstaff()
 	return wp;
 }
 
-weapon * chime_ClericsCrackedChime()
+weaponSharedPtr chime_ClericsCrackedChime()
 {
-	weapon* wp = new weapon("Cleric's Cracked Chime", CHIME_TILE, TCODColor::darkYellow,
-		"Ring this broken chime to politely ask favours of the gods.");
+	weaponSharedPtr wp(new weapon("Cleric's Cracked Chime", CHIME_TILE, TCODColor::darkYellow,
+		"Ring this broken chime to politely ask favours of the gods."));
 	wp->setBasicAttributes(5, SPEED_SLOW);
 	wp->setSpellstoreSize(2);
 	wp->setDivinePower(100);
@@ -550,10 +550,10 @@ weapon * chime_ClericsCrackedChime()
 	return wp;
 }
 
-weapon * chime_WyrdBellbranch()
+weaponSharedPtr chime_WyrdBellbranch()
 {
-	weapon* wp = new weapon("Wyrd Bellbranch", CHIME_TILE, TCODColor::sepia,
-		"The trees of the Wyrd once grew tiny singing bells on their branches.");
+	weaponSharedPtr wp(new weapon("Wyrd Bellbranch", CHIME_TILE, TCODColor::sepia,
+		"The trees of the Wyrd once grew tiny singing bells on their branches."));
 	wp->setBasicAttributes(5, SPEED_SLOW);
 	wp->setSpellstoreSize(2);
 	wp->setDivinePower(100);
@@ -562,11 +562,11 @@ weapon * chime_WyrdBellbranch()
 	return wp;
 }
 
-weapon * chime_OrsylsProfaneChime()
+weaponSharedPtr chime_OrsylsProfaneChime()
 {
-	weapon* wp = new weapon("Orsyl's Profane Chime", CHIME_TILE, TCODColor::lightPurple,
+	weaponSharedPtr wp(new weapon("Orsyl's Profane Chime", CHIME_TILE, TCODColor::lightPurple,
 		"Once-holy chime of Orsyl, who stood against the Void for as long as he could. As the nightmare consumed him, he prayed to \
-the old gods, but they did not answer.");
+the old gods, but they did not answer."));
 	wp->setSpellstoreSize(4);
 	wp->setDivinePower(100);
 	wp->setSpecialAttack(prayer_ProfaneRadiance());

@@ -22,26 +22,26 @@ inventory::~inventory()
 /*
 Equips the item in the relevant slot
 */
-bool inventory::equipItem(item * which)
+bool inventory::equipItem(itemSharedPtr which)
 {
 	//We might also want to make a special pointer to this item
 	itemTypes cat = which->getCategory();
 	if (cat == ITEM_WEAPON)
-		equippedWeapon = static_cast<weapon*>(which);
+		equippedWeapon = std::static_pointer_cast<weapon>(which);
 	else if (cat == ITEM_OFFHAND)
-		equippedOffhand = static_cast<weapon*>(which);
+		equippedOffhand = std::static_pointer_cast<weapon>(which);
 	else if (cat == ITEM_BODY_ARMOUR)
-		equippedArmour = static_cast<armour*>(which);
+		equippedArmour = std::static_pointer_cast<armour>(which);
 	else if (cat == ITEM_HELMET)
-		equippedHelmet = static_cast<armour*>(which);
+		equippedHelmet = std::static_pointer_cast<armour>(which);
 	else if (cat == ITEM_CHARM)
-		equippedCharm = static_cast<charm*>(which);
+		equippedCharm = std::static_pointer_cast<charm>(which);
 	else if (cat == ITEM_CONSUMABLE)
-		equipConsumable(static_cast<consumable*>(which));
+		equipConsumable(std::static_pointer_cast<consumable>(which));
 	else if (cat == ITEM_SPELL) //Currently only spells can fail to equip
-		return equipSpell(static_cast<spell*>(which));
+		return equipSpell(std::static_pointer_cast<spell>(which));
 	else if (cat == ITEM_MISC)
-		equipMiscItem(static_cast<miscItem*>(which));
+		equipMiscItem(std::static_pointer_cast<miscItem>(which));
 	return true;
 }
 
@@ -49,7 +49,7 @@ bool inventory::equipItem(item * which)
 Unequips item, but doesn't drop it
 (NOT IMPLEMENTED)
 */
-void inventory::unequipItem(item * which)
+void inventory::unequipItem(itemSharedPtr which)
 {
 	itemTypes cat = which->getCategory();
 }
@@ -59,9 +59,9 @@ void inventory::unequipItem(item * which)
 Switch secondary and equipped weapons.
 Returns the newly-equipped weapon.
 */
-weapon* inventory::swapWeapon()
+weaponSharedPtr inventory::swapWeapon()
 {
-	weapon* temp = equippedWeapon;
+	weaponSharedPtr temp = equippedWeapon;
 	equippedWeapon = secondaryWeapon;
 	secondaryWeapon = temp;
 	return equippedWeapon;
@@ -71,17 +71,17 @@ weapon* inventory::swapWeapon()
 Spells have to be equipped onto an item with spellstore.
 Returns whether we were able to equip the spell.
 */
-bool inventory::equipSpell(spell * sp)
+bool inventory::equipSpell(spellSharedPtr sp)
 {
 	//Can our main weapon hold it?
-	weapon* wp = getWeapon();
+	weaponSharedPtr wp = getWeapon();
 	if (wp != nullptr && wp->canAddSpell()) {
 		wp->addSpell(sp);
 		return true;
 	}
 	else {
 		//If not, try offhand
-		weapon* off = getOffhand();
+		weaponSharedPtr off = getOffhand();
 		//If it's already in here, remove it!
 		if (off != nullptr) {
 			if (off->hasSpellStored(sp)) {
@@ -102,17 +102,17 @@ bool inventory::equipSpell(spell * sp)
 Remove spell from whatever we have it equipped on, if anything
 (NEEDS TO BE IMPLEMENTED)
 */
-void inventory::unequipSpell(spell * sp)
+void inventory::unequipSpell(spellSharedPtr sp)
 {
 }
 
 /*
 Only true if the spell is contained in something we have equipped.
 */
-bool inventory::isSpellEquipped(spell * sp)
+bool inventory::isSpellEquipped(spellSharedPtr sp)
 {
-	weapon* wp = getWeapon();
-	weapon* off = getOffhand();
+	weaponSharedPtr wp = getWeapon();
+	weaponSharedPtr off = getOffhand();
 	if (wp != nullptr && wp->hasSpellStored(sp))
 		return true;
 	if (off != nullptr && off->hasSpellStored(sp))
@@ -123,19 +123,25 @@ bool inventory::isSpellEquipped(spell * sp)
 /*
 Equip a consumable to our CONSUMABLES HOTBAR.
 */
-void inventory::equipConsumable(consumable * c)
+void inventory::equipConsumable(consumableSharedPtr c)
 {
+	
 	//Iterator to item
 	auto f = std::find(equippedConsumables.begin(), equippedConsumables.end(), c);
+	
 	//Is it already equipped?
 	if (f != equippedConsumables.end()) {
+		
 		//If it's already equipped, let's UNEQUIP it!
 		equippedConsumables.erase(f);
 		//If this is our selected consumable, deselect it
 		if (selectedConsumable == c)
 			selectedConsumable = nullptr;
+	
 	}
+	
 	else {
+		
 		//See if we have room in the hotbar
 		if (equippedConsumables.size() < MAX_CONSUMABLE_SLOTS) {
 			//Yup, we're not equipping it twice
@@ -144,6 +150,7 @@ void inventory::equipConsumable(consumable * c)
 			if (selectedConsumable == nullptr) {
 				selectedConsumable = c;
 			}
+		
 		}
 	}
 }
@@ -151,7 +158,7 @@ void inventory::equipConsumable(consumable * c)
 /*
 Hard-sets our selected consumable.
 */
-void inventory::setSelectedConsumable(consumable * c)
+void inventory::setSelectedConsumable(consumableSharedPtr c)
 {
 	selectedConsumable = c;
 }
@@ -159,7 +166,7 @@ void inventory::setSelectedConsumable(consumable * c)
 /*
 Returns whether the given item is in our HOTBAR.
 */
-bool inventory::isConsumableEquipped(consumable * c)
+bool inventory::isConsumableEquipped(consumableSharedPtr c)
 {
 	return std::find(equippedConsumables.begin(), equippedConsumables.end(), c) != equippedConsumables.end();
 }
@@ -168,11 +175,11 @@ bool inventory::isConsumableEquipped(consumable * c)
 /*
 Misc items can do various things when equipped, but usually it's nothing!
 */
-void inventory::equipMiscItem(miscItem * m)
+void inventory::equipMiscItem(miscItemSharedPtr m)
 {
 	if (m->isRunestone) {
 		//Equip in current weapon, if possible
-		weapon* wp = getWeapon();
+		weaponSharedPtr wp = getWeapon();
 		if (wp != nullptr) {
 			wp->setRune(m->getRune());
 		}
@@ -187,7 +194,7 @@ bool inventory::hasKey(std::string keyTag)
 {
 	//Search our MISCELLANEOUS ITEMS
 	for (auto it : getItemList(ITEM_MISC)) {
-		miscItem* misc = static_cast<miscItem*>(it);
+		miscItemSharedPtr misc = std::static_pointer_cast<miscItem>(it);
 		if (misc->isKey && misc->getKeyTag() == keyTag)
 			return true;
 	}
@@ -199,7 +206,7 @@ Add an item to our storage, without equipping it.
 Returns TRUE if the item stacked with another item.
 Returns FALSE if a new entry was created for this item.
 */
-bool inventory::addItem(item * which)
+bool inventory::addItem(itemSharedPtr which)
 {
 	//Find the proper list
 	for (auto ilist = carried.begin(); ilist != carried.end(); ilist++) {
@@ -231,7 +238,7 @@ bool inventory::addItem(item * which)
 Returns first equipped item of the given category.
 This is generally slower than getting it directly from the pointer!
 */
-item * inventory::getEquipped(itemTypes category)
+itemSharedPtr inventory::getEquipped(itemTypes category)
 {
 	switch (category) {
 	case(ITEM_WEAPON): return getWeapon();
@@ -246,7 +253,7 @@ item * inventory::getEquipped(itemTypes category)
 /*
 Return all carried items of the given type.
 */
-std::vector<item*> inventory::getItemList(itemTypes category)
+itemVector inventory::getItemList(itemTypes category)
 {
 	//Find this category
 	for (auto it : carried) {
@@ -254,7 +261,7 @@ std::vector<item*> inventory::getItemList(itemTypes category)
 			return it.items;
 	}
 	//If we don't find this category for some reason, return an empty vector
-	return std::vector<item*>();
+	return itemVector();
 }
 
 /*
@@ -270,10 +277,7 @@ void inventory::cycleConsumable()
 /*
 Returns which equipped consumable we currently have selected.
 */
-consumable * inventory::getSelectedConsumable()
+consumableSharedPtr inventory::getSelectedConsumable()
 {
-	/*if (selectedConsumable < equippedConsumables.size())
-		return equippedConsumables.at(selectedConsumable);
-	return nullptr;*/
 	return selectedConsumable;
 }

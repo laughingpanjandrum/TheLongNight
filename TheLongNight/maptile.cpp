@@ -162,7 +162,7 @@ maptile * tile_VoidTree()
 
 maptile * tile_DeadTree()
 {
-	return new maptile("Dead Tree", "dead_tree", TREE_TILE, DARK_WOOD_COLOR, DARK_SAND_COLOR);
+	return new maptile("Dead Tree", "dead_tree", TREE_TILE, DARK_WOOD_COLOR, DARK_SAND_COLOR, false, false);
 }
 
 maptile * tile_Water()
@@ -267,7 +267,7 @@ maptile * tile_VoidWarpstone()
 
 maptile * tile_WretchedDoor()
 {
-	maptile* door = new maptile("Wretched Door", "wretched_door", BASIC_DOOR_TILE, DARK_SAND_COLOR, LIGHT_SAND_COLOR, 
+	maptile* door = new maptile("Wretched Door", "wretched_door", BASIC_DOOR_TILE, LIGHT_STONE_COLOR, DARK_STONE_COLOR, 
 		false, false);
 	door->unlockCode = "wretched_door";
 	door->isDoor = true;
@@ -359,6 +359,16 @@ maptile * tile_OldValleyDoor()
 	return door;
 }
 
+maptile * tile_DesolateChurchDoor()
+{
+	maptile* door = new maptile("Desolate Church Door", "desolate_church_door", BASIC_DOOR_TILE,
+		TCODColor::darkFlame, TCODColor::grey, false, false);
+	door->isDoor = true;
+	door->unlockCode = "bartons_key";
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	return door;
+}
+
 maptile * tile_Chair1()
 {
 	return new maptile("Chair", "chair1", CHAIR_TILE_1,
@@ -393,4 +403,10 @@ maptile * tile_Table4()
 {
 	return new maptile("Table", "table4", TABLE_TILE_4,
 		TREE_COLOR, DARK_STONE_COLOR, true, false);
+}
+
+maptile * tile_Tombstone()
+{
+	return new maptile("Tombstone", "tombstone", TOMBSTONE_TILE,
+		LIGHT_STONE_COLOR, DARKEST_GRASS_COLOR, true, true);
 }

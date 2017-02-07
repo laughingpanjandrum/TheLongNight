@@ -29,13 +29,13 @@ public:
 	bool isRangedAttackItem() { return rangedAttack != nullptr; }
 	effectVector getEffects() { return effectsApplied; }
 	int getPotency() { return potency; }
-	spell* getRangedAttack() { return rangedAttack; }
+	spellSharedPtr getRangedAttack() { return rangedAttack; }
 	weaponBuff* getWeaponBuff() { return buff; }
 
 	//Setting effects
 	void addEffect(effect eff) { effectsApplied.push_back(eff); }
 	void setPotency(int pot) { potency = pot; }
-	void setRangedAttack(spell* at) { rangedAttack = at; }
+	void setRangedAttack(spellSharedPtr at) { rangedAttack = at; }
 	void setWeaponBuff(weaponBuff* b) { buff = b; }
 
 	//Flags
@@ -52,44 +52,47 @@ private:
 	int potency;
 
 	//Ranged attack is treated as a spell, for ranged-attack consumables
-	spell* rangedAttack;
+	spellSharedPtr rangedAttack;
 
 	//Weapon buff, for consumables that do that
 	weaponBuff* buff;
 
 };
 
-typedef std::vector<consumable*> consumableVector;
+
+typedef std::shared_ptr<consumable> consumableSharedPtr;
+typedef std::vector<consumableSharedPtr> consumableVector;
 
 /*
 	Consumable objects
 */
 
-consumable* consumable_StarwaterDraught();
-consumable* consumable_InvigoratingTea();
+consumableSharedPtr consumable_StarwaterDraught();
+consumableSharedPtr consumable_InvigoratingTea();
 
-consumable* consumable_TinyRedFlower();
-consumable* consumable_TinyGreenFlower();
-consumable* consumable_BloodDrinkersEyes();
-consumable* consumable_IntoxicatingWine();
+consumableSharedPtr consumable_TinyRedFlower();
+consumableSharedPtr consumable_TinyGreenFlower();
+consumableSharedPtr consumable_BloodDrinkersEyes();
+consumableSharedPtr consumable_IntoxicatingWine();
 
-consumable* ranged_ThrowingKnives();
-consumable* ranged_HeavyJavelin();
-consumable* ranged_LaceratingKnives();
-consumable* ranged_PoisonThrowingKnives();
-consumable* ranged_CorrodingJar();
-consumable* ranged_VoidEssenceJar();
-consumable* ranged_PyromancersFlask();
-consumable* ranged_WitchsJar();
-consumable* ranged_LightingJavelin();
-consumable* ranged_FrostKnives();
+consumableSharedPtr ranged_ThrowingKnives();
+consumableSharedPtr ranged_HeavyJavelin();
+consumableSharedPtr ranged_LaceratingKnives();
+consumableSharedPtr ranged_PoisonThrowingKnives();
+consumableSharedPtr ranged_CorrodingJar();
+consumableSharedPtr ranged_VoidEssenceJar();
+consumableSharedPtr ranged_PyromancersFlask();
+consumableSharedPtr ranged_WitchsJar();
+consumableSharedPtr ranged_LightingJavelin();
+consumableSharedPtr ranged_FrostKnives();
 
-consumable* oil_PyromancersOil();
-consumable* oil_CorrosiveOil();
-consumable* oil_FrozenOil();
-consumable* oil_HolyWater();
+consumableSharedPtr oil_PyromancersOil();
+consumableSharedPtr oil_CorrosiveOil();
+consumableSharedPtr oil_FrozenOil();
+consumableSharedPtr oil_HolyWater();
+consumableSharedPtr oil_CursedWater();
 
-consumable* bell_VoidwalkersDancingBell();
-consumable* bell_VoidwalkersReturningBell();
+consumableSharedPtr bell_VoidwalkersDancingBell();
+consumableSharedPtr bell_VoidwalkersReturningBell();
 
 #endif

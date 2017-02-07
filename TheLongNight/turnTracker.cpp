@@ -11,7 +11,7 @@ turnTracker::~turnTracker()
 {
 }
 
-void turnTracker::addEntity(person * entity, int atDelay)
+void turnTracker::addEntity(personSharedPtr entity, int atDelay)
 {
 	trackedEntity newTrack(entity, atDelay);
 	tracking.push_back(newTrack);
@@ -20,14 +20,14 @@ void turnTracker::addEntity(person * entity, int atDelay)
 /*
 Return the character whose turn is up next.
 */
-person * turnTracker::getNext()
+personSharedPtr turnTracker::getNext()
 {
 	//If the list is empty, we have a problem! Return nullptr as a warning
 	if (tracking.size() == 0)
 		return nullptr;
 	//If we find anyone with delay zero, we send them back.
 	//Otherwise, we reduce everyone's delay and try again.
-	person* next = nullptr;
+	personSharedPtr next = nullptr;
 	while (next == nullptr) {
 		for (auto it = tracking.begin(); it != tracking.end(); it++) {
 			if ((*it).delayLeft <= 0) {

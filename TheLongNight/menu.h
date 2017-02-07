@@ -21,8 +21,8 @@ public:
 
 	//Setting up
 	void addElement(std::string name, TCODColor color);
-	void addElement(element* e) { elements.push_back(e); }
-	void removeElement(element* e);
+	void addElement(elementSharedPtr e) { elements.push_back(e); }
+	void removeElement(elementSharedPtr e);
 
 	//Menu navigation
 	void scrollDown();
@@ -31,7 +31,7 @@ public:
 	//Getting
 	std::string getTitle() { return title; }
 	elementVector getAllElements() { return elements; }
-	element* getSelectedItem();
+	elementSharedPtr getSelectedItem();
 
 private:
 

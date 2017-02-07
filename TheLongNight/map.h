@@ -3,6 +3,8 @@
 #define MAP_H
 
 #include <vector>
+#include <memory>
+
 #include "maptile.h"
 #include "person.h"
 #include "monster.h"
@@ -25,10 +27,11 @@ struct storyEvent {
 	coord spawnPt;
 };
 
-typedef std::vector<person*> personVector;
-typedef std::vector<item*> itemVector;
+
+
 typedef std::vector<connectionPoint> connectionVector;
 typedef std::vector<storyEvent> storyEventVector;
+
 
 class map
 {
@@ -56,10 +59,10 @@ public:
 
 	//Setting
 	void setTile(maptile* t, int x, int y);
-	void addPerson(person* p, int x, int y);
-	void removePerson(person* p);
-	void addItem(item* it, int x, int y);
-	void removeItem(item* it);
+	void addPerson(personSharedPtr p, int x, int y);
+	void removePerson(personSharedPtr p);
+	void addItem(itemSharedPtr it, int x, int y);
+	void removeItem(itemSharedPtr it);
 	void setStartPoint(coord sp) { startPt = sp; }
 	void addMonsterSpawner(std::string monsterTag, coord xy);
 	void removeMonsterSpawner(std::string monsterTag);
@@ -71,9 +74,9 @@ public:
 	int getXSize() { return xsize; }
 	int getYSize() { return ysize; }
 	maptile* getTile(int x, int y);
-	person* getPerson(int x, int y);
+	personSharedPtr getPerson(int x, int y);
 	personVector getAllPeople() { return people; }
-	item* getItem(int x, int y);
+	itemSharedPtr getItem(int x, int y);
 	coord getStartPoint() { return startPt; }
 
 	//Getting: movement data

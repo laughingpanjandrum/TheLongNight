@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include <fstream>
+#include <memory>
+
 #include "person.h"
 #include "utility.h"
 
@@ -12,14 +14,13 @@ class monster: public person
 {
 public:
 
+	typedef std::shared_ptr<monster> monsterSharedPtr;
+
 	//Constructors
 	monster();
 	monster(std::string name, int tileCode, TCODColor color, std::string description = "");
 	monster(const monster& rhs) {} //Copy constructor
 	~monster() {}
-
-	//Copying
-	monster* clone() const { return new monster(*this); }
 
 	//Setting
 	void setMeleeStats(int damage, int speed);
@@ -40,22 +41,22 @@ public:
 	//Spawning stuff
 	bool canSpawnCreatures() { return spawnList.size() > 0; }
 	bool wantsToSpawn();
-	monster * getRandomSpawn();
+	monsterSharedPtr getRandomSpawn();
 	void addSpawnableCreature(std::string handle) { spawnList.push_back(handle); }
 	void setSpawnChance(int c) { spawnChance = c; }
 
 	//Item drops when we DIE
 	itemVector getItemDrops() { return drops; }
-	void addItemDrop(item* it) { drops.push_back(it); }
+	void addItemDrop(itemSharedPtr it) { drops.push_back(it); }
 	int getFragmentsDropped() { return dropsFragments; }
 	void setFragmentsDropped(int f) { dropsFragments = f; }
 
 	//Shopkeeping
-	void addItemToStock(item* it, int price);
-	void addStockUnlock(item* it, int price, std::string unlockCode);
-	void removeItemFromStock(item* it);
+	void addItemToStock(itemSharedPtr it, int price);
+	void addStockUnlock(itemSharedPtr it, int price, std::string unlockCode);
+	void removeItemFromStock(itemSharedPtr it);
 	itemVector getStock() { return stock; }
-	void checkForStockUnlocks(person* unlocker);
+	void checkForStockUnlocks(personSharedPtr unlocker);
 
 	//Chatting with ur buddies
 	void loadDialogue(std::string filename);
@@ -92,7 +93,9 @@ protected:
 
 };
 
-typedef std::vector<monster*> monsterVector;
+
+typedef std::shared_ptr<monster> monsterSharedPtr;
+typedef std::vector<monsterSharedPtr> monsterVector;
 
 
 
@@ -101,74 +104,81 @@ typedef std::vector<monster*> monsterVector;
 
 
 //Stardrift Wreckage
-monster* monster_DrownedCrew();
+monsterSharedPtr monster_DrownedCrew();
 
 //Coruscating Beach
-monster* monster_ThinWretch();
-monster* monster_TimidWretch();
-monster* monster_BloatedWretch();
-monster* boss_TheWretchedMass();
+monsterSharedPtr monster_ThinWretch();
+monsterSharedPtr monster_TimidWretch();
+monsterSharedPtr monster_BloatedWretch();
+monsterSharedPtr boss_TheWretchedMass();
 
 //Pilgrim's Road
-monster* monster_CrowKnight();
-monster* monster_CrowThief();
-monster* monster_CrowArcher();
-monster* monster_ForlornCrowKnight();
-monster* monster_TheOldCrow();
+monsterSharedPtr monster_CrowKnight();
+monsterSharedPtr monster_CrowThief();
+monsterSharedPtr monster_CrowArcher();
+monsterSharedPtr monster_ForlornCrowKnight();
+monsterSharedPtr monster_TheOldCrow();
 
 //The Flooded Lowlands
-monster* monster_StarvingFishman();
-monster* monster_FishmanDoomPreacher();
-monster* monster_FishmanSpearfisher();
-monster* monster_GuardianGolem();
-monster* monster_DegenerateFishman();
-monster* monster_SkinlessKnight();
-monster* monster_FishbornGoddess();
+monsterSharedPtr monster_StarvingFishman();
+monsterSharedPtr monster_FishmanDoomPreacher();
+monsterSharedPtr monster_FishmanSpearfisher();
+monsterSharedPtr monster_GuardianGolem();
+monsterSharedPtr monster_DegenerateFishman();
+monsterSharedPtr monster_SkinlessKnight();
+monsterSharedPtr monster_FishbornGoddess();
 
 //Darkwater Forest
-monster* monster_GiantRat();
-monster* monster_ProfaneRatPriest();
+monsterSharedPtr monster_GiantRat();
+monsterSharedPtr monster_ProfaneRatPriest();
 
 //Crumbling City
-monster* monster_CrawlingZombie();
-monster* monster_FirespitterZombie();
-monster* monster_OozingZombie();
-monster* monster_DevoteeOfPash();
-monster* monster_VoidwalkerMinas();
-monster* monster_BloodthirstyHound();
-monster* monster_BloodstarvedZombie();
-monster* monster_HighClericOrsylTheProfaned();
-monster* monster_CursedKnight();
-monster* monster_CursedArcher();
-monster* monster_Enkidu();
-monster* monster_DukeVortenTheWatchful();
+monsterSharedPtr monster_CrawlingZombie();
+monsterSharedPtr monster_FirespitterZombie();
+monsterSharedPtr monster_OozingZombie();
+monsterSharedPtr monster_DevoteeOfPash();
+monsterSharedPtr monster_VoidwalkerMinas();
+monsterSharedPtr monster_BloodthirstyHound();
+monsterSharedPtr monster_BloodstarvedZombie();
+monsterSharedPtr monster_HighClericOrsylTheProfaned();
+monsterSharedPtr monster_CursedKnight();
+monsterSharedPtr monster_CursedArcher();
+monsterSharedPtr monster_Enkidu();
+monsterSharedPtr monster_DukeVortenTheWatchful();
 
 //The Winter Court
-monster* monster_WinterShade();
-monster* monster_HollowfacedKnight();
+monsterSharedPtr monster_WinterShade();
+monsterSharedPtr monster_HollowfacedKnight();
 
 //The Murdermire
-monster* monster_Wisp();
-monster* monster_DrownedDead();
-monster* monster_SwampSpider();
-monster* monster_AdherentOfGlug();
-monster* monster_GhorthTheBloatedSpider();
+monsterSharedPtr monster_Wisp();
+monsterSharedPtr monster_DrownedDead();
+monsterSharedPtr monster_SwampSpider();
+monsterSharedPtr monster_AdherentOfGlug();
+monsterSharedPtr monster_GhorthTheBloatedSpider();
+
+//Tear-Stained Valley
+monsterSharedPtr monster_UndeadPrisoner();
+monsterSharedPtr monster_BloatedSlaveDriver();
+monsterSharedPtr monster_SlaveringHound();
+monsterSharedPtr monster_Emissary();
+monsterSharedPtr monster_BartonTheProwlingMinister();
 
 //The Void
-monster* monster_VoidTouched();
+monsterSharedPtr monster_VoidTouched();
 
 //Friendly NPCs
-monster* npc_Gorem();
-monster* npc_UtricTheRat();
-monster* npc_MuiraClericOfTheRose();
-monster* npc_ElenaThePilgrim();
-monster* npc_VoidwalkerDaedelus();
-monster* npc_Ydella();
-monster* npc_TheEyelessQueen();
-monster* npc_ToadPriestGhulluk();
+monsterSharedPtr npc_Gorem();
+monsterSharedPtr npc_UtricTheRat();
+monsterSharedPtr npc_MuiraClericOfTheRose();
+monsterSharedPtr npc_ElenaThePilgrim();
+monsterSharedPtr npc_VoidwalkerDaedelus();
+monsterSharedPtr npc_Ydella();
+monsterSharedPtr npc_TheEyelessQueen();
+monsterSharedPtr npc_ToadPriestGhulluk();
 
 
 //For map files
-monster* getMonsterByHandle(std::string handle);
+monsterSharedPtr getMonsterByHandle(std::string handle);
 
 #endif

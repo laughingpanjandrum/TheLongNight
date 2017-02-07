@@ -9,8 +9,9 @@ window::window() : window("THE LONG NIGHT", 100, 70)
 window::window(std::string name, int xsize, int ysize) {
 	TCODSystem::setFps(30);
 	//Setup console
-	mainConsole = new TCODConsole(xsize, ysize);
-	mainConsole->setCustomFont("fonts/large_final_10x10.png", TCOD_FONT_LAYOUT_ASCII_INROW, 16, 32);
+	//mainConsole = new TCODConsole(xsize, ysize);
+	//mainConsole->setCustomFont("fonts/large_final_10x10.png", TCOD_FONT_LAYOUT_ASCII_INROW, 16, 32);
+	TCODConsole::setCustomFont("fonts/large_final_10x10.png", TCOD_FONT_LAYOUT_ASCII_INROW, 16, 32);
 	//Go!
 	TCODConsole::initRoot(xsize, ysize, name.c_str());
 	//Custom font mapping
@@ -19,8 +20,6 @@ window::window(std::string name, int xsize, int ysize) {
 		TCODConsole::mapAsciiCodesToFont(asc, 16, 0, y);
 		asc += 16;
 	}
-	//TCODConsole::mapAsciiCodeToFont(339, 4, 22);
-	//TCODConsole::mapAsciiCodesToFont(256, 255, 17, 0);
 }
 
 /*
@@ -62,7 +61,8 @@ Put a character at the specified screen location.
 Input: x, y coordinates in the window; a character; a foreground and background color.
 */
 void window::writec(int x, int y, int c, TCODColor col, TCODColor bgcol, bool toAltConsole) {
-	mainConsole->putCharEx(x, y, c, col, bgcol);
+	//TCODConsole::putCharEx(nullptr, x, y, c, col, bgcol);
+	TCODConsole::root->putCharEx(x, y, c, col, bgcol);
 }
 
 /*
@@ -118,10 +118,13 @@ Flush the root console.
 Input: None.
 Output: None.
 */
-void window::refresh() {
-	TCODConsole::blit(mainConsole, 0, 0, 0, 0, TCODConsole::root, 0, 0);
+void window::refresh() 
+{
+	//TCODConsole::blit(mainConsole, 0, 0, 0, 0, TCODConsole::root, 0, 0);
 	TCODConsole::flush();
 }
+
+
 
 /*
 Clears only the specified region.
@@ -130,7 +133,7 @@ void window::clearRegion(int lx, int ty, int w, int h)
 {
 	for (int x = lx; x < lx + w; x++) {
 		for (int y = ty; y < ty + h; y++) {
-			mainConsole->putCharEx(x, y, ' ', TCODColor::black, TCODColor::black);
+			TCODConsole::root->putCharEx(x, y, 0, TCODColor::black, TCODColor::black);
 		}
 	}
 }
@@ -142,7 +145,7 @@ Output: None.
 */
 void window::clear() {
 	TCODConsole::root->clear();
-	mainConsole->clear();
+	//mainConsole->clear();
 }
 
 /*

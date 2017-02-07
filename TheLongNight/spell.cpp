@@ -50,60 +50,60 @@ Spell objects
 
 //Weapon arts
 
-spell * attack_Splintering()
+spellSharedPtr attack_Splintering()
 {
-	spell* sp = new spell("Splintering", SWORD_TILE, TCODColor::crimson,
-		"Deals 20 bleed damage to target.");
+	spellSharedPtr sp(new spell("Splintering", SWORD_TILE, TCODColor::crimson,
+		"Deals 20 bleed damage to target."));
 	sp->setAttackType(ATTACK_MELEE);
 	sp->addEffect(APPLY_BLEED_DAMAGE, 20);
 	sp->setVigourCost(1);
 	return sp;
 }
 
-spell * attack_Quickstep()
+spellSharedPtr attack_Quickstep()
 {
-	spell* sp = new spell("Quickstep", SWORD_TILE, TCODColor::yellow,
-		"Quickly leap one space.");
+	spellSharedPtr sp(new spell("Quickstep", SWORD_TILE, TCODColor::yellow,
+		"Quickly leap one space."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->setVigourCost(1);
 	sp->addEffect(GAIN_FREE_MOVES, 2);
 	return sp;
 }
 
-spell * attack_StrongAttack()
+spellSharedPtr attack_StrongAttack()
 {
-	spell* sp = new spell("Strong Attack", SWORD_TILE, TCODColor::darkRed,
-		"Next attack deals double damage.");
+	spellSharedPtr sp(new spell("Strong Attack", SWORD_TILE, TCODColor::darkRed,
+		"Next attack deals double damage."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(SCALE_NEXT_ATTACK, 100);
 	sp->setVigourCost(1);
 	return sp;
 }
 
-spell * attack_Knockback()
+spellSharedPtr attack_Knockback()
 {
-	spell* sp = new spell("Knockback", SWORD_TILE, TCODColor::lightBlue,
-		"Next attack knocks target back.");
+	spellSharedPtr sp(new spell("Knockback", SWORD_TILE, TCODColor::lightBlue,
+		"Next attack knocks target back."));
 	sp->setAttackType(ATTACK_MELEE);
 	sp->addEffect(KNOCKBACK_TARGET, 2);
 	sp->setVigourCost(1);
 	return sp;
 }
 
-spell * attack_MightyCleave()
+spellSharedPtr attack_MightyCleave()
 {
-	spell* sp = new spell("Mighty Cleave", SWORD_TILE, TCODColor::grey,
-		"Attack all adjacent targets.");
+	spellSharedPtr sp(new spell("Mighty Cleave", SWORD_TILE, TCODColor::grey,
+		"Attack all adjacent targets."));
 	sp->setAttackType(ATTACK_AOE);
 	sp->addEffect(CASTER_MELEE_ATTACK, 1);
 	sp->setVigourCost(2);
 	return sp;
 }
 
-spell * attack_Spearfishing()
+spellSharedPtr attack_Spearfishing()
 {
-	spell* sp = new spell("Spearfishing", SWORD_TILE, TCODColor::lime,
-		"Ranged attack yanks target closer.");
+	spellSharedPtr sp(new spell("Spearfishing", SWORD_TILE, TCODColor::lime,
+		"Ranged attack yanks target closer."));
 	sp->setAttackType(ATTACK_RANGE);
 	sp->setAttackRange(3);
 	sp->setVigourCost(1);
@@ -112,20 +112,20 @@ spell * attack_Spearfishing()
 	return sp;
 }
 
-spell * attack_Fillet()
+spellSharedPtr attack_Fillet()
 {
-	spell* sp = new spell("Fillet", DAGGER_TILE, TCODColor::crimson,
-		"Make multiple attacks at once.");
+	spellSharedPtr sp(new spell("Fillet", DAGGER_TILE, TCODColor::crimson,
+		"Make multiple attacks at once."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->setVigourCost(1);
 	sp->addEffect(GAIN_MULTIPLE_ATTACKS, 3);
 	return sp;
 }
 
-spell * attack_DivineSmite()
+spellSharedPtr attack_DivineSmite()
 {
-	spell* sp = new spell("Divine Smite", HAMMER_TILE, TCODColor::darkYellow,
-		"Smite target with holy fury.");
+	spellSharedPtr sp(new spell("Divine Smite", HAMMER_TILE, TCODColor::darkYellow,
+		"Smite target with holy fury."));
 	sp->setAttackType(ATTACK_MELEE);
 	sp->setVigourCost(3);
 	sp->addEffect(APPLY_BLESSED_DAMAGE, 100);
@@ -133,10 +133,10 @@ spell * attack_DivineSmite()
 	return sp;
 }
 
-spell * attack_BloodFeast()
+spellSharedPtr attack_BloodFeast()
 {
-	spell* sp = new spell("Blood Feast", SPELL_TILE, TCODColor::crimson,
-		"Inflict bleed on oneself. Next attack deals +15 damage.");
+	spellSharedPtr sp(new spell("Blood Feast", SPELL_TILE, TCODColor::crimson,
+		"Inflict bleed on oneself. Next attack deals +15 damage."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(APPLY_BLEED_DAMAGE, 10);
 	sp->addEffect(SCALE_NEXT_ATTACK, 15);
@@ -144,10 +144,10 @@ spell * attack_BloodFeast()
 	return sp;
 }
 
-spell * attack_HolySummons()
+spellSharedPtr attack_HolySummons()
 {
-	spell* sp = new spell("Holy Summons", SPELL_TILE, TCODColor::darkYellow,
-		"Pull target closer and deal 25 holy damage.");
+	spellSharedPtr sp(new spell("Holy Summons", SPELL_TILE, TCODColor::darkYellow,
+		"Pull target closer and deal 25 holy damage."));
 	sp->setAttackType(ATTACK_RANGE);
 	sp->setAttackRange(3);
 	sp->addEffect(APPLY_BLESSED_DAMAGE, 25);
@@ -156,10 +156,10 @@ spell * attack_HolySummons()
 	return sp;
 }
 
-spell * attack_VoidSlash()
+spellSharedPtr attack_VoidSlash()
 {
-	spell* sp = new spell("Void Slash", DAGGER_TILE, TCODColor::lightPurple,
-		"Damage target and fling away.");
+	spellSharedPtr sp(new spell("Void Slash", DAGGER_TILE, TCODColor::lightPurple,
+		"Damage target and fling away."));
 	sp->setAttackType(ATTACK_RANGE);
 	sp->setAttackRange(2);
 	sp->addEffect(APPLY_PROFANE_DAMAGE, 25);
@@ -168,10 +168,10 @@ spell * attack_VoidSlash()
 	return sp;
 }
 
-spell * attack_VoidSurge()
+spellSharedPtr attack_VoidSurge()
 {
-	spell* sp = new spell("Void Surge", SWORD_TILE, TCODColor::lightFuchsia,
-		"Weapon surges with profane power, but damages you.");
+	spellSharedPtr sp(new spell("Void Surge", SWORD_TILE, TCODColor::lightFuchsia,
+		"Weapon surges with profane power, but damages you."));
 	sp->setAttackType(ATTACK_BUFF_WEAPON);
 	sp->setBuffApplied(DAMAGE_PROFANE, 50);
 	sp->setVigourCost(3);
@@ -179,30 +179,30 @@ spell * attack_VoidSurge()
 	return sp;
 }
 
-spell * attack_FlameSwathe()
+spellSharedPtr attack_FlameSwathe()
 {
-	spell* sp = new spell("Flame Swathe", SPELL_TILE, TCODColor::darkFlame,
-		"Adjacent targets take fire damage.");
+	spellSharedPtr sp(new spell("Flame Swathe", SPELL_TILE, TCODColor::darkFlame,
+		"Adjacent targets take fire damage."));
 	sp->setAttackType(ATTACK_AOE, 2);
 	sp->addEffect(APPLY_FIRE_DAMAGE, 25);
 	sp->setVigourCost(2);
 	return sp;
 }
 
-spell * attack_DripVenom()
+spellSharedPtr attack_DripVenom()
 {
-	spell* sp = new spell("Drip Venom", DAGGER_TILE, TCODColor::lime,
-		"Blade drips with thick acid.");
+	spellSharedPtr sp(new spell("Drip Venom", DAGGER_TILE, TCODColor::lime,
+		"Blade drips with thick acid."));
 	sp->setAttackType(ATTACK_BUFF_WEAPON);
 	sp->setBuffApplied(DAMAGE_ACID, 25);
 	sp->setVigourCost(3);
 	return sp;
 }
 
-spell * attack_SuckOutLife()
+spellSharedPtr attack_SuckOutLife()
 {
-	spell* sp = new spell("Suck Out Life", DAGGER_TILE, TCODColor::lightCrimson,
-		"The agony dealt by the knife pours life into you.");
+	spellSharedPtr sp(new spell("Suck Out Life", DAGGER_TILE, TCODColor::lightCrimson,
+		"The agony dealt by the knife pours life into you."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(RESTORE_HEALTH, 10);
 	sp->usesDivinePower = true;
@@ -210,10 +210,10 @@ spell * attack_SuckOutLife()
 	return sp;
 }
 
-spell * attack_SpiderStrike()
+spellSharedPtr attack_SpiderStrike()
 {
-	spell* sp = new spell("Spider Strike", WEB_TILE, TCODColor::lightestGrey,
-		"Ensnares target in a sticky web.");
+	spellSharedPtr sp(new spell("Spider Strike", WEB_TILE, TCODColor::lightestGrey,
+		"Ensnares target in a sticky web."));
 	sp->setAttackType(ATTACK_RANGE, 1);
 	sp->addEffect(CASTER_MELEE_ATTACK, 1);
 	sp->addEffect(APPLY_ENTANGLING, 1);
@@ -221,10 +221,10 @@ spell * attack_SpiderStrike()
 	return sp;
 }
 
-spell * attack_DeepCut()
+spellSharedPtr attack_DeepCut()
 {
-	spell* sp = new spell("Deep Cut", DAGGER_TILE, TCODColor::orange,
-		"Deal 100 damage to target and 25 damage to self.");
+	spellSharedPtr sp(new spell("Deep Cut", DAGGER_TILE, TCODColor::orange,
+		"Deal 100 damage to target and 25 damage to self."));
 	sp->setAttackType(ATTACK_RANGE, 1);
 	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 100);
 	sp->addEffect(HURT_CASTER, 25);
@@ -234,40 +234,40 @@ spell * attack_DeepCut()
 
 //Wand/chime powers
 
-spell * ability_PowerSurge()
+spellSharedPtr ability_PowerSurge()
 {
-	spell* sp = new spell("Power Surge", SWORD_TILE, TCODColor::magenta,
-		"Your next spell gains +100% power.");
+	spellSharedPtr sp(new spell("Power Surge", SWORD_TILE, TCODColor::magenta,
+		"Your next spell gains +100% power."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(SCALE_NEXT_SPELL, 100);
 	sp->setVigourCost(1);
 	return sp;
 }
 
-spell * ability_AcidInfusion()
+spellSharedPtr ability_AcidInfusion()
 {
-	spell* sp = new spell("Acid Infusion", SWORD_TILE, TCODColor::darkLime,
-		"Next attack spell deals acid damage. This is especially effective using acid-based spells.");
+	spellSharedPtr sp(new spell("Acid Infusion", SWORD_TILE, TCODColor::darkLime,
+		"Next attack spell deals acid damage. This is especially effective using acid-based spells."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(SPELL_ACID_INFUSION, 25);
 	sp->setVigourCost(1);
 	return sp;
 }
 
-spell * ability_DivineFavour()
+spellSharedPtr ability_DivineFavour()
 {
-	spell* sp = new spell("Divine Favour", SWORD_TILE, TCODColor::darkYellow,
-		"Slowly restore some health.");
+	spellSharedPtr sp(new spell("Divine Favour", SWORD_TILE, TCODColor::darkYellow,
+		"Slowly restore some health."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(ADD_HEALTH_TRICKLE, 15);
 	sp->setVigourCost(1);
 	return sp;
 }
 
-spell * ability_WyrdChannel()
+spellSharedPtr ability_WyrdChannel()
 {
-	spell* sp = new spell("Wyrd Channel", SWORD_TILE, TCODColor::lightSepia,
-		"Next prayer has 150% power.");
+	spellSharedPtr sp(new spell("Wyrd Channel", SWORD_TILE, TCODColor::lightSepia,
+		"Next prayer has 150% power."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(SCALE_NEXT_PRAYER, 50);
 	sp->setVigourCost(1);
@@ -277,10 +277,10 @@ spell * ability_WyrdChannel()
 
 //Spells
 
-spell * spell_MagicMissile()
+spellSharedPtr spell_MagicMissile()
 {
-	spell* sp = new spell("Magic Missile", SPELL_TILE, TCODColor::magenta,
-		"Attack deals magic damage. Magic blasting is the simplest kind of magic there is, and perhaps the most useful.");
+	spellSharedPtr sp(new spell("Magic Missile", SPELL_TILE, TCODColor::magenta,
+		"Attack deals magic damage. Magic blasting is the simplest kind of magic there is, and perhaps the most useful."));
 	sp->setAttackType(ATTACK_RANGE);
 	sp->addEffect(APPLY_MAGIC_DAMAGE, 25);
 	sp->setAttackRange(5);
@@ -289,11 +289,11 @@ spell * spell_MagicMissile()
 	return sp;
 }
 
-spell * spell_ArcaneRadiance()
+spellSharedPtr spell_ArcaneRadiance()
 {
-	spell* sp = new spell("Arcane Radiance", SPELL_TILE, TCODColor::darkMagenta,
+	spellSharedPtr sp(new spell("Arcane Radiance", SPELL_TILE, TCODColor::darkMagenta,
 		"A blast of magical energy strikes everything within 3 spaces. In Sunken Atalundra, when arcane power was harmless, \
-mages used this as a party trick.");
+mages used this as a party trick."));
 	sp->setAttackType(ATTACK_AOE);
 	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 25);
 	sp->setAttackRange(3);
@@ -302,11 +302,11 @@ mages used this as a party trick.");
 	return sp;
 }
 
-spell * spell_ArcaneBlade()
+spellSharedPtr spell_ArcaneBlade()
 {
-	spell* sp = new spell("Arcane Blade", SPELL_TILE, TCODColor::lightMagenta,
+	spellSharedPtr sp(new spell("Arcane Blade", SPELL_TILE, TCODColor::lightMagenta,
 		"Your weapon deals arcane damage. This is an old magick of Sunken Atalundra, which popularized the arcane arts before \
-they sunk beneath the waves.");
+they sunk beneath the waves."));
 	sp->setAttackType(ATTACK_BUFF_WEAPON);
 	sp->setBuffApplied(DAMAGE_MAGIC, 25);
 	sp->setVigourCost(2);
@@ -314,11 +314,11 @@ they sunk beneath the waves.");
 	return sp;
 }
 
-spell * spell_GottricsArcaneProtection()
+spellSharedPtr spell_GottricsArcaneProtection()
 {
-	spell* sp = new spell("Gottric's Arcane Protection", SPELL_TILE, TCODColor::lighterMagenta,
+	spellSharedPtr sp(new spell("Gottric's Arcane Protection", SPELL_TILE, TCODColor::lighterMagenta,
 		"Confers protection from magic damage. Gottric used this spell to protect himself as he delved ever deeper into the \
-mysteries of Sunken Atalundra.");
+mysteries of Sunken Atalundra."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(GAIN_MAGIC_RESIST, 20);
 	sp->setVigourCost(2);
@@ -327,11 +327,11 @@ mysteries of Sunken Atalundra.");
 	return sp;
 }
 
-spell * spell_Frostbolt()
+spellSharedPtr spell_Frostbolt()
 {
-	spell* sp = new spell("Frostbolt", SPELL_TILE, TCODColor::cyan,
+	spellSharedPtr sp(new spell("Frostbolt", SPELL_TILE, TCODColor::cyan,
 		"Bolt deals cold damage. The mages of Sunken Atalundra attempted to use ice magic to protect their city from the rising \
-waves, though of course they did not succeed.");
+waves, though of course they did not succeed."));
 	sp->setAttackType(ATTACK_RANGE);
 	sp->setAttackRange(5);
 	sp->addEffect(APPLY_COLD_DAMAGE, 25);
@@ -341,11 +341,11 @@ waves, though of course they did not succeed.");
 	return sp;
 }
 
-spell * spell_AcidSpit()
+spellSharedPtr spell_AcidSpit()
 {
-	spell* sp = new spell("Acid Spit", SPELL_TILE, TCODColor::lightGreen,
+	spellSharedPtr sp(new spell("Acid Spit", SPELL_TILE, TCODColor::lightGreen,
 		"This spell draws upon the anger of the earth itself towards its despoilers. It was discovered by the Wyrd, who \
-fruitlessly stood against the annihilation of their homeland.");
+fruitlessly stood against the annihilation of their homeland."));
 	sp->setAttackType(ATTACK_RANGE);
 	sp->setAttackRange(5);
 	sp->addEffect(APPLY_ACID_DAMAGE, 25);
@@ -355,11 +355,11 @@ fruitlessly stood against the annihilation of their homeland.");
 	return sp;
 }
 
-spell * spell_AcidBlade()
+spellSharedPtr spell_AcidBlade()
 {
-	spell* sp = new spell("Acid Blade", SPELL_TILE, TCODColor::lime,
+	spellSharedPtr sp(new spell("Acid Blade", SPELL_TILE, TCODColor::lime,
 		"Coat one's blade in corrosive acid to disintegrate the armour of your enemies. The Wyrd discovered this spell and taught \
-it to the angelic visitors who rose from the earth.");
+it to the angelic visitors who rose from the earth."));
 	sp->setAttackType(ATTACK_BUFF_WEAPON);
 	sp->setBuffApplied(DAMAGE_ACID, 25);
 	sp->setVigourCost(2);
@@ -367,10 +367,10 @@ it to the angelic visitors who rose from the earth.");
 	return sp;
 }
 
-spell * spell_AcidBurst()
+spellSharedPtr spell_AcidBurst()
 {
-	spell* sp = new spell("Acid Burst", SPELL_TILE, TCODColor::darkLime,
-		"Spew a powerful blast of acid to disintegrate armour and burn enemies.");
+	spellSharedPtr sp(new spell("Acid Burst", SPELL_TILE, TCODColor::darkLime,
+		"Spew a powerful blast of acid to disintegrate armour and burn enemies."));
 	sp->setAttackType(ATTACK_RANGE);
 	sp->setAttackRange(2);
 	sp->addEffect(APPLY_ACID_DAMAGE, 50);
@@ -380,10 +380,10 @@ spell * spell_AcidBurst()
 	return sp;
 }
 
-spell * spell_ProfanedBlade()
+spellSharedPtr spell_ProfanedBlade()
 {
-	spell* sp = new spell("Profaned Blade", SPELL_TILE, TCODColor::darkPurple,
-		"A blade touched by this spell briefly ceases to exist, replaced by a sucking portal that draws flesh into the Void.");
+	spellSharedPtr sp(new spell("Profaned Blade", SPELL_TILE, TCODColor::darkPurple,
+		"A blade touched by this spell briefly ceases to exist, replaced by a sucking portal that draws flesh into the Void."));
 	sp->setAttackType(ATTACK_BUFF_WEAPON);
 	sp->setBuffApplied(DAMAGE_PROFANE, 15);
 	sp->setVigourCost(2);
@@ -392,11 +392,11 @@ spell * spell_ProfanedBlade()
 	return sp;
 }
 
-spell * spell_VoidJaunt()
+spellSharedPtr spell_VoidJaunt()
 {
-	spell* sp = new spell("Void Jaunt", SPELL_TILE, TCODColor::purple,
+	spellSharedPtr sp(new spell("Void Jaunt", SPELL_TILE, TCODColor::purple,
 		"Total immersion in the Void is known to cause madness, disintegration, or a particularly unpleasant combination of the \
-two. Luckily, this spell is only temporary.");
+two. Luckily, this spell is only temporary."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(BECOME_INVISIBLE, 3);
 	sp->setVigourCost(2);
@@ -405,10 +405,10 @@ two. Luckily, this spell is only temporary.");
 	return sp;
 }
 
-spell * spell_DevouringVoidCloud()
+spellSharedPtr spell_DevouringVoidCloud()
 {
-	spell* sp = new spell("Devouring Void Cloud", SPELL_TILE, TCODColor::darkViolet,
-		"Opening pathways to the Void is a dangerous act that only the mad would entertain.");
+	spellSharedPtr sp(new spell("Devouring Void Cloud", SPELL_TILE, TCODColor::darkViolet,
+		"Opening pathways to the Void is a dangerous act that only the mad would entertain."));
 	sp->setAttackType(ATTACK_AOE, 10);
 	sp->addEffect(APPLY_PROFANE_DAMAGE, 50);
 	sp->setVigourCost(5);
@@ -417,10 +417,10 @@ spell * spell_DevouringVoidCloud()
 	return sp;
 }
 
-spell * spell_FrostBlast()
+spellSharedPtr spell_FrostBlast()
 {
-	spell* sp = new spell("Frost Blast", SPELL_TILE, TCODColor::cyan,
-		"Spell discovered by the Winter Court, whose reign of ice chilled the surrounding lands.");
+	spellSharedPtr sp(new spell("Frost Blast", SPELL_TILE, TCODColor::cyan,
+		"Spell discovered by the Winter Court, whose reign of ice chilled the surrounding lands."));
 	sp->setAttackType(ATTACK_AOE, 3);
 	sp->addEffect(APPLY_COLD_DAMAGE, 50);
 	sp->setVigourCost(2);
@@ -429,10 +429,10 @@ spell * spell_FrostBlast()
 	return sp;
 }
 
-spell * spell_FrozenBlade()
+spellSharedPtr spell_FrozenBlade()
 {
-	spell* sp = new spell("Frozen Blade", SPELL_TILE, TCODColor::darkCyan,
-		"The Winter Court coated their blades in ice and froze their enemies to death.");
+	spellSharedPtr sp(new spell("Frozen Blade", SPELL_TILE, TCODColor::darkCyan,
+		"The Winter Court coated their blades in ice and froze their enemies to death."));
 	sp->setAttackType(ATTACK_BUFF_WEAPON);
 	sp->setBuffApplied(DAMAGE_COLD, 25);
 	sp->setVigourCost(2);
@@ -441,10 +441,10 @@ spell * spell_FrozenBlade()
 	return sp;
 }
 
-spell * spell_Chillbite()
+spellSharedPtr spell_Chillbite()
 {
-	spell* sp = new spell("Chillbite", SPELL_TILE, TCODColor::lightCyan,
-		"An illusory jaw of ice closes around your foe, freezing them solid.");
+	spellSharedPtr sp(new spell("Chillbite", SPELL_TILE, TCODColor::lightCyan,
+		"An illusory jaw of ice closes around your foe, freezing them solid."));
 	sp->setAttackType(ATTACK_RANGE, 6);
 	sp->addEffect(APPLY_COLD_DAMAGE, 20);
 	sp->addEffect(APPLY_ENTANGLING, 3);
@@ -454,10 +454,10 @@ spell * spell_Chillbite()
 	return sp;
 }
 
-spell * spell_SpitFire()
+spellSharedPtr spell_SpitFire()
 {
-	spell* sp = new spell("Spit Fire", SPELL_TILE, TCODColor::flame,
-		"Discharge a stream of fire.");
+	spellSharedPtr sp(new spell("Spit Fire", SPELL_TILE, TCODColor::flame,
+		"Discharge a stream of fire."));
 	sp->setAttackType(ATTACK_RANGE);
 	sp->setAttackRange(8);
 	sp->addEffect(APPLY_FIRE_DAMAGE, 20);
@@ -472,11 +472,11 @@ spell * spell_SpitFire()
 
 
 
-spell * prayer_Restoration()
+spellSharedPtr prayer_Restoration()
 {
-	spell* sp = new spell("Restoration", SPELL_TILE, TCODColor::darkYellow,
+	spellSharedPtr sp(new spell("Restoration", SPELL_TILE, TCODColor::darkYellow,
 		"Call upon the favour of the old gods to restore life essence. But the old gods are fickle, and help only those who \
-strike their fancy.");
+strike their fancy."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(RESTORE_HEALTH, 25);
 	sp->setVigourCost(2);
@@ -484,10 +484,10 @@ strike their fancy.");
 	return sp;
 }
 
-spell * prayer_WyrdChantOfStrength()
+spellSharedPtr prayer_WyrdChantOfStrength()
 {
-	spell* sp = new spell("Wyrd Chant of Strength", SPELL_TILE, TCODColor::darkGreen,
-		"Increases defence by 10%. During the final days of the Wyrd, this chant filled the forest, though it did no good.");
+	spellSharedPtr sp(new spell("Wyrd Chant of Strength", SPELL_TILE, TCODColor::darkGreen,
+		"Increases defence by 10%. During the final days of the Wyrd, this chant filled the forest, though it did no good."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(GAIN_DEFENCE, 10);
 	sp->setVigourCost(2);
@@ -496,10 +496,10 @@ spell * prayer_WyrdChantOfStrength()
 	return sp;
 }
 
-spell * prayer_RayOfLight()
+spellSharedPtr prayer_RayOfLight()
 {
-	spell* sp = new spell("Ray of Light", SPELL_TILE, TCODColor::lightYellow,
-		"Fires a ray of blessed energy.");
+	spellSharedPtr sp(new spell("Ray of Light", SPELL_TILE, TCODColor::lightYellow,
+		"Fires a ray of blessed energy."));
 	sp->setAttackType(ATTACK_RANGE);
 	sp->setAttackRange(8);
 	sp->addEffect(APPLY_BLESSED_DAMAGE, 25);
@@ -508,10 +508,10 @@ spell * prayer_RayOfLight()
 	return sp;
 }
 
-spell * prayer_BlessedRadiance()
+spellSharedPtr prayer_BlessedRadiance()
 {
-	spell* sp = new spell("Blessed Radiance", SPELL_TILE, TCODColor::lighterYellow,
-		"Blind nearby creatures with holy radiance.");
+	spellSharedPtr sp(new spell("Blessed Radiance", SPELL_TILE, TCODColor::lighterYellow,
+		"Blind nearby creatures with holy radiance."));
 	sp->setAttackType(ATTACK_AOE);
 	sp->setAttackRange(3);
 	sp->addEffect(APPLY_BLESSED_DAMAGE, 20);
@@ -521,10 +521,10 @@ spell * prayer_BlessedRadiance()
 	return sp;
 }
 
-spell * prayer_RemovePoison()
+spellSharedPtr prayer_RemovePoison()
 {
-	spell* sp = new spell("Remove Poison", SPELL_TILE, TCODColor::green,
-		"Cleanses the body of poison.");
+	spellSharedPtr sp(new spell("Remove Poison", SPELL_TILE, TCODColor::green,
+		"Cleanses the body of poison."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(REMOVE_POISON, 1);
 	sp->setVigourCost(1);
@@ -532,10 +532,10 @@ spell * prayer_RemovePoison()
 	return sp;
 }
 
-spell * prayer_ProfaneRadiance()
+spellSharedPtr prayer_ProfaneRadiance()
 {
-	spell* sp = new spell("Profane Radiance", SPELL_TILE, TCODColor::purple,
-		"Spell deals profane damage in a blast around you.");
+	spellSharedPtr sp(new spell("Profane Radiance", SPELL_TILE, TCODColor::purple,
+		"Spell deals profane damage in a blast around you."));
 	sp->setAttackType(ATTACK_AOE);
 	sp->setAttackRange(2);
 	sp->setVigourCost(2);
@@ -546,10 +546,10 @@ spell * prayer_ProfaneRadiance()
 	return sp;
 }
 
-spell * prayer_ProfaneRay()
+spellSharedPtr prayer_ProfaneRay()
 {
-	spell* sp = new spell("Profane Ray", SPELL_TILE, TCODColor::lightPurple,
-		"Fire a ray of profane energy, drawing upon the forbidden power of the Void.");
+	spellSharedPtr sp(new spell("Profane Ray", SPELL_TILE, TCODColor::lightPurple,
+		"Fire a ray of profane energy, drawing upon the forbidden power of the Void."));
 	sp->setAttackType(ATTACK_RANGE);
 	sp->setAttackRange(8);
 	sp->setVigourCost(1);
@@ -559,10 +559,10 @@ spell * prayer_ProfaneRay()
 	return sp;
 }
 
-spell * prayer_SinkBeneath()
+spellSharedPtr prayer_SinkBeneath()
 {
-	spell* sp = new spell("Sink Beneath", SPELL_TILE, TCODColor::cyan,
-		"Plunge below the waves and re-emerge somewhere unknown.");
+	spellSharedPtr sp(new spell("Sink Beneath", SPELL_TILE, TCODColor::cyan,
+		"Plunge below the waves and re-emerge somewhere unknown."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(TELEPORT_VIA_WATER, 5);
 	sp->usesDivinePower = true;
@@ -570,10 +570,10 @@ spell * prayer_SinkBeneath()
 	return sp;
 }
 
-spell * prayer_SpidersPrayer()
+spellSharedPtr prayer_SpidersPrayer()
 {
-	spell* sp = new spell("Spider's Prayer", SPELL_TILE, TCODColor::white,
-		"According to certain storytellers, the old gods gave power to the spiders to keep humanity from overrunning the earth.");
+	spellSharedPtr sp(new spell("Spider's Prayer", SPELL_TILE, TCODColor::white,
+		"According to certain storytellers, the old gods gave power to the spiders to keep humanity from overrunning the earth."));
 	sp->setAttackType(ATTACK_RANGE, 10);
 	sp->addEffect(DROP_WEB, 1);
 	sp->usesDivinePower = true;
@@ -581,11 +581,11 @@ spell * prayer_SpidersPrayer()
 	return sp;
 }
 
-spell * prayer_DrawOutTheBlood()
+spellSharedPtr prayer_DrawOutTheBlood()
 {
-	spell* sp = new spell("Draw Out the Blood", SPELL_TILE, TCODColor::crimson,
+	spellSharedPtr sp(new spell("Draw Out the Blood", SPELL_TILE, TCODColor::crimson,
 		"Certain adherents of the Void acquired a great interest in blood. Orsyl was convinced that a secret power lay in \
-the blood of the living, but he never found it.");
+the blood of the living, but he never found it."));
 	sp->setAttackType(ATTACK_RANGE);
 	sp->addEffect(HURT_BLEEDER, 50);
 	sp->usesDivinePower = true;
@@ -593,10 +593,10 @@ the blood of the living, but he never found it.");
 	return sp;
 }
 
-spell * prayer_DivineRetribution()
+spellSharedPtr prayer_DivineRetribution()
 {
-	spell* sp = new spell("Divine Retribution", SPELL_TILE, TCODColor::lightBlue,
-		"Saint Yutria was surrounded by a divine aura wherever she went, such that the nightmare could never touch her.");
+	spellSharedPtr sp(new spell("Divine Retribution", SPELL_TILE, TCODColor::lightBlue,
+		"Saint Yutria was surrounded by a divine aura wherever she went, such that the nightmare could never touch her."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addPermanentBuff = true;
 	sp->addEffect(GAIN_DIVINE_RETRIBUTION, 10);
@@ -605,15 +605,38 @@ spell * prayer_DivineRetribution()
 	return sp;
 }
 
-spell * prayer_YutriasDivineSpark()
+spellSharedPtr prayer_YutriasDivineSpark()
 {
-	spell *sp = new spell("Yutria's Divine Spark", SPELL_TILE, TCODColor::lightestBlue,
-		"Evildoers did not dare tread upon the footprints of Saint Yutria, for those who did were swiftly struck with divine fire.");
+	spellSharedPtr sp(new spell("Yutria's Divine Spark", SPELL_TILE, TCODColor::lightestBlue,
+		"Evildoers did not dare tread upon the footprints of Saint Yutria, for those who did were swiftly struck with divine fire."));
 	sp->setAttackType(ATTACK_RANGE, 8);
 	sp->addEffect(APPLY_BLESSED_DAMAGE, 20);
 	sp->addEffect(APPLY_FIRE_DAMAGE, 20);
 	sp->setVigourCost(2);
 	sp->usesDivinePower = true;
+	return sp;
+}
+
+spellSharedPtr prayer_DivineRestoration()
+{
+	spellSharedPtr sp(new spell("Divine Restoration", SPELL_TILE, TCODColor::flame,
+		"Slowly restores a large amount of health."));
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(ADD_HEALTH_TRICKLE, 100);
+	sp->setVigourCost(2);
+	sp->usesDivinePower = true;
+	return sp;
+}
+
+spellSharedPtr prayer_DivineJudgement()
+{
+	spellSharedPtr sp(new spell("Divine Judgement", SPELL_TILE, TCODColor::lightFlame,
+		"Reduces damage dealt by enemies."));
+	sp->setAttackType(ATTACK_AOE, 3);
+	sp->addEffect(APPLY_DAMAGE_PENALTY, 20);
+	sp->usesDivinePower = true;
+	sp->addPermanentBuff = true;
+	sp->setVigourCost(1);
 	return sp;
 }
 
@@ -623,9 +646,9 @@ spell * prayer_YutriasDivineSpark()
 //Monster abilities
 
 
-spell * ability_Charge()
+spellSharedPtr ability_Charge()
 {
-	spell* sp = new spell("Charge", SPELL_TILE, TCODColor::white);
+	spellSharedPtr sp(new spell("Charge", SPELL_TILE, TCODColor::white));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(GAIN_FREE_MOVES, 3);
 	sp->usesSpellPower = false;
@@ -633,9 +656,9 @@ spell * ability_Charge()
 	return sp;
 }
 
-spell* ability_Burst()
+spellSharedPtr ability_Burst()
 {
-	spell* sp = new spell("Burst", SPELL_TILE, TCODColor::darkLime);
+	spellSharedPtr sp(new spell("Burst", SPELL_TILE, TCODColor::darkLime));
 	sp->setAttackType(ATTACK_AOE);
 	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 25);
 	sp->setAttackRange(2);
@@ -643,9 +666,9 @@ spell* ability_Burst()
 	return sp;
 }
 
-spell * ability_CrowArrow()
+spellSharedPtr ability_CrowArrow()
 {
-	spell* sp = new spell("Crow Arrow", SPELL_TILE, TCODColor::lightGrey);
+	spellSharedPtr sp(new spell("Crow Arrow", SPELL_TILE, TCODColor::lightGrey));
 	sp->setAttackType(ATTACK_RANGE);
 	sp->setAttackRange(8);
 	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 10);
@@ -653,9 +676,9 @@ spell * ability_CrowArrow()
 	return sp;
 }
 
-spell * ability_FeedingFrenzy()
+spellSharedPtr ability_FeedingFrenzy()
 {
-	spell* sp = new spell("Feeding Frenzy", SPELL_TILE, TCODColor::lime);
+	spellSharedPtr sp(new spell("Feeding Frenzy", SPELL_TILE, TCODColor::lime));
 	sp->setAttackType(ATTACK_AOE);
 	sp->setAttackRange(3);
 	sp->addEffect(GAIN_FREE_MOVES, 1);
@@ -663,61 +686,61 @@ spell * ability_FeedingFrenzy()
 	return sp;
 }
 
-spell * ability_DropOoze()
+spellSharedPtr ability_DropOoze()
 {
-	spell* sp = new spell("Drop Ooze", SPELL_TILE, TCODColor::sepia);
+	spellSharedPtr sp(new spell("Drop Ooze", SPELL_TILE, TCODColor::sepia));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(DROP_OOZE, 1);
 	sp->useAlternateAnimation = true;
 	return sp;
 }
 
-spell * ability_ShadowWalk()
+spellSharedPtr ability_ShadowWalk()
 {
-	spell* sp = new spell("Shadow Walk", SPELL_TILE, TCODColor::purple);
+	spellSharedPtr sp(new spell("Shadow Walk", SPELL_TILE, TCODColor::purple));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(BECOME_INVISIBLE, 2);
 	sp->useAlternateAnimation = true;
 	return sp;
 }
 
-spell * ability_WinterBlast()
+spellSharedPtr ability_WinterBlast()
 {
-	spell* sp = new spell("Winter Blast", SPELL_TILE, TCODColor::cyan);
+	spellSharedPtr sp(new spell("Winter Blast", SPELL_TILE, TCODColor::cyan));
 	sp->setAttackType(ATTACK_AOE, 3);
 	sp->addEffect(APPLY_COLD_DAMAGE, 25);
 	sp->useAlternateAnimation = true;
 	return sp;
 }
 
-spell * ability_WreatheInFlame()
+spellSharedPtr ability_WreatheInFlame()
 {
-	spell* sp = new spell("Wreathe In Flame", SPELL_TILE, TCODColor::flame);
+	spellSharedPtr sp(new spell("Wreathe In Flame", SPELL_TILE, TCODColor::flame));
 	sp->setAttackType(ATTACK_AOE, 3);
 	sp->addEffect(APPLY_FIRE_DAMAGE, 25);
 	return sp;
 }
 
-spell * ability_DragBelow()
+spellSharedPtr ability_DragBelow()
 {
-	spell* sp = new spell("Drag Below", SPELL_TILE, TCODColor::sea);
+	spellSharedPtr sp(new spell("Drag Below", SPELL_TILE, TCODColor::sea));
 	sp->setAttackType(ATTACK_RANGE, 1);
 	sp->addEffect(APPLY_ENTANGLING, 4);
 	return sp;
 }
 
-spell * ability_SpitWeb()
+spellSharedPtr ability_SpitWeb()
 {
-	spell* sp = new spell("Spit Web", SPELL_TILE, TCODColor::white);
+	spellSharedPtr sp(new spell("Spit Web", SPELL_TILE, TCODColor::white));
 	sp->setAttackType(ATTACK_RANGE, 8);
 	sp->addEffect(APPLY_ENTANGLING, 5);
 	return sp;
 }
 
-spell * ability_TentacleSwarm()
+spellSharedPtr ability_TentacleSwarm()
 {
-	spell* sp = new spell("Tentacle Swarm", SPELL_TILE, TCODColor::green,
-		"Entangles target, preventing them from moving.");
+	spellSharedPtr sp(new spell("Tentacle Swarm", SPELL_TILE, TCODColor::green,
+		"Entangles target, preventing them from moving."));
 	sp->setAttackType(ATTACK_RANGE);
 	sp->setAttackRange(3);
 	sp->addEffect(APPLY_ENTANGLING, 3);
@@ -725,9 +748,9 @@ spell * ability_TentacleSwarm()
 	return sp;
 }
 
-spell * ability_Throw()
+spellSharedPtr ability_Throw()
 {
-	spell* sp = new spell("Throw", SPELL_TILE, TCODColor::green);
+	spellSharedPtr sp(new spell("Throw", SPELL_TILE, TCODColor::green));
 	sp->setAttackType(ATTACK_RANGE);
 	sp->setAttackRange(1);
 	sp->addEffect(KNOCKBACK_TARGET, 5);
@@ -736,9 +759,9 @@ spell * ability_Throw()
 	return sp;
 }
 
-spell * ability_VoidStep()
+spellSharedPtr ability_VoidStep()
 {
-	spell* sp = new spell("Void Step", SPELL_TILE, TCODColor::purple);
+	spellSharedPtr sp(new spell("Void Step", SPELL_TILE, TCODColor::purple));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(TELEPORT, 5);
 	return sp;

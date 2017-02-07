@@ -50,6 +50,8 @@ class person: public element
 {
 public:
 
+	typedef std::shared_ptr<person> personSharedPtr;
+
 	//Constructors/destructors
 	person(): person("Player", PLAYER_TILE, TCODColor::white) {}
 	person(std::string name, int tileCode, TCODColor color, std::string description = "");
@@ -58,7 +60,7 @@ public:
 	//Stats (if we have any!)
 	statline* stats;
 	int getNextLevelCost() { return stats->level * 100; }
-	int getScalingDamage(weapon* wp);
+	int getScalingDamage(weaponSharedPtr wp);
 	void increaseMaxHealth(int amount) { health.increaseMaxValue(amount, true); }
 	void increaseMaxVigour(int amount) { vigour.increaseMaxValue(amount, true); }
 
@@ -69,7 +71,7 @@ public:
 	//Getters
 	counter getHealth() { return health; }
 	counter getVigour() { return vigour; }
-	person* getTarget() { return target; }
+	personSharedPtr getTarget() { return target; }
 	int getMoveDelay();
 	int getAttackDelay();
 	int getBaseMeleeDamage() { return baseMeleeDamage; }
@@ -80,7 +82,7 @@ public:
 	int getDamageOfType(damageType dtype);
 
 	//Setters
-	void setTarget(person* target) { this->target = target; }
+	void setTarget(personSharedPtr target) { this->target = target; }
 	void clearTarget() { target = nullptr; }
 	void setMaxHealth(int h) { health.setTo(h); }
 	void setMaxVigour(int v) { vigour.setTo(v); }
@@ -155,39 +157,39 @@ public:
 	int coldDamageAppliesInfusion = 0; //If this is >0, taking cold damage gives us a cold infusion boost
 
 	//Magic
-	spell* buffNextMelee; //This spell is automatically discharged onto the next thing we attack in melee.
-	void addSpellKnown(spell* sp) { spellsKnown.push_back(sp); }
-	void removeSpellKnown(spell* sp);
+	spellSharedPtr buffNextMelee; //This spell is automatically discharged onto the next thing we attack in melee.
+	void addSpellKnown(spellSharedPtr sp) { spellsKnown.push_back(sp); }
+	void removeSpellKnown(spellSharedPtr sp);
 	spellVector getSpellsKnown() { return spellsKnown; }
-	spell* getCurrentSpell();
-	void setCurrentSpell(spell* sp);
+	spellSharedPtr getCurrentSpell();
+	void setCurrentSpell(spellSharedPtr sp);
 	void setCurrentSpell(int sp);
 	void cycleSelectedSpell();
 	int getSpellPower();
 	int getDivinePower();
-	void paySpellCost(spell* sp);
+	void paySpellCost(spellSharedPtr sp);
 
 	//Equipping and unequipping items
-	std::vector<item*> getItemsOfType(itemTypes category) { return items.getItemList(category); }
-	void equipItem(item* which);
+	itemVector getItemsOfType(itemTypes category) { return items.getItemList(category); }
+	void equipItem(itemSharedPtr which);
 	void swapWeapon();
-	void unequipItem(item* which);
-	bool addItem(item* which);
-	void doWeaponEquip(weapon* it);
+	void unequipItem(itemSharedPtr which);
+	bool addItem(itemSharedPtr which);
+	void doWeaponEquip(weaponSharedPtr it);
 
 	//Getting equipped items
-	weapon* getWeapon() { return items.getWeapon(); }
-	weapon* getOffhand() { return items.getOffhand(); }
-	armour* getArmour() { return items.getArmour(); }
-	armour* getHelmet() { return items.getHelmet(); }
-	charm* getCharm() { return items.getCharm(); }
-	bool hasItemEquipped(item* it);
+	weaponSharedPtr getWeapon() { return items.getWeapon(); }
+	weaponSharedPtr getOffhand() { return items.getOffhand(); }
+	armourSharedPtr getArmour() { return items.getArmour(); }
+	armourSharedPtr getHelmet() { return items.getHelmet(); }
+	charmSharedPtr getCharm() { return items.getCharm(); }
+	bool hasItemEquipped(itemSharedPtr it);
 
 	//Consumables
-	consumable* getSelectedConsumable();
+	consumableSharedPtr getSelectedConsumable();
 	consumableVector getConsumableList();
 	void cycleConsumable() { items.cycleConsumable(); }
-	void setCurrentConsumable(consumable* c);
+	void setCurrentConsumable(consumableSharedPtr c);
 	void restoreItemsToMax(); //Replenishes consumables
 
 	//Keys
@@ -251,12 +253,15 @@ protected:
 	int baseDivinePower = 0; //Flat bonus to divine power
 
 	//Current thing we're trying to kill
-	person* target;
+	personSharedPtr target;
 
 	//Lighting
 	float emitsLight = 0;
 
 };
+
+typedef std::shared_ptr<person> personSharedPtr;
+typedef std::vector<personSharedPtr> personVector;
 
 #endif
 

@@ -31,7 +31,7 @@ person::~person()
 Returns how much extra damage the given weapon does, based on our stats.
 The total bonus is a percentage of the weapon's base damage.
 */
-int person::getScalingDamage(weapon * wp)
+int person::getScalingDamage(weaponSharedPtr wp)
 {
 	int total = 0;
 	//Bonus from each stat
@@ -75,7 +75,7 @@ int person::getMoveDelay()
 		return SPEED_SLOW;
 	}
 	//Otherwise, from armour
-	armour* a = getArmour();
+	armourSharedPtr a = getArmour();
 	if (a != nullptr)
 		return a->getMoveSpeed();
 	return baseMoveSpeed;
@@ -87,7 +87,7 @@ Based on our equipped weapon.
 */
 int person::getAttackDelay()
 {
-	weapon* wp = getWeapon();
+	weaponSharedPtr wp = getWeapon();
 	if (wp != nullptr)
 		return wp->getAttackDelay();
 	return baseAttackSpeed;
@@ -103,17 +103,17 @@ int person::getDefence()
 	int base = baseDefence;
 	
 	//Bonus from armour
-	armour* ar = getArmour();
+	armourSharedPtr ar = getArmour();
 	if (ar != nullptr)
 		base += ar->getDefence();
 	
 	//Bonus from headgear
-	armour* helm = getHelmet();
+	armourSharedPtr helm = getHelmet();
 	if (helm != nullptr)
 		base += helm->getDefence();
 	
 	//Bonus from offhand item
-	weapon* offhand = getOffhand();
+	weaponSharedPtr offhand = getOffhand();
 	if (offhand != nullptr)
 		base += offhand->getDefence();
 
@@ -132,7 +132,7 @@ Returns how much damage we do in melee.
 */
 int person::getMeleeDamage()
 {
-	weapon* wp = getWeapon();
+	weaponSharedPtr wp = getWeapon();
 	int damage = baseMeleeDamage;
 	if (wp != nullptr) {
 		
@@ -162,7 +162,7 @@ Returns how much SPECIAL DAMAGE we do in melee.
 */
 int person::getDamageOfType(damageType dtype)
 {
-	weapon* wp = getWeapon();
+	weaponSharedPtr wp = getWeapon();
 	if (wp != nullptr) {
 		return wp->getDamageOfType(dtype);
 	}
@@ -478,7 +478,7 @@ void person::applyEffect(effect eff, int potency)
 /*
 Forget a spell we know (e.g. because we un-equipped a wand)
 */
-void person::removeSpellKnown(spell * sp)
+void person::removeSpellKnown(spellSharedPtr sp)
 {
 	auto iter = std::find(spellsKnown.begin(), spellsKnown.end(), sp);
 	if (iter != spellsKnown.end())
@@ -488,7 +488,7 @@ void person::removeSpellKnown(spell * sp)
 /*
 Returns the spell we currently have active.
 */
-spell * person::getCurrentSpell()
+spellSharedPtr person::getCurrentSpell()
 {
 	if (spellsKnown.size() > 0)
 		return spellsKnown.at(selectedSpell);
@@ -498,7 +498,7 @@ spell * person::getCurrentSpell()
 /*
 We're given a spell, figure out which index we should be at
 */
-void person::setCurrentSpell(spell * sp)
+void person::setCurrentSpell(spellSharedPtr sp)
 {
 	while (spellsKnown.at(selectedSpell) != sp)
 		cycleSelectedSpell();
@@ -530,8 +530,8 @@ If we have two equipped items that have separate spellpower ratings, we use the 
 */
 int person::getSpellPower()
 {
-	weapon* wp = getWeapon();
-	weapon* offhand = getOffhand();
+	weaponSharedPtr wp = getWeapon();
+	weaponSharedPtr offhand = getOffhand();
 	int spellPower = baseSpellPower;
 
 	//From weapon
@@ -558,8 +558,8 @@ Scales with Devotion.
 */
 int person::getDivinePower()
 {
-	weapon* wp = getWeapon();
-	weapon* offhand = getOffhand();
+	weaponSharedPtr wp = getWeapon();
+	weaponSharedPtr offhand = getOffhand();
 	int divinePower = baseDivinePower;
 
 	//From weapon
@@ -583,7 +583,7 @@ int person::getDivinePower()
 /*
 Expend resources to cast a spell.
 */
-void person::paySpellCost(spell * sp)
+void person::paySpellCost(spellSharedPtr sp)
 {
 	//Vigour cost
 	loseVigour(sp->getVigourCost());
@@ -601,11 +601,11 @@ void person::paySpellCost(spell * sp)
 /*
 Equip the given item, if possible.
 */
-void person::equipItem(item * which)
+void person::equipItem(itemSharedPtr which)
 {
 	
 	//If there's already an equipped item in this slot, UNEQUIP IT
-	item* here = items.getEquipped(which->getCategory());
+	itemSharedPtr here = items.getEquipped(which->getCategory());
 	if (here != nullptr)
 		unequipItem(here);
 
@@ -619,12 +619,12 @@ void person::equipItem(item * which)
 
 		//Specific item type stuff
 		if (cat == ITEM_WEAPON || cat == ITEM_OFFHAND) {
-			weapon* wp = static_cast<weapon*>(which);
+			weaponSharedPtr wp = std::static_pointer_cast<weapon>(which);
 			doWeaponEquip(wp);
 		}
 		else if (cat == ITEM_SPELL) {
 			//Update our spellstore if the spell was successfully equipped
-			addSpellKnown(static_cast<spell*>(which));
+			addSpellKnown(std::static_pointer_cast<spell>(which));
 		}
 
 		/*
@@ -652,7 +652,7 @@ void person::equipItem(item * which)
 
 		if (cat == ITEM_CHARM) {
 
-			charm* c = static_cast<charm*>(which);
+			charmSharedPtr c = std::static_pointer_cast<charm>(which);
 
 			//Special effects from charms
 			for (int i = 0; i < c->getAllEffects().size(); i++) {
@@ -668,7 +668,7 @@ void person::equipItem(item * which)
 
 		//See if we unequipped a spell
 		if (which->getCategory() == ITEM_SPELL) {
-			spell* sp = static_cast<spell*>(which);
+			spellSharedPtr sp = std::static_pointer_cast<spell>(which);
 			auto iter = std::find(spellsKnown.begin(), spellsKnown.end(), sp);
 			if (iter != spellsKnown.end())
 				spellsKnown.erase(iter);
@@ -685,7 +685,7 @@ Switch between primary and secondary weapons.
 void person::swapWeapon()
 {
 	//Unequip current weapon
-	weapon* wp = items.getWeapon();
+	weaponSharedPtr wp = items.getWeapon();
 	if (wp != nullptr)
 		unequipItem(wp);
 	//Switch to secondary weapon
@@ -699,13 +699,13 @@ void person::swapWeapon()
 /*
 Unequip the given item (if it's equipped).
 */
-void person::unequipItem(item * which)
+void person::unequipItem(itemSharedPtr which)
 {
 	if (hasItemEquipped(which)) {
 		itemTypes cat = which->getCategory();
 
 		if (cat == ITEM_WEAPON || cat == ITEM_OFFHAND) {
-			weapon* wp = static_cast<weapon*>(which);
+			weaponSharedPtr wp = std::static_pointer_cast<weapon>(which);
 			//Regain damage penalty
 			damagePenalty -= wp->getDamagePenalty();
 			//We forget any spells/special attacks this item conferred
@@ -716,7 +716,7 @@ void person::unequipItem(item * which)
 		}
 
 		if (cat == ITEM_CHARM) {
-			charm* c = static_cast<charm*>(which);
+			charmSharedPtr c = std::static_pointer_cast<charm>(which);
 			//Special effects from charms
 			for (int i = 0; i < c->getAllEffects().size(); i++) {
 				effect eType = c->getAllEffects().at(i);
@@ -749,7 +749,7 @@ void person::unequipItem(item * which)
 /*
 Add the given item to our items carried.
 */
-bool person::addItem(item * which)
+bool person::addItem(itemSharedPtr which)
 {
 	//Item stops glittering once we pick it up.
 	which->isGlittery = false;
@@ -761,7 +761,7 @@ bool person::addItem(item * which)
 /*
 Sets up a newly-equipped weapon.
 */
-void person::doWeaponEquip(weapon * wp)
+void person::doWeaponEquip(weaponSharedPtr wp)
 {
 	
 	//Special weapon attack is a spell
@@ -786,7 +786,7 @@ void person::doWeaponEquip(weapon * wp)
 /*
 Returns the currently-highlighted consumable.
 */
-consumable * person::getSelectedConsumable()
+consumableSharedPtr person::getSelectedConsumable()
 {
 	return items.getSelectedConsumable();
 }
@@ -806,7 +806,7 @@ consumableVector person::getConsumableList()
 /*
 Hard-set our selected consumable
 */
-void person::setCurrentConsumable(consumable * c)
+void person::setCurrentConsumable(consumableSharedPtr c)
 {
 	items.setSelectedConsumable(c);
 }
@@ -826,7 +826,7 @@ void person::restoreItemsToMax()
 /*
 Returns whether the given item is equipped.
 */
-bool person::hasItemEquipped(item * it)
+bool person::hasItemEquipped(itemSharedPtr it)
 {
 	switch (it->getCategory()) {
 	case(ITEM_WEAPON): return it == getWeapon();
@@ -834,8 +834,8 @@ bool person::hasItemEquipped(item * it)
 	case(ITEM_BODY_ARMOUR): return it == getArmour();
 	case(ITEM_HELMET): return it == getHelmet();
 	case(ITEM_CHARM): return it == getCharm();
-	case(ITEM_SPELL): return items.isSpellEquipped(static_cast<spell*>(it));
-	case(ITEM_CONSUMABLE): return items.isConsumableEquipped(static_cast<consumable*>(it));
+	case(ITEM_SPELL): return items.isSpellEquipped(std::static_pointer_cast<spell>(it));
+	case(ITEM_CONSUMABLE): return items.isConsumableEquipped(std::static_pointer_cast<consumable>(it));
 	}
 	return false;
 }

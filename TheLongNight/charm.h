@@ -32,17 +32,20 @@ private:
 
 };
 
+typedef std::shared_ptr<charm> charmSharedPtr;
+
+
 //Defined items
-charm* charm_ArcanaDrenchedCharm();
-charm* charm_ClericsHolyPendant();
-charm* charm_BloodstainedCharm();
-charm* charm_KhallesHeadband();
-charm* charm_IdolOfPash();
-charm* charm_EvisceratingRing();
-charm* charm_BloodDrinkersBand();
-charm* charm_WretchedFleshBand();
-charm* charm_WretchedFleshmask();
-charm* charm_FrozenFlowerCharm();
-charm* charm_ToxicantsCharm();
+charmSharedPtr charm_ArcanaDrenchedCharm();
+charmSharedPtr charm_ClericsHolyPendant();
+charmSharedPtr charm_BloodstainedCharm();
+charmSharedPtr charm_KhallesHeadband();
+charmSharedPtr charm_IdolOfPash();
+charmSharedPtr charm_EvisceratingRing();
+charmSharedPtr charm_BloodDrinkersBand();
+charmSharedPtr charm_WretchedFleshBand();
+charmSharedPtr charm_WretchedFleshmask();
+charmSharedPtr charm_FrozenFlowerCharm();
+charmSharedPtr charm_ToxicantsCharm();
 
 #endif

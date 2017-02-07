@@ -162,6 +162,7 @@ maptile* tile_SordidChapelDoor(); //"sordid door"
 maptile* tile_VoidDrenchedDoor(); //"void_drenched_door"
 maptile* tile_DoorOfWinter(); //"door_of_winter"
 maptile* tile_OldValleyDoor(); //"old_valley_door"
+maptile* tile_DesolateChurchDoor(); //"bartons_key"
 
 //Furniture
 maptile* tile_Chair1(); //"chair1"
@@ -170,6 +171,7 @@ maptile* tile_Table1(); //"table1"
 maptile* tile_Table2(); //"table2"
 maptile* tile_Table3(); //"table3"
 maptile* tile_Table4(); //"table4"
+maptile* tile_Tombstone(); //"tombstone"
 
 
 const tileVector ALL_MAPTILES = {
@@ -183,12 +185,13 @@ const tileVector ALL_MAPTILES = {
 	tile_Bed(), tile_Terminal(),
 	tile_StatueOfRest(), tile_VoidWarpstone(),
 	//Furniture
-	tile_Chair1(), tile_Chair2(),
+	tile_Chair1(), tile_Chair2(), tile_Tombstone(),
 	tile_Table1(), tile_Table2(), tile_Table3(), tile_Table4(),
 	//Special locked doors
 	tile_WretchedDoor(), tile_CrowDoor(), tile_RuinedTownshipHallDoor(),
 	tile_WyrdDoor(), tile_GreenChapelGardenDoor(), tile_SordidChapelDoor(),
-	tile_VoidDrenchedDoor(), tile_DoorOfWinter(), tile_OldValleyDoor()
+	tile_VoidDrenchedDoor(), tile_DoorOfWinter(), tile_OldValleyDoor(),
+	tile_DesolateChurchDoor()
 };
 
 #endif

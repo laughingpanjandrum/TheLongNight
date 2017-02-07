@@ -23,7 +23,7 @@ game::game()
 	loadTextDumps("dialogue/journalText.txt");
 	
 	//Character create
-	player = new person();
+	player = personSharedPtr (new person());
 	player->isPlayer = true;
 	player->stats = new statline(1, 1, 1, 1, 1, 1, 1);
 	
@@ -168,7 +168,7 @@ void game::setCursorPosition(int xnew, int ynew)
 	targetPt.first = xnew;
 	targetPt.second = ynew;
 	//If the cursor is over something, make it our target
-	person* target = currentMap->getPerson(xnew, ynew);
+	personSharedPtr target = currentMap->getPerson(xnew, ynew);
 	if (target != nullptr)
 		player->setTarget(target);
 }
@@ -226,11 +226,11 @@ pathVector game::getLine(coord startxy, coord endxy)
 /*
 Returns the first person we find walking along the given path vector.
 */
-person * game::getTargetOnPath(pathVector path)
+personSharedPtr game::getTargetOnPath(pathVector path)
 {
 	for (auto pt : path) {
 		if (currentMap->isWalkable(pt.first, pt.second)) {
-			person* target = currentMap->getPerson(pt.first, pt.second);
+			personSharedPtr target = currentMap->getPerson(pt.first, pt.second);
 			if (target != nullptr)
 				return target;
 		}
@@ -254,7 +254,7 @@ void game::endPlayerTurn()
 	turns.addEntity(player, playerTurnDelay);
 	playerTurnDelay = 0;
 	//Cycle through all turns
-	person* nextTurn = turns.getNext();
+	personSharedPtr nextTurn = turns.getNext();
 	while (nextTurn != player) {
 		doMonsterTurn(nextTurn);
 		nextTurn = turns.getNext();
@@ -269,7 +269,7 @@ void game::endPlayerTurn()
 /*
 Returns a list of all adjacent coords that the given ai will willingly walk upon.
 */
-pathVector game::getAllAdjacentWalkable(monster * ai)
+pathVector game::getAllAdjacentWalkable(monsterSharedPtr ai)
 {
 	int x = ai->getx();
 	int y = ai->gety();
@@ -285,7 +285,7 @@ pathVector game::getAllAdjacentWalkable(monster * ai)
 /*
 Returns whether the given ai will move to the given point.
 */
-bool game::aiIsValidMove(monster * ai, int xnew, int ynew)
+bool game::aiIsValidMove(monsterSharedPtr ai, int xnew, int ynew)
 {
 	//Make sure it's in bounds
 	if (!currentMap->inBounds(xnew, ynew))
@@ -293,7 +293,7 @@ bool game::aiIsValidMove(monster * ai, int xnew, int ynew)
 	else if (!currentMap->isWalkable(xnew, ynew))
 		return false;
 	//Make sure we won't attack a friendly
-	person* here = currentMap->getPerson(xnew, ynew);
+	personSharedPtr here = currentMap->getPerson(xnew, ynew);
 	if (here != nullptr && !here->isPlayer)
 		return false;
 	//Otherwise, we're good to go!
@@ -305,7 +305,7 @@ AI moves directly towards its target, melee-attacking if possible.
 Returns whether we're done moving.
 We might not be done if we get multiple moves in one turn!
 */
-bool game::aiMoveToTarget(monster * ai)
+bool game::aiMoveToTarget(monsterSharedPtr ai)
 {
 
 	//If our target died at some point prior to this, QUIT MOVING
@@ -321,7 +321,7 @@ bool game::aiMoveToTarget(monster * ai)
 	}
 
 	//If there are, find the one that's nearest our target
-	person* t = ai->getTarget();
+	personSharedPtr t = ai->getTarget();
 	coord bestPt = pts.at(0);
 	int bestDist = hypot(bestPt.first - t->getx(), bestPt.second - t->gety());
 
@@ -360,20 +360,26 @@ bool game::aiMoveToTarget(monster * ai)
 /*
 See if we want to cast any of our spells.
 */
-bool game::aiTryUseSpell(monster * ai)
+bool game::aiTryUseSpell(monsterSharedPtr ai)
 {
+	
 	//Random chance to not cast a spell
 	int r = randint(1, 100);
 	if (r > ai->getSpellCastChance())
 		return false;
+	
 	//Sort through all our spells and see if any of them look likely
-	person* target = ai->getTarget();
+	personSharedPtr target = ai->getTarget();
+	
 	for (auto sp : ai->getSpellsKnown()) {
+		
 		attackType aType = sp->getAttackType();
 		if (aType == ATTACK_RANGE) {
+			
 			//Ranged spell - do we have the reach for it?
 			pathVector path = getLine(ai->getPosition(), target->getPosition());
-			person* willHit = getTargetOnPath(path);
+			personSharedPtr willHit = getTargetOnPath(path);
+			
 			if (willHit == target && currentMap->isPointInFOV(ai->getx(),ai->gety())) {
 				//Check spell range
 				int dist = hypot(ai->getx() - target->getx(), ai->gety() - target->gety());
@@ -386,6 +392,7 @@ bool game::aiTryUseSpell(monster * ai)
 				}
 			}
 		}
+		
 		else if (aType == ATTACK_AOE) {
 			//See if AOE spell will hit target
 			int dist = hypot(ai->getx() - target->getx(), ai->gety() - target->gety());
@@ -396,11 +403,13 @@ bool game::aiTryUseSpell(monster * ai)
 				return true;
 			}
 		}
+		
 		else if (aType == ATTACK_BUFF_SELF) {
 			//Cast spell on self - usually a good idea!
 			dischargeSpellOnTarget(sp, ai, ai);
 		}
 	}
+	
 	//We didn't use any abilities
 	return false;
 }
@@ -408,7 +417,7 @@ bool game::aiTryUseSpell(monster * ai)
 /*
 Try to spawn something nearby!
 */
-void game::aiSpawnCreature(monster * ai)
+void game::aiSpawnCreature(monsterSharedPtr ai)
 {
 
 	//First find a free point adjacent to us
@@ -427,7 +436,7 @@ void game::aiSpawnCreature(monster * ai)
 	if (pts.size()) {
 		int p = randrange(pts.size());
 		coord pt = pts.at(p);
-		monster* m = ai->getRandomSpawn();
+		monsterSharedPtr m = ai->getRandomSpawn();
 		//AND PUT IT DOWN
 		currentMap->addPerson(m, pt.first, pt.second);
 		//And add it to the clock
@@ -441,7 +450,7 @@ void game::aiSpawnCreature(monster * ai)
 /*
 What we choose to do if we have a target.
 */
-void game::aiDoCombatAction(monster * ai)
+void game::aiDoCombatAction(monsterSharedPtr ai)
 {
 	//First see if we want to spawn something!
 	if (ai->canSpawnCreatures() && ai->wantsToSpawn())
@@ -457,7 +466,7 @@ void game::aiDoCombatAction(monster * ai)
 /*
 AI tries to find something to kill.
 */
-void game::aiFindTarget(monster * ai)
+void game::aiFindTarget(monsterSharedPtr ai)
 {
 	//If the player can see us, we can see them. ONE SIMPLE RULE.
 	if (currentMap->isPointInFOV(ai->getx(), ai->gety())) {
@@ -476,9 +485,9 @@ void game::aiFindTarget(monster * ai)
 /*
 Monster does its turn and then is placed back into the turn tracker.
 */
-void game::doMonsterTurn(person * p)
+void game::doMonsterTurn(personSharedPtr p)
 {
-	monster* ai = static_cast<monster*>(p);
+	monsterSharedPtr ai = std::static_pointer_cast<monster>(p);
 	//If we're dead, we probably shouldn't do anything
 	if (ai->isDead)
 		return;
@@ -491,15 +500,17 @@ void game::doMonsterTurn(person * p)
 		return;
 	}
 	//Do we have a target?
-	person* target = ai->getTarget();
+	personSharedPtr target = ai->getTarget();
 	if (target == nullptr)
 		aiFindTarget(ai);
 	//If we have one, just move towards it
-	if (target != nullptr)
+	if (target != nullptr) {
 		aiDoCombatAction(ai);
-	else
+	}
+	else {
 		//If not, just wait
 		turns.addEntity(ai, 1);
+	}
 }
 
 
@@ -519,7 +530,8 @@ void game::drawMenu(menu * m, int atx, int aty)
 
 	//Elements
 	auto elements = m->getAllElements();
-	for (auto it = elements.begin(); it != elements.end(); it++) {
+	for (auto it = elements.begin(); it != elements.end(); it++) 
+	{
 
 		//SHOW NAME and tile
 		win.write(atx + 4, ++aty, (*it)->getName(), (*it)->getColor());
@@ -532,7 +544,7 @@ void game::drawMenu(menu * m, int atx, int aty)
 
 		//Special context-sensitive attributes
 		if (state == STATE_VIEW_INVENTORY_CATEGORY) {
-			if (player->hasItemEquipped(static_cast<item*>(*it)))
+			if (player->hasItemEquipped(std::static_pointer_cast<item>(*it)))
 				win.writec(atx + 2, aty, '{', TCODColor::white);
 		}
 
@@ -558,15 +570,16 @@ void game::acceptCurrentMenuIndex()
 	//What this does depends on which MENU we're in
 	if (state == STATE_VIEW_INVENTORY) {
 		//Selected menu object should be an ITEM
-		item* sel = static_cast<item*>(currentMenu->getSelectedItem());
+		itemSharedPtr sel = std::static_pointer_cast<item>(currentMenu->getSelectedItem());
 		selectInventoryCategory(sel->getCategory());
 	}
 	else if (state == STATE_VIEW_INVENTORY_CATEGORY) {
 		//Equip the selected item
-		item* sel = static_cast<item*>(currentMenu->getSelectedItem());
+		itemSharedPtr sel = std::static_pointer_cast<item>(currentMenu->getSelectedItem());
 		if (sel != nullptr)
 			equipItem(sel);
 	}
+	
 	else if (state == STATE_LEVEL_UP_MENU)
 		doLevelUp();
 	else if (state == STATE_SELECT_SPELL)
@@ -672,7 +685,7 @@ drawData game::getDrawData(int x, int y)
 	
 	//Basic data comes from the map tile
 	maptile* m = currentMap->getTile(x, y);
-	drawData* toDraw = new drawData(m->getTileCode(), m->getColor(), m->getBgColor());
+	drawDataSharedPtr toDraw( new drawData(m->getTileCode(), m->getColor(), m->getBgColor()) );
 	
 	//If this point isn't visible, don't draw it!
 	if (!currentMap->isPointInFOV(x, y) || player->isBlind()) {
@@ -695,7 +708,7 @@ drawData game::getDrawData(int x, int y)
 		currentMap->addToMemoryMap(x, y);
 		
 		//Is there a player here?
-		person* p = currentMap->getPerson(x, y);
+		personSharedPtr p = currentMap->getPerson(x, y);
 		
 		if (p != nullptr) {
 			//Invisible? IF SO, CANNOT SEE PERSON!
@@ -707,7 +720,7 @@ drawData game::getDrawData(int x, int y)
 		
 		else {
 			//Is there an item here?
-			item* it = currentMap->getItem(x, y);
+			itemSharedPtr it = currentMap->getItem(x, y);
 			if (it != nullptr) {
 				toDraw->tileCode = it->getTileCode();
 				toDraw->color = it->getColor();
@@ -739,6 +752,7 @@ drawData game::getDrawData(int x, int y)
 	//Highlight cursor position
 	if (targetModeOn && x == targetPt.first && y == targetPt.second)
 		toDraw->bgcolor = TCODColor::pink;
+	
 	//Done! Return it all
 	return *toDraw;
 
@@ -764,7 +778,7 @@ void game::drawInterface(int leftx, int topy)
 	//	Equipment
 	
 	//Weapons
-	weapon* wp = player->getWeapon();
+	weaponSharedPtr wp = player->getWeapon();
 	if (wp != nullptr) {
 		//Weapon
 		win.writec(atx, ++aty, wp->getTileCode(), wp->getColor());
@@ -774,14 +788,14 @@ void game::drawInterface(int leftx, int topy)
 		win.write(atx + 2, ++aty, "no weapon", TCODColor::darkGrey);
 	
 	//Offhand item
-	weapon* of = player->getOffhand();
+	weaponSharedPtr of = player->getOffhand();
 	if (of != nullptr) {
 		win.writec(atx, ++aty, of->getTileCode(), of->getColor());
 		win.write(atx + 2, aty, of->getMenuName(), of->getColor());
 	}
 	
 	//Helmet
-	armour* helm = player->getHelmet();
+	armourSharedPtr helm = player->getHelmet();
 	if (helm != nullptr) {
 		win.writec(atx, ++aty, helm->getTileCode(), helm->getColor());
 		win.write(atx + 2, aty, helm->getMenuName(), helm->getColor());
@@ -790,7 +804,7 @@ void game::drawInterface(int leftx, int topy)
 		win.write(atx + 2, ++aty, "no helmet", TCODColor::darkGrey);
 	
 	//Armour
-	armour* ar = player->getArmour();
+	armourSharedPtr ar = player->getArmour();
 	if (ar != nullptr) {
 		win.writec(atx, ++aty, ar->getTileCode(), ar->getColor());
 		win.write(atx + 2, aty, ar->getMenuName(), ar->getColor());
@@ -799,7 +813,7 @@ void game::drawInterface(int leftx, int topy)
 		win.write(atx + 2, ++aty, "no armour", TCODColor::darkGrey);
 
 	//Charms
-	charm* ch = player->getCharm();
+	charmSharedPtr ch = player->getCharm();
 	if (ch != nullptr) {
 		win.writec(atx, ++aty, ch->getTileCode(), ch->getColor());
 		win.write(atx + 2, aty, ch->getMenuName(), ch->getColor());
@@ -815,7 +829,7 @@ void game::drawInterface(int leftx, int topy)
 		aty += currentMenu->getAllElements().size() + 1;
 	}
 	else {
-		consumable* c = player->getSelectedConsumable();
+		consumableSharedPtr c = player->getSelectedConsumable();
 		if (c != nullptr) {
 			if (c != nullptr) {
 				win.writec(atx, ++aty, c->getTileCode(), c->getColor());
@@ -937,7 +951,7 @@ void game::drawInventory(int atx, int aty)
 	if (state == STATE_VIEW_INVENTORY_CATEGORY) {
 		if (currentMenu->getSelectedItem() != nullptr) {
 			//Selected menu object should be an ITEM
-			item* sel = static_cast<item*>(currentMenu->getSelectedItem());
+			itemSharedPtr sel = std::static_pointer_cast<item>(currentMenu->getSelectedItem());
 			drawItemInfo(sel, atx, aty + 40);
 		}
 	}
@@ -1026,7 +1040,7 @@ void game::drawPlayerInfo(int atx, int aty)
 /*
 Display detailed stats on a monster.
 */
-void game::drawMonsterInfo(monster * m, int atx, int aty)
+void game::drawMonsterInfo(monsterSharedPtr m, int atx, int aty)
 {
 
 	//Box it in!
@@ -1065,7 +1079,7 @@ void game::drawMonsterInfo(monster * m, int atx, int aty)
 	}
 
 	//Status effects
-	weapon* wp = m->getWeapon();
+	weaponSharedPtr wp = m->getWeapon();
 	if (wp != nullptr) {
 		for (int idx = 0; idx < wp->getStatusEffectCount(); idx++) {
 			//Values
@@ -1091,7 +1105,7 @@ void game::drawMonsterInfo(monster * m, int atx, int aty)
 		damageType dtype = static_cast<damageType>(dt);
 		int res = m->getDamageResist(dtype);
 		if (res > 0) {
-			win.write(atx + 1, ++aty, "RES:" + getDamageTypeName(dtype), maincol);
+			win.write(atx + 1, ++aty, getDamageTypeName(dtype), maincol);
 			win.write(atx + offset, aty, std::to_string(res), getDamageTypeColor(dtype));
 		}
 	}
@@ -1115,8 +1129,10 @@ void game::drawMonsterInfo(monster * m, int atx, int aty)
 	}
 
 	//Wait for player to finish!
+	aty += 3;
+	win.write(atx, aty, centreText("PRESS [ESC]", 38), TCODColor::white);
 	win.refresh();
-	while (win.getkey().vk != KEY_ACCEPT && win.getkey().vk != KEY_BACK_OUT) {}
+	while (win.getkey().vk != KEY_BACK_OUT) {}
 
 }
 
@@ -1126,16 +1142,18 @@ Display info about whatever we've highlighted with the CURSOR.
 */
 void game::drawMouseover(int atx, int aty)
 {
+	
 	//What are we pointing at?
 	coord mpt = screenToMapCoords(coord(mouse.cx, mouse.cy));
 	if (currentMap->inBounds(mpt.first, mpt.second) && currentMap->isPointInFOV(mpt.first, mpt.second)) {
+	
 		//Show highlighted object: person?
-		person* target = currentMap->getPerson(mpt.first, mpt.second);
+		personSharedPtr target = currentMap->getPerson(mpt.first, mpt.second);
 		if (target != nullptr)
 			drawTargetInfo(target, atx, aty);
 		else {
 			//Item?
-			item* it = currentMap->getItem(mpt.first, mpt.second);
+			itemSharedPtr it = currentMap->getItem(mpt.first, mpt.second);
 			if (it != nullptr) {
 				win.write(atx, aty, it->getName(), it->getColor());
 			}
@@ -1146,9 +1164,10 @@ void game::drawMouseover(int atx, int aty)
 			}
 		}
 	}
+	
 	else {
 		//If the mouse isn't in play, show the player's current target
-		person* target = player->getTarget();
+		personSharedPtr target = player->getTarget();
 		if (target != nullptr)
 			drawTargetInfo(target, atx, aty);
 	}
@@ -1158,11 +1177,13 @@ void game::drawMouseover(int atx, int aty)
 /*
 Info about a person we have highlighted on the map.
 */
-void game::drawTargetInfo(person * target, int atx, int aty)
+void game::drawTargetInfo(personSharedPtr target, int atx, int aty)
 {
+	
 	//Health
 	win.write(atx, aty, target->getName(), target->getColor());
 	win.write(atx, ++aty, "HP:" + target->getHealth().getAsString(), TCODColor::darkRed);
+	
 	//Bleed
 	int bleeding = target->getBleedDuration();
 	if (bleeding > 0) {
@@ -1175,10 +1196,25 @@ void game::drawTargetInfo(person * target, int atx, int aty)
 		if (bleed->getValue() > 0)
 			win.write(atx + 1, ++aty, "Bleed buildup" + bleed->getAsString(), TCODColor::crimson);
 	}
+	
+	//Poison
+	int poison = target->getPoisonDuration();
+	if (poison > 0) {
+		//Currently poisoned
+		win.write(atx + 1, ++aty, "Poisoned x" + std::to_string(poison), TCODColor::lime);
+	}
+	else {
+		//Poison buildup but not proc'd
+		counter* poisoning = target->getSpecialEffectBuildup(EFFECT_POISON);
+		if (poisoning->getValue())
+			win.write(atx + 1, ++aty, "Poison buildup " + poisoning->getAsString(), TCODColor::lime);
+	}
+	
 	//Blinding
 	if (target->isBlind()) {
 		win.write(atx + 1, ++aty, "Blinded (" + std::to_string(target->getBlindnessDuration()) + ")", TCODColor::lightestYellow);
 	}
+	
 	//Text description
 	win.writeWrapped(atx, ++aty, 20, target->description, TCODColor::lightGrey);
 }
@@ -1187,7 +1223,7 @@ void game::drawTargetInfo(person * target, int atx, int aty)
 /*
 Allows animations to adjust draw data when drawing the map.
 */
-drawData* game::getAnimationDataOverride(drawData * baseData, int x, int y)
+drawDataSharedPtr game::getAnimationDataOverride(drawDataSharedPtr baseData, int x, int y)
 {
 	for (auto a : playingAnimations) {
 		a->getDrawData(baseData, x, y);
@@ -1226,18 +1262,23 @@ void game::updateAnimations()
 /*
 This just figures out which particular info-drawing function to use.
 */
-void game::drawItemInfo(item * it, int atx, int aty)
+void game::drawItemInfo(itemSharedPtr it, int atx, int aty)
 {
+	
 	//Clear region
 	win.clearRegion(atx, aty, 40, 21);
+	
 	//Tile and name
 	win.writec(atx, aty, it->getTileCode(), it->getColor());
 	win.write(atx + 2, aty, it->getName(), it->getColor());
+	
 	//Type of item
 	win.write(atx, ++aty, getItemCategoryName(it->getCategory()), TCODColor::darkGrey);
+	
 	//Indicate whether equipped or not
 	if (player->hasItemEquipped(it))
 		win.write(atx + 12, aty, "EQUIPPED", TCODColor::grey);
+	
 	//Show price, if one is defined
 	if (it->getPrice() > 0) {
 		win.write(atx, ++aty, "PRICE: ", TCODColor::white);
@@ -1252,21 +1293,21 @@ void game::drawItemInfo(item * it, int atx, int aty)
 	atx += 1;
 	auto cat = it->getCategory();
 	switch (cat) {
-	case(ITEM_WEAPON): drawWeaponInfo(static_cast<weapon*>(it), atx, aty); break;
-	case(ITEM_OFFHAND): drawWeaponInfo(static_cast<weapon*>(it), atx, aty); break;
-	case(ITEM_BODY_ARMOUR): drawArmourInfo(static_cast<armour*>(it), atx, aty); break;
-	case(ITEM_HELMET): drawArmourInfo(static_cast<armour*>(it), atx, aty); break;
-	case(ITEM_SPELL): drawSpellInfo(static_cast<spell*>(it), atx, aty); break;
-	case(ITEM_CONSUMABLE): drawConsumableInfo(static_cast<consumable*>(it), atx, aty); break;
-	case(ITEM_CHARM): drawCharmInfo(static_cast<charm*>(it), atx, aty); break;
-	case(ITEM_MISC): drawMiscItemInfo(static_cast<miscItem*>(it), atx, aty); break;
+	case(ITEM_WEAPON): drawWeaponInfo(std::static_pointer_cast<weapon>(it), atx, aty); break;
+	case(ITEM_OFFHAND): drawWeaponInfo(std::static_pointer_cast<weapon>(it), atx, aty); break;
+	case(ITEM_BODY_ARMOUR): drawArmourInfo(std::static_pointer_cast<armour>(it), atx, aty); break;
+	case(ITEM_HELMET): drawArmourInfo(std::static_pointer_cast<armour>(it), atx, aty); break;
+	case(ITEM_SPELL): drawSpellInfo(std::static_pointer_cast<spell>(it), atx, aty); break;
+	case(ITEM_CONSUMABLE): drawConsumableInfo(std::static_pointer_cast<consumable>(it), atx, aty); break;
+	case(ITEM_CHARM): drawCharmInfo(std::static_pointer_cast<charm>(it), atx, aty); break;
+	case(ITEM_MISC): drawMiscItemInfo(std::static_pointer_cast<miscItem>(it), atx, aty); break;
 	}
 }
 
 /*
 Weapon descriptions.
 */
-void game::drawWeaponInfo(weapon * it, int atx, int aty)
+void game::drawWeaponInfo(weaponSharedPtr it, int atx, int aty)
 {
 	int offset = 13;
 	TCODColor maincol = TCODColor::white;
@@ -1375,7 +1416,7 @@ void game::drawWeaponInfo(weapon * it, int atx, int aty)
 	}
 
 	//Special attack, if any
-	spell* atk = it->getSpecialAttack();
+	spellSharedPtr atk = it->getSpecialAttack();
 	if (atk != nullptr) {
 		//Name of special attack
 		win.writec(atx, ++aty, VIGOUR_GLYPH, TCODColor::green);
@@ -1397,13 +1438,15 @@ void game::drawWeaponInfo(weapon * it, int atx, int aty)
 /*
 Armour descriptions.
 */
-void game::drawArmourInfo(armour * it, int atx, int aty)
+void game::drawArmourInfo(armourSharedPtr it, int atx, int aty)
 {
 	int offset = 10;
 	TCODColor maincol = TCODColor::white;
+	
 	//DEF
 	win.write(atx, aty, "DEFENCE", TCODColor::sepia);
 	win.write(atx + offset, aty, std::to_string(it->getDefence()), maincol);
+	
 	//Damage resistances
 	for (int r = 0; r != ALL_DAMAGE_TYPES; r++) {
 		damageType dr = static_cast<damageType>(r);
@@ -1413,18 +1456,21 @@ void game::drawArmourInfo(armour * it, int atx, int aty)
 			win.write(atx + offset, aty, std::to_string(res), maincol);
 		}
 	}
+	
 	//Bleed resist
 	int br = it->getBleedResist();
 	if (br) {
 		win.write(atx, ++aty, "BLEED RES", TCODColor::crimson);
 		win.write(atx + offset, aty, std::to_string(br), maincol);
 	}
+	
 	//Poison resist
 	int pr = it->getPoisonResist();
 	if (pr) {
 		win.write(atx, ++aty, "POISON RES", TCODColor::lime);
 		win.write(atx + offset, aty, std::to_string(pr), maincol);
 	}
+	
 	//Move speed adjustment, if body armour
 	if (it->getCategory() == ITEM_BODY_ARMOUR) {
 		win.write(atx, ++aty, "SPEED", TCODColor::orange);
@@ -1435,7 +1481,7 @@ void game::drawArmourInfo(armour * it, int atx, int aty)
 /*
 Spell description.
 */
-void game::drawSpellInfo(spell * it, int atx, int aty)
+void game::drawSpellInfo(spellSharedPtr it, int atx, int aty)
 {
 	
 	//Type: arcane or divine
@@ -1459,6 +1505,7 @@ void game::drawSpellInfo(spell * it, int atx, int aty)
 		win.write(atx + 5, aty, "Area Attack", TCODColor::white);
 	else if (at == ATTACK_MELEE)
 		win.write(atx + 5, aty, "Melee Attack", TCODColor::white);
+	
 	//Spell details
 	if (at == ATTACK_BUFF_WEAPON) {
 		//Buff details
@@ -1468,11 +1515,13 @@ void game::drawSpellInfo(spell * it, int atx, int aty)
 		win.write(atx + 6, aty, txt, getDamageTypeColor(buff.dtype));
 		win.write(atx + 7 + txt.size(), aty, "damage", TCODColor::white);
 	}
+	
 	else if (at != ATTACK_BUFF_SELF && at != ATTACK_MELEE) {
 		//Range of attack
 		win.write(atx, ++aty, "Range:", TCODColor::lightBlue);
 		win.write(atx + 6, aty, std::to_string(it->getAttackRange()), TCODColor::white);
 	}
+	
 	//Effects conferred
 	for (int i = 0; i < it->getEffectsCount(); i++) {
 		//Effect type and potency
@@ -1488,12 +1537,14 @@ void game::drawSpellInfo(spell * it, int atx, int aty)
 /*
 Consumables info
 */
-void game::drawConsumableInfo(consumable * it, int atx, int aty)
+void game::drawConsumableInfo(consumableSharedPtr it, int atx, int aty)
 {
+	
 	if (it->isRangedAttackItem()) {
 		//This is just a container for a spell attack!
 		drawSpellInfo(it->getRangedAttack(), atx, aty);
 	}
+	
 	else if (it->getWeaponBuff() != nullptr) {
 		//This is a weapon buff.
 		auto buff = it->getWeaponBuff();
@@ -1503,10 +1554,11 @@ void game::drawConsumableInfo(consumable * it, int atx, int aty)
 		win.write(atx + txt1.size(), aty, txt2, getDamageTypeColor(buff->dtype));
 		win.write(atx + txt1.size() + txt2.size(), aty, " damage.", TCODColor::white);
 	}
+	
 	else {
 		//Just applies some sort of effect.
 		for (auto eff : it->getEffects()) {
-			win.write(atx, aty, std::to_string(it->getPotency()), TCODColor::white);
+			win.write(atx, ++aty, std::to_string(it->getPotency()), TCODColor::white);
 			win.write(atx + 3, aty, getEffectName(eff), TCODColor::lightGrey);
 		}
 	}
@@ -1516,7 +1568,7 @@ void game::drawConsumableInfo(consumable * it, int atx, int aty)
 /*
 Charm info.
 */
-void game::drawCharmInfo(charm * it, int atx, int aty)
+void game::drawCharmInfo(charmSharedPtr it, int atx, int aty)
 {
 	//List effects
 	auto allEffects = it->getAllEffects();
@@ -1533,7 +1585,7 @@ void game::drawCharmInfo(charm * it, int atx, int aty)
 /*
 Miscellaneous item info
 */
-void game::drawMiscItemInfo(miscItem * it, int atx, int aty)
+void game::drawMiscItemInfo(miscItemSharedPtr it, int atx, int aty)
 {
 	if (it->isRunestone) {
 		win.write(atx, aty, "Equip to slot into your current weapon.", TCODColor::white);
@@ -1643,9 +1695,9 @@ void game::processMouseClick()
 		//View monster info
 		coord clk = screenToMapCoords(coord(mouse.cx, mouse.cy));
 		if (currentMap->inBounds(clk.first, clk.second)) {
-			person* m = currentMap->getPerson(clk.first, clk.second);
+			personSharedPtr m = currentMap->getPerson(clk.first, clk.second);
 			if (m != nullptr && !m->isPlayer) {
-				drawMonsterInfo(static_cast<monster*>(m), MAP_DRAW_X, MAP_DRAW_Y);
+				drawMonsterInfo(std::static_pointer_cast<monster>(m), MAP_DRAW_X, MAP_DRAW_Y);
 			}
 		}
 	}
@@ -1704,7 +1756,7 @@ We use up our selected consumable.
 */
 void game::useConsumable()
 {
-	consumable* toUse = player->getSelectedConsumable();
+	consumableSharedPtr toUse = player->getSelectedConsumable();
 	if (toUse != nullptr) {
 		//Make sure we have enough
 		if (toUse->getAmountLeft() > 0) {
@@ -1724,7 +1776,7 @@ void game::useConsumable()
 			
 			else if (toUse->getWeaponBuff() != nullptr) {
 				//Buffs a weapon
-				weapon* wp = player->getWeapon();
+				weaponSharedPtr wp = player->getWeapon();
 				if (wp != nullptr)
 					wp->setBuff(*toUse->getWeaponBuff());
 			}
@@ -1771,7 +1823,7 @@ Actually pick a consumable to highlight
 void game::selectConsumableFromMenu()
 {
 	//Select item
-	consumable* it = static_cast<consumable*>(currentMenu->getSelectedItem());
+	consumableSharedPtr it =std::static_pointer_cast<consumable>(currentMenu->getSelectedItem());
 	player->setCurrentConsumable(it);
 	//Close menu now!
 	setState(STATE_VIEW_MAP);
@@ -1791,7 +1843,7 @@ void game::selectConsumableFromMenu()
 /*
 Discharge an AOE spell.
 */
-void game::doAOE(spell * sp, person * caster)
+void game::doAOE(spellSharedPtr sp, personSharedPtr caster)
 {
 	
 	//Animation of the event; colour goes from spell colour to a lighter version on the outside
@@ -1809,7 +1861,7 @@ void game::doAOE(spell * sp, person * caster)
 	for (int x = caster->getx() - r; x <= caster->getx() + r; x++) {
 		for (int y = caster->gety() - r; y <= caster->gety() + r; y++) {
 			//Check for target here
-			person* target = currentMap->getPerson(x, y);
+			personSharedPtr target = currentMap->getPerson(x, y);
 			//AOE doesn't affect caster
 			if (target != nullptr && target != caster) {
 				dischargeSpellOnTarget(sp, caster, target);
@@ -1823,7 +1875,7 @@ void game::doAOE(spell * sp, person * caster)
 Apply any effect to any person.
 Its strength is the given potency.
 */
-void game::applyEffectToPerson(person * target, effect eff, int potency, person* caster)
+void game::applyEffectToPerson(personSharedPtr target, effect eff, int potency, personSharedPtr caster)
 {
 	
 	//Interface stuff for PCs only
@@ -1971,7 +2023,7 @@ void game::playerMoveLogic(int xnew, int ynew)
 /*
 Change player character's position, if the move is valid.
 */
-void game::movePerson(person* p, int xnew, int ynew)
+void game::movePerson(personSharedPtr p, int xnew, int ynew)
 {
 
 	//In bounds?
@@ -1981,7 +2033,7 @@ void game::movePerson(person* p, int xnew, int ynew)
 		if (currentMap->isWalkable(xnew, ynew)) {
 		
 			//Is someone already here?
-			person* here = currentMap->getPerson(xnew, ynew);
+			personSharedPtr here = currentMap->getPerson(xnew, ynew);
 			
 			if (here != nullptr) {
 
@@ -2032,11 +2084,11 @@ void game::movePerson(person* p, int xnew, int ynew)
 Apply effects of standing on a tile to the given person.
 Usually ticks once per round, and once when the player first moves to this tile.
 */
-void game::standOnTile(person * victim)
+void game::standOnTile(personSharedPtr victim)
 {
 	//If we're the PLAYER, we pick up any items that are here
 	if (victim->isPlayer) {
-		item* itemHere = currentMap->getItem(victim->getx(), victim->gety());
+		itemSharedPtr itemHere = currentMap->getItem(victim->getx(), victim->gety());
 		if (itemHere != nullptr) {
 			//Get item
 			pickUpItem(itemHere);
@@ -2211,7 +2263,7 @@ void game::setupWarpMenu()
 	//Menu of known save points
 	menu* warpMenu = new menu("WARP STONES DISCOVERED");
 	for (auto warpPt : warpPoints) {
-		element* e = new element(warpPt.name, 0, TCODColor::white);
+		elementSharedPtr e(new element(warpPt.name, 0, TCODColor::white));
 		warpMenu->addElement(e);
 	}
 	
@@ -2273,7 +2325,7 @@ void game::doWarp(std::string warpPointName)
 /*
 One creature attacks another in melee.
 */
-void game::meleeAttack(person * attacker, person * target)
+void game::meleeAttack(personSharedPtr attacker, personSharedPtr target)
 {
 	addMessage(attacker->getName() + " strikes " + target->getName() + '!', attacker->getColor());
 
@@ -2309,7 +2361,7 @@ void game::meleeAttack(person * attacker, person * target)
 		}
 
 		//Next: STATUS EFFECTS and SPECIAL EFFECTS
-		weapon* wp = attacker->getWeapon();
+		weaponSharedPtr wp = attacker->getWeapon();
 		if (wp != nullptr) {
 
 			//Status effects applied
@@ -2349,7 +2401,7 @@ void game::meleeAttack(person * attacker, person * target)
 		addMessage(target->getName() + " dies!", TCODColor::white);
 		
 		//Possible health restoration on kill!
-		weapon* wp = attacker->getWeapon();
+		weaponSharedPtr wp = attacker->getWeapon();
 		if (wp != nullptr) {
 			attacker->addHealth(wp->getDamageReservoir());
 			wp->clearDamageReservoir();
@@ -2375,7 +2427,7 @@ void game::meleeAttack(person * attacker, person * target)
 /*
 Target gets shoved away.
 */
-void game::knockbackTarget(person * knocker, person * target, int distance)
+void game::knockbackTarget(personSharedPtr knocker, personSharedPtr target, int distance)
 {
 	int xv = get1dVector(knocker->getx(), target->getx());
 	int yv = get1dVector(knocker->gety(), target->gety());
@@ -2387,7 +2439,7 @@ void game::knockbackTarget(person * knocker, person * target, int distance)
 /*
 Target gets yanked closer.
 */
-void game::pullTarget(person * puller, person * target, int distance)
+void game::pullTarget(personSharedPtr puller, personSharedPtr target, int distance)
 {
 	int xv = get1dVector(target->getx(), puller->getx());
 	int yv = get1dVector(target->gety(), puller->gety());
@@ -2401,7 +2453,7 @@ void game::pullTarget(person * puller, person * target, int distance)
 Teleport from one water tile to another.
 Only works if we're already on a water tile.
 */
-bool game::waterWarp(person * target, int distance)
+bool game::waterWarp(personSharedPtr target, int distance)
 {
 	if (currentMap->getTile(target->getx(), target->gety())->isWater) {
 		//Find another water tile within a certain range
@@ -2432,7 +2484,7 @@ bool game::waterWarp(person * target, int distance)
 /*
 Warp to a random point within the given radius.
 */
-void game::teleport(person * target, int distance)
+void game::teleport(personSharedPtr target, int distance)
 {
 	//Make list of warp-able points
 	coordVector pts;
@@ -2479,7 +2531,7 @@ void game::teleportOutOfVoid()
 
 
 
-void game::setBoss(monster * m)
+void game::setBoss(monsterSharedPtr m)
 {
 	currentBoss = m;
 }
@@ -2513,7 +2565,7 @@ void game::bossKillMessage()
 Display a special message when we pick up an item.
 Returns whether we want to equip it or not!
 */
-bool game::itemPickupMessage(item * it)
+bool game::itemPickupMessage(itemSharedPtr it)
 {
 	int atx = MAP_DRAW_X;
 	int aty = MAP_DRAW_Y + 10;
@@ -2539,7 +2591,7 @@ bool game::itemPickupMessage(item * it)
 /*
 We get a new item - picked up off the floor, auto-dropped by a monster, or whatever
 */
-void game::pickUpItem(item * it)
+void game::pickUpItem(itemSharedPtr it)
 {
 	//Get it
 	bool stackedWithOther = player->addItem(it);
@@ -2559,7 +2611,7 @@ void game::createInventoryMenu()
 	//Pick an ITEM CATEGORY
 	currentMenu = new menu("INVENTORY");
 	for (auto cat : ALL_ITEM_TYPES) {
-		item* e = new item(getItemCategoryName(cat), 0, TCODColor::lightGrey, cat);
+		itemSharedPtr e(new item(getItemCategoryName(cat), 0, TCODColor::lightGrey, cat));
 		currentMenu->addElement(e);
 	}
 }
@@ -2580,7 +2632,7 @@ void game::selectInventoryCategory(itemTypes cat)
 /*
 We get the items a dead monster dropped
 */
-void game::getDeathDrops(monster * m)
+void game::getDeathDrops(monsterSharedPtr m)
 {
 	//Items
 	for (auto it : m->getItemDrops()) {
@@ -2595,7 +2647,7 @@ void game::getDeathDrops(monster * m)
 /*
 Equip the selected item.
 */
-void game::equipItem(item * it)
+void game::equipItem(itemSharedPtr it)
 {
 	player->equipItem(it);
 }
@@ -2621,7 +2673,7 @@ void game::useAbilityByHotkey(TCOD_key_t kp)
 /*
 Firing a ranged spell is... COMPLICATED
 */
-void game::doRangedSpell(spell * sp)
+void game::doRangedSpell(spellSharedPtr sp)
 {
 	
 	//Figure out where we're aiming
@@ -2646,7 +2698,7 @@ void game::doRangedSpell(spell * sp)
 		}
 		
 		//See if there's something to hit on the path
-		person* target = getTargetOnPath(path);
+		personSharedPtr target = getTargetOnPath(path);
 		if (target != nullptr) {
 			
 			//Is it in range?
@@ -2672,7 +2724,7 @@ void game::doRangedSpell(spell * sp)
 /*
 Player starts the casting of a spell.
 */
-void game::castSpell(spell * sp)
+void game::castSpell(spellSharedPtr sp)
 {
 	if (sp == nullptr)
 		return;
@@ -2711,7 +2763,7 @@ void game::castSpell(spell * sp)
 /*
 Spell actually affects the target
 */
-void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
+void game::dischargeSpellOnTarget(spellSharedPtr sp, personSharedPtr caster, personSharedPtr target)
 {
 	
 	//No message if this is a self-buff
@@ -2748,8 +2800,9 @@ void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 
 		//Additional potency if profane spell is cast from a profane object
 		if (sp->isProfane) {
-			weapon* offhand = caster->getOffhand();
-			if (offhand->isProfane)
+			weaponSharedPtr wp = caster->getWeapon();
+			weaponSharedPtr offhand = caster->getOffhand();
+			if ((offhand != nullptr && offhand->isProfane) || (wp != nullptr && wp->isProfane))
 				potency += potency / 2;
 		}
 
@@ -2793,7 +2846,7 @@ void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 	auto attackType = sp->getAttackType();
 	if (attackType == ATTACK_BUFF_SELF) {
 		if (sp->useAlternateAnimation) {
-			addAnimations(new flashCharacter(target, sp->getColor()));
+			//addAnimations(new flashCharacter(target, sp->getColor()));
 		}
 		else {
 			pathVector* pts = new pathVector();
@@ -2807,7 +2860,7 @@ void game::dischargeSpellOnTarget(spell * sp, person * caster, person * target)
 /*
 Spell affects weapon instead of person!
 */
-void game::dischargeSpellOnWeapon(spell * sp, person * caster, weapon * target)
+void game::dischargeSpellOnWeapon(spellSharedPtr sp, personSharedPtr caster, weaponSharedPtr target)
 {
 	//Make sure the weapon actually exists
 	if (target != nullptr) {
@@ -2817,7 +2870,6 @@ void game::dischargeSpellOnWeapon(spell * sp, person * caster, weapon * target)
 		//Animation
 		coordVector pts;
 		pts.push_back(caster->getPosition());
-		//addAnimations(new glyphCycle(pts, sp->getColor(), target->getColor()));
 	}
 }
 
@@ -2839,7 +2891,7 @@ Pick a spell off the menu, close the menu
 */
 void game::selectSpellFromMenu()
 {
-	spell* sp = static_cast<spell*>(currentMenu->getSelectedItem());
+	spellSharedPtr sp = std::static_pointer_cast<spell>(currentMenu->getSelectedItem());
 	player->setCurrentSpell(sp);
 	setState(STATE_VIEW_MAP);
 }
@@ -2874,7 +2926,7 @@ Level up selected stat.
 */
 void game::doLevelUp()
 {
-	element* e = currentMenu->getSelectedItem();
+	elementSharedPtr e = currentMenu->getSelectedItem();
 	std::string name = e->getName();
 	//Can we afford it?
 	if (fragments >= player->getNextLevelCost()) {
@@ -2943,7 +2995,7 @@ void game::talkToNPC()
 		{
 			if (x != player->getx() && y != player->gety()) 
 			{
-				monster* target = static_cast<monster*>(currentMap->getPerson(x, y));
+				monsterSharedPtr target = std::static_pointer_cast<monster>(currentMap->getPerson(x, y));
 				if (target != nullptr)
 				{
 					//Talking
@@ -2966,7 +3018,7 @@ void game::talkToNPC()
 /*
 Chitchat with an npc!
 */
-void game::doDialogue(monster * target)
+void game::doDialogue(monsterSharedPtr target)
 {
 	while (key.vk != KEY_BACK_OUT) {
 
@@ -3011,7 +3063,7 @@ Sometimes special things happen when we're chatting with a friendly NPC.
 They're triggered by special codes embedded in dialogue!
 If we return True, the dialogue should end.
 */
-bool game::checkForDialogueEvent(std::string line, monster * target)
+bool game::checkForDialogueEvent(std::string line, monsterSharedPtr target)
 {
 	if (line == "|SHOP") {
 		target->backUpDialogue(); //Go back to the previous line of dialogue
@@ -3058,7 +3110,7 @@ void game::drawShopMenu(int atx, int aty)
 	drawMenu(currentMenu, atx, aty);
 	//Description of items for purchase
 	aty += currentMenu->getAllElements().size() + 10;
-	item* sel = static_cast<item*>(currentMenu->getSelectedItem());
+	itemSharedPtr sel = std::static_pointer_cast<item>(currentMenu->getSelectedItem());
 	if (sel != nullptr)
 		drawItemInfo(sel, atx, aty);
 }
@@ -3067,9 +3119,9 @@ void game::drawShopMenu(int atx, int aty)
 /*
 Create menu for SHOPPING!
 */
-void game::setupShopMenu(person * shopkeeper)
+void game::setupShopMenu(personSharedPtr shopkeeper)
 {
-	monster* m = static_cast<monster*>(shopkeeper);
+	monsterSharedPtr m = std::static_pointer_cast<monster>(shopkeeper);
 	//Update shop inventory
 	m->checkForStockUnlocks(player);
 	//Create shopping menu
@@ -3088,7 +3140,7 @@ Try to buy selected menu item
 */
 void game::buyItemFromShop()
 {
-	item* it = static_cast<item*>(currentMenu->getSelectedItem());
+	itemSharedPtr it = std::static_pointer_cast<item>(currentMenu->getSelectedItem());
 	if (it != nullptr) {
 		if (fragments >= it->getPrice()) {
 			//Pay the COST
@@ -3344,7 +3396,7 @@ void game::clearDeadCreatures()
 			currentMap->removePerson(p);
 			//If this was the BOSS, then this BOSS FIGHT is over
 			if (p == currentBoss) {
-				monster* b = static_cast<monster*>(p);
+				monsterSharedPtr b = std::static_pointer_cast<monster>(p);
 				if (b->showBossHealthBar) {
 					bossKillMessage();
 				}
@@ -3353,7 +3405,7 @@ void game::clearDeadCreatures()
 				currentMap->bossDestroyed = true;
 			}
 			//And the PLAYER gets the ITEMS we drop!
-			getDeathDrops(static_cast<monster*>(p));
+			getDeathDrops(std::static_pointer_cast<monster>(p));
 		}
 
 	}
@@ -3448,7 +3500,7 @@ coord game::screenToMapCoords(coord pt)
 */
 
 
-void getAllItems(person* player) 
+void getAllItems(personSharedPtr player)
 {
 	
 	player->addItem(weapon_ArmOfTheDuke());
@@ -3608,7 +3660,7 @@ void game::debugMenu()
 	else if (txt == "item") {
 		txt = win.getstr(1, 1);
 		//Get item by name
-		item* it = getItemByHandle(txt);
+		itemSharedPtr it = getItemByHandle(txt);
 		if (it != nullptr)
 			player->addItem(it);
 	}

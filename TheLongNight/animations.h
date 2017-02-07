@@ -3,10 +3,14 @@
 #define ANIMATIONS_H
 
 #include <vector>
+#include <memory>
+
 #include "libtcod.hpp"
 #include "window.h"
 #include "map.h"
 #include "person.h"
+
+
 
 //Draw data - useful little chunk of data that defines what to draw at a point on the map
 struct drawData {
@@ -20,6 +24,8 @@ struct drawData {
 	TCODColor color;
 	TCODColor bgcolor;
 };
+
+
 
 
 //For differentiating which type of animation to use
@@ -36,6 +42,8 @@ typedef std::vector<coord*> pathVectorP; //Path vector with pointers to coords i
 typedef std::vector<coord> pathVector;
 typedef std::vector<TCODColor> colorVector;
 
+typedef std::shared_ptr<drawData> drawDataSharedPtr;
+
 
 //Base class
 class animations
@@ -47,7 +55,7 @@ public:
 	~animations() {}
 
 	//Progressing and playing
-	virtual drawData* getDrawData (drawData* baseData, const int x, const int y) { return new drawData(*baseData); }
+	virtual drawDataSharedPtr getDrawData (drawDataSharedPtr baseData, const int x, const int y) { return baseData; }
 	virtual void tick() {}
 	virtual bool isDone() { return false; }
 
@@ -72,7 +80,7 @@ class flashCharacter : public animations
 {
 public:
 	flashCharacter(person* p, TCODColor color);
-	virtual drawData* getDrawData(drawData* baseData, const int x, const int y);
+	virtual drawDataSharedPtr getDrawData(drawDataSharedPtr baseData, const int x, const int y);
 	virtual void tick() { timeLeft--; }
 	virtual bool isDone() { return timeLeft < 1; }
 protected:
@@ -89,7 +97,7 @@ class explosion : public animations
 {
 public:
 	explosion(coord ctr, int radius, TCODColor col1, TCODColor col2);
-	virtual drawData* getDrawData(drawData* baseData, const int x, const int y);
+	virtual drawDataSharedPtr getDrawData(drawDataSharedPtr baseData, const int x, const int y);
 	virtual void tick();
 	virtual bool isDone() { return atPoint > radius; }
 protected:
@@ -108,7 +116,7 @@ class bulletPath : public animations
 {
 public:
 	bulletPath(coordVector* pts, int tileCode, TCODColor color);
-	virtual drawData* getDrawData(drawData* baseData, const int x, const int y);
+	virtual drawDataSharedPtr getDrawData(drawDataSharedPtr baseData, const int x, const int y);
 	virtual void tick();
 	virtual bool isDone() { return atIdx >= pts->size(); }
 private:
@@ -125,7 +133,7 @@ class glowPath : public animations
 {
 public:
 	glowPath(coordVector* pts, TCODColor col1, TCODColor col2);
-	virtual drawData* getDrawData(drawData* baseData, const int x, const int y);
+	virtual drawDataSharedPtr getDrawData(drawDataSharedPtr baseData, const int x, const int y);
 	virtual void tick();
 	virtual bool isDone() { return atIdx >= pts->size(); }
 private:
@@ -142,7 +150,7 @@ class glyphCycle : public animations
 {
 public:
 	glyphCycle(coordVector* pts, TCODColor col1, TCODColor col2);
-	virtual drawData* getDrawData(drawData* baseData, const int x, const int y);
+	virtual drawDataSharedPtr getDrawData(drawDataSharedPtr baseData, const int x, const int y);
 	virtual void tick() { timeLeft--; }
 	virtual bool isDone() { return timeLeft < 1; }
 private:
@@ -159,7 +167,7 @@ class shockwave : public animations
 {
 public:
 	shockwave (int x, int y, TCODColor col1, TCODColor col2);
-	virtual drawData* getDrawData (drawData* baseData, const int x, const int y);
+	virtual drawDataSharedPtr getDrawData (drawDataSharedPtr baseData, const int x, const int y);
 	virtual void tick() { atIdx++; }
 	virtual bool isDone() { return atIdx >= RADIUS; }
 private:

@@ -101,7 +101,7 @@ map * mapLoader::loadMapFromFile(std::string filename)
 			}
 			else if (loadingItems) {
 				//New item!
-				item* it = getItemByHandle(chunk);
+				itemSharedPtr it = getItemByHandle(chunk);
 				it->setPosition(x, y);
 				items.push_back(it);
 			}

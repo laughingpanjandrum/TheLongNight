@@ -11,6 +11,7 @@ It also draws all the stuff that needs drawing.
 
 #include <iostream>
 #include <fstream>
+#include <memory>
 
 #include "libtcod.hpp"
 #include "window.h"
@@ -85,7 +86,7 @@ private:
 
 	//Character/state/etc
 	map* currentMap;
-	person* player;
+	personSharedPtr player;
 	gameState state = STATE_VIEW_MAP;
 	bool isGameOver = false;
 
@@ -112,7 +113,7 @@ private:
 	//Pathfinding
 	TCODPath* getPathToCoord(coord startxy, coord endxy);
 	pathVector getLine(coord startxy, coord endxy);
-	person* getTargetOnPath(pathVector path);
+	personSharedPtr getTargetOnPath(pathVector path);
 
 	//Turn tracking
 	turnTracker turns;
@@ -120,14 +121,14 @@ private:
 	void endPlayerTurn();
 
 	//Monster actions
-	pathVector getAllAdjacentWalkable(monster* ai);
-	bool aiIsValidMove(monster* ai, int xnew, int ynew);
-	bool aiMoveToTarget(monster* ai);
-	bool aiTryUseSpell(monster* ai);
-	void aiSpawnCreature(monster* ai);
-	void aiDoCombatAction(monster* ai);
-	void aiFindTarget(monster* ai);
-	void doMonsterTurn(person* ai);
+	pathVector getAllAdjacentWalkable(monsterSharedPtr ai);
+	bool aiIsValidMove(monsterSharedPtr ai, int xnew, int ynew);
+	bool aiMoveToTarget(monsterSharedPtr ai);
+	bool aiTryUseSpell(monsterSharedPtr ai);
+	void aiSpawnCreature(monsterSharedPtr ai);
+	void aiDoCombatAction(monsterSharedPtr ai);
+	void aiFindTarget(monsterSharedPtr ai);
+	void doMonsterTurn(personSharedPtr ai);
 
 	//Menu management/drawing
 	menu* currentMenu;
@@ -144,24 +145,24 @@ private:
 	void drawInterface(int atx, int aty);
 	void drawInventory(int atx, int aty);
 	void drawPlayerInfo(int atx, int aty);
-	void drawMonsterInfo(monster* m, int atx, int aty);
+	void drawMonsterInfo(monsterSharedPtr m, int atx, int aty);
 	void drawMouseover(int atx, int aty);
-	void drawTargetInfo(person* target, int atx, int aty);
+	void drawTargetInfo(personSharedPtr target, int atx, int aty);
 
 	//Animations
 	animVector playingAnimations;
 	void addAnimations(animations* a) { playingAnimations.push_back(a); }
-	drawData* getAnimationDataOverride(drawData* baseData, int x, int y);
+	drawDataSharedPtr getAnimationDataOverride(drawDataSharedPtr baseData, int x, int y);
 	void updateAnimations();
 
 	//Drawing item information
-	void drawItemInfo(item* it, int atx, int aty);
-	void drawWeaponInfo(weapon* it, int atx, int aty);
-	void drawArmourInfo(armour* it, int atx, int aty);
-	void drawSpellInfo(spell* it, int atx, int aty);
-	void drawConsumableInfo(consumable* it, int atx, int aty);
-	void drawCharmInfo(charm* it, int atx, int aty);
-	void drawMiscItemInfo(miscItem* it, int atx, int aty);
+	void drawItemInfo(itemSharedPtr it, int atx, int aty);
+	void drawWeaponInfo(weaponSharedPtr it, int atx, int aty);
+	void drawArmourInfo(armourSharedPtr it, int atx, int aty);
+	void drawSpellInfo(spellSharedPtr it, int atx, int aty);
+	void drawConsumableInfo(consumableSharedPtr it, int atx, int aty);
+	void drawCharmInfo(charmSharedPtr it, int atx, int aty);
+	void drawMiscItemInfo(miscItemSharedPtr it, int atx, int aty);
 
 	//Input processing
 	void processCommand();
@@ -179,8 +180,8 @@ private:
 	void selectConsumableFromMenu();
 
 	//Effects
-	void doAOE(spell* sp, person* caster);
-	void applyEffectToPerson(person* target, effect e, int potency, person* caster = nullptr);
+	void doAOE(spellSharedPtr sp, personSharedPtr caster);
+	void applyEffectToPerson(personSharedPtr target, effect e, int potency, personSharedPtr caster = nullptr);
 
 	//Movement
 	void processMove(TCOD_key_t kp);
@@ -188,8 +189,8 @@ private:
 	bool isNumberKey(TCOD_key_t kp);
 	int getNumberByKeycode(TCOD_key_t kp);
 	void playerMoveLogic(int xnew, int ynew);
-	void movePerson(person* p, int xnew, int ynew);
-	void standOnTile(person* victim);
+	void movePerson(personSharedPtr p, int xnew, int ynew);
+	void standOnTile(personSharedPtr victim);
 	void unlockAdjacentTiles(int x, int y);
 	void tryUnlockDoor(int x, int y);
 
@@ -204,37 +205,37 @@ private:
 	void doWarp(std::string warpPointName);
 
 	//Combat
-	void meleeAttack(person* attacker, person* target);
+	void meleeAttack(personSharedPtr attacker, personSharedPtr target);
 
 	//Special effects
-	void knockbackTarget(person* knocker, person* target, int distance);
-	void pullTarget(person* puller, person* target, int distance);
-	bool waterWarp(person* target, int distance);
-	void teleport(person* target, int distance);
+	void knockbackTarget(personSharedPtr knocker, personSharedPtr target, int distance);
+	void pullTarget(personSharedPtr puller, personSharedPtr target, int distance);
+	bool waterWarp(personSharedPtr target, int distance);
+	void teleport(personSharedPtr target, int distance);
 
 	//Player-only SPECIAL MAP JUMPS
 	void teleportToVoid();
 	void teleportOutOfVoid();
 
 	//Boss fights
-	monster* currentBoss;
-	void setBoss(monster* m);
+	monsterSharedPtr currentBoss;
+	void setBoss(monsterSharedPtr m);
 	void bossKillMessage();
 
 	//Inventory management
-	bool itemPickupMessage(item* it);
-	void pickUpItem(item* it);
+	bool itemPickupMessage(itemSharedPtr it);
+	void pickUpItem(itemSharedPtr it);
 	void createInventoryMenu();
 	void selectInventoryCategory(itemTypes cat);
-	void getDeathDrops(monster* m);
-	void equipItem(item* it);
+	void getDeathDrops(monsterSharedPtr m);
+	void equipItem(itemSharedPtr it);
 
 	//Spellcasting
 	void useAbilityByHotkey(TCOD_key_t kp);
-	void doRangedSpell(spell* sp);
-	void castSpell(spell* sp);
-	void dischargeSpellOnTarget(spell* sp, person* caster, person* target);
-	void dischargeSpellOnWeapon(spell* sp, person* caster, weapon* target);
+	void doRangedSpell(spellSharedPtr sp);
+	void castSpell(spellSharedPtr sp);
+	void dischargeSpellOnTarget(spellSharedPtr sp, personSharedPtr caster, personSharedPtr target);
+	void dischargeSpellOnWeapon(spellSharedPtr sp, personSharedPtr caster, weaponSharedPtr target);
 	void openSpellMenu();
 	void selectSpellFromMenu();
 
@@ -245,12 +246,12 @@ private:
 	void drawLevelUpMenu(int atx, int aty);
 
 	//Shopping/chatting
-	monster* currentShopkeeper;
+	monsterSharedPtr currentShopkeeper;
 	void talkToNPC();
-	void doDialogue(monster* target);
-	bool checkForDialogueEvent(std::string line, monster* target);
+	void doDialogue(monsterSharedPtr target);
+	bool checkForDialogueEvent(std::string line, monsterSharedPtr target);
 	void drawShopMenu(int atx, int aty);
-	void setupShopMenu(person* shopkeeper);
+	void setupShopMenu(personSharedPtr shopkeeper);
 	void buyItemFromShop();
 
 	//Story event tracking!

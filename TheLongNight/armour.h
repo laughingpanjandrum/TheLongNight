@@ -27,38 +27,45 @@ private:
 
 };
 
+
+typedef std::shared_ptr<armour> armourSharedPtr;
+
+
 /*
 	Armour objects
 */
 
-armour* headgear_CaptainsTricorn();
-armour* armour_RuinedUniform();
+armourSharedPtr headgear_CaptainsTricorn();
+armourSharedPtr armour_RuinedUniform();
 
-armour* headgear_RuinedKnightsHelm();
-armour* armour_RuinedKnightsArmour();
+armourSharedPtr headgear_RuinedKnightsHelm();
+armourSharedPtr armour_RuinedKnightsArmour();
 
-armour* headgear_ClericsHood();
-armour* armour_ClericsVestments();
+armourSharedPtr headgear_ClericsHood();
+armourSharedPtr armour_ClericsVestments();
 
-armour* headgear_CrowKnightsHood();
-armour* armour_CrowKnightsArmour();
+armourSharedPtr headgear_CrowKnightsHood();
+armourSharedPtr armour_CrowKnightsArmour();
 
-armour* headgear_FishpriestHat();
-armour* armour_FishscaleCoat();
+armourSharedPtr headgear_FishpriestHat();
+armourSharedPtr armour_FishscaleCoat();
 
-armour* headgear_CityGuardHelm();
-armour* armour_CityGuardArmour();
+armourSharedPtr headgear_CityGuardHelm();
+armourSharedPtr armour_CityGuardArmour();
 
-armour* headgear_PashHood();
-armour* armour_PashRobes();
+armourSharedPtr headgear_PashHood();
+armourSharedPtr armour_PashRobes();
 
-armour* headgear_CursedKnightsHelm();
-armour* armour_CursedKnightsArmour();
+armourSharedPtr headgear_CursedKnightsHelm();
+armourSharedPtr armour_CursedKnightsArmour();
 
-armour* headgear_GreyThiefsHood();
-armour* armour_GreyThiefsRags();
+armourSharedPtr headgear_GreyThiefsHood();
+armourSharedPtr armour_GreyThiefsRags();
 
-armour* headgear_SirPercivelsHelm();
+armourSharedPtr headgear_SilverPlatedHood();
+armourSharedPtr armour_SilverPlatedArmour();
+
+armourSharedPtr headgear_SirPercivelsHelm();
 
 #endif
 

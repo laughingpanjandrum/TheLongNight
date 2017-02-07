@@ -2,6 +2,7 @@
 #ifndef ITEM_H
 #define ITEM_H
 
+#include <memory>
 #include "element.h"
 #include "categories.h"
 
@@ -60,7 +61,9 @@ protected:
 
 };
 
-typedef std::vector<item*> itemVector;
+
+typedef std::shared_ptr<item> itemSharedPtr;
+typedef std::vector<itemSharedPtr> itemVector;
 
 
 /*
@@ -68,11 +71,12 @@ For shopkeepers.
 Keeps track of a set of sellable items that are unlocked with a code.
 */
 struct unlockableStock {
-	unlockableStock(item* it, std::string unlockCode) :
+	unlockableStock(itemSharedPtr it, std::string unlockCode) :
 		it(it), unlockCode(unlockCode) {}
-	item* it;
+	itemSharedPtr it;
 	std::string unlockCode;
 };
+
 typedef std::vector<unlockableStock*> stockUnlockVector;
 
 
@@ -91,8 +95,9 @@ struct weaponRune {
 	//Effects
 	statScaling addScalingType;
 };
-typedef std::vector<weaponRune*> weaponRuneVector;
 
+
+typedef std::vector<weaponRune*> weaponRuneVector;
 
 //Names of item categories.
 const std::string getItemCategoryName(itemTypes cat);

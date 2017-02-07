@@ -7,6 +7,7 @@ Keeps track of stored inventory and equipped items.
 #define INVENTORY_H
 
 #include <vector>
+
 #include "categories.h"
 #include "weapon.h"
 #include "armour.h"
@@ -17,8 +18,8 @@ Keeps track of stored inventory and equipped items.
 //Slot with list of carried items
 struct inventoryList {
 	inventoryList(itemTypes category): category(category) {}
-	void add(item* it) { items.push_back(it); }
-	std::vector<item*> items;
+	void add(itemSharedPtr it) { items.push_back(it); }
+	itemVector items;
 	itemTypes category;
 };
 
@@ -33,46 +34,46 @@ public:
 	static const int MAX_CONSUMABLE_SLOTS = 5;
 
 	//Setters
-	bool equipItem(item* which);
-	void unequipItem(item* which);
-	bool addItem(item* which);
+	bool equipItem(itemSharedPtr which);
+	void unequipItem(itemSharedPtr which);
+	bool addItem(itemSharedPtr which);
 
 	//Getters
 	itemlistVector getAllCarried() { return carried; }
-	item* getEquipped(itemTypes category);
-	std::vector<item*> getItemList(itemTypes category);
-	std::vector<consumable*> getConsumables() { return equippedConsumables; }
+	itemSharedPtr getEquipped(itemTypes category);
+	itemVector getItemList(itemTypes category);
+	consumableVector getConsumables() { return equippedConsumables; }
 
 	//Getting particular items
-	weapon* getWeapon() { return equippedWeapon; }
-	weapon* getSecondaryWeapon() { return secondaryWeapon; }
-	weapon* getOffhand() { return equippedOffhand; }
-	armour* getArmour() { return equippedArmour; }
-	armour* getHelmet() { return equippedHelmet; }
-	charm* getCharm() { return equippedCharm; }
+	weaponSharedPtr getWeapon() { return equippedWeapon; }
+	weaponSharedPtr getSecondaryWeapon() { return secondaryWeapon; }
+	weaponSharedPtr getOffhand() { return equippedOffhand; }
+	armourSharedPtr getArmour() { return equippedArmour; }
+	armourSharedPtr getHelmet() { return equippedHelmet; }
+	charmSharedPtr getCharm() { return equippedCharm; }
 
 	//Weapon swapping
-	weapon* swapWeapon();
+	weaponSharedPtr swapWeapon();
 
 	//Spells, which are special
-	bool equipSpell(spell* sp);
-	void unequipSpell(spell* sp);
-	bool isSpellEquipped(spell* sp);
+	bool equipSpell(spellSharedPtr sp);
+	void unequipSpell(spellSharedPtr sp);
+	bool isSpellEquipped(spellSharedPtr sp);
 
 	//Consumables
-	void equipConsumable(consumable* c);
-	void setSelectedConsumable(consumable* c);
-	bool isConsumableEquipped(consumable* c);
+	void equipConsumable(consumableSharedPtr c);
+	void setSelectedConsumable(consumableSharedPtr c);
+	bool isConsumableEquipped(consumableSharedPtr c);
 
 	//Misc items
-	void equipMiscItem(miscItem* m);
+	void equipMiscItem(miscItemSharedPtr m);
 
 	//Keys
 	bool hasKey(std::string keyTag);
 
 	//Selecting particular slots
 	void cycleConsumable();
-	consumable* getSelectedConsumable();
+	consumableSharedPtr getSelectedConsumable();
 
 private:
 
@@ -80,18 +81,18 @@ private:
 	itemlistVector carried;
 	
 	//Pointers to each equipped item
-	weapon* equippedWeapon;
-	weapon* equippedOffhand;
-	armour* equippedArmour;
-	armour* equippedHelmet;
-	charm* equippedCharm;
-	consumable* selectedConsumable;
+	weaponSharedPtr equippedWeapon;
+	weaponSharedPtr equippedOffhand;
+	armourSharedPtr equippedArmour;
+	armourSharedPtr equippedHelmet;
+	charmSharedPtr equippedCharm;
+	consumableSharedPtr selectedConsumable;
 
 	//Secondary items for quick-swapping
-	weapon* secondaryWeapon;
+	weaponSharedPtr secondaryWeapon;
 
 	//Consumables appear as a list
-	std::vector<consumable*> equippedConsumables;
+	consumableVector equippedConsumables;
 	//int selectedConsumable = 0;
 };
 

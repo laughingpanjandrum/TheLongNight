@@ -65,88 +65,97 @@ private:
 
 };
 
+
+
+typedef std::shared_ptr<spell> spellSharedPtr;
+typedef std::vector<spellSharedPtr> spellVector;
+
+
 //Weapon arts
-spell* attack_Splintering();
-spell* attack_Quickstep();
-spell* attack_StrongAttack();
-spell* attack_Knockback();
-spell* attack_MightyCleave();
-spell* attack_Spearfishing();
-spell* attack_Fillet();
-spell* attack_DivineSmite();
-spell* attack_BloodFeast();
-spell* attack_HolySummons();
-spell* attack_VoidSlash();
-spell* attack_VoidSurge();
-spell* attack_FlameSwathe();
-spell* attack_DripVenom();
-spell* attack_SuckOutLife();
-spell* attack_SpiderStrike();
-spell* attack_DeepCut();
+spellSharedPtr attack_Splintering();
+spellSharedPtr attack_Quickstep();
+spellSharedPtr attack_StrongAttack();
+spellSharedPtr attack_Knockback();
+spellSharedPtr attack_MightyCleave();
+spellSharedPtr attack_Spearfishing();
+spellSharedPtr attack_Fillet();
+spellSharedPtr attack_DivineSmite();
+spellSharedPtr attack_BloodFeast();
+spellSharedPtr attack_HolySummons();
+spellSharedPtr attack_VoidSlash();
+spellSharedPtr attack_VoidSurge();
+spellSharedPtr attack_FlameSwathe();
+spellSharedPtr attack_DripVenom();
+spellSharedPtr attack_SuckOutLife();
+spellSharedPtr attack_SpiderStrike();
+spellSharedPtr attack_DeepCut();
 
 //Wand/chime powers
-spell* ability_PowerSurge();
-spell* ability_AcidInfusion();
-spell* ability_DivineFavour();
-spell* ability_WyrdChannel();
+spellSharedPtr ability_PowerSurge();
+spellSharedPtr ability_AcidInfusion();
+spellSharedPtr ability_DivineFavour();
+spellSharedPtr ability_WyrdChannel();
 
 //	Arcane spells
-spell* spell_MagicMissile();
-spell* spell_ArcaneRadiance();
+spellSharedPtr spell_MagicMissile();
+spellSharedPtr spell_ArcaneRadiance();
 //Utric, basic
-spell* spell_ArcaneBlade();
-spell* spell_GottricsArcaneProtection();
-spell* spell_Frostbolt();
+spellSharedPtr spell_ArcaneBlade();
+spellSharedPtr spell_GottricsArcaneProtection();
+spellSharedPtr spell_Frostbolt();
 //Utric, with waterlogged writings
-spell* spell_AcidSpit();
-spell* spell_AcidBlade();
-spell* spell_AcidBurst();
+spellSharedPtr spell_AcidSpit();
+spellSharedPtr spell_AcidBlade();
+spellSharedPtr spell_AcidBurst();
 //Utric, with profaned writings
-spell* spell_ProfanedBlade();
-spell* spell_VoidJaunt();
-spell* spell_DevouringVoidCloud();
+spellSharedPtr spell_ProfanedBlade();
+spellSharedPtr spell_VoidJaunt();
+spellSharedPtr spell_DevouringVoidCloud();
 //Utric, with frostbitten writings
-spell* spell_FrostBlast();
-spell* spell_FrozenBlade();
-spell* spell_Chillbite();
+spellSharedPtr spell_FrostBlast();
+spellSharedPtr spell_FrozenBlade();
+spellSharedPtr spell_Chillbite();
 
-spell* spell_SpitFire();
+spellSharedPtr spell_SpitFire();
 
 //	Prayers
-spell* prayer_Restoration();
+spellSharedPtr prayer_Restoration();
 //Sold by Gorem
-spell* prayer_WyrdChantOfStrength();
+spellSharedPtr prayer_WyrdChantOfStrength();
 //Muira, basic
-spell* prayer_RayOfLight();
-spell* prayer_BlessedRadiance();
-spell* prayer_RemovePoison();
+spellSharedPtr prayer_RayOfLight();
+spellSharedPtr prayer_BlessedRadiance();
+spellSharedPtr prayer_RemovePoison();
 //Orsyl's Tome of Prayer
-spell* prayer_DrawOutTheBlood();
-spell* prayer_ProfaneRadiance();
+spellSharedPtr prayer_DrawOutTheBlood();
+spellSharedPtr prayer_ProfaneRadiance();
 //Divine Moonspark Tome
-spell* prayer_DivineRetribution();
-spell* prayer_YutriasDivineSpark();
+spellSharedPtr prayer_DivineRetribution();
+spellSharedPtr prayer_YutriasDivineSpark();
+//Divine Tome of the Emissary
+spellSharedPtr prayer_DivineRestoration();
+spellSharedPtr prayer_DivineJudgement();
 //Sold by Ydella
-spell* prayer_SinkBeneath();
-spell* prayer_SpidersPrayer();
+spellSharedPtr prayer_SinkBeneath();
+spellSharedPtr prayer_SpidersPrayer();
 //Misc
-spell* prayer_ProfaneRay();
+spellSharedPtr prayer_ProfaneRay();
 
 //Monster abilities
-spell* ability_Charge();
-spell* ability_Burst();
-spell* ability_CrowArrow();
-spell* ability_FeedingFrenzy();
-spell* ability_DropOoze();
-spell* ability_ShadowWalk();
-spell* ability_WinterBlast();
-spell* ability_WreatheInFlame();
-spell* ability_DragBelow();
-spell* ability_SpitWeb();
+spellSharedPtr ability_Charge();
+spellSharedPtr ability_Burst();
+spellSharedPtr ability_CrowArrow();
+spellSharedPtr ability_FeedingFrenzy();
+spellSharedPtr ability_DropOoze();
+spellSharedPtr ability_ShadowWalk();
+spellSharedPtr ability_WinterBlast();
+spellSharedPtr ability_WreatheInFlame();
+spellSharedPtr ability_DragBelow();
+spellSharedPtr ability_SpitWeb();
 
 //Duke Vorten
-spell* ability_TentacleSwarm();
-spell* ability_Throw();
-spell* ability_VoidStep();
+spellSharedPtr ability_TentacleSwarm();
+spellSharedPtr ability_Throw();
+spellSharedPtr ability_VoidStep();
 
 #endif

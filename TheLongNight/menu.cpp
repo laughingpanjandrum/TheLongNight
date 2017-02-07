@@ -7,11 +7,11 @@ menu::~menu()
 
 void menu::addElement(std::string name, TCODColor color)
 {
-	element* e = new element(name, 0, color);
+	elementSharedPtr e(new element(name, 0, color));
 	elements.push_back(e);
 }
 
-void menu::removeElement(element * e)
+void menu::removeElement(elementSharedPtr e)
 {
 	auto iter = std::find(elements.begin(), elements.end(), e);
 	if (iter != elements.end())
@@ -39,7 +39,7 @@ void menu::scrollUp()
 Returns the element at the selected index.
 If there are no menu elements, returns nullptr.
 */
-element * menu::getSelectedItem()
+elementSharedPtr menu::getSelectedItem()
 {
 	if (elements.size())
 		return elements.at(idx);

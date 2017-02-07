@@ -18,7 +18,7 @@ Mostly used by the map loader - so that we have a consistent place to track item
 Giant nightmare function that turns names into items.
 Used by the map loader.
 */
-item* getItemByHandle(std::string handle);
+itemSharedPtr getItemByHandle(std::string handle);
 
 /*
 This is for getting names and other ui data for damage types.
