@@ -952,6 +952,80 @@ glow crystal-blue. Torn silver robes hang from its gaunt body, and it wields a h
 	m->setMoveStats(SPEED_SLOW);
 	m->equipItem(weaponSharedPtr(new weapon(15, SPEED_SLOW, DAMAGE_COLD, 35)));
 	m->emitsFog = 3;
+	m->addSpellKnown(spellSharedPtr(new spell("Fellfrost", TCODColor::cyan, 5, 0, APPLY_COLD_DAMAGE, 25)));
+	m->addSpellKnown(spell_VoidJaunt());
+	m->setSpellCastChance(50);
+	m->setFragmentsDropped(2000);
+	m->isBoss = true;
+	m->addItemDrop(horn_HeraldsWhiteHorn());
+	return m;
+}
+
+monsterSharedPtr monster_HightowerAristocrat()
+{
+	monsterSharedPtr m(new monster("Hightower Aristocrat", ARISTOCRAT_TILE, TCODColor::lightBlue,
+		"A grinning aristocrat of Hightower, already drunk on wine and black honey. Its face is a death-mask."));
+	m->setHealth(25);
+	m->setMoveStats(SPEED_FAST);
+	m->equipItem(weaponSharedPtr(new weapon(10, SPEED_FAST, EFFECT_BLEED, 10)));
+	return m;
+}
+
+monsterSharedPtr monster_SilverKnight()
+{
+	monsterSharedPtr m(new monster("Silver Knight", KNIGHT_TILE, TCODColor::silver,
+		"A knight in silver armour, set to stand guard over the guests. Their silence, \
+and their heavy hoods, led some guests to suspect that the suits of armour were empty."));
+	m->setHealth(200);
+	m->setDefence(DAMAGE_PHYSICAL, 50);
+	m->setDefence(DAMAGE_PROFANE, 75);
+	m->setDefence(DAMAGE_COLD, 25);
+	m->setDefence(DAMAGE_FIRE, 25);
+	m->setMoveStats(SPEED_SLOW);
+	m->equipItem(weaponSharedPtr(new weapon(25, SPEED_SLOW, DAMAGE_ELECTRIC, 25)));
+	m->addSpellKnown(prayer_BlessedRadiance());
+	m->setSpellCastChance(20);
+	return m;
+}
+
+monsterSharedPtr monster_LadyTvert()
+{
+	monsterSharedPtr m(new monster("Lady Tvert", ARISTOCRAT_TILE, TCODColor::lightestBlue,
+		"Her gown and jewels are the portrait of elegance, but something about her aspect is unsettling. Perhaps her unnatural \
+height, or her extraordinarily long and thin fingers, which end in hooked nails; or perhaps \
+it's the sight of her sharpened teeth as she turns to grin at you, or the blankness of her pure red eyes."));
+	m->setHealth(800);
+	m->setDefence(DAMAGE_PHYSICAL, 10);
+	m->setDefence(DAMAGE_MAGIC, 50);
+	m->makeProfane();
+	m->setMoveStats(SPEED_FAST);
+	m->equipItem(weaponSharedPtr(new weapon(10, SPEED_FAST, EFFECT_POISON, 20)));
+	m->addSpellKnown(attack_RavenousHunger());
+	m->addSpellKnown(spell_VoidJaunt());
+	m->setSpellCastChance(50);
+	m->isBoss = true;
+	m->addSpawnableCreature("scion_of_tvert");
+	m->setSpawnChance(25);
+	m->addItemDrop(key_LadyTvertsKey());
+	m->addItemDrop(heart_LadyTvertsHeart());
+	m->setFragmentsDropped(1500);
+	return m;
+}
+
+monsterSharedPtr monster_ScionOfTvert()
+{
+	monsterSharedPtr m(new monster("Scion of Tvert", ARISTOCRAT_TILE, TCODColor::lightPink,
+		"Lady Tvert's bile forms the shape of this twisted creature - a mockery of the human form, \
+his face riddled with scars, his arms gruesome chunks of flesh covered in vile worms."));
+	m->setHealth(100);
+	m->setDefence(DAMAGE_PHYSICAL, 10);
+	m->setBleedResist(60);
+	m->setPoisonResist(60);
+	m->makeProfane();
+	m->setMoveStats(SPEED_NORMAL);
+	m->equipItem(weaponSharedPtr(new weapon(0, SPEED_NORMAL, DAMAGE_PROFANE, 30)));
+	m->addSpellKnown(ability_ShredSkin());
+	m->setSpellCastChance(20);
 	return m;
 }
 
@@ -1105,6 +1179,7 @@ monsterSharedPtr npc_Ydella()
 	m->addStockUnlock(weapon_ArmOfTheDuke(), 300, "vortens_heart");
 	m->addStockUnlock(weapon_SpiderboneShard(), 200, "venomous_spider_heart");
 	m->addStockUnlock(prayer_SpidersPrayer(), 100, "venomous_spider_heart");
+	m->addStockUnlock(weapon_LadyTvertsClaws(), 150, "lady_tverts_heart");
 	return m;
 }
 
@@ -1244,6 +1319,16 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return monster_SlaveMasterGasgut();
 	else if (handle == "white_fog_herald")
 		return monster_WhiteFogHerald();
+
+	//Hightower Banquet
+	else if (handle == "hightower_lord")
+		return monster_HightowerAristocrat();
+	else if (handle == "silver_knight")
+		return monster_SilverKnight();
+	else if (handle == "lady_tvert")
+		return monster_LadyTvert();
+	else if (handle == "scion_of_tvert")
+		return monster_ScionOfTvert();
 
 	//The Void
 	else if (handle == "void_touched")

@@ -171,6 +171,12 @@ monsterSharedPtr monster_BartonTheProwlingMinister();
 monsterSharedPtr monster_SlaveMasterGasgut();
 monsterSharedPtr monster_WhiteFogHerald();
 
+//Hightower Banquet
+monsterSharedPtr monster_HightowerAristocrat();
+monsterSharedPtr monster_SilverKnight();
+monsterSharedPtr monster_LadyTvert();
+monsterSharedPtr monster_ScionOfTvert();
+
 //The Void
 monsterSharedPtr monster_VoidTouched();
 

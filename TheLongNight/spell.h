@@ -155,6 +155,8 @@ spellSharedPtr ability_WinterBlast();
 spellSharedPtr ability_WreatheInFlame();
 spellSharedPtr ability_DragBelow();
 spellSharedPtr ability_SpitWeb();
+spellSharedPtr attack_RavenousHunger();
+spellSharedPtr ability_ShredSkin();
 
 //Duke Vorten
 spellSharedPtr ability_TentacleSwarm();

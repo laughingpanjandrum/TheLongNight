@@ -164,6 +164,7 @@ maptile* tile_DoorOfWinter(); //"door_of_winter"
 maptile* tile_OldValleyDoor(); //"old_valley_door"
 maptile* tile_DesolateChurchDoor(); //"bartons_door"
 maptile* tile_HightowerDoor(); //"hightower_door"
+maptile* tile_BasementDoor(); //"basement_door"
 
 //Furniture
 maptile* tile_Chair1(); //"chair1"
@@ -192,7 +193,7 @@ const tileVector ALL_MAPTILES = {
 	tile_WretchedDoor(), tile_CrowDoor(), tile_RuinedTownshipHallDoor(),
 	tile_WyrdDoor(), tile_GreenChapelGardenDoor(), tile_SordidChapelDoor(),
 	tile_VoidDrenchedDoor(), tile_DoorOfWinter(), tile_OldValleyDoor(),
-	tile_DesolateChurchDoor(), tile_HightowerDoor()
+	tile_DesolateChurchDoor(), tile_HightowerDoor(), tile_BasementDoor()
 };
 
 #endif

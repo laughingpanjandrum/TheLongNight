@@ -221,6 +221,15 @@ consumableSharedPtr oil_CursedWater()
 	return c;
 }
 
+consumableSharedPtr oil_HangmansBlood()
+{
+	consumableSharedPtr c(new consumable("Hangman's Blood", VIAL_TILE, TCODColor::darkerRed,
+		"The pure blood of a hangman is enriched by those he kills, and in death, a hangman's blood \
+is said to carry the stench of a thousand graves."));
+	c->setWeaponBuff(new weaponBuff(DAMAGE_PHYSICAL, 15));
+	return c;
+}
+
 consumableSharedPtr bell_VoidwalkersDancingBell()
 {
 	consumableSharedPtr c(new consumable("Voidwalker's Dancing Bell", BELL_TILE, TCODColor::purple,
@@ -237,5 +246,16 @@ consumableSharedPtr bell_VoidwalkersReturningBell()
 they will return home someday."));
 	c->consumeOnUse = false;
 	c->addEffect(TELEPORT_BACK_FROM_VOID);
+	return c;
+}
+
+consumableSharedPtr horn_HeraldsWhiteHorn()
+{
+	consumableSharedPtr c(new consumable("Herald's White Horn", BELL_TILE, TCODColor::white,
+		"The silver horn of the Herald, who comes in the White Fog. According to certain storytellers, his presence signifies the coming of the \
+Lord of Fallow Fields, who rises from the realms of the old gods to bring final judgement upon the world."));
+	c->consumeOnUse = false;
+	c->addEffect(CREATE_FOG);
+	c->setPotency(5);
 	return c;
 }

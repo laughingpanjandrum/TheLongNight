@@ -442,6 +442,19 @@ until death, but this did not satisfy Lady Tvert, whose made a pact to ensure th
 	return wp;
 }
 
+weaponSharedPtr weapon_LadyTvertsClaws()
+{
+	weaponSharedPtr wp(new weapon("Lady Tvert's Claws", DAGGER_TILE, TCODColor::lightBlue,
+		"Lady Tvert's pact with the Herald caused her body to deform, but she herself, \
+and her followers, saw a peculiar beauty in the transformation."));
+	wp->setBasicAttributes(10, SPEED_FAST);
+	wp->addStatusEffect(EFFECT_BLEED, 10);
+	wp->addStatusEffect(EFFECT_POISON, 10);
+	wp->addScalingType(SCALE_DEX);
+	wp->setSpecialAttack(attack_RavenousHunger());
+	return wp;
+}
+
 weaponSharedPtr weapon_ProfaneGreatsword()
 {
 	weaponSharedPtr wp(new weapon("Profane Greatsword", SWORD_TILE, TCODColor::purple,

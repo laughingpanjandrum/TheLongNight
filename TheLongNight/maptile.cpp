@@ -379,6 +379,16 @@ maptile * tile_HightowerDoor()
 	return door;
 }
 
+maptile * tile_BasementDoor()
+{
+	maptile* door = new maptile("Basement Door", "basement_door", BASIC_DOOR_TILE,
+		TCODColor::lightGrey, TCODColor::darkGrey, false, false);
+	door->isDoor = true;
+	door->unlockCode = "basement_key";
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	return door;
+}
+
 maptile * tile_Chair1()
 {
 	return new maptile("Chair", "chair1", CHAIR_TILE_1,

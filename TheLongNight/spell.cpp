@@ -757,6 +757,24 @@ spellSharedPtr ability_SpitWeb()
 	return sp;
 }
 
+spellSharedPtr attack_RavenousHunger()
+{
+	spellSharedPtr sp(new spell("Ravenous Hunger", SPELL_TILE, TCODColor::red,
+		"Attack heals you and deals bleed damage to target."));
+	sp->setAttackType(ATTACK_RANGE, 1);
+	sp->addEffect(APPLY_BLEED_DAMAGE, 25);
+	sp->addEffect(HEAL_CASTER, 25);
+	return sp;
+}
+
+spellSharedPtr ability_ShredSkin()
+{
+	spellSharedPtr sp(new spell("Shred Skin", SPELL_TILE, TCODColor::red));
+	sp->addEffect(HURT_CASTER, 15);
+	sp->addEffect(APPLY_DAMAGE_PENALTY, -25);
+	return sp;
+}
+
 spellSharedPtr ability_TentacleSwarm()
 {
 	spellSharedPtr sp(new spell("Tentacle Swarm", SPELL_TILE, TCODColor::green,

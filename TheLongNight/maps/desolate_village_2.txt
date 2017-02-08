@@ -2,6 +2,7 @@ Desolate Graveyard
 start:39,4
 white_fog_herald:20,20
 -items
+siltras_bones:5,4
 -enditems
 -codes
 . floor_grass

@@ -97,6 +97,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return oil_HolyWater();
 	else if (handle == "cursed_water")
 		return oil_CursedWater();
+	else if (handle == "hangmans_blood")
+		return oil_HangmansBlood();
 
 	//RANGED WEAPONS
 	else if (handle == "throwing_knives")
@@ -191,6 +193,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return charm_ToxicantsCharm();
 	else if (handle == "obscuring_charm")
 		return charm_ObscuringCharm();
+	else if (handle == "fragrant_amulet")
+		return charm_FragrantAmulet();
 
 	//SPELLS
 	else if (handle == "magic_missile")

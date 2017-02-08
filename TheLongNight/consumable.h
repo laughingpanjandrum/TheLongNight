@@ -92,8 +92,10 @@ consumableSharedPtr oil_CorrosiveOil();
 consumableSharedPtr oil_FrozenOil();
 consumableSharedPtr oil_HolyWater();
 consumableSharedPtr oil_CursedWater();
+consumableSharedPtr oil_HangmansBlood();
 
 consumableSharedPtr bell_VoidwalkersDancingBell();
 consumableSharedPtr bell_VoidwalkersReturningBell();
+consumableSharedPtr horn_HeraldsWhiteHorn();
 
 #endif

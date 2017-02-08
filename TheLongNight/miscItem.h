@@ -19,7 +19,7 @@ public:
 
 	//For key/lock items
 	bool isKey = true;
-	void setKeyTag(std::string t) { keyTag = t; }
+	void setKeyTag(std::string t) { keyTag = t; isKey = true; }
 	std::string getKeyTag() { return keyTag; }
 
 	//For runestones
@@ -55,6 +55,7 @@ miscItemSharedPtr key_SpinalColumnShard();
 miscItemSharedPtr key_OldValleyKey();
 miscItemSharedPtr key_BartonsKey();
 miscItemSharedPtr key_HightowerKey();
+miscItemSharedPtr key_LadyTvertsKey();
 
 miscItemSharedPtr key_WatchfulEyestalk();
 
@@ -65,6 +66,7 @@ miscItemSharedPtr heart_FishBornGoddessesHeart();
 miscItemSharedPtr heart_OrsylsShriveledHeart();
 miscItemSharedPtr heart_VortensShriveledHeart();
 miscItemSharedPtr heart_VenomousSpiderHeart();
+miscItemSharedPtr heart_LadyTvertsHeart();
 
 //Spellbooks
 miscItemSharedPtr spellbook_WaterloggedWritings();

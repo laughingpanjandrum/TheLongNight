@@ -3,7 +3,6 @@ start:39,4
 slavemaster_gasgut:31,29
 -items
 black_honey:35,15
-siltras_bones:4,5
 obscuring_charm:34,23
 -enditems
 -codes
@@ -32,6 +31,7 @@ u tombstone
 -connections
 east:tear_stained_valley_3
 west:desolate_village_2
+south:hightower_banquet_1
 -endconnections
 ########################################
 ##......................................

@@ -1,0 +1,84 @@
+Hightower Banquet
+start:23,0
+hightower_lord:20,7
+hightower_lord:16,7
+hightower_lord:17,8
+hightower_lord:15,7
+hightower_lord:21,8
+silver_knight:7,17
+silver_knight:11,28
+hightower_lord:10,27
+hightower_lord:12,27
+hightower_lord:11,29
+-items
+fragrant_amulet:8,13
+hangmans_blood:5,37
+starwater_draught:31,14
+-enditems
+-codes
+. floor_stone
+; floor_sand
+" floor_mossy_stone
+r floor_carpet
+% bush
+$ corpse
+T tree
+# wall_stone
+w wall_wood
+~ water
+: water_mossy
+D water_deep
+? statue
++ door_stone
+G glass
+* warpstone
+c chair2
+t table4
+u tombstone
+& basement_door
+-endcodes
+-connections
+north:desolate_village_1
+south:hightower_banquet_2
+-endconnections
+######################.....#############
+.....................#.....#...........#
+.....................#.....#...........#
+.....................#.....#...........#
+########################+###############
+#......................................#
+#...t..t..t..t..t..t..t..t..t..t..t....#
+#rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr#
+#rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr#
+#.rr................................rr.#
+#.rr...t..t..t..t..t..t..t..t..t..t.rr.#
+#.rr.###############&##############.rr.#
+#.rr.#.....rr.....#......#.t.rr...#.rr.#
+#.rr.#....rrrr..t.#......#rrrrrrrrrrrr.#
+#.rr.#...rrrrrr.c.#......#rrrrrrrrrrrr.#
+#.rrrrrrrrrrrrrr..#......#.t.rr...#.rr.#
+#.rrrrrrrrrrrrrr..#################.rr.#
+#.rr.#...rrrrrr.t.#~~~~~~#..........rr.#
+#.rr.#....rrrr....#~~~~~~#.rrrrrrrrrrr.#
+#.rr.##############~~~~~~#.rrrrrrrrrrr.#
+#.rr.#rrrrrrrrrrr..~~~~~~#.rr..........#
+#.rr.#rrrrrrrrrrr..~~~~~~#.rr.##########
+#.rrrrrrrrrrrrrrr..~~~~~~#.rr.#rrrrrrrr#
+#.rrrrrrrrrrrrrrr..~~~~~~#.rr.#.rrrrrr.#
+#.rr.#rrrrrrrrrrr..~~~~~~#.rr.#..rrrr..#
+#.rr.#####################.rr.#...rr...#
+#.rr.#............#........rrrrrrrrr.t.#
+#.rr.#..tc.rrrrrrrrrrrrrrrrrrrrrrrrr.t.#
+#.rr.#.....rrrrrrrrrrrrrrrrrr.#...rr...#
+#.rr.#..tc.rr.....#.rr........#..rrrr..#
+#.rr.#.....rr.....#.rr.########.rrrrrr.#
+#.rr.######rr######.rr.#......#rrrrrrrr#
+#.rr.......rr.......rr.#......##########
+#.rrrrrrrrrrrrrrrrrrrrrrrrrrr..........#
+#.rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr..#
+#..........rr..........#..rrrrrrrrrrr..#
+###########rr###########..rrrrrrrrrrr..#
+#.tc...tc..rr..tc...tc.#.......r.......#
+#rrrrrrrrrrrrrrrrrrrrrr########+########
+#.tc...tc..rr..tc...tc.#.....#.r.#......
+########################.....#.r.#......

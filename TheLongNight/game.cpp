@@ -1937,6 +1937,8 @@ void game::applyEffectToPerson(personSharedPtr target, effect eff, int potency, 
 		meleeAttack(caster, target);
 	else if (eff == HURT_CASTER)
 		caster->takeDamage(potency);
+	else if (eff == HEAL_CASTER)
+		caster->addHealth(potency);
 
 	//Special effects, other
 	else if (eff == KNOCKBACK_TARGET)

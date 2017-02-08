@@ -120,3 +120,11 @@ ever managed to breach the gates, and Lady Tvert remained untouched."));
 	c->addEffect(CHANGE_DETECTION_RANGE, -4);
 	return c;
 }
+
+charmSharedPtr charm_FragrantAmulet()
+{
+	charmSharedPtr c(new charm("Fragrant Amulet", CHARM_TILE, TCODColor::pink,
+		"The pleasing scent of this amulet is said to improve the mood of the \
+lords and ladies of Hightower. But beyond its cleanliness, it seems to have no use."));
+	return c;
+}

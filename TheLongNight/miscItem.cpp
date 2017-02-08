@@ -17,7 +17,6 @@ miscItemSharedPtr key_WretchsKey()
 {
 	miscItemSharedPtr m(new miscItem("Wretch's Key", KEY_TILE, TCODColor::green,
 		"Key treasured by the wretches who fled the Winter Court, but could go no further than Coruscating Beach."));
-	m->isKey = true;
 	m->setKeyTag("wretched_door");
 	return m;
 }
@@ -26,7 +25,6 @@ miscItemSharedPtr key_OldCrowsKey()
 {
 	miscItemSharedPtr m(new miscItem("Old Crow's Key", KEY_TILE, TCODColor::lightGrey,
 		"The Winter Court entrusted the crows with this key, and begged them to safeguard their lands against the scourge."));
-	m->isKey = true;
 	m->setKeyTag("crow_door");
 	return m;
 }
@@ -35,7 +33,6 @@ miscItemSharedPtr key_RuinedTownshipKey()
 {
 	miscItemSharedPtr m(new miscItem("Ruined Township Key", KEY_TILE, TCODColor::darkLime,
 		"Someone entrusted the guardian golem with the safekeeping of this key, and it persisted even after the end of the world."));
-	m->isKey = true;
 	m->setKeyTag("ruined_township_hall_door");
 	return m;
 }
@@ -45,7 +42,6 @@ miscItemSharedPtr key_WyrdKey()
 	miscItemSharedPtr m(new miscItem("Wyrd Key", KEY_TILE, TCODColor::lightSepia,
 		"The Wyrd were once entrusted with the guardianship of the Winter Court - a duty that they upheld even when their \
 world was destroyed."));
-	m->isKey = true;
 	m->setKeyTag("wyrd_door");
 	return m;
 }
@@ -54,7 +50,6 @@ miscItemSharedPtr key_GreenChapelGardenKey()
 {
 	miscItemSharedPtr m(new miscItem("Green Chapel Garden Key", KEY_TILE, TCODColor::lightGreen,
 		"A key with its handle carved in the shape of a rose."));
-	m->isKey = true;
 	m->setKeyTag("green_chapel_door");
 	return m;
 }
@@ -63,7 +58,6 @@ miscItemSharedPtr key_SordidChapelKey()
 {
 	miscItemSharedPtr m(new miscItem("Sordid Chapel Key", KEY_TILE, TCODColor::purple,
 		"This key is so soaked with blood that its material is unrecognizable. Whatever it unlocks is probably best left alone."));
-	m->isKey = true;
 	m->setKeyTag("sordid_chapel_door");
 	return m;
 }
@@ -73,7 +67,6 @@ miscItemSharedPtr key_SpinalColumnShard()
 	miscItemSharedPtr m(new miscItem("Spinal Column Shard", KEY_TILE, TCODColor::lighterGrey,
 		"A fragment of Orsyl's spinal column. According to the writings of Saint Lucina, one's spinal column contains the \
 memories of one's ancestors."));
-	m->isKey = true;
 	m->setKeyTag("spinal_column_shard");
 	return m;
 }
@@ -83,7 +76,6 @@ miscItemSharedPtr key_OldValleyKey()
 	miscItemSharedPtr m(new miscItem("Old Valley Key", KEY_TILE, TCODColor::white,
 		"This bone-white key unlocks the door of the Tear-Stained Valley. Who knows how it the bloated spider absorbed it into \
 its grisly bulk?"));
-	m->isKey = true;
 	m->setKeyTag("old_valley_door");
 	return m;
 }
@@ -92,7 +84,6 @@ miscItemSharedPtr key_BartonsKey()
 {
 	miscItemSharedPtr m(new miscItem("Barton's Key", KEY_TILE, TCODColor::flame,
 		"Key to the church that guarded entry to Hightower, entrusted to Barton by the Lady of the Tower."));
-	m->isKey = true;
 	m->setKeyTag("bartons_key");
 	return m;
 }
@@ -102,8 +93,16 @@ miscItemSharedPtr key_HightowerKey()
 	miscItemSharedPtr m(new miscItem("Hightower Key", KEY_TILE, TCODColor::pink,
 		"Heavy brass key to the main gates of Hightower. Many assassins would have paid dearly to acquire this key at the height of\
  Lady Tvert's reign, but now the lowly slave master holds it, and no one approaches the gilded gates."));
-	m->isKey = true;
 	m->setKeyTag("hightower_key");
+	return m;
+}
+
+miscItemSharedPtr key_LadyTvertsKey()
+{
+	miscItemSharedPtr m(new miscItem("Lady Tvert's Key", KEY_TILE, TCODColor::lightBlue,
+		"The key to the Hightower basement. Lady Tvert kept the only copy on a chain around her neck. Hightower \
+festivals gloried in their hedonistic excess, and the sole thing the nobles were forbidden was to enter the mysterious basement."));
+	m->setKeyTag("lady_tverts_key");
 	return m;
 }
 
@@ -112,7 +111,6 @@ miscItemSharedPtr key_WatchfulEyestalk()
 	miscItemSharedPtr m(new miscItem("Watchful Eyestalk", KEY_TILE, TCODColor::darkGreen,
 		"According to the Ritual of Khull-Kallen, the first article of summoning is the Watchful Eyestalk. 'The Eye of the Lord \
 behold his subjects, and lets their most profound desires be known to him. Offer it at the altar in honour of his knowledge.'"));
-	m->isKey = true;
 	m->setKeyTag("watchful_eyestalk");
 	return m;
 }
@@ -129,7 +127,6 @@ miscItemSharedPtr heart_WretchedHeart()
 	miscItemSharedPtr h(new miscItem("Wretched Heart", HEART_TILE, TCODColor::darkRed,
 		"This small, putrid heart lay at the centre of the wretched mass, apparently conferring life to the putrid thing."));
 	h->setKeyTag("wretched_heart");
-	h->isKey = true;
 	return h;
 }
 
@@ -138,7 +135,6 @@ miscItemSharedPtr heart_OldCrowsHeart()
 	miscItemSharedPtr h(new miscItem("Old Crow's Heart", HEART_TILE, TCODColor::lightCrimson,
 		"Within the Old Crow's breast sat this small, black heart. It beats softly in your palm."));
 	h->setKeyTag("old_crows_heart");
-	h->isKey = true;
 	return h;
 }
 
@@ -147,7 +143,6 @@ miscItemSharedPtr heart_FishBornGoddessesHeart()
 	miscItemSharedPtr h(new miscItem("Fishborn Goddess's Heart", HEART_TILE, TCODColor::darkSea,
 		"Within the breast of the Fish-born Goddess sat this scaly green heart, dripping with seawater."));
 	h->setKeyTag("fishborn_heart");
-	h->isKey = true;
 	return h;
 }
 
@@ -157,7 +152,6 @@ miscItemSharedPtr heart_OrsylsShriveledHeart()
 		"Ruined heart of High Cleric Orsyl, who stood against the Void for as long as he could. It pulses with the awful light \
 of the Void."));
 	h->setKeyTag("orsyls_heart");
-	h->isKey = true;
 	return h;
 }
 
@@ -167,7 +161,6 @@ miscItemSharedPtr heart_VortensShriveledHeart()
 		"Duke Vorten welcomed the Void, and was cast out of the Winter Court as a consequence. He remained at the gates while the \
 Void gnawed at him, begging to be allowed back in, but the gates never opened."));
 	h->setKeyTag("vortens_heart");
-	h->isKey = true;
 	return h;
 }
 
@@ -176,7 +169,14 @@ miscItemSharedPtr heart_VenomousSpiderHeart()
 	miscItemSharedPtr h(new miscItem("Venomous Spider Heart", HEART_TILE, TCODColor::lime,
 		"This venom-drenched heart lay deep within Ghorth, the monstrous lord of spiders."));
 	h->setKeyTag("venomous_spider_heart");
-	h->isKey = true;
+	return h;
+}
+
+miscItemSharedPtr heart_LadyTvertsHeart()
+{
+	miscItemSharedPtr h(new miscItem("Lady Tvert's Heart", HEART_TILE, TCODColor::lightBlue,
+		"Heart plucked from the breast of Lady Tvert, whose pact with the White Fog Herald brought ruin to her house."));
+	h->setKeyTag("lady_tverts_heart");
 	return h;
 }
 
@@ -193,7 +193,6 @@ miscItemSharedPtr spellbook_WaterloggedWritings()
 	miscItemSharedPtr s(new miscItem("Waterlogged Writings", SPELL_TILE, TCODColor::lightLime,
 		"Water-soaked pages filled with sketches of fishmen and descriptions of their scaly magic."));
 	s->setKeyTag("waterlogged_writings");
-	s->isKey = true;
 	return s;
 }
 
@@ -202,7 +201,6 @@ miscItemSharedPtr spellbook_MinasProfanedWritings()
 	miscItemSharedPtr s(new miscItem("Minas's Profaned Writings", SPELL_TILE, TCODColor::purple,
 		"This filthy scroll is marked with profane runes, scrawled in blood."));
 	s->setKeyTag("minas_profaned_writings");
-	s->isKey = true;
 	return s;
 }
 
@@ -211,7 +209,6 @@ miscItemSharedPtr spellbook_FrostbittenWritings()
 	miscItemSharedPtr s(new miscItem("Frostbitten Writings", SPELL_TILE, TCODColor::cyan,
 		"These pages are brittle and cold, marked with runes and sketches of frostbitten shades. Perhaps a trained wizard could \
 make some sense of them."));
-	s->isKey = true;
 	s->setKeyTag("frostbitten_writings");
 	return s;
 }
@@ -221,7 +218,6 @@ miscItemSharedPtr spellbook_OrsylsTomeOfPrayer()
 	miscItemSharedPtr s(new miscItem("Orsyl's Tome of Prayer", SPELL_TILE, TCODColor::lightPurple,
 		"In his final days, Orsyl's holy prayers were profaned by his contact with the Void."));
 	s->setKeyTag("orsyls_tome_of_prayer");
-	s->isKey = true;
 	return s;
 }
 
@@ -230,7 +226,6 @@ miscItemSharedPtr spellbook_DivineMoonsparkTome()
 	miscItemSharedPtr s(new miscItem("Divine Moonspark Tome", SPELL_TILE, TCODColor::lighterYellow,
 		"This tome, encrusted with mud, contains the divine knowledge of the lost saint Yutria."));
 	s->setKeyTag("divine_moonspark_tome");
-	s->isKey = true;
 	return s;
 }
 
@@ -239,7 +234,6 @@ miscItemSharedPtr spellbook_DivineTomeOfTheEmissary()
 	miscItemSharedPtr s(new miscItem("Divine Tome of the Emissary", SPELL_TILE, TCODColor::lightFlame,
 		"The writings of the Emissaries are filled with edicts of cleansing and proclamations of divine justice, \
 as befit their role in the Valley."));
-	s->isKey = true;
 	s->setKeyTag("divine_tome_of_the_emissary");
 	return s;
 }
