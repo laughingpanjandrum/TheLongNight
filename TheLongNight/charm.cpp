@@ -111,3 +111,12 @@ grips you."));
 	c->addEffect(PHYS_RESIST_WHILE_POISONED, 20);
 	return c;
 }
+
+charmSharedPtr charm_ObscuringCharm()
+{
+	charmSharedPtr c(new charm("Obscuring Charm", CHARM_TILE, TCODColor::lightGrey,
+		"This small charm was used by the old assassins. Many of them came to Hightower, but none \
+ever managed to breach the gates, and Lady Tvert remained untouched."));
+	c->addEffect(CHANGE_DETECTION_RANGE, -4);
+	return c;
+}

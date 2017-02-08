@@ -14,14 +14,23 @@ map::map(int xsize, int ysize)
 		//Each x-coordinate is a vector
 		maptileVector1d* yvector = new maptileVector1d;
 		boolVector1d ymemory;
+		boolVector1d yfog;
+		boolVector1d yfogbirth;
+		boolVector1d yfogdeath;
 		//Fill this vector with empty tiles
 		for (int y = 0; y < ysize; y++) {
 			yvector->push_back(tile_Floor());
 			ymemory.push_back(false);
+			yfog.push_back(false);
+			yfogbirth.push_back(false);
+			yfogdeath.push_back(false);
 		}
 		//And then push this vector onto the x-list
 		maptiles.push_back(yvector);
 		memoryMap.push_back(ymemory);
+		fogMap.push_back(yfog);
+		fogBirthMap.push_back(yfogbirth);
+		fogDeathMap.push_back(yfogdeath);
 	}
 	//Also build a datamap for FOV/etc
 	datamap = new TCODMap(xsize, ysize);
@@ -35,9 +44,11 @@ map::~map()
 {
 }
 
+
 /*
 	BOUNDARY CHECKING
 */
+
 
 bool map::inBounds(int x, int y)
 {
@@ -309,4 +320,107 @@ TCODPath* map::getPath()
 {
 	TCODPath *path = new TCODPath(datamap);
 	return path;
+}
+
+
+
+
+/*
+	Fog cloud
+*/
+
+
+/*
+Creates a new fog of cloud in this region.
+*/
+void map::createFogCloud(int ctrx, int ctry, int radius)
+{
+	//We now have fog!
+	hasFog = true;
+	//Set up the cloud
+	for (int x = ctrx - radius; x <= ctrx + radius; x++) {
+		for (int y = ctry - radius; y <= ctry - radius; y++) {
+			if (inBounds(x, y)) {
+				int h = hypot(x - ctrx, y - ctry);
+				if (h <= radius) {
+					setFog(true, x, y);
+				}
+			}
+		}
+	}
+}
+
+
+/*
+Returns the number of tiles adjacent to the given one that have fog.
+*/
+int map::countAdjacentFogTiles(int cx, int cy)
+{
+	int count = 0;
+	for (int x = cx - 1; x <= cx + 1; x++) {
+		for (int y = cy - 1; y <= cy + 1; y++) {
+			if (inBounds(x, y) && !(x == cx && y == cy)) {
+				if (isFoggy(x, y))
+					count++;
+			}
+		}
+	}
+	return count;
+}
+
+
+/*
+Fog spreads and fades, as Conway's Game of Life.
+*/
+void map::progressFog()
+{
+
+	//If we know there is no fog, just skip this
+	if (!hasFog)
+		return;
+	
+	//Fill in the two maps
+	for (int x = 0; x < xsize; x++) {
+		for (int y = 0; y < ysize; y++) {
+			
+			//Count fog squares around this one.
+			int count = countAdjacentFogTiles(x, y);
+			
+			//Status depends on the state of this square
+			if (isFoggy(x, y)) {
+
+				//Death?
+				if (count <= FOG_DEATH_COUNT_LOW || count >= FOG_DEATH_COUNT_HIGH)
+					fogDeathMap.at(x).at(y) = true;
+				else
+					fogDeathMap.at(x).at(y) = false;
+
+			}
+
+			else {
+
+				//Birth?
+				if (count == FOG_BIRTH_COUNT)
+					fogBirthMap.at(x).at(y) = true;
+				else
+					fogDeathMap.at(x).at(y) = false;
+
+			}
+
+		}
+	}
+
+
+	//Now update the main map according to the death/birth map
+	for (int x = 0; x < xsize; x++) {
+		for (int y = 0; y < ysize; y++) {
+
+			if (fogBirthMap.at(x).at(y))
+				setFog(true, x, y);
+			if (fogDeathMap.at(x).at(y))
+				setFog(false, x, y);
+
+		}
+	}
+
 }

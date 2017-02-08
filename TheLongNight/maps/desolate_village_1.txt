@@ -1,0 +1,76 @@
+Desolate Village
+start:39,4
+slavemaster_gasgut:31,29
+-items
+black_honey:35,15
+siltras_bones:4,5
+obscuring_charm:34,23
+-enditems
+-codes
+. floor_grass
+; floor_sand
+, floor_stone
+" floor_mossy_stone
+r floor_road
+% bush
+$ corpse
+T tree
+# wall_stone
+w wall_wood
+~ water
+: water_mossy
+D water_deep
+? statue
++ door_wood
+G glass
+* warpstone
+c chair2
+t table1
+u tombstone
+& hightower_door
+-endcodes
+-connections
+east:tear_stained_valley_3
+west:desolate_village_2
+-endconnections
+########################################
+##......................................
+#.wwwwwww.wwwwwwwwwwwwwwwwwwww......T...
+#.w,,,,,w.w,,,,,,,,,,,,w,,,,,+rrrrr.....
+#.w,tc,,+.w,t,,,,,,,,,,+,,,,,w....rrrrrr
+#.w,,,,,w.w,,,,,,,,,,,,w,,,,,w...rr.....
+#.w,tc,,w.wwww+wwwwwwwwwwwwwww..rr...T..
+#.w,,,,,w.w,,,,,,,,w,,,,,,,w...rr..?....
+#.w,tc,,w.w,tc,,,,,+,,,,t,,w.T.r....T..#
+#.w,,,,,w.w,,,,,,,,w,,,,,,,w...r...~...#
+#.wwwwwww.wwwwwwwwwwww+wwwww..rr.T.~~..#
+#............................rr..%.....#
+#...%.....rrrrrrrrrrrrrrrrrrrr.....%...#
+#.wwwwww.rr.................r.wwwwwwww%#
+#.w,,,,w.r....T.%......T..%.r.w,,,,,,w.#
+#.w,tc,w.r.T......~~........r.+,,,,,,w.#
+#.w,,,,+.r...%...~~~~..%.T..r.w,,,t,,w.#
+..wwwwww.r......~~~~~~....%.r.w,,,,,,w.#
+rrrrrrrrrr...T.~~~~~~~~.....r.wwwwwwww.#
+..wwwwww.r.%...~~~~~~~~.T...r..........#
+#.w,,,,w.r......~~~~~~......r.wwwwwwww.#
+#.w,tc,+.r..T.%..~~~~..%....r.w,,,,,,w.#
+#.w,,,,w.r........~~.....T..r.+,,,,,,w.#
+#.wwwwww.r..%.T.......T.....r.w,t,t,,w.#
+#....%...rr.........%......rr.w,,,,,,w.#
+#.........rrrrrrrrrrrrrrrrrr..wwwwwwww.#
+#.wwwwwww..r...........................#
+#.w,,,,,w..r..wwwwwwwwwwwwwwwwwwwwwwww.#
+#.w,,,,,+..r....w,,,+,,c,,c,,c,,c,,c,w.#
+#.w,,,,,w..rr...+,,,wt,,,,,,,,,,,,,,,w.#
+#.w,,,,,w...rr..wwGww,,c,,c,,c,,c,,c,w.#
+#.wwwwwww.%..rr.....wwwwwwwwwwwwwwwwww.#
+#.............rr.......................#
+#.wwwwwwww+ww..r....%.............T....#
+#.w,,,,,,,,,w..r..##############.......#
+#.w,,,,,,,,,w..r..#,,,,,,,,,,,,#..~..T.#
+#.wwwww,,,,,w..rrr&,,,,,,,,,tc,#..~~...#
+#.....w,,,,,w.....#,,,,,tc,,,,,#..~~...#
+#.....wwwwwww.....#,tc,,,,,,tc,#...~...#
+##................#,,,,,,,,,,,,#......##
+######################,,,,,#############

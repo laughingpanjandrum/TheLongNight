@@ -66,6 +66,9 @@ public:
 	void backUpDialogue() { atChatLine--; }
 	bool hasDialogue() { return dialogue.size() > 0; }
 
+	//Fog
+	int emitsFog = 0;
+
 	//Flags
 	bool isBoss = false;
 	bool showBossHealthBar = true; //only if we're actually a boss, of course!
@@ -163,6 +166,10 @@ monsterSharedPtr monster_BloatedSlaveDriver();
 monsterSharedPtr monster_SlaveringHound();
 monsterSharedPtr monster_Emissary();
 monsterSharedPtr monster_BartonTheProwlingMinister();
+
+//Desolate Village
+monsterSharedPtr monster_SlaveMasterGasgut();
+monsterSharedPtr monster_WhiteFogHerald();
 
 //The Void
 monsterSharedPtr monster_VoidTouched();

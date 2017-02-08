@@ -205,8 +205,10 @@ public:
 	//Lighting
 	void setLightEmitted(float e) { emitsLight = e; }
 	float getLightEmitted() { return emitsLight; }
+	int detectionRange = 12; //Max range at which we can be detected.
 
 	//Flags
+	bool canSwapWithAllies = false;
 	bool isDead = false;
 	bool isPlayer = true;
 	bool isHostile = true;

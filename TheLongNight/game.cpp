@@ -25,6 +25,7 @@ game::game()
 	//Character create
 	player = personSharedPtr (new person());
 	player->isPlayer = true;
+	player->isHostile = false;
 	player->stats = new statline(1, 1, 1, 1, 1, 1, 1);
 	
 	//Find starting position
@@ -287,15 +288,20 @@ Returns whether the given ai will move to the given point.
 */
 bool game::aiIsValidMove(monsterSharedPtr ai, int xnew, int ynew)
 {
+	
 	//Make sure it's in bounds
 	if (!currentMap->inBounds(xnew, ynew))
 		return false;
 	else if (!currentMap->isWalkable(xnew, ynew))
 		return false;
+	
 	//Make sure we won't attack a friendly
 	personSharedPtr here = currentMap->getPerson(xnew, ynew);
-	if (here != nullptr && !here->isPlayer)
-		return false;
+	if (here != nullptr && !here->isPlayer) {
+		if (!ai->canSwapWithAllies)
+			return false;
+	}
+	
 	//Otherwise, we're good to go!
 	return true;
 }
@@ -362,6 +368,10 @@ See if we want to cast any of our spells.
 */
 bool game::aiTryUseSpell(monsterSharedPtr ai)
 {
+
+	//Possible fog emission!
+	if (ai->emitsFog > 0)
+		currentMap->createFogCloud(ai->getx(), ai->gety(), ai->emitsFog);
 	
 	//Random chance to not cast a spell
 	int r = randint(1, 100);
@@ -380,7 +390,7 @@ bool game::aiTryUseSpell(monsterSharedPtr ai)
 			pathVector path = getLine(ai->getPosition(), target->getPosition());
 			personSharedPtr willHit = getTargetOnPath(path);
 			
-			if (willHit == target && currentMap->isPointInFOV(ai->getx(),ai->gety())) {
+			if (willHit == target && canPlayerSeePoint(ai->getx(),ai->gety())) {
 				//Check spell range
 				int dist = hypot(ai->getx() - target->getx(), ai->gety() - target->gety());
 				if (dist <= sp->getAttackRange()) {
@@ -469,9 +479,9 @@ AI tries to find something to kill.
 void game::aiFindTarget(monsterSharedPtr ai)
 {
 	//If the player can see us, we can see them. ONE SIMPLE RULE.
-	if (currentMap->isPointInFOV(ai->getx(), ai->gety())) {
+	if (canPlayerSeePoint(ai->getx(), ai->gety())) {
 		int dist = hypot(player->getx() - ai->getx(), player->gety() - ai->gety());
-		if (dist <= 12) {
+		if (dist <= player->detectionRange) {
 			ai->setTarget(player);
 			//If we are a BOSS, it looks like a BOSS FIGHT just started
 			if (ai->isBoss)
@@ -649,8 +659,10 @@ Input: Coordinates to start drawing at (the top left corner of the map)
 */
 void game::drawMap(int leftx, int topy)
 {
+	
 	//Draw map name just above
 	win.write(leftx, topy - 1, centreText(currentMap->getName(), 38), TCODColor::white);
+	
 	//Draw entire map, left to right & top to bottom
 	for (int x = 0; x < currentMap->getXSize(); x++) {
 		for (int y = 0; y < currentMap->getYSize(); y++) {
@@ -659,6 +671,7 @@ void game::drawMap(int leftx, int topy)
 			win.writec(leftx + x, topy + y, toDraw.tileCode, toDraw.color, toDraw.bgcolor);
 		}
 	}
+
 }
 
 
@@ -677,6 +690,20 @@ float game::getLightEmitters(int x, int y)
 	return mod;
 }
 
+
+/*
+Returns whether the given point is visible to the player.
+*/
+bool game::canPlayerSeePoint(int x, int y)
+{
+	//If we're in a fog zone, we can only see other fog zones.
+	if (currentMap->isFoggy(player->getx(), player->gety()))
+		if (!currentMap->isFoggy(x, y))
+			return false;
+	//Otherwise, it's just the map's FOV.
+	return currentMap->isPointInFOV(x, y);
+}
+
 /*
 Returns what to draw at the given point.
 */
@@ -688,7 +715,7 @@ drawData game::getDrawData(int x, int y)
 	drawDataSharedPtr toDraw( new drawData(m->getTileCode(), m->getColor(), m->getBgColor()) );
 	
 	//If this point isn't visible, don't draw it!
-	if (!currentMap->isPointInFOV(x, y) || player->isBlind()) {
+	if (!canPlayerSeePoint(x, y) || player->isBlind()) {
 		
 		//What to draw if out of FOV
 		if (currentMap->inMemoryMap(x, y)) {
@@ -729,6 +756,13 @@ drawData game::getDrawData(int x, int y)
 		
 		//Allow animations to adjust draw data
 		getAnimationDataOverride(toDraw, x, y);
+
+		//Fog effects
+		if (currentMap->isFoggy(x, y)) {
+			//Whiten front, and background colour is fully white
+			toDraw->bgcolor = TCODColor::lightestGrey;
+			toDraw->color.scaleHSV(0.2, 1.0);
+		}
 		
 		//Darken tiles that are further away
 		int distance = hypot(x - player->getx(), y - player->gety());
@@ -1145,7 +1179,7 @@ void game::drawMouseover(int atx, int aty)
 	
 	//What are we pointing at?
 	coord mpt = screenToMapCoords(coord(mouse.cx, mouse.cy));
-	if (currentMap->inBounds(mpt.first, mpt.second) && currentMap->isPointInFOV(mpt.first, mpt.second)) {
+	if (currentMap->inBounds(mpt.first, mpt.second) && canPlayerSeePoint(mpt.first, mpt.second)) {
 	
 		//Show highlighted object: person?
 		personSharedPtr target = currentMap->getPerson(mpt.first, mpt.second);
@@ -1559,7 +1593,7 @@ void game::drawConsumableInfo(consumableSharedPtr it, int atx, int aty)
 		//Just applies some sort of effect.
 		for (auto eff : it->getEffects()) {
 			win.write(atx, ++aty, std::to_string(it->getPotency()), TCODColor::white);
-			win.write(atx + 3, aty, getEffectName(eff), TCODColor::lightGrey);
+			win.write(atx + 4, aty, getEffectName(eff), TCODColor::lightGrey);
 		}
 	}
 }
@@ -1719,7 +1753,7 @@ void game::startAutoWalk()
 	//Make sure we're going to a valid space
 	if (currentMap->inBounds(pos.first, pos.second)) {
 		//We can only walk to spaces we can see
-		if (currentMap->isPointInFOV(pos.first, pos.second)) {
+		if (canPlayerSeePoint(pos.first, pos.second)) {
 			//And we can't walk into enemies
 			if (currentMap->getPerson(pos.first, pos.second) == nullptr) {
 				isAutoWalking = true;
@@ -1917,6 +1951,8 @@ void game::applyEffectToPerson(personSharedPtr target, effect eff, int potency, 
 		currentMap->setTile(tile_Ooze(), target->getx(), target->gety());
 	else if (eff == DROP_WEB)
 		currentMap->setTile(tile_Web(), target->getx(), target->gety());
+	else if (eff == CREATE_FOG)
+		currentMap->createFogCloud(target->getx(), target->gety(), potency);
 
 	//Some effect that the person should take care of
 	else
@@ -2041,8 +2077,16 @@ void game::movePerson(personSharedPtr p, int xnew, int ynew)
 				if (p->isPlayer)
 					playerTurnDelay = p->getAttackDelay();
 				
-				//We attack
-				meleeAttack(p, here);
+				//We attack! Or switch places!
+				if (p->isHostile != here->isHostile) {
+					meleeAttack(p, here);
+				}
+				else if (p->canSwapWithAllies) {
+					//A friendly is here; swap places if we can!
+					auto tempPos = p->getPosition();
+					p->setPosition(here->getPosition());
+					here->setPosition(tempPos);
+				}
 			}
 			
 			else {
@@ -3364,6 +3408,8 @@ void game::tick()
 	for (auto p : currentMap->getAllPeople()) {
 		p->tick();
 	}
+	//Map updates
+	currentMap->progressFog();
 }
 
 /*
@@ -3682,119 +3728,10 @@ void game::debugMenu()
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());
 		player->addItem(consumable_StarwaterDraught());
+		fragments += 125;
 		loadMapFromHandle("maps/cbeach_2.txt", CONNECT_WARP, player->getx(), player->gety());
 	}
-	else if (txt == "fairweather") {
-		fragments += 420;
-		loadMapFromHandle("maps/old_fairweather.txt", CONNECT_WARP, player->getx(), player->gety());
-	}
-	else if (txt == "oldcrow") {
-		player->addItem(weapon_SplinteredSword());
-		player->addItem(weapon_ThinKnife());
-		player->addItem(weapon_StraightSword());
-		player->addItem(weapon_Warhammer());
-		player->addItem(armour_RuinedUniform());
-		player->addItem(headgear_CaptainsTricorn());
-		player->addItem(armour_RuinedKnightsArmour());
-		player->addItem(headgear_RuinedKnightsHelm());
-		player->addItem(headgear_CrowKnightsHood());
-		player->addItem(armour_CrowKnightsArmour());
-		player->addItem(spell_MagicMissile());
-		player->addItem(spell_ArcaneRadiance());
-		player->addItem(wand_DriftwoodWand());
-		player->addItem(ranged_ThrowingKnives());
-		player->addItem(ranged_LaceratingKnives());
-		player->addItem(shield_BatteredWoodenShield());
-		player->addItem(chime_ClericsCrackedChime());
-		player->addItem(prayer_Restoration());
-		player->addItem(consumable_StarwaterDraught());
-		player->addItem(consumable_StarwaterDraught());
-		player->addItem(consumable_StarwaterDraught());
-		player->addItem(consumable_StarwaterDraught());
-		fragments += 600;
-		loadMapFromHandle("maps/pilgrims_road_5.txt", CONNECT_WARP, player->getx(), player->gety());
-	}
-	else if (txt == "lowlands") {
-		player->addItem(weapon_SplinteredSword());
-		player->addItem(weapon_ThinKnife());
-		player->addItem(weapon_StraightSword());
-		player->addItem(weapon_Warhammer());
-		player->addItem(armour_RuinedUniform());
-		player->addItem(headgear_CaptainsTricorn());
-		player->addItem(armour_RuinedKnightsArmour());
-		player->addItem(headgear_RuinedKnightsHelm());
-		player->addItem(headgear_CrowKnightsHood());
-		player->addItem(armour_CrowKnightsArmour());
-		player->addItem(spell_MagicMissile());
-		player->addItem(spell_ArcaneRadiance());
-		player->addItem(wand_DriftwoodWand());
-		player->addItem(ranged_ThrowingKnives());
-		player->addItem(ranged_LaceratingKnives());
-		player->addItem(shield_BatteredWoodenShield());
-		player->addItem(chime_ClericsCrackedChime());
-		player->addItem(prayer_Restoration());
-		player->addItem(consumable_StarwaterDraught());
-		player->addItem(consumable_StarwaterDraught());
-		player->addItem(consumable_StarwaterDraught());
-		player->addItem(consumable_StarwaterDraught());
-		player->addItem(weapon_FishmansKnife());
-		fragments += 700;
-		loadMapFromHandle("maps/flooded_lowlands_1.txt", CONNECT_WARP, player->getx(), player->gety());
-	}
-	else if (txt == "lowlands_boss") {
-		player->addItem(weapon_FishmansHarpoon());
-		player->addItem(weapon_FishmansKnife());
-		player->addItem(wand_FishmansToadstaff());
-		player->addItem(spell_AcidBlade());
-		player->addItem(spell_AcidBurst());
-		player->addItem(spell_AcidSpit());
-		player->addItem(armour_FishscaleCoat());
-		player->addItem(headgear_FishpriestHat());
-		fragments += 1200;
-		loadMapFromHandle("maps/flooded_lowlands_3.txt", CONNECT_WARP, player->getx(), player->gety());
-	}
-	else if (txt == "city") {
-		player->addItem(weapon_NotchedGreatsword());
-		player->addItem(weapon_FishmansHarpoon());
-		player->addItem(weapon_FishmansKnife());
-		player->addItem(wand_FishmansToadstaff());
-		player->addItem(chime_ClericsCrackedChime());
-		player->addItem(prayer_BlessedRadiance());
-		player->addItem(prayer_RayOfLight());
-		player->addItem(prayer_Restoration());
-		player->addItem(spell_AcidBlade());
-		player->addItem(spell_AcidBurst());
-		player->addItem(spell_AcidSpit());
-		player->addItem(armour_FishscaleCoat());
-		player->addItem(headgear_FishpriestHat());
-		player->addItem(armour_RuinedKnightsArmour());
-		player->addItem(headgear_RuinedKnightsHelm());
-		player->addItem(armour_ClericsVestments());
-		player->addItem(headgear_ClericsHood());
-		player->addItem(consumable_StarwaterDraught());
-		player->addItem(consumable_StarwaterDraught());
-		player->addItem(consumable_StarwaterDraught());
-		player->addItem(consumable_StarwaterDraught());
-		player->addItem(consumable_StarwaterDraught());
-		player->addItem(bell_VoidwalkersDancingBell());
-		fragments += 3000;
-		addStoryFlag("utricToFairweather");
-		addStoryFlag("muiraToFairweather");
-		addStoryFlag("elenaToFairweather");
-		loadMapFromHandle("maps/crumbling_city_1.txt", CONNECT_WARP, player->getx(), player->gety());
-	}
-	else if (txt == "red_gardens") {
-		player->equipItem(weapon_NotchedGreatsword());
-		player->equipItem(shield_WoodenWyrdShield());
-		player->equipItem(headgear_CrowKnightsHood());
-		player->equipItem(armour_CrowKnightsArmour());
-		player->equipItem(consumable_StarwaterDraught());
-		for (int i = 0; i < 8; i++)
-			player->addItem(consumable_StarwaterDraught());
-		player->stats->health = 6;
-		player->stats->strength = 12;
-		loadMapFromHandle("maps/red_drenched_gardens_1.txt", CONNECT_WARP, player->getx(), player->gety());
-	}
+
 	else if (txt == "allitems") {
 		getAllItems(player);
 		fragments += 8000;

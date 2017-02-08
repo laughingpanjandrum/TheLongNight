@@ -150,6 +150,7 @@ weaponSharedPtr weapon_CrimsonNail();
 weaponSharedPtr weapon_SpiderboneShard();
 
 weaponSharedPtr weapon_SacrificialKnife();
+weaponSharedPtr weapon_SlaveMastersWhip();
 
 weaponSharedPtr weapon_ProfaneGreatsword();
 

@@ -430,6 +430,18 @@ Those who refused to heed the call were sacrificed to the Gaping Maw to the bene
 	return wp;
 }
 
+weaponSharedPtr weapon_SlaveMastersWhip()
+{
+	weaponSharedPtr wp(new weapon("Slave Master's Whip", WHIP_TILE, TCODColor::lightRed,
+		"Long whip of the slave-drivers of the Valley, barbed to induce bleeding. The prisoners of the Valley served Hightower \
+until death, but this did not satisfy Lady Tvert, whose made a pact to ensure their eternal servitude."));
+	wp->setBasicAttributes(5, SPEED_FAST);
+	wp->addStatusEffect(EFFECT_BLEED, 20);
+	wp->addScalingType(SCALE_DEX);
+	wp->setSpecialAttack(attack_Lash());
+	return wp;
+}
+
 weaponSharedPtr weapon_ProfaneGreatsword()
 {
 	weaponSharedPtr wp(new weapon("Profane Greatsword", SWORD_TILE, TCODColor::purple,

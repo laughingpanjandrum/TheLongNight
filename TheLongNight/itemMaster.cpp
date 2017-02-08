@@ -83,6 +83,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return consumable_BloodDrinkersEyes();
 	else if (handle == "intoxicating_wine")
 		return consumable_IntoxicatingWine();
+	else if (handle == "black_honey")
+		return consumable_BlackHoney();
 
 	//OILS
 	else if (handle == "pyromancers_oil")
@@ -187,6 +189,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return charm_FrozenFlowerCharm();
 	else if (handle == "toxicants_charm")
 		return charm_ToxicantsCharm();
+	else if (handle == "obscuring_charm")
+		return charm_ObscuringCharm();
 
 	//SPELLS
 	else if (handle == "magic_missile")
@@ -209,6 +213,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return bell_VoidwalkersReturningBell();
 	else if (handle == "khalles_bones")
 		return bones_KhallesBones();
+	else if (handle == "siltras_bones")
+		return bones_SiltrasBones();
 
 	//SPELLBOOKS
 	else if (handle == "waterlogged_writings")
@@ -358,10 +364,13 @@ std::string getEffectName(effect e)
 	case(GAIN_HEALTH_ON_KILL): return "health restored on kill";
 	case(CHANGE_FRAGMENT_PICKUP_MULT): return "times fragments gained";
 	case(GAIN_DIVINE_RETRIBUTION): return "divine retribution";
+	case(CHANGE_DETECTION_RANGE): return "detection range";
 
 	case(TELEPORT_VIA_WATER): return "water warp";
 	case(TELEPORT_TO_VOID): return "warp to void";
 	case(TELEPORT_BACK_FROM_VOID): return "escape void";
+
+	case(CREATE_FOG): return "radius fog cloud";
 
 	}
 

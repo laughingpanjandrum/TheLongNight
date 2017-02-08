@@ -815,7 +815,7 @@ monsterSharedPtr monster_GhorthTheBloatedSpider()
 	monsterSharedPtr m(new monster("Ghorth the Bloated Spider", SPIDER_TILE, TCODColor::purple,
 		"This monstrous creature has a body the size of a horse, on which rest a dozen egg-sized green eyes. \
 Venom drips from its fangs, and it drags itself along the ground with eight spindly arms."));
-	m->setHealth(600);
+	m->setHealth(800);
 	m->setMoveStats(SPEED_FAST);
 	m->equipItem(weaponSharedPtr(new weapon(25, SPEED_SLOW, EFFECT_POISON, 25)));
 	m->setDefence(DAMAGE_PHYSICAL, 10);
@@ -826,6 +826,7 @@ Venom drips from its fangs, and it drags itself along the ground with eight spin
 	m->immuneToEntangle = true;
 	m->keepsDistance = true;
 	m->isBoss = true;
+	m->canSwapWithAllies = true;
 	m->setFragmentsDropped(500);
 	m->addItemDrop(heart_VenomousSpiderHeart());
 	m->addItemDrop(key_OldValleyKey());
@@ -914,6 +915,43 @@ prayers through emaciated lips."));
 	m->isBoss = true;
 	m->setFragmentsDropped(1000);
 	m->addItemDrop(key_BartonsKey());
+	return m;
+}
+
+monsterSharedPtr monster_SlaveMasterGasgut()
+{
+	monsterSharedPtr m(new monster("Slavemaster Gasgut", JAILOR_TILE, TCODColor::red,
+		"This bloated lord of the slave-drivers wields a crooked whip and bellows with impotent rage. \
+Alone, there is little he can do."));
+	m->setHealth(300);
+	m->setDefence(DAMAGE_PHYSICAL, 10);
+	m->setBleedResist(80);
+	m->setMoveStats(SPEED_NORMAL);
+	m->equipItem(weaponSharedPtr(new weapon(5, SPEED_FAST, EFFECT_BLEED, 15)));
+	m->addSpellKnown(attack_Lash());
+	m->setSpellCastChance(50);
+	m->setFragmentsDropped(500);
+	m->addItemDrop(key_HightowerKey());
+	m->addItemDrop(weapon_SlaveMastersWhip());
+	m->isBoss = true;
+	m->showBossHealthBar = false;
+	return m;
+}
+
+monsterSharedPtr monster_WhiteFogHerald()
+{
+	monsterSharedPtr m(new monster("White Fog Herald", HERALD_TILE, TCODColor::darkGrey,
+		"A figure is visible in the fog: no less than ten feet tall, with stretched skin of pure white and eyes that \
+glow crystal-blue. Torn silver robes hang from its gaunt body, and it wields a horn and a slender staff."));
+	m->setHealth(1000);
+	m->setDefence(DAMAGE_PHYSICAL, 15);
+	m->setDefence(DAMAGE_COLD, 100);
+	m->addWeakness(DAMAGE_FIRE);
+	m->setBleedResist(100);
+	m->setPoisonResist(100);
+	m->setMoveStats(SPEED_SLOW);
+	m->equipItem(weaponSharedPtr(new weapon(15, SPEED_SLOW, DAMAGE_COLD, 35)));
+	m->emitsFog = 3;
 	return m;
 }
 
@@ -1200,6 +1238,12 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return monster_Emissary();
 	else if (handle == "barton")
 		return monster_BartonTheProwlingMinister();
+
+	//Desolate Village
+	else if (handle == "slavemaster_gasgut")
+		return monster_SlaveMasterGasgut();
+	else if (handle == "white_fog_herald")
+		return monster_WhiteFogHerald();
 
 	//The Void
 	else if (handle == "void_touched")

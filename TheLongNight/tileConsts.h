@@ -50,6 +50,7 @@ const int TOAD_TILE = 84;
 const int UNDEAD_TILE = 117;
 const int JAILOR_TILE = 74;
 const int EMISSARY_TILE = 69;
+const int HERALD_TILE = 72;
 
 const int GOREM_TILE = 327; //This is a golem-dude
 
@@ -58,14 +59,17 @@ const int SWORD_TILE = 267;
 const int DAGGER_TILE = 268;
 const int HAMMER_TILE = 269;
 const int SPEAR_TILE = 279;
+const int WHIP_TILE = 279;
 const int STAFF_TILE = 277;
 const int CHIME_TILE = 278;
+
 const int SHIELD_TILE = 270;
 const int ARMOUR_TILE = 271;
 const int HELMET_TILE = 272;
 const int ROBE_TILE = 280;
 const int HOOD_TILE = 281;
 const int VIAL_TILE = 273;
+
 const int SPELL_TILE = 274;
 const int KEY_TILE = 275;
 const int CHARM_TILE = 276;

@@ -47,5 +47,6 @@ charmSharedPtr charm_WretchedFleshBand();
 charmSharedPtr charm_WretchedFleshmask();
 charmSharedPtr charm_FrozenFlowerCharm();
 charmSharedPtr charm_ToxicantsCharm();
+charmSharedPtr charm_ObscuringCharm();
 
 #endif

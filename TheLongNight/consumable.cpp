@@ -78,6 +78,19 @@ consumableSharedPtr consumable_IntoxicatingWine()
 	return c;
 }
 
+consumableSharedPtr consumable_BlackHoney()
+{
+	consumableSharedPtr c(new consumable("Black Honey", VIAL_TILE, TCODColor::darkPurple,
+		"Black honey, once the principle export of the village, was said to induce vivid dreams. But if one's life is filled with bloodshed,\
+ one's dreams are unlikely to bring peace."));
+	c->addEffect(APPLY_DAMAGE_PENALTY);
+	c->addEffect(INCREASE_SPELL_POWER);
+	c->addEffect(INCREASE_PRAYER_POWER);
+	c->setPotency(-10);
+	c->addsPermanentBuff = true;
+	return c;
+}
+
 consumableSharedPtr ranged_ThrowingKnives()
 {
 	consumableSharedPtr c(new consumable("Throwing Knives", DAGGER_TILE, TCODColor::lightGrey,

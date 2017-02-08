@@ -97,6 +97,16 @@ miscItemSharedPtr key_BartonsKey()
 	return m;
 }
 
+miscItemSharedPtr key_HightowerKey()
+{
+	miscItemSharedPtr m(new miscItem("Hightower Key", KEY_TILE, TCODColor::pink,
+		"Heavy brass key to the main gates of Hightower. Many assassins would have paid dearly to acquire this key at the height of\
+ Lady Tvert's reign, but now the lowly slave master holds it, and no one approaches the gilded gates."));
+	m->isKey = true;
+	m->setKeyTag("hightower_key");
+	return m;
+}
+
 miscItemSharedPtr key_WatchfulEyestalk()
 {
 	miscItemSharedPtr m(new miscItem("Watchful Eyestalk", KEY_TILE, TCODColor::darkGreen,
@@ -303,6 +313,16 @@ miscItemSharedPtr bones_KhallesBones()
 and her congregation was swallowed by the rising mud."));
 	b->isKey = true;
 	b->setKeyTag("khalles_bones");
+	return b;
+}
+
+miscItemSharedPtr bones_SiltrasBones()
+{
+	miscItemSharedPtr b(new miscItem("Siltra's Bones", KEY_TILE, TCODColor::lightestYellow,
+		"All that remains of Siltra, who once menaced the lowlands with her red-eyed army. In later days it was said that she \
+was greatly changed, and that the old gods gave her a fitting reward for her deeds."));
+	b->isKey = true;
+	b->setKeyTag("siltras_bones");
 	return b;
 }
 

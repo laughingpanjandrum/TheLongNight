@@ -89,12 +89,15 @@ spellSharedPtr attack_DripVenom();
 spellSharedPtr attack_SuckOutLife();
 spellSharedPtr attack_SpiderStrike();
 spellSharedPtr attack_DeepCut();
+spellSharedPtr attack_Lash();
 
 //Wand/chime powers
 spellSharedPtr ability_PowerSurge();
 spellSharedPtr ability_AcidInfusion();
 spellSharedPtr ability_DivineFavour();
 spellSharedPtr ability_WyrdChannel();
+
+spellSharedPtr ability_FogCloud();
 
 //	Arcane spells
 spellSharedPtr spell_MagicMissile();

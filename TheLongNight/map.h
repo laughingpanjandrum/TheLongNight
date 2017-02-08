@@ -102,6 +102,15 @@ public:
 	void addToMemoryMap(int x, int y) { memoryMap.at(x).at(y) = true; }
 	bool inMemoryMap(int x, int y) { return memoryMap.at(x).at(y); }
 
+	//Fog map
+	bool hasFog = false;
+	bool isFoggy(int x, int y) { return fogMap.at(x).at(y); }
+	void setFog(bool foggy, int x, int y) { fogMap.at(x).at(y) = foggy; }
+	void toggleFog(int x, int y) { fogMap.at(x).at(y) = !fogMap.at(x).at(y); }
+	void createFogCloud(int ctrx, int ctry, int radius);
+	int countAdjacentFogTiles(int x, int y);
+	void progressFog();
+
 private:
 
 	//Flava
@@ -117,8 +126,16 @@ private:
 	//Map elements
 	maptileVector2d maptiles;
 	boolVector2d memoryMap;
+	boolVector2d fogMap;
+	boolVector2d fogBirthMap;
+	boolVector2d fogDeathMap;
 	personVector people;
 	itemVector items;
+
+	//Fog attributes
+	const static int FOG_BIRTH_COUNT = 4;
+	const static int FOG_DEATH_COUNT_HIGH = 4;
+	const static int FOG_DEATH_COUNT_LOW = 1;
 
 	//Saved list of monsters to respawn
 	std::vector<std::string> monsterSpawnTags;

@@ -54,6 +54,7 @@ miscItemSharedPtr key_SordidChapelKey();
 miscItemSharedPtr key_SpinalColumnShard();
 miscItemSharedPtr key_OldValleyKey();
 miscItemSharedPtr key_BartonsKey();
+miscItemSharedPtr key_HightowerKey();
 
 miscItemSharedPtr key_WatchfulEyestalk();
 
@@ -82,6 +83,7 @@ miscItemSharedPtr runestone_CharredRunestone();
 
 //Bone keys
 miscItemSharedPtr bones_KhallesBones();
+miscItemSharedPtr bones_SiltrasBones();
 
 //Other
 miscItemSharedPtr misc_VoidSigil();

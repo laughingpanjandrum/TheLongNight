@@ -382,6 +382,8 @@ void person::applyEffect(effect eff, int potency)
 		fragmentPickupMultiplier = potency;
 	else if (eff == GAIN_DIVINE_RETRIBUTION)
 		divineRetribution += potency;
+	else if (eff == CHANGE_DETECTION_RANGE)
+		detectionRange += potency;
 
 	//Debuffs
 

@@ -38,6 +38,7 @@ u tombstone
 -connections
 east:tear_stained_valley_1
 south:tear_stained_river_3
+west:desolate_village_1
 -endconnections
 ###############################.........
 ....%.........................#.........

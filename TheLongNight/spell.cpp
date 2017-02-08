@@ -232,6 +232,17 @@ spellSharedPtr attack_DeepCut()
 	return sp;
 }
 
+spellSharedPtr attack_Lash()
+{
+	spellSharedPtr sp(new spell("Lash", WHIP_TILE, TCODColor::lightRed,
+		"Attack from up to 3 spaces away, dealing extra bleed damage."));
+	sp->setAttackType(ATTACK_RANGE, 3);
+	sp->addEffect(CASTER_MELEE_ATTACK, 1);
+	sp->addEffect(APPLY_BLEED_DAMAGE, 10);
+	sp->setVigourCost(1);
+	return sp;
+}
+
 //Wand/chime powers
 
 spellSharedPtr ability_PowerSurge()
@@ -271,6 +282,15 @@ spellSharedPtr ability_WyrdChannel()
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(SCALE_NEXT_PRAYER, 50);
 	sp->setVigourCost(1);
+	return sp;
+}
+
+spellSharedPtr ability_FogCloud()
+{
+	spellSharedPtr sp(new spell("Fog Cloud", SPELL_TILE, TCODColor::white,
+		"Create a cloud of fog."));
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(CREATE_FOG, 5);
 	return sp;
 }
 

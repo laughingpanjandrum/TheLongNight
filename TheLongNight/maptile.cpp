@@ -369,44 +369,54 @@ maptile * tile_DesolateChurchDoor()
 	return door;
 }
 
+maptile * tile_HightowerDoor()
+{
+	maptile* door = new maptile("Hightower Door", "hightower_door", BASIC_DOOR_TILE,
+		TCODColor::pink, TCODColor::grey, false, false);
+	door->isDoor = true;
+	door->unlockCode = "hightower_key";
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	return door;
+}
+
 maptile * tile_Chair1()
 {
 	return new maptile("Chair", "chair1", CHAIR_TILE_1,
-		TREE_COLOR, DARK_STONE_COLOR, true, false);
+		TREE_COLOR, DARK_STONE_COLOR);
 }
 
 maptile * tile_Chair2()
 {
 	return new maptile("Chair", "chair2", CHAIR_TILE_2,
-		TREE_COLOR, DARK_STONE_COLOR, true, false);
+		TREE_COLOR, DARK_STONE_COLOR);
 }
 
 maptile * tile_Table1()
 {
 	return new maptile("Table", "table1", TABLE_TILE_1,
-		TREE_COLOR, DARK_STONE_COLOR, true, false);
+		TREE_COLOR, DARK_STONE_COLOR);
 }
 
 maptile * tile_Table2()
 {
 	return new maptile("Table", "table2", TABLE_TILE_2,
-		TREE_COLOR, DARK_STONE_COLOR, true, false);
+		TREE_COLOR, DARK_STONE_COLOR);
 }
 
 maptile * tile_Table3()
 {
 	return new maptile("Table", "table3", TABLE_TILE_3,
-		TREE_COLOR, DARK_STONE_COLOR, true, false);
+		TREE_COLOR, DARK_STONE_COLOR);
 }
 
 maptile * tile_Table4()
 {
 	return new maptile("Table", "table4", TABLE_TILE_4,
-		TREE_COLOR, DARK_STONE_COLOR, true, false);
+		TREE_COLOR, DARK_STONE_COLOR);
 }
 
 maptile * tile_Tombstone()
 {
 	return new maptile("Tombstone", "tombstone", TOMBSTONE_TILE,
-		LIGHT_STONE_COLOR, DARKEST_GRASS_COLOR, true, true);
+		LIGHT_STONE_COLOR, DARKEST_GRASS_COLOR);
 }

@@ -1,0 +1,64 @@
+Desolate Graveyard
+start:39,4
+white_fog_herald:20,20
+-items
+-enditems
+-codes
+. floor_grass
+; floor_sand
+, floor_stone
+" floor_mossy_stone
+r floor_road
+% bush
+$ corpse
+T tree
+# wall_stone
+w wall_wood
+~ water
+: water_mossy
+D water_deep
+? statue
++ door_wood
+G glass
+* warpstone
+c chair2
+t table1
+u tombstone
+-endcodes
+-connections
+east:desolate_village_1
+-endconnections
+########################################
+#......................................#
+#...%.....u.....u...........%....T.....#
+#.....u%.....T......%..T..u...%.u......#
+#........T.%.u...rrrrrrrrrrrr.......T..#
+#..rrrrrrrrrrrrrrr....u....ur.T...u....#
+#..r...........r..u.%.......r...%......#
+#..r%.u....u.%.r......T..u..r.%..T.....#
+#..r.....T.....r.....u......r...u..%...#
+#..r...%.u...u.rrrr...%.....rrrrrr..T..#
+#..r.u.T....%.....r.....T.%......r.....#
+#..r...u...u..T%..r..%.......T..ur...%.#
+#..rrrrrrrr...u...rrrrrr.....%...r.u...#
+#......%..r..T..u.r....r..T......r...T.#
+#...%u..T.r.u.....r..T.r..%..u...r..%..#
+#....T....rrrrrrrrr.u.%rrrrrrrrrrr..u..#
+#.......u.r..u.%.......r.........r.T...#
+#...Tu....r....T...T.u.r..u.%.T..r......
+#.%....T..r.u....%.....r..T.....rrrrrrrr
+#.........r..%..u.rrrrrr.....u..r.......
+#..%T..u..rrrrr...r.......%..T..r..u...#
+#.........u...rrrrr....T......%.r......#
+#.....T...T...r...%.Tu....u.rrrrr..uT..#
+#...%...u...T.r..Tu....%....r.....%....#
+#........T....r.........uT..r..T..u....#
+#.T..rrrrrrrrrr.u..%.T......r.....T....#
+#..%.r..uT......T....rrrrrrrr...%......#
+#....r........u......r..........u...T..#
+#..T.r.T%.uT.......u.r.T.u..T.%........#
+#....r..........%.T..r.....%.....T.....#
+#....rrrrrrrrrrrrrrrrru..T%%..u........#
+#.........uT........................T..#
+#.............%.............T..........#
+########################################
