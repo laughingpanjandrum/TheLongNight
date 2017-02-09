@@ -148,6 +148,15 @@ int person::getMeleeDamage()
 			damage += bleedScaling;
 		}
 
+		//Buff due to health status, if applicable
+		if (lowHealthDamageBuff > 0) {
+			float healthPerc = health.getPercent();
+			if (healthPerc <= 0.25)
+				damage = damage * 2;
+			else if (healthPerc <= 0.5)
+				damage += damage / 2;
+		}
+
 		//Penalty
 		int penalty = (float)damage * (float)damagePenalty / 100.0;
 		if (penalty > 0)
@@ -384,6 +393,8 @@ void person::applyEffect(effect eff, int potency)
 		divineRetribution += potency;
 	else if (eff == CHANGE_DETECTION_RANGE)
 		detectionRange += potency;
+	else if (eff == LOW_HEALTH_DAMAGE_BUFF)
+		lowHealthDamageBuff += potency;
 
 	//Debuffs
 

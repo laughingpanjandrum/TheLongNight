@@ -144,6 +144,7 @@ public:
 	int getFragmentPickupMult() { return fragmentPickupMultiplier; }
 	bool immuneToEntangle = false;
 	int divineRetribution = 0; //Melee attackers take damage in return
+	int lowHealthDamageBuff = 0; //Gain buffs to damage when health reaches certain thresholds
 
 	//Debuffs
 	int slowdown = 0;

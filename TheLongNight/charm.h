@@ -49,5 +49,6 @@ charmSharedPtr charm_FrozenFlowerCharm();
 charmSharedPtr charm_ToxicantsCharm();
 charmSharedPtr charm_ObscuringCharm();
 charmSharedPtr charm_FragrantAmulet();
+charmSharedPtr charm_RavenousIdol();
 
 #endif

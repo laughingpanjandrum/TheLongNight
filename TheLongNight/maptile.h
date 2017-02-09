@@ -122,11 +122,13 @@ maptile* tile_SandyRock(); //"wall_sand"
 maptile* tile_Wall(); //"wall_stone"
 maptile* tile_WoodenWall(); //"wall_wood";
 maptile* tile_MarbleWall(); //"wall_marble"
+maptile* tile_Bars(); //"bars"
 
 maptile* tile_Door(); //"door_stone"
 maptile* tile_WoodenDoor(); //"door_wood"
 maptile* tile_LockedDoor(); //"locked_door"
 maptile* tile_DoorUnlocker(); //"door_unlocker"
+maptile* tile_CellDoor(); //"door_cell"
 
 maptile* tile_Glass(); //"glass"
 maptile* tile_Bush(); //"bush"
@@ -184,6 +186,7 @@ const tileVector ALL_MAPTILES = {
 	tile_Wall(), tile_WoodenWall(), tile_SandyRock(), tile_MarbleWall(),
 	tile_Door(), tile_WoodenDoor(), tile_LockedDoor(), tile_DoorUnlocker(),
 	tile_Glass(), tile_Bush(), tile_Rosebush(), tile_Tree(), tile_VoidTree(), tile_DeadTree(),
+	tile_Bars(), tile_CellDoor(),
 	tile_Water(), tile_MossyWater(), tile_DeepWater(), tile_Acid(),
 	tile_Ooze(), tile_Web(), tile_WebOnFloor(),
 	tile_Bloodstain(), tile_Corpse(),

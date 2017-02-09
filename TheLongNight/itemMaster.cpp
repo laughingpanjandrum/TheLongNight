@@ -195,6 +195,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return charm_ObscuringCharm();
 	else if (handle == "fragrant_amulet")
 		return charm_FragrantAmulet();
+	else if (handle == "ravenous_idol")
+		return charm_RavenousIdol();
 
 	//SPELLS
 	else if (handle == "magic_missile")
@@ -369,6 +371,7 @@ std::string getEffectName(effect e)
 	case(CHANGE_FRAGMENT_PICKUP_MULT): return "times fragments gained";
 	case(GAIN_DIVINE_RETRIBUTION): return "divine retribution";
 	case(CHANGE_DETECTION_RANGE): return "detection range";
+	case(LOW_HEALTH_DAMAGE_BUFF): return "damage buff when health is low";
 
 	case(TELEPORT_VIA_WATER): return "water warp";
 	case(TELEPORT_TO_VOID): return "warp to void";

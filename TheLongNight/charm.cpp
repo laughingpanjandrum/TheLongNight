@@ -128,3 +128,11 @@ charmSharedPtr charm_FragrantAmulet()
 lords and ladies of Hightower. But beyond its cleanliness, it seems to have no use."));
 	return c;
 }
+
+charmSharedPtr charm_RavenousIdol()
+{
+	charmSharedPtr c(new charm("Ravenous Idol", CHARM_TILE, TCODColor::orange,
+		"Obsidian idol of Pash, whose eternal hunger is legendary."));
+	c->addEffect(LOW_HEALTH_DAMAGE_BUFF, 1);
+	return c;
+}

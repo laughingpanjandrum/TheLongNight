@@ -104,6 +104,11 @@ maptile * tile_MarbleWall()
 	return new maptile("Marble Wall", "wall_marble", BASIC_WALL_TILE, TCODColor::darkCyan, TCODColor::white, false, false);
 }
 
+maptile * tile_Bars()
+{
+	return new maptile("Bars", "bars", BARS_TILE, LIGHT_STONE_COLOR, DARK_STONE_COLOR, false, true);
+}
+
 maptile * tile_Door()
 {
 	maptile* d = new maptile("Door", "door_stone", BASIC_DOOR_TILE, LIGHT_STONE_COLOR, DARK_STONE_COLOR, true, false);
@@ -133,6 +138,11 @@ maptile * tile_DoorUnlocker()
 	maptile* u = new maptile("Floor", "door_unlocker", BASIC_FLOOR_TILE, TCODColor::grey, TCODColor::darkerGrey);
 	u->addTouchEffect(UNLOCK_ADJACENT_DOORS);
 	return u;
+}
+
+maptile * tile_CellDoor()
+{
+	return new maptile("Cell Door", "door_cell", CELL_DOOR_TILE, LIGHT_STONE_COLOR, DARK_STONE_COLOR);
 }
 
 maptile * tile_Glass()

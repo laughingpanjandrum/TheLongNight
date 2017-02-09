@@ -102,6 +102,9 @@ const int CORPSE_TILE = 37;
 const int CARPET_TILE = 177;
 const int WEB_TILE = 37;
 
+const int BARS_TILE = 353;
+const int CELL_DOOR_TILE = 354;
+
 const int STATUE_TILE = 297;
 const int WARPSTONE_TILE = 298;
 const int GLASS_TILE = 299;
