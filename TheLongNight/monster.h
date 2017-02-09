@@ -44,6 +44,7 @@ public:
 	monsterSharedPtr getRandomSpawn();
 	void addSpawnableCreature(std::string handle) { spawnList.push_back(handle); }
 	void setSpawnChance(int c) { spawnChance = c; }
+	void setSpawnHealthThreshold(int h) { spawnAtHealthThreshold = h; }
 
 	//Item drops when we DIE
 	itemVector getItemDrops() { return drops; }
@@ -81,6 +82,7 @@ protected:
 	//Spawning powers
 	std::vector<std::string> spawnList;
 	int spawnChance = 0;
+	int spawnAtHealthThreshold = 0; //We automatically spawn a creature the first time our health drops to this level.
 
 	//Item drops
 	itemVector drops;
@@ -176,6 +178,11 @@ monsterSharedPtr monster_HightowerAristocrat();
 monsterSharedPtr monster_SilverKnight();
 monsterSharedPtr monster_LadyTvert();
 monsterSharedPtr monster_ScionOfTvert();
+monsterSharedPtr monster_MouthOfPash();
+
+//Dead Sparrow's Tower
+monsterSharedPtr monster_SparrowKnight();
+monsterSharedPtr monster_EtherealMage();
 
 //The Void
 monsterSharedPtr monster_VoidTouched();

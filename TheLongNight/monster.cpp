@@ -62,6 +62,12 @@ Random roll to decide if we want to spawn a thing
 */
 bool monster::wantsToSpawn()
 {
+	//We sometimes spawn creatures at a certain HP threshold
+	if (health.getValue() <= spawnAtHealthThreshold) {
+		spawnAtHealthThreshold = 0;
+		return true;
+	}
+	//Otherwise, random odds
 	int r = randint(1, 100);
 	return r <= spawnChance;
 }
@@ -1004,8 +1010,9 @@ it's the sight of her sharpened teeth as she turns to grin at you, or the blankn
 	m->addSpellKnown(spell_VoidJaunt());
 	m->setSpellCastChance(50);
 	m->isBoss = true;
+	m->keepsDistance = true;
 	m->addSpawnableCreature("scion_of_tvert");
-	m->setSpawnChance(25);
+	m->setSpawnHealthThreshold(400);
 	m->addItemDrop(key_LadyTvertsKey());
 	m->addItemDrop(heart_LadyTvertsHeart());
 	m->setFragmentsDropped(1500);
@@ -1017,7 +1024,7 @@ monsterSharedPtr monster_ScionOfTvert()
 	monsterSharedPtr m(new monster("Scion of Tvert", ARISTOCRAT_TILE, TCODColor::lightPink,
 		"Lady Tvert's bile forms the shape of this twisted creature - a mockery of the human form, \
 his face riddled with scars, his arms gruesome chunks of flesh covered in vile worms."));
-	m->setHealth(100);
+	m->setHealth(800);
 	m->setDefence(DAMAGE_PHYSICAL, 10);
 	m->setBleedResist(60);
 	m->setPoisonResist(60);
@@ -1026,6 +1033,65 @@ his face riddled with scars, his arms gruesome chunks of flesh covered in vile w
 	m->equipItem(weaponSharedPtr(new weapon(0, SPEED_NORMAL, DAMAGE_PROFANE, 30)));
 	m->addSpellKnown(ability_ShredSkin());
 	m->setSpellCastChance(20);
+	return m;
+}
+
+monsterSharedPtr monster_MouthOfPash()
+{
+	monsterSharedPtr m(new monster("Mouth of Pash", SPIDER_TILE, TCODColor::lightestRed,
+		"This thing looks like nothing more than an enormous mouth, crawling on hundreds of tiny insect's legs. \
+Its thousands of teeth drip poison, and a mass of eyestalks protrude from its head."));
+	m->setHealth(1000);
+	m->setDefence(DAMAGE_PHYSICAL, 10);
+	m->makeProfane();
+	m->setMoveStats(SPEED_FAST);
+	m->equipItem(weaponSharedPtr(new weapon(15, SPEED_NORMAL, EFFECT_POISON, 15)));
+	m->addSpellKnown(ability_Gnash());
+	m->setSpellCastChance(50);
+	m->isBoss = true;
+	m->setFragmentsDropped(2000);
+	m->addItemDrop(key_MawtoothFragment());
+	return m;
+}
+
+
+
+/*
+	Dead Sparrow's Tower
+*/
+
+
+
+monsterSharedPtr monster_SparrowKnight()
+{
+	monsterSharedPtr m(new monster("Sparrow Knight", KNIGHT_TILE, TCODColor::magenta,
+		"A knight in half-visible armour, wielding an ethereal blade. Two pinprick-light eyes glare from under \
+the glistening helm."));
+	m->setHealth(150);
+	m->setDefence(DAMAGE_PHYSICAL, 10);
+	m->setDefence(DAMAGE_MAGIC, 80);
+	m->setMoveStats(SPEED_NORMAL);
+	m->equipItem(weaponSharedPtr(new weapon(0, SPEED_NORMAL, DAMAGE_MAGIC, 50)));
+	m->addSpellKnown(spellSharedPtr(new spell("Ethereal Jaunt", TCODColor::magenta, ATTACK_BUFF_SELF,
+		0, TELEPORT, 3)));
+	m->setSpellCastChance(10);
+	return m;
+}
+
+monsterSharedPtr monster_EtherealMage()
+{
+	monsterSharedPtr m(new monster("Ethereal Mage", MAGE_TILE, TCODColor::magenta,
+		"At first this creature is hardly visible. It appears only as a floating white robe clutching \
+a wand, while two pale eyes regard you with something like disinterest."));
+	m->setHealth(50);
+	m->setDefence(DAMAGE_MAGIC, 90);
+	m->setMoveStats(SPEED_NORMAL);
+	m->setMeleeStats(10, SPEED_NORMAL);
+	m->addSpellKnown(spell_LightningStrike());
+	m->addSpellKnown(spellSharedPtr(new spell("Ethereal Curse", TCODColor::magenta, ATTACK_RANGE, 4,
+		TELEPORT, 3)));
+	m->setSpellCastChance(75);
+	m->keepsDistance = true;
 	return m;
 }
 
@@ -1094,6 +1160,10 @@ monsterSharedPtr npc_UtricTheRat()
 	m->addStockUnlock(spell_FrostBlast(), 100, "frostbitten_writings");
 	m->addStockUnlock(spell_FrozenBlade(), 100, "frostbitten_writings");
 	m->addStockUnlock(spell_Chillbite(), 100, "frostbitten_writings");
+	//Unlock: Singed Writings
+	m->addStockUnlock(spell_LightningStrike(), 100, "singed_writings");
+	m->addStockUnlock(spell_ArcLightning(), 100, "singed_writings");
+	m->addStockUnlock(spell_ElectricBlade(), 100, "singed_writings");
 	//Dialogue
 	m->loadDialogue("dialogue/utric_chat.txt");
 	return m;
@@ -1329,6 +1399,14 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return monster_LadyTvert();
 	else if (handle == "scion_of_tvert")
 		return monster_ScionOfTvert();
+	else if (handle == "mouth_of_pash")
+		return monster_MouthOfPash();
+
+	//Dead Sparrow's Tower
+	else if (handle == "sparrow_knight")
+		return monster_SparrowKnight();
+	else if (handle == "ethereal_mage")
+		return monster_EtherealMage();
 
 	//The Void
 	else if (handle == "void_touched")

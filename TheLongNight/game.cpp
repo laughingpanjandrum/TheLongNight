@@ -1628,8 +1628,16 @@ void game::drawMiscItemInfo(miscItemSharedPtr it, int atx, int aty)
 		if (rune != nullptr) {
 			//Description
 			if (rune->addScalingType == SCALE_FIRE) {
-				//Add fire damage
-				win.write(atx, ++aty, "Weapon deals additional Fire damage.", rune->color);
+				win.write(atx, ++aty, "Weapon deals additional fire damage.", rune->color);
+			}
+			else if (rune->addScalingType == SCALE_ELECTRIC) {
+				win.write(atx, ++aty, "Weapon deals additional electric damage.", rune->color);
+			}
+			else if (rune->addScalingType == SCALE_MAGIC) {
+				win.write(atx, ++aty, "Weapon deals additional magic damage.", rune->color);
+			}
+			else if (rune->addScalingType == SCALE_PHYSICAL) {
+				win.write(atx, ++aty, "Weapon deals additional physical damage.", rune->color);
 			}
 			else {
 				//Changes scaling
@@ -2815,8 +2823,16 @@ void game::castSpell(spellSharedPtr sp)
 			//Hits target marked with the cursor
 			doRangedSpell(sp);
 		}
+
 		//Time taken
-		playerTurnDelay += SPEED_NORMAL;
+		if (player->instantSpellCast) {
+			player->instantSpellCast--;
+		}
+		else {
+			playerTurnDelay += SPEED_NORMAL;
+		}
+		
+		//Casting cost
 		player->paySpellCost(sp);
 	}
 }
@@ -3573,12 +3589,15 @@ void getAllItems(personSharedPtr player)
 	player->addItem(weapon_CrowHalfsword());
 	player->addItem(weapon_CrowKnife());
 	player->addItem(weapon_CrowKnightSword());
+	player->addItem(weapon_DragonboneSword());
 	player->addItem(weapon_FishmansHarpoon());
 	player->addItem(weapon_FishmansKnife());
 	player->addItem(weapon_KythielsScythe());
 	player->addItem(weapon_LadyTvertsClaws());
 	player->addItem(weapon_NotchedGreatsword());
+	player->addItem(weapon_SacrificialKnife());
 	player->addItem(weapon_SerpentsTooth());
+	player->addItem(weapon_SlaveMastersWhip());
 	player->addItem(weapon_SpiderboneShard());
 	player->addItem(weapon_SplinteredSword());
 	player->addItem(weapon_StraightSword());
@@ -3590,6 +3609,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(shield_BatteredSteelShield());
 	player->addItem(shield_BatteredWoodenShield());
 	player->addItem(shield_CityGuardianShield());
+	player->addItem(shield_DragonboneShield());
 	player->addItem(shield_VoidTouchedShield());
 	player->addItem(shield_WoodenWyrdShield());
 
@@ -3688,6 +3708,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(runestone_SiltrasRunestone());
 	player->addItem(runestone_CharredRunestone());
 
+	player->addItem(key_DeadSparrowKey());
 	player->addItem(key_GreenChapelGardenKey());
 	player->addItem(key_HightowerKey());
 	player->addItem(key_LadyTvertsKey());

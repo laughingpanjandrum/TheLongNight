@@ -145,6 +145,7 @@ public:
 	bool immuneToEntangle = false;
 	int divineRetribution = 0; //Melee attackers take damage in return
 	int lowHealthDamageBuff = 0; //Gain buffs to damage when health reaches certain thresholds
+	int instantSpellCast = 0; //If >0, our next spell takes no time to cast
 
 	//Debuffs
 	int slowdown = 0;

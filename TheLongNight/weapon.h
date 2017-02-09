@@ -35,7 +35,7 @@ public:
 	void makeOffhand() { category = ITEM_OFFHAND; } //Make this an offhand weapon
 
 	//Getting
-	int getDamage() { return damage; }
+	int getDamage();
 	int getDamagePenalty() { return damagePenalty; }
 	int getDamageOfType(damageType dtype);
 	int getAttackDelay() { return attackDelay; }
@@ -166,6 +166,7 @@ weaponSharedPtr shield_DragonboneShield();
 //Wands
 weaponSharedPtr wand_DriftwoodWand();
 weaponSharedPtr wand_FishmansToadstaff();
+weaponSharedPtr wand_EtherealWand();
 
 //Chimes
 weaponSharedPtr chime_ClericsCrackedChime();

@@ -56,8 +56,10 @@ miscItemSharedPtr key_OldValleyKey();
 miscItemSharedPtr key_BartonsKey();
 miscItemSharedPtr key_HightowerKey();
 miscItemSharedPtr key_LadyTvertsKey();
+miscItemSharedPtr key_DeadSparrowKey();
 
 miscItemSharedPtr key_WatchfulEyestalk();
+miscItemSharedPtr key_MawtoothFragment();
 
 //Monster hearts
 miscItemSharedPtr heart_WretchedHeart();
@@ -72,6 +74,7 @@ miscItemSharedPtr heart_LadyTvertsHeart();
 miscItemSharedPtr spellbook_WaterloggedWritings();
 miscItemSharedPtr spellbook_MinasProfanedWritings();
 miscItemSharedPtr spellbook_FrostbittenWritings();
+miscItemSharedPtr spellbook_SingedWritings();
 miscItemSharedPtr spellbook_OrsylsTomeOfPrayer();
 miscItemSharedPtr spellbook_DivineMoonsparkTome();
 miscItemSharedPtr spellbook_DivineTomeOfTheEmissary();
@@ -82,6 +85,9 @@ miscItemSharedPtr runestone_SiltrasRunestone();
 miscItemSharedPtr runestone_KhallesRunestone();
 miscItemSharedPtr runestone_IetrasRunestone();
 miscItemSharedPtr runestone_CharredRunestone();
+miscItemSharedPtr runestone_KinslayersRunestone();
+miscItemSharedPtr runestone_StarweaversRunestone();
+miscItemSharedPtr runestone_ThundrousRunestone();
 
 //Bone keys
 miscItemSharedPtr bones_KhallesBones();

@@ -72,6 +72,24 @@ void weapon::addStatusEffect(statusEffects eType, int damage)
 	statusEffectDamage.push_back(damage);
 }
 
+
+/*
+Damage, plus bonus from runestone, if any
+*/
+int weapon::getDamage()
+{
+	int total = damage;
+	auto r = getRune();
+	if (r != nullptr) {
+		if (r->addScalingType == SCALE_PHYSICAL)
+			total += (float)total * 0.2;
+	}
+	return total;
+}
+
+/*
+Other damage types
+*/
 int weapon::getDamageOfType(damageType dtype)
 {
 	
@@ -84,7 +102,7 @@ int weapon::getDamageOfType(damageType dtype)
 
 	//Bonus from runestone
 	if (getRunestoneDamage(dtype)) {
-		dmg += (float)getDamage() * 0.2;
+		dmg += (float)getDamage() * 0.4;
 	}
 	
 	//Done
@@ -152,6 +170,10 @@ bool weapon::getRunestoneDamage(damageType dtype)
 	auto runestone = getRune();
 	if (runestone != nullptr) {
 		if (runestone->addScalingType == SCALE_FIRE && dtype == DAMAGE_FIRE)
+			return true;
+		else if (runestone->addScalingType == SCALE_ELECTRIC && dtype == DAMAGE_ELECTRIC)
+			return true;
+		else if (runestone->addScalingType == SCALE_MAGIC && dtype == DAMAGE_MAGIC)
 			return true;
 	}
 	return false;
@@ -559,6 +581,18 @@ weaponSharedPtr wand_FishmansToadstaff()
 	wp->setSpellstoreSize(4);
 	wp->setSpellPower(75);
 	wp->setSpecialAttack(ability_AcidInfusion());
+	wp->makeOffhand();
+	return wp;
+}
+
+weaponSharedPtr wand_EtherealWand()
+{
+	weaponSharedPtr wp(new weapon("Ethereal Wand", STAFF_TILE, TCODColor::magenta,
+		"A barely-visible ethereal wand, created by one of the Sparrows to channel arcane power. These spells were swift, but weak."));
+	wp->setBasicAttributes(5, SPEED_NORMAL);
+	wp->setSpellstoreSize(4);
+	wp->setSpellPower(60);
+	wp->setSpecialAttack(attack_EtherealSurge());
 	wp->makeOffhand();
 	return wp;
 }

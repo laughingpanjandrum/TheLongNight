@@ -65,6 +65,9 @@ armourSharedPtr armour_GreyThiefsRags();
 armourSharedPtr headgear_SilverPlatedHood();
 armourSharedPtr armour_SilverPlatedArmour();
 
+armourSharedPtr headgear_EtherealCrown();
+armourSharedPtr armour_EtherealRobes();
+
 armourSharedPtr headgear_SirPercivelsHelm();
 
 #endif

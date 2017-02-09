@@ -395,6 +395,8 @@ void person::applyEffect(effect eff, int potency)
 		detectionRange += potency;
 	else if (eff == LOW_HEALTH_DAMAGE_BUFF)
 		lowHealthDamageBuff += potency;
+	else if (eff == INSTANT_SPELL_CAST)
+		instantSpellCast += potency;
 
 	//Debuffs
 

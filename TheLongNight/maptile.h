@@ -110,6 +110,7 @@ typedef std::vector<maptile*> tileVector;
 
 
 maptile* tile_Floor();	//"floor_stone"
+maptile* tile_MagicFloor(); //"floor_magic"
 maptile* tile_MossyFloor(); //"floor_mossy_stone"
 maptile* tile_Sand(); //"floor_sand"
 maptile* tile_Grass(); //"floor_grass"
@@ -120,6 +121,7 @@ maptile* tile_SnowFloor(); //"floor_snow"
 
 maptile* tile_SandyRock(); //"wall_sand"
 maptile* tile_Wall(); //"wall_stone"
+maptile* tile_MagicWall(); //"wall_magic"
 maptile* tile_WoodenWall(); //"wall_wood";
 maptile* tile_MarbleWall(); //"wall_marble"
 maptile* tile_Bars(); //"bars"
@@ -170,6 +172,7 @@ maptile* tile_OldValleyDoor(); //"old_valley_door"
 maptile* tile_DesolateChurchDoor(); //"bartons_door"
 maptile* tile_HightowerDoor(); //"hightower_door"
 maptile* tile_BasementDoor(); //"basement_door"
+maptile* tile_SparrowTowerDoor(); //"sparrow_tower_door"
 
 //Furniture
 maptile* tile_Chair1(); //"chair1"
@@ -183,7 +186,8 @@ maptile* tile_Tombstone(); //"tombstone"
 
 const tileVector ALL_MAPTILES = {
 	tile_Floor(), tile_MossyFloor(), tile_Sand(), tile_Grass(), tile_Road(), tile_Void(), tile_Carpet(), tile_SnowFloor(),
-	tile_Wall(), tile_WoodenWall(), tile_SandyRock(), tile_MarbleWall(),
+	tile_MagicFloor(),
+	tile_Wall(), tile_WoodenWall(), tile_SandyRock(), tile_MarbleWall(), tile_MagicWall(),
 	tile_Door(), tile_WoodenDoor(), tile_LockedDoor(), tile_DoorUnlocker(),
 	tile_Glass(), tile_Bush(), tile_Rosebush(), tile_Tree(), tile_VoidTree(), tile_DeadTree(),
 	tile_Bars(), tile_CellDoor(),
@@ -201,7 +205,8 @@ const tileVector ALL_MAPTILES = {
 	tile_WretchedDoor(), tile_CrowDoor(), tile_RuinedTownshipHallDoor(),
 	tile_WyrdDoor(), tile_GreenChapelGardenDoor(), tile_SordidChapelDoor(),
 	tile_VoidDrenchedDoor(), tile_DoorOfWinter(), tile_OldValleyDoor(),
-	tile_DesolateChurchDoor(), tile_HightowerDoor(), tile_BasementDoor()
+	tile_DesolateChurchDoor(), tile_HightowerDoor(), tile_BasementDoor(),
+	tile_SparrowTowerDoor(),
 };
 
 #endif

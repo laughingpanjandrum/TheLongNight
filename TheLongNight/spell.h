@@ -14,6 +14,8 @@ public:
 	//This is for quickly constructing spells for ranged weapon attacks
 	spell(std::string name, TCODColor color, int attackRange, int physDamage, 
 		effect otherEffect = NULL_EFFECT, int otherEffectPotency = 0);
+	//This is for quickly constructing any spell with a single effect
+	spell(std::string name, TCODColor color, attackType aType, int range, effect mainEff, int potency);
 	~spell();
 
 	//Setting
@@ -90,6 +92,7 @@ spellSharedPtr attack_SuckOutLife();
 spellSharedPtr attack_SpiderStrike();
 spellSharedPtr attack_DeepCut();
 spellSharedPtr attack_Lash();
+spellSharedPtr attack_EtherealSurge();
 
 //Wand/chime powers
 spellSharedPtr ability_PowerSurge();
@@ -118,6 +121,10 @@ spellSharedPtr spell_DevouringVoidCloud();
 spellSharedPtr spell_FrostBlast();
 spellSharedPtr spell_FrozenBlade();
 spellSharedPtr spell_Chillbite();
+//Utric, with singed writings
+spellSharedPtr spell_LightningStrike();
+spellSharedPtr spell_ElectricBlade();
+spellSharedPtr spell_ArcLightning();
 
 spellSharedPtr spell_SpitFire();
 
@@ -157,6 +164,7 @@ spellSharedPtr ability_DragBelow();
 spellSharedPtr ability_SpitWeb();
 spellSharedPtr attack_RavenousHunger();
 spellSharedPtr ability_ShredSkin();
+spellSharedPtr ability_Gnash();
 
 //Duke Vorten
 spellSharedPtr ability_TentacleSwarm();

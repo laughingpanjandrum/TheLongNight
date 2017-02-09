@@ -192,6 +192,7 @@ well-deserved punishment."));
 	a->setDefence(5);
 	a->setBleedResist(20);
 	a->setPoisonResist(20);
+	a->setMoveSpeed(SPEED_FAST);
 	return a;
 }
 
@@ -214,6 +215,28 @@ from the onslaught of night."));
 	a->setDefence(40);
 	a->setDamageResist(DAMAGE_COLD, 10);
 	a->setDamageResist(DAMAGE_PROFANE, 30);
+	a->setMoveSpeed(SPEED_SLOW);
+	return a;
+}
+
+armourSharedPtr headgear_EtherealCrown()
+{
+	armourSharedPtr a(new armour("Ethereal Crown", HELMET_TILE, TCODColor::silver, ITEM_HELMET,
+		"In time, the Sparrows who studied the arcane faded from the physical world, becoming mere shadows. \
+This silver crown can hardly be seen, though it feels real enough."));
+	a->setDefence(0);
+	a->setDamageResist(DAMAGE_MAGIC, 25);
+	return a;
+}
+
+armourSharedPtr armour_EtherealRobes()
+{
+	armourSharedPtr a(new armour("Ethereal Robes", ROBE_TILE, TCODColor::silver, ITEM_BODY_ARMOUR,
+		"As the Sparrows sought the truth of the world, they became increasingly disconnected from it. \
+Now they exist as mere shadows, gazing upon planes of existence beyond our own."));
+	a->setDefence(0);
+	a->setDamageResist(DAMAGE_MAGIC, 50);
+	a->setMoveSpeed(SPEED_FAST);
 	return a;
 }
 

@@ -67,6 +67,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return wand_DriftwoodWand();
 	else if (handle == "fishmans_toadstaff")
 		return wand_FishmansToadstaff();
+	else if (handle == "ethereal_wand")
+		return wand_EtherealWand();
 	else if (handle == "clerics_cracked_chime")
 		return chime_ClericsCrackedChime();
 
@@ -173,6 +175,11 @@ itemSharedPtr getItemByHandle(std::string handle)
 	else if (handle == "silver_plated_armour")
 		return armour_SilverPlatedArmour();
 
+	else if (handle == "ethereal_crown")
+		return headgear_EtherealCrown();
+	else if (handle == "ethereal_robes")
+		return armour_EtherealRobes();
+
 	else if (handle == "sir_percivels_helm")
 		return headgear_SirPercivelsHelm();
 
@@ -211,6 +218,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 	//MISC ITEMS
 	else if (handle == "green_chapel_garden_key")
 		return key_GreenChapelGardenKey();
+	else if (handle == "dead_sparrow_key")
+		return key_DeadSparrowKey();
 	else if (handle == "void_sigil")
 		return misc_VoidSigil();
 	else if (handle == "sordid_chapel_key")
@@ -229,6 +238,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return spellbook_MinasProfanedWritings();
 	else if (handle == "frostbitten_writings")
 		return spellbook_FrostbittenWritings();
+	else if (handle == "singed_writings")
+		return spellbook_SingedWritings();
 	else if (handle == "orsyls_tome_of_prayer")
 		return spellbook_OrsylsTomeOfPrayer();
 	else if (handle == "divine_moonspark_tome")
@@ -249,6 +260,12 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return runestone_IetrasRunestone();
 	else if (handle == "charred_runestone")
 		return runestone_CharredRunestone();
+	else if (handle == "kinslayers_runestone")
+		return runestone_KinslayersRunestone();
+	else if (handle == "starweavers_runestone")
+		return runestone_StarweaversRunestone();
+	else if (handle == "thundrous_runestone")
+		return runestone_ThundrousRunestone();
 	
 	//Uh oh, we didn't find anything!
 	return nullptr;
@@ -335,6 +352,7 @@ std::string getEffectName(effect e)
 	case(SPELL_ACID_INFUSION): return "acid infusion for next spell";
 	case(SPELL_COLD_INFUSION): return "cold infusion for next spell";
 	case(COLD_DAMAGE_ADDS_INFUSION): return "cold infusion upon taking cold damage";
+	case(INSTANT_SPELL_CAST): return "instant spell cast";
 
 	case(GAIN_DEFENCE): return "physical defence";
 	case(GAIN_ACID_RESIST): return "acid defence";

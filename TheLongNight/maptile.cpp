@@ -46,6 +46,11 @@ maptile * tile_Floor()
 	return new maptile("Floor", "floor_stone", BASIC_FLOOR_TILE, LIGHT_STONE_COLOR, DARK_STONE_COLOR);
 }
 
+maptile * tile_MagicFloor()
+{
+	return new maptile("Floor", "floor_magic", BASIC_FLOOR_TILE, TCODColor::lightPurple, DARK_STONE_COLOR);
+}
+
 maptile * tile_MossyFloor()
 {
 	return new maptile("Floor", "floor_mossy_stone", MOSS_TILE, LIGHT_GRASS_COLOR, DARK_STONE_COLOR);
@@ -92,6 +97,11 @@ maptile * tile_SandyRock()
 maptile * tile_Wall()
 {
 	return new maptile("Wall", "wall_stone", BASIC_WALL_TILE, DARK_STONE_COLOR, LIGHT_STONE_COLOR, false, false);
+}
+
+maptile * tile_MagicWall()
+{
+	return new maptile("Wall", "wall_magic", BASIC_WALL_TILE, DARK_STONE_COLOR, TCODColor::lightPurple, false, false);
 }
 
 maptile * tile_WoodenWall()
@@ -411,6 +421,16 @@ maptile * tile_BasementDoor()
 		TCODColor::lightGrey, TCODColor::darkGrey, false, false);
 	door->isDoor = true;
 	door->unlockCode = "lady_tverts_key";
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	return door;
+}
+
+maptile * tile_SparrowTowerDoor()
+{
+	maptile* door = new maptile("Sparrow Tower Door", "sparrow_tower_door", BASIC_DOOR_TILE,
+		TCODColor::cyan, TCODColor::darkGrey, false, false);
+	door->isDoor = true;
+	door->unlockCode = "dead_sparrows_key";
 	door->addTouchEffect(CHECK_FOR_UNLOCK);
 	return door;
 }

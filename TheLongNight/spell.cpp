@@ -22,6 +22,19 @@ spell::spell(std::string name, TCODColor color, int attackRange, int physDamage,
 	this->color = color;
 }
 
+
+//Quick-and-dirty constructor for creating any spell with a single effect.
+spell::spell(std::string name, TCODColor color, attackType aType, int range, effect mainEff, int potency) :
+	aType(aType), attackRange(range)
+{
+	this->name = name;
+	this->color = color;
+	addEffect(mainEff, potency);
+}
+
+
+
+
 spell::~spell()
 {
 }
@@ -239,6 +252,16 @@ spellSharedPtr attack_Lash()
 	sp->setAttackType(ATTACK_RANGE, 3);
 	sp->addEffect(CASTER_MELEE_ATTACK, 1);
 	sp->addEffect(APPLY_BLEED_DAMAGE, 10);
+	sp->setVigourCost(1);
+	return sp;
+}
+
+spellSharedPtr attack_EtherealSurge()
+{
+	spellSharedPtr sp(new spell("Ethereal Surge", SPELL_TILE, TCODColor::magenta,
+		"Your next two spells are cast instantly."));
+	sp->setAttackRange(ATTACK_BUFF_SELF);
+	sp->addEffect(INSTANT_SPELL_CAST, 2);
 	sp->setVigourCost(1);
 	return sp;
 }
@@ -471,6 +494,43 @@ spellSharedPtr spell_Chillbite()
 	sp->setVigourCost(2);
 	sp->usesSpellPower = true;
 	sp->isColdSpell = true;
+	return sp;
+}
+
+spellSharedPtr spell_LightningStrike()
+{
+	spellSharedPtr sp(new spell("Lightning Strike", SPELL_TILE, TCODColor::lightPurple,
+		"The old gods visited a just punishment upon the First Sparrow, but their cleansing fire only strengthened \
+his resolve. According to certain storytellers, in later days, he learned to channel their power for himself, \
+until he ascended to near-godhood."));
+	sp->setAttackType(ATTACK_RANGE, 10);
+	sp->addEffect(APPLY_ELECTRIC_DAMAGE, 25);
+	sp->usesSpellPower = true;
+	sp->setVigourCost(2);
+	return sp;
+}
+
+spellSharedPtr spell_ElectricBlade()
+{
+	spellSharedPtr sp(new spell("Electric Blade", SPELL_TILE, TCODColor::lightPurple,
+		"The weapons of the Sparrow Knights once flashed with arcane lightning, drawn from the earth \
+by arcane power near to godhood."));
+	sp->setAttackType(ATTACK_BUFF_WEAPON);
+	sp->setBuffApplied(DAMAGE_ELECTRIC, 15);
+	sp->usesSpellPower = true;
+	sp->setVigourCost(2);
+	return sp;
+}
+
+spellSharedPtr spell_ArcLightning()
+{
+	spellSharedPtr sp(new spell("Arc Lightning", SPELL_TILE, TCODColor::lightPurple,
+		"Given enough time, even the most profound secrets underlying the universe can be discovered. At least, such \
+was the belief of the First Sparrow, who delved deep into matters forbidden by the gods."));
+	sp->setAttackType(ATTACK_AOE, 5);
+	sp->addEffect(APPLY_ELECTRIC_DAMAGE, 50);
+	sp->usesSpellPower = true;
+	sp->setVigourCost(4);
 	return sp;
 }
 
@@ -770,8 +830,19 @@ spellSharedPtr attack_RavenousHunger()
 spellSharedPtr ability_ShredSkin()
 {
 	spellSharedPtr sp(new spell("Shred Skin", SPELL_TILE, TCODColor::red));
+	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(HURT_CASTER, 15);
 	sp->addEffect(APPLY_DAMAGE_PENALTY, -25);
+	return sp;
+}
+
+spellSharedPtr ability_Gnash()
+{
+	spellSharedPtr sp(new spell("Gnash", SPELL_TILE, TCODColor::lightestRed));
+	sp->setAttackType(ATTACK_RANGE, 1);
+	sp->addEffect(HEAL_CASTER, 100);
+	sp->addEffect(APPLY_ENTANGLING, 1);
+	sp->addEffect(APPLY_BLEED_DAMAGE, 10);
 	return sp;
 }
 

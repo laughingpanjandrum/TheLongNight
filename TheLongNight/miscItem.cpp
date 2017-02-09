@@ -106,12 +106,30 @@ festivals gloried in their hedonistic excess, and the sole thing the nobles were
 	return m;
 }
 
+miscItemSharedPtr key_DeadSparrowKey()
+{
+	miscItemSharedPtr m(new miscItem("Dead Sparrow's Key", KEY_TILE, TCODColor::magenta,
+		"Key to the tower of the Dead Sparrow, that watchful aeon who keeps the surrounding lands safe from harm."));
+	m->setKeyTag("dead_sparrows_key");
+	return m;
+}
+
 miscItemSharedPtr key_WatchfulEyestalk()
 {
 	miscItemSharedPtr m(new miscItem("Watchful Eyestalk", KEY_TILE, TCODColor::darkGreen,
 		"According to the Ritual of Khull-Kallen, the first article of summoning is the Watchful Eyestalk. 'The Eye of the Lord \
 behold his subjects, and lets their most profound desires be known to him. Offer it at the altar in honour of his knowledge.'"));
 	m->setKeyTag("watchful_eyestalk");
+	return m;
+}
+
+miscItemSharedPtr key_MawtoothFragment()
+{
+	miscItemSharedPtr m(new miscItem("Mawtooth Fragment", KEY_TILE, TCODColor::lightestRed,
+		"According to the Ritual of Khull-Khallen, the second Article of Summoning is the Mawtooth Fragment. As it is written:\
+ 'The Mouthpiece of the Lord issues His Commands, and lets His Will be known to the world.Offer it at the \
+Altar in honour of His Wisdom.'"));
+	m->setKeyTag("mawtooth_fragment");
 	return m;
 }
 
@@ -213,6 +231,15 @@ make some sense of them."));
 	return s;
 }
 
+miscItemSharedPtr spellbook_SingedWritings()
+{
+	miscItemSharedPtr s(new miscItem("Singed Writings", SPELL_TILE, TCODColor::magenta,
+		"Pages singed by lightning bolts. No surprise that Gottric would be intrigued by the Sparrows; their \
+knowledge of arcane mysteries was well known."));
+	s->setKeyTag("singed_writings");
+	return s;
+}
+
 miscItemSharedPtr spellbook_OrsylsTomeOfPrayer()
 {
 	miscItemSharedPtr s(new miscItem("Orsyl's Tome of Prayer", SPELL_TILE, TCODColor::lightPurple,
@@ -292,6 +319,37 @@ miscItemSharedPtr runestone_CharredRunestone()
 		"Horribly burnt runestone, perhaps seared in Lady Tvert's cleansing fire."));
 	r->isRunestone = true;
 	r->setRune(new weaponRune("Charred Runestone", "Flaming", TCODColor::darkFlame, SCALE_FIRE));
+	return r;
+}
+
+miscItemSharedPtr runestone_KinslayersRunestone()
+{
+	miscItemSharedPtr r(new miscItem("Kinslayer's Runestone", RUNESTONE_TILE, TCODColor::red,
+		"The Kinslayer's name was lost to time, but his misdeeds were never forgotten. They say his \
+wickedness was sealed into this gore-soaked stone."));
+	r->isRunestone = true;
+	r->setRune(new weaponRune("Kinslayer's Runestone", "Slayer's", TCODColor::red, SCALE_PHYSICAL));
+	return r;
+}
+
+miscItemSharedPtr runestone_StarweaversRunestone()
+{
+	miscItemSharedPtr r(new miscItem("Starweaver's Runestone", RUNESTONE_TILE, TCODColor::magenta,
+		"The Sparrow's aim was to someday reach the stars, and so his followers delved deep into the arcane secrets of \
+the runestones. It was said that all rune-writings eventually laid one bare to the gaze of the gods."));
+	r->isRunestone = true;
+	r->setRune(new weaponRune("Starweaver's Runestone", "Weaving", TCODColor::magenta, SCALE_MAGIC));
+	return r;
+}
+
+miscItemSharedPtr runestone_ThundrousRunestone()
+{
+	miscItemSharedPtr r(new miscItem("Thundrous Runestone", RUNESTONE_TILE, TCODColor::lightPurple,
+		"Eventually, the inquiries of the Sparrows was bound to reach the eye of the gods. Who could say whether they \
+would look kindly upon such searching? Always, when the gods were threatened with the uncovering of their holy mysteries, \
+they responded with holy lightning."));
+	r->isRunestone = true;
+	r->setRune(new weaponRune("Thundrous Runestone", "Thundrous", TCODColor::lightPurple, SCALE_ELECTRIC));
 	return r;
 }
 

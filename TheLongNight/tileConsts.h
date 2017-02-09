@@ -54,6 +54,8 @@ const int HERALD_TILE = 72;
 
 const int ARISTOCRAT_TILE = 108;
 
+const int MAGE_TILE = 109;
+
 const int GOREM_TILE = 327; //This is a golem-dude
 
 //Items
