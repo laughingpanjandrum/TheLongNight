@@ -1057,10 +1057,25 @@ void game::drawPlayerInfo(int atx, int aty)
 	win.write(atx + offset, aty, getAttackSpeedName(player->getMoveDelay()), TCODColor::white);
 	win.write(atx, ++aty, "Attack Speed", mainCol);
 	win.write(atx + offset, aty, getAttackSpeedName(player->getAttackDelay()), TCODColor::white);
+
+	//Damage dealt
 	win.write(atx, ++aty, "Melee DMG", mainCol);
-	win.write(atx + offset, aty, std::to_string(player->getMeleeDamage()), TCODColor::darkRed);
+	std::string txt = std::to_string(player->getMeleeDamage());
+	win.write(atx + offset, aty, txt, TCODColor::darkRed);
+	int dx = atx + offset + txt.size();
+	//Additional damage types dealt
+	for (int dt = 0; dt != ALL_DAMAGE_TYPES; dt++) {
+		damageType dtype = static_cast<damageType>(dt);
+		int dmg = player->getDamageOfType(dtype);
+		if (dmg > 0) {
+			txt = '+' + std::to_string(dmg);
+			win.write(dx, aty, txt, getDamageTypeColor(dtype));
+			dx += txt.size();
+		}
+	}
 
 	//List buffs
+	aty++;
 	for (auto b : player->getAllBuffs()) {
 		win.write(atx, ++aty, b->name, b->color);
 	}
