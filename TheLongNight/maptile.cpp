@@ -260,6 +260,22 @@ maptile * tile_VoidWarpstone()
 	return warpstone;
 }
 
+maptile * tile_StairsDown()
+{
+	maptile* s = new maptile("Stairs Down", "downstairs", STAIRS_DOWN_TILE, TCODColor::white, DARK_STONE_COLOR,
+		true, true, true);
+	s->addTouchEffect(NAVIGATE_STAIRS);
+	return s;
+}
+
+maptile * tile_StairsUp()
+{
+	maptile* s = new maptile("Stairs Up", "upstairs", STAIRS_UP_TILE, TCODColor::white, DARK_STONE_COLOR,
+		true, true, true);
+	s->addTouchEffect(NAVIGATE_STAIRS);
+	return s;
+}
+
 
 /*
 	Specific locked doors
@@ -384,7 +400,7 @@ maptile * tile_BasementDoor()
 	maptile* door = new maptile("Basement Door", "basement_door", BASIC_DOOR_TILE,
 		TCODColor::lightGrey, TCODColor::darkGrey, false, false);
 	door->isDoor = true;
-	door->unlockCode = "basement_key";
+	door->unlockCode = "lady_tverts_key";
 	door->addTouchEffect(CHECK_FOR_UNLOCK);
 	return door;
 }

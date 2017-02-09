@@ -1931,6 +1931,8 @@ void game::applyEffectToPerson(personSharedPtr target, effect eff, int potency, 
 		teleportToVoid();
 	else if (eff == TELEPORT_BACK_FROM_VOID)
 		teleportOutOfVoid();
+	else if (eff == NAVIGATE_STAIRS)
+		takeStairs();
 
 	//Special spell effect
 	else if (eff == CASTER_MELEE_ATTACK)
@@ -2198,6 +2200,19 @@ void game::tryUnlockDoor(int x, int y)
 /*
 	INTER - MAP MOVEMENT
 */
+
+
+/*
+Try taking the stairs!
+*/
+void game::takeStairs()
+{
+	std::string newHandle = currentMap->getConnection(CONNECT_VERTICAL);
+	if (newHandle.size()) {
+		loadMapFromHandle(newHandle, CONNECT_VERTICAL, player->getx(),player->gety());
+	}
+}
+
 
 
 /*
@@ -3561,6 +3576,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(weapon_FishmansHarpoon());
 	player->addItem(weapon_FishmansKnife());
 	player->addItem(weapon_KythielsScythe());
+	player->addItem(weapon_LadyTvertsClaws());
 	player->addItem(weapon_NotchedGreatsword());
 	player->addItem(weapon_SerpentsTooth());
 	player->addItem(weapon_SpiderboneShard());
@@ -3641,6 +3657,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(prayer_WyrdChantOfStrength());
 	player->addItem(prayer_YutriasDivineSpark());
 
+	player->addItem(consumable_BlackHoney());
 	player->addItem(consumable_BloodDrinkersEyes());
 	player->addItem(consumable_IntoxicatingWine());
 	player->addItem(consumable_InvigoratingTea());
@@ -3659,7 +3676,9 @@ void getAllItems(personSharedPtr player)
 	player->addItem(ranged_VoidEssenceJar());
 
 	player->addItem(oil_CorrosiveOil());
+	player->addItem(oil_CursedWater());
 	player->addItem(oil_FrozenOil());
+	player->addItem(oil_HangmansBlood());
 	player->addItem(oil_HolyWater());
 	player->addItem(oil_PyromancersOil());
 
@@ -3670,6 +3689,8 @@ void getAllItems(personSharedPtr player)
 	player->addItem(runestone_CharredRunestone());
 
 	player->addItem(key_GreenChapelGardenKey());
+	player->addItem(key_HightowerKey());
+	player->addItem(key_LadyTvertsKey());
 	player->addItem(key_OldCrowsKey());
 	player->addItem(key_RuinedTownshipKey());
 	player->addItem(key_SordidChapelKey());
@@ -3679,6 +3700,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(misc_VoidSigil());
 
 	player->addItem(heart_FishBornGoddessesHeart());
+	player->addItem(heart_LadyTvertsHeart());
 	player->addItem(heart_OldCrowsHeart());
 	player->addItem(heart_OrsylsShriveledHeart());
 	player->addItem(heart_VenomousSpiderHeart());

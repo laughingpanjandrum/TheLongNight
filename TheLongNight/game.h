@@ -198,6 +198,7 @@ private:
 	//Inter-map movement
 	mapLoader makemap;
 	savePointVector warpPoints;
+	void takeStairs();
 	void tryMapChange(int xnew, int ynew);
 	void loadMapFromHandle(std::string handle, connectionPoint connect, int oldx, int oldy);
 	void loadNewMap(map* newMap, connectionPoint connect, int oldx, int oldy);

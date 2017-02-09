@@ -152,6 +152,9 @@ maptile* tile_Terminal(); //"terminal"
 maptile* tile_StatueOfRest(); //"statue"
 maptile* tile_VoidWarpstone(); //"warpstone"
 
+maptile* tile_StairsDown(); //"stairsdown"
+maptile* tile_StairsUp(); //"stairsup"
+
 //Specific locked doors
 maptile* tile_WretchedDoor(); //"wretched_door"
 maptile* tile_CrowDoor(); //"crow_door"
@@ -186,6 +189,8 @@ const tileVector ALL_MAPTILES = {
 	tile_Bloodstain(), tile_Corpse(),
 	tile_Bed(), tile_Terminal(),
 	tile_StatueOfRest(), tile_VoidWarpstone(),
+	//Stairs
+	tile_StairsDown(), tile_StairsUp(),
 	//Furniture
 	tile_Chair1(), tile_Chair2(), tile_Tombstone(),
 	tile_Table1(), tile_Table2(), tile_Table3(), tile_Table4(),

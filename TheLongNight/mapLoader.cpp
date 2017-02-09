@@ -153,6 +153,8 @@ map * mapLoader::loadMapFromFile(std::string filename)
 			connectionPoints.push_back(CONNECT_NORTH);
 		else if (chunk == "south")
 			connectionPoints.push_back(CONNECT_SOUTH);
+		else if (chunk == "stairs")
+			connectionPoints.push_back(CONNECT_VERTICAL);
 		//Next line
 		getline(mapfile, line);
 	}

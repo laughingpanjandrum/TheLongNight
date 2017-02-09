@@ -90,6 +90,9 @@ const int WOODEN_WALL = 299;
 const int SAND_TILE = 432;
 const int STONE_WALL_TILE = 498;
 
+const int STAIRS_DOWN_TILE = 62;
+const int STAIRS_UP_TILE = 60;
+
 const int BED_TILE = 292;
 const int MOSS_TILE = 293;
 const int BUSH_TILE = 294;

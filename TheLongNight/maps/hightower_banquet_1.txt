@@ -36,10 +36,12 @@ c chair2
 t table4
 u tombstone
 & basement_door
+> downstairs
 -endcodes
 -connections
 north:desolate_village_1
 south:hightower_banquet_2
+stairs:hightower_basement
 -endconnections
 ######################.....#############
 .....................#.....#...........#
@@ -55,7 +57,7 @@ south:hightower_banquet_2
 #.rr.###############&##############.rr.#
 #.rr.#.....rr.....#......#.t.rr...#.rr.#
 #.rr.#....rrrr..t.#......#rrrrrrrrrrrr.#
-#.rr.#...rrrrrr.c.#......#rrrrrrrrrrrr.#
+#.rr.#...rrrrrr.c.#..>...#rrrrrrrrrrrr.#
 #.rrrrrrrrrrrrrr..#......#.t.rr...#.rr.#
 #.rrrrrrrrrrrrrr..#################.rr.#
 #.rr.#...rrrrrr.t.#~~~~~~#..........rr.#
