@@ -261,3 +261,13 @@ void window::drawCounter(counter c, std::string title, int x, int y, TCODColor c
 		writec(x + i, y, EMPTY_COUNTER_TILE, col2);
 	}
 }
+
+
+
+/*
+Blit an image onto the console.
+*/
+void window::drawImage(imageSharedPtr img, int atx, int aty)
+{
+	img->blitRect(TCODConsole::root, atx, aty);
+}

@@ -1130,6 +1130,7 @@ you approach."));
 	m->isHostile = false;
 	m->addItemToStock(shield_WoodenWyrdShield(), 25);
 	m->addItemToStock(chime_WyrdBellbranch(), 50);
+	m->addItemToStock(wand_BleachwoodWand(), 100);
 	m->addItemToStock(prayer_WyrdChantOfStrength(), 25);
 	//Chatting
 	m->loadDialogue("dialogue/gorem_chat.txt");

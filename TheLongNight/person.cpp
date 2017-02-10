@@ -388,7 +388,7 @@ void person::applyEffect(effect eff, int potency)
 	else if (eff == BECOME_INVISIBLE)
 		invisibility += potency;
 	else if (eff == CHANGE_FRAGMENT_PICKUP_MULT)
-		fragmentPickupMultiplier = potency;
+		fragmentPickupMultiplier += potency;
 	else if (eff == GAIN_DIVINE_RETRIBUTION)
 		divineRetribution += potency;
 	else if (eff == CHANGE_DETECTION_RANGE)
@@ -397,6 +397,8 @@ void person::applyEffect(effect eff, int potency)
 		lowHealthDamageBuff += potency;
 	else if (eff == INSTANT_SPELL_CAST)
 		instantSpellCast += potency;
+	else if (eff == NEXT_SPELL_COST_ADJUST)
+		nextSpellCostAdjust += potency;
 
 	//Debuffs
 
@@ -600,11 +602,20 @@ Expend resources to cast a spell.
 */
 void person::paySpellCost(spellSharedPtr sp)
 {
+	
+	//Calculate vigour cost
+	int cost = sp->getVigourCost();
+	cost += nextSpellCostAdjust;
+	if (cost < 0)
+		cost = 0;
+	
 	//Vigour cost
-	loseVigour(sp->getVigourCost());
+	loseVigour(cost);
+	
 	//Life cost
 	if (sp->getDamageToCaster() > 0)
 		takeDamage(sp->getDamageToCaster());
+
 }
 
 

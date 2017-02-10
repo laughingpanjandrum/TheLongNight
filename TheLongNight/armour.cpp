@@ -38,6 +38,7 @@ armourSharedPtr headgear_RuinedKnightsHelm()
 	armourSharedPtr h(new armour("Ruined Knight's Helm", HELMET_TILE, TCODColor::darkGreen, ITEM_HELMET,
 		"This helmet has taken more than a few blows."));
 	h->setDefence(10);
+	h->setImage(IMAGE_RUINED_KNIGHT_HELM);
 	return h;
 }
 
@@ -47,6 +48,7 @@ armourSharedPtr armour_RuinedKnightsArmour()
 		"The heraldry on this armour is so old that it's illegible."));
 	a->setDefence(20);
 	a->setMoveSpeed(SPEED_NORMAL);
+	a->setImage(IMAGE_RUINED_KNIGHT_ARMOUR);
 	return a;
 }
 
@@ -56,6 +58,7 @@ armourSharedPtr headgear_ClericsHood()
 		"It's important to remember your prayers."));
 	a->setDefence(0);
 	a->setDamageResist(DAMAGE_PROFANE, 5);
+	a->setImage(IMAGE_CLERICS_HOOD);
 	return a;
 }
 
@@ -66,6 +69,7 @@ armourSharedPtr armour_ClericsVestments()
 	a->setDefence(10);
 	a->setDamageResist(DAMAGE_PROFANE, 10);
 	a->setMoveSpeed(SPEED_FAST);
+	a->setImage(IMAGE_CLERICS_VESTMENTS);
 	return a;
 }
 
@@ -75,6 +79,7 @@ armourSharedPtr headgear_CrowKnightsHood()
 		"The hood of a crow knight is black, and interlaced with singular white feathers."));
 	a->setDefence(5);
 	a->setBleedResist(10);
+	a->setImage(IMAGE_CROW_KNIGHT_HELM);
 	return a;
 }
 
@@ -85,6 +90,7 @@ armourSharedPtr armour_CrowKnightsArmour()
 	a->setDefence(10);
 	a->setBleedResist(15);
 	a->setMoveSpeed(SPEED_FAST);
+	a->setImage(IMAGE_CROW_KNIGHT_ARMOUR);
 	return a;
 }
 
@@ -117,6 +123,7 @@ exposed to the devouring gaze of Pash."));
 	a->setDefence(15);
 	a->setDamageResist(DAMAGE_ELECTRIC, 10);
 	a->setDamageResist(DAMAGE_FIRE, 10);
+	a->setImage(IMAGE_CITY_GUARD_HELM);
 	return a;
 }
 
@@ -128,6 +135,7 @@ armourSharedPtr armour_CityGuardArmour()
 	a->setDamageResist(DAMAGE_ELECTRIC, 20);
 	a->setDamageResist(DAMAGE_FIRE, 25);
 	a->setMoveSpeed(SPEED_SLOW);
+	a->setImage(IMAGE_CITY_GUARD_ARMOUR);
 	return a;
 }
 
@@ -139,6 +147,7 @@ Court, the face of Pash itself appeared in the sky, devouring the stars."));
 	a->setDefence(5);
 	a->setDamageResist(DAMAGE_COLD, 10);
 	a->setDamageResist(DAMAGE_BLESSED, 10);
+	a->setImage(IMAGE_PASH_HOOD);
 	return a;
 }
 
@@ -151,6 +160,7 @@ streets, though none knew their origins."));
 	a->setDamageResist(DAMAGE_COLD, 15);
 	a->setDamageResist(DAMAGE_BLESSED, 15);
 	a->setMoveSpeed(SPEED_FAST);
+	a->setImage(IMAGE_PASH_ROBES);
 	return a;
 }
 
@@ -160,6 +170,7 @@ armourSharedPtr headgear_CursedKnightsHelm()
 		"Helm of the knights of the Winter Court, who stood guard over Kythiel until her final moments."));
 	a->setDefence(15);
 	a->setDamageResist(DAMAGE_BLESSED, 15);
+	a->setImage(IMAGE_CURSED_KNIGHT_HELM);
 	return a;
 }
 
@@ -170,6 +181,7 @@ armourSharedPtr armour_CursedKnightsArmour()
 	a->setDefence(30);
 	a->setDamageResist(DAMAGE_BLESSED, 30);
 	a->setMoveSpeed(SPEED_SLOW);
+	a->setImage(IMAGE_CURSED_KNIGHT_ARMOUR);
 	return a;
 }
 

@@ -256,13 +256,24 @@ spellSharedPtr attack_Lash()
 	return sp;
 }
 
-spellSharedPtr attack_EtherealSurge()
+spellSharedPtr ability_EtherealSurge()
 {
 	spellSharedPtr sp(new spell("Ethereal Surge", SPELL_TILE, TCODColor::magenta,
 		"Your next two spells are cast instantly."));
-	sp->setAttackRange(ATTACK_BUFF_SELF);
+	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(INSTANT_SPELL_CAST, 2);
 	sp->setVigourCost(1);
+	return sp;
+}
+
+spellSharedPtr ability_Metamagic()
+{
+	spellSharedPtr sp(new spell("Metamagic", SPELL_TILE, TCODColor::white,
+		"Next spell has reduced power but costs (3) less."));
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(SCALE_NEXT_SPELL, -20);
+	sp->addEffect(NEXT_SPELL_COST_ADJUST, -3);
+	sp->setVigourCost(0);
 	return sp;
 }
 

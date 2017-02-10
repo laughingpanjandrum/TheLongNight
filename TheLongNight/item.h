@@ -5,7 +5,7 @@
 #include <memory>
 #include "element.h"
 #include "categories.h"
-
+#include "images.h"
 
 
 class item: public element
@@ -45,6 +45,11 @@ public:
 	int getPrice() { return price; }
 	void setPrice(int p) { price = p; }
 
+	//Image data
+	bool hasImage() { return imgPtr != nullptr; }
+	imageSharedPtr getImage() { return imgPtr; }
+	void setImage(imageSharedPtr img) { imgPtr = img; }
+
 protected:
 
 	//Sorting
@@ -58,6 +63,9 @@ protected:
 	int bleedResist = 0;
 	int poisonResist = 0;
 	std::vector<int> damageResist;
+
+	//Image data
+	imageSharedPtr imgPtr;
 
 };
 

@@ -154,6 +154,7 @@ public:
 	//Spell buffs
 	int scaleNextSpell = 0; //Buff to next spell cast
 	int scaleNextPrayer = 0; //Buff to next prayer cast
+	int nextSpellCostAdjust = 0; //Change to the cost of your next spell
 	int spellAcidInfusion = 0;
 	int spellColdInfusion = 0;
 	int coldDamageAppliesInfusion = 0; //If this is >0, taking cold damage gives us a cold infusion boost

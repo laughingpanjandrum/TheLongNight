@@ -92,11 +92,12 @@ spellSharedPtr attack_SuckOutLife();
 spellSharedPtr attack_SpiderStrike();
 spellSharedPtr attack_DeepCut();
 spellSharedPtr attack_Lash();
-spellSharedPtr attack_EtherealSurge();
 
 //Wand/chime powers
 spellSharedPtr ability_PowerSurge();
 spellSharedPtr ability_AcidInfusion();
+spellSharedPtr ability_EtherealSurge();
+spellSharedPtr ability_Metamagic();
 spellSharedPtr ability_DivineFavour();
 spellSharedPtr ability_WyrdChannel();
 

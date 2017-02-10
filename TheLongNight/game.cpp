@@ -634,12 +634,14 @@ Clears, draws the entire screen, then refreshes.
 void game::drawScreen(bool doRefresh) 
 {
 	win.clear();
-	//Always draw the interface
-	drawInterface(MAP_DRAW_X + 43, MAP_DRAW_Y);
+	
+	//Always draw the interface, except with our inventory!
+	if (state != STATE_VIEW_INVENTORY_CATEGORY)
+		drawInterface(MAP_DRAW_X + 43, MAP_DRAW_Y);
+	
 	//Figure out else what to draw
-	if (state == STATE_VIEW_INVENTORY || state == STATE_VIEW_INVENTORY_CATEGORY) {
+	if (state == STATE_VIEW_INVENTORY || state == STATE_VIEW_INVENTORY_CATEGORY)
 		drawInventory(MAP_DRAW_X, MAP_DRAW_Y);
-	}
 	else if (state == STATE_LEVEL_UP_MENU)
 		drawLevelUpMenu(MAP_DRAW_X, MAP_DRAW_Y);
 	else if (state == STATE_SHOP_MENU)
@@ -648,6 +650,7 @@ void game::drawScreen(bool doRefresh)
 		drawMenu(currentMenu, MAP_DRAW_X, MAP_DRAW_Y);
 	else
 		drawMap(MAP_DRAW_X, MAP_DRAW_Y);
+	
 	//win.drawFont();
 	if (doRefresh)
 		win.refresh();
@@ -987,6 +990,7 @@ void game::drawInventory(int atx, int aty)
 			//Selected menu object should be an ITEM
 			itemSharedPtr sel = std::static_pointer_cast<item>(currentMenu->getSelectedItem());
 			drawItemInfo(sel, atx, aty + 40);
+			drawItemImage(sel, atx + 50, aty);
 		}
 	}
 	else {
@@ -1335,6 +1339,7 @@ void game::drawItemInfo(itemSharedPtr it, int atx, int aty)
 		win.write(atx + 8, aty, std::to_string(it->getPrice()), TCODColor::amber);
 
 	}
+	
 	//Item description
 	aty = win.writeWrapped(atx + 1, aty + 1, 40, it->description, TCODColor::lightGrey);
 	//Rest of item info
@@ -1351,6 +1356,7 @@ void game::drawItemInfo(itemSharedPtr it, int atx, int aty)
 	case(ITEM_CHARM): drawCharmInfo(std::static_pointer_cast<charm>(it), atx, aty); break;
 	case(ITEM_MISC): drawMiscItemInfo(std::static_pointer_cast<miscItem>(it), atx, aty); break;
 	}
+
 }
 
 /*
@@ -1666,6 +1672,17 @@ void game::drawMiscItemInfo(miscItemSharedPtr it, int atx, int aty)
 				win.write(atx, ++aty, "Improves scaling with " + scaleType + ".", rune->color);
 			}
 		}
+	}
+}
+
+
+/*
+Draws an item's image onto the screen, if it has one.
+*/
+void game::drawItemImage(itemSharedPtr it, int atx, int aty)
+{
+	if (it->hasImage()) {
+		win.drawImage(it->getImage(), atx, aty);
 	}
 }
 
@@ -2815,6 +2832,10 @@ void game::castSpell(spellSharedPtr sp)
 	int vcost = sp->getVigourCost();
 	
 	if (player->getVigour().getValue() >= vcost) {
+
+		//Casting cost
+		player->paySpellCost(sp);
+
 		//We have enough vig to cast. PROCEED.
 		attackType aType = sp->getAttackType();
 		if (aType == ATTACK_MELEE) {
@@ -2840,15 +2861,13 @@ void game::castSpell(spellSharedPtr sp)
 		}
 
 		//Time taken
-		if (player->instantSpellCast) {
+		if (player->instantSpellCast > 0) {
 			player->instantSpellCast--;
 		}
 		else {
 			playerTurnDelay += SPEED_NORMAL;
 		}
 		
-		//Casting cost
-		player->paySpellCost(sp);
 	}
 }
 
@@ -3632,7 +3651,9 @@ void getAllItems(personSharedPtr player)
 	player->addItem(chime_OrsylsProfaneChime());
 	player->addItem(chime_WyrdBellbranch());
 
+	player->addItem(wand_BleachwoodWand());
 	player->addItem(wand_DriftwoodWand());
+	player->addItem(wand_EtherealWand());
 	player->addItem(wand_FishmansToadstaff());
 
 	player->addItem(headgear_CaptainsTricorn());

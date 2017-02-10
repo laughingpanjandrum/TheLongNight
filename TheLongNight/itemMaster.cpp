@@ -353,6 +353,7 @@ std::string getEffectName(effect e)
 	case(SPELL_COLD_INFUSION): return "cold infusion for next spell";
 	case(COLD_DAMAGE_ADDS_INFUSION): return "cold infusion upon taking cold damage";
 	case(INSTANT_SPELL_CAST): return "instant spell cast";
+	case(NEXT_SPELL_COST_ADJUST): return "next spell cost";
 
 	case(GAIN_DEFENCE): return "physical defence";
 	case(GAIN_ACID_RESIST): return "acid defence";

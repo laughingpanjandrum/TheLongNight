@@ -206,6 +206,7 @@ weaponSharedPtr weapon_SplinteredSword()
 		"Once a treasured heirloom. Now it's just a broken sword, decent at serration, but certainly unfit for a stardrift captain."));
 	wp->setBasicAttributes(25, SPEED_NORMAL);
 	wp->addScalingType(SCALE_STR);
+	wp->setImage(IMAGE_SPLINTERED_SWORD);
 	return wp;
 }
 
@@ -216,6 +217,7 @@ weaponSharedPtr weapon_ThinKnife()
 	wp->setBasicAttributes(15, SPEED_FAST);
 	wp->setSpecialAttack(attack_Quickstep());
 	wp->addScalingType(SCALE_DEX);
+	wp->setImage(IMAGE_THIN_KNIFE);
 	return wp;
 }
 
@@ -227,6 +229,7 @@ weaponSharedPtr weapon_StraightSword()
 	wp->setSpecialAttack(attack_StrongAttack());
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEX);
+	wp->setImage(IMAGE_STRAIGHT_SWORD);
 	return wp;
 }
 
@@ -237,6 +240,7 @@ weaponSharedPtr weapon_Warhammer()
 	wp->setBasicAttributes(50, SPEED_SLOW);
 	wp->setSpecialAttack(attack_Knockback());
 	wp->addScalingType(SCALE_STR);
+	wp->setImage(IMAGE_WARHAMMER);
 	return wp;
 }
 
@@ -248,6 +252,7 @@ weaponSharedPtr weapon_CrowKnightSword()
 	wp->setSpecialAttack(attack_Splintering());
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEX);
+	wp->setImage(IMAGE_CROW_KNIGHT_SWORD);
 	return wp;
 }
 
@@ -259,6 +264,7 @@ weaponSharedPtr weapon_CrowKnife()
 	wp->addStatusEffect(EFFECT_BLEED, 10);
 	wp->setSpecialAttack(attack_Splintering());
 	wp->addScalingType(SCALE_DEX);
+	wp->setImage(IMAGE_CROW_KNIFE);
 	return wp;
 }
 
@@ -271,6 +277,7 @@ weaponSharedPtr weapon_CrowHalfsword()
 	wp->setSpecialAttack(attack_Splintering());
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEX);
+	wp->setImage(IMAGE_CROW_HALFSWORD);
 	return wp;
 }
 
@@ -283,6 +290,7 @@ but over the years his promise was forgotten."));
 	wp->addStatusEffect(EFFECT_BLEED, 15);
 	wp->setSpecialAttack(attack_Quickstep());
 	wp->addScalingType(SCALE_DEX);
+	wp->setImage(IMAGE_OLD_CROWS_LONG_KNIFE);
 	return wp;
 }
 
@@ -293,6 +301,7 @@ weaponSharedPtr weapon_NotchedGreatsword()
 	wp->setBasicAttributes(100, SPEED_SLOW);
 	wp->addScalingType(SCALE_STR);
 	wp->setSpecialAttack(attack_MightyCleave());
+	wp->setImage(IMAGE_NOTCHED_GREATSWORD);
 	return wp;
 }
 
@@ -496,6 +505,7 @@ weaponSharedPtr shield_BatteredWoodenShield()
 		"It's just a scrap of wood, but it might still save your life."));
 	wp->setDefence(10);
 	wp->makeOffhand();
+	wp->setImage(IMAGE_BATTERED_WOODEN_SHIELD);
 	return wp;
 }
 
@@ -591,9 +601,21 @@ weaponSharedPtr wand_EtherealWand()
 		"A barely-visible ethereal wand, created by one of the Sparrows to channel arcane power. These spells were swift, but weak."));
 	wp->setBasicAttributes(5, SPEED_NORMAL);
 	wp->setSpellstoreSize(4);
-	wp->setSpellPower(60);
-	wp->setSpecialAttack(attack_EtherealSurge());
+	wp->setSpellPower(80);
+	wp->setSpecialAttack(ability_EtherealSurge());
 	wp->makeOffhand();
+	return wp;
+}
+
+weaponSharedPtr wand_BleachwoodWand()
+{
+	weaponSharedPtr wp(new weapon("Bleachwood Wand", STAFF_TILE, TCODColor::lighterGrey,
+		"The pale white wood of this wand is associated with the Wyrd, where white trees kept the shadows contained."));
+	wp->setBasicAttributes(5, SPEED_NORMAL);
+	wp->setSpellstoreSize(4);
+	wp->setSpellPower(120);
+	wp->makeOffhand();
+	wp->setSpecialAttack(ability_Metamagic());
 	return wp;
 }
 

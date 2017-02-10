@@ -132,6 +132,7 @@
     <ClCompile Include="counter.cpp" />
     <ClCompile Include="element.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="images.cpp" />
     <ClCompile Include="inventory.cpp" />
     <ClCompile Include="item.cpp" />
     <ClCompile Include="itemMaster.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="counter.h" />
     <ClInclude Include="element.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="images.h" />
     <ClInclude Include="inventory.h" />
     <ClInclude Include="item.h" />
     <ClInclude Include="itemMaster.h" />
