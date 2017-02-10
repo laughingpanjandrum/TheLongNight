@@ -10,6 +10,7 @@ undead_prisoner:22,2
 mouth_of_pash:15,18
 -items
 ravenous_idol:3,37
+dead_sparrow_key:6,9
 -enditems
 -codes
 . floor_stone

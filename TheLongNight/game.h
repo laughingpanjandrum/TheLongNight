@@ -155,6 +155,7 @@ private:
 	void addAnimations(animations* a) { playingAnimations.push_back(a); }
 	drawDataSharedPtr getAnimationDataOverride(drawDataSharedPtr baseData, int x, int y);
 	void updateAnimations();
+	void spellTitleAnimation(personSharedPtr caster, spellSharedPtr sp);
 
 	//Drawing item information
 	void drawItemInfo(itemSharedPtr it, int atx, int aty);

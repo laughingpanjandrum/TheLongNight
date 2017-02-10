@@ -17,7 +17,7 @@ pathVectorP * animations::getPointerPath(coordVector * pts)
 /*
 Given person briefly changes to the given color, then changes back.
 */
-flashCharacter::flashCharacter(person* p, TCODColor color) :
+flashCharacter::flashCharacter(personSharedPtr p, TCODColor color) :
 	xy(p->getPosition()), color(color)
 {
 
@@ -204,6 +204,32 @@ drawDataSharedPtr shockwave::getDrawData(drawDataSharedPtr baseData, const int x
 	if (dist == atIdx + 1) {
 		//This is one of our spaces!
 		baseData->bgcolor = colors[atIdx];
+	}
+	return baseData;
+}
+
+
+
+
+/*
+	Text splash
+*/
+
+
+textSplash::textSplash(int x, int y, std::string txt, TCODColor color) :
+	atx(x), aty(y), txt(txt), color(color)
+{
+
+}
+
+drawDataSharedPtr textSplash::getDrawData(drawDataSharedPtr baseData, const int x, const int y)
+{
+	if (y == aty) {
+		int idx = x - atx;
+		if (idx >= 0 && idx < txt.size()) {
+			baseData->tileCode = txt.at(idx);
+			baseData->color = color;
+		}
 	}
 	return baseData;
 }

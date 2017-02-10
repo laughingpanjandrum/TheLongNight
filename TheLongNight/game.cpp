@@ -394,6 +394,8 @@ bool game::aiTryUseSpell(monsterSharedPtr ai)
 				//Check spell range
 				int dist = hypot(ai->getx() - target->getx(), ai->gety() - target->gety());
 				if (dist <= sp->getAttackRange()) {
+					//ANIMATION BLAST!
+					spellTitleAnimation(ai,sp);
 					//We hit!
 					dischargeSpellOnTarget(sp, ai, target);
 					//Time passes
@@ -404,19 +406,28 @@ bool game::aiTryUseSpell(monsterSharedPtr ai)
 		}
 		
 		else if (aType == ATTACK_AOE) {
+			
 			//See if AOE spell will hit target
 			int dist = hypot(ai->getx() - target->getx(), ai->gety() - target->gety());
 			if (dist <= sp->getAttackRange()) {
+				//ANIMATION BLAST!
+				spellTitleAnimation(ai, sp);
 				//Do the AOE!
 				doAOE(sp, ai);
 				turns.addEntity(ai, ai->getAttackDelay());
 				return true;
 			}
+		
 		}
 		
 		else if (aType == ATTACK_BUFF_SELF) {
+
+			//ANIMATION BLAST!
+			spellTitleAnimation(ai, sp);
+
 			//Cast spell on self - usually a good idea!
 			dischargeSpellOnTarget(sp, ai, ai);
+		
 		}
 	}
 	
@@ -756,9 +767,6 @@ drawData game::getDrawData(int x, int y)
 				toDraw->color = it->getColor();
 			}
 		}
-		
-		//Allow animations to adjust draw data
-		getAnimationDataOverride(toDraw, x, y);
 
 		//Fog effects
 		if (currentMap->isFoggy(x, y)) {
@@ -785,6 +793,9 @@ drawData game::getDrawData(int x, int y)
 		toDraw->bgcolor.scaleHSV(1.0, modifier);
 	
 	}
+
+	//Allow animations to adjust draw data
+	getAnimationDataOverride(toDraw, x, y);
 
 	//Highlight cursor position
 	if (targetModeOn && x == targetPt.first && y == targetPt.second)
@@ -1305,6 +1316,15 @@ void game::updateAnimations()
 			playingAnimations.erase(it);
 	}
 
+}
+
+
+/*
+	Animation plays every time someone casts a spell.
+*/
+void game::spellTitleAnimation(personSharedPtr caster, spellSharedPtr sp)
+{
+	addAnimations(new textSplash(caster->getx() - 3, caster->gety() - 1, sp->getName(), sp->getColor()));
 }
 
 
@@ -2836,6 +2856,9 @@ void game::castSpell(spellSharedPtr sp)
 		//Casting cost
 		player->paySpellCost(sp);
 
+		//ANIMATION BLAST!
+		spellTitleAnimation(player, sp);
+
 		//We have enough vig to cast. PROCEED.
 		attackType aType = sp->getAttackType();
 		if (aType == ATTACK_MELEE) {
@@ -2957,7 +2980,7 @@ void game::dischargeSpellOnTarget(spellSharedPtr sp, personSharedPtr caster, per
 	auto attackType = sp->getAttackType();
 	if (attackType == ATTACK_BUFF_SELF) {
 		if (sp->useAlternateAnimation) {
-			//addAnimations(new flashCharacter(target, sp->getColor()));
+			addAnimations(new flashCharacter(target,sp->getColor()));
 		}
 		else {
 			pathVector* pts = new pathVector();

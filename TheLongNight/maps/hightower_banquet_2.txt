@@ -2,7 +2,6 @@ Lady Tvert's Chamber
 start:23,0
 lady_tvert:20,6
 -items
-dead_sparrow_key:15,15
 -enditems
 -codes
 . floor_stone

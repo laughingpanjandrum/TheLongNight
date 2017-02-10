@@ -79,7 +79,7 @@ Briefly changes a person's colour.
 class flashCharacter : public animations
 {
 public:
-	flashCharacter(person* p, TCODColor color);
+	flashCharacter(personSharedPtr p, TCODColor color);
 	virtual drawDataSharedPtr getDrawData(drawDataSharedPtr baseData, const int x, const int y);
 	virtual void tick() { timeLeft--; }
 	virtual bool isDone() { return timeLeft < 1; }
@@ -175,6 +175,25 @@ private:
 	int atIdx = 0;
 	TCODColor* colors;
 	const static int RADIUS = 4;
+};
+
+
+/*
+Throws up some text on the screen.
+*/
+class textSplash : public animations
+{
+public:
+	textSplash(int x, int y, std::string txt, TCODColor color);
+	virtual drawDataSharedPtr getDrawData(drawDataSharedPtr baseDAta, const int x, const int y);
+	virtual void tick() { timePassed++; }
+	virtual bool isDone() { return timePassed >= TIME_ON_SCREEN; }
+private:
+	int atx, aty;
+	int timePassed = 0;
+	const std::string txt;
+	const TCODColor color;
+	const static int TIME_ON_SCREEN = 10;
 };
 
 
