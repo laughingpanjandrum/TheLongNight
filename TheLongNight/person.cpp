@@ -170,8 +170,8 @@ int person::getMeleeDamage()
 		if (penalty > 0)
 			damage -= penalty;
 
-		//Penalty if acidic
-		if (acidic > 0)
+		//Penalty if electrified
+		if (electrified > 0)
 			damage -= damage / 10;
 
 	}

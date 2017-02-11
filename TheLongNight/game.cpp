@@ -1284,7 +1284,7 @@ int game::listStatusEffects(personSharedPtr target, int atx, int aty)
 
 	//Frozen
 	if (target->frozen > 0)
-		win.write(atx + 1, ++aty, "Frozen" + std::to_string(target->frozen), getDamageTypeColor(DAMAGE_COLD));
+		win.write(atx + 1, ++aty, "Frozen " + std::to_string(target->frozen), getDamageTypeColor(DAMAGE_COLD));
 
 	//Entangled
 	if (target->isEntangled())
