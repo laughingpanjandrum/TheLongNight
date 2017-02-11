@@ -252,6 +252,27 @@ Now they exist as mere shadows, gazing upon planes of existence beyond our own."
 	return a;
 }
 
+armourSharedPtr headgear_SparrowKnightsHelm()
+{
+	armourSharedPtr a(new armour("Sparrow Knight's Helm", HELMET_TILE, TCODColor::darkMagenta, ITEM_HELMET,
+		"Helm of the Sparrow Knights, sent to guard the mages of the tower. The eyes of the knights seem haunted - \
+what do they see in the pale realm beyond the world?"));
+	a->setDefence(5);
+	a->setDamageResist(DAMAGE_MAGIC, 15);
+	return a;
+}
+
+armourSharedPtr armour_SparrowKnightsArmour()
+{
+	armourSharedPtr a(new armour("Sparrow Knight's Armour", ARMOUR_TILE, TCODColor::darkMagenta, ITEM_BODY_ARMOUR,
+		"Armour of the Sparrow Knights, who were called upon to protect the secret work of the Sparrows. Alas, these knights \
+were slowly drawn into pale worlds of the imagination, until only their spectral forms remained."));
+	a->setDefence(10);
+	a->setDamageResist(DAMAGE_MAGIC, 25);
+	a->setMoveSpeed(SPEED_NORMAL);
+	return a;
+}
+
 armourSharedPtr headgear_SirPercivelsHelm()
 {
 	armourSharedPtr a(new armour("Sir Percivel's Helm", HELMET_TILE, TCODColor::lightGreen, ITEM_HELMET,

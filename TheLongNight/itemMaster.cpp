@@ -47,6 +47,9 @@ itemSharedPtr getItemByHandle(std::string handle)
 	//Tear-Stained Valley
 	else if (handle == "sacrificial_knife")
 		return weapon_SacrificialKnife();
+	//Dead Sparrow's Tower
+	else if (handle == "ethereal_sword")
+		return weapon_EtherealSword();
 
 	//SHIELDS
 	else if (handle == "battered_wooden_shield")
@@ -61,6 +64,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return shield_VoidTouchedShield();
 	else if (handle == "dragonbone_shield")
 		return shield_DragonboneShield();
+	else if (handle == "ethereal_shield")
+		return shield_EtherealShield();
 
 	//WANDS/CHIMES
 	else if (handle == "driftwood_wand")
@@ -101,6 +106,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return oil_CursedWater();
 	else if (handle == "hangmans_blood")
 		return oil_HangmansBlood();
+	else if (handle == "witchs_ooze")
+		return oil_WitchsOoze();
 
 	//RANGED WEAPONS
 	else if (handle == "throwing_knives")
@@ -180,6 +187,11 @@ itemSharedPtr getItemByHandle(std::string handle)
 	else if (handle == "ethereal_robes")
 		return armour_EtherealRobes();
 
+	else if (handle == "sparrow_knights_helm")
+		return headgear_SparrowKnightsHelm();
+	else if (handle == "sparrow_knights_armour")
+		return armour_SparrowKnightsArmour();
+
 	else if (handle == "sir_percivels_helm")
 		return headgear_SirPercivelsHelm();
 
@@ -246,6 +258,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return spellbook_DivineMoonsparkTome();
 	else if (handle == "divine_tome_of_the_emissary")
 		return spellbook_DivineTomeOfTheEmissary();
+	else if (handle == "divine_nightmare_tome")
+		return spellbook_DivineNightmareTome();
 	else if (handle == "piece_of_jade")
 		return misc_PieceOfJade();
 
@@ -363,6 +377,7 @@ std::string getEffectName(effect e)
 	case(GAIN_MAGIC_RESIST): return "magic defence";
 
 	case(CASTER_MELEE_ATTACK): return "free melee attack";
+	case(APPLY_UNTYPED_DAMAGE): return "damage";
 	case(APPLY_PHYSICAL_DAMAGE): return "physical damage";
 	case(APPLY_ACID_DAMAGE): return "acid damage";
 	case(APPLY_BLEED_DAMAGE): return "bleed damage";
@@ -391,6 +406,8 @@ std::string getEffectName(effect e)
 	case(GAIN_DIVINE_RETRIBUTION): return "divine retribution";
 	case(CHANGE_DETECTION_RANGE): return "detection range";
 	case(LOW_HEALTH_DAMAGE_BUFF): return "damage buff when health is low";
+
+	case(INSTILL_FEAR): return "instill fear";
 
 	case(TELEPORT_VIA_WATER): return "water warp";
 	case(TELEPORT_TO_VOID): return "warp to void";

@@ -1095,6 +1095,36 @@ a wand, while two pale eyes regard you with something like disinterest."));
 	return m;
 }
 
+monsterSharedPtr monster_DecomposingKnight()
+{
+	monsterSharedPtr m(new monster("Decomposing Knight", KNIGHT_TILE, TCODColor::green,
+		"This rotten knight slouches towards you, flesh disintegrating, dragging a filth-crusted sword."));
+	m->setHealth(200);
+	m->setMoveStats(SPEED_SLOW);
+	m->setDefence(DAMAGE_PHYSICAL, 50);
+	m->setDefence(DAMAGE_ACID, 25);
+	m->setPoisonResist(60);
+	m->equipItem(weaponSharedPtr(new weapon(25, SPEED_NORMAL, EFFECT_POISON, 20)));
+	m->addSpellKnown(spellSharedPtr(new spell("Flesh Chunk", TCODColor::darkLime, 5, 0, APPLY_POISON_DAMAGE, 10)));
+	m->setSpellCastChance(20);
+	return m;
+}
+
+monsterSharedPtr monster_LifedrinkerWraith()
+{
+	monsterSharedPtr m(new monster("Lifedrinker Wraith", GHOST_TILE, TCODColor::magenta,
+		"The half-shape of a creature starved for living flesh, which drifts through the aether."));
+	m->setDefence(DAMAGE_PHYSICAL, 100);
+	m->setDefence(DAMAGE_COLD, 75);
+	m->setPoisonResist(1000);
+	m->setBleedResist(1000);
+	m->addWeakness(DAMAGE_MAGIC);
+	m->addWeakness(DAMAGE_ELECTRIC);
+	m->setMoveStats(SPEED_FAST);
+	m->equipItem(weaponSharedPtr(new weapon(0, SPEED_FAST, DAMAGE_MAGIC, 25)));
+	return m;
+}
+
 
 /*
 	The Void
@@ -1191,6 +1221,9 @@ monsterSharedPtr npc_MuiraClericOfTheRose()
 	//With Divine Tome of the Emissary
 	m->addStockUnlock(prayer_DivineRestoration(), 100, "divine_tome_of_the_emissary");
 	m->addStockUnlock(prayer_DivineJudgement(), 100, "divine_tome_of_the_emissary");
+	//With Divine Nightmare Tome
+	m->addStockUnlock(prayer_NightmarePrayer(), 150, "divine_nightmare_tome");
+	m->addStockUnlock(prayer_WordOfUnmaking(), 150, "divine_nightmare_tome");
 	//Dialogue
 	m->loadDialogue("dialogue/muira_chat.txt");
 	return m;
@@ -1408,6 +1441,10 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return monster_SparrowKnight();
 	else if (handle == "ethereal_mage")
 		return monster_EtherealMage();
+	else if (handle == "decomposing_knight")
+		return monster_DecomposingKnight();
+	else if (handle == "lifedrinker_wraith")
+		return monster_LifedrinkerWraith();
 
 	//The Void
 	else if (handle == "void_touched")

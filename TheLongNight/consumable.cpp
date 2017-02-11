@@ -230,6 +230,14 @@ is said to carry the stench of a thousand graves."));
 	return c;
 }
 
+consumableSharedPtr oil_WitchsOoze()
+{
+	consumableSharedPtr c(new consumable("Witch's Ooze", VIAL_TILE, TCODColor::magenta,
+		"The blood of those who dabble in the arcane slowly thickens, and congeals into a magic-drenched paste."));
+	c->setWeaponBuff(new weaponBuff(DAMAGE_MAGIC, 15));
+	return c;
+}
+
 consumableSharedPtr bell_VoidwalkersDancingBell()
 {
 	consumableSharedPtr c(new consumable("Voidwalker's Dancing Bell", BELL_TILE, TCODColor::purple,

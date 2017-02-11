@@ -338,7 +338,7 @@ bool game::aiMoveToTarget(monsterSharedPtr ai)
 
 		//Figure out what we want - to get closer or further away
 		bool cond;
-		if (ai->keepsDistance && !ai->hasFreeMoves() && randint(1, 3) == 1)
+		if ((ai->fear > 0) || (ai->keepsDistance && !ai->hasFreeMoves() && randint(1, 3) == 1))
 			cond = newDist > bestDist;
 		else
 			cond = newDist < bestDist;
@@ -558,15 +558,20 @@ void game::drawMenu(menu * m, int atx, int aty)
 		win.write(atx + 4, ++aty, (*it)->getName(), (*it)->getColor());
 		win.writec(atx + 3, aty, (*it)->getTileCode(), (*it)->getColor());
 
+		//Mouse highlighting?!
+		if (mouse.cx <= (atx + (*it)->getName().size()) && mouse.cx >= atx && mouse.cy == aty) {
+			//Mouse over!
+			win.writec(atx + 1, aty, '>', TCODColor::white);
+		}
 		//Indicate whether this is the highlighted element
-		if (m->getSelectedItem() == (*it)) {
+		else if (m->getSelectedItem() == (*it)) {
 			win.writec(atx + 1, aty, '>', TCODColor::white);
 		}
 
 		//Special context-sensitive attributes
 		if (state == STATE_VIEW_INVENTORY_CATEGORY) {
 			if (player->hasItemEquipped(std::static_pointer_cast<item>(*it)))
-				win.writec(atx + 2, aty, '{', TCODColor::white);
+				win.writec(atx + 2, aty, '#', TCODColor::white);
 		}
 
 	}
@@ -1278,6 +1283,10 @@ void game::drawTargetInfo(personSharedPtr target, int atx, int aty)
 	if (target->isBlind()) {
 		win.write(atx + 1, ++aty, "Blinded (" + std::to_string(target->getBlindnessDuration()) + ")", TCODColor::lightestYellow);
 	}
+
+	//Fear
+	if (target->fear > 0)
+		win.write(atx + 1, ++aty, "Afraid (" + std::to_string(target->fear) + ")", TCODColor::orange);
 	
 	//Text description
 	win.writeWrapped(atx, ++aty, 20, target->description, TCODColor::lightGrey);
@@ -3697,6 +3706,8 @@ void getAllItems(personSharedPtr player)
 	player->addItem(armour_CursedKnightsArmour());
 	player->addItem(headgear_GreyThiefsHood());
 	player->addItem(armour_GreyThiefsRags());
+	player->addItem(headgear_EtherealCrown());
+	player->addItem(armour_EtherealRobes());
 
 	player->addItem(charm_ArcanaDrenchedCharm());
 	player->addItem(charm_BloodDrinkersBand());
@@ -3728,11 +3739,13 @@ void getAllItems(personSharedPtr player)
 	player->addItem(prayer_BlessedRadiance());
 	player->addItem(prayer_DivineRetribution());
 	player->addItem(prayer_DrawOutTheBlood());
+	player->addItem(prayer_NightmarePrayer());
 	player->addItem(prayer_ProfaneRadiance());
 	player->addItem(prayer_RayOfLight());
 	player->addItem(prayer_RemovePoison());
 	player->addItem(prayer_Restoration());
 	player->addItem(prayer_SpidersPrayer());
+	player->addItem(prayer_WordOfUnmaking());
 	player->addItem(prayer_WyrdChantOfStrength());
 	player->addItem(prayer_YutriasDivineSpark());
 
@@ -3761,11 +3774,14 @@ void getAllItems(personSharedPtr player)
 	player->addItem(oil_HolyWater());
 	player->addItem(oil_PyromancersOil());
 
+	player->addItem(runestone_CharredRunestone());
 	player->addItem(runestone_CorensRunestone());
 	player->addItem(runestone_IetrasRunestone());
 	player->addItem(runestone_KhallesRunestone());
+	player->addItem(runestone_KinslayersRunestone());
 	player->addItem(runestone_SiltrasRunestone());
-	player->addItem(runestone_CharredRunestone());
+	player->addItem(runestone_StarweaversRunestone());
+	player->addItem(runestone_ThundrousRunestone());
 
 	player->addItem(key_DeadSparrowKey());
 	player->addItem(key_GreenChapelGardenKey());

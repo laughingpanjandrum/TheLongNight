@@ -256,6 +256,16 @@ spellSharedPtr attack_Lash()
 	return sp;
 }
 
+spellSharedPtr attack_EtherealStrike()
+{
+	spellSharedPtr sp(new spell("Ethereal Strike", SWORD_TILE, TCODColor::lightMagenta,
+		"Special attack deals damage that ignores all armour."));
+	sp->setAttackType(ATTACK_RANGE, 1);
+	sp->addEffect(APPLY_UNTYPED_DAMAGE, 50);
+	sp->setVigourCost(1);
+	return sp;
+}
+
 spellSharedPtr ability_EtherealSurge()
 {
 	spellSharedPtr sp(new spell("Ethereal Surge", SPELL_TILE, TCODColor::magenta,
@@ -727,6 +737,31 @@ spellSharedPtr prayer_DivineJudgement()
 	sp->addEffect(APPLY_DAMAGE_PENALTY, 20);
 	sp->usesDivinePower = true;
 	sp->addPermanentBuff = true;
+	sp->setVigourCost(1);
+	return sp;
+}
+
+spellSharedPtr prayer_NightmarePrayer()
+{
+	spellSharedPtr sp(new spell("Nightmare Prayer", SPELL_TILE, TCODColor::orange,
+		"Perhaps the old gods did hear the prayers of Ietra, who - surrounded by enemies - called upon their aid, \
+and found her enemies fleeing; but their attention did not serve her well in the end."));
+	sp->setAttackType(ATTACK_AOE, 10);
+	sp->addEffect(INSTILL_FEAR, 10);
+	sp->usesDivinePower = true;
+	sp->setVigourCost(3);
+	return sp;
+}
+
+spellSharedPtr prayer_WordOfUnmaking()
+{
+	spellSharedPtr sp(new spell("Word of Unmaking", SPELL_TILE, TCODColor::darkOrange,
+		"Ietra began to see the true shape of things, buried within the arcane mysteries, and asked the gods to \
+unmake her being; with which they happily complied."));
+	sp->setAttackType(ATTACK_RANGE, 10);
+	sp->addEffect(APPLY_UNTYPED_DAMAGE, 100);
+	sp->addEffect(HURT_CASTER, 50);
+	sp->usesDivinePower = true;
 	sp->setVigourCost(1);
 	return sp;
 }

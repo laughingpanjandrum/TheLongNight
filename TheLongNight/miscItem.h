@@ -75,9 +75,11 @@ miscItemSharedPtr spellbook_WaterloggedWritings();
 miscItemSharedPtr spellbook_MinasProfanedWritings();
 miscItemSharedPtr spellbook_FrostbittenWritings();
 miscItemSharedPtr spellbook_SingedWritings();
+//Prayer books
 miscItemSharedPtr spellbook_OrsylsTomeOfPrayer();
 miscItemSharedPtr spellbook_DivineMoonsparkTome();
 miscItemSharedPtr spellbook_DivineTomeOfTheEmissary();
+miscItemSharedPtr spellbook_DivineNightmareTome();
 
 //Runestones
 miscItemSharedPtr runestone_CorensRunestone();

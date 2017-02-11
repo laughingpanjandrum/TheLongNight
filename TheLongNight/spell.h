@@ -92,6 +92,7 @@ spellSharedPtr attack_SuckOutLife();
 spellSharedPtr attack_SpiderStrike();
 spellSharedPtr attack_DeepCut();
 spellSharedPtr attack_Lash();
+spellSharedPtr attack_EtherealStrike();
 
 //Wand/chime powers
 spellSharedPtr ability_PowerSurge();
@@ -146,6 +147,9 @@ spellSharedPtr prayer_YutriasDivineSpark();
 //Divine Tome of the Emissary
 spellSharedPtr prayer_DivineRestoration();
 spellSharedPtr prayer_DivineJudgement();
+//Divine Nightmare Tome
+spellSharedPtr prayer_NightmarePrayer();
+spellSharedPtr prayer_WordOfUnmaking();
 //Sold by Ydella
 spellSharedPtr prayer_SinkBeneath();
 spellSharedPtr prayer_SpidersPrayer();

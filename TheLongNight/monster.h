@@ -183,6 +183,8 @@ monsterSharedPtr monster_MouthOfPash();
 //Dead Sparrow's Tower
 monsterSharedPtr monster_SparrowKnight();
 monsterSharedPtr monster_EtherealMage();
+monsterSharedPtr monster_DecomposingKnight();
+monsterSharedPtr monster_LifedrinkerWraith();
 
 //The Void
 monsterSharedPtr monster_VoidTouched();

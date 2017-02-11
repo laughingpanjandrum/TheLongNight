@@ -37,6 +37,7 @@ G glass
 -endcodes
 -connections
 north:cbeach_1
+stairs:dead_sparrows_tower_2
 -endconnections
 ####;;;#################################
 ###;;;;;############;?;;################

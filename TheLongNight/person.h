@@ -150,6 +150,7 @@ public:
 	//Debuffs
 	int slowdown = 0;
 	int damagePenalty = 0; //Percent reduction to melee damage.
+	int fear = 0; //ais have to run away
 
 	//Spell buffs
 	int scaleNextSpell = 0; //Buff to next spell cast

@@ -265,6 +265,16 @@ as befit their role in the Valley."));
 	return s;
 }
 
+miscItemSharedPtr spellbook_DivineNightmareTome()
+{
+	miscItemSharedPtr s(new miscItem("Divine Nightmare Tome", SPELL_TILE, TCODColor::magenta,
+		"Before she was devoured by the Void, Iedra, last wizard of the Winter Court, sought a truth beyond the \
+stars. The First Sparrow rejected her offer to teach him the prayers that led her to this holy knowledge, however, \
+and she was cast out to wither away."));
+	s->setKeyTag("divine_nightmare_tome");
+	return s;
+}
+
 
 
 /*

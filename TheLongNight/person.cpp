@@ -408,6 +408,8 @@ void person::applyEffect(effect eff, int potency)
 		entangle(potency);
 	else if (eff == APPLY_DAMAGE_PENALTY)
 		damagePenalty += potency;
+	else if (eff == INSTILL_FEAR)
+		fear += potency;
 
 	//Defensive buffs
 
@@ -457,6 +459,8 @@ void person::applyEffect(effect eff, int potency)
 
 	//Damage effects
 
+	else if (eff == APPLY_UNTYPED_DAMAGE)
+		takeDamage(potency);
 	else if (eff == APPLY_PHYSICAL_DAMAGE)
 		takeDamage(potency, DAMAGE_PHYSICAL);
 	else if (eff == APPLY_MAGIC_DAMAGE)
@@ -901,21 +905,24 @@ void person::applyStatusEffects()
 {
 	//Bleed: 25 damage/turn once it procs
 	bleedBuildup.decrease();
-	if (isBleeding) {
+	if (isBleeding > 0) {
 		isBleeding--;
 		takeDamage(25);
 	}
 	//Poison: constant damage, never goes away on its own
 	poisonBuildup.decrease();
-	if (isPoisoned) {
+	if (isPoisoned > 0) {
 		takeDamage(isPoisoned);
 	}
 	//Blinding: just ticks down
 	if (blinding > 0)
 		blinding--;
 	//Invisibility fades
-	if (invisibility)
+	if (invisibility > 0)
 		invisibility--;
+	//Fear declines
+	if (fear > 0)
+		fear--;
 }
 
 /*

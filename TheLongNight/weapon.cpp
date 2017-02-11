@@ -486,6 +486,19 @@ and her followers, saw a peculiar beauty in the transformation."));
 	return wp;
 }
 
+weaponSharedPtr weapon_EtherealSword()
+{
+	weaponSharedPtr wp(new weapon("Ethereal Sword", SWORD_TILE, TCODColor::lightMagenta,
+		"Half-unreal sword of the Sparrow Knights. These blades were once made of steel, but now \
+little of their original form remains."));
+	wp->setBasicAttributes(0, SPEED_NORMAL);
+	wp->addDamageType(DAMAGE_MAGIC, 50);
+	wp->addScalingType(SCALE_STR);
+	wp->addScalingType(SCALE_ARC);
+	wp->setSpecialAttack(attack_EtherealStrike());
+	return wp;
+}
+
 weaponSharedPtr weapon_ProfaneGreatsword()
 {
 	weaponSharedPtr wp(new weapon("Profane Greatsword", SWORD_TILE, TCODColor::purple,
@@ -565,6 +578,16 @@ weaponSharedPtr shield_DragonboneShield()
 	wp->setDefence(20);
 	wp->setDamageResist(DAMAGE_FIRE, 50);
 	wp->setDamagePenalty(15);
+	wp->makeOffhand();
+	return wp;
+}
+
+weaponSharedPtr shield_EtherealShield()
+{
+	weaponSharedPtr wp(new weapon("Ethereal Shield", SHIELD_TILE, TCODColor::magenta,
+		"A shield half-vanished from reality, pulsing with magical energy."));
+	wp->setDefence(0);
+	wp->setDamageResist(DAMAGE_MAGIC, 25);
 	wp->makeOffhand();
 	return wp;
 }
