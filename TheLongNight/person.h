@@ -93,6 +93,7 @@ public:
 	//Taking damage and healing
 	void addHealth(int amount);
 	void takeDamage(int amount, damageType dtype = DAMAGE_UNTYPED);
+	void applyDamageAffliction(int amount, damageType dtype);
 	void addVigour(int amount) { vigour.increase(amount); }
 	void loseVigour(int amount) { vigour.decrease(amount); }
 	void fullRestore();
@@ -151,6 +152,14 @@ public:
 	int slowdown = 0;
 	int damagePenalty = 0; //Percent reduction to melee damage.
 	int fear = 0; //ais have to run away
+
+	//Elemental effects
+	int acidic = 0; //Acid; slow damage, long time
+	int frozen = 0; //Cold; reduces attack
+	int burning = 0; //Fire; big damage, short time
+	int electrified = 0; //Electric; reduces defence
+	int profaneAffliction = 0; //Profane; reduces profane resistance
+	int holyAffliction = 0; //Holy; reduces holy resistance
 
 	//Spell buffs
 	int scaleNextSpell = 0; //Buff to next spell cast

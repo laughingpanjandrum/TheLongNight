@@ -149,6 +149,7 @@ private:
 	void drawMonsterInfo(monsterSharedPtr m, int atx, int aty);
 	void drawMouseover(int atx, int aty);
 	void drawTargetInfo(personSharedPtr target, int atx, int aty);
+	int listStatusEffects(personSharedPtr target, int atx, int aty);
 
 	//Animations
 	animVector playingAnimations;

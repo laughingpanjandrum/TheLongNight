@@ -121,6 +121,14 @@ int person::getDefence()
 	if (isPoisoned > 0) {
 		base += defenceWhenPoisoned;
 	}
+
+	//Penalty if frozen
+	if (frozen > 0)
+		base -= 10;
+
+	//Cap
+	if (base < 0)
+		base = 0;
 	
 	//Done!
 	return base;
@@ -157,10 +165,14 @@ int person::getMeleeDamage()
 				damage += damage / 2;
 		}
 
-		//Penalty
+		//Basic penalty
 		int penalty = (float)damage * (float)damagePenalty / 100.0;
 		if (penalty > 0)
 			damage -= penalty;
+
+		//Penalty if acidic
+		if (acidic > 0)
+			damage -= damage / 10;
 
 	}
 	return damage;
@@ -228,12 +240,48 @@ void person::takeDamage(int amount, damageType dtype)
 	//Minimum 1 damage
 	if (amount < 1)
 		amount = 1;
+
+	//Afflictions due to particular damage types
+	applyDamageAffliction(amount, dtype);
 	
 	//Take the rest
 	health.decrease(amount);
 	if (health.isEmpty())
 		die();
 }
+
+
+/*
+Special status effects due to particular damage types.
+*/
+void person::applyDamageAffliction(int amount, damageType dtype)
+{
+	int chance = randint(1, 100);
+	if (chance <= amount) {
+		//We are afflicted!
+		if (dtype == DAMAGE_ACID) {
+			acidic += 25;
+		}
+		else if (dtype == DAMAGE_COLD) {
+			frozen += 10;
+		}
+		else if (dtype == DAMAGE_ELECTRIC) {
+			electrified += 10;
+		}
+		else if (dtype == DAMAGE_FIRE) {
+			burning += 5;
+		}
+		else if (dtype == DAMAGE_PROFANE) {
+			profaneAffliction += 3;
+		}
+		else if (dtype == DAMAGE_BLESSED) {
+			holyAffliction += 3;
+		}
+	}
+}
+
+
+
 
 /*
 Applies special effects, e.g. bleed, poison.
@@ -914,6 +962,23 @@ void person::applyStatusEffects()
 	if (isPoisoned > 0) {
 		takeDamage(isPoisoned);
 	}
+	//Reduce damage afflictions
+	if (acidic > 0) {
+		acidic--;
+		takeDamage(1);
+	}
+	if (burning > 0) {
+		burning--;
+		takeDamage(15, DAMAGE_FIRE);
+	}
+	if (electrified > 0)
+		electrified--;
+	if (frozen > 0)
+		frozen--;
+	if (profaneAffliction > 0)
+		profaneAffliction--;
+	if (holyAffliction > 0)
+		holyAffliction--;
 	//Blinding: just ticks down
 	if (blinding > 0)
 		blinding--;

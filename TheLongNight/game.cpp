@@ -920,37 +920,8 @@ void game::drawInterface(int leftx, int topy)
 		win.write(atx, ++aty, "CHARGE!", TCODColor::yellow);
 	}
 	
-	//Status effects: BLEED
-	if (player->getBleedDuration()) {
-		win.write(atx, ++aty, "BLEEDING " + std::to_string(player->getBleedDuration()), TCODColor::crimson);
-	}
-	else {
-		auto bl = player->getSpecialEffectBuildup(EFFECT_BLEED);
-		if (bl->getValue() > 0)
-			win.drawCounter(*bl, "BLEED", atx, ++aty, TCODColor::crimson, TCODColor::darkGrey, 10);
-	}
-
-	//Status effects: POISON
-	if (player->getPoisonDuration()) {
-		win.write(atx, ++aty, "POISONED x" + std::to_string(player->getPoisonDuration()), TCODColor::lime);
-	}
-	else {
-		auto pois = player->getSpecialEffectBuildup(EFFECT_POISON);
-		if (pois->getValue() > 0)
-			win.drawCounter(*pois, "POISON", atx, ++aty, TCODColor::lime, TCODColor::darkGrey, 10);
-	}
-
-	//Status effect: SLOWED!
-	if (player->slowdown > 0)
-		win.write(atx, ++aty, "SLOWED", TCODColor::sepia);
-
-	//Status effect: BLINDED!
-	if (player->isBlind())
-		win.write(atx, ++aty, "BLIND", TCODColor::white);
-
-	//Status effect: ENTANGLED!
-	if (player->isEntangled())
-		win.write(atx, ++aty, "ENTANGLED " + std::to_string(player->getEntangleDuration()), TCODColor::lightGrey);
+	//Status effects
+	aty = listStatusEffects(player, atx, aty);
 
 	//Infusions
 	if (player->spellAcidInfusion > 0)
@@ -1255,43 +1226,71 @@ void game::drawTargetInfo(personSharedPtr target, int atx, int aty)
 	win.write(atx, aty, target->getName(), target->getColor());
 	win.write(atx, ++aty, "HP:" + target->getHealth().getAsString(), TCODColor::darkRed);
 	
-	//Bleed
-	int bleeding = target->getBleedDuration();
-	if (bleeding > 0) {
-		//Currently bleeding
-		win.write(atx + 1, ++aty, "Bleeding (" + std::to_string(bleeding) + ")", TCODColor::crimson);
+	//Status effects
+	aty = listStatusEffects(target, atx, aty);
+	
+	//Text description
+	win.writeWrapped(atx, ++aty, 20, target->description, TCODColor::lightGrey);
+}
+
+
+/*
+Lists all status effects currently afflicting the given character.
+Returns the next line after the last one we draw on.
+*/
+int game::listStatusEffects(personSharedPtr target, int atx, int aty)
+{
+
+	//Status effects: BLEED
+	if (target->getBleedDuration()) {
+		win.write(atx, ++aty, "BLEEDING " + std::to_string(target->getBleedDuration()), TCODColor::crimson);
 	}
 	else {
-		//Bleed building up but not proc'd
-		counter* bleed = target->getSpecialEffectBuildup(EFFECT_BLEED);
-		if (bleed->getValue() > 0)
-			win.write(atx + 1, ++aty, "Bleed buildup" + bleed->getAsString(), TCODColor::crimson);
+		auto bl = target->getSpecialEffectBuildup(EFFECT_BLEED);
+		if (bl->getValue() > 0)
+			win.drawCounter(*bl, "BLEED", atx, ++aty, TCODColor::crimson, TCODColor::darkGrey, 10);
 	}
-	
-	//Poison
-	int poison = target->getPoisonDuration();
-	if (poison > 0) {
-		//Currently poisoned
-		win.write(atx + 1, ++aty, "Poisoned x" + std::to_string(poison), TCODColor::lime);
+
+	//Status effects: POISON
+	if (player->getPoisonDuration()) {
+		win.write(atx, ++aty, "POISONED x" + std::to_string(target->getPoisonDuration()), TCODColor::lime);
 	}
 	else {
-		//Poison buildup but not proc'd
-		counter* poisoning = target->getSpecialEffectBuildup(EFFECT_POISON);
-		if (poisoning->getValue())
-			win.write(atx + 1, ++aty, "Poison buildup " + poisoning->getAsString(), TCODColor::lime);
+		auto pois = target->getSpecialEffectBuildup(EFFECT_POISON);
+		if (pois->getValue() > 0)
+			win.drawCounter(*pois, "POISON", atx, ++aty, TCODColor::lime, TCODColor::darkGrey, 10);
 	}
-	
+
 	//Blinding
 	if (target->isBlind()) {
-		win.write(atx + 1, ++aty, "Blinded (" + std::to_string(target->getBlindnessDuration()) + ")", TCODColor::lightestYellow);
+		win.write(atx + 1, ++aty, "Blinded" + std::to_string(target->getBlindnessDuration()), TCODColor::lightestYellow);
 	}
 
 	//Fear
 	if (target->fear > 0)
-		win.write(atx + 1, ++aty, "Afraid (" + std::to_string(target->fear) + ")", TCODColor::orange);
-	
-	//Text description
-	win.writeWrapped(atx, ++aty, 20, target->description, TCODColor::lightGrey);
+		win.write(atx + 1, ++aty, "Afraid" + std::to_string(target->fear), TCODColor::orange);
+
+	//Acidified
+	if (target->acidic > 0)
+		win.write(atx + 1, ++aty, "Acidic " + std::to_string(target->acidic), getDamageTypeColor(DAMAGE_ACID));
+
+	//Burning
+	if (target->burning > 0)
+		win.write(atx + 1, ++aty, "Burning " + std::to_string(target->burning), getDamageTypeColor(DAMAGE_FIRE));
+
+	//Electrified
+	if (target->electrified > 0)
+		win.write(atx + 1, ++aty, "Electrified " + std::to_string(target->electrified), getDamageTypeColor(DAMAGE_ELECTRIC));
+
+	//Frozen
+	if (target->frozen > 0)
+		win.write(atx + 1, ++aty, "Frozen" + std::to_string(target->frozen), getDamageTypeColor(DAMAGE_COLD));
+
+	//Entangled
+	if (target->isEntangled())
+		win.write(atx, ++aty, "Entangled " + std::to_string(target->getEntangleDuration()), TCODColor::lightGrey);
+
+	return aty++;
 }
 
 
