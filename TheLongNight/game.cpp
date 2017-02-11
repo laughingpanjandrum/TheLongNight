@@ -561,10 +561,12 @@ void game::drawMenu(menu * m, int atx, int aty)
 		//Mouse highlighting?!
 		if (mouse.cx <= (atx + (*it)->getName().size()) && mouse.cx >= atx && mouse.cy == aty) {
 			//Mouse over!
-			win.writec(atx + 1, aty, '>', TCODColor::white);
+			//win.writec(atx + 1, aty, '>', TCODColor::white);
+			m->setCurrentElement(*it);
 		}
 		//Indicate whether this is the highlighted element
-		else if (m->getSelectedItem() == (*it)) {
+		
+		if (m->getSelectedItem() == (*it)) {
 			win.writec(atx + 1, aty, '>', TCODColor::white);
 		}
 
@@ -1790,9 +1792,15 @@ void game::processCommand()
 
 void game::processMouseClick()
 {
-	if (mouse.lbutton) {
-		//Start autowalking to here
-		startAutoWalk();
+	if (mouse.lbutton_pressed) {
+		if (state == STATE_VIEW_MAP) {
+			//Start autowalking to here, if in map mode
+			startAutoWalk();
+		}
+		else {
+			//Menu selection otherwise
+			acceptCurrentMenuIndex();
+		}
 	}
 	else if (mouse.rbutton_pressed) {
 		//View monster info

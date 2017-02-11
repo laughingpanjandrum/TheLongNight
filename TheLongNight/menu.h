@@ -27,6 +27,7 @@ public:
 	//Menu navigation
 	void scrollDown();
 	void scrollUp();
+	void setCurrentElement(elementSharedPtr e);
 
 	//Getting
 	std::string getTitle() { return title; }

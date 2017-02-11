@@ -35,6 +35,22 @@ void menu::scrollUp()
 		idx = elements.size() - 1;
 }
 
+
+/*
+Sets our index to the given element.
+*/
+void menu::setCurrentElement(elementSharedPtr e)
+{
+	int i = 0;
+	for (auto it : elements) {
+		if (it == e) {
+			idx = i;
+			return;
+		}
+		i++;
+	}
+}
+
 /*
 Returns the element at the selected index.
 If there are no menu elements, returns nullptr.
