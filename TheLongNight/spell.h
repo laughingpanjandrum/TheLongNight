@@ -28,6 +28,7 @@ public:
 	void setDamageToCaster(int d) { damageToCaster = d; }
 
 	//Getting
+	bool hasEffect(effect eff);
 	int getEffectsCount() { return effectsApplied.size(); }
 	effect getEffectType(int idx) { return effectsApplied.at(idx); }
 	int getEffectPotency(int idx) { return effectPotencies.at(idx); }
@@ -129,6 +130,7 @@ spellSharedPtr spell_ElectricBlade();
 spellSharedPtr spell_ArcLightning();
 
 spellSharedPtr spell_SpitFire();
+spellSharedPtr spell_MirrorImage();
 
 //	Prayers
 spellSharedPtr prayer_Restoration();

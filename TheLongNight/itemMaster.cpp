@@ -406,6 +406,7 @@ std::string getEffectName(effect e)
 	case(GAIN_DIVINE_RETRIBUTION): return "divine retribution";
 	case(CHANGE_DETECTION_RANGE): return "detection range";
 	case(LOW_HEALTH_DAMAGE_BUFF): return "damage buff when health is low";
+	case(CREATE_MIRROR_IMAGE): return "create mirror image";
 
 	case(INSTILL_FEAR): return "instill fear";
 

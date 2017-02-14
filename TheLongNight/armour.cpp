@@ -30,6 +30,7 @@ armourSharedPtr armour_RuinedUniform()
 		"A relic of eras prior to the annihilation of time, when the stardrift sigil meant something."));
 	a->setDefence(10);
 	a->setMoveSpeed(SPEED_FAST);
+	a->setImage(IMAGE_RUINED_UNIFORM);
 	return a;
 }
 

@@ -1114,6 +1114,7 @@ monsterSharedPtr monster_LifedrinkerWraith()
 {
 	monsterSharedPtr m(new monster("Lifedrinker Wraith", GHOST_TILE, TCODColor::magenta,
 		"The half-shape of a creature starved for living flesh, which drifts through the aether."));
+	m->setHealth(100);
 	m->setDefence(DAMAGE_PHYSICAL, 100);
 	m->setDefence(DAMAGE_COLD, 75);
 	m->setPoisonResist(1000);
@@ -1122,6 +1123,22 @@ monsterSharedPtr monster_LifedrinkerWraith()
 	m->addWeakness(DAMAGE_ELECTRIC);
 	m->setMoveStats(SPEED_FAST);
 	m->equipItem(weaponSharedPtr(new weapon(0, SPEED_FAST, DAMAGE_MAGIC, 25)));
+	return m;
+}
+
+monsterSharedPtr monster_TheDeadSparrow()
+{
+	monsterSharedPtr m(new monster("The Dead Sparrow", GHOST_TILE, TCODColor::lightestFuchsia,
+		"The First Sparrow has died a hundred times, but his body endures, shrouded in arcane mist."));
+	m->setHealth(1000);
+	m->setDefence(DAMAGE_MAGIC, 90);
+	m->setMoveStats(SPEED_FAST);
+	m->setMeleeStats(10, SPEED_NORMAL);
+	m->keepsDistance = true;
+	m->setSpellPower(150);
+	//m->addSpellKnown(spell_MagicMissile());
+	m->addSpellKnown(spell_MirrorImage());
+	m->setSpellCastChance(20);
 	return m;
 }
 
@@ -1445,6 +1462,8 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return monster_DecomposingKnight();
 	else if (handle == "lifedrinker_wraith")
 		return monster_LifedrinkerWraith();
+	else if (handle == "dead_sparrow")
+		return monster_TheDeadSparrow();
 
 	//The Void
 	else if (handle == "void_touched")

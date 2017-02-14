@@ -185,6 +185,7 @@ monsterSharedPtr monster_SparrowKnight();
 monsterSharedPtr monster_EtherealMage();
 monsterSharedPtr monster_DecomposingKnight();
 monsterSharedPtr monster_LifedrinkerWraith();
+monsterSharedPtr monster_TheDeadSparrow();
 
 //The Void
 monsterSharedPtr monster_VoidTouched();

@@ -349,8 +349,21 @@ bool game::aiMoveToTarget(monsterSharedPtr ai)
 		}
 	}
 
+	//We might need to remember our prior location
+	int oldx = ai->getx();
+	int oldy = ai->gety();
+
 	//Now move to this point
 	movePerson(ai, bestPt.first, bestPt.second);
+
+	//If we have a MIRROR IMAGE active, it also moves
+	if (ai->hasMirrorImage()) {
+		auto img = ai->getMirrorImage();
+		int xv = bestPt.first - oldx;
+		int yv = bestPt.second - oldy;
+		movePerson(img, img->getx() + xv, img->gety() + yv);
+	}
+	
 	//Time passes (UNLESS WE HAVE FREE MOVES!)
 	if (!ai->hasFreeMoves()) {
 		turns.addEntity(ai, ai->getMoveDelay());
@@ -361,6 +374,19 @@ bool game::aiMoveToTarget(monsterSharedPtr ai)
 		return false;
 	}
 
+}
+
+
+/*
+Returns whether we want to cast a given spell.
+*/
+bool game::aiShouldCastSpell(monsterSharedPtr ai, spellSharedPtr sp)
+{
+	//Don't summon a mirror if we already have one
+	if (sp->hasEffect(CREATE_MIRROR_IMAGE) && ai->hasMirrorImage())
+		return false;
+	//We're good to go!
+	return true;
 }
 
 /*
@@ -382,52 +408,56 @@ bool game::aiTryUseSpell(monsterSharedPtr ai)
 	personSharedPtr target = ai->getTarget();
 	
 	for (auto sp : ai->getSpellsKnown()) {
-		
-		attackType aType = sp->getAttackType();
-		if (aType == ATTACK_RANGE) {
-			
-			//Ranged spell - do we have the reach for it?
-			pathVector path = getLine(ai->getPosition(), target->getPosition());
-			personSharedPtr willHit = getTargetOnPath(path);
-			
-			if (willHit == target && canPlayerSeePoint(ai->getx(),ai->gety())) {
-				//Check spell range
+
+		if (aiShouldCastSpell(ai, sp)) {
+
+			attackType aType = sp->getAttackType();
+			if (aType == ATTACK_RANGE) {
+
+				//Ranged spell - do we have the reach for it?
+				pathVector path = getLine(ai->getPosition(), target->getPosition());
+				personSharedPtr willHit = getTargetOnPath(path);
+
+				if (willHit == target && canPlayerSeePoint(ai->getx(), ai->gety())) {
+					//Check spell range
+					int dist = hypot(ai->getx() - target->getx(), ai->gety() - target->gety());
+					if (dist <= sp->getAttackRange()) {
+						//ANIMATION BLAST!
+						spellTitleAnimation(ai, sp);
+						//We hit!
+						dischargeSpellOnTarget(sp, ai, target);
+						//Time passes
+						turns.addEntity(ai, ai->getAttackDelay());
+						return true;
+					}
+				}
+			}
+
+			else if (aType == ATTACK_AOE) {
+
+				//See if AOE spell will hit target
 				int dist = hypot(ai->getx() - target->getx(), ai->gety() - target->gety());
 				if (dist <= sp->getAttackRange()) {
 					//ANIMATION BLAST!
-					spellTitleAnimation(ai,sp);
-					//We hit!
-					dischargeSpellOnTarget(sp, ai, target);
-					//Time passes
+					spellTitleAnimation(ai, sp);
+					//Do the AOE!
+					doAOE(sp, ai);
 					turns.addEntity(ai, ai->getAttackDelay());
 					return true;
 				}
+
 			}
-		}
-		
-		else if (aType == ATTACK_AOE) {
-			
-			//See if AOE spell will hit target
-			int dist = hypot(ai->getx() - target->getx(), ai->gety() - target->gety());
-			if (dist <= sp->getAttackRange()) {
+
+			else if (aType == ATTACK_BUFF_SELF) {
+
 				//ANIMATION BLAST!
 				spellTitleAnimation(ai, sp);
-				//Do the AOE!
-				doAOE(sp, ai);
-				turns.addEntity(ai, ai->getAttackDelay());
-				return true;
+
+				//Cast spell on self - usually a good idea!
+				dischargeSpellOnTarget(sp, ai, ai);
+
 			}
-		
-		}
-		
-		else if (aType == ATTACK_BUFF_SELF) {
 
-			//ANIMATION BLAST!
-			spellTitleAnimation(ai, sp);
-
-			//Cast spell on self - usually a good idea!
-			dischargeSpellOnTarget(sp, ai, ai);
-		
 		}
 	}
 	
@@ -971,20 +1001,28 @@ When an item is selected, show its description.
 
 void game::drawInventory(int atx, int aty)
 {
+	
 	//The menu
 	drawMenu(currentMenu, MAP_DRAW_X, MAP_DRAW_Y);
+	
 	//Show selected item, if relevant
 	if (state == STATE_VIEW_INVENTORY_CATEGORY) {
 		if (currentMenu->getSelectedItem() != nullptr) {
+			
 			//Selected menu object should be an ITEM
 			itemSharedPtr sel = std::static_pointer_cast<item>(currentMenu->getSelectedItem());
+
+			//Draw the item and the image for the item
 			drawItemInfo(sel, atx, aty + 40);
-			drawItemImage(sel, atx + 50, aty);
+		
 		}
 	}
+	
 	else {
+		
 		//We can go to the level-up menu from here
 		win.write(atx, aty + 20, "Press [p] to LEVEL UP", TCODColor::white);
+	
 	}
 }
 
@@ -1347,9 +1385,8 @@ This just figures out which particular info-drawing function to use.
 */
 void game::drawItemInfo(itemSharedPtr it, int atx, int aty)
 {
-	
-	//Clear region
-	win.clearRegion(atx, aty, 40, 21);
+
+	drawItemImage(it, MAP_DRAW_X + 50, MAP_DRAW_Y);
 	
 	//Tile and name
 	win.writec(atx, aty, it->getTileCode(), it->getColor());
@@ -1372,6 +1409,7 @@ void game::drawItemInfo(itemSharedPtr it, int atx, int aty)
 	
 	//Item description
 	aty = win.writeWrapped(atx + 1, aty + 1, 40, it->description, TCODColor::lightGrey);
+	
 	//Rest of item info
 	aty += 1;
 	atx += 1;
@@ -1712,7 +1750,26 @@ Draws an item's image onto the screen, if it has one.
 void game::drawItemImage(itemSharedPtr it, int atx, int aty)
 {
 	if (it->hasImage()) {
+		
+		//If this is body armour, draw our current helmet first
+		if (it->getCategory() == ITEM_BODY_ARMOUR) {
+			auto h = player->getHelmet();
+			if (h != nullptr && h->hasImage()) {
+				win.drawImage(h->getImage(), atx, aty);
+			}
+		}
+		
+		//Draw this item
 		win.drawImage(it->getImage(), atx, aty);
+		
+		//If this is a helmet, draw our current body armour afterward
+		if (it->getCategory() == ITEM_HELMET) {
+			auto a = player->getArmour();
+			if (a != nullptr && a->hasImage()) {
+				win.drawImage(a->getImage(), atx, aty);
+			}
+		}
+	
 	}
 }
 
@@ -2033,6 +2090,8 @@ void game::applyEffectToPerson(personSharedPtr target, effect eff, int potency, 
 		currentMap->setTile(tile_Web(), target->getx(), target->gety());
 	else if (eff == CREATE_FOG)
 		currentMap->createFogCloud(target->getx(), target->gety(), potency);
+	else if (eff == CREATE_MIRROR_IMAGE)
+		createMirrorImage(target);
 
 	//Some effect that the person should take care of
 	else
@@ -2638,6 +2697,28 @@ void game::teleport(personSharedPtr target, int distance)
 		int idx = randrange(pts.size());
 		coord pt = pts.at(idx);
 		movePerson(target, pt.first, pt.second);
+	}
+}
+
+
+/*
+Spawn a mirror image of the target nearby.
+It mimics the caster's actions.
+*/
+void game::createMirrorImage(personSharedPtr target)
+{
+	personSharedPtr mirror = target->createMirrorImage();
+	
+	//Find a free point adjacent to us to spawn upon
+	for (int x = target->getx() - 1; x <= target->getx() + 1; x++) {
+		for (int y = target->gety() - 1; y <= target->gety() + 1; y++) {
+			if (currentMap->isWalkable(x, y) && currentMap->getPerson(x, y) == nullptr) {
+			
+				//This is a good spot!
+				currentMap->addPerson(mirror, x, y);
+			
+			}
+		}
 	}
 }
 
@@ -3740,6 +3821,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(spell_FrozenBlade());
 	player->addItem(spell_GottricsArcaneProtection());
 	player->addItem(spell_MagicMissile());
+	player->addItem(spell_MirrorImage());
 	player->addItem(spell_ProfanedBlade());
 	player->addItem(spell_VoidJaunt());
 

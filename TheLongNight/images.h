@@ -7,6 +7,7 @@
 #include <memory>
 #include "libtcod.hpp"
 
+
 const std::string WEAPONS_FOLDER = "img/weapons/";
 const std::string ARMOUR_FOLDER = "img/outfits/";
 const std::string IMG_FILE_EXTENSION = ".png";
@@ -44,6 +45,8 @@ const imageSharedPtr IMAGE_WARHAMMER = loadWeaponImage("warhammer");
 
 
 //Armour
+
+const imageSharedPtr IMAGE_RUINED_UNIFORM = loadArmourImage("B_captian's uniform");
 
 const imageSharedPtr IMAGE_CITY_GUARD_HELM = loadArmourImage("H_city guard");
 const imageSharedPtr IMAGE_CITY_GUARD_ARMOUR = loadArmourImage("B_city guard");

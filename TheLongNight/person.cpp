@@ -20,6 +20,18 @@ person::person(std::string name, int tileCode, TCODColor color, std::string desc
 	}
 }
 
+/*
+Copy constructor
+*/
+person::person(const person & other) :
+	person(other.name, other.tileCode, other.color, other.description) 
+{
+	isPlayer = other.isPlayer;
+	isHostile = other.isHostile;
+}
+
+
+//Destructor
 person::~person()
 {
 }
@@ -900,6 +912,19 @@ void person::restoreItemsToMax()
 		}
 	}
 }
+
+
+/*
+Create a magical duplicate of ourselves, which does whatever we do.
+*/
+personSharedPtr person::createMirrorImage()
+{
+	mirrorImage = personSharedPtr(new person(*this));
+	mirrorImage->setMaxHealth(1);
+	return mirrorImage;
+}
+
+
 
 /*
 Returns whether the given item is equipped.

@@ -56,6 +56,19 @@ void spell::addEffect(effect eff, int potency)
 }
 
 
+/*
+Returns whether we have the given effect.
+*/
+bool spell::hasEffect(effect eff)
+{
+	for (auto e : effectsApplied) {
+		if (e == eff)
+			return true;
+	}
+	return false;
+}
+
+
 
 /*
 Spell objects
@@ -563,6 +576,17 @@ spellSharedPtr spell_SpitFire()
 	sp->setAttackRange(8);
 	sp->addEffect(APPLY_FIRE_DAMAGE, 20);
 	sp->setVigourCost(1);
+	sp->usesSpellPower = true;
+	return sp;
+}
+
+spellSharedPtr spell_MirrorImage()
+{
+	spellSharedPtr sp(new spell("Mirror Image", SPELL_TILE, TCODColor::fuchsia,
+		"Create a mirror image that mimics your actions."));
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(CREATE_MIRROR_IMAGE, 1);
+	sp->setVigourCost(3);
 	sp->usesSpellPower = true;
 	return sp;
 }

@@ -124,6 +124,7 @@ private:
 	pathVector getAllAdjacentWalkable(monsterSharedPtr ai);
 	bool aiIsValidMove(monsterSharedPtr ai, int xnew, int ynew);
 	bool aiMoveToTarget(monsterSharedPtr ai);
+	bool aiShouldCastSpell(monsterSharedPtr ai, spellSharedPtr sp);
 	bool aiTryUseSpell(monsterSharedPtr ai);
 	void aiSpawnCreature(monsterSharedPtr ai);
 	void aiDoCombatAction(monsterSharedPtr ai);
@@ -217,6 +218,7 @@ private:
 	void pullTarget(personSharedPtr puller, personSharedPtr target, int distance);
 	bool waterWarp(personSharedPtr target, int distance);
 	void teleport(personSharedPtr target, int distance);
+	void createMirrorImage(personSharedPtr target);
 
 	//Player-only SPECIAL MAP JUMPS
 	void teleportToVoid();
