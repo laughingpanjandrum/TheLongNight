@@ -445,6 +445,16 @@ maptile * tile_ObservatoryDoor()
 	return door;
 }
 
+maptile * tile_BloodyMausoleumDoor()
+{
+	maptile* door = new maptile("Bloody Mausoleum Door", "bloody_mausoleum_door", BASIC_DOOR_TILE,
+		TCODColor::crimson, TCODColor::black, false, false);
+	door->isDoor = true;
+	door->unlockCode = "corens_bones";
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	return door;
+}
+
 maptile * tile_Chair1()
 {
 	return new maptile("Chair", "chair1", CHAIR_TILE_1,

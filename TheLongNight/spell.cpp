@@ -279,6 +279,16 @@ spellSharedPtr attack_EtherealStrike()
 	return sp;
 }
 
+spellSharedPtr attack_Frenzy()
+{
+	spellSharedPtr sp(new spell("Frenzy", SWORD_TILE, TCODColor::crimson,
+		"Next attack deals double damage."));
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(SCALE_NEXT_ATTACK, 100);
+	sp->setVigourCost(2);
+	return sp;
+}
+
 spellSharedPtr ability_EtherealSurge()
 {
 	spellSharedPtr sp(new spell("Ethereal Surge", SPELL_TILE, TCODColor::magenta,

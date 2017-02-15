@@ -1189,6 +1189,8 @@ monsterSharedPtr monster_Ooze()
 		"This pathetic ooze dribbles along the ground. A few bones and rags protrude from its midst."));
 	m->setHealth(300);
 	m->setDefence(DAMAGE_PHYSICAL, 50);
+	m->setPoisonResist(1000);
+	m->setBleedResist(1000);
 	m->addWeakness(DAMAGE_FIRE);
 	m->setMoveStats(SPEED_SLOW);
 	m->equipItem(weaponSharedPtr(new weapon(5, SPEED_NORMAL, EFFECT_POISON, 15)));
@@ -1198,6 +1200,59 @@ monsterSharedPtr monster_Ooze()
 	m->showBossHealthBar = false;
 	m->setFragmentsDropped(5000);
 	m->addItemDrop(wand_MoshkasSingingStaff());
+	return m;
+}
+
+/*
+	Mausoleum of Blood
+*/
+
+monsterSharedPtr monster_BleedingMaw()
+{
+	monsterSharedPtr m(new monster("Bleeding Maw", TOAD_TILE, TCODColor::crimson,
+		"A wreckage of flesh, encrusted with gibbering mouths and drenched in blood. Its own, or another's?"));
+	m->setHealth(300);
+	m->setDefence(DAMAGE_PHYSICAL, 10);
+	m->setDefence(DAMAGE_FIRE, 25);
+	m->setBleedResist(1000);
+	m->setMoveStats(SPEED_SLOW);
+	m->equipItem(weaponSharedPtr(new weapon(10, SPEED_SLOW, EFFECT_BLEED, 20)));
+	m->addSpellKnown(spellSharedPtr(new spell("Engulf", TCODColor::crimson, 1, 10, APPLY_ENTANGLING, 3)));
+	m->setSpellCastChance(100);
+	return m;
+}
+
+monsterSharedPtr monster_CrawlingWretch()
+{
+	monsterSharedPtr m(new monster("Crawling Wretch", WRETCH_TILE, TCODColor::crimson,
+		"A wretched ruin, perhaps once human, that crawls around the ground. As it grows near, \
+its mouth suddenly distends, exposing myriad jagged teeth."));
+	m->setHealth(150);
+	m->setDefence(DAMAGE_FIRE, 25);
+	m->setBleedResist(1000);
+	m->setMoveStats(SPEED_SLOW);
+	m->equipItem(weaponSharedPtr(new weapon(10, SPEED_SLOW, EFFECT_BLEED, 20)));
+	m->addSpellKnown(spellSharedPtr(new spell("Rush", TCODColor::orange, ATTACK_BUFF_SELF, 1, GAIN_FREE_MOVES, 3)));
+	m->setSpellCastChance(50);
+	return m;
+}
+
+monsterSharedPtr monster_CorenTheBloody()
+{
+	monsterSharedPtr m(new monster("Coren the Bloody", PLAYER_TILE, TCODColor::crimson,
+		"Wounds cover the naked warrior's body, gushing blood as though from a hundred gaping mouths. \
+He hefts his greataxe and roars incoherently."));
+	m->setHealth(900);
+	m->setDefence(DAMAGE_PHYSICAL, 15);
+	m->setDefence(DAMAGE_FIRE, 25);
+	m->setBleedResist(1000);
+	m->setMoveStats(SPEED_FAST);
+	m->equipItem(weaponSharedPtr(new weapon(50, SPEED_SLOW, EFFECT_BLEED, 30)));
+	m->addSpellKnown(spellSharedPtr(new spell("Frenzy", TCODColor::darkCrimson, ATTACK_BUFF_SELF, 1, SCALE_NEXT_ATTACK, 50)));
+	m->setSpellCastChance(30);
+	m->setFragmentsDropped(1500);
+	m->addItemDrop(heart_HeartOfCoren());
+	m->isBoss = true;
 	return m;
 }
 
@@ -1361,6 +1416,7 @@ monsterSharedPtr npc_Ydella()
 	m->addStockUnlock(prayer_SpidersPrayer(), 100, "venomous_spider_heart");
 	m->addStockUnlock(weapon_LadyTvertsClaws(), 150, "lady_tverts_heart");
 	m->addStockUnlock(wand_SparrowsStaff(), 300, "dead_sparrows_heart");
+	m->addStockUnlock(weapon_CorensGreataxe(), 300, "corens_heart");
 	return m;
 }
 
@@ -1532,6 +1588,14 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return monster_Starspawned();
 	else if (handle == "ooze")
 		return monster_Ooze();
+
+	//Mausoleum of Blood
+	else if (handle == "bleeding_maw")
+		return monster_BleedingMaw();
+	else if (handle == "crawling_wretch")
+		return monster_CrawlingWretch();
+	else if (handle == "coren_the_bloody")
+		return monster_CorenTheBloody();
 
 	//The Void
 	else if (handle == "void_touched")

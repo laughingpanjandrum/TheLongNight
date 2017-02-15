@@ -71,6 +71,7 @@ miscItemSharedPtr heart_VortensShriveledHeart();
 miscItemSharedPtr heart_VenomousSpiderHeart();
 miscItemSharedPtr heart_LadyTvertsHeart();
 miscItemSharedPtr heart_DeadSparrowsHeart();
+miscItemSharedPtr heart_HeartOfCoren();
 
 //Spellbooks
 miscItemSharedPtr spellbook_WaterloggedWritings();

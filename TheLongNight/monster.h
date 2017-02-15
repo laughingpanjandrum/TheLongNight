@@ -192,6 +192,11 @@ monsterSharedPtr monster_MirrorImage();
 monsterSharedPtr monster_Starspawned();
 monsterSharedPtr monster_Ooze();
 
+//Mausoleum of Blood
+monsterSharedPtr monster_BleedingMaw();
+monsterSharedPtr monster_CrawlingWretch();
+monsterSharedPtr monster_CorenTheBloody();
+
 //The Void
 monsterSharedPtr monster_VoidTouched();
 

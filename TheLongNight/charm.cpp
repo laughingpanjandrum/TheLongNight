@@ -136,3 +136,12 @@ charmSharedPtr charm_RavenousIdol()
 	c->addEffect(LOW_HEALTH_DAMAGE_BUFF, 1);
 	return c;
 }
+
+charmSharedPtr charm_FrenzyCharm()
+{
+	charmSharedPtr c(new charm("Frenzy Charm", CHARM_TILE, TCODColor::darkCrimson,
+		"Charm fashioned from the blood-drenched heart of Coren the Conqueror, who once feasted upon his enemies. \
+The gods looked favourably upon his bloodlust, and granted him even greater extremes of insanity."));
+	c->addEffect(GAIN_KILL_DAMAGE_BUFF, 5);
+	return c;
+}

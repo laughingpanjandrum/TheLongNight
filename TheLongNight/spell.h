@@ -94,6 +94,7 @@ spellSharedPtr attack_SpiderStrike();
 spellSharedPtr attack_DeepCut();
 spellSharedPtr attack_Lash();
 spellSharedPtr attack_EtherealStrike();
+spellSharedPtr attack_Frenzy();
 
 //Wand/chime powers
 spellSharedPtr ability_PowerSurge();

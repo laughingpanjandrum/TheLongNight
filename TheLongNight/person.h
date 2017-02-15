@@ -134,9 +134,11 @@ public:
 	//Other buffs
 	void clearFreeMoves() { freeMoves = 0; }
 	void gainFreeMoves(int f) { freeMoves += f; }
+	void gainFlatDamageBuff(int d);
 	bool hasFreeMoves() { return freeMoves > 0; }
 	void useFreeMove() { freeMoves--; }
 	int scaleNextAttack = 0; //Percent damage bonus damage added to next attack
+	int killDamageBuff = 0; //Cumulative damage buff, added on kill; cleared on rest
 	int attacksPerHit = 1; //Multiattack count, resets to 1 after use
 	int healthTrickle = 0; //We get 1 point of this per tick until it runs out
 	int healthOnKill = 0; //Health restored when we kill something
@@ -259,6 +261,7 @@ protected:
 	int freeMoves = 0; //While this is >0, our move delay is zero; this ticks down each time we move.
 	int fragmentPickupMultiplier = 1; //For PC only; increases number of fragments gained.
 	int healingFactor = 1;
+	int flatDamageBuff = 0; //Accumulating damage buff, cleared on death
 
 	//Equipment
 	inventory items;
@@ -274,6 +277,9 @@ protected:
 
 	//Lighting
 	float emitsLight = 0;
+
+	//Constants
+	const static int MAX_FLAT_DAMAGE_BUFF = 40;
 
 };
 

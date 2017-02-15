@@ -216,6 +216,15 @@ brought him too close to the mysteries of the gods."));
 	return h;
 }
 
+miscItemSharedPtr heart_HeartOfCoren()
+{
+	miscItemSharedPtr h(new miscItem("Heart of Coren", HEART_TILE, TCODColor::darkCrimson,
+		"The beating heart of Coren the Conqueror, who once laid waste to the lowlands. It perpetually oozes blood, \
+but never seems to run dry."));
+	h->setKeyTag("corens_heart");
+	return h;
+}
+
 
 
 /*

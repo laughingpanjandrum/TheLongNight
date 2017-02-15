@@ -187,6 +187,10 @@ int person::getMeleeDamage()
 			damage -= damage / 10;
 
 	}
+
+	//Flat buff to everything
+	damage += flatDamageBuff;
+
 	return damage;
 }
 
@@ -332,6 +336,13 @@ void person::fullRestore()
 	poisonBuildup.clear();
 	isBleeding = 0;
 	isPoisoned = 0;
+	entangling = 0;
+	acidic = 0;
+	frozen = 0;
+	electrified = 0;
+	burning = 0;
+	//Remove accumulated buffs
+	flatDamageBuff = 0;
 	//Replenish items
 	restoreItemsToMax();
 }
@@ -435,6 +446,8 @@ void person::applyEffect(effect eff, int potency)
 		attacksPerHit = potency;
 	else if (eff == SCALE_NEXT_ATTACK)
 		scaleNextAttack = potency;
+	else if (eff == GAIN_KILL_DAMAGE_BUFF)
+		killDamageBuff += potency;
 	else if (eff == ADD_HEALTH_TRICKLE)
 		healthTrickle += potency;
 	else if (eff == GAIN_MAX_HEALTH)
@@ -547,6 +560,12 @@ void person::applyEffect(effect eff, int potency)
 	else if (eff == APPLY_BLINDING)
 		blind(potency);
 
+}
+
+void person::gainFlatDamageBuff(int d)
+{
+	if (d < MAX_FLAT_DAMAGE_BUFF)
+		flatDamageBuff += d;
 }
 
 

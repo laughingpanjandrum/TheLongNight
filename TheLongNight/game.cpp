@@ -1749,6 +1749,9 @@ void game::drawMiscItemInfo(miscItemSharedPtr it, int atx, int aty)
 			else if (rune->addScalingType == SCALE_PHYSICAL) {
 				win.write(atx, ++aty, "Weapon deals additional physical damage.", rune->color);
 			}
+			else if (rune->addScalingType == SCALE_BLEED) {
+				win.write(atx, ++aty, "Weapon deals additional bleed damage.", rune->color);
+			}
 			else {
 				//Changes scaling
 				std::string scaleType;
@@ -2623,6 +2626,9 @@ void game::meleeAttack(personSharedPtr attacker, personSharedPtr target)
 			attacker->addHealth(wp->getDamageReservoir());
 			wp->clearDamageReservoir();
 		}
+
+		//Possible damage buff on kill
+		attacker->gainFlatDamageBuff(attacker->killDamageBuff);
 	
 	}
 	else
@@ -3740,6 +3746,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(weapon_ArmOfTheDuke());
 	player->addItem(weapon_BloodDrinkersKnife());
 	player->addItem(weapon_CityGuardianWarhammer());
+	player->addItem(weapon_CorensGreataxe());
 	player->addItem(weapon_CrimsonNail());
 	player->addItem(weapon_CrowHalfsword());
 	player->addItem(weapon_CrowKnife());
@@ -3808,6 +3815,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(charm_BloodstainedCharm());
 	player->addItem(charm_ClericsHolyPendant());
 	player->addItem(charm_EvisceratingRing());
+	player->addItem(charm_FrenzyCharm());
 	player->addItem(charm_FrozenFlowerCharm());
 	player->addItem(charm_IdolOfPash());
 	player->addItem(charm_KhallesHeadband());
@@ -3894,6 +3902,10 @@ void getAllItems(personSharedPtr player)
 	player->addItem(key_WretchsKey());
 	player->addItem(key_WyrdKey());
 	player->addItem(misc_VoidSigil());
+
+	player->addItem(bones_CorensBones());
+	player->addItem(bones_KhallesBones());
+	player->addItem(bones_SiltrasBones());
 
 	player->addItem(heart_FishBornGoddessesHeart());
 	player->addItem(heart_LadyTvertsHeart());

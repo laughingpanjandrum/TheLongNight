@@ -154,6 +154,8 @@ weaponSharedPtr weapon_LadyTvertsClaws();
 
 weaponSharedPtr weapon_EtherealSword();
 
+weaponSharedPtr weapon_CorensGreataxe();
+
 weaponSharedPtr weapon_ProfaneGreatsword();
 
 //Shields
@@ -164,6 +166,7 @@ weaponSharedPtr shield_CityGuardianShield();
 weaponSharedPtr shield_VoidTouchedShield();
 weaponSharedPtr shield_DragonboneShield();
 weaponSharedPtr shield_EtherealShield();
+weaponSharedPtr shield_SirPercivelsShield();
 
 //Wands
 weaponSharedPtr wand_DriftwoodWand();

@@ -2,6 +2,10 @@
 
 itemSharedPtr getItemByHandle(std::string handle)
 {
+
+	/*
+	This is multiple if-statements instead of a single block due to compiler limits.
+	*/
 	
 	//	WEAPONS
 	//Starters
@@ -52,7 +56,7 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return weapon_EtherealSword();
 
 	//SHIELDS
-	else if (handle == "battered_wooden_shield")
+	if (handle == "battered_wooden_shield")
 		return shield_BatteredWoodenShield();
 	else if (handle == "wooden_wyrd_shield")
 		return shield_WoodenWyrdShield();
@@ -66,9 +70,11 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return shield_DragonboneShield();
 	else if (handle == "ethereal_shield")
 		return shield_EtherealShield();
+	else if (handle == "sir_percivels_shield")
+		return shield_SirPercivelsShield();
 
 	//WANDS/CHIMES
-	else if (handle == "driftwood_wand")
+	if (handle == "driftwood_wand")
 		return wand_DriftwoodWand();
 	else if (handle == "fishmans_toadstaff")
 		return wand_FishmansToadstaff();
@@ -78,7 +84,7 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return chime_ClericsCrackedChime();
 
 	//CONSUMABLES
-	else if (handle == "starwater_draught")
+	if (handle == "starwater_draught")
 		return consumable_StarwaterDraught();
 	else if (handle == "invigorating_tea")
 		return consumable_InvigoratingTea();
@@ -96,7 +102,7 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return consumable_BlackHoney();
 
 	//OILS
-	else if (handle == "pyromancers_oil")
+	if (handle == "pyromancers_oil")
 		return oil_PyromancersOil();
 	else if (handle == "corrosive_oil")
 		return oil_CorrosiveOil();
@@ -110,9 +116,11 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return oil_HangmansBlood();
 	else if (handle == "witchs_ooze")
 		return oil_WitchsOoze();
+	else if (handle == "deep_red_oil")
+		return oil_DeepRedOil();
 
 	//RANGED WEAPONS
-	else if (handle == "throwing_knives")
+	if (handle == "throwing_knives")
 		return ranged_ThrowingKnives();
 	else if (handle == "lacerating_knives")
 		return ranged_LaceratingKnives();
@@ -134,7 +142,7 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return ranged_FrostKnives();
 
 	//ARMOUR
-	else if (handle == "captains_tricorn")
+	if (handle == "captains_tricorn")
 		return headgear_CaptainsTricorn();
 	else if (handle == "ruined_uniform")
 		return armour_RuinedUniform();
@@ -203,7 +211,7 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return headgear_SirPercivelsHelm();
 
 	//CHARMS
-	else if (handle == "bloodstained_charm")
+	if (handle == "bloodstained_charm")
 		return charm_BloodstainedCharm();
 	else if (handle == "khalles_headband")
 		return charm_KhallesHeadband();
@@ -235,7 +243,7 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return prayer_Restoration();
 
 	//MISC ITEMS
-	else if (handle == "green_chapel_garden_key")
+	if (handle == "green_chapel_garden_key")
 		return key_GreenChapelGardenKey();
 	else if (handle == "dead_sparrow_key")
 		return key_DeadSparrowKey();
@@ -253,7 +261,7 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return bones_CorensBones();
 
 	//SPELLBOOKS
-	else if (handle == "waterlogged_writings")
+	if (handle == "waterlogged_writings")
 		return spellbook_WaterloggedWritings();
 	else if (handle == "minas_profaned_writings")
 		return spellbook_MinasProfanedWritings();
@@ -275,7 +283,7 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return misc_PieceOfJade();
 
 	//RUNESTONES
-	else if (handle == "corens_runestone")
+	if (handle == "corens_runestone")
 		return runestone_CorensRunestone();
 	else if (handle == "siltras_runestone")
 		return runestone_SiltrasRunestone();
@@ -291,6 +299,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return runestone_StarweaversRunestone();
 	else if (handle == "thundrous_runestone")
 		return runestone_ThundrousRunestone();
+	else if (handle == "blood_drenched_runestone")
+		return runestone_BloodDrenchedRunestone();
 	
 	//Uh oh, we didn't find anything!
 	return nullptr;
@@ -417,6 +427,7 @@ std::string getEffectName(effect e)
 	case(GAIN_DIVINE_RETRIBUTION): return "divine retribution";
 	case(CHANGE_DETECTION_RANGE): return "detection range";
 	case(LOW_HEALTH_DAMAGE_BUFF): return "damage buff when health is low";
+	case(GAIN_KILL_DAMAGE_BUFF): return "damage buff upon kill";
 
 	case(INSTILL_FEAR): return "instill fear";
 

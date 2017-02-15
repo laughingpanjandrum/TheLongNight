@@ -513,6 +513,18 @@ little of their original form remains."));
 	return wp;
 }
 
+weaponSharedPtr weapon_CorensGreataxe()
+{
+	weaponSharedPtr wp(new weapon("Coren's Greataxe", SWORD_TILE, TCODColor::darkCrimson,
+		"The enormous greataxe of Coren, whose thirst for blood was insatiable. Eventually the gods gave him \
+what he desired, and it drove him mad."));
+	wp->setBasicAttributes(100, SPEED_SLOW);
+	wp->addScalingType(SCALE_STR);
+	wp->addStatusEffect(EFFECT_BLEED, 10);
+	wp->setSpecialAttack(attack_Frenzy());
+	return wp;
+}
+
 weaponSharedPtr weapon_ProfaneGreatsword()
 {
 	weaponSharedPtr wp(new weapon("Profane Greatsword", SWORD_TILE, TCODColor::purple,
@@ -602,6 +614,18 @@ weaponSharedPtr shield_EtherealShield()
 		"A shield half-vanished from reality, pulsing with magical energy."));
 	wp->setDefence(0);
 	wp->setDamageResist(DAMAGE_MAGIC, 25);
+	wp->makeOffhand();
+	return wp;
+}
+
+weaponSharedPtr shield_SirPercivelsShield()
+{
+	weaponSharedPtr wp(new weapon("Sir Percivel's Shield", SHIELD_TILE, TCODColor::lightGreen,
+		"Sir Percivel sought the truth of the Rose's decline. Among the ruins of Coren's former victories, he discovered \
+what comes of those who rely on the strength of the old gods, and was immensely disturbed."));
+	wp->setDefence(20);
+	wp->setBleedResist(40);
+	wp->setDamagePenalty(10);
 	wp->makeOffhand();
 	return wp;
 }
