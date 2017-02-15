@@ -3243,6 +3243,20 @@ void game::initializeShops()
 	goremShop->addItem(prayer_WyrdChantOfStrength(), 25);
 	allShops.push_back(goremShop);
 
+	//Utric
+	shopSharedPtr utricShop = shopSharedPtr(new shop("utric_shop"));
+	utricShop->addItem(charm_ArcanaDrenchedCharm(), 100);
+	utricShop->addItem(spell_ArcaneBlade(), 50);
+	utricShop->addItem(spell_Frostbolt(), 50);
+	utricShop->addItem(spell_GottricsArcaneProtection(), 100);
+	allShops.push_back(utricShop);
+	//	Waterlogged Writings
+	shopSharedPtr waterlogged = shopSharedPtr(new shop("waterlogged_writings"));
+	waterlogged->addItem(spell_AcidBlade(), 50);
+	waterlogged->addItem(spell_AcidBurst(), 75);
+	waterlogged->addItem(spell_AcidSpit(), 50);
+	allUnlockableShops.push_back(waterlogged);
+
 }
 
 
@@ -3391,13 +3405,51 @@ void game::drawShopMenu(int atx, int aty)
 
 
 /*
+Checks to see if the player has unlocked any of this shopkeeper's extra inventories.
+If he has, appends them.
+*/
+void game::checkForStockUnlocks(monsterSharedPtr shopkeeper)
+{
+	//Loop through all the shopkeeper's unlocks
+	for (auto unlock : shopkeeper->getShopUnlocks()) {
+
+		//If player has the key corresponding to this unlock, UNLOCK IT
+		if (player->hasKey(unlock)) {
+
+			//Try to match them to shops we have
+			for (auto iter = allUnlockableShops.begin(); iter != allUnlockableShops.end(); iter++) {
+
+				//Compare
+				if ((*iter)->tag == unlock) {
+
+					//A match! Combine with the present shop
+					auto currentShop = getShopByTag(shopkeeper->getShopTag());
+					for (auto it : (*iter)->stock) {
+						currentShop->addItem(it, it->getPrice());
+					}
+					//And then delete this unlock, cuz we can only unlock it once
+					allUnlockableShops.erase(iter);
+					//And we're done; stop iterating
+					break;
+
+				}
+
+			}
+
+		}
+
+	}
+}
+
+
+/*
 Create menu for SHOPPING!
 */
 void game::setupShopMenu(personSharedPtr shopkeeper)
 {
 	monsterSharedPtr m = std::static_pointer_cast<monster>(shopkeeper);
 	//Update shop inventory
-	//m->checkForStockUnlocks(player);
+	checkForStockUnlocks(m);
 	//Create shopping menu
 	currentMenu = new menu(m->getName());
 	auto sh = getShopByTag(m->getShopTag());

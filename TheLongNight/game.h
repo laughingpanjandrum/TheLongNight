@@ -279,11 +279,13 @@ private:
 	void initializeShops();
 	shopSharedPtr getShopByTag(std::string tag);
 	shopVector allShops;
+	shopVector allUnlockableShops;
 	monsterSharedPtr currentShopkeeper;
 	void talkToNPC();
 	void doDialogue(monsterSharedPtr target);
 	bool checkForDialogueEvent(std::string line, monsterSharedPtr target);
 	void drawShopMenu(int atx, int aty);
+	void checkForStockUnlocks(monsterSharedPtr shopkeeper);
 	void setupShopMenu(personSharedPtr shopkeeper);
 	void buyItemFromShop();
 

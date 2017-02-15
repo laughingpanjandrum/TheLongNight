@@ -1307,6 +1307,8 @@ monsterSharedPtr npc_UtricTheRat()
 	m->setHealth(100);
 	m->isHostile = false;
 	m->isShopkeeper = true;
+	m->setShopTag("utric_shop");
+	m->addShopUnlock("waterlogged_writings");
 	//Starting stock
 	//m->addItemToStock(charm_ArcanaDrenchedCharm(), 100);
 	//m->addItemToStock(spell_ArcaneBlade(), 50);

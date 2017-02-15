@@ -60,6 +60,8 @@ public:
 	void checkForStockUnlocks(personSharedPtr unlocker);*/
 	void setShopTag(std::string tag) { shopTag = tag; }
 	std::string getShopTag() { return shopTag; }
+	void addShopUnlock(std::string tag) { shopUnlocks.push_back(tag); }
+	std::vector<std::string> getShopUnlocks() { return shopUnlocks; }
 
 	//Chatting with ur buddies
 	void loadDialogue(std::string filename);
@@ -92,6 +94,7 @@ protected:
 
 	//Shopkeeping
 	std::string shopTag;
+	std::vector<std::string> shopUnlocks;
 
 	//Chatting
 	std::vector<std::string> dialogue;
