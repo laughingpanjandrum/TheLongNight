@@ -1309,27 +1309,9 @@ monsterSharedPtr npc_UtricTheRat()
 	m->isShopkeeper = true;
 	m->setShopTag("utric_shop");
 	m->addShopUnlock("waterlogged_writings");
-	//Starting stock
-	//m->addItemToStock(charm_ArcanaDrenchedCharm(), 100);
-	//m->addItemToStock(spell_ArcaneBlade(), 50);
-	//m->addItemToStock(spell_GottricsArcaneProtection(), 40);
-	//m->addItemToStock(spell_Frostbolt(), 25);
-	////Unlock: Waterlogged Writings
-	//m->addStockUnlock(spell_AcidSpit(), 50, "waterlogged_writings");
-	//m->addStockUnlock(spell_AcidBurst(), 75, "waterlogged_writings");
-	//m->addStockUnlock(spell_AcidBlade(), 100, "waterlogged_writings");
-	////Unlock: Minas's Profaned Writings
-	//m->addStockUnlock(spell_ProfanedBlade(), 100, "minas_profaned_writings");
-	//m->addStockUnlock(spell_VoidJaunt(), 100, "minas_profaned_writings");
-	//m->addStockUnlock(spell_DevouringVoidCloud(), 150, "minas_profaned_writings");
-	////Unlock: Frostbitten Writings
-	//m->addStockUnlock(spell_FrostBlast(), 100, "frostbitten_writings");
-	//m->addStockUnlock(spell_FrozenBlade(), 100, "frostbitten_writings");
-	//m->addStockUnlock(spell_Chillbite(), 100, "frostbitten_writings");
-	////Unlock: Singed Writings
-	//m->addStockUnlock(spell_LightningStrike(), 100, "singed_writings");
-	//m->addStockUnlock(spell_ArcLightning(), 100, "singed_writings");
-	//m->addStockUnlock(spell_ElectricBlade(), 100, "singed_writings");
+	m->addShopUnlock("minas_profaned_writings");
+	m->addShopUnlock("frostbitten_writings");
+	m->addShopUnlock("singed_writings");
 	//Dialogue
 	m->loadDialogue("dialogue/utric_chat.txt");
 	return m;
@@ -1342,23 +1324,11 @@ monsterSharedPtr npc_MuiraClericOfTheRose()
 	m->setHealth(120);
 	m->isHostile = false;
 	m->isShopkeeper = true;
-	//Starting stock
-	//m->addItemToStock(charm_ClericsHolyPendant(), 100);
-	//m->addItemToStock(prayer_RayOfLight(), 25);
-	//m->addItemToStock(prayer_BlessedRadiance(), 50);
-	//m->addItemToStock(prayer_RemovePoison(), 25);
-	////With Orsyl's Tome
-	//m->addStockUnlock(prayer_ProfaneRadiance(), 50, "orsyls_tome_of_prayer");
-	//m->addStockUnlock(prayer_DrawOutTheBlood(), 75, "orsyls_tome_of_prayer");
-	////With Divine Moonspark Tome
-	//m->addStockUnlock(prayer_DivineRetribution(), 100, "divine_moonspark_tome");
-	//m->addStockUnlock(prayer_YutriasDivineSpark(), 100, "divine_moonspark_tome");
-	////With Divine Tome of the Emissary
-	//m->addStockUnlock(prayer_DivineRestoration(), 100, "divine_tome_of_the_emissary");
-	//m->addStockUnlock(prayer_DivineJudgement(), 100, "divine_tome_of_the_emissary");
-	////With Divine Nightmare Tome
-	//m->addStockUnlock(prayer_NightmarePrayer(), 150, "divine_nightmare_tome");
-	//m->addStockUnlock(prayer_WordOfUnmaking(), 150, "divine_nightmare_tome");
+	m->setShopTag("muira_shop");
+	m->addShopUnlock("orsyls_tome_of_prayer");
+	m->addShopUnlock("divine_moonspark_tome");
+	m->addShopUnlock("divine_tome_of_the_emissary");
+	m->addShopUnlock("divine_nightmare_tome");
 	//Dialogue
 	m->loadDialogue("dialogue/muira_chat.txt");
 	return m;
@@ -1371,20 +1341,8 @@ monsterSharedPtr npc_ElenaThePilgrim()
 	m->setHealth(80);
 	m->isHostile = false;
 	m->isShopkeeper = true;
-	//Starting stock
-	//m->addItemToStock(ranged_ThrowingKnives(), 50);
-	//m->addItemToStock(ranged_LaceratingKnives(), 75);
-	//m->addItemToStock(ranged_WitchsJar(), 75);
-	//m->addItemToStock(ranged_PyromancersFlask(), 75);
-	//m->addItemToStock(consumable_TinyGreenFlower(), 25);
-	//m->addItemToStock(consumable_InvigoratingTea(), 150);
-	////With Piece of Jade
-	//m->addStockUnlock(consumable_TinyRedFlower(), 50, "piece_of_jade");
-	//m->addStockUnlock(consumable_TinyGreenFlower(), 50, "piece_of_jade");
-	//m->addStockUnlock(ranged_CorrodingJar(), 50, "piece_of_jade");
-	//m->addStockUnlock(ranged_HeavyJavelin(), 50, "piece_of_jade");
-	//m->addStockUnlock(ranged_LightingJavelin(), 75, "piece_of_jade");
-	//m->addStockUnlock(ranged_FrostKnives(), 75, "piece_of_jade");
+	m->setShopTag("elena_shop");
+	m->addShopUnlock("piece_of_jade");
 	//Dialogue
 	m->loadDialogue("dialogue/elena_chat.txt");
 	return m;

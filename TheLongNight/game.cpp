@@ -3256,6 +3256,70 @@ void game::initializeShops()
 	waterlogged->addItem(spell_AcidBurst(), 75);
 	waterlogged->addItem(spell_AcidSpit(), 50);
 	allUnlockableShops.push_back(waterlogged);
+	//	Minas's Profaned Writings
+	shopSharedPtr profWrit = shopSharedPtr(new shop("minas_profaned_writings"));
+	profWrit->addItem(spell_ProfanedBlade(), 100);
+	profWrit->addItem(spell_VoidJaunt(), 100);
+	profWrit->addItem(spell_DevouringVoidCloud(), 150);
+	allUnlockableShops.push_back(profWrit);
+	//	Frostbitten Writings
+	shopSharedPtr frostbitten = shopSharedPtr(new shop("frostbitten_writings"));
+	frostbitten->addItem(spell_FrostBlast(), 100);
+	frostbitten->addItem(spell_FrozenBlade(), 100);
+	frostbitten->addItem(spell_Chillbite(), 100);
+	allUnlockableShops.push_back(frostbitten);
+	//	Singed Writings
+	shopSharedPtr singed = shopSharedPtr(new shop("singed_writings"));
+	singed->addItem(spell_LightningStrike(), 100);
+	singed->addItem(spell_ArcLightning(), 100);
+	singed->addItem(spell_ElectricBlade(), 100);
+	allUnlockableShops.push_back(singed);
+
+	//Muira
+	shopSharedPtr muiraShop = shopSharedPtr(new shop("muira_shop"));
+	muiraShop->addItem(charm_ClericsHolyPendant(), 100);
+	muiraShop->addItem(prayer_RayOfLight(), 25);
+	muiraShop->addItem(prayer_BlessedRadiance(), 50);
+	muiraShop->addItem(prayer_RemovePoison(), 25);
+	allShops.push_back(muiraShop);
+	//	Orsyl's Tome of Prayer
+	shopSharedPtr orsyl = shopSharedPtr(new shop("orsyls_tome_of_prayer"));
+	orsyl->addItem(prayer_ProfaneRadiance(), 50);
+	orsyl->addItem(prayer_DrawOutTheBlood(), 75);
+	allUnlockableShops.push_back(orsyl);
+	//	Divine Moonspark Tome
+	shop* moonspark = new shop("divine_moonspark_tome");
+	moonspark->addItem(prayer_DivineRetribution(), 100);
+	moonspark->addItem(prayer_YutriasDivineSpark(), 100);
+	allUnlockableShops.push_back(shopSharedPtr(moonspark));
+	//	Divine Tome of the Emissary
+	shop* emissary = new shop("divine_tome_of_the_emissary");
+	emissary->addItem(prayer_DivineRestoration(), 100);
+	emissary->addItem(prayer_DivineJudgement(), 100);
+	allUnlockableShops.push_back(shopSharedPtr(emissary));
+	//	Divine Nightmare Tome
+	shop* nightmare = new shop("divine_nightmare_tome");
+	nightmare->addItem(prayer_NightmarePrayer(), 150);
+	nightmare->addItem(prayer_WordOfUnmaking(), 150);
+	allUnlockableShops.push_back(shopSharedPtr(nightmare));
+
+	//Elena
+	shop* elena = new shop("elena_shop");
+	elena->addItem(ranged_ThrowingKnives(), 50);
+	elena->addItem(ranged_LaceratingKnives(), 75);
+	elena->addItem(ranged_WitchsJar(), 75);
+	elena->addItem(consumable_TinyGreenFlower(), 75);
+	elena->addItem(consumable_InvigoratingTea(), 150);
+	allShops.push_back(shopSharedPtr(elena));
+	//With Piece of Jade
+	shop* jade = new shop("piece_of_jade");
+	jade->addItem(consumable_TinyGreenFlower(), 50);
+	jade->addItem(ranged_PyromancersFlask(), 50);
+	jade->addItem(ranged_CorrodingJar(), 50);
+	jade->addItem(ranged_HeavyJavelin(), 100);
+	jade->addItem(ranged_LightingJavelin(), 100);
+	jade->addItem(ranged_FrostKnives(), 100);
+	allShops.push_back(shopSharedPtr(jade));
 
 }
 
