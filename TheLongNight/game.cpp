@@ -3872,6 +3872,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(oil_HolyWater());
 	player->addItem(oil_PyromancersOil());
 
+	player->addItem(runestone_BloodDrenchedRunestone());
 	player->addItem(runestone_CharredRunestone());
 	player->addItem(runestone_CorensRunestone());
 	player->addItem(runestone_IetrasRunestone());

@@ -93,6 +93,7 @@ miscItemSharedPtr runestone_CharredRunestone();
 miscItemSharedPtr runestone_KinslayersRunestone();
 miscItemSharedPtr runestone_StarweaversRunestone();
 miscItemSharedPtr runestone_ThundrousRunestone();
+miscItemSharedPtr runestone_BloodDrenchedRunestone();
 
 //Bone keys
 miscItemSharedPtr bones_KhallesBones();

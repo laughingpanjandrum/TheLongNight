@@ -390,6 +390,15 @@ they responded with holy lightning."));
 	return r;
 }
 
+miscItemSharedPtr runestone_BloodDrenchedRunestone()
+{
+	miscItemSharedPtr r(new miscItem("Blood-drenched Runestone", RUNESTONE_TILE, TCODColor::crimson,
+		"Runestone infused with gore from the heart of Coren, the Conqueror, whose blood was said to contain immense power."));
+	r->isRunestone = true;
+	r->setRune(new weaponRune("Blood Drenched Runestone", "Bloody", TCODColor::crimson, SCALE_BLEED));
+	return r;
+}
+
 
 /*
 	Bones

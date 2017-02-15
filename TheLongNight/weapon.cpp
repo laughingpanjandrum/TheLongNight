@@ -145,6 +145,11 @@ int weapon::getStatusEffectDamage(statusEffects etype)
 	if (currentBuff.etype == etype) {
 		total += currentBuff.bonusDamage;
 	}
+	//Check for bonus from runestones
+	if (rune != nullptr) {
+		if (rune->addScalingType == SCALE_BLEED && etype == EFFECT_BLEED)
+			total += 10 + total / 5;
+	}
 	//Done, return
 	return total;
 }
