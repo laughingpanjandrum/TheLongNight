@@ -21,6 +21,9 @@ game::game()
 	//Load in story events
 	loadStoryEvents("maps/storyFlags.txt");
 	loadTextDumps("dialogue/journalText.txt");
+
+	//Set up store inventories
+	initializeShops();
 	
 	//Character create
 	player = personSharedPtr (new person());
@@ -3218,9 +3221,42 @@ void game::drawLevelUpMenu(int atx, int aty)
 }
 
 
+
+
 /*
 	SHOPPING / TALKING
 */
+
+
+
+/*
+Initializes store inventories
+*/
+void game::initializeShops()
+{
+
+	//Gorem
+	shopSharedPtr goremShop = shopSharedPtr(new shop("gorem_shop"));
+	goremShop->addItem(shield_WoodenWyrdShield(), 25);
+	goremShop->addItem(chime_WyrdBellbranch(), 50);
+	goremShop->addItem(wand_BleachwoodWand(), 100);
+	goremShop->addItem(prayer_WyrdChantOfStrength(), 25);
+	allShops.push_back(goremShop);
+
+}
+
+
+/*
+Finds the shop with the corresponding nametag.
+*/
+shopSharedPtr game::getShopByTag(std::string tag)
+{
+	for (auto s : allShops) {
+		if (s->tag == tag)
+			return s;
+	}
+	return nullptr;
+}
 
 
 //Look for someone to talk to
@@ -3361,10 +3397,11 @@ void game::setupShopMenu(personSharedPtr shopkeeper)
 {
 	monsterSharedPtr m = std::static_pointer_cast<monster>(shopkeeper);
 	//Update shop inventory
-	m->checkForStockUnlocks(player);
+	//m->checkForStockUnlocks(player);
 	//Create shopping menu
-	currentMenu = new menu(shopkeeper->getName());
-	for (auto it : m->getStock()) {
+	currentMenu = new menu(m->getName());
+	auto sh = getShopByTag(m->getShopTag());
+	for (auto it : sh->stock) {
 		currentMenu->addElement(it);
 	}
 	//We keep track of who the shopkeeper is
@@ -3379,6 +3416,7 @@ Try to buy selected menu item
 void game::buyItemFromShop()
 {
 	itemSharedPtr it = std::static_pointer_cast<item>(currentMenu->getSelectedItem());
+	shopSharedPtr currentShop = getShopByTag(currentShopkeeper->getShopTag());
 	if (it != nullptr) {
 		if (fragments >= it->getPrice()) {
 			//Pay the COST
@@ -3386,7 +3424,7 @@ void game::buyItemFromShop()
 			//But get the ITEM
 			pickUpItem(it);
 			//Remove from menu and shopkeeper's inventory
-			currentShopkeeper->removeItemFromStock(it);
+			currentShop->removeItem(it);
 			currentMenu->removeElement(it);
 		}
 	}

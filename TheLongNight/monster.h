@@ -53,11 +53,13 @@ public:
 	void setFragmentsDropped(int f) { dropsFragments = f; }
 
 	//Shopkeeping
-	void addItemToStock(itemSharedPtr it, int price);
+	/*void addItemToStock(itemSharedPtr it, int price);
 	void addStockUnlock(itemSharedPtr it, int price, std::string unlockCode);
 	void removeItemFromStock(itemSharedPtr it);
 	itemVector getStock() { return stock; }
-	void checkForStockUnlocks(personSharedPtr unlocker);
+	void checkForStockUnlocks(personSharedPtr unlocker);*/
+	void setShopTag(std::string tag) { shopTag = tag; }
+	std::string getShopTag() { return shopTag; }
 
 	//Chatting with ur buddies
 	void loadDialogue(std::string filename);
@@ -89,8 +91,7 @@ protected:
 	int dropsFragments = 0;
 
 	//Shopkeeping
-	itemVector stock;
-	stockUnlockVector stockUnlocks;
+	std::string shopTag;
 
 	//Chatting
 	std::vector<std::string> dialogue;

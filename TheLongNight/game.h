@@ -56,10 +56,34 @@ struct areaText {
 };
 
 
+//Shop list
+struct shop {
+	//Basic constructors
+	shop(std::string tag) : tag(tag) {}
+	//Methods
+	void addItem(itemSharedPtr it, int price) { 
+		it->isGlittery = false;
+		it->setPrice(price);
+		stock.push_back(it); 
+	}
+	void removeItem(itemSharedPtr it) {
+		auto iter = std::find(stock.begin(), stock.end(), it);
+		if (iter != stock.end())
+			stock.erase(iter);
+	}
+	//Data
+	std::string tag; //How we're identified
+	itemVector stock; //List of items sold
+};
+
+
 typedef std::vector<message> messageVector;
 typedef std::vector<savePoint> savePointVector;
 typedef std::vector<std::string> stringVector;
 typedef std::vector<areaText*> areaTextVector;
+
+typedef std::shared_ptr<shop> shopSharedPtr;
+typedef std::vector<shopSharedPtr> shopVector;
 
 
 
@@ -252,6 +276,9 @@ private:
 	void drawLevelUpMenu(int atx, int aty);
 
 	//Shopping/chatting
+	void initializeShops();
+	shopSharedPtr getShopByTag(std::string tag);
+	shopVector allShops;
 	monsterSharedPtr currentShopkeeper;
 	void talkToNPC();
 	void doDialogue(monsterSharedPtr target);
@@ -259,6 +286,7 @@ private:
 	void drawShopMenu(int atx, int aty);
 	void setupShopMenu(personSharedPtr shopkeeper);
 	void buyItemFromShop();
+
 
 	//Story event tracking!
 	std::vector<std::string> storyFlags;

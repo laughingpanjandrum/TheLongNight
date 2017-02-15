@@ -84,59 +84,60 @@ monsterSharedPtr monster::getRandomSpawn()
 }
 
 
-/*
-For shopkeeper NPCs.
-*/
-void monster::addItemToStock(itemSharedPtr it, int price)
-{
-	it->isGlittery = false;
-	it->setPrice(price);
-	stock.push_back(it);
-}
 
-/*
-These items are unlocked if the player has a specific key.
-*/
-void monster::addStockUnlock(itemSharedPtr it, int price, std::string unlockCode)
-{
-	it->isGlittery = false;
-	it->setPrice(price);
-	stockUnlocks.push_back(new unlockableStock(it,unlockCode));
-}
-
-/*
-Cause we bought something!
-*/
-void monster::removeItemFromStock(itemSharedPtr it)
-{
-	auto iter = std::find(stock.begin(), stock.end(), it);
-	if (iter != stock.end())
-		stock.erase(iter);
-}
-
-
-/*
-See if the given person has a key that will unlock additional stock items.
-*/
-void monster::checkForStockUnlocks(personSharedPtr unlocker)
-{
-	//Keep track of stuff to remove, if any
-	stockUnlockVector toRemove;
-	//Have a look
-	for (auto unlock : stockUnlocks) {
-		if (unlocker->hasKey(unlock->unlockCode)) {
-			//Yup, here's one!
-			stock.push_back(unlock->it);
-			//And make sure we only add it once!
-			toRemove.push_back(unlock);
-		}
-	}
-	//Remove anything that we unlocked from the list to ensure it can't be unlocked twice
-	for (auto rem : toRemove) {
-		auto iter = std::find(stockUnlocks.begin(), stockUnlocks.end(), rem);
-		stockUnlocks.erase(iter);
-	}
-}
+///*
+//For shopkeeper NPCs.
+//*/
+//void monster::addItemToStock(itemSharedPtr it, int price)
+//{
+//	it->isGlittery = false;
+//	it->setPrice(price);
+//	stock.push_back(it);
+//}
+//
+///*
+//These items are unlocked if the player has a specific key.
+//*/
+//void monster::addStockUnlock(itemSharedPtr it, int price, std::string unlockCode)
+//{
+//	it->isGlittery = false;
+//	it->setPrice(price);
+//	stockUnlocks.push_back(new unlockableStock(it,unlockCode));
+//}
+//
+///*
+//Cause we bought something!
+//*/
+//void monster::removeItemFromStock(itemSharedPtr it)
+//{
+//	auto iter = std::find(stock.begin(), stock.end(), it);
+//	if (iter != stock.end())
+//		stock.erase(iter);
+//}
+//
+//
+///*
+//See if the given person has a key that will unlock additional stock items.
+//*/
+//void monster::checkForStockUnlocks(personSharedPtr unlocker)
+//{
+//	//Keep track of stuff to remove, if any
+//	stockUnlockVector toRemove;
+//	//Have a look
+//	for (auto unlock : stockUnlocks) {
+//		if (unlocker->hasKey(unlock->unlockCode)) {
+//			//Yup, here's one!
+//			stock.push_back(unlock->it);
+//			//And make sure we only add it once!
+//			toRemove.push_back(unlock);
+//		}
+//	}
+//	//Remove anything that we unlocked from the list to ensure it can't be unlocked twice
+//	for (auto rem : toRemove) {
+//		auto iter = std::find(stockUnlocks.begin(), stockUnlocks.end(), rem);
+//		stockUnlocks.erase(iter);
+//	}
+//}
 
 
 /*
@@ -1289,10 +1290,11 @@ you approach."));
 	m->setHealth(800);
 	m->isShopkeeper = true;
 	m->isHostile = false;
-	m->addItemToStock(shield_WoodenWyrdShield(), 25);
+	/*m->addItemToStock(shield_WoodenWyrdShield(), 25);
 	m->addItemToStock(chime_WyrdBellbranch(), 50);
 	m->addItemToStock(wand_BleachwoodWand(), 100);
-	m->addItemToStock(prayer_WyrdChantOfStrength(), 25);
+	m->addItemToStock(prayer_WyrdChantOfStrength(), 25);*/
+	m->setShopTag("gorem_shop");
 	//Chatting
 	m->loadDialogue("dialogue/gorem_chat.txt");
 	return m;
@@ -1306,26 +1308,26 @@ monsterSharedPtr npc_UtricTheRat()
 	m->isHostile = false;
 	m->isShopkeeper = true;
 	//Starting stock
-	m->addItemToStock(charm_ArcanaDrenchedCharm(), 100);
-	m->addItemToStock(spell_ArcaneBlade(), 50);
-	m->addItemToStock(spell_GottricsArcaneProtection(), 40);
-	m->addItemToStock(spell_Frostbolt(), 25);
-	//Unlock: Waterlogged Writings
-	m->addStockUnlock(spell_AcidSpit(), 50, "waterlogged_writings");
-	m->addStockUnlock(spell_AcidBurst(), 75, "waterlogged_writings");
-	m->addStockUnlock(spell_AcidBlade(), 100, "waterlogged_writings");
-	//Unlock: Minas's Profaned Writings
-	m->addStockUnlock(spell_ProfanedBlade(), 100, "minas_profaned_writings");
-	m->addStockUnlock(spell_VoidJaunt(), 100, "minas_profaned_writings");
-	m->addStockUnlock(spell_DevouringVoidCloud(), 150, "minas_profaned_writings");
-	//Unlock: Frostbitten Writings
-	m->addStockUnlock(spell_FrostBlast(), 100, "frostbitten_writings");
-	m->addStockUnlock(spell_FrozenBlade(), 100, "frostbitten_writings");
-	m->addStockUnlock(spell_Chillbite(), 100, "frostbitten_writings");
-	//Unlock: Singed Writings
-	m->addStockUnlock(spell_LightningStrike(), 100, "singed_writings");
-	m->addStockUnlock(spell_ArcLightning(), 100, "singed_writings");
-	m->addStockUnlock(spell_ElectricBlade(), 100, "singed_writings");
+	//m->addItemToStock(charm_ArcanaDrenchedCharm(), 100);
+	//m->addItemToStock(spell_ArcaneBlade(), 50);
+	//m->addItemToStock(spell_GottricsArcaneProtection(), 40);
+	//m->addItemToStock(spell_Frostbolt(), 25);
+	////Unlock: Waterlogged Writings
+	//m->addStockUnlock(spell_AcidSpit(), 50, "waterlogged_writings");
+	//m->addStockUnlock(spell_AcidBurst(), 75, "waterlogged_writings");
+	//m->addStockUnlock(spell_AcidBlade(), 100, "waterlogged_writings");
+	////Unlock: Minas's Profaned Writings
+	//m->addStockUnlock(spell_ProfanedBlade(), 100, "minas_profaned_writings");
+	//m->addStockUnlock(spell_VoidJaunt(), 100, "minas_profaned_writings");
+	//m->addStockUnlock(spell_DevouringVoidCloud(), 150, "minas_profaned_writings");
+	////Unlock: Frostbitten Writings
+	//m->addStockUnlock(spell_FrostBlast(), 100, "frostbitten_writings");
+	//m->addStockUnlock(spell_FrozenBlade(), 100, "frostbitten_writings");
+	//m->addStockUnlock(spell_Chillbite(), 100, "frostbitten_writings");
+	////Unlock: Singed Writings
+	//m->addStockUnlock(spell_LightningStrike(), 100, "singed_writings");
+	//m->addStockUnlock(spell_ArcLightning(), 100, "singed_writings");
+	//m->addStockUnlock(spell_ElectricBlade(), 100, "singed_writings");
 	//Dialogue
 	m->loadDialogue("dialogue/utric_chat.txt");
 	return m;
@@ -1339,22 +1341,22 @@ monsterSharedPtr npc_MuiraClericOfTheRose()
 	m->isHostile = false;
 	m->isShopkeeper = true;
 	//Starting stock
-	m->addItemToStock(charm_ClericsHolyPendant(), 100);
-	m->addItemToStock(prayer_RayOfLight(), 25);
-	m->addItemToStock(prayer_BlessedRadiance(), 50);
-	m->addItemToStock(prayer_RemovePoison(), 25);
-	//With Orsyl's Tome
-	m->addStockUnlock(prayer_ProfaneRadiance(), 50, "orsyls_tome_of_prayer");
-	m->addStockUnlock(prayer_DrawOutTheBlood(), 75, "orsyls_tome_of_prayer");
-	//With Divine Moonspark Tome
-	m->addStockUnlock(prayer_DivineRetribution(), 100, "divine_moonspark_tome");
-	m->addStockUnlock(prayer_YutriasDivineSpark(), 100, "divine_moonspark_tome");
-	//With Divine Tome of the Emissary
-	m->addStockUnlock(prayer_DivineRestoration(), 100, "divine_tome_of_the_emissary");
-	m->addStockUnlock(prayer_DivineJudgement(), 100, "divine_tome_of_the_emissary");
-	//With Divine Nightmare Tome
-	m->addStockUnlock(prayer_NightmarePrayer(), 150, "divine_nightmare_tome");
-	m->addStockUnlock(prayer_WordOfUnmaking(), 150, "divine_nightmare_tome");
+	//m->addItemToStock(charm_ClericsHolyPendant(), 100);
+	//m->addItemToStock(prayer_RayOfLight(), 25);
+	//m->addItemToStock(prayer_BlessedRadiance(), 50);
+	//m->addItemToStock(prayer_RemovePoison(), 25);
+	////With Orsyl's Tome
+	//m->addStockUnlock(prayer_ProfaneRadiance(), 50, "orsyls_tome_of_prayer");
+	//m->addStockUnlock(prayer_DrawOutTheBlood(), 75, "orsyls_tome_of_prayer");
+	////With Divine Moonspark Tome
+	//m->addStockUnlock(prayer_DivineRetribution(), 100, "divine_moonspark_tome");
+	//m->addStockUnlock(prayer_YutriasDivineSpark(), 100, "divine_moonspark_tome");
+	////With Divine Tome of the Emissary
+	//m->addStockUnlock(prayer_DivineRestoration(), 100, "divine_tome_of_the_emissary");
+	//m->addStockUnlock(prayer_DivineJudgement(), 100, "divine_tome_of_the_emissary");
+	////With Divine Nightmare Tome
+	//m->addStockUnlock(prayer_NightmarePrayer(), 150, "divine_nightmare_tome");
+	//m->addStockUnlock(prayer_WordOfUnmaking(), 150, "divine_nightmare_tome");
 	//Dialogue
 	m->loadDialogue("dialogue/muira_chat.txt");
 	return m;
@@ -1368,19 +1370,19 @@ monsterSharedPtr npc_ElenaThePilgrim()
 	m->isHostile = false;
 	m->isShopkeeper = true;
 	//Starting stock
-	m->addItemToStock(ranged_ThrowingKnives(), 50);
-	m->addItemToStock(ranged_LaceratingKnives(), 75);
-	m->addItemToStock(ranged_WitchsJar(), 75);
-	m->addItemToStock(ranged_PyromancersFlask(), 75);
-	m->addItemToStock(consumable_TinyGreenFlower(), 25);
-	m->addItemToStock(consumable_InvigoratingTea(), 150);
-	//With Piece of Jade
-	m->addStockUnlock(consumable_TinyRedFlower(), 50, "piece_of_jade");
-	m->addStockUnlock(consumable_TinyGreenFlower(), 50, "piece_of_jade");
-	m->addStockUnlock(ranged_CorrodingJar(), 50, "piece_of_jade");
-	m->addStockUnlock(ranged_HeavyJavelin(), 50, "piece_of_jade");
-	m->addStockUnlock(ranged_LightingJavelin(), 75, "piece_of_jade");
-	m->addStockUnlock(ranged_FrostKnives(), 75, "piece_of_jade");
+	//m->addItemToStock(ranged_ThrowingKnives(), 50);
+	//m->addItemToStock(ranged_LaceratingKnives(), 75);
+	//m->addItemToStock(ranged_WitchsJar(), 75);
+	//m->addItemToStock(ranged_PyromancersFlask(), 75);
+	//m->addItemToStock(consumable_TinyGreenFlower(), 25);
+	//m->addItemToStock(consumable_InvigoratingTea(), 150);
+	////With Piece of Jade
+	//m->addStockUnlock(consumable_TinyRedFlower(), 50, "piece_of_jade");
+	//m->addStockUnlock(consumable_TinyGreenFlower(), 50, "piece_of_jade");
+	//m->addStockUnlock(ranged_CorrodingJar(), 50, "piece_of_jade");
+	//m->addStockUnlock(ranged_HeavyJavelin(), 50, "piece_of_jade");
+	//m->addStockUnlock(ranged_LightingJavelin(), 75, "piece_of_jade");
+	//m->addStockUnlock(ranged_FrostKnives(), 75, "piece_of_jade");
 	//Dialogue
 	m->loadDialogue("dialogue/elena_chat.txt");
 	return m;
@@ -1406,7 +1408,7 @@ monsterSharedPtr npc_Ydella()
 	m->isShopkeeper = true;
 	m->loadDialogue("dialogue/ydella_chat.txt");
 	//Items are all acquired via HEART-TRADING
-	m->addStockUnlock(charm_WretchedFleshBand(), 200, "wretched_heart");
+	/*m->addStockUnlock(charm_WretchedFleshBand(), 200, "wretched_heart");
 	m->addStockUnlock(charm_WretchedFleshmask(), 200, "wretched_heart");
 	m->addStockUnlock(prayer_SinkBeneath(), 200, "fishborn_heart");
 	m->addStockUnlock(weapon_OldCrowsLongKnife(), 200, "old_crows_heart");
@@ -1417,6 +1419,7 @@ monsterSharedPtr npc_Ydella()
 	m->addStockUnlock(weapon_LadyTvertsClaws(), 150, "lady_tverts_heart");
 	m->addStockUnlock(wand_SparrowsStaff(), 300, "dead_sparrows_heart");
 	m->addStockUnlock(weapon_CorensGreataxe(), 300, "corens_heart");
+	m->addStockUnlock(charm_FrenzyCharm(), 300, "corens_heart");*/
 	return m;
 }
 
