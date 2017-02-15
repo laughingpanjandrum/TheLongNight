@@ -207,11 +207,6 @@ public:
 	void setCurrentConsumable(consumableSharedPtr c);
 	void restoreItemsToMax(); //Replenishes consumables
 
-	//Special spell effect creates a mirror-image of us that mimics our actions
-	personSharedPtr createMirrorImage();
-	personSharedPtr getMirrorImage() { return mirrorImage; }
-	bool hasMirrorImage() { return mirrorImage != nullptr; }
-
 	//Keys
 	bool hasKey(std::string keyTag);
 
@@ -273,9 +268,6 @@ protected:
 	int selectedSpell = 0; //Highlighted spell
 	int baseSpellPower = 0; //Flat bonus to spell power
 	int baseDivinePower = 0; //Flat bonus to divine power
-
-	//Special spell effect gives us a mirror image of ourselves
-	personSharedPtr mirrorImage;
 
 	//Current thing we're trying to kill
 	personSharedPtr target;

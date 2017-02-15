@@ -90,6 +90,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return consumable_BloodDrinkersEyes();
 	else if (handle == "intoxicating_wine")
 		return consumable_IntoxicatingWine();
+	else if (handle == "witchwater_flask")
+		return consumable_WitchwaterFlask();
 	else if (handle == "black_honey")
 		return consumable_BlackHoney();
 
@@ -192,6 +194,11 @@ itemSharedPtr getItemByHandle(std::string handle)
 	else if (handle == "sparrow_knights_armour")
 		return armour_SparrowKnightsArmour();
 
+	else if (handle == "moshkas_headpiece")
+		return headgear_MoshkasHeadpiece();
+	else if (handle == "moshkas_robes")
+		return armour_MoshkasRobes();
+
 	else if (handle == "sir_percivels_helm")
 		return headgear_SirPercivelsHelm();
 
@@ -242,6 +249,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return bones_KhallesBones();
 	else if (handle == "siltras_bones")
 		return bones_SiltrasBones();
+	else if (handle == "corens_bones")
+		return bones_CorensBones();
 
 	//SPELLBOOKS
 	else if (handle == "waterlogged_writings")
@@ -406,7 +415,6 @@ std::string getEffectName(effect e)
 	case(GAIN_DIVINE_RETRIBUTION): return "divine retribution";
 	case(CHANGE_DETECTION_RANGE): return "detection range";
 	case(LOW_HEALTH_DAMAGE_BUFF): return "damage buff when health is low";
-	case(CREATE_MIRROR_IMAGE): return "create mirror image";
 
 	case(INSTILL_FEAR): return "instill fear";
 

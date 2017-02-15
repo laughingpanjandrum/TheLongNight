@@ -642,6 +642,18 @@ weaponSharedPtr wand_BleachwoodWand()
 	return wp;
 }
 
+weaponSharedPtr wand_SparrowsStaff()
+{
+	weaponSharedPtr wp(new weapon("Sparrow's Staff", STAFF_TILE, TCODColor::fuchsia,
+		"The crooked staff of the Dead Sparrow, who wrought it during his transitory visits to worlds beyond our own."));
+	wp->setBasicAttributes(5, SPEED_NORMAL);
+	wp->setSpellstoreSize(8);
+	wp->setSpellPower(80);
+	wp->setSpecialAttack(ability_TransitorySurge());
+	wp->makeOffhand();
+	return wp;
+}
+
 weaponSharedPtr chime_ClericsCrackedChime()
 {
 	weaponSharedPtr wp(new weapon("Cleric's Cracked Chime", CHIME_TILE, TCODColor::darkYellow,

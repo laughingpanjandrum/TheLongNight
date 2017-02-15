@@ -114,6 +114,15 @@ miscItemSharedPtr key_DeadSparrowKey()
 	return m;
 }
 
+miscItemSharedPtr key_MoshkasKey()
+{
+	miscItemSharedPtr m(new miscItem("Moshka's Key", KEY_TILE, TCODColor::fuchsia,
+		"Moshka, mentor of the Sparrow, entrusted his old friend with this precious key, before departing to learn the \
+mysteries of the stars."));
+	m->setKeyTag("moshkas_key");
+	return m;
+}
+
 miscItemSharedPtr key_WatchfulEyestalk()
 {
 	miscItemSharedPtr m(new miscItem("Watchful Eyestalk", KEY_TILE, TCODColor::darkGreen,
@@ -195,6 +204,15 @@ miscItemSharedPtr heart_LadyTvertsHeart()
 	miscItemSharedPtr h(new miscItem("Lady Tvert's Heart", HEART_TILE, TCODColor::lightBlue,
 		"Heart plucked from the breast of Lady Tvert, whose pact with the White Fog Herald brought ruin to her house."));
 	h->setKeyTag("lady_tverts_heart");
+	return h;
+}
+
+miscItemSharedPtr heart_DeadSparrowsHeart()
+{
+	miscItemSharedPtr h(new miscItem("Dead Sparrow's Heart", HEART_TILE, TCODColor::fuchsia,
+		"The ethereal heart buried in the breast of the Dead Sparrow, whose search for arcane power \
+brought him too close to the mysteries of the gods."));
+	h->setKeyTag("dead_sparrows_heart");
 	return h;
 }
 
@@ -385,6 +403,15 @@ miscItemSharedPtr bones_SiltrasBones()
 was greatly changed, and that the old gods gave her a fitting reward for her deeds."));
 	b->isKey = true;
 	b->setKeyTag("siltras_bones");
+	return b;
+}
+
+miscItemSharedPtr bones_CorensBones()
+{
+	miscItemSharedPtr b(new miscItem("Coren's Bones", KEY_TILE, TCODColor::lightestYellow,
+		"All that remains of Coren, who prayed to the old gods for glory and victory, and who once laid waste to the\
+ lowlands. After the gods had slaked their thirst, his bones were laid to rest in the muck."));
+	b->setKeyTag("corens_bones");
 	return b;
 }
 

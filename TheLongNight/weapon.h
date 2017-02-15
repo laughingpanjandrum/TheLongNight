@@ -171,6 +171,7 @@ weaponSharedPtr wand_DriftwoodWand();
 weaponSharedPtr wand_FishmansToadstaff();
 weaponSharedPtr wand_EtherealWand();
 weaponSharedPtr wand_BleachwoodWand();
+weaponSharedPtr wand_SparrowsStaff();
 
 //Chimes
 weaponSharedPtr chime_ClericsCrackedChime();

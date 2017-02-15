@@ -914,15 +914,6 @@ void person::restoreItemsToMax()
 }
 
 
-/*
-Create a magical duplicate of ourselves, which does whatever we do.
-*/
-personSharedPtr person::createMirrorImage()
-{
-	mirrorImage = personSharedPtr(new person(*this));
-	mirrorImage->setMaxHealth(1);
-	return mirrorImage;
-}
 
 
 

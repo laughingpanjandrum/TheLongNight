@@ -53,10 +53,10 @@ const int EMISSARY_TILE = 69;
 const int HERALD_TILE = 72;
 
 const int ARISTOCRAT_TILE = 108;
-
 const int MAGE_TILE = 109;
+const int STARSPAWN_TILE = 83;
 
-const int GOREM_TILE = 327; //This is a golem-dude
+const int GOREM_TILE = 327; 
 
 //Items
 const int SWORD_TILE = 267;

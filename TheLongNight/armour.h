@@ -71,6 +71,9 @@ armourSharedPtr armour_EtherealRobes();
 armourSharedPtr headgear_SparrowKnightsHelm();
 armourSharedPtr armour_SparrowKnightsArmour();
 
+armourSharedPtr headgear_MoshkasHeadpiece();
+armourSharedPtr armour_MoshkasRobes();
+
 armourSharedPtr headgear_SirPercivelsHelm();
 
 #endif

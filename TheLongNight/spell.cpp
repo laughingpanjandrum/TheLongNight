@@ -289,6 +289,16 @@ spellSharedPtr ability_EtherealSurge()
 	return sp;
 }
 
+spellSharedPtr ability_TransitorySurge()
+{
+	spellSharedPtr sp(new spell("Transitory Surge", SPELL_TILE, TCODColor::fuchsia,
+		"Grants a temporary surge of magical power."));
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(SCALE_NEXT_SPELL, 200);
+	sp->setVigourCost(1);
+	return sp;
+}
+
 spellSharedPtr ability_Metamagic()
 {
 	spellSharedPtr sp(new spell("Metamagic", SPELL_TILE, TCODColor::white,
@@ -576,17 +586,6 @@ spellSharedPtr spell_SpitFire()
 	sp->setAttackRange(8);
 	sp->addEffect(APPLY_FIRE_DAMAGE, 20);
 	sp->setVigourCost(1);
-	sp->usesSpellPower = true;
-	return sp;
-}
-
-spellSharedPtr spell_MirrorImage()
-{
-	spellSharedPtr sp(new spell("Mirror Image", SPELL_TILE, TCODColor::fuchsia,
-		"Create a mirror image that mimics your actions."));
-	sp->setAttackType(ATTACK_BUFF_SELF);
-	sp->addEffect(CREATE_MIRROR_IMAGE, 1);
-	sp->setVigourCost(3);
 	sp->usesSpellPower = true;
 	return sp;
 }
@@ -913,6 +912,15 @@ spellSharedPtr ability_Gnash()
 	sp->addEffect(HEAL_CASTER, 100);
 	sp->addEffect(APPLY_ENTANGLING, 1);
 	sp->addEffect(APPLY_BLEED_DAMAGE, 10);
+	return sp;
+}
+
+spellSharedPtr ability_DevouringGaze()
+{
+	spellSharedPtr sp(new spell("Devouring Gaze", SPELL_TILE, TCODColor::purple));
+	sp->setAttackType(ATTACK_RANGE, 1);
+	sp->addEffect(APPLY_BLINDING, 1);
+	sp->addEffect(APPLY_POISON_DAMAGE, 10);
 	return sp;
 }
 

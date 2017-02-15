@@ -186,6 +186,10 @@ monsterSharedPtr monster_EtherealMage();
 monsterSharedPtr monster_DecomposingKnight();
 monsterSharedPtr monster_LifedrinkerWraith();
 monsterSharedPtr monster_TheDeadSparrow();
+monsterSharedPtr monster_MirrorImage();
+
+//Moshka's Observatory
+monsterSharedPtr monster_Starspawned();
 
 //The Void
 monsterSharedPtr monster_VoidTouched();

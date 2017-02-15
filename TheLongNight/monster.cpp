@@ -1136,8 +1136,48 @@ monsterSharedPtr monster_TheDeadSparrow()
 	m->setMeleeStats(10, SPEED_NORMAL);
 	m->keepsDistance = true;
 	m->setSpellPower(150);
-	//m->addSpellKnown(spell_MagicMissile());
-	m->addSpellKnown(spell_MirrorImage());
+	m->addSpellKnown(spell_MagicMissile());
+	m->setSpellCastChance(50);
+	m->isBoss = true;
+	m->addSpawnableCreature("mirror_image");
+	m->setSpawnChance(75);
+	m->setFragmentsDropped(3000);
+	m->addItemDrop(key_MoshkasKey());
+	m->addItemDrop(heart_DeadSparrowsHeart());
+	return m;
+}
+
+monsterSharedPtr monster_MirrorImage()
+{
+	monsterSharedPtr m(new monster("Mirror Image", GHOST_TILE, TCODColor::desaturatedFuchsia,
+		"A faded image of the Dead Sparrow, half-lost in the aether."));
+	m->setHealth(1);
+	m->setDefence(DAMAGE_MAGIC, 90);
+	m->setMoveStats(SPEED_FAST);
+	m->setSpellPower(75);
+	m->addSpellKnown(spell_MagicMissile());
+	m->addSpellKnown(spell_ArcLightning());
+	m->setSpellCastChance(80);
+	return m;
+}
+
+
+/*
+	Moshka's Observatory
+*/
+
+monsterSharedPtr monster_Starspawned()
+{
+	monsterSharedPtr m(new monster("Starspawned", STARSPAWN_TILE, TCODColor::lighterPurple,
+		"This shrieking mass of eyes floats on tattered wings."));
+	m->setHealth(100);
+	m->setDefence(DAMAGE_PHYSICAL, 10);
+	m->setDefence(DAMAGE_FIRE, 25);
+	m->setDefence(DAMAGE_MAGIC, 25);
+	m->addWeakness(DAMAGE_ELECTRIC);
+	m->addSpellKnown(ability_DevouringGaze());
+	m->setMoveStats(SPEED_SLOW);
+	m->equipItem(weaponSharedPtr(new weapon(15, SPEED_FAST, EFFECT_POISON, 15)));
 	m->setSpellCastChance(20);
 	return m;
 }
@@ -1301,6 +1341,7 @@ monsterSharedPtr npc_Ydella()
 	m->addStockUnlock(weapon_SpiderboneShard(), 200, "venomous_spider_heart");
 	m->addStockUnlock(prayer_SpidersPrayer(), 100, "venomous_spider_heart");
 	m->addStockUnlock(weapon_LadyTvertsClaws(), 150, "lady_tverts_heart");
+	m->addStockUnlock(wand_SparrowsStaff(), 300, "dead_sparrows_heart");
 	return m;
 }
 
@@ -1464,6 +1505,12 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return monster_LifedrinkerWraith();
 	else if (handle == "dead_sparrow")
 		return monster_TheDeadSparrow();
+	else if (handle == "mirror_image")
+		return monster_MirrorImage();
+
+	//Moshka's Observatory
+	else if (handle == "starspawned")
+		return monster_Starspawned();
 
 	//The Void
 	else if (handle == "void_touched")

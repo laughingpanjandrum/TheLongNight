@@ -218,7 +218,6 @@ private:
 	void pullTarget(personSharedPtr puller, personSharedPtr target, int distance);
 	bool waterWarp(personSharedPtr target, int distance);
 	void teleport(personSharedPtr target, int distance);
-	void createMirrorImage(personSharedPtr target);
 
 	//Player-only SPECIAL MAP JUMPS
 	void teleportToVoid();

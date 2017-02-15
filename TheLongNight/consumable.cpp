@@ -78,11 +78,23 @@ consumableSharedPtr consumable_IntoxicatingWine()
 	return c;
 }
 
+consumableSharedPtr consumable_WitchwaterFlask()
+{
+	consumableSharedPtr c(new consumable("Witchwater Flask", VIAL_TILE, TCODColor::fuchsia,
+		"A flask of invigorating witchwater, said to break down the barriers between our world and reality. Moshka \
+was a great believer in witchwater, and consumed it in copious amounts."));
+	c->addEffect(INCREASE_SPELL_POWER);
+	c->addEffect(APPLY_DAMAGE_PENALTY);
+	c->setPotency(25);
+	c->addsPermanentBuff = true;
+	return c;
+}
+
 consumableSharedPtr consumable_BlackHoney()
 {
 	consumableSharedPtr c(new consumable("Black Honey", VIAL_TILE, TCODColor::darkPurple,
-		"Black honey, once the principle export of the village, was said to induce vivid dreams. But if one's life is filled with bloodshed,\
- one's dreams are unlikely to bring peace."));
+		"Black honey, once the principle export of the village, was said to induce vivid dreams. But if one's life is filled \
+with bloodshed, one's dreams are unlikely to bring peace."));
 	c->addEffect(APPLY_DAMAGE_PENALTY);
 	c->addEffect(INCREASE_SPELL_POWER);
 	c->addEffect(INCREASE_PRAYER_POWER);

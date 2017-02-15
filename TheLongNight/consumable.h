@@ -74,6 +74,7 @@ consumableSharedPtr consumable_TinyRedFlower();
 consumableSharedPtr consumable_TinyGreenFlower();
 consumableSharedPtr consumable_BloodDrinkersEyes();
 consumableSharedPtr consumable_IntoxicatingWine();
+consumableSharedPtr consumable_WitchwaterFlask();
 consumableSharedPtr consumable_BlackHoney();
 
 consumableSharedPtr ranged_ThrowingKnives();

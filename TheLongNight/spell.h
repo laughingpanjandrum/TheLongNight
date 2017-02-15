@@ -99,6 +99,7 @@ spellSharedPtr attack_EtherealStrike();
 spellSharedPtr ability_PowerSurge();
 spellSharedPtr ability_AcidInfusion();
 spellSharedPtr ability_EtherealSurge();
+spellSharedPtr ability_TransitorySurge();
 spellSharedPtr ability_Metamagic();
 spellSharedPtr ability_DivineFavour();
 spellSharedPtr ability_WyrdChannel();
@@ -130,7 +131,6 @@ spellSharedPtr spell_ElectricBlade();
 spellSharedPtr spell_ArcLightning();
 
 spellSharedPtr spell_SpitFire();
-spellSharedPtr spell_MirrorImage();
 
 //	Prayers
 spellSharedPtr prayer_Restoration();
@@ -172,6 +172,7 @@ spellSharedPtr ability_SpitWeb();
 spellSharedPtr attack_RavenousHunger();
 spellSharedPtr ability_ShredSkin();
 spellSharedPtr ability_Gnash();
+spellSharedPtr ability_DevouringGaze();
 
 //Duke Vorten
 spellSharedPtr ability_TentacleSwarm();

@@ -355,14 +355,6 @@ bool game::aiMoveToTarget(monsterSharedPtr ai)
 
 	//Now move to this point
 	movePerson(ai, bestPt.first, bestPt.second);
-
-	//If we have a MIRROR IMAGE active, it also moves
-	if (ai->hasMirrorImage()) {
-		auto img = ai->getMirrorImage();
-		int xv = bestPt.first - oldx;
-		int yv = bestPt.second - oldy;
-		movePerson(img, img->getx() + xv, img->gety() + yv);
-	}
 	
 	//Time passes (UNLESS WE HAVE FREE MOVES!)
 	if (!ai->hasFreeMoves()) {
@@ -382,9 +374,6 @@ Returns whether we want to cast a given spell.
 */
 bool game::aiShouldCastSpell(monsterSharedPtr ai, spellSharedPtr sp)
 {
-	//Don't summon a mirror if we already have one
-	if (sp->hasEffect(CREATE_MIRROR_IMAGE) && ai->hasMirrorImage())
-		return false;
 	//We're good to go!
 	return true;
 }
@@ -422,15 +411,26 @@ bool game::aiTryUseSpell(monsterSharedPtr ai)
 					//Check spell range
 					int dist = hypot(ai->getx() - target->getx(), ai->gety() - target->gety());
 					if (dist <= sp->getAttackRange()) {
+						
 						//ANIMATION BLAST!
 						spellTitleAnimation(ai, sp);
+						pathVector path = getLine(ai->getPosition(), target->getPosition());
+						if (sp->useAlternateAnimation) {
+							addAnimations(new bulletPath(&path, BULLET_TILE, sp->getColor()));
+						}
+						else {
+							addAnimations(new glowPath(&path, sp->getColor(), TCODColor::white));
+						}
+						
 						//We hit!
 						dischargeSpellOnTarget(sp, ai, target);
+
 						//Time passes
 						turns.addEntity(ai, ai->getAttackDelay());
 						return true;
 					}
 				}
+
 			}
 
 			else if (aType == ATTACK_AOE) {
@@ -2090,8 +2090,6 @@ void game::applyEffectToPerson(personSharedPtr target, effect eff, int potency, 
 		currentMap->setTile(tile_Web(), target->getx(), target->gety());
 	else if (eff == CREATE_FOG)
 		currentMap->createFogCloud(target->getx(), target->gety(), potency);
-	else if (eff == CREATE_MIRROR_IMAGE)
-		createMirrorImage(target);
 
 	//Some effect that the person should take care of
 	else
@@ -2701,26 +2699,6 @@ void game::teleport(personSharedPtr target, int distance)
 }
 
 
-/*
-Spawn a mirror image of the target nearby.
-It mimics the caster's actions.
-*/
-void game::createMirrorImage(personSharedPtr target)
-{
-	personSharedPtr mirror = target->createMirrorImage();
-	
-	//Find a free point adjacent to us to spawn upon
-	for (int x = target->getx() - 1; x <= target->getx() + 1; x++) {
-		for (int y = target->gety() - 1; y <= target->gety() + 1; y++) {
-			if (currentMap->isWalkable(x, y) && currentMap->getPerson(x, y) == nullptr) {
-			
-				//This is a good spot!
-				currentMap->addPerson(mirror, x, y);
-			
-			}
-		}
-	}
-}
 
 
 /*
@@ -3744,6 +3722,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(weapon_CrowKnife());
 	player->addItem(weapon_CrowKnightSword());
 	player->addItem(weapon_DragonboneSword());
+	player->addItem(weapon_EtherealSword());
 	player->addItem(weapon_FishmansHarpoon());
 	player->addItem(weapon_FishmansKnife());
 	player->addItem(weapon_KythielsScythe());
@@ -3764,6 +3743,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(shield_BatteredWoodenShield());
 	player->addItem(shield_CityGuardianShield());
 	player->addItem(shield_DragonboneShield());
+	player->addItem(shield_EtherealShield());
 	player->addItem(shield_VoidTouchedShield());
 	player->addItem(shield_WoodenWyrdShield());
 
@@ -3775,6 +3755,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(wand_DriftwoodWand());
 	player->addItem(wand_EtherealWand());
 	player->addItem(wand_FishmansToadstaff());
+	player->addItem(wand_SparrowsStaff());
 
 	player->addItem(headgear_CaptainsTricorn());
 	player->addItem(armour_RuinedUniform());
@@ -3796,6 +3777,8 @@ void getAllItems(personSharedPtr player)
 	player->addItem(armour_GreyThiefsRags());
 	player->addItem(headgear_EtherealCrown());
 	player->addItem(armour_EtherealRobes());
+	player->addItem(headgear_SparrowKnightsHelm());
+	player->addItem(armour_SparrowKnightsArmour());
 
 	player->addItem(charm_ArcanaDrenchedCharm());
 	player->addItem(charm_BloodDrinkersBand());
@@ -3814,14 +3797,16 @@ void getAllItems(personSharedPtr player)
 	player->addItem(spell_AcidSpit());
 	player->addItem(spell_ArcaneBlade());
 	player->addItem(spell_ArcaneRadiance());
+	player->addItem(spell_ArcLightning());
 	player->addItem(spell_Chillbite());
 	player->addItem(spell_DevouringVoidCloud());
+	player->addItem(spell_ElectricBlade());
 	player->addItem(spell_FrostBlast());
 	player->addItem(spell_Frostbolt());
 	player->addItem(spell_FrozenBlade());
 	player->addItem(spell_GottricsArcaneProtection());
+	player->addItem(spell_LightningStrike());
 	player->addItem(spell_MagicMissile());
-	player->addItem(spell_MirrorImage());
 	player->addItem(spell_ProfanedBlade());
 	player->addItem(spell_VoidJaunt());
 
@@ -3876,6 +3861,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(key_GreenChapelGardenKey());
 	player->addItem(key_HightowerKey());
 	player->addItem(key_LadyTvertsKey());
+	player->addItem(key_MoshkasKey());
 	player->addItem(key_OldCrowsKey());
 	player->addItem(key_RuinedTownshipKey());
 	player->addItem(key_SordidChapelKey());

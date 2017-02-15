@@ -274,6 +274,31 @@ were slowly drawn into pale worlds of the imagination, until only their spectral
 	return a;
 }
 
+armourSharedPtr headgear_MoshkasHeadpiece()
+{
+	armourSharedPtr a(new armour("Moshka's Headpiece", HOOD_TILE, TCODColor::fuchsia, ITEM_HELMET,
+		"Headgear with an eyepiece meant to peer into unseen truths. Once worn by Moshka, whose observatory was meant \
+to look into other realms."));
+	a->setDamageResist(DAMAGE_MAGIC, 10);
+	a->setDamageResist(DAMAGE_FIRE, 10);
+	a->setDamageResist(DAMAGE_ACID, 10);
+	a->setDamageResist(DAMAGE_COLD, 10);
+	return a;
+}
+
+armourSharedPtr armour_MoshkasRobes()
+{
+	armourSharedPtr a(new armour("Moshka's Robes", ROBE_TILE, TCODColor::fuchsia, ITEM_BODY_ARMOUR,
+		"Robes of Moshka, who peered into the mysteries beyond the world. He believed that the arcane symbols stitched \
+into his robes protected him from doom."));
+	a->setDamageResist(DAMAGE_MAGIC, 20);
+	a->setDamageResist(DAMAGE_FIRE, 20);
+	a->setDamageResist(DAMAGE_ACID, 20);
+	a->setDamageResist(DAMAGE_COLD, 20);
+	a->setMoveSpeed(SPEED_FAST);
+	return a;
+}
+
 armourSharedPtr headgear_SirPercivelsHelm()
 {
 	armourSharedPtr a(new armour("Sir Percivel's Helm", HELMET_TILE, TCODColor::lightGreen, ITEM_HELMET,
