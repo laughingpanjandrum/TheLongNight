@@ -101,6 +101,7 @@ spellSharedPtr ability_AcidInfusion();
 spellSharedPtr ability_EtherealSurge();
 spellSharedPtr ability_TransitorySurge();
 spellSharedPtr ability_Metamagic();
+spellSharedPtr ability_StrengthOfMind();
 spellSharedPtr ability_DivineFavour();
 spellSharedPtr ability_WyrdChannel();
 

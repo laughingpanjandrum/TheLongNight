@@ -1179,6 +1179,25 @@ monsterSharedPtr monster_Starspawned()
 	m->setMoveStats(SPEED_SLOW);
 	m->equipItem(weaponSharedPtr(new weapon(15, SPEED_FAST, EFFECT_POISON, 15)));
 	m->setSpellCastChance(20);
+	m->setFragmentsDropped(200);
+	return m;
+}
+
+monsterSharedPtr monster_Ooze()
+{
+	monsterSharedPtr m(new monster("Ooze", OOZE_TILE, TCODColor::lightSepia,
+		"This pathetic ooze dribbles along the ground. A few bones and rags protrude from its midst."));
+	m->setHealth(300);
+	m->setDefence(DAMAGE_PHYSICAL, 50);
+	m->addWeakness(DAMAGE_FIRE);
+	m->setMoveStats(SPEED_SLOW);
+	m->equipItem(weaponSharedPtr(new weapon(5, SPEED_NORMAL, EFFECT_POISON, 15)));
+	m->addSpellKnown(spellSharedPtr(new spell("Spit", TCODColor::lime, 5, 0, APPLY_POISON_DAMAGE, 10)));
+	m->setSpellCastChance(50);
+	m->isBoss = true;
+	m->showBossHealthBar = false;
+	m->setFragmentsDropped(5000);
+	m->addItemDrop(wand_MoshkasSingingStaff());
 	return m;
 }
 
@@ -1511,6 +1530,8 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 	//Moshka's Observatory
 	else if (handle == "starspawned")
 		return monster_Starspawned();
+	else if (handle == "ooze")
+		return monster_Ooze();
 
 	//The Void
 	else if (handle == "void_touched")

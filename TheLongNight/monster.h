@@ -190,6 +190,7 @@ monsterSharedPtr monster_MirrorImage();
 
 //Moshka's Observatory
 monsterSharedPtr monster_Starspawned();
+monsterSharedPtr monster_Ooze();
 
 //The Void
 monsterSharedPtr monster_VoidTouched();

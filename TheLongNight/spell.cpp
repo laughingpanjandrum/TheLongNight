@@ -310,6 +310,17 @@ spellSharedPtr ability_Metamagic()
 	return sp;
 }
 
+spellSharedPtr ability_StrengthOfMind()
+{
+	spellSharedPtr sp(new spell("Strength of Mind", SPELL_TILE, TCODColor::orange,
+		"Temporarily boosts both prayers and spells."));
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(SCALE_NEXT_SPELL, 20);
+	sp->addEffect(SCALE_NEXT_PRAYER, 20);
+	sp->setVigourCost(1);
+	return sp;
+}
+
 //Wand/chime powers
 
 spellSharedPtr ability_PowerSurge()

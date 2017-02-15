@@ -1,8 +1,13 @@
 Dead Sparrow's Tower
+starspawned:22,8
+starspawned:23,8
+starspawned:22,9
+ooze:12,22
 -items
 moshkas_headpiece:8,5
 moshkas_robes:9,6
 witchwater_flask:5,19
+startouched_writings:12,24
 -enditems
 -codes
 . floor_magic

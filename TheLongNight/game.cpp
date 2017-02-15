@@ -1163,8 +1163,8 @@ void game::drawMonsterInfo(monsterSharedPtr m, int atx, int aty)
 	if (wp != nullptr) {
 		for (int idx = 0; idx < wp->getStatusEffectCount(); idx++) {
 			//Values
-			statusEffects sType = wp->getStatusEffectType(idx);
-			int sdmg = wp->getStatusEffectDamage(idx);
+			statusEffects sType = static_cast<statusEffects>(idx);
+			int sdmg = wp->getStatusEffectDamage(sType);
 			//Display
 			if (sdmg > 0) {
 				win.write(atx, ++aty, " +" + getStatusEffectName(sType), maincol);
@@ -1459,10 +1459,12 @@ void game::drawWeaponInfo(weaponSharedPtr it, int atx, int aty)
 		
 		//Status effects applied
 		for (int idx = 0; idx < it->getStatusEffectCount(); idx++) {
-			statusEffects sType = it->getStatusEffectType(idx);
-			int sdmg = it->getStatusEffectDamage(idx);
-			win.write(atx + offset, ++aty, std::to_string(sdmg), TCODColor::white);
-			win.write(atx + 1, aty, getStatusEffectName(sType), getStatusEffectColor(sType));
+			statusEffects sType = static_cast<statusEffects>(idx);
+			int sdmg = it->getStatusEffectDamage(sType);
+			if (sdmg > 0) {
+				win.write(atx + offset, ++aty, '+' + std::to_string(sdmg), TCODColor::white);
+				win.write(atx + 1, aty, getStatusEffectName(sType), getStatusEffectColor(sType));
+			}
 		}
 		
 		//Scaling
@@ -1669,21 +1671,40 @@ void game::drawConsumableInfo(consumableSharedPtr it, int atx, int aty)
 	}
 	
 	else if (it->getWeaponBuff() != nullptr) {
+		
 		//This is a weapon buff.
 		auto buff = it->getWeaponBuff();
 		std::string txt1 = "Weapon deals +" + std::to_string(buff->bonusDamage) + " ";
 		win.write(atx, aty, txt1, TCODColor::white);
-		std::string txt2 = getDamageTypeName(buff->dtype);
-		win.write(atx + txt1.size(), aty, txt2, getDamageTypeColor(buff->dtype));
+		
+		//Buff type: damage type or status effect?
+		std::string txt2;
+		
+		if (buff->etype != EFFECT_NONE) {
+			//Status effect
+			txt2 = getStatusEffectName(buff->etype);
+			win.write(atx + txt1.size(), aty, txt2, getStatusEffectColor(buff->etype));
+		}
+		
+		else {
+			//Damage type
+			txt2 = getDamageTypeName(buff->dtype);
+			win.write(atx + txt1.size(), aty, txt2, getDamageTypeColor(buff->dtype));
+		}
+		
+		//Coda
 		win.write(atx + txt1.size() + txt2.size(), aty, " damage.", TCODColor::white);
+	
 	}
 	
 	else {
-		//Just applies some sort of effect.
+		
+		//Just applies some sort of effect to the player.
 		for (auto eff : it->getEffects()) {
 			win.write(atx, ++aty, std::to_string(it->getPotency()), TCODColor::white);
 			win.write(atx + 4, aty, getEffectName(eff), TCODColor::lightGrey);
 		}
+	
 	}
 }
 
@@ -2561,14 +2582,16 @@ void game::meleeAttack(personSharedPtr attacker, personSharedPtr target)
 			//Status effects applied
 			for (int idx = 0; idx < wp->getStatusEffectCount(); idx++) {
 				//Values
-				statusEffects sType = wp->getStatusEffectType(idx);
-				int sdmg = wp->getStatusEffectDamage(idx);
-				//Buffs
-				if (sType == EFFECT_BLEED && attacker->getBleedDuration() > 0)
-					sdmg += attacker->bleedScaling;
-				sdmg = sdmg * attacker->bleedDamageFactor;
-				//Deal the damage
-				target->takeStatusEffectDamage(sType, sdmg);
+				statusEffects sType = static_cast<statusEffects>(idx);
+				int sdmg = wp->getStatusEffectDamage(sType);
+				if (sdmg > 0) {
+					//Buffs to a particular effect type
+					if (sType == EFFECT_BLEED && attacker->getBleedDuration() > 0)
+						sdmg += attacker->bleedScaling;
+					sdmg = sdmg * attacker->bleedDamageFactor;
+					//Deal the damage
+					target->takeStatusEffectDamage(sType, sdmg);
+				}
 			}
 
 			//Damage to self
@@ -3843,6 +3866,7 @@ void getAllItems(personSharedPtr player)
 
 	player->addItem(oil_CorrosiveOil());
 	player->addItem(oil_CursedWater());
+	player->addItem(oil_DeepRedOil());
 	player->addItem(oil_FrozenOil());
 	player->addItem(oil_HangmansBlood());
 	player->addItem(oil_HolyWater());

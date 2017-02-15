@@ -261,6 +261,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return spellbook_FrostbittenWritings();
 	else if (handle == "singed_writings")
 		return spellbook_SingedWritings();
+	else if (handle == "startouched_writings")
+		return spellbook_StartouchedWritings();
 	else if (handle == "orsyls_tome_of_prayer")
 		return spellbook_OrsylsTomeOfPrayer();
 	else if (handle == "divine_moonspark_tome")

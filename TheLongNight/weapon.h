@@ -57,9 +57,9 @@ public:
 	void setDivinePower(int power) { divinePower = power; }
 
 	//Status effects
-	int getStatusEffectCount() { return statusEffectType.size(); } //Returns number of status effects we apply
-	statusEffects getStatusEffectType(int idx) { return statusEffectType.at(idx); }
-	int getStatusEffectDamage(int idx);
+	int getStatusEffectCount() { return statusEffectDamage.size(); } //Returns number of status effects we apply
+	//statusEffects getStatusEffectType(int idx) { return statusEffectType.at(idx); }
+	int getStatusEffectDamage(statusEffects etype);
 
 	//Buffing
 	void setBuff(weaponBuff buff) { currentBuff = buff; }
@@ -100,7 +100,6 @@ private:
 
 	//Special effects
 	std::vector<int> damageTypes;
-	statusEffectVector statusEffectType;
 	std::vector<int> statusEffectDamage;
 	int damageReservoir = 0; //Built-up damage is restored to you on a kill.
 	int damageToSelf = 0;  //Damage dealt to attacker on hit.
@@ -172,6 +171,7 @@ weaponSharedPtr wand_FishmansToadstaff();
 weaponSharedPtr wand_EtherealWand();
 weaponSharedPtr wand_BleachwoodWand();
 weaponSharedPtr wand_SparrowsStaff();
+weaponSharedPtr wand_MoshkasSingingStaff();
 
 //Chimes
 weaponSharedPtr chime_ClericsCrackedChime();

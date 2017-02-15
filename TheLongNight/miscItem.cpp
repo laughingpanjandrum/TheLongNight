@@ -258,6 +258,15 @@ knowledge of arcane mysteries was well known."));
 	return s;
 }
 
+miscItemSharedPtr spellbook_StartouchedWritings()
+{
+	miscItemSharedPtr s(new miscItem("Star-touched Writings", SPELL_TILE, TCODColor::lightFuchsia,
+		"These page seems faintly unreal. Moshka's handwriting is unmistakable, and grows increasingly fervent as \
+the writings proceed, until at least he seems wholly unhinged."));
+	s->setKeyTag("startouched_writings");
+	return s;
+}
+
 miscItemSharedPtr spellbook_OrsylsTomeOfPrayer()
 {
 	miscItemSharedPtr s(new miscItem("Orsyl's Tome of Prayer", SPELL_TILE, TCODColor::lightPurple,

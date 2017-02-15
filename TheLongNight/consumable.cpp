@@ -250,6 +250,14 @@ consumableSharedPtr oil_WitchsOoze()
 	return c;
 }
 
+consumableSharedPtr oil_DeepRedOil()
+{
+	consumableSharedPtr c(new consumable("Deep Red Oil", VIAL_TILE, TCODColor::crimson,
+		"Oil of a deep red shade. Not made from blood, but certainly has an affinity for it."));
+	c->setWeaponBuff(new weaponBuff(EFFECT_BLEED, 10));
+	return c;
+}
+
 consumableSharedPtr bell_VoidwalkersDancingBell()
 {
 	consumableSharedPtr c(new consumable("Voidwalker's Dancing Bell", BELL_TILE, TCODColor::purple,

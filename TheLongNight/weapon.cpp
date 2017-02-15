@@ -10,6 +10,10 @@ weapon::weapon(std::string name, int tileCode, TCODColor color, std::string desc
 	for (int i = 0; i < ALL_DAMAGE_TYPES; i++) {
 		damageTypes.push_back(0);
 	}
+	//Status effect types
+	for (int i = 0; i != EFFECT_NONE; i++) {
+		statusEffectDamage.push_back(0);
+	}
 }
 
 
@@ -68,8 +72,7 @@ Add a status effect, e.g. bleed, to the weapon's standard attack
 */
 void weapon::addStatusEffect(statusEffects eType, int damage)
 {
-	statusEffectType.push_back(eType);
-	statusEffectDamage.push_back(damage);
+	statusEffectDamage.at(eType) += damage;
 }
 
 
@@ -135,9 +138,15 @@ void weapon::removeSpell(spellSharedPtr sp)
 */
 
 
-int weapon::getStatusEffectDamage(int idx)
+int weapon::getStatusEffectDamage(statusEffects etype)
 {
-	return statusEffectDamage.at(idx);
+	int total = statusEffectDamage.at(etype);
+	//Check for bonus from buffs
+	if (currentBuff.etype == etype) {
+		total += currentBuff.bonusDamage;
+	}
+	//Done, return
+	return total;
 }
 
 
@@ -651,6 +660,21 @@ weaponSharedPtr wand_SparrowsStaff()
 	wp->setSpellPower(80);
 	wp->setSpecialAttack(ability_TransitorySurge());
 	wp->makeOffhand();
+	return wp;
+}
+
+weaponSharedPtr wand_MoshkasSingingStaff()
+{
+	weaponSharedPtr wp(new weapon("Moshka's Singing Staff", STAFF_TILE, TCODColor::orange,
+		"The staff of Moshka, who delved deep into arcane mysteries. In the end he claimed that the old gods themselves \
+oversaw every realm of magic, but he went mad before his accusations could be proven. His unusual staff can cast both spells \
+and divine prayers."));
+	wp->setBasicAttributes(5, SPEED_NORMAL);
+	wp->setSpellstoreSize(4);
+	wp->setSpellPower(80);
+	wp->setDivinePower(80);
+	wp->makeOffhand();
+	wp->setSpecialAttack(ability_StrengthOfMind());
 	return wp;
 }
 

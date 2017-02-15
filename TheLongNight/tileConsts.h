@@ -55,6 +55,7 @@ const int HERALD_TILE = 72;
 const int ARISTOCRAT_TILE = 108;
 const int MAGE_TILE = 109;
 const int STARSPAWN_TILE = 83;
+const int OOZE_TILE = 79;
 
 const int GOREM_TILE = 327; 
 
