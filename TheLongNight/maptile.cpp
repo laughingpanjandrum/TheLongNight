@@ -455,6 +455,16 @@ maptile * tile_BloodyMausoleumDoor()
 	return door;
 }
 
+maptile * tile_LostDoor()
+{
+	maptile* door = new maptile("Lost Door", "lost_door", BASIC_DOOR_TILE,
+		TCODColor::cyan, TCODColor::black, false, false);
+	door->isDoor = true;
+	door->unlockCode = "khalles_bones";
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	return door;
+}
+
 maptile * tile_Chair1()
 {
 	return new maptile("Chair", "chair1", CHAIR_TILE_1,

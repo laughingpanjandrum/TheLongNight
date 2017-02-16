@@ -157,6 +157,7 @@ spellSharedPtr prayer_WordOfUnmaking();
 //Sold by Ydella
 spellSharedPtr prayer_SinkBeneath();
 spellSharedPtr prayer_SpidersPrayer();
+spellSharedPtr prayer_TouchOfDoom();
 //Misc
 spellSharedPtr prayer_ProfaneRay();
 

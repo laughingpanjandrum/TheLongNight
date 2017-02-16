@@ -166,6 +166,7 @@ weaponSharedPtr shield_CityGuardianShield();
 weaponSharedPtr shield_VoidTouchedShield();
 weaponSharedPtr shield_DragonboneShield();
 weaponSharedPtr shield_EtherealShield();
+weaponSharedPtr shield_KhallesBellShield();
 weaponSharedPtr shield_SirPercivelsShield();
 
 //Wands

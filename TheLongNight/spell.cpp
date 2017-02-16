@@ -726,6 +726,23 @@ spellSharedPtr prayer_SpidersPrayer()
 	return sp;
 }
 
+spellSharedPtr prayer_TouchOfDoom()
+{
+	spellSharedPtr sp(new spell("Touch of Doom", SPELL_TILE, TCODColor::lightYellow,
+		"Khalle's devotion allowed her to glimpse the divine light of Heaven. Her followers claimed that \
+the true shape of the old gods drove her mad, but they never discerned why."));
+	sp->setAttackType(ATTACK_RANGE, 1);
+	sp->addEffect(GAIN_DEFENCE, -20);
+	sp->addEffect(GAIN_ELECTRIC_RESIST, -20);
+	sp->addEffect(GAIN_FIRE_RESIST, -20);
+	sp->addEffect(GAIN_COLD_RESIST, -20);
+	sp->addEffect(GAIN_ACID_RESIST, -20);
+	sp->addPermanentBuff = true;
+	sp->usesDivinePower = true;
+	sp->setVigourCost(1);
+	return sp;
+}
+
 spellSharedPtr prayer_DrawOutTheBlood()
 {
 	spellSharedPtr sp(new spell("Draw Out the Blood", SPELL_TILE, TCODColor::crimson,

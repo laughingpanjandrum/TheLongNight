@@ -201,6 +201,11 @@ monsterSharedPtr monster_BleedingMaw();
 monsterSharedPtr monster_CrawlingWretch();
 monsterSharedPtr monster_CorenTheBloody();
 
+//Mausoleum of the Lost
+monsterSharedPtr monster_SkeletonKnight();
+monsterSharedPtr monster_SkeletonArcher();
+monsterSharedPtr monster_KhalleTheLost();
+
 //The Void
 monsterSharedPtr monster_VoidTouched();
 

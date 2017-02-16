@@ -176,6 +176,7 @@ maptile* tile_SparrowTowerDoor(); //"sparrow_tower_door"
 maptile* tile_ObservatoryDoor(); //"observatory_door"
 
 maptile* tile_BloodyMausoleumDoor(); //"bloody_mausoleum_door"
+maptile* tile_LostDoor(); //"lost_door"
 
 //Furniture
 maptile* tile_Chair1(); //"chair1"
@@ -210,7 +211,7 @@ const tileVector ALL_MAPTILES = {
 	tile_VoidDrenchedDoor(), tile_DoorOfWinter(), tile_OldValleyDoor(),
 	tile_DesolateChurchDoor(), tile_HightowerDoor(), tile_BasementDoor(),
 	tile_SparrowTowerDoor(), tile_ObservatoryDoor(),
-	tile_BloodyMausoleumDoor(),
+	tile_BloodyMausoleumDoor(), tile_LostDoor(),
 };
 
 #endif

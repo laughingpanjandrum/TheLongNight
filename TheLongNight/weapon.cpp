@@ -618,6 +618,21 @@ weaponSharedPtr shield_EtherealShield()
 	return wp;
 }
 
+weaponSharedPtr shield_KhallesBellShield()
+{
+	weaponSharedPtr wp(new weapon("Khalle's Bell Shield", SHIELD_TILE, TCODColor::darkYellow,
+		"The bent shield of Khalle, devout priestess of the lowlands, who decorated it with dozens of tiny bells. \
+They ring in times of danger, bringing the favour of the old gods upon the lost."));
+	wp->setDefence(10);
+	wp->setDamageResist(DAMAGE_PROFANE, 10);
+	wp->setDamageResist(DAMAGE_ELECTRIC, 10);
+	wp->setDamagePenalty(10);
+	wp->setSpellstoreSize(2);
+	wp->setDivinePower(75);
+	wp->makeOffhand();
+	return wp;
+}
+
 weaponSharedPtr shield_SirPercivelsShield()
 {
 	weaponSharedPtr wp(new weapon("Sir Percivel's Shield", SHIELD_TILE, TCODColor::lightGreen,

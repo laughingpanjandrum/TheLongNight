@@ -308,3 +308,14 @@ obscure wisdom from the rotten folk that lurked in the mud."));
 	a->setPoisonResist(25);
 	return a;
 }
+
+armourSharedPtr armour_SirPercivelsArmour()
+{
+	armourSharedPtr a(new armour("Sir Percivel's Armour", ARMOUR_TILE, TCODColor::lightGreen, ITEM_BODY_ARMOUR,
+		"Sir Percivel sought the truth of the Rose's decline. The legend of Khalle and the silence of the gods drew \
+him to her forsaken mausoleum, where he uncovered an awful truth."));
+	a->setDefence(20);
+	a->setDamageResist(DAMAGE_ELECTRIC, 20);
+	a->setMoveSpeed(SPEED_NORMAL);
+	return a;
+}

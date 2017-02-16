@@ -1257,6 +1257,65 @@ He hefts his greataxe and roars incoherently."));
 	return m;
 }
 
+/*
+	Mausoleum of the Lost
+*/
+
+monsterSharedPtr monster_SkeletonKnight()
+{
+	monsterSharedPtr m(new monster("Skeleton Knight", SKELETON_TILE, TCODColor::lightestGrey,
+		"A clattering pile of bones, wielding the shattered hilt of a sword."));
+	m->setHealth(400);
+	m->setDefence(DAMAGE_PHYSICAL, 50);
+	m->setDefence(DAMAGE_COLD, 50);
+	m->setDefence(DAMAGE_FIRE, 50);
+	m->setBleedResist(1000);
+	m->setPoisonResist(1000);
+	m->makeProfane();
+	m->setMoveStats(SPEED_NORMAL);
+	m->equipItem(weaponSharedPtr(new weapon(10, SPEED_FAST, DAMAGE_ELECTRIC, 25)));
+	return m;
+}
+
+monsterSharedPtr monster_SkeletonArcher()
+{
+	monsterSharedPtr m(new monster("Skeleton Archer", SKELETON_TILE, TCODColor::lighterGrey,
+		"A clattering pile of bones holding a battered crossbow."));
+	m->setHealth(300);
+	m->setDefence(DAMAGE_PHYSICAL, 50);
+	m->setDefence(DAMAGE_COLD, 50);
+	m->setDefence(DAMAGE_FIRE, 50);
+	m->setBleedResist(1000);
+	m->setPoisonResist(1000);
+	m->makeProfane();
+	m->setMoveStats(SPEED_NORMAL);
+	m->equipItem(weaponSharedPtr(new weapon(10, SPEED_FAST, EFFECT_BLEED, 10)));
+	m->keepsDistance = true;
+	m->addSpellKnown(spellSharedPtr(new spell("Bone Arrow", TCODColor::white, 8, 10, APPLY_ELECTRIC_DAMAGE, 15)));
+	m->setSpellCastChance(75);
+	return m;
+}
+
+monsterSharedPtr monster_KhalleTheLost()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Khalle the Lost", PLAYER_TILE, TCODColor::darkYellow,
+		"Her skull is visible through her thin flesh; bones jut from her arms. She clutches her holy chime and her \
+crooked scythe, and whispers unanswered prayers."));
+	m->setHealth(800);
+	m->setDefence(DAMAGE_ELECTRIC, 50);
+	m->setDefence(DAMAGE_FIRE, 50);
+	m->setDefence(DAMAGE_BLESSED, 100);
+	m->setMoveStats(SPEED_NORMAL);
+	m->equipItem(weaponSharedPtr(new weapon(25, SPEED_NORMAL, DAMAGE_ELECTRIC, 25)));
+	m->addSpellKnown(prayer_TouchOfDoom());
+	m->addSpellKnown(attack_HolySummons());
+	m->setDivinePower(120);
+	m->setSpellCastChance(50);
+	m->isBoss = true;
+	m->setFragmentsDropped(1500);
+	return m;
+}
+
 
 /*
 	The Void
@@ -1559,6 +1618,14 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return monster_CrawlingWretch();
 	else if (handle == "coren_the_bloody")
 		return monster_CorenTheBloody();
+
+	//Mausoleum of the Lost
+	else if (handle == "skeleton_knight")
+		return monster_SkeletonKnight();
+	else if (handle == "skeleton_archer")
+		return monster_SkeletonArcher();
+	else if (handle == "khalle_the_lost")
+		return monster_KhalleTheLost();
 
 	//The Void
 	else if (handle == "void_touched")

@@ -75,6 +75,7 @@ armourSharedPtr headgear_MoshkasHeadpiece();
 armourSharedPtr armour_MoshkasRobes();
 
 armourSharedPtr headgear_SirPercivelsHelm();
+armourSharedPtr armour_SirPercivelsArmour();
 
 #endif
 

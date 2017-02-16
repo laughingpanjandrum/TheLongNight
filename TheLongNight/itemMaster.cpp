@@ -70,6 +70,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return shield_DragonboneShield();
 	else if (handle == "ethereal_shield")
 		return shield_EtherealShield();
+	else if (handle == "khalles_bell_shield")
+		return shield_KhallesBellShield();
 	else if (handle == "sir_percivels_shield")
 		return shield_SirPercivelsShield();
 
@@ -116,6 +118,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return oil_HangmansBlood();
 	else if (handle == "witchs_ooze")
 		return oil_WitchsOoze();
+	else if (handle == "lightning_oil")
+		return oil_LightningOil();
 	else if (handle == "deep_red_oil")
 		return oil_DeepRedOil();
 
@@ -209,6 +213,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 
 	else if (handle == "sir_percivels_helm")
 		return headgear_SirPercivelsHelm();
+	else if (handle == "sir_percivels_armour")
+		return armour_SirPercivelsArmour();
 
 	//CHARMS
 	if (handle == "bloodstained_charm")

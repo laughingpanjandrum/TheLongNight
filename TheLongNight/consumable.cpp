@@ -250,6 +250,14 @@ consumableSharedPtr oil_WitchsOoze()
 	return c;
 }
 
+consumableSharedPtr oil_LightningOil()
+{
+	consumable* c = new consumable("Lightning Oil", VIAL_TILE, TCODColor::lightPurple,
+		"Oil infused with lightning, used by the bone-whisperers of the deep.");
+	c->setWeaponBuff(new weaponBuff(DAMAGE_ELECTRIC, 15));
+	return consumableSharedPtr(c);
+}
+
 consumableSharedPtr oil_DeepRedOil()
 {
 	consumableSharedPtr c(new consumable("Deep Red Oil", VIAL_TILE, TCODColor::crimson,
