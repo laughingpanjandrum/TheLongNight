@@ -10,7 +10,7 @@ class armour : public item
 public:
 
 	//Constructors
-	armour(): item() {}
+	armour() : armour("", 0, TCODColor::white, ITEM_BODY_ARMOUR, "") {}
 	armour(std::string name, int tileCode, TCODColor color, itemTypes slot, std::string description);
 	~armour();
 

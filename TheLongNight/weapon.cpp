@@ -534,6 +534,22 @@ what he desired, and it drove him mad."));
 	return wp;
 }
 
+weaponSharedPtr weapon_KhallesHolyScythe()
+{
+	weaponSharedPtr wp(new weapon("Khalle's Holy Scythe", SWORD_TILE, TCODColor::darkYellow,
+		"The scythe of Khalle, who devoutly opposed the void, but eventually saw the uselessness of the old gods. \
+According to certain storytellers, she once peered into Heaven itself, and what she saw there drove her to despair."));
+	wp->setBasicAttributes(25, SPEED_NORMAL);
+	wp->addDamageType(DAMAGE_ELECTRIC, 25);
+	wp->addScalingType(SCALE_STR);
+	wp->addScalingType(SCALE_DEX);
+	wp->addScalingType(SCALE_DEV);
+	wp->setSpellstoreSize(1);
+	wp->setDivinePower(50);
+	wp->setSpecialAttack(prayer_BlessedRadiance());
+	return wp;
+}
+
 weaponSharedPtr weapon_ProfaneGreatsword()
 {
 	weaponSharedPtr wp(new weapon("Profane Greatsword", SWORD_TILE, TCODColor::purple,

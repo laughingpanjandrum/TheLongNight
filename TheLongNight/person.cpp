@@ -892,6 +892,24 @@ void person::doWeaponEquip(weaponSharedPtr wp)
 	damagePenalty += wp->getDamagePenalty();
 }
 
+
+/*
+Lose the key corresponding to this tag, if we have it
+*/
+void person::loseKey(std::string keyTag)
+{
+	auto itemList = getItemsOfType(ITEM_MISC);
+	for (auto iter = itemList.begin(); iter != itemList.end(); iter++) {
+		//Cast to misc
+		auto m = std::static_pointer_cast<miscItem>(*iter);
+		if (m->isKey && m->getKeyTag() == keyTag) {
+			//Lose this item and quit
+			items.removeMiscItem(m);
+			return;
+		}
+	}
+}
+
 /*
 Returns the currently-highlighted consumable.
 */

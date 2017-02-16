@@ -12,13 +12,14 @@ class weapon : public item
 {
 public:
 
-	//Item categories
+	//Basic constructor
 	weapon(): weapon("", 0, TCODColor::white, "") {}
 	weapon(std::string name, int tileCode, TCODColor color, std::string description);
 	//Just for monsters: creates a weapon that applies a status effect
 	weapon(int baseDamage, const int attackSpeed, statusEffects eType, int statusEffectDamage);
 	//Just for monsters: a weapon with a special damage type
 	weapon(int baseDamage, const int attackSpeed, damageType dtype, int specialDamage);
+	//Destructor
 	~weapon();
 
 	//Override
@@ -155,6 +156,7 @@ weaponSharedPtr weapon_LadyTvertsClaws();
 weaponSharedPtr weapon_EtherealSword();
 
 weaponSharedPtr weapon_CorensGreataxe();
+weaponSharedPtr weapon_KhallesHolyScythe();
 
 weaponSharedPtr weapon_ProfaneGreatsword();
 

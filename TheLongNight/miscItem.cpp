@@ -152,7 +152,7 @@ Altar in honour of His Wisdom.'"));
 miscItemSharedPtr heart_WretchedHeart()
 {
 	miscItemSharedPtr h(new miscItem("Wretched Heart", HEART_TILE, TCODColor::darkRed,
-		"This small, putrid heart lay at the centre of the wretched mass, apparently conferring life to the putrid thing."));
+		"This small, rotten heart lay at the centre of the wretched mass, apparently conferring life to the putrid thing."));
 	h->setKeyTag("wretched_heart");
 	return h;
 }
@@ -222,6 +222,14 @@ miscItemSharedPtr heart_HeartOfCoren()
 		"The beating heart of Coren the Conqueror, who once laid waste to the lowlands. It perpetually oozes blood, \
 but never seems to run dry."));
 	h->setKeyTag("corens_heart");
+	return h;
+}
+
+miscItemSharedPtr heart_KhallesWretchedHeart()
+{
+	miscItemSharedPtr h(new miscItem("Khalle's Wretched Heart", HEART_TILE, TCODColor::darkYellow,
+		"Heart filled with shards of bone. This is all that remains of Khalle, whom the gods never answered."));
+	h->setKeyTag("khalles_heart");
 	return h;
 }
 

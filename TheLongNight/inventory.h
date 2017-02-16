@@ -67,6 +67,7 @@ public:
 
 	//Misc items
 	void equipMiscItem(miscItemSharedPtr m);
+	void removeMiscItem(miscItemSharedPtr m);
 
 	//Keys
 	bool hasKey(std::string keyTag);

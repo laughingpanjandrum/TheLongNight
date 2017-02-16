@@ -266,6 +266,28 @@ itemSharedPtr getItemByHandle(std::string handle)
 	else if (handle == "corens_bones")
 		return bones_CorensBones();
 
+	//HEARTS
+	if (handle == "wretched_heart")
+		return heart_WretchedHeart();
+	else if (handle == "old_crows_heart")
+		return heart_OldCrowsHeart();
+	else if (handle == "fishborn_heart")
+		return heart_FishBornGoddessesHeart();
+	else if (handle == "orsyls_heart")
+		return heart_OrsylsShriveledHeart();
+	else if (handle == "vortens_heart")
+		return heart_VortensShriveledHeart();
+	else if (handle == "venomous_spider_heart")
+		return heart_VenomousSpiderHeart();
+	else if (handle == "lady_tverts_heart")
+		return heart_LadyTvertsHeart();
+	else if (handle == "dead_sparrows_heart")
+		return heart_DeadSparrowsHeart();
+	else if (handle == "corens_heart")
+		return heart_HeartOfCoren();
+	else if (handle == "khalles_heart")
+		return heart_KhallesWretchedHeart();
+
 	//SPELLBOOKS
 	if (handle == "waterlogged_writings")
 		return spellbook_WaterloggedWritings();

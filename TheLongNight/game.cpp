@@ -1388,8 +1388,6 @@ This just figures out which particular info-drawing function to use.
 */
 void game::drawItemInfo(itemSharedPtr it, int atx, int aty)
 {
-
-	drawItemImage(it, MAP_DRAW_X + 50, MAP_DRAW_Y);
 	
 	//Tile and name
 	win.writec(atx, aty, it->getTileCode(), it->getColor());
@@ -1407,7 +1405,11 @@ void game::drawItemInfo(itemSharedPtr it, int atx, int aty)
 		win.write(atx, ++aty, "PRICE: ", TCODColor::white);
 		win.writec(atx + 6, aty, FRAGMENT_GLYPH, TCODColor::amber);
 		win.write(atx + 8, aty, std::to_string(it->getPrice()), TCODColor::amber);
-
+		//And key devoured, if applicable
+		if (it->eatsKeyWhenBought) {
+			auto keyEaten = getItemByHandle(it->getKeyEaten());
+			win.write(atx, ++aty, "Formed from the " + keyEaten->getName() + '.', keyEaten->getColor());
+		}
 	}
 	
 	//Item description
@@ -1427,6 +1429,9 @@ void game::drawItemInfo(itemSharedPtr it, int atx, int aty)
 	case(ITEM_CHARM): drawCharmInfo(std::static_pointer_cast<charm>(it), atx, aty); break;
 	case(ITEM_MISC): drawMiscItemInfo(std::static_pointer_cast<miscItem>(it), atx, aty); break;
 	}
+
+	//Item image
+	drawItemImage(it, 50, 1);
 
 }
 
@@ -1778,24 +1783,8 @@ void game::drawItemImage(itemSharedPtr it, int atx, int aty)
 {
 	if (it->hasImage()) {
 		
-		//If this is body armour, draw our current helmet first
-		if (it->getCategory() == ITEM_BODY_ARMOUR) {
-			auto h = player->getHelmet();
-			if (h != nullptr && h->hasImage()) {
-				win.drawImage(h->getImage(), atx, aty);
-			}
-		}
-		
 		//Draw this item
 		win.drawImage(it->getImage(), atx, aty);
-		
-		//If this is a helmet, draw our current body armour afterward
-		if (it->getCategory() == ITEM_HELMET) {
-			auto a = player->getArmour();
-			if (a != nullptr && a->hasImage()) {
-				win.drawImage(a->getImage(), atx, aty);
-			}
-		}
 	
 	}
 }
@@ -2797,7 +2786,7 @@ bool game::itemPickupMessage(itemSharedPtr it)
 {
 	int atx = MAP_DRAW_X;
 	int aty = MAP_DRAW_Y + 10;
-	win.clearRegion(atx - 1, aty, 42, 20);
+	win.clearRegion(atx - 1, aty, 42, 25);
 	win.drawBox(atx - 1, aty, 42, 25, TCODColor::darkSepia);
 	//What we can do
 	std::string txt = "[SPACE] Equip  [ESC] Store";
@@ -3321,6 +3310,54 @@ void game::initializeShops()
 	jade->addItem(ranged_FrostKnives(), 100);
 	allShops.push_back(shopSharedPtr(jade));
 
+	//Ydella
+	shop* ydella = new shop("ydella_shop");
+	allShops.push_back(shopSharedPtr(ydella));
+	//	Wretched Heart
+	shop* wretched = new shop("wretched_heart", true);
+	wretched->addItem(charm_WretchedFleshBand(), 200);
+	wretched->addItem(charm_WretchedFleshmask(), 200);
+	allUnlockableShops.push_back(shopSharedPtr(wretched));
+	//	Old Crow's Heart
+	shop* old_crow = new shop("old_crows_heart", true);
+	old_crow->addItem(weapon_OldCrowsLongKnife(), 200);
+	allUnlockableShops.push_back(shopSharedPtr(old_crow));
+	//	Fishborn Goddess Heart
+	shop* fishborn = new shop("fishborn_heart", true);
+	fishborn->addItem(prayer_SinkBeneath(), 200);
+	allUnlockableShops.push_back(shopSharedPtr(fishborn));
+	//	Orsyl's Heart
+	shop* or = new shop("orsyls_heart", true);
+	or->addItem(chime_OrsylsProfaneChime(), 300);
+	allUnlockableShops.push_back(shopSharedPtr(or));
+	//	Vorten's Heart
+	shop* vorten = new shop("vortens_heart", true);
+	vorten->addItem(weapon_ArmOfTheDuke(), 300);
+	allUnlockableShops.push_back(shopSharedPtr(vorten));
+	//	Venomous Spider's Heart
+	shop* spider = new shop("venomous_spider_heart", true);
+	spider->addItem(weapon_SpiderboneShard(), 150);
+	spider->addItem(prayer_SpidersPrayer(), 150);
+	allUnlockableShops.push_back(shopSharedPtr(spider));
+	//	Lady Tvert's Heart
+	shop* tvert = new shop("lady_tverts_heart", true);
+	tvert->addItem(weapon_LadyTvertsClaws(), 200);
+	allUnlockableShops.push_back(shopSharedPtr(tvert));
+	//	Dead Sparrow's Heart
+	shop* sparrow = new shop("dead_sparrows_heart", true);
+	sparrow->addItem(wand_SparrowsStaff(), 400);
+	allUnlockableShops.push_back(shopSharedPtr(sparrow));
+	//	Coren's Heart
+	shop* coren = new shop("corens_heart", true);
+	coren->addItem(weapon_CorensGreataxe(), 400);
+	coren->addItem(charm_FrenzyCharm(), 500);
+	allUnlockableShops.push_back(shopSharedPtr(coren));
+	//	Khalle's Heart
+	shop* khalle = new shop("khalles_heart", true);
+	khalle->addItem(weapon_KhallesHolyScythe(), 400);
+	khalle->addItem(prayer_TouchOfDoom(), 300);
+	allUnlockableShops.push_back(shopSharedPtr(khalle));
+
 }
 
 
@@ -3542,7 +3579,33 @@ void game::buyItemFromShop()
 			//Remove from menu and shopkeeper's inventory
 			currentShop->removeItem(it);
 			currentMenu->removeElement(it);
+			//Player might lose a key as a consequence
+			if (it->eatsKeyWhenBought) {
+				player->loseKey(it->getKeyEaten());
+				//Also lose other items that eat this key
+				destroyShopItemsWithKey(currentShop, it->getKeyEaten());
+			}
 		}
+	}
+}
+
+
+/*
+Remove items from the current shop that also correspond to this key.
+*/
+void game::destroyShopItemsWithKey(shopSharedPtr currentShop, std::string keyTag)
+{
+	itemVector toRemove;
+	//Make a list of items that use this key
+	for (auto iter = currentShop->stock.begin(); iter != currentShop->stock.end(); iter++) {
+		if ((*iter)->eatsKeyWhenBought && (*iter)->getKeyEaten() == keyTag) {
+			toRemove.push_back(*iter);
+		}
+	}
+	//KILL THEM ALL
+	for (auto it : toRemove) {
+		currentShop->removeItem(it);
+		currentMenu->removeElement(it);
 	}
 }
 

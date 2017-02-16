@@ -188,6 +188,19 @@ void inventory::equipMiscItem(miscItemSharedPtr m)
 
 
 /*
+We lose a misc item, usually a heart (due to heart trading)
+*/
+void inventory::removeMiscItem(miscItemSharedPtr m)
+{
+	auto itemList = &carried.at(ITEM_MISC).items;
+	auto iter = std::find(itemList->begin(), itemList->end(), m);
+	if (iter != itemList->end()) {
+		itemList->erase(iter);
+	}
+}
+
+
+/*
 Returns whether we have the key that will unlock the given door tag.
 */
 bool inventory::hasKey(std::string keyTag)

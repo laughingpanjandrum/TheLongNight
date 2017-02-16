@@ -1313,6 +1313,7 @@ crooked scythe, and whispers unanswered prayers."));
 	m->setSpellCastChance(50);
 	m->isBoss = true;
 	m->setFragmentsDropped(1500);
+	m->addItemDrop(heart_KhallesWretchedHeart());
 	return m;
 }
 
@@ -1349,10 +1350,6 @@ you approach."));
 	m->setHealth(800);
 	m->isShopkeeper = true;
 	m->isHostile = false;
-	/*m->addItemToStock(shield_WoodenWyrdShield(), 25);
-	m->addItemToStock(chime_WyrdBellbranch(), 50);
-	m->addItemToStock(wand_BleachwoodWand(), 100);
-	m->addItemToStock(prayer_WyrdChantOfStrength(), 25);*/
 	m->setShopTag("gorem_shop");
 	//Chatting
 	m->loadDialogue("dialogue/gorem_chat.txt");
@@ -1427,18 +1424,17 @@ monsterSharedPtr npc_Ydella()
 	m->isShopkeeper = true;
 	m->loadDialogue("dialogue/ydella_chat.txt");
 	//Items are all acquired via HEART-TRADING
-	/*m->addStockUnlock(charm_WretchedFleshBand(), 200, "wretched_heart");
-	m->addStockUnlock(charm_WretchedFleshmask(), 200, "wretched_heart");
-	m->addStockUnlock(prayer_SinkBeneath(), 200, "fishborn_heart");
-	m->addStockUnlock(weapon_OldCrowsLongKnife(), 200, "old_crows_heart");
-	m->addStockUnlock(chime_OrsylsProfaneChime(), 200, "orsyls_heart");
-	m->addStockUnlock(weapon_ArmOfTheDuke(), 300, "vortens_heart");
-	m->addStockUnlock(weapon_SpiderboneShard(), 200, "venomous_spider_heart");
-	m->addStockUnlock(prayer_SpidersPrayer(), 100, "venomous_spider_heart");
-	m->addStockUnlock(weapon_LadyTvertsClaws(), 150, "lady_tverts_heart");
-	m->addStockUnlock(wand_SparrowsStaff(), 300, "dead_sparrows_heart");
-	m->addStockUnlock(weapon_CorensGreataxe(), 300, "corens_heart");
-	m->addStockUnlock(charm_FrenzyCharm(), 300, "corens_heart");*/
+	m->setShopTag("ydella_shop");
+	m->addShopUnlock("wretched_heart");
+	m->addShopUnlock("old_crows_heart");
+	m->addShopUnlock("fishborn_heart");
+	m->addShopUnlock("orsyls_heart");
+	m->addShopUnlock("vortens_heart");
+	m->addShopUnlock("venomous_spider_heart");
+	m->addShopUnlock("lady_tverts_heart");
+	m->addShopUnlock("dead_sparrows_heart");
+	m->addShopUnlock("corens_heart");
+	m->addShopUnlock("khalles_heart");
 	return m;
 }
 

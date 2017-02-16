@@ -44,6 +44,9 @@ public:
 	//Shopkeeping
 	int getPrice() { return price; }
 	void setPrice(int p) { price = p; }
+	void setKeyEaten(std::string tag) { keyEaten = tag; eatsKeyWhenBought = true; }
+	std::string getKeyEaten() { return keyEaten; }
+	bool eatsKeyWhenBought = false;
 
 	//Image data
 	bool hasImage() { return imgPtr != nullptr; }
@@ -57,6 +60,7 @@ protected:
 
 	//Shopkeeping
 	int price = 0;
+	std::string keyEaten;
 
 	//Any item can have these attributes
 	int defence = 0;

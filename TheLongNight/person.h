@@ -193,6 +193,7 @@ public:
 	void unequipItem(itemSharedPtr which);
 	bool addItem(itemSharedPtr which);
 	void doWeaponEquip(weaponSharedPtr it);
+	void loseKey(std::string keyTag);
 
 	//Getting equipped items
 	weaponSharedPtr getWeapon() { return items.getWeapon(); }

@@ -21,6 +21,7 @@ armourSharedPtr headgear_CaptainsTricorn()
 	armourSharedPtr h(new armour("Captain's Tricorn", HELMET_TILE, TCODColor::lightBlue, ITEM_HELMET,
 		"Ornate tricorn hat, intended to make the stardrift captain more imposing to his subordinates."));
 	h->setDefence(5);
+	h->setImage(IMAGE_CAPTAINS_TRICORN);
 	return h;
 }
 
