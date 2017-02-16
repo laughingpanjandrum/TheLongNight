@@ -328,6 +328,7 @@ weaponSharedPtr weapon_FishmansHarpoon()
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_Spearfishing());
+	wp->setImage(IMAGE_FISHMANS_HARPOON);
 	return wp;
 }
 
@@ -338,6 +339,7 @@ weaponSharedPtr weapon_FishmansKnife()
 	wp->setBasicAttributes(15, SPEED_FAST);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_Fillet());
+	wp->setImage(IMAGE_FISHMANS_KNIFE);
 	return wp;
 }
 
@@ -350,6 +352,7 @@ weaponSharedPtr weapon_CityGuardianWarhammer()
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEV);
 	wp->setSpecialAttack(attack_DivineSmite());
+	wp->setImage(IMAGE_HOLY_WARHAMMER);
 	return wp;
 }
 
@@ -363,6 +366,7 @@ see the true shape of all things."));
 	wp->addScalingType(SCALE_DEX);
 	wp->addScalingType(SCALE_DEV);
 	wp->setSpecialAttack(attack_BloodFeast());
+	wp->setImage(IMAGE_BLOOD_KNIFE);
 	return wp;
 }
 
@@ -376,6 +380,7 @@ weaponSharedPtr weapon_KythielsScythe()
 	wp->addScalingType(SCALE_DEX);
 	wp->addScalingType(SCALE_DEV);
 	wp->setSpecialAttack(attack_HolySummons());
+	wp->setImage(IMAGE_HOLY_SCYTHE);
 	return wp;
 }
 
@@ -387,6 +392,7 @@ weaponSharedPtr weapon_VoidTouchedKnife()
 	wp->addDamageType(DAMAGE_PROFANE, 20);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_VoidSlash());
+	wp->setImage(IMAGE_ETHEREAL_KNIFE);
 	return wp;
 }
 
@@ -399,6 +405,7 @@ weaponSharedPtr weapon_VoidCrystalGreatsword()
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEV);
 	wp->setSpecialAttack(attack_VoidSurge());
+	wp->setImage(IMAGE_ETHEREAL_SWORD);
 	return wp;
 }
 
@@ -414,6 +421,7 @@ weaponSharedPtr weapon_ArmOfTheDuke()
 	wp->setDivinePower(80);
 	wp->setSpecialAttack(ability_TentacleSwarm());
 	wp->isProfane = true;
+	wp->setImage(IMAGE_TENTACLE_ARM);
 	return wp;
 }
 
@@ -510,6 +518,7 @@ little of their original form remains."));
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_ARC);
 	wp->setSpecialAttack(attack_EtherealStrike());
+	
 	return wp;
 }
 
@@ -556,6 +565,7 @@ weaponSharedPtr shield_WoodenWyrdShield()
 	wp->setBleedResist(15);
 	wp->setDamagePenalty(5);
 	wp->makeOffhand();
+	wp->setImage(IMAGE_WYRD_SHIELD);
 	return wp;
 }
 
@@ -570,6 +580,7 @@ weaponSharedPtr shield_BatteredSteelShield()
 	wp->setDamageResist(DAMAGE_COLD, 5);
 	wp->setDamagePenalty(10);
 	wp->makeOffhand();
+	wp->setImage(IMAGE_BATTERED_STEEL_SHIELD);
 	return wp;
 }
 
@@ -583,6 +594,7 @@ but not a single knight survived."));
 	wp->setDamageResist(DAMAGE_FIRE, 10);
 	wp->setDamagePenalty(10);
 	wp->makeOffhand();
+	wp->setImage(IMAGE_HOLY_SHIELD);
 	return wp;
 }
 
@@ -594,6 +606,7 @@ weaponSharedPtr shield_VoidTouchedShield()
 	wp->setDamageResist(DAMAGE_PROFANE, 50);
 	wp->setDamagePenalty(5);
 	wp->makeOffhand();
+	wp->setImage(IMAGE_ETHEREAL_SHIELD);
 	return wp;
 }
 
@@ -656,6 +669,7 @@ weaponSharedPtr wand_DriftwoodWand()
 	wp->setSpellPower(100);
 	wp->makeOffhand();
 	wp->setSpecialAttack(ability_PowerSurge());
+	wp->setImage(IMAGE_DRIFTWOOD_WAND);
 	return wp;
 }
 
@@ -731,6 +745,7 @@ weaponSharedPtr chime_ClericsCrackedChime()
 	wp->setDivinePower(100);
 	wp->makeOffhand();
 	wp->setSpecialAttack(ability_DivineFavour());
+	wp->setImage(IMAGE_CRACKED_CHIME);
 	return wp;
 }
 
@@ -743,6 +758,7 @@ weaponSharedPtr chime_WyrdBellbranch()
 	wp->setDivinePower(100);
 	wp->setSpecialAttack(ability_WyrdChannel());
 	wp->makeOffhand();
+	wp->setImage(IMAGE_WYRD_BELLBRANCH);
 	return wp;
 }
 
@@ -756,5 +772,6 @@ the old gods, but they did not answer."));
 	wp->setSpecialAttack(prayer_ProfaneRadiance());
 	wp->makeOffhand();
 	wp->isProfane = true;
+	wp->setImage(IMAGE_UNHOLY_CHIME);
 	return wp;
 }
