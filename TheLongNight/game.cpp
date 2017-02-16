@@ -4037,6 +4037,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(charm_IdolOfPash());
 	player->addItem(charm_KhallesHeadband());
 	player->addItem(charm_ToxicantsCharm());
+	player->addItem(charm_VenomrubyRing());
 	player->addItem(charm_WretchedFleshBand());
 	player->addItem(charm_WretchedFleshmask());
 

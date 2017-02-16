@@ -145,3 +145,12 @@ The gods looked favourably upon his bloodlust, and granted him even greater extr
 	c->addEffect(GAIN_KILL_DAMAGE_BUFF, 5);
 	return c;
 }
+
+charmSharedPtr charm_VenomrubyRing()
+{
+	charmSharedPtr c(new charm("Venomruby Ring", CHARM_TILE, TCODColor::darkGreen,
+		"Lost treasure of Farin, who was said to crave death above all else. This ring empowered \
+those who embraced their suffering."));
+	c->addEffect(DAMAGE_WHEN_POISONED, 20);
+	return c;
+}

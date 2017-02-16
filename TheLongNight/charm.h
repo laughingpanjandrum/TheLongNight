@@ -51,5 +51,6 @@ charmSharedPtr charm_ObscuringCharm();
 charmSharedPtr charm_FragrantAmulet();
 charmSharedPtr charm_RavenousIdol();
 charmSharedPtr charm_FrenzyCharm();
+charmSharedPtr charm_VenomrubyRing();
 
 #endif

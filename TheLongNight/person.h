@@ -145,6 +145,7 @@ public:
 	int invisibility = 0;
 	int bleedScaling = 0; //Extra damage dealt when we have bleed
 	int defenceWhenPoisoned = 0; //Buff to defence when we're poisoned
+	int attackWhenPoisoned = 0; //Buff to damage when we're poisoned
 	int bleedDamageFactor = 1; //Multiplies both bleed damage taken and given
 	int getFragmentPickupMult() { return fragmentPickupMultiplier; }
 	bool immuneToEntangle = false;

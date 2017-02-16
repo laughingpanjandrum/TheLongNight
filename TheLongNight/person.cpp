@@ -164,8 +164,13 @@ int person::getMeleeDamage()
 		damage += (float)scalingPercent / 100.0 * (float)damage;
 		
 		//Bonus from bleed, if any
-		if (isBleeding || !bleedBuildup.isEmpty()) {
+		if (isBleeding > 0 || !bleedBuildup.isEmpty()) {
 			damage += bleedScaling;
+		}
+
+		//Bonus from poison, if any
+		if (isPoisoned > 0) {
+			damage += attackWhenPoisoned * isPoisoned;
 		}
 
 		//Buff due to health status, if applicable
@@ -456,6 +461,8 @@ void person::applyEffect(effect eff, int potency)
 		healthOnKill += potency;
 	else if (eff == GAIN_BLEED_SCALING)
 		bleedScaling += potency;
+	else if (eff == DAMAGE_WHEN_POISONED)
+		attackWhenPoisoned += potency;
 	else if (eff == PHYS_RESIST_WHILE_POISONED)
 		defenceWhenPoisoned += potency;
 	else if (eff == BECOME_INVISIBLE)

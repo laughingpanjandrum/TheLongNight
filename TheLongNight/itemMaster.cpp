@@ -237,6 +237,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return charm_FragrantAmulet();
 	else if (handle == "ravenous_idol")
 		return charm_RavenousIdol();
+	else if (handle == "venomruby_ring")
+		return charm_VenomrubyRing();
 
 	//SPELLS
 	else if (handle == "magic_missile")
@@ -446,6 +448,7 @@ std::string getEffectName(effect e)
 	case(PULL_CLOSER): return "pull target";
 	case(BLEED_DAMAGE_FACTOR): return "times bleed damage dealt and taken";
 	case(GAIN_BLEED_SCALING): return "extra damage dealt when bleeding";
+	case(DAMAGE_WHEN_POISONED): return "extra damage dealt when poisoned";
 	case(PHYS_RESIST_WHILE_POISONED): return "defence when poisoned";
 	case(HURT_BLEEDER): return "profane damage dealt to bleeding target";
 	case(HEALING_FACTOR): return "percent healing boost";
@@ -456,7 +459,6 @@ std::string getEffectName(effect e)
 	case(CHANGE_DETECTION_RANGE): return "detection range";
 	case(LOW_HEALTH_DAMAGE_BUFF): return "damage buff when health is low";
 	case(GAIN_KILL_DAMAGE_BUFF): return "damage buff upon kill";
-
 	case(INSTILL_FEAR): return "instill fear";
 
 	case(TELEPORT_VIA_WATER): return "water warp";
