@@ -196,6 +196,7 @@ public:
 	bool addItem(itemSharedPtr which);
 	void doWeaponEquip(weaponSharedPtr it);
 	void loseKey(std::string keyTag);
+	bool isRunestoneEquipped(miscItemSharedPtr r);
 
 	//Getting equipped items
 	weaponSharedPtr getWeapon() { return items.getWeapon(); }

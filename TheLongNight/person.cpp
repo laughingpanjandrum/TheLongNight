@@ -928,6 +928,18 @@ void person::loseKey(std::string keyTag)
 }
 
 /*
+Returns whether the given stone is equipped to our current weapon.
+*/
+bool person::isRunestoneEquipped(miscItemSharedPtr r)
+{
+	if (r->isRunestone) {
+		weaponSharedPtr wp = getWeapon();
+		return (wp->getRune() == r->getRune());
+	}
+	return false;
+}
+
+/*
 Returns the currently-highlighted consumable.
 */
 consumableSharedPtr person::getSelectedConsumable()
@@ -984,6 +996,7 @@ bool person::hasItemEquipped(itemSharedPtr it)
 	case(ITEM_CHARM): return it == getCharm();
 	case(ITEM_SPELL): return items.isSpellEquipped(std::static_pointer_cast<spell>(it));
 	case(ITEM_CONSUMABLE): return items.isConsumableEquipped(std::static_pointer_cast<consumable>(it));
+	case(ITEM_MISC): return isRunestoneEquipped(std::static_pointer_cast<miscItem>(it));
 	}
 	return false;
 }
