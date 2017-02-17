@@ -154,9 +154,19 @@ weaponSharedPtr weapon_SlaveMastersWhip();
 weaponSharedPtr weapon_LadyTvertsClaws();
 
 weaponSharedPtr weapon_EtherealSword();
+weaponSharedPtr weapon_SentinelsPike();
 
 weaponSharedPtr weapon_CorensGreataxe();
 weaponSharedPtr weapon_KhallesHolyScythe();
+
+weaponSharedPtr weapon_SirPercivelsSword();
+
+weaponSharedPtr weapon_VoidfireKnife();
+weaponSharedPtr weapon_LightningWarhammer();
+weaponSharedPtr weapon_IetrasFlameScythe();
+
+weaponSharedPtr weapon_EtherealGreatsword();
+weaponSharedPtr weapon_MoonpaleScythe();
 
 weaponSharedPtr weapon_ProfaneGreatsword();
 
@@ -169,6 +179,7 @@ weaponSharedPtr shield_VoidTouchedShield();
 weaponSharedPtr shield_DragonboneShield();
 weaponSharedPtr shield_EtherealShield();
 weaponSharedPtr shield_KhallesBellShield();
+weaponSharedPtr shield_GhostlyShield();
 weaponSharedPtr shield_SirPercivelsShield();
 
 //Wands

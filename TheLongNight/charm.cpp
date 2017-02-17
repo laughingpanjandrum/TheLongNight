@@ -154,3 +154,24 @@ those who embraced their suffering."));
 	c->addEffect(DAMAGE_WHEN_POISONED, 20);
 	return c;
 }
+
+charmSharedPtr charm_SirPercivelsRing()
+{
+	charmSharedPtr c(new charm("Sir Percivel's Ring", CHARM_TILE, TCODColor::lightGreen,
+		"Sir Percivel sought the truth of the Rose's decline. In the heart of the Void, he looked upon the whispering \
+void at the heart of creation, and a great silence overtook him. Afterward, he began his final pilgrimage."));
+	c->addEffect(BUFF_HOLY_DAMAGE, 25);
+	return c;
+}
+
+charmSharedPtr charm_PaleShadesRing()
+{
+	charmSharedPtr c(new charm("Pale Shade's Ring", CHARM_TILE, TCODColor::lighterBlue,
+		"Ring worn by the Pale Shade, decorated with the crest of the Moon-Pale King. As the king's domain became \
+unmoored from reality, he slowly withered away in his palace, even as his servants rushed to stop the oncoming void."));
+	c->setDamageResist(DAMAGE_ACID, 20);
+	c->setDamageResist(DAMAGE_COLD, 20);
+	c->setDamageResist(DAMAGE_ELECTRIC, 20);
+	c->setDamageResist(DAMAGE_MAGIC, -30);
+	return c;
+}

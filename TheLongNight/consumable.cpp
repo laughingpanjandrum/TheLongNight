@@ -193,6 +193,15 @@ consumableSharedPtr ranged_FrostKnives()
 	return c;
 }
 
+consumableSharedPtr ranged_WarpingJavelin()
+{
+	consumableSharedPtr c(new consumable("Warping Javelin", SPEAR_TILE, TCODColor::lighterBlue,
+		"These javelins, infused with the power of the void, phase in and out of reality, and always hit their target."));
+	c->setRangedAttack(ability_WarpingJavelin());
+	c->add(4);
+	return c;
+}
+
 consumableSharedPtr oil_PyromancersOil()
 {
 	consumableSharedPtr c(new consumable("Pyromancer's Oil", VIAL_TILE, TCODColor::darkFlame,

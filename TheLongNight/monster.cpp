@@ -1317,6 +1317,199 @@ crooked scythe, and whispers unanswered prayers."));
 	return m;
 }
 
+monsterSharedPtr monster_VoidwalkerEnkidu()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Voidwalker Enkidu", PLAYER_TILE, TCODColor::lightPurple,
+		"This voidwalker wears armour spiked with void crystals, and wields a broken deadwood wand."));
+	m->setHealth(400);
+	m->setDefence(DAMAGE_PHYSICAL, 50);
+	m->setDefence(DAMAGE_PROFANE, 50);
+	m->setDefence(DAMAGE_BLESSED, 50);
+	m->setMoveStats(SPEED_NORMAL);
+	m->setMeleeStats(25, SPEED_NORMAL);
+	m->addSpellKnown(spell_StormLash());
+	m->setSpellCastChance(50);
+	m->keepsDistance = true;
+	m->setFragmentsDropped(500);
+	m->addItemDrop(spell_StormLash());
+	m->isBoss = true;
+	m->showBossHealthBar = false;
+	return m;
+}
+
+monsterSharedPtr monster_VoidwalkerIcarus()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Voidwalker Icarus", PLAYER_TILE, TCODColor::purple,
+		"This voidwalker wears a crown that glows with the light of the void, and wields a pair of knives imbued with dark flame."));
+	m->setHealth(400);
+	m->setDefence(DAMAGE_PHYSICAL, 50);
+	m->setDefence(DAMAGE_ELECTRIC, 50);
+	m->setDefence(DAMAGE_FIRE, 50);
+	m->setMoveStats(SPEED_FAST);
+	m->equipItem(weapon_VoidfireKnife());
+	m->setFragmentsDropped(500);
+	m->addItemDrop(weapon_VoidfireKnife());
+	m->addSpellKnown(attack_KnifeCast());
+	m->setSpellCastChance(30);
+	m->isBoss = true;
+	m->showBossHealthBar = false;
+	return m;
+}
+
+monsterSharedPtr monster_VoidwalkerPenelope()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Voidwalker Penelope", PLAYER_TILE, TCODColor::darkPurple,
+		"This voidwalker wears a tattered purple cape, and wields an enormous hammer that crackles with void lightning."));
+	m->setHealth(600);
+	m->setDefence(DAMAGE_PHYSICAL, 50);
+	m->setDefence(DAMAGE_ELECTRIC, 50);
+	m->setDefence(DAMAGE_ACID, 50);
+	m->setMoveStats(SPEED_SLOW);
+	m->equipItem(weapon_LightningWarhammer());
+	m->addSpellKnown(attack_LightningSlam());
+	m->setSpellCastChance(50);
+	m->setFragmentsDropped(500);
+	m->addItemDrop(weapon_LightningWarhammer());
+	m->isBoss = true;
+	m->showBossHealthBar = false;
+	return m;
+}
+
+monsterSharedPtr monster_IetraEaterOfSilence()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Ietra, Eater of Silence", PLAYER_TILE, TCODColor::lighterPurple,
+		"Her eyes are deep pools that reflect the dark of the void; her hair crackles with lightning and fire. In one hand \
+she wields a crooked scythe imbued with flames; in the other, she clutches an amber pendant."));
+	m->setHealth(1000);
+	m->setDefence(DAMAGE_PHYSICAL, 50);
+	m->setDefence(DAMAGE_ELECTRIC, 30);
+	m->setDefence(DAMAGE_FIRE, 30);
+	m->setDefence(DAMAGE_PROFANE, 30);
+	m->setMoveStats(SPEED_NORMAL);
+	m->isBoss = true;
+	m->setFragmentsDropped(3000);
+	m->addItemDrop(weapon_IetrasFlameScythe());
+	m->addSpellKnown(spell_Firestorm());
+	m->setSpellCastChance(20);
+	m->addItemDrop(heart_IetrasBurningHeart());
+	m->addItemDrop(key_IetrasAmberPendant());
+	return m;
+}
+
+/*
+	Bridge of Lords
+*/
+
+monsterSharedPtr monster_SentinelPikeman()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Sentinel Pikeman", KNIGHT_TILE, TCODColor::lightBlue,
+		"A tall figure in monolithic armour, wielding a wicked-looking pike."));
+	m->setHealth(200);
+	m->setDefence(DAMAGE_PHYSICAL, 50);
+	m->setDefence(DAMAGE_ELECTRIC, 75);
+	m->setDefence(DAMAGE_MAGIC, 75);
+	m->setMoveStats(SPEED_SLOW);
+	m->equipItem(weaponSharedPtr(new weapon(25, SPEED_NORMAL, DAMAGE_ELECTRIC, 25)));
+	m->addSpellKnown(attack_Penetrate());
+	m->setSpellCastChance(50);
+	m->setFragmentsDropped(250);
+	return m;
+}
+
+monsterSharedPtr monster_SentinelArcher()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Sentinel Archer", KNIGHT_TILE, TCODColor::lightestBlue,
+		"A tall knight in monolithic armour, wielding an enormous bow."));
+	m->setHealth(100);
+	m->setDefence(DAMAGE_PHYSICAL, 50);
+	m->setDefence(DAMAGE_ELECTRIC, 75);
+	m->setDefence(DAMAGE_MAGIC, 75);
+	m->setMoveStats(SPEED_SLOW);
+	m->setMeleeStats(10, SPEED_SLOW);
+	m->addSpellKnown(spellSharedPtr(new spell("Greatbow Shot", TCODColor::lightBlue, 8, 25, APPLY_ELECTRIC_DAMAGE, 25)));
+	m->setSpellCastChance(50);
+	m->keepsDistance = true;
+	m->setFragmentsDropped(250);
+	return m;
+}
+
+monsterSharedPtr monster_GhostlyWarrior()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Ghostly Warrior", KNIGHT_TILE, TCODColor::lightPink,
+		"The pale shadow of a knight, dressed in ghostly armour, who drifts slightly above the ground. In one \
+hand it clutches a huge, ethereal greatsword."));
+	m->setHealth(100);
+	m->setDefence(DAMAGE_PHYSICAL, 100);
+	m->addWeakness(DAMAGE_MAGIC);
+	m->setMoveStats(SPEED_FAST);
+	m->equipItem(weaponSharedPtr(new weapon(0, SPEED_SLOW, DAMAGE_MAGIC, 50)));
+	m->setFragmentsDropped(200);
+	return m;
+}
+
+monsterSharedPtr monster_EtherealWisp()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Ethereal Wisp", WISP_TILE, TCODColor::lightPink,
+		"This thing is hardly visible - a faint cloud that drifts above the ground, exuding a pale mist."));
+	m->setHealth(25);
+	m->setLightEmitted(0.4);
+	m->setDefence(DAMAGE_PHYSICAL, 100);
+	m->setDefence(DAMAGE_ACID, 100);
+	m->addWeakness(DAMAGE_MAGIC);
+	m->setMoveStats(SPEED_NORMAL);
+	m->keepsDistance = true;
+	m->addSpellKnown(spellSharedPtr(new spell("Acidic Cloud", TCODColor::green, ATTACK_AOE, 3, APPLY_ACID_DAMAGE, 25)));
+	m->setFragmentsDropped(100);
+	return m;
+}
+
+monsterSharedPtr monster_WeepingWanderer()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Weeping Wanderer", WISP_TILE, TCODColor::darkPink,
+		"One could almost mistake this for a human shape, were it not for the ethereal glow exuding from its torn \
+white robes. Its tears stain the floor of the valley."));
+	m->setHealth(100);
+	m->setDefence(DAMAGE_PHYSICAL, 100);
+	m->setDefence(DAMAGE_ACID, 100);
+	m->addWeakness(DAMAGE_MAGIC);
+	m->setMoveStats(SPEED_NORMAL);
+	m->keepsDistance = true;
+	m->isBoss = true;
+	m->showBossHealthBar = false;
+	m->setFragmentsDropped(500);
+	m->addSpellKnown(spellSharedPtr(new spell("Weep", TCODColor::green, ATTACK_BUFF_SELF, 1, DROP_DRAINING_POOL, 1)));
+	m->setSpellCastChance(25);
+	return m;
+}
+
+monsterSharedPtr monster_ThePaleShade()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("The Pale Shade", GHOST_TILE, TCODColor::lightCyan,
+		"This near-invisible creature floats in a pale cloud, and its frost-drenched eyes suggest a sense of profound calm. \
+Acid drips from one twisted hand, while the other sings with electricity."));
+	m->setHealth(1200);
+	m->setLightEmitted(0.4);
+	m->setDefence(DAMAGE_PHYSICAL, 100);
+	m->setDefence(DAMAGE_COLD, 75);
+	m->setDefence(DAMAGE_ELECTRIC, 75);
+	m->setDefence(DAMAGE_COLD, 75);
+	m->addWeakness(DAMAGE_FIRE);
+	m->addWeakness(DAMAGE_MAGIC);
+	m->setPoisonResist(1000);
+	m->setBleedResist(100);
+	m->setMoveStats(SPEED_NORMAL);
+	m->equipItem(weaponSharedPtr(new weapon(0, SPEED_NORMAL, DAMAGE_MAGIC, 50)));
+	m->addSpellKnown(spellSharedPtr(new spell("Electric Touch", TCODColor::lightPurple, 1, 0, APPLY_ELECTRIC_DAMAGE, 25)));
+	m->addSpellKnown(spellSharedPtr(new spell("Frigid Glance", TCODColor::cyan, 5, 0, APPLY_COLD_DAMAGE, 25)));
+	m->addSpellKnown(spellSharedPtr(new spell("Weep", TCODColor::green, ATTACK_BUFF_SELF, 1, DROP_DRAINING_POOL, 1)));
+	m->setSpellCastChance(50);
+	m->isBoss = true;
+	m->setFragmentsDropped(4000);
+	m->addItemDrop(key_MoonpaleKey());
+	m->addItemDrop(heart_PaleHeart());
+	return m;
+}
+
 
 /*
 	The Void
@@ -1435,6 +1628,8 @@ monsterSharedPtr npc_Ydella()
 	m->addShopUnlock("dead_sparrows_heart");
 	m->addShopUnlock("corens_heart");
 	m->addShopUnlock("khalles_heart");
+	m->addShopUnlock("ietras_heart");
+	m->addShopUnlock("pale_heart");
 	return m;
 }
 
@@ -1456,6 +1651,16 @@ monsterSharedPtr npc_ToadPriestGhulluk()
 	m->setHealth(500);
 	m->isHostile = false;
 	m->loadDialogue("dialogue/ghulluk_chat.txt");
+	return m;
+}
+
+monsterSharedPtr npc_SiltraTheRedEyed()
+{
+	monsterSharedPtr m(new monster("Siltra the Red-Eyed", PLAYER_TILE, TCODColor::red,
+		"A forlorn woman sits among the ruins. Her eyes shine bright red."));
+	m->setHealth(1000);
+	m->isHostile = false;
+	m->loadDialogue("dialogue/siltra_chat.txt");
 	return m;
 }
 
@@ -1623,6 +1828,32 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 	else if (handle == "khalle_the_lost")
 		return monster_KhalleTheLost();
 
+	//Mausoleum of the Void
+	else if (handle == "voidwalker_enkidu")
+		return monster_VoidwalkerEnkidu();
+	else if (handle == "voidwalker_icarus")
+		return monster_VoidwalkerIcarus();
+	else if (handle == "voidwalker_penelope")
+		return monster_VoidwalkerPenelope();
+	else if (handle == "ietra")
+		return monster_IetraEaterOfSilence();
+
+	//Bridge of Lords
+	else if (handle == "sentinel_pikeman")
+		return monster_SentinelPikeman();
+	else if (handle == "sentinel_archer")
+		return monster_SentinelArcher();
+
+	//Moonpale Wastes
+	else if (handle == "ghostly_warrior")
+		return monster_GhostlyWarrior();
+	else if (handle == "ethereal_wisp")
+		return monster_EtherealWisp();
+	else if (handle == "weeping_wanderer")
+		return monster_WeepingWanderer();
+	else if (handle == "the_pale_shade")
+		return monster_ThePaleShade();
+
 	//The Void
 	else if (handle == "void_touched")
 		return monster_VoidTouched();
@@ -1644,6 +1875,8 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return npc_TheEyelessQueen();
 	else if (handle == "ghulluk")
 		return npc_ToadPriestGhulluk();
+	else if (handle == "siltra")
+		return npc_SiltraTheRedEyed();
 
 	//LET'S HOPE WE NEVER GET HERE!
 	return nullptr;

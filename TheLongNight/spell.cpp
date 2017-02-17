@@ -289,6 +289,82 @@ spellSharedPtr attack_Frenzy()
 	return sp;
 }
 
+spellSharedPtr attack_PercivelsFire()
+{
+	spellSharedPtr sp(new spell("Percivel's Fire", SWORD_TILE, TCODColor::flame,
+		"Blast your foe with holy fire."));
+	sp->setAttackType(ATTACK_RANGE, 1);
+	sp->addEffect(CASTER_MELEE_ATTACK, 1);
+	sp->addEffect(APPLY_FIRE_DAMAGE, 25);
+	sp->setVigourCost(1);
+	return sp;
+}
+
+spellSharedPtr attack_KnifeCast()
+{
+	spellSharedPtr sp(new spell("Knife Cast", DAGGER_TILE, TCODColor::flame,
+		"Cast the knife as a ranged attack; it instantly returns to your hand."));
+	sp->setAttackType(ATTACK_RANGE, 4);
+	sp->addEffect(CASTER_MELEE_ATTACK, 1);
+	sp->setVigourCost(1);
+	return sp;
+}
+
+spellSharedPtr attack_LightningSlam()
+{
+	spellSharedPtr sp(new spell("Lightning Slam", HAMMER_TILE, TCODColor::lightPurple,
+		"Slam target with a melee attack that launches them away."));
+	sp->setAttackType(ATTACK_RANGE, 1);
+	sp->addEffect(CASTER_MELEE_ATTACK, 1);
+	sp->addEffect(KNOCKBACK_TARGET, 3);
+	sp->setVigourCost(1);
+	return sp;
+}
+
+spellSharedPtr attack_BillowingFlames()
+{
+	spellSharedPtr sp(new spell("Billowing Flames", SPEAR_TILE, TCODColor::darkFlame,
+		"Imbues the scythe with billowing fire."));
+	sp->setAttackType(ATTACK_BUFF_WEAPON);
+	sp->setBuffApplied(DAMAGE_FIRE, 25);
+	sp->setVigourCost(5);
+	return sp;
+}
+
+spellSharedPtr attack_Penetrate()
+{
+	spellSharedPtr sp(new spell("Penetrate", SPEAR_TILE, TCODColor::lightBlue,
+		"Strike a target up to 3 spaces away with the long pike, dealing additional damage."));
+	sp->setAttackType(ATTACK_RANGE, 3);
+	sp->addEffect(CASTER_MELEE_ATTACK, 1);
+	sp->addEffect(SCALE_NEXT_ATTACK, 2);
+	sp->setVigourCost(1);
+	return sp;
+}
+
+spellSharedPtr attack_EtherealRay()
+{
+	spellSharedPtr sp(new spell("Ethereal Ray", SPELL_TILE, TCODColor::lightMagenta,
+		"Fires a beam of magical energy."));
+	sp->setAttackType(ATTACK_RANGE, 5);
+	sp->addEffect(APPLY_MAGIC_DAMAGE, 25);
+	sp->setVigourCost(1);
+	return sp;
+}
+
+spellSharedPtr attack_PaleSlash()
+{
+	spellSharedPtr sp(new spell("Pale Slash", SPEAR_TILE, TCODColor::lightestBlue,
+		"Attack deals cold, acid and electric damage."));
+	sp->setAttackType(ATTACK_RANGE, 1);
+	sp->addEffect(CASTER_MELEE_ATTACK, 1);
+	sp->addEffect(APPLY_COLD_DAMAGE, 25);
+	sp->addEffect(APPLY_ACID_DAMAGE, 25);
+	sp->addEffect(APPLY_ELECTRIC_DAMAGE, 25);
+	sp->setVigourCost(2);
+	return sp;
+}
+
 spellSharedPtr ability_EtherealSurge()
 {
 	spellSharedPtr sp(new spell("Ethereal Surge", SPELL_TILE, TCODColor::magenta,
@@ -607,6 +683,30 @@ spellSharedPtr spell_SpitFire()
 	sp->setAttackRange(8);
 	sp->addEffect(APPLY_FIRE_DAMAGE, 20);
 	sp->setVigourCost(1);
+	sp->usesSpellPower = true;
+	return sp;
+}
+
+spellSharedPtr spell_StormLash()
+{
+	spellSharedPtr sp(new spell("Storm Lash", SPELL_TILE, TCODColor::lightPurple,
+		"This spell, born of the churning heart of the void, summons a thunderous whip that throws enemies back."));
+	sp->setAttackType(ATTACK_RANGE, 3);
+	sp->addEffect(APPLY_ELECTRIC_DAMAGE, 25);
+	sp->addEffect(KNOCKBACK_TARGET, 5);
+	sp->setVigourCost(2);
+	sp->usesSpellPower = true;
+	return sp;
+}
+
+spellSharedPtr spell_Firestorm()
+{
+	spellSharedPtr sp(new spell("Firestorm", SPELL_TILE, TCODColor::flame,
+		"Spell of Ietra, who saw the flame at the heart of the void. She claimed that the truth of the immortals lay \
+within that fire, but her tomb was sealed away from the world so that the knowledge would be forgotten."));
+	sp->setAttackType(ATTACK_AOE, 5);
+	sp->addEffect(APPLY_FIRE_DAMAGE, 50);
+	sp->setVigourCost(3);
 	sp->usesSpellPower = true;
 	return sp;
 }
@@ -989,5 +1089,14 @@ spellSharedPtr ability_VoidStep()
 	spellSharedPtr sp(new spell("Void Step", SPELL_TILE, TCODColor::purple));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(TELEPORT, 5);
+	return sp;
+}
+
+spellSharedPtr ability_WarpingJavelin()
+{
+	spellSharedPtr sp(new spell("Warping Javelin", SPELL_TILE, TCODColor::lighterBlue));
+	sp->setAttackType(ATTACK_RANGE, 8);
+	sp->addEffect(APPLY_PROFANE_DAMAGE, 100);
+	sp->alwaysHitTarget = true;
 	return sp;
 }

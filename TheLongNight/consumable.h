@@ -87,6 +87,7 @@ consumableSharedPtr ranged_PyromancersFlask();
 consumableSharedPtr ranged_WitchsJar();
 consumableSharedPtr ranged_LightingJavelin();
 consumableSharedPtr ranged_FrostKnives();
+consumableSharedPtr ranged_WarpingJavelin();
 
 consumableSharedPtr oil_PyromancersOil();
 consumableSharedPtr oil_CorrosiveOil();

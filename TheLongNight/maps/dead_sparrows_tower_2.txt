@@ -32,6 +32,7 @@ o ooze
 -connections
 stairs:dead_sparrows_tower_1
 east:dead_sparrows_tower_3
+north:bridge_of_lords_1
 -endconnections
 ####;;;########;;;;;;;;;;###############
 ###;;;;;#######;;;;;;;;;;###############

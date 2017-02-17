@@ -300,6 +300,52 @@ into his robes protected him from doom."));
 	return a;
 }
 
+armourSharedPtr headgear_SentinelsHelm()
+{
+	armourSharedPtr a(new armour("Sentinel's Helm", HELMET_TILE, TCODColor::lightBlue, ITEM_HELMET,
+		"Slitted helm of the Sentinels. It permitted almost no light to enter, which led some to suspect \
+that the Sentinels were not entirely human."));
+	a->setDefence(15);
+	a->setDamageResist(DAMAGE_ELECTRIC, 15);
+	a->setDamageResist(DAMAGE_MAGIC, 15);
+	return a;
+}
+
+armourSharedPtr armour_SentinelsArmour()
+{
+	armourSharedPtr a(new armour("Sentinel's Armour", ARMOUR_TILE, TCODColor::lightBlue, ITEM_BODY_ARMOUR,
+		"Heavy armour of the Sentinels, decorated with the sigils of the Moon-Pale King. They never flagged in \
+their ancient duty, and indeed, some began to suspect that they were not even human."));
+	a->setDefence(45);
+	a->setDamageResist(DAMAGE_ELECTRIC, 35);
+	a->setDamageResist(DAMAGE_MAGIC, 15);
+	a->setMoveSpeed(SPEED_SLOW);
+	return a;
+}
+
+armourSharedPtr headgear_GhostlyHelm()
+{
+	armourSharedPtr a(new armour("Ghostly Helm", HELMET_TILE, TCODColor::lightestPink, ITEM_HELMET,
+		"Half-unreal helm that glitters with arcane essence. Once worn by the knights of the Moon-Pale King, \
+who slowly faded from existence."));
+	a->setDamageResist(DAMAGE_MAGIC, 15);
+	a->setDamageResist(DAMAGE_COLD, 10);
+	a->setDamageResist(DAMAGE_ACID, 10);
+	return a;
+}
+
+armourSharedPtr armour_GhostlyArmour()
+{
+	armourSharedPtr a(new armour("Ghostly Armour", ARMOUR_TILE, TCODColor::lightestPink, ITEM_BODY_ARMOUR,
+		"Half-unreal armour that glistens with arcane essence. The warriors of the Moon-Pale King wore this armour, \
+until they slowly faded from time."));
+	a->setDamageResist(DAMAGE_MAGIC, 30);
+	a->setDamageResist(DAMAGE_COLD, 20);
+	a->setDamageResist(DAMAGE_ACID, 20);
+	a->setMoveSpeed(SPEED_FAST);
+	return a;
+}
+
 armourSharedPtr headgear_SirPercivelsHelm()
 {
 	armourSharedPtr a(new armour("Sir Percivel's Helm", HELMET_TILE, TCODColor::lightGreen, ITEM_HELMET,

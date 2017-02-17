@@ -2104,6 +2104,8 @@ void game::applyEffectToPerson(personSharedPtr target, effect eff, int potency, 
 		currentMap->setTile(tile_Ooze(), target->getx(), target->gety());
 	else if (eff == DROP_WEB)
 		currentMap->setTile(tile_Web(), target->getx(), target->gety());
+	else if (eff == DROP_DRAINING_POOL)
+		currentMap->setTile(tile_DrainingPool(), target->getx(), target->gety());
 	else if (eff == CREATE_FOG)
 		currentMap->createFogCloud(target->getx(), target->gety(), potency);
 
@@ -2915,7 +2917,15 @@ void game::doRangedSpell(spellSharedPtr sp)
 		}
 		
 		//See if there's something to hit on the path
-		personSharedPtr target = getTargetOnPath(path);
+		personSharedPtr target;
+		if (sp->alwaysHitTarget) {
+			target = currentMap->getPerson(tp.first, tp.second);
+		}
+		else {
+			target = getTargetOnPath(path);
+		}
+
+		//And slam this dude if he exists!
 		if (target != nullptr) {
 			
 			//Is it in range?
@@ -3357,6 +3367,16 @@ void game::initializeShops()
 	khalle->addItem(weapon_KhallesHolyScythe(), 400);
 	khalle->addItem(prayer_TouchOfDoom(), 300);
 	allUnlockableShops.push_back(shopSharedPtr(khalle));
+	//	Ietra's Heart
+	shop* ietra = new shop("ietras_heart", true);
+	ietra->addItem(weapon_IetrasFlameScythe(), 400);
+	ietra->addItem(spell_Firestorm(), 400);
+	allUnlockableShops.push_back(shopSharedPtr(ietra));
+	//	Pale Heart
+	shop* pale = new shop("pale_heart", true);
+	pale->addItem(weapon_MoonpaleScythe(), 500);
+	pale->addItem(charm_PaleShadesRing(), 100);
+	allUnlockableShops.push_back(shopSharedPtr(pale));
 
 }
 
@@ -3969,11 +3989,13 @@ void getAllItems(personSharedPtr player)
 	player->addItem(weapon_CrowKnife());
 	player->addItem(weapon_CrowKnightSword());
 	player->addItem(weapon_DragonboneSword());
+	player->addItem(weapon_EtherealGreatsword());
 	player->addItem(weapon_EtherealSword());
 	player->addItem(weapon_FishmansHarpoon());
 	player->addItem(weapon_FishmansKnife());
 	player->addItem(weapon_KythielsScythe());
 	player->addItem(weapon_LadyTvertsClaws());
+	player->addItem(weapon_MoonpaleScythe());
 	player->addItem(weapon_NotchedGreatsword());
 	player->addItem(weapon_SacrificialKnife());
 	player->addItem(weapon_SerpentsTooth());
@@ -3991,6 +4013,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(shield_CityGuardianShield());
 	player->addItem(shield_DragonboneShield());
 	player->addItem(shield_EtherealShield());
+	player->addItem(shield_GhostlyShield());
 	player->addItem(shield_VoidTouchedShield());
 	player->addItem(shield_WoodenWyrdShield());
 
@@ -4026,6 +4049,10 @@ void getAllItems(personSharedPtr player)
 	player->addItem(armour_EtherealRobes());
 	player->addItem(headgear_SparrowKnightsHelm());
 	player->addItem(armour_SparrowKnightsArmour());
+	player->addItem(headgear_SentinelsHelm());
+	player->addItem(armour_SentinelsArmour());
+	player->addItem(headgear_GhostlyHelm());
+	player->addItem(armour_GhostlyArmour());
 
 	player->addItem(charm_ArcanaDrenchedCharm());
 	player->addItem(charm_BloodDrinkersBand());
@@ -4078,6 +4105,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(consumable_InvigoratingTea());
 	player->addItem(consumable_TinyGreenFlower());
 	player->addItem(consumable_TinyRedFlower());
+	player->addItem(consumable_WitchwaterFlask());
 
 	player->addItem(ranged_CorrodingJar());
 	player->addItem(ranged_FrostKnives());
@@ -4087,6 +4115,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(ranged_PoisonThrowingKnives());
 	player->addItem(ranged_PyromancersFlask());
 	player->addItem(ranged_ThrowingKnives());
+	player->addItem(ranged_WarpingJavelin());
 	player->addItem(ranged_WitchsJar());
 	player->addItem(ranged_VoidEssenceJar());
 
@@ -4101,6 +4130,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(runestone_BloodDrenchedRunestone());
 	player->addItem(runestone_CharredRunestone());
 	player->addItem(runestone_CorensRunestone());
+	player->addItem(runestone_CorrodingRunestone());
 	player->addItem(runestone_IetrasRunestone());
 	player->addItem(runestone_KhallesRunestone());
 	player->addItem(runestone_KinslayersRunestone());
@@ -4124,11 +4154,13 @@ void getAllItems(personSharedPtr player)
 	player->addItem(bones_CorensBones());
 	player->addItem(bones_KhallesBones());
 	player->addItem(bones_SiltrasBones());
+	player->addItem(bones_IetrasBones());
 
 	player->addItem(heart_FishBornGoddessesHeart());
 	player->addItem(heart_LadyTvertsHeart());
 	player->addItem(heart_OldCrowsHeart());
 	player->addItem(heart_OrsylsShriveledHeart());
+	player->addItem(heart_PaleHeart());
 	player->addItem(heart_VenomousSpiderHeart());
 	player->addItem(heart_VortensShriveledHeart());
 	player->addItem(heart_WretchedHeart());

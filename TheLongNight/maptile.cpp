@@ -185,6 +185,11 @@ maptile * tile_DeadTree()
 	return new maptile("Dead Tree", "dead_tree", TREE_TILE, DARK_WOOD_COLOR, DARK_SAND_COLOR, false, false);
 }
 
+maptile * tile_SnowboundTree()
+{
+	return new maptile("Snowbound Tree", "snowbound_tree", TREE_TILE, DARK_WOOD_COLOR, TCODColor::lighterGrey, false, false);
+}
+
 maptile * tile_Water()
 {
 	maptile* m = new maptile("Water", "water", BASIC_WATER_TILE, LIGHT_WATER_COLOR, DARK_WATER_COLOR);
@@ -209,6 +214,15 @@ maptile * tile_Acid()
 	maptile* a = new maptile("Acid", "acid", BASIC_WATER_TILE, TCODColor::lighterGreen, TCODColor::green);
 	a->addTouchEffect(APPLY_PHYSICAL_DAMAGE);
 	a->setPotency(5);
+	return a;
+}
+
+maptile * tile_DrainingPool()
+{
+	maptile* a = new maptile("Draining Pool", "draining_pool", BASIC_WATER_TILE, 
+		TCODColor::lighterMagenta, TCODColor::blue);
+	a->addTouchEffect(DRAIN_VIGOUR);
+	a->setPotency(1);
 	return a;
 }
 
@@ -461,6 +475,26 @@ maptile * tile_LostDoor()
 		TCODColor::cyan, TCODColor::black, false, false);
 	door->isDoor = true;
 	door->unlockCode = "khalles_bones";
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	return door;
+}
+
+maptile * tile_SilentDoor()
+{
+	maptile* door = new maptile("Silent Door", "silent_door", BASIC_DOOR_TILE,
+		TCODColor::green, TCODColor::black, false, false);
+	door->isDoor = true;
+	door->unlockCode = "siltras_bones";
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	return door;
+}
+
+maptile * tile_VoidMausoleumDoor()
+{
+	maptile* door = new maptile("Void Mausoleum Door", "void_mausoleum_door", BASIC_DOOR_TILE,
+		TCODColor::purple, TCODColor::black, false, false);
+	door->isDoor = true;
+	door->unlockCode = "ietras_bones";
 	door->addTouchEffect(CHECK_FOR_UNLOCK);
 	return door;
 }

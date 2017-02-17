@@ -48,6 +48,7 @@ public:
 	bool isAcidSpell = false; //Determines whether acid infusions are super-effective
 	bool isColdSpell = false;
 	bool isProfane = false; //Buffed by profane items, bad for blessed people
+	bool alwaysHitTarget = false; //Doesn't hit intermediate targets
 
 private:
 
@@ -95,6 +96,13 @@ spellSharedPtr attack_DeepCut();
 spellSharedPtr attack_Lash();
 spellSharedPtr attack_EtherealStrike();
 spellSharedPtr attack_Frenzy();
+spellSharedPtr attack_PercivelsFire();
+spellSharedPtr attack_KnifeCast();
+spellSharedPtr attack_LightningSlam();
+spellSharedPtr attack_BillowingFlames();
+spellSharedPtr attack_Penetrate();
+spellSharedPtr attack_EtherealRay();
+spellSharedPtr attack_PaleSlash();
 
 //Wand/chime powers
 spellSharedPtr ability_PowerSurge();
@@ -133,6 +141,8 @@ spellSharedPtr spell_ElectricBlade();
 spellSharedPtr spell_ArcLightning();
 
 spellSharedPtr spell_SpitFire();
+spellSharedPtr spell_StormLash();
+spellSharedPtr spell_Firestorm();
 
 //	Prayers
 spellSharedPtr prayer_Restoration();
@@ -181,5 +191,8 @@ spellSharedPtr ability_DevouringGaze();
 spellSharedPtr ability_TentacleSwarm();
 spellSharedPtr ability_Throw();
 spellSharedPtr ability_VoidStep();
+
+//Special
+spellSharedPtr ability_WarpingJavelin();
 
 #endif

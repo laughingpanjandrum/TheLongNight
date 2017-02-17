@@ -189,6 +189,8 @@ bool weapon::getRunestoneDamage(damageType dtype)
 			return true;
 		else if (runestone->addScalingType == SCALE_MAGIC && dtype == DAMAGE_MAGIC)
 			return true;
+		else if (runestone->addScalingType == SCALE_ACID && dtype == DAMAGE_ACID)
+			return true;
 	}
 	return false;
 }
@@ -518,7 +520,18 @@ little of their original form remains."));
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_ARC);
 	wp->setSpecialAttack(attack_EtherealStrike());
-	
+	return wp;
+}
+
+weaponSharedPtr weapon_SentinelsPike()
+{
+	weaponSharedPtr wp(new weapon("Sentinel's Pike", SPEAR_TILE, TCODColor::lightBlue,
+		"Long pike of the Sentinels, set to guard the Bridge of Lords, who never flagged in their ancient duty."));
+	wp->setBasicAttributes(25, SPEED_NORMAL);
+	wp->addDamageType(DAMAGE_ELECTRIC, 25);
+	wp->addScalingType(SCALE_STR);
+	wp->addScalingType(SCALE_DEX);
+	wp->setSpecialAttack(attack_Penetrate());
 	return wp;
 }
 
@@ -547,6 +560,77 @@ According to certain storytellers, she once peered into Heaven itself, and what 
 	wp->setSpellstoreSize(1);
 	wp->setDivinePower(50);
 	wp->setSpecialAttack(prayer_BlessedRadiance());
+	return wp;
+}
+
+weaponSharedPtr weapon_SirPercivelsSword()
+{
+	weaponSharedPtr wp(new weapon("Sir Percivel's Sword", SWORD_TILE, TCODColor::green,
+		"Sir Percivel sought the truth of the Rose's decline. Amongst all the ruined souls \
+in the forsaken mausoleums of the lowlands, he found only one who would still heed him."));
+	wp->setBasicAttributes(75, SPEED_NORMAL);
+	wp->addScalingType(SCALE_STR);
+	wp->addScalingType(SCALE_DEX);
+	wp->setSpecialAttack(attack_PercivelsFire());
+	return wp;
+}
+
+weaponSharedPtr weapon_VoidfireKnife()
+{
+	weaponSharedPtr wp(new weapon("Voidfire Knife", DAGGER_TILE, TCODColor::lighterPurple,
+		"A short knife that glows with dark flame."));
+	wp->setBasicAttributes(0, SPEED_FAST);
+	wp->addDamageType(DAMAGE_PROFANE, 10);
+	wp->addDamageType(DAMAGE_FIRE, 15);
+	wp->addScalingType(SCALE_DEX);
+	wp->setSpecialAttack(attack_KnifeCast());
+	return wp;
+}
+
+weaponSharedPtr weapon_LightningWarhammer()
+{
+	weaponSharedPtr wp(new weapon("Lightning Warhammer", HAMMER_TILE, TCODColor::lightPurple,
+		"Massive warhammer of the Void, flashing with arcane lightning."));
+	wp->setBasicAttributes(50, SPEED_SLOW);
+	wp->addDamageType(DAMAGE_ELECTRIC, 50);
+	wp->addScalingType(SCALE_STR);
+	wp->setSpecialAttack(attack_LightningSlam());
+	return wp;
+}
+
+weaponSharedPtr weapon_IetrasFlameScythe()
+{
+	weaponSharedPtr wp(new weapon("Ietra's Flame Scythe", SPEAR_TILE, TCODColor::flame,
+		"Scythe of Ietra, imbued with the secret fire that lies at the heart of the void. When \
+her tomb was sealed, she resolved that the secret of the Angel would never leave its depths."));
+	wp->setBasicAttributes(25, SPEED_NORMAL);
+	wp->addDamageType(DAMAGE_PROFANE, 25);
+	wp->addScalingType(SCALE_DEX);
+	wp->setSpecialAttack(attack_BillowingFlames());
+	return wp;
+}
+
+weaponSharedPtr weapon_EtherealGreatsword()
+{
+	weaponSharedPtr wp(new weapon("Ethereal Greatsword", SWORD_TILE, TCODColor::lightBlue,
+		"An unreal blade infused with potent magical energy."));
+	wp->setBasicAttributes(0, SPEED_SLOW);
+	wp->addDamageType(DAMAGE_MAGIC, 100);
+	wp->addScalingType(SCALE_STR);
+	wp->addScalingType(SCALE_ARC);
+	wp->setSpecialAttack(attack_EtherealRay());
+	return wp;
+}
+
+weaponSharedPtr weapon_MoonpaleScythe()
+{
+	weaponSharedPtr wp(new weapon("Moon-Pale Scythe", SPEAR_TILE, TCODColor::lighterBlue,
+		"Half-unreal scythe wielded by the Pale Shade. According to certain storytellers, the Shade was all \
+that remained of the Moon-Pale King, who wasted away in his abandoned palace as it drifted through the Void."));
+	wp->setBasicAttributes(0, SPEED_NORMAL);
+	wp->addDamageType(DAMAGE_MAGIC, 25);
+	wp->addScalingType(SCALE_ARC);
+	wp->setSpecialAttack(attack_PaleSlash());
 	return wp;
 }
 
@@ -658,6 +742,18 @@ They ring in times of danger, bringing the favour of the old gods upon the lost.
 	wp->setDamagePenalty(10);
 	wp->setSpellstoreSize(2);
 	wp->setDivinePower(75);
+	wp->makeOffhand();
+	return wp;
+}
+
+weaponSharedPtr shield_GhostlyShield()
+{
+	weaponSharedPtr wp(new weapon("Ghostly Shield", SHIELD_TILE, TCODColor::lightestPink,
+		"Half-unreal shield, engraved with the crest of the Moon-Pale King. As his palace faded into the moonlight, \
+the crest slowly changed into the shape of a crooked finger."));
+	wp->setDamageResist(DAMAGE_MAGIC, 15);
+	wp->setDamageResist(DAMAGE_COLD, 15);
+	wp->setDamageResist(DAMAGE_ACID, 15);
 	wp->makeOffhand();
 	return wp;
 }

@@ -54,6 +54,14 @@ itemSharedPtr getItemByHandle(std::string handle)
 	//Dead Sparrow's Tower
 	else if (handle == "ethereal_sword")
 		return weapon_EtherealSword();
+	//Silent Mausoleum
+	else if (handle == "sir_percivels_sword")
+		return weapon_SirPercivelsSword();
+	//Bridge of Lords/Moonpale Wastes
+	else if (handle == "sentinels_pike")
+		return weapon_SentinelsPike();
+	else if (handle == "ethereal_greatsword")
+		return weapon_EtherealGreatsword();
 
 	//SHIELDS
 	if (handle == "battered_wooden_shield")
@@ -72,6 +80,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return shield_EtherealShield();
 	else if (handle == "khalles_bell_shield")
 		return shield_KhallesBellShield();
+	else if (handle == "ghostly_shield")
+		return shield_GhostlyShield();
 	else if (handle == "sir_percivels_shield")
 		return shield_SirPercivelsShield();
 
@@ -144,6 +154,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return ranged_LightingJavelin();
 	else if (handle == "frost_knives")
 		return ranged_FrostKnives();
+	else if (handle == "warping_javelins")
+		return ranged_WarpingJavelin();
 
 	//ARMOUR
 	if (handle == "captains_tricorn")
@@ -211,6 +223,16 @@ itemSharedPtr getItemByHandle(std::string handle)
 	else if (handle == "moshkas_robes")
 		return armour_MoshkasRobes();
 
+	else if (handle == "sentinels_helm")
+		return headgear_SentinelsHelm();
+	else if (handle == "sentinels_armour")
+		return armour_SentinelsArmour();
+
+	else if (handle == "ghostly_helm")
+		return headgear_GhostlyHelm();
+	else if (handle == "ghostly_armour")
+		return armour_GhostlyArmour();
+
 	else if (handle == "sir_percivels_helm")
 		return headgear_SirPercivelsHelm();
 	else if (handle == "sir_percivels_armour")
@@ -239,6 +261,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return charm_RavenousIdol();
 	else if (handle == "venomruby_ring")
 		return charm_VenomrubyRing();
+	else if (handle == "sir_percivels_ring")
+		return charm_SirPercivelsRing();
 
 	//SPELLS
 	else if (handle == "magic_missile")
@@ -267,6 +291,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return bones_SiltrasBones();
 	else if (handle == "corens_bones")
 		return bones_CorensBones();
+	else if (handle == "ietras_bones")
+		return bones_IetrasBones();
 
 	//HEARTS
 	if (handle == "wretched_heart")
@@ -289,6 +315,10 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return heart_HeartOfCoren();
 	else if (handle == "khalles_heart")
 		return heart_KhallesWretchedHeart();
+	else if (handle == "ietras_heart")
+		return heart_IetrasBurningHeart();
+	else if (handle == "pale_heart")
+		return heart_PaleHeart();
 
 	//SPELLBOOKS
 	if (handle == "waterlogged_writings")
@@ -331,6 +361,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return runestone_ThundrousRunestone();
 	else if (handle == "blood_drenched_runestone")
 		return runestone_BloodDrenchedRunestone();
+	else if (handle == "corroding_runestone")
+		return runestone_CorrodingRunestone();
 	
 	//Uh oh, we didn't find anything!
 	return nullptr;
@@ -460,6 +492,7 @@ std::string getEffectName(effect e)
 	case(LOW_HEALTH_DAMAGE_BUFF): return "damage buff when health is low";
 	case(GAIN_KILL_DAMAGE_BUFF): return "damage buff upon kill";
 	case(INSTILL_FEAR): return "instill fear";
+	case(BUFF_HOLY_DAMAGE): return "% holy damage dealt";
 
 	case(TELEPORT_VIA_WATER): return "water warp";
 	case(TELEPORT_TO_VOID): return "warp to void";

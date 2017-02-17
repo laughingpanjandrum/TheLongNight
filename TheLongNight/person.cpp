@@ -206,7 +206,11 @@ int person::getDamageOfType(damageType dtype)
 {
 	weaponSharedPtr wp = getWeapon();
 	if (wp != nullptr) {
-		return wp->getDamageOfType(dtype);
+		int dmg = wp->getDamageOfType(dtype);
+		if (dtype == DAMAGE_BLESSED) {
+			dmg += (float)dmg * ((float)percentBuffHolyDamage / 100);
+		}
+		return dmg;
 	}
 	return 0;
 }
@@ -442,6 +446,8 @@ void person::applyEffect(effect eff, int potency)
 		addHealth(potency);
 	else if (eff == RESTORE_VIGOUR)
 		addVigour(potency);
+	else if (eff == DRAIN_VIGOUR)
+		loseVigour(potency);
 
 	//Buffs
 
@@ -479,6 +485,8 @@ void person::applyEffect(effect eff, int potency)
 		instantSpellCast += potency;
 	else if (eff == NEXT_SPELL_COST_ADJUST)
 		nextSpellCostAdjust += potency;
+	else if (eff == BUFF_HOLY_DAMAGE)
+		percentBuffHolyDamage += potency;
 
 	//Debuffs
 

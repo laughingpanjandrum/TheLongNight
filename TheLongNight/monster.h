@@ -206,6 +206,22 @@ monsterSharedPtr monster_SkeletonKnight();
 monsterSharedPtr monster_SkeletonArcher();
 monsterSharedPtr monster_KhalleTheLost();
 
+//Mausoleum of the Void
+monsterSharedPtr monster_VoidwalkerEnkidu();
+monsterSharedPtr monster_VoidwalkerIcarus();
+monsterSharedPtr monster_VoidwalkerPenelope();
+monsterSharedPtr monster_IetraEaterOfSilence();
+
+//Bridge of Lords
+monsterSharedPtr monster_SentinelPikeman();
+monsterSharedPtr monster_SentinelArcher();
+
+//Moonpale Wastes
+monsterSharedPtr monster_GhostlyWarrior();
+monsterSharedPtr monster_EtherealWisp();
+monsterSharedPtr monster_WeepingWanderer();
+monsterSharedPtr monster_ThePaleShade();
+
 //The Void
 monsterSharedPtr monster_VoidTouched();
 
@@ -218,6 +234,7 @@ monsterSharedPtr npc_VoidwalkerDaedelus();
 monsterSharedPtr npc_Ydella();
 monsterSharedPtr npc_TheEyelessQueen();
 monsterSharedPtr npc_ToadPriestGhulluk();
+monsterSharedPtr npc_SiltraTheRedEyed();
 
 
 //For map files

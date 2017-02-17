@@ -138,11 +138,13 @@ maptile* tile_Rosebush(); //"rosebush"
 maptile* tile_Tree(); //"tree"
 maptile* tile_VoidTree(); //"void_tree"
 maptile* tile_DeadTree(); //"dead_tree"
+maptile* tile_SnowboundTree(); //"snowbound_tree"
 
 maptile* tile_Water(); //"water"
 maptile* tile_MossyWater(); //"water_mossy"
 maptile* tile_DeepWater(); //"water_deep"
 maptile* tile_Acid(); //"acid"
+maptile* tile_DrainingPool(); //"draining pool"
 
 maptile* tile_Ooze(); //"ooze"
 maptile* tile_Web(); //"web"
@@ -177,6 +179,8 @@ maptile* tile_ObservatoryDoor(); //"observatory_door"
 
 maptile* tile_BloodyMausoleumDoor(); //"bloody_mausoleum_door"
 maptile* tile_LostDoor(); //"lost_door"
+maptile* tile_SilentDoor(); //"silent_door"
+maptile* tile_VoidMausoleumDoor(); //"void_mausoleum_door"
 
 //Furniture
 maptile* tile_Chair1(); //"chair1"
@@ -193,9 +197,9 @@ const tileVector ALL_MAPTILES = {
 	tile_MagicFloor(),
 	tile_Wall(), tile_WoodenWall(), tile_SandyRock(), tile_MarbleWall(), tile_MagicWall(),
 	tile_Door(), tile_WoodenDoor(), tile_LockedDoor(), tile_DoorUnlocker(),
-	tile_Glass(), tile_Bush(), tile_Rosebush(), tile_Tree(), tile_VoidTree(), tile_DeadTree(),
+	tile_Glass(), tile_Bush(), tile_Rosebush(), tile_Tree(), tile_VoidTree(), tile_DeadTree(), tile_SnowboundTree(),
 	tile_Bars(), tile_CellDoor(),
-	tile_Water(), tile_MossyWater(), tile_DeepWater(), tile_Acid(),
+	tile_Water(), tile_MossyWater(), tile_DeepWater(), tile_Acid(), tile_DrainingPool(),
 	tile_Ooze(), tile_Web(), tile_WebOnFloor(),
 	tile_Bloodstain(), tile_Corpse(),
 	tile_Bed(), tile_Terminal(),
@@ -211,7 +215,7 @@ const tileVector ALL_MAPTILES = {
 	tile_VoidDrenchedDoor(), tile_DoorOfWinter(), tile_OldValleyDoor(),
 	tile_DesolateChurchDoor(), tile_HightowerDoor(), tile_BasementDoor(),
 	tile_SparrowTowerDoor(), tile_ObservatoryDoor(),
-	tile_BloodyMausoleumDoor(), tile_LostDoor(),
+	tile_BloodyMausoleumDoor(), tile_LostDoor(), tile_SilentDoor(), tile_VoidMausoleumDoor(),
 };
 
 #endif

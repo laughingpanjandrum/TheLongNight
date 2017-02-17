@@ -123,6 +123,16 @@ mysteries of the stars."));
 	return m;
 }
 
+miscItemSharedPtr key_MoonpaleKey()
+{
+	miscItemSharedPtr m(new miscItem("Moon-Pale Key", KEY_TILE, TCODColor::lighterBlue,
+		"Key created by the Eyeless Queen. Seeing that the Moon-Pale King's lands were slowly becoming unmoored \
+from reality, she forged this key to the King to return to the material world whenever he desired. Alas, the king \
+did not care to return, and instead remained in his palace until only a withered husk remained."));
+	m->setKeyTag("moonpale_key");
+	return m;
+}
+
 miscItemSharedPtr key_WatchfulEyestalk()
 {
 	miscItemSharedPtr m(new miscItem("Watchful Eyestalk", KEY_TILE, TCODColor::darkGreen,
@@ -139,6 +149,14 @@ miscItemSharedPtr key_MawtoothFragment()
  'The Mouthpiece of the Lord issues His Commands, and lets His Will be known to the world.Offer it at the \
 Altar in honour of His Wisdom.'"));
 	m->setKeyTag("mawtooth_fragment");
+	return m;
+}
+
+miscItemSharedPtr key_IetrasAmberPendant()
+{
+	miscItemSharedPtr m(new miscItem("Ietra's Amber Pendant", KEY_TILE, TCODColor::amber,
+		"Amber stone on a cord, which Ietra clutched until her dying moment. Its significance is unknown."));
+	m->setKeyTag("ietras_amber_pendant");
 	return m;
 }
 
@@ -230,6 +248,24 @@ miscItemSharedPtr heart_KhallesWretchedHeart()
 	miscItemSharedPtr h(new miscItem("Khalle's Wretched Heart", HEART_TILE, TCODColor::darkYellow,
 		"Heart filled with shards of bone. This is all that remains of Khalle, whom the gods never answered."));
 	h->setKeyTag("khalles_heart");
+	return h;
+}
+
+miscItemSharedPtr heart_IetrasBurningHeart()
+{
+	miscItemSharedPtr h(new miscItem("Ietra's Burning Heart", HEART_TILE, TCODColor::flame,
+		"Still-burning heart of Ietra the Seer, who found the truth of the immortals at the heart of the void, \
+and resolved that it would be known to none."));
+	h->setKeyTag("ietras_heart");
+	return h;
+}
+
+miscItemSharedPtr heart_PaleHeart()
+{
+	miscItemSharedPtr h(new miscItem("Pale Heart", HEART_TILE, TCODColor::lightestBlue,
+		"Half-unreal heart of the Pale Shade that dwelt in the wastes of a lost kingdom. Perhaps its tears were what \
+kept the wastes from drifting out of existence entirely."));
+	h->setKeyTag("pale_heart");
 	return h;
 }
 
@@ -416,6 +452,15 @@ miscItemSharedPtr runestone_BloodDrenchedRunestone()
 	return r;
 }
 
+miscItemSharedPtr runestone_CorrodingRunestone()
+{
+	miscItemSharedPtr r(new miscItem("Corroding Runestone", RUNESTONE_TILE, TCODColor::green,
+		"Runestone that exudes corrosive acid, bringing with it a potent stench."));
+	r->isRunestone = true;
+	r->setRune(new weaponRune("Corroding Runestone", "Corrosive", TCODColor::green, SCALE_ACID));
+	return r;
+}
+
 
 /*
 	Bones
@@ -447,6 +492,15 @@ miscItemSharedPtr bones_CorensBones()
 		"All that remains of Coren, who prayed to the old gods for glory and victory, and who once laid waste to the\
  lowlands. After the gods had slaked their thirst, his bones were laid to rest in the muck."));
 	b->setKeyTag("corens_bones");
+	return b;
+}
+
+miscItemSharedPtr bones_IetrasBones()
+{
+	miscItemSharedPtr b(new miscItem("Ietra's Bones", KEY_TILE, TCODColor::lightestYellow,
+		"All that remains of Ietra, who sought truth among the fallen stars. According to certain storytellers, \
+she told Moshka the true history of the immortals, and then fell to lie eternally in the void."));
+	b->setKeyTag("ietras_bones");
 	return b;
 }
 

@@ -1,0 +1,7 @@
+"Wander off, wander off..."
+"Are my children still dancing? I see their lights in the ruins!"
+"Don't speak to me, traveler. Fall into the dark."
+"The Angel dances upon the void, light as a feather. Who would want to be immortal?"
+"Here, here, if it's truth you seek, take these ragged bones..."
+"Wander off, wander off..."
+|BACK_UP_AND_END
