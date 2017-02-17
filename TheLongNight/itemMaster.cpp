@@ -363,6 +363,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return runestone_BloodDrenchedRunestone();
 	else if (handle == "corroding_runestone")
 		return runestone_CorrodingRunestone();
+	else if (handle == "frozen_runestone")
+		return runestone_FrozenRunestone();
 	
 	//Uh oh, we didn't find anything!
 	return nullptr;

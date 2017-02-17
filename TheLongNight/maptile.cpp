@@ -459,6 +459,16 @@ maptile * tile_ObservatoryDoor()
 	return door;
 }
 
+maptile * tile_MoonPalaceDoor()
+{
+	maptile* door = new maptile("Moon Palace Door", "moon_palace_door", BASIC_DOOR_TILE,
+		TCODColor::lightBlue, TCODColor::black, false, false);
+	door->isDoor = true;
+	door->unlockCode = "moon_pale_key";
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	return door;
+}
+
 maptile * tile_BloodyMausoleumDoor()
 {
 	maptile* door = new maptile("Bloody Mausoleum Door", "bloody_mausoleum_door", BASIC_DOOR_TILE,

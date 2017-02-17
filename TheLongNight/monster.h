@@ -221,6 +221,8 @@ monsterSharedPtr monster_GhostlyWarrior();
 monsterSharedPtr monster_EtherealWisp();
 monsterSharedPtr monster_WeepingWanderer();
 monsterSharedPtr monster_ThePaleShade();
+monsterSharedPtr monster_SoulEater();
+monsterSharedPtr monster_TheKingsRemnants();
 
 //The Void
 monsterSharedPtr monster_VoidTouched();

@@ -366,3 +366,12 @@ him to her forsaken mausoleum, where he uncovered an awful truth."));
 	a->setMoveSpeed(SPEED_NORMAL);
 	return a;
 }
+
+armourSharedPtr headgear_MoonPaleCrown()
+{
+	armourSharedPtr a(new armour("Moon Pale Crown", HELMET_TILE, TCODColor::lighterBlue, ITEM_HELMET,
+		"Crown of the Moon-Pale King. According to certain storytellers, the ancestral crown was cursed, causing his \
+lands to drift endlessly in the void. But the king refused to remove it from his head."));
+	a->setDamageResist(DAMAGE_MAGIC, 25);
+	return a;
+}

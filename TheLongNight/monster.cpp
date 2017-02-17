@@ -1468,7 +1468,7 @@ monsterSharedPtr monster_WeepingWanderer()
 	monsterSharedPtr m = monsterSharedPtr(new monster("Weeping Wanderer", WISP_TILE, TCODColor::darkPink,
 		"One could almost mistake this for a human shape, were it not for the ethereal glow exuding from its torn \
 white robes. Its tears stain the floor of the valley."));
-	m->setHealth(100);
+	m->setHealth(500);
 	m->setDefence(DAMAGE_PHYSICAL, 100);
 	m->setDefence(DAMAGE_ACID, 100);
 	m->addWeakness(DAMAGE_MAGIC);
@@ -1507,6 +1507,39 @@ Acid drips from one twisted hand, while the other sings with electricity."));
 	m->setFragmentsDropped(4000);
 	m->addItemDrop(key_MoonpaleKey());
 	m->addItemDrop(heart_PaleHeart());
+	return m;
+}
+
+monsterSharedPtr monster_SoulEater()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Soul Eater", WISP_TILE, TCODColor::cyan,
+		"An ethereal skeleton, its massive jaw unhinged, roams the halls in long, loping strides."));
+	m->setHealth(100);
+	m->setDefence(DAMAGE_PHYSICAL, 15);
+	m->setDefence(DAMAGE_MAGIC, 100);
+	m->setMoveStats(SPEED_FAST);
+	m->equipItem(weaponSharedPtr(new weapon(10, SPEED_FAST, DAMAGE_MAGIC, 40)));
+	m->addSpellKnown(spellSharedPtr(new spell("Drain Soul", TCODColor::cyan, 1, 0, DRAIN_VIGOUR, 1)));
+	m->setSpellCastChance(25);
+	m->setFragmentsDropped(100);
+	return m;
+}
+
+monsterSharedPtr monster_TheKingsRemnants()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("The King's Remnants", KNIGHT_TILE, TCODColor::lightCyan,
+		"This withered husk wears the ruins of a king's robe, and on its head is perched a golden crown. It floats above \
+the ground in a cloud of pale mist, which nearly forms the shape of a giant hand."));
+	m->setHealth(100);
+	m->setDefence(DAMAGE_PHYSICAL, 10);
+	m->setDefence(DAMAGE_MAGIC, 75);
+	m->setMoveStats(SPEED_SLOW);
+	m->setMeleeStats(10, SPEED_SLOW);
+	m->addSpellKnown(spellSharedPtr(new spell("Drain Soul", TCODColor::cyan, 1, 0, DRAIN_VIGOUR, 2)));
+	m->setFragmentsDropped(1);
+	m->isBoss = true;
+	m->addItemDrop(key_WitheredFinger());
+	m->addItemDrop(headgear_MoonPaleCrown());
 	return m;
 }
 
@@ -1853,6 +1886,10 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return monster_WeepingWanderer();
 	else if (handle == "the_pale_shade")
 		return monster_ThePaleShade();
+	else if (handle == "soul_eater")
+		return monster_SoulEater();
+	else if (handle == "the_kings_remnants")
+		return monster_TheKingsRemnants();
 
 	//The Void
 	else if (handle == "void_touched")

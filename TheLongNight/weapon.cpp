@@ -191,6 +191,8 @@ bool weapon::getRunestoneDamage(damageType dtype)
 			return true;
 		else if (runestone->addScalingType == SCALE_ACID && dtype == DAMAGE_ACID)
 			return true;
+		else if (runestone->addScalingType == SCALE_COLD && dtype == DAMAGE_COLD)
+			return true;
 	}
 	return false;
 }

@@ -83,5 +83,7 @@ armourSharedPtr armour_GhostlyArmour();
 armourSharedPtr headgear_SirPercivelsHelm();
 armourSharedPtr armour_SirPercivelsArmour();
 
+armourSharedPtr headgear_MoonPaleCrown();
+
 #endif
 

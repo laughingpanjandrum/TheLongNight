@@ -62,6 +62,7 @@ miscItemSharedPtr key_MoonpaleKey();
 
 miscItemSharedPtr key_WatchfulEyestalk();
 miscItemSharedPtr key_MawtoothFragment();
+miscItemSharedPtr key_WitheredFinger();
 
 miscItemSharedPtr key_IetrasAmberPendant();
 
@@ -102,6 +103,7 @@ miscItemSharedPtr runestone_StarweaversRunestone();
 miscItemSharedPtr runestone_ThundrousRunestone();
 miscItemSharedPtr runestone_BloodDrenchedRunestone();
 miscItemSharedPtr runestone_CorrodingRunestone();
+miscItemSharedPtr runestone_FrozenRunestone();
 
 //Bone keys
 miscItemSharedPtr bones_KhallesBones();

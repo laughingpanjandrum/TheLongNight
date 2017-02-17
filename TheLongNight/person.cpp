@@ -704,8 +704,10 @@ void person::paySpellCost(spellSharedPtr sp)
 	//Calculate vigour cost
 	int cost = sp->getVigourCost();
 	cost += nextSpellCostAdjust;
-	if (cost < 0)
+	nextSpellCostAdjust = 0;
+	if (cost < 0) {
 		cost = 0;
+	}
 	
 	//Vigour cost
 	loseVigour(cost);

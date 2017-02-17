@@ -129,7 +129,7 @@ miscItemSharedPtr key_MoonpaleKey()
 		"Key created by the Eyeless Queen. Seeing that the Moon-Pale King's lands were slowly becoming unmoored \
 from reality, she forged this key to the King to return to the material world whenever he desired. Alas, the king \
 did not care to return, and instead remained in his palace until only a withered husk remained."));
-	m->setKeyTag("moonpale_key");
+	m->setKeyTag("moon_pale_key");
 	return m;
 }
 
@@ -149,6 +149,16 @@ miscItemSharedPtr key_MawtoothFragment()
  'The Mouthpiece of the Lord issues His Commands, and lets His Will be known to the world.Offer it at the \
 Altar in honour of His Wisdom.'"));
 	m->setKeyTag("mawtooth_fragment");
+	return m;
+}
+
+miscItemSharedPtr key_WitheredFinger()
+{
+	miscItemSharedPtr m(new miscItem("Withered Finger", KEY_TILE, TCODColor::darkRed,
+		"According to the Ritual of Khull-Khallen, the third Article of Summoning is the Withered Finger. \
+As it is written: 'The Hand of the Lord carries out His Will, and punishes those who defy Him.Offer it at \
+the Altar in honour of His Power.'"));
+	m->setKeyTag("withered_finger");
 	return m;
 }
 
@@ -458,6 +468,15 @@ miscItemSharedPtr runestone_CorrodingRunestone()
 		"Runestone that exudes corrosive acid, bringing with it a potent stench."));
 	r->isRunestone = true;
 	r->setRune(new weaponRune("Corroding Runestone", "Corrosive", TCODColor::green, SCALE_ACID));
+	return r;
+}
+
+miscItemSharedPtr runestone_FrozenRunestone()
+{
+	miscItemSharedPtr r(new miscItem("Frozen Runestone", RUNESTONE_TILE, TCODColor::cyan,
+		"A runestone rendered solid with frost. The magic of the Moon-Pale king grew very cold in his waning years."));
+	r->isRunestone = true;
+	r->setRune(new weaponRune("Frozen Runestone", "Frozen", TCODColor::cyan, SCALE_COLD));
 	return r;
 }
 

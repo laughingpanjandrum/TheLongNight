@@ -1760,6 +1760,12 @@ void game::drawMiscItemInfo(miscItemSharedPtr it, int atx, int aty)
 			else if (rune->addScalingType == SCALE_BLEED) {
 				win.write(atx, ++aty, "Weapon deals additional bleed damage.", rune->color);
 			}
+			else if (rune->addScalingType == SCALE_ACID) {
+				win.write(atx, ++aty, "Weapon deals additional acid damage.", rune->color);
+			}
+			else if (rune->addScalingType == SCALE_COLD) {
+				win.write(atx, ++aty, "Weapon deals additional cold damage.", rune->color);
+			}
 			else {
 				//Changes scaling
 				std::string scaleType;
