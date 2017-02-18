@@ -294,7 +294,7 @@ void person::applyDamageAffliction(int amount, damageType dtype)
 			electrified += 10;
 		}
 		else if (dtype == DAMAGE_FIRE) {
-			burning += 5;
+			burning += 2;
 		}
 		else if (dtype == DAMAGE_PROFANE) {
 			profaneAffliction += 3;
@@ -1052,7 +1052,7 @@ void person::applyStatusEffects()
 	}
 	if (burning > 0) {
 		burning--;
-		takeDamage(15, DAMAGE_FIRE);
+		takeDamage(10);
 	}
 	if (electrified > 0)
 		electrified--;

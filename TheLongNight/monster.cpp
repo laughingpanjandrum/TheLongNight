@@ -972,7 +972,11 @@ monsterSharedPtr monster_HightowerAristocrat()
 {
 	monsterSharedPtr m(new monster("Hightower Aristocrat", ARISTOCRAT_TILE, TCODColor::lightBlue,
 		"A grinning aristocrat of Hightower, already drunk on wine and black honey. Its face is a death-mask."));
-	m->setHealth(25);
+	m->setHealth(50);
+	m->addWeakness(DAMAGE_FIRE);
+	m->addWeakness(DAMAGE_ELECTRIC);
+	m->addWeakness(DAMAGE_ACID);
+	m->addWeakness(DAMAGE_COLD);
 	m->setMoveStats(SPEED_FAST);
 	m->equipItem(weaponSharedPtr(new weapon(10, SPEED_FAST, EFFECT_BLEED, 10)));
 	return m;
@@ -1009,7 +1013,7 @@ it's the sight of her sharpened teeth as she turns to grin at you, or the blankn
 	m->equipItem(weaponSharedPtr(new weapon(10, SPEED_FAST, EFFECT_POISON, 20)));
 	m->addSpellKnown(attack_RavenousHunger());
 	m->addSpellKnown(spell_VoidJaunt());
-	m->setSpellCastChance(50);
+	m->setSpellCastChance(20);
 	m->isBoss = true;
 	m->keepsDistance = true;
 	m->addSpawnableCreature("scion_of_tvert");
