@@ -979,6 +979,7 @@ monsterSharedPtr monster_HightowerAristocrat()
 	m->addWeakness(DAMAGE_COLD);
 	m->setMoveStats(SPEED_FAST);
 	m->equipItem(weaponSharedPtr(new weapon(10, SPEED_FAST, EFFECT_BLEED, 10)));
+	m->setFragmentsDropped(10);
 	return m;
 }
 
@@ -996,6 +997,7 @@ and their heavy hoods, led some guests to suspect that the suits of armour were 
 	m->equipItem(weaponSharedPtr(new weapon(25, SPEED_SLOW, DAMAGE_ELECTRIC, 25)));
 	m->addSpellKnown(prayer_BlessedRadiance());
 	m->setSpellCastChance(20);
+	m->setFragmentsDropped(50);
 	return m;
 }
 

@@ -30,13 +30,13 @@ public:
 	effectVector getEffects() { return effectsApplied; }
 	int getPotency() { return potency; }
 	spellSharedPtr getRangedAttack() { return rangedAttack; }
-	weaponBuff* getWeaponBuff() { return buff; }
+	weaponBuffSharedPtr getWeaponBuff() { return buff; }
 
 	//Setting effects
 	void addEffect(effect eff) { effectsApplied.push_back(eff); }
 	void setPotency(int pot) { potency = pot; }
 	void setRangedAttack(spellSharedPtr at) { rangedAttack = at; }
-	void setWeaponBuff(weaponBuff* b) { buff = b; }
+	void setWeaponBuff(weaponBuff* b) { buff = weaponBuffSharedPtr(b); }
 
 	//Flags
 	bool consumeOnUse = true; //Doesn't have to get USED UP!
@@ -55,7 +55,7 @@ private:
 	spellSharedPtr rangedAttack;
 
 	//Weapon buff, for consumables that do that
-	weaponBuff* buff;
+	weaponBuffSharedPtr buff;
 
 };
 

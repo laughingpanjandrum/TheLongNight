@@ -3408,7 +3408,7 @@ void game::talkToNPC()
 	{
 		for (int y = player->gety() - r; y <= player->gety() + r; y++)
 		{
-			if (x != player->getx() && y != player->gety()) 
+			if (x != player->getx() || y != player->gety()) 
 			{
 				monsterSharedPtr target = std::static_pointer_cast<monster>(currentMap->getPerson(x, y));
 				if (target != nullptr)

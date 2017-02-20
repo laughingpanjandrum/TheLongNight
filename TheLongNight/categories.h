@@ -8,6 +8,7 @@ i.e. all item types/monster types should be kept here.
 #define CATEGORIES_H
 
 #include <vector>
+#include <memory>
 
 //Game states
 
@@ -128,5 +129,7 @@ struct weaponBuff {
 	statusEffects etype = EFFECT_NONE;
 	int bonusDamage = 0;
 };
+
+typedef std::shared_ptr<weaponBuff> weaponBuffSharedPtr;
 
 #endif
