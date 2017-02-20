@@ -111,6 +111,9 @@ public:
 	//Poison
 	int getPoisonDuration() { return isPoisoned; }
 	void clearPoison() { poisonBuildup.clear(); }
+	//Plague
+	int getPlagueDamage() { return plagueDamage; }
+	void clearPlague() { plagueBuildup.clear(); }
 	//Blindness
 	void blind(int duration) { blinding += duration; }
 	bool isBlind() { return blinding > 0; }
@@ -259,6 +262,8 @@ protected:
 	counter bleedBuildup;
 	int isPoisoned = 0;
 	counter poisonBuildup;
+	int plagueDamage = 0;
+	counter plagueBuildup;
 	int blinding = 0;
 	int entangling = 0;
 

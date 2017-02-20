@@ -1573,6 +1573,20 @@ monsterSharedPtr monster_DeathwatchStatue()
 	return m;
 }
 
+monsterSharedPtr monster_Gravekeeper()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Gravekeeper", GRAVEKEEPER_TILE, TCODColor::sepia,
+		"A loping figure in putrid rags stalks among the graves, clutching a rotted spear."));
+	m->setHealth(200);
+	m->setPlagueResist(1000);
+	m->setPoisonResist(100);
+	m->setDefence(DAMAGE_ACID, 50);
+	m->setMoveStats(SPEED_NORMAL);
+	m->equipItem(weaponSharedPtr(new weapon(25, SPEED_NORMAL, EFFECT_PLAGUE, 25)));
+	m->setFragmentsDropped(200);
+	return m;
+}
+
 
 /*
 	The Void
@@ -1924,6 +1938,8 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 	//Ancestral Tombs of Farin
 	else if (handle == "deathwatch_statue")
 		return monster_DeathwatchStatue();
+	else if (handle == "gravekeeper")
+		return monster_Gravekeeper();
 
 	//The Void
 	else if (handle == "void_touched")

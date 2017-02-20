@@ -1077,6 +1077,10 @@ void game::drawPlayerInfo(int atx, int aty)
 	win.write(atx, ++aty, "POIS Resist", mainCol);
 	win.write(atx + offset, aty, std::to_string(player->getSpecialEffectBuildup(EFFECT_POISON)->getMaxValue()), TCODColor::lime);
 
+	//Plague resist
+	win.write(atx, ++aty, "PLAGUE Resist", mainCol);
+	win.write(atx + offset, aty, std::to_string(player->getSpecialEffectBuildup(EFFECT_PLAGUE)->getMaxValue()), TCODColor::sepia);
+
 	aty++;
 
 	//Magic stuff
@@ -1283,7 +1287,7 @@ int game::listStatusEffects(personSharedPtr target, int atx, int aty)
 {
 
 	//Status effects: BLEED
-	if (target->getBleedDuration()) {
+	if (target->getBleedDuration() > 0) {
 		win.write(atx, ++aty, "BLEEDING " + std::to_string(target->getBleedDuration()), TCODColor::crimson);
 	}
 	else {
@@ -1293,13 +1297,23 @@ int game::listStatusEffects(personSharedPtr target, int atx, int aty)
 	}
 
 	//Status effects: POISON
-	if (player->getPoisonDuration()) {
+	if (player->getPoisonDuration() > 0) {
 		win.write(atx, ++aty, "POISONED x" + std::to_string(target->getPoisonDuration()), TCODColor::lime);
 	}
 	else {
 		auto pois = target->getSpecialEffectBuildup(EFFECT_POISON);
 		if (pois->getValue() > 0)
 			win.drawCounter(*pois, "POISON", atx, ++aty, TCODColor::lime, TCODColor::darkGrey, 10);
+	}
+
+	//Status effects: PLAGUE
+	if (player->getPlagueDamage() > 0) {
+		win.write(atx, ++aty, "PLAGUE " + std::to_string(target->getPlagueDamage()), TCODColor::sepia);
+	}
+	else {
+		auto plague = target->getSpecialEffectBuildup(EFFECT_PLAGUE);
+		if (plague->getValue() > 0)
+			win.drawCounter(*plague, "PLAGUE", atx, ++aty, TCODColor::sepia, TCODColor::darkGrey, 10);
 	}
 
 	//Blinding

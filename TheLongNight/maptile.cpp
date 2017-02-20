@@ -250,6 +250,15 @@ maptile * tile_WebOnFloor()
 	return web;
 }
 
+maptile * tile_PoisonOoze()
+{
+	maptile* ooze = new maptile("Poison Ooze", "poison_ooze", BASIC_WATER_TILE, TCODColor::darkGreen, TCODColor::green);
+	ooze->addTouchEffect(APPLY_POISON_DAMAGE);
+	ooze->setPotency(10);
+	return ooze;
+
+}
+
 maptile * tile_Bloodstain()
 {
 	return new maptile("Bloodstain", "bloodstain", BASIC_FLOOR_TILE, TCODColor::darkCrimson, DARK_STONE_COLOR);

@@ -58,6 +58,7 @@ const int STARSPAWN_TILE = 83;
 const int OOZE_TILE = 79;
 
 const int SKELETON_TILE = 83;
+const int GRAVEKEEPER_TILE = 103;
 
 const int GOREM_TILE = 327; 
 

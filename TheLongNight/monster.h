@@ -28,6 +28,7 @@ public:
 	void setDefence(damageType dtype, int defence);
 	void setBleedResist(int br) { bleedBuildup.setMaxValue(br); }
 	void setPoisonResist(int pois) { poisonBuildup.setMaxValue(pois); }
+	void setPlagueResist(int pl) { plagueBuildup.setMaxValue(pl); }
 	void setHealth(int hp);
 	void setSpellPower(int power) { baseSpellPower = power; }
 	void setDivinePower(int power) { baseDivinePower = power; }
@@ -222,6 +223,7 @@ monsterSharedPtr monster_TheKingsRemnants();
 
 //Ancestral Tombs of Farin
 monsterSharedPtr monster_DeathwatchStatue();
+monsterSharedPtr monster_Gravekeeper();
 
 //The Void
 monsterSharedPtr monster_VoidTouched();

@@ -13,6 +13,7 @@ person::person(std::string name, int tileCode, TCODColor color, std::string desc
 	//Status effects
 	bleedBuildup.setTo(20, 0);
 	poisonBuildup.setTo(20, 0);
+	plagueBuildup.setTo(20, 0);
 	//Resistances/vulnerabilities
 	for (int r = 0; r < ALL_DAMAGE_TYPES; r++) {
 		damageResist.push_back(0);
@@ -330,6 +331,15 @@ void person::takeStatusEffectDamage(statusEffects eType, int damage)
 			isPoisoned += 1;
 		}
 	}
+	else if (eType == EFFECT_PLAGUE) {
+		plagueBuildup.increase(damage);
+		if (plagueBuildup.isFull()) {
+			//We have the PLAGUE
+			plagueDamage += 10;
+			health.increaseMaxValue(-10, false);
+			plagueBuildup.clear();
+		}
+	}
 }
 
 /*
@@ -343,6 +353,9 @@ void person::fullRestore()
 	//Remove status effects
 	bleedBuildup.clear();
 	poisonBuildup.clear();
+	plagueBuildup.clear();
+	health.increaseMaxValue(plagueDamage);
+	plagueDamage = 0;
 	isBleeding = 0;
 	isPoisoned = 0;
 	entangling = 0;
@@ -374,6 +387,7 @@ counter* person::getSpecialEffectBuildup(statusEffects eff)
 	switch (eff) {
 	case(EFFECT_BLEED): return &bleedBuildup;
 	case(EFFECT_POISON): return &poisonBuildup;
+	case(EFFECT_PLAGUE): return &plagueBuildup;
 	}
 	return new counter();
 }
@@ -574,6 +588,8 @@ void person::applyEffect(effect eff, int potency)
 		takeStatusEffectDamage(EFFECT_BLEED, potency);
 	else if (eff == APPLY_POISON_DAMAGE)
 		takeStatusEffectDamage(EFFECT_POISON, potency);
+	else if (eff == APPLY_PLAGUE_DAMAGE)
+		takeStatusEffectDamage(EFFECT_PLAGUE, potency);
 	else if (eff == APPLY_BLINDING)
 		blind(potency);
 

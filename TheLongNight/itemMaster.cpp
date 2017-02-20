@@ -468,6 +468,7 @@ std::string getEffectName(effect e)
 	case(APPLY_ACID_DAMAGE): return "acid damage";
 	case(APPLY_BLEED_DAMAGE): return "bleed damage";
 	case(APPLY_POISON_DAMAGE): return "poison damage";
+	case(APPLY_PLAGUE_DAMAGE): return "plague damage";
 	case(APPLY_COLD_DAMAGE): return "cold damage";
 	case(APPLY_ELECTRIC_DAMAGE): return "electric damage";
 	case(APPLY_FIRE_DAMAGE): return "fire damage";
