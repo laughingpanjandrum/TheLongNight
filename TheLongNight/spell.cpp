@@ -16,8 +16,6 @@ spell::spell(std::string name, TCODColor color, int attackRange, int physDamage,
 	if (otherEffect != NULL_EFFECT)
 		addEffect(otherEffect, otherEffectPotency);
 	this->vigourCost = 0;
-	//We use the "projectile" type animation
-	useAlternateAnimation = true;
 	this->name = name;
 	this->color = color;
 }

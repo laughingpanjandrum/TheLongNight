@@ -92,6 +92,8 @@ typedef std::vector<areaText*> areaTextVector;
 typedef std::shared_ptr<shop> shopSharedPtr;
 typedef std::vector<shopSharedPtr> shopVector;
 
+typedef std::shared_ptr<TCODPath> pathSharedPtr;
+
 
 
 class game
@@ -142,9 +144,9 @@ private:
 	void setCursorPosition(coord xy);
 
 	//Pathfinding
-	TCODPath* getPathToCoord(coord startxy, coord endxy);
-	pathVector getLine(coord startxy, coord endxy);
-	personSharedPtr getTargetOnPath(pathVector path);
+	pathSharedPtr getPathToCoord(coord startxy, coord endxy);
+	coordVectorSharedPtr getLine(coord startxy, coord endxy);
+	personSharedPtr getTargetOnPath(coordVectorSharedPtr path);
 
 	//Turn tracking
 	turnTracker turns;
@@ -208,7 +210,7 @@ private:
 	bool isAutoWalking = false;
 	void startAutoWalk();
 	void playerAutoWalk();
-	TCODPath* playerAutoPath;
+	pathSharedPtr playerAutoPath;
 
 	//Consumables
 	void useConsumable();

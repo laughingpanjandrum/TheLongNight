@@ -38,11 +38,13 @@ enum animationType {
 
 
 
-typedef std::vector<coord*> pathVectorP; //Path vector with pointers to coords instead of values
+typedef std::shared_ptr<coord> coordSharedPtr;
+typedef std::vector<coordSharedPtr> pathVectorP; //Path vector with pointers to coords instead of values
 typedef std::vector<coord> pathVector;
 typedef std::vector<TCODColor> colorVector;
 
 typedef std::shared_ptr<drawData> drawDataSharedPtr;
+typedef std::shared_ptr<coordVector> coordVectorSharedPtr;
 
 
 //Base class
@@ -58,10 +60,6 @@ public:
 	virtual drawDataSharedPtr getDrawData (drawDataSharedPtr baseData, const int x, const int y) { return baseData; }
 	virtual void tick() {}
 	virtual bool isDone() { return false; }
-
-protected:
-
-	pathVectorP* getPointerPath(coordVector* pts);
 
 };
 
@@ -115,13 +113,13 @@ Bullet path effect - traces path with some kind of tile.
 class bulletPath : public animations
 {
 public:
-	bulletPath(coordVector* pts, int tileCode, TCODColor color);
+	bulletPath(coordVectorSharedPtr pts, int tileCode, TCODColor color);
 	virtual drawDataSharedPtr getDrawData(drawDataSharedPtr baseData, const int x, const int y);
 	virtual void tick();
 	virtual bool isDone() { return atIdx >= pts->size(); }
 private:
 	int atIdx = 0;
-	coordVector* pts;
+	coordVectorSharedPtr pts;
 	int tileCode;
 	TCODColor color;
 };
@@ -132,13 +130,13 @@ Bullet path effect, but tiles glow all along the trail.
 class glowPath : public animations
 {
 public:
-	glowPath(coordVector* pts, TCODColor col1, TCODColor col2);
+	glowPath(coordVectorSharedPtr pts, TCODColor col1, TCODColor col2);
 	virtual drawDataSharedPtr getDrawData(drawDataSharedPtr baseData, const int x, const int y);
 	virtual void tick();
 	virtual bool isDone() { return atIdx >= pts->size(); }
 private:
 	int atIdx = 0;
-	coordVector* pts;
+	coordVectorSharedPtr pts;
 	TCODColor* colors;
 };
 

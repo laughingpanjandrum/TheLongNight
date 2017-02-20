@@ -2,18 +2,6 @@
 
 
 
-//Converts the given vector of coordinates into a vector of pointers to coordinates.
-pathVectorP * animations::getPointerPath(coordVector * pts)
-{
-	pathVectorP* vec = new pathVectorP();
-	for (auto iter = pts->begin(); iter != pts->end(); iter++) {
-		vec->push_back(new coord(iter->first, iter->second));
-	}
-	return vec;
-}
-
-
-
 /*
 Given person briefly changes to the given color, then changes back.
 */
@@ -81,21 +69,16 @@ void explosion::tick()
 */
 
 
-bulletPath::bulletPath(coordVector* pts, int tileCode, TCODColor color) :
-	tileCode(tileCode), color(color)
+bulletPath::bulletPath(coordVectorSharedPtr pts, int tileCode, TCODColor color) :
+	tileCode(tileCode), color(color), pts(pts)
 {
-	//Create a brand-new path
-	this->pts = new coordVector();
-	for (auto iter = pts->begin(); iter != pts->end(); iter++) {
-		this->pts->push_back(coord(iter->first, iter->second));
-	}
 }
 
 drawDataSharedPtr bulletPath::getDrawData(drawDataSharedPtr baseData, const int x, const int y)
 {
 	if (atIdx < pts->size()) {
-		coord* pt = new coord(pts->at(atIdx));
-		if (pt->first == x && pt->second == y) {
+		coord pt = pts->at(atIdx);
+		if (pt.first == x && pt.second == y) {
 			baseData->tileCode = tileCode;
 			baseData->color = color;
 		}
@@ -115,13 +98,9 @@ void bulletPath::tick()
 */
 
 
-glowPath::glowPath(coordVector* pts, TCODColor col1, TCODColor col2)
+glowPath::glowPath(coordVectorSharedPtr pts, TCODColor col1, TCODColor col2) :
+	pts(pts)
 {
-	//Create a brand-new path
-	this->pts = new coordVector();
-	for (auto iter = pts->begin(); iter != pts->end(); iter++) {
-		this->pts->push_back(coord(iter->first, iter->second));
-	}
 	//Colors fade from col1 to col2
 	int idx[] = { 0, pts->size() };
 	TCODColor cols[] = { col1, col2 };

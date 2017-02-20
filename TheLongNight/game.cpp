@@ -194,20 +194,20 @@ void game::setCursorPosition(coord xy)
 /*
 Returns TCOD-format path to the given coord
 */
-TCODPath* game::getPathToCoord(coord startxy, coord endxy)
+pathSharedPtr game::getPathToCoord(coord startxy, coord endxy)
 {
 	TCODPath *path = currentMap->getPath();
 	path->compute(startxy.first, startxy.second, endxy.first, endxy.second);
-	return path;
+	return pathSharedPtr(path);
 }
 
 
 /*
 Builds a vector of x,y coordinate pairs in a straight line from the start point to the endpoint.
 */
-pathVector game::getLine(coord startxy, coord endxy)
+coordVectorSharedPtr game::getLine(coord startxy, coord endxy)
 {
-	pathVector path;
+	coordVectorSharedPtr path = coordVectorSharedPtr(new coordVector());
 	coord atxy = startxy; //Current position
 	//Vectors to final point
 	int xvec = get1dVector(startxy.first, endxy.first);
@@ -221,7 +221,7 @@ pathVector game::getLine(coord startxy, coord endxy)
 			atxy.second += yvec;
 		//Append to path
 		coord thisPt = atxy;
-		path.push_back(thisPt);
+		path->push_back(thisPt);
 	}
 	//Done
 	return path;
@@ -230,9 +230,9 @@ pathVector game::getLine(coord startxy, coord endxy)
 /*
 Returns the first person we find walking along the given path vector.
 */
-personSharedPtr game::getTargetOnPath(pathVector path)
+personSharedPtr game::getTargetOnPath(coordVectorSharedPtr path)
 {
-	for (auto pt : path) {
+	for (auto pt : *path) {
 		if (currentMap->isWalkable(pt.first, pt.second)) {
 			personSharedPtr target = currentMap->getPerson(pt.first, pt.second);
 			if (target != nullptr)
@@ -407,7 +407,7 @@ bool game::aiTryUseSpell(monsterSharedPtr ai)
 			if (aType == ATTACK_RANGE) {
 
 				//Ranged spell - do we have the reach for it?
-				pathVector path = getLine(ai->getPosition(), target->getPosition());
+				coordVectorSharedPtr path = coordVectorSharedPtr(getLine(ai->getPosition(), target->getPosition()));
 				personSharedPtr willHit = getTargetOnPath(path);
 
 				if (willHit == target && canPlayerSeePoint(ai->getx(), ai->gety())) {
@@ -417,12 +417,12 @@ bool game::aiTryUseSpell(monsterSharedPtr ai)
 						
 						//ANIMATION BLAST!
 						spellTitleAnimation(ai, sp);
-						pathVector path = getLine(ai->getPosition(), target->getPosition());
+						coordVectorSharedPtr path = coordVectorSharedPtr(getLine(ai->getPosition(), target->getPosition()));
 						if (sp->useAlternateAnimation) {
-							addAnimations(new bulletPath(&path, BULLET_TILE, sp->getColor()));
+							addAnimations(new glowPath(path, sp->getColor(), TCODColor::white));
 						}
 						else {
-							addAnimations(new glowPath(&path, sp->getColor(), TCODColor::white));
+							addAnimations(new bulletPath(path, BULLET_TILE, sp->getColor()));
 						}
 						
 						//We hit!
@@ -2912,14 +2912,14 @@ void game::doRangedSpell(spellSharedPtr sp)
 	if (currentMap->inBounds(tp.first, tp.second)) {
 		
 		//Get a path to the target
-		pathVector path = getLine(player->getPosition(), tp);
+		coordVectorSharedPtr path = coordVectorSharedPtr(getLine(player->getPosition(), tp));
 
 		//Bullet animation!
 		if (sp->useAlternateAnimation) {
-			addAnimations(new bulletPath(&path, BULLET_TILE, sp->getColor()));
+			addAnimations(new bulletPath(path, BULLET_TILE, sp->getColor()));
 		}
 		else {
-			addAnimations(new glowPath(&path, sp->getColor(), TCODColor::white));
+			addAnimations(new glowPath(path, sp->getColor(), TCODColor::white));
 		}
 		
 		//See if there's something to hit on the path
@@ -4148,6 +4148,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(key_GreenChapelGardenKey());
 	player->addItem(key_HightowerKey());
 	player->addItem(key_LadyTvertsKey());
+	player->addItem(key_MoonpaleKey());
 	player->addItem(key_MoshkasKey());
 	player->addItem(key_OldCrowsKey());
 	player->addItem(key_RuinedTownshipKey());
