@@ -460,6 +460,7 @@ std::string getEffectName(effect e)
 	case(GAIN_ELECTRIC_RESIST): return "electric defence";
 	case(GAIN_FIRE_RESIST): return "fire defence";
 	case(GAIN_MAGIC_RESIST): return "magic defence";
+	case(GAIN_STINK_RESIST): return "stench resistance";
 
 	case(CASTER_MELEE_ATTACK): return "free melee attack";
 	case(APPLY_UNTYPED_DAMAGE): return "damage";

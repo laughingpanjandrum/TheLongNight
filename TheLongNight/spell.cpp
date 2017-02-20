@@ -1060,6 +1060,15 @@ spellSharedPtr ability_DevouringGaze()
 	return sp;
 }
 
+spellSharedPtr ability_Deathwatch()
+{
+	spellSharedPtr sp(new spell("Death Stink", SPELL_TILE, TCODColor::green));
+	sp->setAttackType(ATTACK_RANGE, 8);
+	sp->addEffect(APPLY_UNTYPED_DAMAGE, 50);
+	sp->isStenchBased = true;
+	return sp;
+}
+
 spellSharedPtr ability_TentacleSwarm()
 {
 	spellSharedPtr sp(new spell("Tentacle Swarm", SPELL_TILE, TCODColor::green,

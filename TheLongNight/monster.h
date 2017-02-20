@@ -35,6 +35,7 @@ public:
 
 	//Setting/getting behaviours
 	bool keepsDistance = false;
+	bool immobile = false;
 	void setSpellCastChance(int c) { spellCastChance = c; }
 	int getSpellCastChance() { return spellCastChance; }
 
@@ -53,11 +54,6 @@ public:
 	void setFragmentsDropped(int f) { dropsFragments = f; }
 
 	//Shopkeeping
-	/*void addItemToStock(itemSharedPtr it, int price);
-	void addStockUnlock(itemSharedPtr it, int price, std::string unlockCode);
-	void removeItemFromStock(itemSharedPtr it);
-	itemVector getStock() { return stock; }
-	void checkForStockUnlocks(personSharedPtr unlocker);*/
 	void setShopTag(std::string tag) { shopTag = tag; }
 	std::string getShopTag() { return shopTag; }
 	void addShopUnlock(std::string tag) { shopUnlocks.push_back(tag); }
@@ -223,6 +219,9 @@ monsterSharedPtr monster_WeepingWanderer();
 monsterSharedPtr monster_ThePaleShade();
 monsterSharedPtr monster_SoulEater();
 monsterSharedPtr monster_TheKingsRemnants();
+
+//Ancestral Tombs of Farin
+monsterSharedPtr monster_DeathwatchStatue();
 
 //The Void
 monsterSharedPtr monster_VoidTouched();

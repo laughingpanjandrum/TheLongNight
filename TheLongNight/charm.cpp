@@ -126,6 +126,7 @@ charmSharedPtr charm_FragrantAmulet()
 	charmSharedPtr c(new charm("Fragrant Amulet", CHARM_TILE, TCODColor::pink,
 		"The pleasing scent of this amulet is said to improve the mood of the \
 lords and ladies of Hightower. But beyond its cleanliness, it seems to have no use."));
+	c->addEffect(GAIN_STINK_RESIST, 1);
 	return c;
 }
 

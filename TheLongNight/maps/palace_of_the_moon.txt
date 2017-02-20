@@ -4,7 +4,11 @@ soul_eater:15,31
 soul_eater:18,31
 soul_eater:17,26
 soul_eater:19,26
-the_kings_remnants:20,20
+soul_eater:18,18
+soul_eater:19,19
+soul_eater:18,19
+soul_eater:19,18
+the_kings_remnants:17,17
 -items
 frozen_runestone:16,36
 -enditems

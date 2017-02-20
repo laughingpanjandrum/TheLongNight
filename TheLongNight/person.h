@@ -82,6 +82,7 @@ public:
 	bool isWeakTo(damageType dr) { return damageWeakness.at(dr); }
 	int getMeleeDamage();
 	int getDamageOfType(damageType dtype);
+	bool isStinkResistant() { return stinkResist > 0; }
 
 	//Setters
 	void setTarget(personSharedPtr target) { this->target = target; }
@@ -251,6 +252,7 @@ protected:
 	int baseDefence = 0;
 	std::vector<int> damageResist;
 	std::vector<bool> damageWeakness;
+	int stinkResist = 0;
 
 	//Status effects
 	int isBleeding = 0;

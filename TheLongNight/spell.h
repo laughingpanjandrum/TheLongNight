@@ -49,6 +49,7 @@ public:
 	bool isColdSpell = false;
 	bool isProfane = false; //Buffed by profane items, bad for blessed people
 	bool alwaysHitTarget = false; //Doesn't hit intermediate targets
+	bool isStenchBased = false; //Stench resistance negates the effects
 
 private:
 
@@ -186,6 +187,7 @@ spellSharedPtr attack_RavenousHunger();
 spellSharedPtr ability_ShredSkin();
 spellSharedPtr ability_Gnash();
 spellSharedPtr ability_DevouringGaze();
+spellSharedPtr ability_Deathwatch();
 
 //Duke Vorten
 spellSharedPtr ability_TentacleSwarm();

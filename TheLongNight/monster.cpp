@@ -1550,6 +1550,30 @@ the ground in a cloud of pale mist, which nearly forms the shape of a giant hand
 }
 
 
+
+/*
+	Ancestral Tombs of Farin
+*/
+
+
+monsterSharedPtr monster_DeathwatchStatue()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Deathwatch Statue", STATUE_TILE, TCODColor::lightGreen,
+		"An immobile stone statue in the shape of a gravekeeper. Its face is eyeless, but you feel its stare nonetheless."));
+	m->setHealth(300);
+	m->setDefence(DAMAGE_PHYSICAL, 80);
+	m->setDefence(DAMAGE_FIRE, 100);
+	m->setDefence(DAMAGE_MAGIC, 100);
+	m->setDefence(DAMAGE_ELECTRIC, 50);
+	m->immobile = true;
+	m->setFragmentsDropped(5);
+	m->setMeleeStats(0, SPEED_SLOW);
+	m->addSpellKnown(ability_Deathwatch());
+	m->setSpellCastChance(100);
+	return m;
+}
+
+
 /*
 	The Void
 */
@@ -1896,6 +1920,10 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return monster_SoulEater();
 	else if (handle == "the_kings_remnants")
 		return monster_TheKingsRemnants();
+
+	//Ancestral Tombs of Farin
+	else if (handle == "deathwatch_statue")
+		return monster_DeathwatchStatue();
 
 	//The Void
 	else if (handle == "void_touched")

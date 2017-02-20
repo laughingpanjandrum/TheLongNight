@@ -510,7 +510,7 @@ void game::aiDoCombatAction(monsterSharedPtr ai)
 	if (ai->canSpawnCreatures() && ai->wantsToSpawn())
 		aiSpawnCreature(ai);
 	//If not, try casting a spell. If that fails, move towards our target.
-	else if (!aiTryUseSpell(ai))
+	else if (!aiTryUseSpell(ai) && !ai->immobile)
 		//We keep moving until the move function says we're done.
 		while (!aiMoveToTarget(ai)) {}
 }
@@ -3011,6 +3011,11 @@ Spell actually affects the target
 */
 void game::dischargeSpellOnTarget(spellSharedPtr sp, personSharedPtr caster, personSharedPtr target)
 {
+
+	//Ignore stink based spells, possibly!
+	if (sp->isStenchBased && target->isStinkResistant()) {
+		return;
+	}
 	
 	//No message if this is a self-buff
 	if (caster != target)
@@ -4065,6 +4070,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(charm_BloodstainedCharm());
 	player->addItem(charm_ClericsHolyPendant());
 	player->addItem(charm_EvisceratingRing());
+	player->addItem(charm_FragrantAmulet());
 	player->addItem(charm_FrenzyCharm());
 	player->addItem(charm_FrozenFlowerCharm());
 	player->addItem(charm_IdolOfPash());
