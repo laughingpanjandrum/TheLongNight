@@ -4018,11 +4018,15 @@ void getAllItems(personSharedPtr player)
 	player->addItem(weapon_EtherealSword());
 	player->addItem(weapon_FishmansHarpoon());
 	player->addItem(weapon_FishmansKnife());
+	player->addItem(weapon_IetrasFlameScythe());
+	player->addItem(weapon_KhallesHolyScythe());
 	player->addItem(weapon_KythielsScythe());
 	player->addItem(weapon_LadyTvertsClaws());
+	player->addItem(weapon_LightningWarhammer());
 	player->addItem(weapon_MoonpaleScythe());
 	player->addItem(weapon_NotchedGreatsword());
 	player->addItem(weapon_SacrificialKnife());
+	player->addItem(weapon_SentinelsPike());
 	player->addItem(weapon_SerpentsTooth());
 	player->addItem(weapon_SlaveMastersWhip());
 	player->addItem(weapon_SpiderboneShard());
@@ -4030,6 +4034,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(weapon_StraightSword());
 	player->addItem(weapon_ThinKnife());
 	player->addItem(weapon_VoidCrystalGreatsword());
+	player->addItem(weapon_VoidfireKnife());
 	player->addItem(weapon_VoidTouchedKnife());
 	player->addItem(weapon_Warhammer());
 

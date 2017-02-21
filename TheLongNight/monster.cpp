@@ -1587,6 +1587,22 @@ monsterSharedPtr monster_Gravekeeper()
 	return m;
 }
 
+monsterSharedPtr monster_PlagueRottedZombie()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Plague-Rotted Zombie", ZOMBIE_TILE, TCODColor::lightSepia,
+		"Shambling remnant of the vile dead, putrid with plague."));
+	m->setHealth(100);
+	m->setPlagueResist(1000);
+	m->setPoisonResist(1000);
+	m->setBleedResist(1000);
+	m->setMoveStats(SPEED_SLOW);
+	m->equipItem(weaponSharedPtr(new weapon(10, SPEED_SLOW, EFFECT_PLAGUE, 15)));
+	m->addSpellKnown(spellSharedPtr(new spell("Plaguebomb", TCODColor::sepia, 4, 0, APPLY_PLAGUE_DAMAGE, 5)));
+	m->setSpellCastChance(15);
+	m->setFragmentsDropped(50);
+	return m;
+}
+
 
 /*
 	The Void
@@ -1940,6 +1956,8 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return monster_DeathwatchStatue();
 	else if (handle == "gravekeeper")
 		return monster_Gravekeeper();
+	else if (handle == "plague_rotted_zombie")
+		return monster_PlagueRottedZombie();
 
 	//The Void
 	else if (handle == "void_touched")

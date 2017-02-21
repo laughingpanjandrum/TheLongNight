@@ -9,7 +9,13 @@ deathwatch_statue:14,16
 deathwatch_statue:14,18
 deathwatch_statue:14,20
 gravekeeper:4,34
+gravekeeper:22,7
+plague_rotted_zombie:14,34
+plague_rotted_zombie:15,34
+plague_rotted_zombie:13,35
 -items
+gravekeeper_spear:20,5
+rotblood_oil:32,35
 -enditems
 -codes
 ; floor_grass

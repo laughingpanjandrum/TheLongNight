@@ -409,7 +409,7 @@ weaponSharedPtr weapon_VoidCrystalGreatsword()
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEV);
 	wp->setSpecialAttack(attack_VoidSurge());
-	wp->setImage(IMAGE_ETHEREAL_SWORD);
+	wp->setImage(IMAGE_PROFANE_GREATSWORD);
 	return wp;
 }
 
@@ -439,6 +439,7 @@ contain some of that power."));
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_FlameSwathe());
+	wp->setImage(IMAGE_DRAGONBONE_SWORD);
 	return wp;
 }
 
@@ -450,6 +451,7 @@ weaponSharedPtr weapon_SerpentsTooth()
 	wp->addStatusEffect(EFFECT_POISON, 15);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_DripVenom());
+	wp->setImage(IMAGE_SERPENTS_TOOTH);
 	return wp;
 }
 
@@ -461,6 +463,7 @@ weaponSharedPtr weapon_CrimsonNail()
 	wp->addScalingType(SCALE_DEX);
 	wp->scaleWithDamage = true;
 	wp->setSpecialAttack(attack_SuckOutLife());
+	wp->setImage(IMAGE_CRIMSON_NAIL);
 	return wp;
 }
 
@@ -472,6 +475,7 @@ weaponSharedPtr weapon_SpiderboneShard()
 	wp->addStatusEffect(EFFECT_POISON, 20);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_SpiderStrike());
+	wp->setImage(IMAGE_SPIDERBONE_SHARD);
 	return wp;
 }
 
@@ -484,6 +488,7 @@ Those who refused to heed the call were sacrificed to the Gaping Maw to the bene
 	wp->addScalingType(SCALE_DEX);
 	wp->setDamageToSelf(5);
 	wp->setSpecialAttack(attack_DeepCut());
+	wp->setImage(IMAGE_SACRIFICAL_KNIFE);
 	return wp;
 }
 
@@ -496,6 +501,7 @@ until death, but this did not satisfy Lady Tvert, whose made a pact to ensure th
 	wp->addStatusEffect(EFFECT_BLEED, 20);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_Lash());
+	wp->setImage(IMAGE_SLAVEMASTER_WHIP);
 	return wp;
 }
 
@@ -509,6 +515,7 @@ and her followers, saw a peculiar beauty in the transformation."));
 	wp->addStatusEffect(EFFECT_POISON, 10);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_RavenousHunger());
+	wp->setImage(IMAGE_POISONOUS_CLAWS);
 	return wp;
 }
 
@@ -522,6 +529,7 @@ little of their original form remains."));
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_ARC);
 	wp->setSpecialAttack(attack_EtherealStrike());
+	wp->setImage(IMAGE_ENERGY_SWORD);
 	return wp;
 }
 
@@ -534,6 +542,7 @@ weaponSharedPtr weapon_SentinelsPike()
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_Penetrate());
+	wp->setImage(IMAGE_SENTINEL_SPEAR);
 	return wp;
 }
 
@@ -546,6 +555,7 @@ what he desired, and it drove him mad."));
 	wp->addScalingType(SCALE_STR);
 	wp->addStatusEffect(EFFECT_BLEED, 10);
 	wp->setSpecialAttack(attack_Frenzy());
+	wp->setImage(IMAGE_BLOODY_GREATAXE);
 	return wp;
 }
 
@@ -562,6 +572,7 @@ According to certain storytellers, she once peered into Heaven itself, and what 
 	wp->setSpellstoreSize(1);
 	wp->setDivinePower(50);
 	wp->setSpecialAttack(prayer_BlessedRadiance());
+	wp->setImage(IMAGE_SUPER_HOLY_SCYTHE);
 	return wp;
 }
 
@@ -574,6 +585,7 @@ in the forsaken mausoleums of the lowlands, he found only one who would still he
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_PercivelsFire());
+	wp->setImage(IMAGE_GREEN_KNIGHT_SWORD);
 	return wp;
 }
 
@@ -586,6 +598,7 @@ weaponSharedPtr weapon_VoidfireKnife()
 	wp->addDamageType(DAMAGE_FIRE, 15);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_KnifeCast());
+	wp->setImage(IMAGE_VOIDFIRE_KNIFE);
 	return wp;
 }
 
@@ -597,6 +610,7 @@ weaponSharedPtr weapon_LightningWarhammer()
 	wp->addDamageType(DAMAGE_ELECTRIC, 50);
 	wp->addScalingType(SCALE_STR);
 	wp->setSpecialAttack(attack_LightningSlam());
+	wp->setImage(IMAGE_LIGHTNING_WARHAMMER);
 	return wp;
 }
 
@@ -609,6 +623,7 @@ her tomb was sealed, she resolved that the secret of the Angel would never leave
 	wp->addDamageType(DAMAGE_PROFANE, 25);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_BillowingFlames());
+	wp->setImage(IMAGE_PROFANE_SCYTHE);
 	return wp;
 }
 
@@ -633,6 +648,18 @@ that remained of the Moon-Pale King, who wasted away in his abandoned palace as 
 	wp->addDamageType(DAMAGE_MAGIC, 25);
 	wp->addScalingType(SCALE_ARC);
 	wp->setSpecialAttack(attack_PaleSlash());
+	return wp;
+}
+
+weaponSharedPtr weapon_GravekeeperSpear()
+{
+	weaponSharedPtr wp(new weapon("Gravekeeper Spear", SPEAR_TILE, TCODColor::lightSepia,
+		"Spear infected with rot. The gravekeepers, abandoned by Farin, still fulfill their ancient purpose."));
+	wp->setBasicAttributes(25, SPEED_NORMAL);
+	wp->addStatusEffect(EFFECT_PLAGUE, 20);
+	wp->addScalingType(SCALE_STR);
+	wp->addScalingType(SCALE_DEX);
+	wp->setSpecialAttack(attack_Quickstep());
 	return wp;
 }
 
@@ -720,6 +747,7 @@ weaponSharedPtr shield_DragonboneShield()
 	wp->setDamageResist(DAMAGE_FIRE, 50);
 	wp->setDamagePenalty(15);
 	wp->makeOffhand();
+	wp->setImage(IMAGE_DRAGONBONE_SHIELD);
 	return wp;
 }
 
@@ -730,6 +758,7 @@ weaponSharedPtr shield_EtherealShield()
 	wp->setDefence(0);
 	wp->setDamageResist(DAMAGE_MAGIC, 25);
 	wp->makeOffhand();
+	wp->setImage(IMAGE_ETHEREAL_SHIELD);
 	return wp;
 }
 
@@ -769,6 +798,7 @@ what comes of those who rely on the strength of the old gods, and was immensely 
 	wp->setBleedResist(40);
 	wp->setDamagePenalty(10);
 	wp->makeOffhand();
+	wp->setImage(IMAGE_GREEN_KNIGHTS_SHIELD);
 	return wp;
 }
 

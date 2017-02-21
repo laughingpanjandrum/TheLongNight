@@ -167,6 +167,7 @@ weaponSharedPtr weapon_IetrasFlameScythe();
 
 weaponSharedPtr weapon_EtherealGreatsword();
 weaponSharedPtr weapon_MoonpaleScythe();
+weaponSharedPtr weapon_GravekeeperSpear();
 
 weaponSharedPtr weapon_ProfaneGreatsword();
 

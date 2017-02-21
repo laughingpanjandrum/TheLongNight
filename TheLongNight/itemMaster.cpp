@@ -62,6 +62,9 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return weapon_SentinelsPike();
 	else if (handle == "ethereal_greatsword")
 		return weapon_EtherealGreatsword();
+	//Ancenstral Tombs of Farin
+	else if (handle == "gravekeeper_spear")
+		return weapon_GravekeeperSpear();
 
 	//SHIELDS
 	if (handle == "battered_wooden_shield")
@@ -132,6 +135,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return oil_LightningOil();
 	else if (handle == "deep_red_oil")
 		return oil_DeepRedOil();
+	else if (handle == "rotblood_oil")
+		return oil_RotbloodOil();
 
 	//RANGED WEAPONS
 	if (handle == "throwing_knives")

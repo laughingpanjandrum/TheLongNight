@@ -275,6 +275,14 @@ consumableSharedPtr oil_DeepRedOil()
 	return c;
 }
 
+consumableSharedPtr oil_RotbloodOil()
+{
+	consumableSharedPtr c(new consumable("Rotblood Oil", VIAL_TILE, TCODColor::sepia,
+		"Oil made from the rotten blood of the vile dead. Use of this oil is forbidden in any land the sunlight touched."));
+	c->setWeaponBuff(new weaponBuff(EFFECT_PLAGUE, 10));
+	return c;
+}
+
 consumableSharedPtr bell_VoidwalkersDancingBell()
 {
 	consumableSharedPtr c(new consumable("Voidwalker's Dancing Bell", BELL_TILE, TCODColor::purple,

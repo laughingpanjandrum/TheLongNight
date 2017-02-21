@@ -98,6 +98,7 @@ consumableSharedPtr oil_HangmansBlood();
 consumableSharedPtr oil_WitchsOoze();
 consumableSharedPtr oil_LightningOil();
 consumableSharedPtr oil_DeepRedOil();
+consumableSharedPtr oil_RotbloodOil();
 
 consumableSharedPtr bell_VoidwalkersDancingBell();
 consumableSharedPtr bell_VoidwalkersReturningBell();

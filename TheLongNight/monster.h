@@ -224,6 +224,7 @@ monsterSharedPtr monster_TheKingsRemnants();
 //Ancestral Tombs of Farin
 monsterSharedPtr monster_DeathwatchStatue();
 monsterSharedPtr monster_Gravekeeper();
+monsterSharedPtr monster_PlagueRottedZombie();
 
 //The Void
 monsterSharedPtr monster_VoidTouched();
