@@ -157,6 +157,9 @@ public:
 	int lowHealthDamageBuff = 0; //Gain buffs to damage when health reaches certain thresholds
 	int instantSpellCast = 0; //If >0, our next spell takes no time to cast
 	int percentBuffHolyDamage = 0; //Buff to holy damage dealt
+	int deathfireInfusion = 0; //We explode, dealing fire damage, upon death
+	int deathlink = 0; //If we die, we return to life with this much hp (so long as it's >0)
+	int silence = 0; //If >0, can't cast spells
 
 	//Debuffs
 	int slowdown = 0;

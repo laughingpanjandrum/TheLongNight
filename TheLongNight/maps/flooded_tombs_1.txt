@@ -1,0 +1,85 @@
+Flooded Tomb
+darkness:0.3,0
+start:29,17
+starving_rat:3,3
+starving_rat:3,4
+starving_rat:5,7
+starving_rat:10,3
+starving_rat:14,7
+starving_rat:5,9
+starving_rat:3,20
+starving_rat:17,20
+starving_rat:18,20
+starving_rat:16,21
+starving_rat:14,15
+starving_rat:12,20
+starving_rat:13,17
+starving_rat:3,5
+-items
+dragonbone_helm:36,2
+dragonbone_armour:36,4
+farins_torch:37,37
+-enditems
+-codes
+; floor_grass
+. floor_stone
+" water_mossy
+: floor_sand
+r floor_road
+% bones
+T tree
+# wall_stone
+W wall_wood
+~ poison_ooze
+? statue
++ door_stone
+D water_deep
+* warpstone
+< upstairs
+w water
+-endcodes
+-connections
+stairs:ancestral_tombs_4
+south:flooded_tombs_2
+-endconnections
+########################################
+#wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww#
+#w"wwwwwww"wwwwwwwww"wwwwwwwwww##w##www#
+#ww"wwwwwwww"wwww#ww###ww"wwwwwwwww#ww"#
+#wwww""wwwwwwwwww#"wwwwwwwww"wwww"wwwww#
+#www#########wwww#www"w#"wwwww#wwww#www#
+#wwwwwwwww"w#wwwwwwwwww#ww"www#www##"ww#
+#w"w#ww"wwww#wwww#wwwwww"wwwwwwwwwwwwww#
+#www#wwwwwww#ww"w###wwwwwww""wwwwwwwwww#
+#wwwwwww"wwwwwwwwwwwwww##w###wwww"w#####
+#wwwww#ww####wwwwwwwwwwwwwwwwwwwwwwwwww#
+#ww"wwwwwwwwww"www#w"wwwwww"#w"wwwwwww"#
+#wwwwwww"wwww#wwwwwwww#wwwww#wwwwww#www#
+#wwwwww"wwwww#wwww"www#w"www#wwwwww#w"w#
+#ww#w###wwwwwww""wwwwwwwwww##w"wwww#####
+#ww#wwwwww"wwwwwww#wwwwwwwwwwwwwwwwwwww#
+#ww#wwwwwwwww######ww"www####+##"wwwwww#
+#wwwwwwww"wwwwwwwwwwwwwww#wwww*#wwwwwww#
+#wwww"w#wwwwww"wwwwwwwwww#w<www#www"www#
+#www###wwwwwwwwwwwwwwww"w#?wwww#wwwwwww#
+#wwwwwwwww#w##"w####wwwww#######wwwww"w#
+#wwwwww"ww#wwwwwwwwwwwwwwwwwwwwwwwwwwww#
+#ww"wwwwww#w"wwwwwwww"wwwwwwwwwwww"wwww#
+#wwwwwwwww#wwwwww"w#wwwwwwwwwwwwwwwww"w#
+#wwwwwwwwwwwwwwwwww#wwwwww##w##w"wwwwww#
+#wwww"wwww#ww"wwwwwwwwwwwwwww"wwwwwwwww#
+#wwwwwwwww###www#wwwww"w#wwwwwwwww"wwww#
+#wwwwwwwwwwwwwwwwwwwwwww#"wwww#wwwwwwww#
+#ww##ww###wwwwwwwwww"www#wwwww#wwwwwwww#
+#wwwwww"w#wwwwww"###wwww###ww#wwwwwwwww#
+#ww#ww""w#wwwwww###wwwwwwwwwwwwwwwww"ww#
+#ww#wwwww#wwwwwwwwwwwwwww##ww###wwwwwww#
+#wwwww##w#wwwww"wwwwwwwwwwwwwww#wwww"ww#
+#"wwwwwwwwwwwwwwww####ww"wwwwwwwwwwwwww#
+#"wwwwwwwwwwwwwwww#wwwwwwwwwwwww"wwwwww#
+#wwwwwww###w###wwwwwwww#ww###wwwwwwwwww#
+#www"www#wwww"#www#"www##w#"wwwwww"wwww#
+#wwwwwww#"wwww#www#wwwwwww#wwww"wwwwwww#
+#wwwwwwwwwwwww#www#wwwwwww#wwwwwwwww"ww#
+#wwwwwww#wwwww#wwwwwwwwwww#wwwwwwwwwwww#
+##########w#############################

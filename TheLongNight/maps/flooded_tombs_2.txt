@@ -1,0 +1,69 @@
+Flooded Tomb
+darkness:0.3,0
+start:29,17
+tomb_horror:25,12
+-items
+venomous_runestone:3,15
+-enditems
+-codes
+; floor_grass
+. floor_stone
+' water_mossy
+: floor_sand
+r floor_road
+% bones
+T tree
+# wall_stone
+W wall_wood
+~ poison_ooze
+? statue
++ door_stone
+D water_deep
+* warpstone
+< upstairs
+w water
+-endcodes
+-connections
+north:flooded_tombs_1
+-endconnections
+##########w#############################
+#wwwwww#?w'w#wwwwwwwwwwwwwwwwwwwwwwwwww#
+#wwwwww#w''wwwwwwwww'wwwwwwwwww'wwwwwww#
+#ww'wwwwwwww'wwwwwwwwwwwwwwwwwwwwwww'ww#
+#wwwwww'wwww#www'wwwwwww'wwwwwww'wwwwww#
+#wwwwwwww#'##wwwwwwwwwwwwwwwwwwwwwwwwww#
+#wwww'wwwwwwwwwwww'wwwwwwwwwwwwwwwww'ww#
+#wwwwwwwwwwwww###www######ww#'##wwwwwww#
+#ww'wwwww'wwww#wwwwwwwwwwwwwwwwwww'wwww#
+#wwwwwwwwwwwww#wwwwwwwwwww'wwww#wwwwwww#
+#wwwwww'wwwwww#ww'wwwww'wwwwwww#wwwwwww#
+#wwwwwwwwwwwww#wwwwwww'wwwwwwwwwwwwwww'#
+#wwww'wwwwwwwwww'wwwwwwwwwwwwwwwwww'www#
+#wwwwwwwwww'ww##wwwwwwwwwww'www#wwwwwww#
+#ww'wwww'wwwwww#ww'wwwwwwwwwwww#ww'wwww#
+#wwwwwwwwwwwwww#wwwwwwwwwwwww'w#wwwwwww#
+#wwwwwwwww'wwww#####ww'wwwwwwwwww'wwwww#
+#w'wwwwwwwwwwwwwwww#wwwwwwwwwwwwwwww'ww#
+#wwwwww'wwwwwwwwwww#wwwww'wwwwwwwwwwwww#
+#wwww'www'wwwwwwwwwwwwwwwwwwwww#wwwwwww#
+#ww'wwwwwwwwww'wwww#wwwwwwww'ww#ww'wwww#
+#wwwwwww'wwwwwwwwww#w##ww####w##wwww'ww#
+#wwwwwwwwwwwwwww'wwwww'wwwwwwwwwwwwwwww#
+######wwww'www'wwwwwwwwwwwwwwww'wwwwwww#
+#wwww####wwwwwwwwwwwwwwwww'wwwww########
+#wwwwwww######wwwww'wwwwwwwwwwww#wwwwww#
+#wwwwwwwwwwww#########ww'wwwww'w#wwwwww#
+#wwwwwwwwwwwwwwwwwwww#####wwwwww#wwwwww#
+#wwwwwwwwwwwwwwwwwwwwwwww########wwwwww#
+#wwwwwwwwwwwwwwwwwwwwwwwwwww#wwwwwwwwww#
+#wwwwwwwwwwwwwwwwwwwwwwwwwww#wwwwwwwwww#
+#wwwwwwwwwwwwwwwwwwwwwwwwwww#wwwwwwwwww#
+#wwwwwwwwwwwwwwwwwwwwwwwwwww#wwwwwwwwww#
+#wwwwwwwwwwwwwwwwwwwwwwwwwww#wwwwwwwwww#
+#wwwwwwwwwwwwwwwwwwwwwwwwwww############
+#wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww#
+#wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww#
+#wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww#
+#wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww#
+#wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww#
+########################################

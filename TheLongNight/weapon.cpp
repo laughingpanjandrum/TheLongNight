@@ -149,6 +149,8 @@ int weapon::getStatusEffectDamage(statusEffects etype)
 	if (rune != nullptr) {
 		if (rune->addScalingType == SCALE_BLEED && etype == EFFECT_BLEED)
 			total += 10 + total / 5;
+		if (rune->addScalingType == SCALE_POISON && etype == EFFECT_POISON)
+			total += 10 + total / 5;
 	}
 	//Done, return
 	return total;
@@ -660,6 +662,28 @@ weaponSharedPtr weapon_GravekeeperSpear()
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_Quickstep());
+	return wp;
+}
+
+weaponSharedPtr weapon_SelvixsHookblade()
+{
+	weaponSharedPtr wp(new weapon("Selvix's Hookblade", SWORD_TILE, TCODColor::lightAmber,
+		"Curved shortsword used by Gravekeeper Selvix, infused with poison and rot."));
+	wp->setBasicAttributes(15, SPEED_FAST);
+	wp->addStatusEffect(EFFECT_PLAGUE, 10);
+	wp->addScalingType(SCALE_DEX);
+	wp->setSpecialAttack(attack_PoisonHook());
+	return wp;
+}
+
+weaponSharedPtr weapon_FarinsTorch()
+{
+	weaponSharedPtr wp(new weapon("Farin's Torch", DAGGER_TILE, TCODColor::darkFlame,
+		"Enchanted torch of Farin, who carried it into the depths of the earth, promising that he would bring light to the dead."));
+	wp->setBasicAttributes(0, SPEED_NORMAL);
+	wp->addDamageType(DAMAGE_FIRE, 25);
+	wp->addScalingType(SCALE_ARC);
+	wp->setSpecialAttack(attack_FlameBreath());
 	return wp;
 }
 

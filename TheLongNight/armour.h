@@ -83,6 +83,15 @@ armourSharedPtr armour_GhostlyArmour();
 armourSharedPtr headgear_SirPercivelsHelm();
 armourSharedPtr armour_SirPercivelsArmour();
 
+armourSharedPtr headgear_GravekeepersHood();
+armourSharedPtr armour_GravekeepersRags();
+
+armourSharedPtr headgear_PilgrimsHood();
+armourSharedPtr armour_PilgrimsCoat();
+
+armourSharedPtr headgear_DragonboneHelm();
+armourSharedPtr armour_DragonboneArmour();
+
 armourSharedPtr headgear_MoonPaleCrown();
 
 #endif

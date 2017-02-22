@@ -225,6 +225,10 @@ monsterSharedPtr monster_TheKingsRemnants();
 monsterSharedPtr monster_DeathwatchStatue();
 monsterSharedPtr monster_Gravekeeper();
 monsterSharedPtr monster_PlagueRottedZombie();
+monsterSharedPtr monster_GravekeeperSelvix();
+monsterSharedPtr monster_StarvingRat();
+monsterSharedPtr monster_Tentacle();
+monsterSharedPtr monster_TombHorror();
 
 //The Void
 monsterSharedPtr monster_VoidTouched();

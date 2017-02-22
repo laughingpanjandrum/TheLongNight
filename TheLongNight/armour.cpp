@@ -367,6 +367,79 @@ him to her forsaken mausoleum, where he uncovered an awful truth."));
 	return a;
 }
 
+armourSharedPtr headgear_GravekeepersHood()
+{
+	armourSharedPtr a(new armour("Gravekeeper's Hood", HOOD_TILE, TCODColor::darkAmber, ITEM_HELMET,
+		"Putrid hood of the gravekeepers, who keep watch over the dead. Under these hoods, little flesh remains."));
+	a->setPlagueResist(10);
+	a->setDamageResist(DAMAGE_ACID, 10);
+	return a;
+}
+
+armourSharedPtr armour_GravekeepersRags()
+{
+	armourSharedPtr a(new armour("Gravekeeper's Rags", ROBE_TILE, TCODColor::darkAmber, ITEM_BODY_ARMOUR,
+		"Rotted rags of the gravekeepers, charged by Farin to keep watch over the dead. According to certain storytellers, \
+Farin kept a secret even from his most trusted gravekeepers, and took it with him when he walked out of the world."));
+	a->setPlagueResist(40);
+	a->setDamageResist(DAMAGE_ACID, 20);
+	return a;
+}
+
+armourSharedPtr headgear_PilgrimsHood()
+{
+	armourSharedPtr a(new armour("Pilgrim's Hood", HOOD_TILE, TCODColor::lightSepia, ITEM_HELMET,
+		"A simple pilgrim's hood, woven through with charms of guidance and protection."));
+	a->setBleedResist(5);
+	a->setPoisonResist(5);
+	a->setPlagueResist(5);
+	a->setDamageResist(DAMAGE_COLD, 10);
+	a->setDamageResist(DAMAGE_ACID, 10);
+	a->setDamageResist(DAMAGE_FIRE, 10);
+	a->setDamageResist(DAMAGE_ELECTRIC, 10);
+	return a;
+}
+
+armourSharedPtr armour_PilgrimsCoat()
+{
+	armourSharedPtr a(new armour("Pilgrim's Coat", ROBE_TILE, TCODColor::lightSepia, ITEM_BODY_ARMOUR,
+		"A simple pilgrim's coat, woven through with charms of guidance and protection. Many pilgrims walk a long and \
+dangerous road."));
+	a->setBleedResist(10);
+	a->setPoisonResist(10);
+	a->setPlagueResist(10);
+	a->setDamageResist(DAMAGE_COLD, 20);
+	a->setDamageResist(DAMAGE_ACID, 20);
+	a->setDamageResist(DAMAGE_FIRE, 20);
+	a->setDamageResist(DAMAGE_ELECTRIC, 20);
+	a->setMoveSpeed(SPEED_NORMAL);
+	return a;
+}
+
+armourSharedPtr headgear_DragonboneHelm()
+{
+	armourSharedPtr a(new armour("Dragonbone Helm", HELMET_TILE, TCODColor::lightFlame, ITEM_HELMET,
+		"The bones of dragons are said to be singularly resistant to fire, and indeed this helm - carved in \
+the shape of a dragon's head - is always cool to touch."));
+	a->setDefence(10);
+	a->setDamageResist(DAMAGE_FIRE, 15);
+	a->setDamageResist(DAMAGE_ELECTRIC, 10);
+	return a;
+}
+
+armourSharedPtr armour_DragonboneArmour()
+{
+	armourSharedPtr a(new armour("Dragonbone Armour", ARMOUR_TILE, TCODColor::lightFlame, ITEM_BODY_ARMOUR,
+		"The bones of dragons were said to be strongly attuned to fire, and indeed, these singularly heavy armour \
+bears those properties."));
+	a->setDefence(30);
+	a->setDamageResist(DAMAGE_FIRE, 40);
+	a->setDamageResist(DAMAGE_ACID, 20);
+	a->setDamageResist(DAMAGE_ELECTRIC, 20);
+	a->setMoveSpeed(SPEED_SLOW);
+	return a;
+}
+
 armourSharedPtr headgear_MoonPaleCrown()
 {
 	armourSharedPtr a(new armour("Moon-Pale Crown", HELMET_TILE, TCODColor::lighterBlue, ITEM_HELMET,

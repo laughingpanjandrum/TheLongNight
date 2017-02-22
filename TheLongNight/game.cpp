@@ -390,6 +390,10 @@ bool game::aiTryUseSpell(monsterSharedPtr ai)
 	//Possible fog emission!
 	if (ai->emitsFog > 0)
 		currentMap->createFogCloud(ai->getx(), ai->gety(), ai->emitsFog);
+
+	//If silenced, can't cast at all
+	if (ai->silence > 0)
+		return false;
 	
 	//Random chance to not cast a spell
 	int r = randint(1, 100);
@@ -1297,7 +1301,7 @@ int game::listStatusEffects(personSharedPtr target, int atx, int aty)
 	}
 
 	//Status effects: POISON
-	if (player->getPoisonDuration() > 0) {
+	if (target->getPoisonDuration() > 0) {
 		win.write(atx, ++aty, "POISONED x" + std::to_string(target->getPoisonDuration()), TCODColor::lime);
 	}
 	else {
@@ -1307,7 +1311,7 @@ int game::listStatusEffects(personSharedPtr target, int atx, int aty)
 	}
 
 	//Status effects: PLAGUE
-	if (player->getPlagueDamage() > 0) {
+	if (target->getPlagueDamage() > 0) {
 		win.write(atx, ++aty, "PLAGUE " + std::to_string(target->getPlagueDamage()), TCODColor::sepia);
 	}
 	else {
@@ -1318,12 +1322,12 @@ int game::listStatusEffects(personSharedPtr target, int atx, int aty)
 
 	//Blinding
 	if (target->isBlind()) {
-		win.write(atx + 1, ++aty, "Blinded" + std::to_string(target->getBlindnessDuration()), TCODColor::lightestYellow);
+		win.write(atx + 1, ++aty, "Blinded " + std::to_string(target->getBlindnessDuration()), TCODColor::lightestYellow);
 	}
 
 	//Fear
 	if (target->fear > 0)
-		win.write(atx + 1, ++aty, "Afraid" + std::to_string(target->fear), TCODColor::orange);
+		win.write(atx + 1, ++aty, "Afraid " + std::to_string(target->fear), TCODColor::orange);
 
 	//Acidified
 	if (target->acidic > 0)
@@ -1344,6 +1348,14 @@ int game::listStatusEffects(personSharedPtr target, int atx, int aty)
 	//Entangled
 	if (target->isEntangled())
 		win.write(atx, ++aty, "Entangled " + std::to_string(target->getEntangleDuration()), TCODColor::lightGrey);
+
+	//Deathlink
+	if (target->deathlink > 0)
+		win.write(atx, ++aty, "Deathlink " + std::to_string(target->deathlink), TCODColor::darkFlame);
+	
+	//Silence
+	if (target->silence > 0)
+		win.write(atx, ++aty, "Silence " + std::to_string(target->silence), TCODColor::lightBlue);
 
 	return aty++;
 }
@@ -1587,7 +1599,7 @@ Armour descriptions.
 */
 void game::drawArmourInfo(armourSharedPtr it, int atx, int aty)
 {
-	int offset = 10;
+	int offset = 12;
 	TCODColor maincol = TCODColor::white;
 	
 	//DEF
@@ -1616,6 +1628,13 @@ void game::drawArmourInfo(armourSharedPtr it, int atx, int aty)
 	if (pr) {
 		win.write(atx, ++aty, "POISON RES", TCODColor::lime);
 		win.write(atx + offset, aty, std::to_string(pr), maincol);
+	}
+
+	//Plague resist
+	int plr = it->getPlagueResist();
+	if (plr) {
+		win.write(atx, ++aty, "PLAGUE RES", TCODColor::amber);
+		win.write(atx + offset, aty, std::to_string(plr), maincol);
 	}
 	
 	//Move speed adjustment, if body armour
@@ -2643,6 +2662,20 @@ void game::meleeAttack(personSharedPtr attacker, personSharedPtr target)
 
 		//Possible damage buff on kill
 		attacker->gainFlatDamageBuff(attacker->killDamageBuff);
+
+		//Target sometimes EXPLODES
+		if (target->deathfireInfusion > 0)
+			doAOE(spellSharedPtr(new spell(
+				"Deathfire", TCODColor::flame, ATTACK_AOE, 3, APPLY_FIRE_DAMAGE, target->deathfireInfusion)),
+				attacker);
+
+		//Deathlink can return us to life!
+		if (target->deathlink > 0) {
+			spellTitleAnimation(target, prayer_Deathlink());
+			target->addHealth(target->deathlink);
+			target->deathlink = 0;
+			target->isDead = false;
+		}
 	
 	}
 	else
@@ -2976,6 +3009,12 @@ void game::castSpell(spellSharedPtr sp)
 	if (sp == nullptr)
 		return;
 	int vcost = sp->getVigourCost();
+
+	//Can't cast spells if silenced
+	if (player->silence > 0) {
+		addMessage("You are silenced!", TCODColor::white);
+		return;
+	}
 	
 	if (player->getVigour().getValue() >= vcost) {
 
@@ -3114,9 +3153,9 @@ void game::dischargeSpellOnTarget(spellSharedPtr sp, personSharedPtr caster, per
 			addAnimations(new flashCharacter(target,sp->getColor()));
 		}
 		else {
-			pathVector* pts = new pathVector();
-			pts->push_back(target->getPosition());
-			addAnimations(new glyphCycle(pts, sp->getColor(), target->getColor()));
+			//coordVectorSharedPtr pts = coordVectorSharedPtr(new coordVector());
+			//pts->push_back(target->getPosition());
+			//addAnimations(new glyphCycle(pts, sp->getColor(), target->getColor()));
 		}
 	}
 
@@ -3326,6 +3365,11 @@ void game::initializeShops()
 	nightmare->addItem(prayer_NightmarePrayer(), 150);
 	nightmare->addItem(prayer_WordOfUnmaking(), 150);
 	allUnlockableShops.push_back(shopSharedPtr(nightmare));
+	//	Tome of the Dead
+	shop* dead = new shop("tome_of_the_dead");
+	dead->addItem(prayer_Deathlink(), 100);
+	dead->addItem(prayer_ProfoundStill(), 100);
+	allUnlockableShops.push_back(shopSharedPtr(dead));
 
 	//Elena
 	shop* elena = new shop("elena_shop");
@@ -3343,7 +3387,15 @@ void game::initializeShops()
 	jade->addItem(ranged_HeavyJavelin(), 100);
 	jade->addItem(ranged_LightingJavelin(), 100);
 	jade->addItem(ranged_FrostKnives(), 100);
-	allShops.push_back(shopSharedPtr(jade));
+	allUnlockableShops.push_back(shopSharedPtr(jade));
+	//With Piece of Bone
+	shop* bone = new shop("piece_of_bone");
+	bone->addItem(consumable_PutridFlower(), 100);
+	bone->addItem(consumable_InvigoratingTea(), 500);
+	bone->addItem(ranged_WarpingJavelin(), 100);
+	bone->addItem(headgear_PilgrimsHood(), 300);
+	bone->addItem(armour_PilgrimsCoat(), 500);
+	allUnlockableShops.push_back(shopSharedPtr(bone));
 
 	//Ydella
 	shop* ydella = new shop("ydella_shop");
@@ -3402,6 +3454,14 @@ void game::initializeShops()
 	pale->addItem(weapon_MoonpaleScythe(), 500);
 	pale->addItem(charm_PaleShadesRing(), 100);
 	allUnlockableShops.push_back(shopSharedPtr(pale));
+	//	Plague-Ridden Heart
+	shop* plague = new shop("plague_ridden_heart", true);
+	plague->addItem(weapon_SelvixsHookblade(), 200);
+	allUnlockableShops.push_back(shopSharedPtr(plague));
+	//Heart of Farin
+	shop* farin = new shop("heart_of_farin", true);
+	farin->addItem(spell_LightOfFarin(), 200);
+	allUnlockableShops.push_back(shopSharedPtr(farin));
 
 }
 
@@ -4026,8 +4086,10 @@ void getAllItems(personSharedPtr player)
 	player->addItem(weapon_MoonpaleScythe());
 	player->addItem(weapon_NotchedGreatsword());
 	player->addItem(weapon_SacrificialKnife());
+	player->addItem(weapon_SelvixsHookblade());
 	player->addItem(weapon_SentinelsPike());
 	player->addItem(weapon_SerpentsTooth());
+	player->addItem(weapon_SirPercivelsSword());
 	player->addItem(weapon_SlaveMastersWhip());
 	player->addItem(weapon_SpiderboneShard());
 	player->addItem(weapon_SplinteredSword());
@@ -4044,6 +4106,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(shield_DragonboneShield());
 	player->addItem(shield_EtherealShield());
 	player->addItem(shield_GhostlyShield());
+	player->addItem(shield_SirPercivelsShield());
 	player->addItem(shield_VoidTouchedShield());
 	player->addItem(shield_WoodenWyrdShield());
 
@@ -4083,6 +4146,12 @@ void getAllItems(personSharedPtr player)
 	player->addItem(armour_SentinelsArmour());
 	player->addItem(headgear_GhostlyHelm());
 	player->addItem(armour_GhostlyArmour());
+	player->addItem(headgear_GravekeepersHood());
+	player->addItem(armour_GravekeepersRags());
+	player->addItem(headgear_PilgrimsHood());
+	player->addItem(armour_PilgrimsCoat());
+	player->addItem(headgear_SirPercivelsHelm());
+	player->addItem(armour_SirPercivelsArmour());
 
 	player->addItem(charm_ArcanaDrenchedCharm());
 	player->addItem(charm_BloodDrinkersBand());
@@ -4094,6 +4163,9 @@ void getAllItems(personSharedPtr player)
 	player->addItem(charm_FrozenFlowerCharm());
 	player->addItem(charm_IdolOfPash());
 	player->addItem(charm_KhallesHeadband());
+	player->addItem(charm_PaleShadesRing());
+	player->addItem(charm_RavenousIdol());
+	player->addItem(charm_SirPercivelsRing());
 	player->addItem(charm_ToxicantsCharm());
 	player->addItem(charm_VenomrubyRing());
 	player->addItem(charm_WretchedFleshBand());
@@ -4112,16 +4184,19 @@ void getAllItems(personSharedPtr player)
 	player->addItem(spell_Frostbolt());
 	player->addItem(spell_FrozenBlade());
 	player->addItem(spell_GottricsArcaneProtection());
+	player->addItem(spell_LightOfFarin());
 	player->addItem(spell_LightningStrike());
 	player->addItem(spell_MagicMissile());
 	player->addItem(spell_ProfanedBlade());
 	player->addItem(spell_VoidJaunt());
 
 	player->addItem(prayer_BlessedRadiance());
+	player->addItem(prayer_Deathlink());
 	player->addItem(prayer_DivineRetribution());
 	player->addItem(prayer_DrawOutTheBlood());
 	player->addItem(prayer_NightmarePrayer());
 	player->addItem(prayer_ProfaneRadiance());
+	player->addItem(prayer_ProfoundStill());
 	player->addItem(prayer_RayOfLight());
 	player->addItem(prayer_RemovePoison());
 	player->addItem(prayer_Restoration());
@@ -4170,6 +4245,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(runestone_ThundrousRunestone());
 
 	player->addItem(key_DeadSparrowKey());
+	player->addItem(key_FarinsKey());
 	player->addItem(key_GreenChapelGardenKey());
 	player->addItem(key_HightowerKey());
 	player->addItem(key_LadyTvertsKey());
@@ -4193,11 +4269,12 @@ void getAllItems(personSharedPtr player)
 	player->addItem(heart_OldCrowsHeart());
 	player->addItem(heart_OrsylsShriveledHeart());
 	player->addItem(heart_PaleHeart());
+	player->addItem(heart_PlagueRiddenHeart());
 	player->addItem(heart_VenomousSpiderHeart());
 	player->addItem(heart_VortensShriveledHeart());
 	player->addItem(heart_WretchedHeart());
 
-	for (int i = 0; i <= 7; i++)
+	for (int i = 0; i <= 9; i++)
 		player->addItem(consumable_StarwaterDraught());
 
 }
@@ -4248,6 +4325,6 @@ void game::debugMenu()
 
 	else if (txt == "allitems") {
 		getAllItems(player);
-		fragments += 8000;
+		fragments += 15000;
 	}
 }

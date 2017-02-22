@@ -501,6 +501,12 @@ void person::applyEffect(effect eff, int potency)
 		nextSpellCostAdjust += potency;
 	else if (eff == BUFF_HOLY_DAMAGE)
 		percentBuffHolyDamage += potency;
+	else if (eff == DEATHFIRE_INFUSION)
+		deathfireInfusion += potency;
+	else if (eff == DEATHLINK)
+		deathlink += potency;
+	else if (eff == SILENCE)
+		silence += potency;
 
 	//Debuffs
 
@@ -536,6 +542,11 @@ void person::applyEffect(effect eff, int potency)
 	else if (eff == REMOVE_POISON) {
 		isPoisoned = 0;
 		poisonBuildup.clear();
+	}
+	else if (eff == REMOVE_PLAGUE) {
+		plagueBuildup.clear();
+		health.increaseMaxValue(plagueDamage, false);
+		plagueDamage = 0;
 	}
 	else if (eff == HURT_BLEEDER) {
 		//This only affects bleeding targets
@@ -791,6 +802,10 @@ void person::equipItem(itemSharedPtr which)
 			int poisonResist = which->getPoisonResist();
 			if (poisonResist > 0)
 				poisonBuildup.increaseMaxValue(poisonResist, false);
+			//Add resistance: PLAGUE
+			int plagueResist = which->getPlagueResist();
+			if (plagueResist > 0)
+				plagueBuildup.increaseMaxValue(plagueResist, false);
 		
 		}
 
@@ -884,6 +899,9 @@ void person::unequipItem(itemSharedPtr which)
 			int poisonResist = which->getPoisonResist();
 			if (poisonResist > 0)
 				poisonBuildup.increaseMaxValue(-poisonResist, false);
+			int plagueResist = which->getPlagueResist();
+			if (plagueResist > 0)
+				plagueBuildup.increaseMaxValue(-plagueResist, false);
 
 		}
 
@@ -1089,6 +1107,9 @@ void person::applyStatusEffects()
 	//Fear declines
 	if (fear > 0)
 		fear--;
+	//Silence fades
+	if (silence > 0)
+		silence--;
 }
 
 /*

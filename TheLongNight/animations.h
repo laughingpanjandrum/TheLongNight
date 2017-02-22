@@ -147,12 +147,12 @@ Rapidly cycles through random glyphs.
 class glyphCycle : public animations
 {
 public:
-	glyphCycle(coordVector* pts, TCODColor col1, TCODColor col2);
+	glyphCycle(coordVectorSharedPtr pts, TCODColor col1, TCODColor col2);
 	virtual drawDataSharedPtr getDrawData(drawDataSharedPtr baseData, const int x, const int y);
 	virtual void tick() { timeLeft--; }
 	virtual bool isDone() { return timeLeft < 1; }
 private:
-	coordVector* pts;
+	coordVectorSharedPtr pts;
 	TCODColor* colors;
 	int timeLeft = 20;
 };

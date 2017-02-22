@@ -269,6 +269,11 @@ maptile * tile_Corpse()
 	return new maptile("Corpse", "corpse", CORPSE_TILE, TCODColor::darkCrimson, DARK_STONE_COLOR);
 }
 
+maptile * tile_Bones()
+{
+	return new maptile("Bones", "bones", CORPSE_TILE, TCODColor::lightestYellow, DARK_STONE_COLOR);
+}
+
 maptile * tile_Bed()
 {
 	return new maptile("Bed", "bed", BED_TILE, TCODColor::darkRed, DARK_STONE_COLOR);
@@ -474,6 +479,16 @@ maptile * tile_MoonPalaceDoor()
 		TCODColor::lightBlue, TCODColor::black, false, false);
 	door->isDoor = true;
 	door->unlockCode = "moon_pale_key";
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	return door;
+}
+
+maptile * tile_GraveDoor()
+{
+	maptile* door = new maptile("Grave Door", "grave_door", BASIC_DOOR_TILE,
+		TCODColor::amber, TCODColor::black, false, false);
+	door->isDoor = true;
+	door->unlockCode = "farins_key";
 	door->addTouchEffect(CHECK_FOR_UNLOCK);
 	return door;
 }

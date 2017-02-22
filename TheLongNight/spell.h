@@ -104,6 +104,8 @@ spellSharedPtr attack_BillowingFlames();
 spellSharedPtr attack_Penetrate();
 spellSharedPtr attack_EtherealRay();
 spellSharedPtr attack_PaleSlash();
+spellSharedPtr attack_PoisonHook();
+spellSharedPtr attack_FlameBreath();
 
 //Wand/chime powers
 spellSharedPtr ability_PowerSurge();
@@ -144,6 +146,7 @@ spellSharedPtr spell_ArcLightning();
 spellSharedPtr spell_SpitFire();
 spellSharedPtr spell_StormLash();
 spellSharedPtr spell_Firestorm();
+spellSharedPtr spell_LightOfFarin();
 
 //	Prayers
 spellSharedPtr prayer_Restoration();
@@ -167,6 +170,8 @@ spellSharedPtr prayer_NightmarePrayer();
 spellSharedPtr prayer_WordOfUnmaking();
 //Sold by Ydella
 spellSharedPtr prayer_SinkBeneath();
+spellSharedPtr prayer_Deathlink();
+spellSharedPtr prayer_ProfoundStill();
 spellSharedPtr prayer_SpidersPrayer();
 spellSharedPtr prayer_TouchOfDoom();
 //Misc

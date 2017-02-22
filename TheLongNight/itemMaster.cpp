@@ -65,6 +65,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 	//Ancenstral Tombs of Farin
 	else if (handle == "gravekeeper_spear")
 		return weapon_GravekeeperSpear();
+	else if (handle == "farins_torch")
+		return weapon_FarinsTorch();
 
 	//SHIELDS
 	if (handle == "battered_wooden_shield")
@@ -107,6 +109,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return consumable_TinyRedFlower();
 	else if (handle == "tiny_green_flower")
 		return consumable_TinyGreenFlower();
+	else if (handle == "putrid_flower")
+		return consumable_PutridFlower();
 	else if (handle == "blood_drinkers_eyes")
 		return consumable_BloodDrinkersEyes();
 	else if (handle == "intoxicating_wine")
@@ -243,6 +247,16 @@ itemSharedPtr getItemByHandle(std::string handle)
 	else if (handle == "sir_percivels_armour")
 		return armour_SirPercivelsArmour();
 
+	else if (handle == "gravekeepers_hood")
+		return headgear_GravekeepersHood();
+	else if (handle == "gravekeepers_rags")
+		return armour_GravekeepersRags();
+
+	else if (handle == "dragonbone_helm")
+		return headgear_DragonboneHelm();
+	else if (handle == "dragonbone_armour")
+		return armour_DragonboneArmour();
+
 	//CHARMS
 	if (handle == "bloodstained_charm")
 		return charm_BloodstainedCharm();
@@ -344,8 +358,12 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return spellbook_DivineTomeOfTheEmissary();
 	else if (handle == "divine_nightmare_tome")
 		return spellbook_DivineNightmareTome();
+	else if (handle == "tome_of_the_dead")
+		return spellbook_TomeOfTheDead();
 	else if (handle == "piece_of_jade")
 		return misc_PieceOfJade();
+	else if (handle == "piece_of_bone")
+		return misc_PieceOfBone();
 
 	//RUNESTONES
 	if (handle == "corens_runestone")
@@ -370,6 +388,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return runestone_CorrodingRunestone();
 	else if (handle == "frozen_runestone")
 		return runestone_FrozenRunestone();
+	else if (handle == "venomous_runestone")
+		return runestone_VenomousRunestone();
 	
 	//Uh oh, we didn't find anything!
 	return nullptr;
@@ -445,6 +465,7 @@ std::string getEffectName(effect e)
 
 	case(REMOVE_BLEED): return "cures bleed buildup";
 	case(REMOVE_POISON): return "cures poisoning";
+	case(REMOVE_PLAGUE): return "cures plague";
 	case(ADD_HEALTH_TRICKLE): return "health restore, 1/turn";
 
 	case(INCREASE_SPELL_POWER): return "arcane power";
@@ -502,6 +523,9 @@ std::string getEffectName(effect e)
 	case(GAIN_KILL_DAMAGE_BUFF): return "damage buff upon kill";
 	case(INSTILL_FEAR): return "instill fear";
 	case(BUFF_HOLY_DAMAGE): return "% holy damage dealt";
+	case(DEATHFIRE_INFUSION): return "fire explosion on death";
+	case(DEATHLINK): return "upon death, return to life";
+	case(SILENCE): return "silence";
 
 	case(TELEPORT_VIA_WATER): return "water warp";
 	case(TELEPORT_TO_VOID): return "warp to void";

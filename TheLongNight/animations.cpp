@@ -132,7 +132,7 @@ void glowPath::tick()
 */
 
 
-glyphCycle::glyphCycle(coordVector* pts, TCODColor col1, TCODColor col2):
+glyphCycle::glyphCycle(coordVectorSharedPtr pts, TCODColor col1, TCODColor col2):
 	pts(pts)
 {
 	//Make a colour map for us to cycle through

@@ -133,6 +133,15 @@ did not care to return, and instead remained in his palace until only a withered
 	return m;
 }
 
+miscItemSharedPtr key_FarinsKey()
+{
+	miscItemSharedPtr m(new miscItem("Farin's Key", KEY_TILE, TCODColor::amber,
+		"Farin entrusted this key to Selvin, his first gravekeeper, before he descended into the depths of Atalundra, \
+seeking the truth of the silence of the gods."));
+	m->setKeyTag("farins_key");
+	return m;
+}
+
 miscItemSharedPtr key_WatchfulEyestalk()
 {
 	miscItemSharedPtr m(new miscItem("Watchful Eyestalk", KEY_TILE, TCODColor::darkGreen,
@@ -279,6 +288,22 @@ kept the wastes from drifting out of existence entirely."));
 	return h;
 }
 
+miscItemSharedPtr heart_PlagueRiddenHeart()
+{
+	miscItemSharedPtr h(new miscItem("Plague-Ridden Heart", HEART_TILE, TCODColor::amber,
+		"The rotten heart of Gravekeeper Selvix, dripping with vile plague."));
+	h->setKeyTag("plague_ridden_heart");
+	return h;
+}
+
+miscItemSharedPtr heart_HeartOfFarin()
+{
+	miscItemSharedPtr h(new miscItem("Heart of Farin", HEART_TILE, TCODColor::lightAmber,
+		"In the mouth of the strangling maw lie a shriveled, still-beating heart."));
+	h->setKeyTag("heart_of_farin");
+	return h;
+}
+
 
 
 /*
@@ -362,6 +387,15 @@ miscItemSharedPtr spellbook_DivineNightmareTome()
 stars. The First Sparrow rejected her offer to teach him the prayers that led her to this holy knowledge, however, \
 and she was cast out to wither away."));
 	s->setKeyTag("divine_nightmare_tome");
+	return s;
+}
+
+miscItemSharedPtr spellbook_TomeOfTheDead()
+{
+	miscItemSharedPtr s(new miscItem("Tome of the Dead", SPELL_TILE, TCODColor::lightBlue,
+		"The sorcerer-kings of Sunken Atalundra became deeply interested in death, even as their kingdom sunk further \
+into the deep. The writings in these waterlogged pages suggest an insight into the mysteries of the lands beyond death."));
+	s->setKeyTag("tome_of_the_dead");
 	return s;
 }
 
@@ -480,6 +514,15 @@ miscItemSharedPtr runestone_FrozenRunestone()
 	return r;
 }
 
+miscItemSharedPtr runestone_VenomousRunestone()
+{
+	miscItemSharedPtr r(new miscItem("Venomous Runestone", RUNESTONE_TILE, TCODColor::green,
+		"This light-coloured stone drips with concealed venom."));
+	r->isRunestone = true;
+	r->setRune(new weaponRune("Venomous Runestone", "Toxic", TCODColor::green, SCALE_POISON));
+	return r;
+}
+
 
 /*
 	Bones
@@ -546,5 +589,13 @@ miscItemSharedPtr misc_PieceOfJade()
 		"A chunk of jade that sparkles with surprising radiance. It reminds you of home."));
 	m->isKey = true;
 	m->setKeyTag("piece_of_jade");
+	return m;
+}
+
+miscItemSharedPtr misc_PieceOfBone()
+{
+	miscItemSharedPtr m(new miscItem("Piece of Bone", FRAGMENT_GLYPH, TCODColor::lightestYellow,
+		"A chunk of bone, surprisingly warm to the touch. It reminds you of home."));
+	m->setKeyTag("piece_of_bone");
 	return m;
 }

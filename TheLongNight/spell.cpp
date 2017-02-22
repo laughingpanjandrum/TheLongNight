@@ -363,6 +363,28 @@ spellSharedPtr attack_PaleSlash()
 	return sp;
 }
 
+spellSharedPtr attack_PoisonHook()
+{
+	spellSharedPtr sp(new spell("Poison Hook", DAGGER_TILE, TCODColor::lightAmber,
+		"Attack deals poison and bleed damage."));
+	sp->setAttackType(ATTACK_RANGE, 1);
+	sp->addEffect(CASTER_MELEE_ATTACK, 1);
+	sp->addEffect(APPLY_BLEED_DAMAGE, 10);
+	sp->addEffect(APPLY_POISON_DAMAGE, 20);
+	sp->setVigourCost(1);
+	return sp;
+}
+
+spellSharedPtr attack_FlameBreath()
+{
+	spellSharedPtr sp(new spell("Flame Breath", DAGGER_TILE, TCODColor::darkFlame,
+		"Blow a stream of fire."));
+	sp->setAttackType(ATTACK_RANGE, 5);
+	sp->addEffect(APPLY_FIRE_DAMAGE, 50);
+	sp->setVigourCost(1);
+	return sp;
+}
+
 spellSharedPtr ability_EtherealSurge()
 {
 	spellSharedPtr sp(new spell("Ethereal Surge", SPELL_TILE, TCODColor::magenta,
@@ -709,6 +731,18 @@ within that fire, but her tomb was sealed away from the world so that the knowle
 	return sp;
 }
 
+spellSharedPtr spell_LightOfFarin()
+{
+	spellSharedPtr sp(new spell("Light of Farin", SPELL_TILE, TCODColor::lighterFlame,
+		"Before he was consumed, Farin learned that even the dead carry a flame within them, and that the power \
+of this flame can be harnessed."));
+	sp->setAttackType(ATTACK_RANGE, 10);
+	sp->addEffect(DEATHFIRE_INFUSION, 25);
+	sp->setVigourCost(2);
+	sp->usesSpellPower = true;
+	return sp;
+}
+
 
 
 //Prayers
@@ -799,6 +833,29 @@ spellSharedPtr prayer_ProfaneRay()
 	sp->addEffect(APPLY_PROFANE_DAMAGE, 25);
 	sp->usesDivinePower = true;
 	sp->isProfane = true;
+	return sp;
+}
+
+spellSharedPtr prayer_Deathlink()
+{
+	spellSharedPtr sp(new spell("Deathlink", SPELL_TILE, TCODColor::blue,
+		"Students of the Arcane in Sunken Atalundra learned that the gods were the true source of arcane power. \
+With this prayer, they begged the gods to send them life beyond death."));
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(DEATHLINK, 10);
+	sp->setVigourCost(3);
+	sp->usesDivinePower = true;
+	return sp;
+}
+
+spellSharedPtr prayer_ProfoundStill()
+{
+	spellSharedPtr sp(new spell("Profound Still", SPELL_TILE, TCODColor::lightBlue,
+		"The clerics of Atalundra begged the gods to spare their kingdom, and were met only with profound silence."));
+	sp->setAttackType(ATTACK_AOE, 5);
+	sp->addEffect(SILENCE, 20);
+	sp->setVigourCost(3);
+	sp->usesDivinePower = true;
 	return sp;
 }
 

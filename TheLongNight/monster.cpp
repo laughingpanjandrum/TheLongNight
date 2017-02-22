@@ -1582,7 +1582,7 @@ monsterSharedPtr monster_Gravekeeper()
 	m->setPoisonResist(100);
 	m->setDefence(DAMAGE_ACID, 50);
 	m->setMoveStats(SPEED_NORMAL);
-	m->equipItem(weaponSharedPtr(new weapon(25, SPEED_NORMAL, EFFECT_PLAGUE, 25)));
+	m->equipItem(weaponSharedPtr(new weapon(25, SPEED_NORMAL, EFFECT_PLAGUE, 10)));
 	m->setFragmentsDropped(200);
 	return m;
 }
@@ -1600,6 +1600,70 @@ monsterSharedPtr monster_PlagueRottedZombie()
 	m->addSpellKnown(spellSharedPtr(new spell("Plaguebomb", TCODColor::sepia, 4, 0, APPLY_PLAGUE_DAMAGE, 5)));
 	m->setSpellCastChance(15);
 	m->setFragmentsDropped(50);
+	return m;
+}
+
+monsterSharedPtr monster_GravekeeperSelvix()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Gravekeeper Selvix", GRAVEKEEPER_TILE, TCODColor::lightAmber,
+		"There is little to distinguish him from the other gravekeepers, except for the hooked scimitar he wields alongside \
+his spear, and the furious yellow light in his eyes."));
+	m->setHealth(2000);
+	m->setPlagueResist(1000);
+	m->setPoisonResist(1000);
+	m->setBleedResist(120);
+	m->setMoveStats(SPEED_FAST);
+	m->equipItem(weaponSharedPtr(new weapon(10, SPEED_FAST, EFFECT_PLAGUE, 10)));
+	m->addSpellKnown(spellSharedPtr(new spell("Plaguebomb", TCODColor::amber, 4, 10, APPLY_PLAGUE_DAMAGE, 10)));
+	m->setSpellCastChance(40);
+	m->setFragmentsDropped(4000);
+	m->keepsDistance = true;
+	m->addItemDrop(heart_PlagueRiddenHeart());
+	m->addItemDrop(key_FarinsKey());
+	m->isBoss = true;
+	return m;
+}
+
+monsterSharedPtr monster_StarvingRat()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Starving Rat", RAT_TILE, TCODColor::sepia,
+		"A dog-sized rat, slavering for sustenance, its eyes hollow and gleaming."));
+	m->setHealth(30);
+	m->setPlagueResist(1000);
+	m->setMoveStats(SPEED_FAST);
+	m->equipItem(weaponSharedPtr(new weapon(10, SPEED_FAST, EFFECT_PLAGUE, 5)));
+	m->setFragmentsDropped(5);
+	return m;
+}
+
+monsterSharedPtr monster_Tentacle()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Tentacle", TENTACLE_TILE, TCODColor::green,
+		"A slimy tentacle, covered in tiny suckers, gropes from the muck."));
+	m->setHealth(100);
+	m->setPoisonResist(100);
+	m->setDefence(DAMAGE_PHYSICAL, 10);
+	m->setMoveStats(SPEED_SLOW);
+	m->setMeleeStats(25, SPEED_NORMAL);
+	m->addSpellKnown(spellSharedPtr(new spell("Grasp", TCODColor::green, 1, 5, APPLY_ENTANGLING, 1)));
+	m->setSpellCastChance(50);
+	m->setFragmentsDropped(100);
+	return m;
+}
+
+monsterSharedPtr monster_TombHorror()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Tomb Horror", SPIDER_TILE, TCODColor::lightAmber,
+		"A gaping maw rises from the muck, ringed with millions of tiny teeth, surrounded by squirming throngs of tentacles."));
+	m->setHealth(2400);
+	m->setMoveStats(SPEED_SLOW);
+	m->equipItem(weaponSharedPtr(new weapon(25, SPEED_SLOW, DAMAGE_ACID, 25)));
+	m->addSpawnableCreature("tentacle");
+	m->setSpawnChance(50);
+	m->keepsDistance = true;
+	m->setFragmentsDropped(5000);
+	m->addItemDrop(heart_HeartOfFarin());
+	m->isBoss = true;
 	return m;
 }
 
@@ -1671,6 +1735,7 @@ monsterSharedPtr npc_MuiraClericOfTheRose()
 	m->addShopUnlock("divine_moonspark_tome");
 	m->addShopUnlock("divine_tome_of_the_emissary");
 	m->addShopUnlock("divine_nightmare_tome");
+	m->addShopUnlock("tome_of_the_dead");
 	//Dialogue
 	m->loadDialogue("dialogue/muira_chat.txt");
 	return m;
@@ -1685,6 +1750,7 @@ monsterSharedPtr npc_ElenaThePilgrim()
 	m->isShopkeeper = true;
 	m->setShopTag("elena_shop");
 	m->addShopUnlock("piece_of_jade");
+	m->addShopUnlock("piece_of_bone");
 	//Dialogue
 	m->loadDialogue("dialogue/elena_chat.txt");
 	return m;
@@ -1723,6 +1789,8 @@ monsterSharedPtr npc_Ydella()
 	m->addShopUnlock("khalles_heart");
 	m->addShopUnlock("ietras_heart");
 	m->addShopUnlock("pale_heart");
+	m->addShopUnlock("plague_ridden_heart");
+	m->addShopUnlock("heart_of_farin");
 	return m;
 }
 
@@ -1958,6 +2026,14 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return monster_Gravekeeper();
 	else if (handle == "plague_rotted_zombie")
 		return monster_PlagueRottedZombie();
+	else if (handle == "selvix")
+		return monster_GravekeeperSelvix();
+	else if (handle == "starving_rat")
+		return monster_StarvingRat();
+	else if (handle == "tentacle")
+		return monster_Tentacle();
+	else if (handle == "tomb_horror")
+		return monster_TombHorror();
 
 	//The Void
 	else if (handle == "void_touched")

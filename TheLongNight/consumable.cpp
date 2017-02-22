@@ -56,6 +56,16 @@ consumableSharedPtr consumable_TinyGreenFlower()
 	return c;
 }
 
+consumableSharedPtr consumable_PutridFlower()
+{
+	consumableSharedPtr c(new consumable("Putrid Flower", FLOWER_TILE, TCODColor::amber,
+		"A foul-smelling flower that grows underground. According to certain storytellers, Farin \
+cultivated these in secret, afraid that he would someday regret bringing plague upon the world."));
+	c->addEffect(REMOVE_PLAGUE);
+	c->setPotency(1);
+	return c;
+}
+
 consumableSharedPtr consumable_BloodDrinkersEyes()
 {
 	consumableSharedPtr c(new consumable("Blood Drinker's Eyes", CHARM_TILE, TCODColor::crimson,

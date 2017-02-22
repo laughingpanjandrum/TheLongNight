@@ -23,6 +23,7 @@ public:
 	void setDefence(int def) { this->defence = def; }
 	void setBleedResist(int r) { bleedResist = r; }
 	void setPoisonResist(int r) { poisonResist = r; }
+	void setPlagueResist(int r) { plagueResist = r; }
 	void setDamageResist(damageType dtype, int def) { damageResist.at(dtype) = def; }
 
 	//Getters
@@ -35,6 +36,7 @@ public:
 	int getDamageResist(damageType dtype) { return damageResist.at(dtype); }
 	int getBleedResist() { return bleedResist; }
 	int getPoisonResist() { return poisonResist; }
+	int getPlagueResist() { return plagueResist; }
 
 	//Stacking
 	virtual const bool isStackable() { return false; }
@@ -66,6 +68,7 @@ protected:
 	int defence = 0;
 	int bleedResist = 0;
 	int poisonResist = 0;
+	int plagueResist = 0;
 	std::vector<int> damageResist;
 
 	//Image data

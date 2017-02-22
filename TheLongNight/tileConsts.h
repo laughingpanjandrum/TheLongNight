@@ -59,6 +59,7 @@ const int OOZE_TILE = 79;
 
 const int SKELETON_TILE = 83;
 const int GRAVEKEEPER_TILE = 103;
+const int TENTACLE_TILE = 116;
 
 const int GOREM_TILE = 327; 
 

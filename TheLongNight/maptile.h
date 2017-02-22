@@ -153,6 +153,7 @@ maptile* tile_PoisonOoze(); //"poison_ooze"
 
 maptile* tile_Bloodstain(); //"bloodstain"
 maptile* tile_Corpse(); //"corpse"
+maptile* tile_Bones(); //"bones"
 
 maptile* tile_Bed(); //"bed"
 maptile* tile_Terminal(); //"terminal"
@@ -179,6 +180,7 @@ maptile* tile_BasementDoor(); //"basement_door"
 maptile* tile_SparrowTowerDoor(); //"sparrow_tower_door"
 maptile* tile_ObservatoryDoor(); //"observatory_door"
 maptile* tile_MoonPalaceDoor(); //"moon_palace_door"
+maptile* tile_GraveDoor(); //"grave_door"
 
 maptile* tile_BloodyMausoleumDoor(); //"bloody_mausoleum_door"
 maptile* tile_LostDoor(); //"lost_door"
@@ -204,7 +206,7 @@ const tileVector ALL_MAPTILES = {
 	tile_Bars(), tile_CellDoor(),
 	tile_Water(), tile_MossyWater(), tile_DeepWater(), tile_Acid(), tile_DrainingPool(),
 	tile_Ooze(), tile_Web(), tile_WebOnFloor(), tile_PoisonOoze(),
-	tile_Bloodstain(), tile_Corpse(),
+	tile_Bloodstain(), tile_Corpse(), tile_Bones(),
 	tile_Bed(), tile_Terminal(),
 	tile_StatueOfRest(), tile_VoidWarpstone(),
 	//Stairs
@@ -218,6 +220,7 @@ const tileVector ALL_MAPTILES = {
 	tile_VoidDrenchedDoor(), tile_DoorOfWinter(), tile_OldValleyDoor(),
 	tile_DesolateChurchDoor(), tile_HightowerDoor(), tile_BasementDoor(),
 	tile_SparrowTowerDoor(), tile_ObservatoryDoor(), tile_MoonPalaceDoor(),
+	tile_GraveDoor(),
 	tile_BloodyMausoleumDoor(), tile_LostDoor(), tile_SilentDoor(), tile_VoidMausoleumDoor(),
 };
 

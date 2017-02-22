@@ -187,7 +187,7 @@ private:
 
 	//Animations
 	animVector playingAnimations;
-	void addAnimations(animations* a) { playingAnimations.push_back(a); }
+	void addAnimations(animations* a) { }// playingAnimations.push_back(a); }
 	drawDataSharedPtr getAnimationDataOverride(drawDataSharedPtr baseData, int x, int y);
 	void updateAnimations();
 	void spellTitleAnimation(personSharedPtr caster, spellSharedPtr sp);
