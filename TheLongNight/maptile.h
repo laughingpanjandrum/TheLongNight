@@ -124,6 +124,7 @@ maptile* tile_Wall(); //"wall_stone"
 maptile* tile_MagicWall(); //"wall_magic"
 maptile* tile_WoodenWall(); //"wall_wood";
 maptile* tile_MarbleWall(); //"wall_marble"
+maptile* tile_GoldenWall(); //"wall_golden"
 maptile* tile_Bars(); //"bars"
 
 maptile* tile_Door(); //"door_stone"
@@ -181,6 +182,7 @@ maptile* tile_SparrowTowerDoor(); //"sparrow_tower_door"
 maptile* tile_ObservatoryDoor(); //"observatory_door"
 maptile* tile_MoonPalaceDoor(); //"moon_palace_door"
 maptile* tile_GraveDoor(); //"grave_door"
+maptile* tile_AtalundraGate(); //"atalundra_gate"
 
 maptile* tile_BloodyMausoleumDoor(); //"bloody_mausoleum_door"
 maptile* tile_LostDoor(); //"lost_door"
@@ -200,7 +202,7 @@ maptile* tile_Tombstone(); //"tombstone"
 const tileVector ALL_MAPTILES = {
 	tile_Floor(), tile_MossyFloor(), tile_Sand(), tile_Grass(), tile_Road(), tile_Void(), tile_Carpet(), tile_SnowFloor(),
 	tile_MagicFloor(),
-	tile_Wall(), tile_WoodenWall(), tile_SandyRock(), tile_MarbleWall(), tile_MagicWall(),
+	tile_Wall(), tile_WoodenWall(), tile_SandyRock(), tile_MarbleWall(), tile_MagicWall(), tile_GoldenWall(),
 	tile_Door(), tile_WoodenDoor(), tile_LockedDoor(), tile_DoorUnlocker(),
 	tile_Glass(), tile_Bush(), tile_Rosebush(), tile_Tree(), tile_VoidTree(), tile_DeadTree(), tile_SnowboundTree(),
 	tile_Bars(), tile_CellDoor(),
@@ -220,7 +222,7 @@ const tileVector ALL_MAPTILES = {
 	tile_VoidDrenchedDoor(), tile_DoorOfWinter(), tile_OldValleyDoor(),
 	tile_DesolateChurchDoor(), tile_HightowerDoor(), tile_BasementDoor(),
 	tile_SparrowTowerDoor(), tile_ObservatoryDoor(), tile_MoonPalaceDoor(),
-	tile_GraveDoor(),
+	tile_GraveDoor(), tile_AtalundraGate(),
 	tile_BloodyMausoleumDoor(), tile_LostDoor(), tile_SilentDoor(), tile_VoidMausoleumDoor(),
 };
 

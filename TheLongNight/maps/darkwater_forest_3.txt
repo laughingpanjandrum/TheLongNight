@@ -30,6 +30,7 @@ G glass
 south:ruined_green_chapel
 east:court_of_the_rose
 west:murdermire_1
+north:percivels_shrine
 -endconnections
 .........#.......############.........##
 .........#..%.....##########.....%....##

@@ -114,6 +114,11 @@ maptile * tile_MarbleWall()
 	return new maptile("Marble Wall", "wall_marble", BASIC_WALL_TILE, TCODColor::darkCyan, TCODColor::white, false, false);
 }
 
+maptile * tile_GoldenWall()
+{
+	return new maptile("Golden Wall", "wall_golden", BASIC_WALL_TILE, TCODColor::gold, TCODColor::black, false, false);
+}
+
 maptile * tile_Bars()
 {
 	return new maptile("Bars", "bars", BARS_TILE, LIGHT_STONE_COLOR, DARK_STONE_COLOR, false, true);
@@ -489,6 +494,16 @@ maptile * tile_GraveDoor()
 		TCODColor::amber, TCODColor::black, false, false);
 	door->isDoor = true;
 	door->unlockCode = "farins_key";
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	return door;
+}
+
+maptile * tile_AtalundraGate()
+{
+	maptile* door = new maptile("Atalundra Gate", "atalundra_gate", BASIC_DOOR_TILE,
+		TCODColor::brass, TCODColor::black, false, false);
+	door->isDoor = true;
+	door->unlockCode = "atalundra_key";
 	door->addTouchEffect(CHECK_FOR_UNLOCK);
 	return door;
 }

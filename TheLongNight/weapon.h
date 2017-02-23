@@ -192,9 +192,12 @@ weaponSharedPtr wand_EtherealWand();
 weaponSharedPtr wand_BleachwoodWand();
 weaponSharedPtr wand_SparrowsStaff();
 weaponSharedPtr wand_MoshkasSingingStaff();
+weaponSharedPtr wand_GottricsWand();
 
 //Chimes
 weaponSharedPtr chime_ClericsCrackedChime();
+weaponSharedPtr chime_GreenKnightsChime();
+weaponSharedPtr chime_RotbloodBell();
 weaponSharedPtr chime_WyrdBellbranch();
 weaponSharedPtr chime_OrsylsProfaneChime();
 

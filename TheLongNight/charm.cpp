@@ -162,6 +162,7 @@ charmSharedPtr charm_SirPercivelsRing()
 		"Sir Percivel sought the truth of the Rose's decline. In the heart of the Void, he looked upon the whispering \
 void at the heart of creation, and a great silence overtook him. Afterward, he began his final pilgrimage."));
 	c->addEffect(BUFF_HOLY_DAMAGE, 25);
+	c->inSirPercivelsSet = true;
 	return c;
 }
 
@@ -174,5 +175,14 @@ unmoored from reality, he slowly withered away in his palace, even as his servan
 	c->setDamageResist(DAMAGE_COLD, 20);
 	c->setDamageResist(DAMAGE_ELECTRIC, 20);
 	c->setDamageResist(DAMAGE_MAGIC, -30);
+	return c;
+}
+
+charmSharedPtr charm_StarweaversRing()
+{
+	charmSharedPtr c(new charm("Starweaver's Ring", CHARM_TILE, TCODColor::pink,
+		"Enchantingly beautiful ring of the Starweavers, whose power signalled the draining of their life."));
+	c->addEffect(INCREASE_SPELL_POWER, 50);
+	c->addEffect(GAIN_MAX_HEALTH, -50);
 	return c;
 }

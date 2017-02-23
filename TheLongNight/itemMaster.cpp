@@ -97,8 +97,12 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return wand_FishmansToadstaff();
 	else if (handle == "ethereal_wand")
 		return wand_EtherealWand();
+	else if (handle == "gottrics_wand")
+		return wand_GottricsWand();
 	else if (handle == "clerics_cracked_chime")
 		return chime_ClericsCrackedChime();
+	else if (handle == "rotblood_bell")
+		return chime_RotbloodBell();
 
 	//CONSUMABLES
 	if (handle == "starwater_draught")
@@ -257,6 +261,11 @@ itemSharedPtr getItemByHandle(std::string handle)
 	else if (handle == "dragonbone_armour")
 		return armour_DragonboneArmour();
 
+	else if (handle == "starweavers_hood")
+		return headgear_StarweaversHood();
+	else if (handle == "starweavers_robe")
+		return armour_StarweaversRobe();
+
 	//CHARMS
 	if (handle == "bloodstained_charm")
 		return charm_BloodstainedCharm();
@@ -282,12 +291,20 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return charm_VenomrubyRing();
 	else if (handle == "sir_percivels_ring")
 		return charm_SirPercivelsRing();
+	else if (handle == "starweavers_ring")
+		return charm_StarweaversRing();
 
 	//SPELLS
 	else if (handle == "magic_missile")
 		return spell_MagicMissile();
 	else if (handle == "arcane_radiance")
 		return spell_ArcaneRadiance();
+	else if (handle == "atalundra_arcane_spear")
+		return spell_AtalundraArcaneSpear();
+	else if (handle == "atalundra_death_surge")
+		return spell_AtalundraDeathSurge();
+	else if (handle == "atalundra_soul_blade")
+		return spell_AtalundraSoulBlade();
 
 	//PRAYERS
 	else if (handle == "restoration")

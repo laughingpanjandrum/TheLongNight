@@ -50,6 +50,7 @@ public:
 	bool isProfane = false; //Buffed by profane items, bad for blessed people
 	bool alwaysHitTarget = false; //Doesn't hit intermediate targets
 	bool isStenchBased = false; //Stench resistance negates the effects
+	bool inverseHealthScaling = false; //Power increases as the caster's health lowers
 
 private:
 
@@ -113,9 +114,12 @@ spellSharedPtr ability_AcidInfusion();
 spellSharedPtr ability_EtherealSurge();
 spellSharedPtr ability_TransitorySurge();
 spellSharedPtr ability_Metamagic();
+spellSharedPtr ability_GottricsPartingCall();
 spellSharedPtr ability_StrengthOfMind();
 spellSharedPtr ability_DivineFavour();
 spellSharedPtr ability_WyrdChannel();
+spellSharedPtr ability_Rotcall();
+spellSharedPtr ability_MemoryOfLight();
 
 spellSharedPtr ability_FogCloud();
 
@@ -142,6 +146,10 @@ spellSharedPtr spell_Chillbite();
 spellSharedPtr spell_LightningStrike();
 spellSharedPtr spell_ElectricBlade();
 spellSharedPtr spell_ArcLightning();
+//Atalundra magic
+spellSharedPtr spell_AtalundraArcaneSpear();
+spellSharedPtr spell_AtalundraDeathSurge();
+spellSharedPtr spell_AtalundraSoulBlade();
 
 spellSharedPtr spell_SpitFire();
 spellSharedPtr spell_StormLash();

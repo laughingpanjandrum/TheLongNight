@@ -137,6 +137,7 @@ monsterSharedPtr monster_FishbornGoddess();
 //Darkwater Forest
 monsterSharedPtr monster_GiantRat();
 monsterSharedPtr monster_ProfaneRatPriest();
+monsterSharedPtr monster_RatPrince();
 
 //Crumbling City
 monsterSharedPtr monster_CrawlingZombie();
@@ -229,6 +230,12 @@ monsterSharedPtr monster_GravekeeperSelvix();
 monsterSharedPtr monster_StarvingRat();
 monsterSharedPtr monster_Tentacle();
 monsterSharedPtr monster_TombHorror();
+
+//Sunken Atalundra
+monsterSharedPtr monster_LanternBearer();
+monsterSharedPtr monster_ShadeOfAtalundra();
+monsterSharedPtr monster_DistortedHorror();
+monsterSharedPtr monster_HeartOfAtalundra();
 
 //The Void
 monsterSharedPtr monster_VoidTouched();

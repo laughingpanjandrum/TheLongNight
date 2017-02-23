@@ -61,6 +61,8 @@ const int SKELETON_TILE = 83;
 const int GRAVEKEEPER_TILE = 103;
 const int TENTACLE_TILE = 116;
 
+const int LANTERN_BEARER_TILE = 108;
+
 const int GOREM_TILE = 327; 
 
 //Items

@@ -353,6 +353,7 @@ armourSharedPtr headgear_SirPercivelsHelm()
 obscure wisdom from the rotten folk that lurked in the mud."));
 	a->setDefence(10);
 	a->setPoisonResist(25);
+	a->inSirPercivelsSet = true;
 	return a;
 }
 
@@ -364,6 +365,7 @@ him to her forsaken mausoleum, where he uncovered an awful truth."));
 	a->setDefence(20);
 	a->setDamageResist(DAMAGE_ELECTRIC, 20);
 	a->setMoveSpeed(SPEED_NORMAL);
+	a->inSirPercivelsSet = true;
 	return a;
 }
 
@@ -437,6 +439,23 @@ bears those properties."));
 	a->setDamageResist(DAMAGE_ACID, 20);
 	a->setDamageResist(DAMAGE_ELECTRIC, 20);
 	a->setMoveSpeed(SPEED_SLOW);
+	return a;
+}
+
+armourSharedPtr headgear_StarweaversHood()
+{
+	armourSharedPtr a(new armour("Starweaver's Hood", HOOD_TILE, TCODColor::pink, ITEM_HELMET,
+		"Majestic hood of a starweaver - the lost artificers of Atalundra, who knit universes together with their minds."));
+	a->setDefence(0);
+	a->setDamageResist(DAMAGE_MAGIC, 40);
+	return a;
+}
+
+armourSharedPtr armour_StarweaversRobe()
+{
+	armourSharedPtr a(new armour("Starweaver's Robe", ROBE_TILE, TCODColor::pink, ITEM_BODY_ARMOUR,
+		"Majestic robes of a starweaver - the lost artificers of Atalundra, who knit universes together with their minds."));
+	a->setDamageResist(DAMAGE_MAGIC, 60);
 	return a;
 }
 

@@ -422,12 +422,12 @@ bool game::aiTryUseSpell(monsterSharedPtr ai)
 						//ANIMATION BLAST!
 						spellTitleAnimation(ai, sp);
 						coordVectorSharedPtr path = coordVectorSharedPtr(getLine(ai->getPosition(), target->getPosition()));
-						if (sp->useAlternateAnimation) {
+						/*if (sp->useAlternateAnimation) {
 							addAnimations(new glowPath(path, sp->getColor(), TCODColor::white));
 						}
 						else {
 							addAnimations(new bulletPath(path, BULLET_TILE, sp->getColor()));
-						}
+						}*/
 						
 						//We hit!
 						dischargeSpellOnTarget(sp, ai, target);
@@ -2072,12 +2072,12 @@ void game::doAOE(spellSharedPtr sp, personSharedPtr caster)
 	int r = sp->getAttackRange();
 	TCODColor col1 = sp->getColor();
 	TCODColor col2 = win.mixColors(col1, TCODColor::white, 0.5);
-	if (sp->useAlternateAnimation) {
+	/*if (sp->useAlternateAnimation) {
 		addAnimations(new explosion(caster->getPosition(), r, col1, col2));
 	}
 	else {
 		addAnimations(new shockwave(caster->getx(), caster->gety(), col1, col2));
-	}
+	}*/
 	
 	//Execute the spell
 	for (int x = caster->getx() - r; x <= caster->getx() + r; x++) {
@@ -2872,6 +2872,12 @@ void game::pickUpItem(itemSharedPtr it)
 	bool equipItem = itemPickupMessage(it);
 	if (equipItem && !stackedWithOther)
 		player->equipItem(it);
+	//Items from SIR PERCIVEL'S SET accumulate to give us a special key
+	if (it->inSirPercivelsSet) {
+		gotSirPercivelsSet++;
+		if (gotSirPercivelsSet == 5)
+			pickUpItem(key_PercivelsSign());
+	}
 }
 
 /*
@@ -2962,12 +2968,12 @@ void game::doRangedSpell(spellSharedPtr sp)
 		coordVectorSharedPtr path = coordVectorSharedPtr(getLine(player->getPosition(), tp));
 
 		//Bullet animation!
-		if (sp->useAlternateAnimation) {
+		/*if (sp->useAlternateAnimation) {
 			addAnimations(new bulletPath(path, BULLET_TILE, sp->getColor()));
 		}
 		else {
 			addAnimations(new glowPath(path, sp->getColor(), TCODColor::white));
-		}
+		}*/
 		
 		//See if there's something to hit on the path
 		personSharedPtr target;
@@ -3108,6 +3114,12 @@ void game::dischargeSpellOnTarget(spellSharedPtr sp, personSharedPtr caster, per
 			weaponSharedPtr offhand = caster->getOffhand();
 			if ((offhand != nullptr && offhand->isProfane) || (wp != nullptr && wp->isProfane))
 				potency += potency / 2;
+		}
+
+		//Additional potency from low health, possibly
+		if (sp->inverseHealthScaling) {
+			float f = caster->getHealth().getPercent();
+			potency += (1.0 - f) * 100;
 		}
 
 		//Permanent buff or temporary?
@@ -4112,6 +4124,7 @@ void getAllItems(personSharedPtr player)
 
 	player->addItem(chime_ClericsCrackedChime());
 	player->addItem(chime_OrsylsProfaneChime());
+	player->addItem(chime_RotbloodBell());
 	player->addItem(chime_WyrdBellbranch());
 
 	player->addItem(wand_BleachwoodWand());
@@ -4177,6 +4190,9 @@ void getAllItems(personSharedPtr player)
 	player->addItem(spell_ArcaneBlade());
 	player->addItem(spell_ArcaneRadiance());
 	player->addItem(spell_ArcLightning());
+	player->addItem(spell_AtalundraArcaneSpear());
+	player->addItem(spell_AtalundraDeathSurge());
+	player->addItem(spell_AtalundraSoulBlade());
 	player->addItem(spell_Chillbite());
 	player->addItem(spell_DevouringVoidCloud());
 	player->addItem(spell_ElectricBlade());

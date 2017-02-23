@@ -4,10 +4,12 @@ start:2,25
 gravekeeper:4,11
 gravekeeper:5,11
 starving_rat:6,12
+gravekeeper:16,10
 starving_rat:7,13
 -items
 piece_of_bone:37,26
-tome_of_the_Dead:8,17
+tome_of_the_dead:8,17
+rotblood_bell:15,9
 -enditems
 -codes
 ; floor_grass

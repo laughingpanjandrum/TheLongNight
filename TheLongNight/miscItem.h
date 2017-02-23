@@ -60,10 +60,13 @@ miscItemSharedPtr key_DeadSparrowKey();
 miscItemSharedPtr key_MoshkasKey();
 miscItemSharedPtr key_MoonpaleKey();
 miscItemSharedPtr key_FarinsKey();
+miscItemSharedPtr key_AtalundraRunekey();
+miscItemSharedPtr key_PercivelsSign();
 
 miscItemSharedPtr key_WatchfulEyestalk();
 miscItemSharedPtr key_MawtoothFragment();
 miscItemSharedPtr key_WitheredFinger();
+miscItemSharedPtr key_BeatingHeart();
 
 miscItemSharedPtr key_IetrasAmberPendant();
 

@@ -488,6 +488,24 @@ monsterSharedPtr monster_ProfaneRatPriest()
 	return m;
 }
 
+monsterSharedPtr monster_RatPrince()
+{
+	monsterSharedPtr m(new monster("Rat Prince Pollug", RAT_TILE, TCODColor::green,
+		"This rat, shaped like a man, swings a holy bell and cackles incoherently."));
+	m->setHealth(400);
+	m->setPoisonResist(1000);
+	m->setMoveStats(SPEED_FAST);
+	m->keepsDistance = true;
+	m->makeProfane();
+	m->addSpellKnown(spellSharedPtr(new spell("Envenom", TCODColor::green, 3, 0, APPLY_POISON_DAMAGE, 10)));
+	m->setSpellCastChance(25);
+	m->setFragmentsDropped(200);
+	m->isBoss = true;
+	m->showBossHealthBar = false;
+	m->addItemDrop(chime_GreenKnightsChime());
+	return m;
+}
+
 
 /*
 	Crumbling City
@@ -1655,7 +1673,7 @@ monsterSharedPtr monster_TombHorror()
 {
 	monsterSharedPtr m = monsterSharedPtr(new monster("Tomb Horror", SPIDER_TILE, TCODColor::lightAmber,
 		"A gaping maw rises from the muck, ringed with millions of tiny teeth, surrounded by squirming throngs of tentacles."));
-	m->setHealth(2400);
+	m->setHealth(2000);
 	m->setMoveStats(SPEED_SLOW);
 	m->equipItem(weaponSharedPtr(new weapon(25, SPEED_SLOW, DAMAGE_ACID, 25)));
 	m->addSpawnableCreature("tentacle");
@@ -1663,7 +1681,77 @@ monsterSharedPtr monster_TombHorror()
 	m->keepsDistance = true;
 	m->setFragmentsDropped(5000);
 	m->addItemDrop(heart_HeartOfFarin());
+	m->addItemDrop(key_AtalundraRunekey());
 	m->isBoss = true;
+	return m;
+}
+
+
+/*
+	Sunken Atalundra
+*/
+
+monsterSharedPtr monster_LanternBearer()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Lantern Bearer", LANTERN_BEARER_TILE, TCODColor::lightCyan,
+		"A withered figure, still clutching an enchanted lantern, watches you as you pass by."));
+	m->setHealth(100);
+	m->setMoveStats(SPEED_SLOW);
+	m->setMeleeStats(5, SPEED_SLOW);
+	m->setDefence(DAMAGE_MAGIC, 90);
+	m->immobile = true;
+	m->setLightEmitted(0.4);
+	m->addSpellKnown(spellSharedPtr(new spell("Atalundra Lightspear", TCODColor::cyan, 8, 0, APPLY_MAGIC_DAMAGE, 50)));
+	m->setSpellCastChance(5);
+	m->setFragmentsDropped(5);
+	return m;
+}
+
+monsterSharedPtr monster_ShadeOfAtalundra()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Shade of Atalundra", GHOST_TILE, TCODColor::lightOrange,
+		"Ghostly figure of a scholar, clutching a tome and raising a spectral wand."));
+	m->setHealth(300);
+	m->setMeleeStats(10, SPEED_SLOW);
+	m->setDefence(DAMAGE_MAGIC, 100);
+	m->setDefence(DAMAGE_ACID, 50);
+	m->addSpellKnown(spellSharedPtr(new spell("Magic Missile", TCODColor::magenta, 5, 0, APPLY_MAGIC_DAMAGE, 50)));
+	m->addSpellKnown(spellSharedPtr(new spell("Acid Shot", TCODColor::green, 3, 0, APPLY_ACID_DAMAGE, 75)));
+	m->setSpellCastChance(50);
+	m->keepsDistance = true;
+	m->setFragmentsDropped(200);
+	return m;
+}
+
+monsterSharedPtr monster_DistortedHorror()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Distorted Horror", SPIDER_TILE, TCODColor::darkPurple,
+		"A ruined mass of limbs, heads, and eyes, moaning in perpetual agony - or perhaps incomprehensible delight."));
+	m->setHealth(500);
+	m->setDefence(DAMAGE_PHYSICAL, 15);
+	m->setDefence(DAMAGE_FIRE, 25);
+	m->makeProfane();
+	m->setMoveStats(SPEED_NORMAL);
+	m->setMeleeStats(100, SPEED_SLOW);
+	m->setFragmentsDropped(300);
+	return m;
+}
+
+monsterSharedPtr monster_HeartOfAtalundra()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Heart of Atalundra", HEART_TILE, TCODColor::red,
+		"A singular beating heart rests in the muck, exuding magical surges."));
+	m->setHealth(3000);
+	m->immobile = true;
+	m->makeProfane();
+	m->setMeleeStats(1, SPEED_SLOW);
+	m->addSpellKnown(spellSharedPtr(new spell("Surge of Power", TCODColor::magenta, ATTACK_AOE, 20,
+		APPLY_MAGIC_DAMAGE, 100)));
+	m->addSpellKnown(spellSharedPtr(new spell("Push", TCODColor::white, ATTACK_AOE, 5, KNOCKBACK_TARGET, 5)));
+	m->setSpellCastChance(25);
+	m->setFragmentsDropped(5000);
+	m->isBoss = true;
+	m->addItemDrop(key_BeatingHeart());
 	return m;
 }
 
@@ -1878,6 +1966,8 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return monster_GiantRat();
 	else if (handle == "profane_rat_priest")
 		return monster_ProfaneRatPriest();
+	else if (handle == "rat_prince")
+		return monster_RatPrince();
 
 	//Crumbling City
 	else if (handle == "crawling_zombie")
@@ -2034,6 +2124,16 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return monster_Tentacle();
 	else if (handle == "tomb_horror")
 		return monster_TombHorror();
+
+	//Sunken Atalundra
+	else if (handle == "lantern_bearer")
+		return monster_LanternBearer();
+	else if (handle == "shade_of_atalundra")
+		return monster_ShadeOfAtalundra();
+	else if (handle == "distorted_horror")
+		return monster_DistortedHorror();
+	else if (handle == "heart_of_atalundra")
+		return monster_HeartOfAtalundra();
 
 	//The Void
 	else if (handle == "void_touched")

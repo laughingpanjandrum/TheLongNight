@@ -416,6 +416,16 @@ spellSharedPtr ability_Metamagic()
 	return sp;
 }
 
+spellSharedPtr ability_GottricsPartingCall()
+{
+	spellSharedPtr sp(new spell("Gottric's Parting Call", SPELL_TILE, TCODColor::purple,
+		"Next spell gains 1000% power."));
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(SCALE_NEXT_SPELL, 1000);
+	sp->setVigourCost(10);
+	return sp;
+}
+
 spellSharedPtr ability_StrengthOfMind()
 {
 	spellSharedPtr sp(new spell("Strength of Mind", SPELL_TILE, TCODColor::orange,
@@ -466,6 +476,27 @@ spellSharedPtr ability_WyrdChannel()
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(SCALE_NEXT_PRAYER, 50);
 	sp->setVigourCost(1);
+	return sp;
+}
+
+spellSharedPtr ability_Rotcall()
+{
+	spellSharedPtr sp(new spell("Rotcall", SPELL_TILE, TCODColor::darkAmber,
+		"Buff self; being poisoned increases physical resistance."));
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(PHYS_RESIST_WHILE_POISONED, 40);
+	sp->setVigourCost(1);
+	return sp;
+}
+
+spellSharedPtr ability_MemoryOfLight()
+{
+	spellSharedPtr sp(new spell("Memory of Light", SPELL_TILE, TCODColor::lightGreen,
+		"Memories of prior days restore a hint of life."));
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(HEAL_CASTER, 25);
+	sp->addEffect(ADD_HEALTH_TRICKLE, 25);
+	sp->setVigourCost(2);
 	return sp;
 }
 
@@ -692,6 +723,46 @@ was the belief of the First Sparrow, who delved deep into matters forbidden by t
 	sp->addEffect(APPLY_ELECTRIC_DAMAGE, 50);
 	sp->usesSpellPower = true;
 	sp->setVigourCost(4);
+	return sp;
+}
+
+spellSharedPtr spell_AtalundraArcaneSpear()
+{
+	spellSharedPtr sp(new spell("Atalundra Arcane Spear", SPELL_TILE, TCODColor::lightestMagenta,
+		"Fire a surging beam of arcane energy. A spell discovered by the sages of Atalundra, who perished for their trouble."));
+	sp->setAttackType(ATTACK_RANGE, 12);
+	sp->addEffect(APPLY_MAGIC_DAMAGE, 100);
+	sp->addEffect(APPLY_ELECTRIC_DAMAGE, 50);
+	sp->usesSpellPower = true;
+	sp->alwaysHitTarget = true;
+	sp->setVigourCost(3);
+	return sp;
+}
+
+spellSharedPtr spell_AtalundraDeathSurge()
+{
+	spellSharedPtr sp(new spell("Atalundra Death Surge", SPELL_TILE, TCODColor::lightMagenta,
+		"The final days of Atalundra were characterized by frantic research, as the scholars of the city searched for the \
+knowledge that they were certain would be their salvation. In the end, all they found was this, inscribed on the wall of the \
+sunken cathedral."));
+	sp->setAttackType(ATTACK_AOE, 5);
+	sp->addEffect(APPLY_MAGIC_DAMAGE, 100);
+	sp->inverseHealthScaling = true;
+	sp->usesSpellPower = true;
+	sp->setVigourCost(3);
+	return sp;
+}
+
+spellSharedPtr spell_AtalundraSoulBlade()
+{
+	spellSharedPtr sp(new spell("Atalundra Soul Blade", SPELL_TILE, TCODColor::lighterMagenta,
+		"As their city was consigned to the waves, the scholars of Atalundra despaired of ever concluding their great work. \
+All that remained were the arcane words of this spell, which summon the spectre of a knight with a shining blade, half-visible."));
+	sp->setAttackType(ATTACK_RANGE, 2);
+	sp->addEffect(APPLY_MAGIC_DAMAGE, 500);
+	sp->usesSpellPower = true;
+	sp->alwaysHitTarget = true;
+	sp->setVigourCost(5);
 	return sp;
 }
 

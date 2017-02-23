@@ -54,5 +54,6 @@ charmSharedPtr charm_FrenzyCharm();
 charmSharedPtr charm_VenomrubyRing();
 charmSharedPtr charm_SirPercivelsRing();
 charmSharedPtr charm_PaleShadesRing();
+charmSharedPtr charm_StarweaversRing();
 
 #endif

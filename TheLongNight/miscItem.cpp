@@ -142,6 +142,23 @@ seeking the truth of the silence of the gods."));
 	return m;
 }
 
+miscItemSharedPtr key_AtalundraRunekey()
+{
+	miscItemSharedPtr m(new miscItem("Atalundra Runekey", KEY_TILE, TCODColor::lightBlue,
+		"Ancient key of the gatekeepers of Sunken Atalundra, whose secrets were meant to be safeguarded forever."));
+	m->setKeyTag("atalundra_key");
+	return m;
+}
+
+miscItemSharedPtr key_PercivelsSign()
+{
+	miscItemSharedPtr m(new miscItem("Percivel's Sign", KEY_TILE, TCODColor::green,
+		"Sir Percivel sought the truth of the Rose's decline. The truth was waiting for him in the depths of the earth, kept \
+safe by the King of Rats."));
+	m->setKeyTag("percivels_key");
+	return m;
+}
+
 miscItemSharedPtr key_WatchfulEyestalk()
 {
 	miscItemSharedPtr m(new miscItem("Watchful Eyestalk", KEY_TILE, TCODColor::darkGreen,
@@ -155,8 +172,8 @@ miscItemSharedPtr key_MawtoothFragment()
 {
 	miscItemSharedPtr m(new miscItem("Mawtooth Fragment", KEY_TILE, TCODColor::lightestRed,
 		"According to the Ritual of Khull-Khallen, the second Article of Summoning is the Mawtooth Fragment. As it is written:\
- 'The Mouthpiece of the Lord issues His Commands, and lets His Will be known to the world.Offer it at the \
-Altar in honour of His Wisdom.'"));
+ 'The Mouthpiece of the Lord issues his Commands, and lets his will be known to the world. Offer it at the \
+Altar in honour of his wisdom.'"));
 	m->setKeyTag("mawtooth_fragment");
 	return m;
 }
@@ -165,9 +182,19 @@ miscItemSharedPtr key_WitheredFinger()
 {
 	miscItemSharedPtr m(new miscItem("Withered Finger", KEY_TILE, TCODColor::darkRed,
 		"According to the Ritual of Khull-Khallen, the third Article of Summoning is the Withered Finger. \
-As it is written: 'The Hand of the Lord carries out His Will, and punishes those who defy Him.Offer it at \
-the Altar in honour of His Power.'"));
+As it is written: 'The Hand of the Lord carries out his will, and punishes those who defy him. Offer it at \
+the Altar in honour of his power.'"));
 	m->setKeyTag("withered_finger");
+	return m;
+}
+
+miscItemSharedPtr key_BeatingHeart()
+{
+	miscItemSharedPtr m(new miscItem("Beating Heart", KEY_TILE, TCODColor::lightPink,
+		"According to the Ritual of Khull-Khallen, the fourth Article of Summoning is the Beating Heart. As it is written: \
+'The Heart of the Lord holds His vigour, and suffers the pain of those who defy Him. Offer it at the Altar in honour of \
+his eternal strength.'"));
+	m->setKeyTag("beating_heart");
 	return m;
 }
 

@@ -55,6 +55,9 @@ public:
 	imageSharedPtr getImage() { return imgPtr; }
 	void setImage(imageSharedPtr img) { imgPtr = img; }
 
+	//Flags
+	bool inSirPercivelsSet = false; //The parts of this set form a key when all are acquired
+
 protected:
 
 	//Sorting

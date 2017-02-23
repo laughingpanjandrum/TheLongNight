@@ -92,6 +92,9 @@ armourSharedPtr armour_PilgrimsCoat();
 armourSharedPtr headgear_DragonboneHelm();
 armourSharedPtr armour_DragonboneArmour();
 
+armourSharedPtr headgear_StarweaversHood();
+armourSharedPtr armour_StarweaversRobe();
+
 armourSharedPtr headgear_MoonPaleCrown();
 
 #endif

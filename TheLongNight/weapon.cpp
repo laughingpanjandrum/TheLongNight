@@ -588,6 +588,7 @@ in the forsaken mausoleums of the lowlands, he found only one who would still he
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_PercivelsFire());
 	wp->setImage(IMAGE_GREEN_KNIGHT_SWORD);
+	wp->inSirPercivelsSet = true;
 	return wp;
 }
 
@@ -823,6 +824,7 @@ what comes of those who rely on the strength of the old gods, and was immensely 
 	wp->setDamagePenalty(10);
 	wp->makeOffhand();
 	wp->setImage(IMAGE_GREEN_KNIGHTS_SHIELD);
+	wp->inSirPercivelsSet = true;
 	return wp;
 }
 
@@ -904,16 +906,53 @@ and divine prayers."));
 	return wp;
 }
 
+weaponSharedPtr wand_GottricsWand()
+{
+	weaponSharedPtr wp(new weapon("Gottric's Wand", STAFF_TILE, TCODColor::lightPurple,
+		"Quite a simple wand, after all. Gottric was no great master of the art - only a curious scholar."));
+	wp->setBasicAttributes(5, SPEED_NORMAL);
+	wp->setSpellstoreSize(1);
+	wp->setSpellPower(100);
+	wp->makeOffhand();
+	wp->setSpecialAttack(ability_GottricsPartingCall());
+	return wp;
+}
+
 weaponSharedPtr chime_ClericsCrackedChime()
 {
 	weaponSharedPtr wp(new weapon("Cleric's Cracked Chime", CHIME_TILE, TCODColor::darkYellow,
 		"Ring this broken chime to politely ask favours of the gods."));
 	wp->setBasicAttributes(5, SPEED_SLOW);
-	wp->setSpellstoreSize(2);
+	wp->setSpellstoreSize(6);
 	wp->setDivinePower(100);
 	wp->makeOffhand();
 	wp->setSpecialAttack(ability_DivineFavour());
 	wp->setImage(IMAGE_CRACKED_CHIME);
+	return wp;
+}
+
+weaponSharedPtr chime_GreenKnightsChime()
+{
+	weaponSharedPtr wp(new weapon("Green Knight's Chime", CHIME_TILE, TCODColor::green,
+		"Relic of a time before the decline of the Rose."));
+	wp->setBasicAttributes(5, SPEED_SLOW);
+	wp->setSpellstoreSize(3);
+	wp->setDivinePower(120);
+	wp->makeOffhand();
+	wp->setSpecialAttack(ability_MemoryOfLight());
+	return wp;
+}
+
+weaponSharedPtr chime_RotbloodBell()
+{
+	weaponSharedPtr wp(new weapon("Rotblood Bell", CHIME_TILE, TCODColor::amber,
+		"A bell drenched in thick poison. The cry of this toxic chime calls to the old gods, who slumber in their putrid caves, \
+waiting for the end of the world."));
+	wp->setBasicAttributes(5, SPEED_SLOW);
+	wp->setSpellstoreSize(4);
+	wp->setDivinePower(100);
+	wp->makeOffhand();
+	wp->setSpecialAttack(ability_Rotcall());
 	return wp;
 }
 

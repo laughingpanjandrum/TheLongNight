@@ -20,11 +20,13 @@ W wall_wood
 + door_stone
 D water_deep
 * warpstone
-< upstairs
+> downstairs
 w water
+& atalundra_gate
 -endcodes
 -connections
 north:flooded_tombs_1
+stairs:atalundra_1
 -endconnections
 ##########w#############################
 #wwwwww#?w'w#wwwwwwwwwwwwwwwwwwwwwwwwww#
@@ -44,22 +46,22 @@ north:flooded_tombs_1
 #wwwwwwwwwwwwww#wwwwwwwwwwwww'w#wwwwwww#
 #wwwwwwwww'wwww#####ww'wwwwwwwwww'wwwww#
 #w'wwwwwwwwwwwwwwww#wwwwwwwwwwwwwwww'ww#
-#wwwwww'wwwwwwwwwww#wwwww'wwwwwwwwwwwww#
-#wwww'www'wwwwwwwwwwwwwwwwwwwww#wwwwwww#
-#ww'wwwwwwwwww'wwww#wwwwwwww'ww#ww'wwww#
+#wwwwww'wwwwwwwwwww#wwwww'wwwwwwwwww'ww#
+#wwww'www'wwwwwwwwwwwwwwwwwwwww#www''ww#
+#ww'wwwwwwwwww'wwww#wwwwwwww'ww#w''ww'w#
 #wwwwwww'wwwwwwwwww#w##ww####w##wwww'ww#
-#wwwwwwwwwwwwwww'wwwww'wwwwwwwwwwwwwwww#
-######wwww'www'wwwwwwwwwwwwwwww'wwwwwww#
-#wwww####wwwwwwwwwwwwwwwww'wwwww########
+#wwwwwwwwwwwwwww'wwwww'wwwwwwwww'''ww'w#
+######wwww'www'wwwwwwwwwwwwwwww'w'ww''w#
+#wwww####wwwwwwwwwwwwwwwww'ww''w###&####
 #wwwwwww######wwwww'wwwwwwwwwwww#wwwwww#
 #wwwwwwwwwwww#########ww'wwwww'w#wwwwww#
 #wwwwwwwwwwwwwwwwwwww#####wwwwww#wwwwww#
 #wwwwwwwwwwwwwwwwwwwwwwww########wwwwww#
 #wwwwwwwwwwwwwwwwwwwwwwwwwww#wwwwwwwwww#
-#wwwwwwwwwwwwwwwwwwwwwwwwwww#wwwwwwwwww#
-#wwwwwwwwwwwwwwwwwwwwwwwwwww#wwwwwwwwww#
-#wwwwwwwwwwwwwwwwwwwwwwwwwww#wwwwwwwwww#
-#wwwwwwwwwwwwwwwwwwwwwwwwwww#wwwwwwwwww#
+#wwwwwwwwwwwwwwwwwwwwwwwwwww#wwwww.....#
+#wwwwwwwwwwwwwwwwwwwwwwwwwww#wwwwww....#
+#wwwwwwwwwwwwwwwwwwwwwwwwwww#wwwww...>.#
+#wwwwwwwwwwwwwwwwwwwwwwwwwww#wwww......#
 #wwwwwwwwwwwwwwwwwwwwwwwwwww############
 #wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww#
 #wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww#
