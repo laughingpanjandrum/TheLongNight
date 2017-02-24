@@ -14,13 +14,17 @@ public:
 	armour(std::string name, int tileCode, TCODColor color, itemTypes slot, std::string description);
 	~armour();
 
+	//Images
+	virtual imageSharedPtr getImage() { return imgPtr; }
+	virtual void setImage(imagePtr i) { imgPtr = imageSharedPtr(i); }
+
 	//Setting
 	void setMoveSpeed(int moveSpeed) { this->moveSpeed = moveSpeed; }
 
 	//Getting
 	int getMoveSpeed() { return moveSpeed; }
 
-private:
+protected:
 
 	//Attributes
 	int moveSpeed = SPEED_NORMAL;

@@ -52,8 +52,8 @@ public:
 
 	//Image data
 	bool hasImage() { return imgPtr != nullptr; }
-	imageSharedPtr getImage() { return imgPtr; }
-	void setImage(imageSharedPtr img) { imgPtr = img; }
+	virtual imageSharedPtr getImage() { return imgPtr; }
+	virtual void setImage(imagePtr img) { imgPtr = imageSharedPtr(img); }
 
 	//Flags
 	bool inSirPercivelsSet = false; //The parts of this set form a key when all are acquired
