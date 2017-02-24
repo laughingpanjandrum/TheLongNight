@@ -107,6 +107,7 @@ spellSharedPtr attack_EtherealRay();
 spellSharedPtr attack_PaleSlash();
 spellSharedPtr attack_PoisonHook();
 spellSharedPtr attack_FlameBreath();
+spellSharedPtr attack_RatCleave();
 
 //Wand/chime powers
 spellSharedPtr ability_PowerSurge();

@@ -331,6 +331,15 @@ miscItemSharedPtr heart_HeartOfFarin()
 	return h;
 }
 
+miscItemSharedPtr heart_RatKingsHeart()
+{
+	miscItemSharedPtr h(new miscItem("Rat King's Heart", HEART_TILE, TCODColor::sepia,
+		"Pulsing heart of the Rat King, sordid slave of the defiled god of rats. Who knows why Sir Percivel's final journey \
+took him here, to the miserable depths of the earth, where no possible insight could be gained?"));
+	h->setKeyTag("rat_kings_heart");
+	return h;
+}
+
 
 
 /*

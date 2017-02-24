@@ -171,6 +171,8 @@ weaponSharedPtr weapon_GravekeeperSpear();
 weaponSharedPtr weapon_SelvixsHookblade();
 weaponSharedPtr weapon_FarinsTorch();
 
+weaponSharedPtr weapon_RatboneCleaver();
+
 weaponSharedPtr weapon_ProfaneGreatsword();
 
 //Shields

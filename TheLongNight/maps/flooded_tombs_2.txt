@@ -23,10 +23,12 @@ D water_deep
 > downstairs
 w water
 & atalundra_gate
+@ rat_door
 -endcodes
 -connections
 north:flooded_tombs_1
 stairs:atalundra_1
+south:rat_kings_cathedral_1
 -endconnections
 ##########w#############################
 #wwwwww#?w'w#wwwwwwwwwwwwwwwwwwwwwwwwww#
@@ -51,21 +53,21 @@ stairs:atalundra_1
 #ww'wwwwwwwwww'wwww#wwwwwwww'ww#w''ww'w#
 #wwwwwww'wwwwwwwwww#w##ww####w##wwww'ww#
 #wwwwwwwwwwwwwww'wwwww'wwwwwwwww'''ww'w#
-######wwww'www'wwwwwwwwwwwwwwww'w'ww''w#
+###@##wwww'www'wwwwwwwwwwwwwwww'w'ww''w#
 #wwww####wwwwwwwwwwwwwwwww'ww''w###&####
-#wwwwwww######wwwww'wwwwwwwwwwww#wwwwww#
-#wwwwwwwwwwww#########ww'wwwww'w#wwwwww#
-#wwwwwwwwwwwwwwwwwwww#####wwwwww#wwwwww#
-#wwwwwwwwwwwwwwwwwwwwwwww########wwwwww#
-#wwwwwwwwwwwwwwwwwwwwwwwwwww#wwwwwwwwww#
-#wwwwwwwwwwwwwwwwwwwwwwwwwww#wwwww.....#
-#wwwwwwwwwwwwwwwwwwwwwwwwwww#wwwwww....#
-#wwwwwwwwwwwwwwwwwwwwwwwwwww#wwwww...>.#
-#wwwwwwwwwwwwwwwwwwwwwwwwwww#wwww......#
-#wwwwwwwwwwwwwwwwwwwwwwwwwww############
-#wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww#
-#wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww#
-#wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww#
-#wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww#
-#wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww#
-########################################
+#wwww#ww######wwwww'wwwwwwwwwwww#wwwwww#
+#wwww#wwwwwww#########ww'wwwww'w#wwwwww#
+#wwww#wwwwwwwwwwwwwww#####wwwwww#wwwwww#
+#.www#wwwwwwwwwwwwwwwwwww########wwwwww#
+#.%ww#wwwwwwwwwwwwwwwwwwwwww#wwwwwwwwww#
+#%..w##wwwwwwwwwwwwwwwwwwwww#wwwww.....#
+#.....#wwwwwwwwwwwwwwwwwwwww#wwwwww....#
+#..%.%#wwwwwwwwwwwwwwwwwwwww#wwwww...>.#
+#.%%..##wwwwwwwwwwwwwwwwwwww#wwww......#
+#...%..#wwwwwwwwwwwwwwwwwwww############
+#...%..#wwwwwwwwwwwwwwwwwwwwwwwwwwwwwww#
+#..%%.%##wwwwwwwwwwwwwwwwwwwwwwwwwwwwww#
+#.%%%...#wwwwwwwwwwwwwwwwwwwwwwwwwwwwww#
+#%%%...%#wwwwwwwwwwwwwwwwwwwwwwwwwwwwww#
+#%%..%..#wwwwwwwwwwwwwwwwwwwwwwwwwwwwww#
+######..################################

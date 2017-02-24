@@ -18,6 +18,7 @@ G glass
 o ooze
 > downstairs
 & observatory_door
+* warpstone
 -endcodes
 -connections
 stairs:dead_sparrows_tower_3

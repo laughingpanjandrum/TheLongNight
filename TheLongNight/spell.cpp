@@ -385,6 +385,16 @@ spellSharedPtr attack_FlameBreath()
 	return sp;
 }
 
+spellSharedPtr attack_RatCleave()
+{
+	spellSharedPtr sp(new spell("Rat Cleave", SWORD_TILE, TCODColor::sepia,
+		"Attack all adjacent targets."));
+	sp->setAttackType(ATTACK_AOE, 1);
+	sp->addEffect(CASTER_MELEE_ATTACK, 1);
+	sp->setVigourCost(2);
+	return sp;
+}
+
 spellSharedPtr ability_EtherealSurge()
 {
 	spellSharedPtr sp(new spell("Ethereal Surge", SPELL_TILE, TCODColor::magenta,

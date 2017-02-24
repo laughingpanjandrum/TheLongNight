@@ -237,6 +237,11 @@ monsterSharedPtr monster_ShadeOfAtalundra();
 monsterSharedPtr monster_DistortedHorror();
 monsterSharedPtr monster_HeartOfAtalundra();
 
+//Rat King's Cathedral
+monsterSharedPtr monster_RatKing();
+monsterSharedPtr monster_RatSpawn();
+monsterSharedPtr monster_SirPercivel();
+
 //The Void
 monsterSharedPtr monster_VoidTouched();
 

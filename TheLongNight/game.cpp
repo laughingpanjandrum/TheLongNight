@@ -946,6 +946,9 @@ void game::drawInterface(int leftx, int topy)
 		if (sp == player->getCurrentSpell())
 			win.writec(atx, aty, '>', TCODColor::white);
 		s++;
+		//Show description if our mouse is hovering over this spell
+		if (mouse.cx > atx && mouse.cx < atx + sp->getName().size() && mouse.cy == aty)
+			drawItemInfo(sp, MAP_DRAW_X, MAP_DRAW_Y + 42);
 	}
 
 	//Money
@@ -1755,6 +1758,7 @@ Charm info.
 */
 void game::drawCharmInfo(charmSharedPtr it, int atx, int aty)
 {
+	
 	//List effects
 	auto allEffects = it->getAllEffects();
 	auto allPotencies = it->getAllPotencies();
@@ -1764,6 +1768,41 @@ void game::drawCharmInfo(charmSharedPtr it, int atx, int aty)
 		win.write(atx, ++aty, std::to_string(pot), TCODColor::white);
 		win.write(atx + 3, aty, getEffectName(eff), TCODColor::lightGrey);
 	}
+	
+	//Damage resistances
+	int offset = 14;
+	TCODColor maincol = TCODColor::lightGrey;
+	for (int r = 0; r != ALL_DAMAGE_TYPES; r++) {
+		damageType dr = static_cast<damageType>(r);
+		int res = it->getDamageResist(dr);
+		if (res > 0) {
+			win.write(atx, ++aty, "DEF:" + getDamageTypeName(dr), getDamageTypeColor(dr));
+			win.write(atx + offset, aty, std::to_string(res), maincol);
+		}
+	}
+
+	//Status effect resistances
+	//Bleed resist
+	int br = it->getBleedResist();
+	if (br) {
+		win.write(atx, ++aty, "BLEED RES", TCODColor::crimson);
+		win.write(atx + offset, aty, std::to_string(br), maincol);
+	}
+
+	//Poison resist
+	int pr = it->getPoisonResist();
+	if (pr) {
+		win.write(atx, ++aty, "POISON RES", TCODColor::lime);
+		win.write(atx + offset, aty, std::to_string(pr), maincol);
+	}
+
+	//Plague resist
+	int plr = it->getPlagueResist();
+	if (plr) {
+		win.write(atx, ++aty, "PLAGUE RES", TCODColor::amber);
+		win.write(atx + offset, aty, std::to_string(plr), maincol);
+	}
+
 }
 
 
@@ -3474,6 +3513,10 @@ void game::initializeShops()
 	shop* farin = new shop("heart_of_farin", true);
 	farin->addItem(spell_LightOfFarin(), 200);
 	allUnlockableShops.push_back(shopSharedPtr(farin));
+	//Rat King's Heart
+	shop* rat = new shop("rat_kings_heart", true);
+	rat->addItem(weapon_RatboneCleaver(), 300);
+	allUnlockableShops.push_back(shopSharedPtr(rat));
 
 }
 

@@ -85,6 +85,7 @@ miscItemSharedPtr heart_IetrasBurningHeart();
 miscItemSharedPtr heart_PaleHeart();
 miscItemSharedPtr heart_PlagueRiddenHeart();
 miscItemSharedPtr heart_HeartOfFarin();
+miscItemSharedPtr heart_RatKingsHeart();
 
 //Spellbooks
 miscItemSharedPtr spellbook_WaterloggedWritings();

@@ -279,6 +279,11 @@ maptile * tile_Bones()
 	return new maptile("Bones", "bones", CORPSE_TILE, TCODColor::lightestYellow, DARK_STONE_COLOR);
 }
 
+maptile * tile_SandBones()
+{
+	return new maptile("Bones", "bones_sand", CORPSE_TILE, TCODColor::lightestYellow, DARKEST_SAND_COLOR);
+}
+
 maptile * tile_Bed()
 {
 	return new maptile("Bed", "bed", BED_TILE, TCODColor::darkRed, DARK_STONE_COLOR);
@@ -504,6 +509,15 @@ maptile * tile_AtalundraGate()
 		TCODColor::brass, TCODColor::black, false, false);
 	door->isDoor = true;
 	door->unlockCode = "atalundra_key";
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	return door;
+}
+
+maptile * tile_RatDoor()
+{
+	maptile* door = new maptile("Rat Door", "rat_door", BASIC_DOOR_TILE, TCODColor::lightSepia, TCODColor::black, false, false);
+	door->isDoor = true;
+	door->unlockCode = "percivels_key";
 	door->addTouchEffect(CHECK_FOR_UNLOCK);
 	return door;
 }

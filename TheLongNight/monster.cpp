@@ -1755,6 +1755,53 @@ monsterSharedPtr monster_HeartOfAtalundra()
 	return m;
 }
 
+monsterSharedPtr monster_RatKing()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Rat King", RAT_TILE, TCODColor::darkSepia,
+		"The lord of rats writhes at the centre of his shrieking host, wearing a crown of agony."));
+	m->setHealth(50);
+	m->makeProfane();
+	m->setMoveStats(SPEED_SLOW);
+	m->setMeleeStats(10, SPEED_SLOW);
+	m->keepsDistance = true;
+	m->setDefence(DAMAGE_PROFANE, 100);
+	m->setDefence(DAMAGE_MAGIC, 100);
+	m->setFragmentsDropped(4000);
+	m->addSpawnableCreature("rat_spawn");
+	m->setSpawnChance(50);
+	m->isBoss = true;
+	return m;
+}
+
+monsterSharedPtr monster_RatSpawn()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Ratspawn", RAT_TILE, TCODColor::lightSepia,
+		"Loathsome spawn of the lord of rats, writhing at his feet in holy anguish."));
+	m->setHealth(25);
+	m->makeProfane();
+	m->equipItem(weaponSharedPtr(new weapon(5, SPEED_NORMAL, EFFECT_POISON, 5)));
+	m->setMoveStats(SPEED_FAST);
+	m->setFragmentsDropped(0);
+	return m;
+}
+
+monsterSharedPtr monster_SirPercivel()
+{
+	monsterSharedPtr m = monsterSharedPtr(new monster("Sir Percivel the Enslaved", KNIGHT_TILE, TCODColor::green,
+		"Ruined and tattered, Sir Percivel stands before you, wielding a broken sword."));
+	m->setHealth(1000);
+	m->setDefence(DAMAGE_PHYSICAL, 50);
+	m->setDefence(DAMAGE_ELECTRIC, 20);
+	m->setPoisonResist(45);
+	m->setBleedResist(60);
+	m->equipItem(weapon_SirPercivelsSword());
+	m->setSpellCastChance(20);
+	m->setMoveStats(SPEED_NORMAL);
+	m->isBoss = true;
+	m->makeProfane();
+	return m;
+}
+
 
 /*
 	The Void
@@ -1879,6 +1926,7 @@ monsterSharedPtr npc_Ydella()
 	m->addShopUnlock("pale_heart");
 	m->addShopUnlock("plague_ridden_heart");
 	m->addShopUnlock("heart_of_farin");
+	m->addShopUnlock("rat_kings_heart");
 	return m;
 }
 
@@ -2134,6 +2182,14 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return monster_DistortedHorror();
 	else if (handle == "heart_of_atalundra")
 		return monster_HeartOfAtalundra();
+
+	//Rat King's Cathedral
+	else if (handle == "rat_king")
+		return monster_RatKing();
+	else if (handle == "rat_spawn")
+		return monster_RatSpawn();
+	else if (handle == "sir_percivel")
+		return monster_SirPercivel();
 
 	//The Void
 	else if (handle == "void_touched")

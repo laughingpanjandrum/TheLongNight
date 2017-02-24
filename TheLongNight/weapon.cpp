@@ -688,6 +688,17 @@ weaponSharedPtr weapon_FarinsTorch()
 	return wp;
 }
 
+weaponSharedPtr weapon_RatboneCleaver()
+{
+	weaponSharedPtr wp(new weapon("Ratbone Cleaver", SWORD_TILE, TCODColor::amber,
+		"Cleaver forged from shards of ratbone, drenched with ichorous toxins and crawling plague."));
+	wp->setBasicAttributes(50, SPEED_SLOW);
+	wp->addStatusEffect(EFFECT_POISON, 20);
+	wp->addScalingType(SCALE_STR);
+	wp->setSpecialAttack(attack_RatCleave());
+	return wp;
+}
+
 weaponSharedPtr weapon_ProfaneGreatsword()
 {
 	weaponSharedPtr wp(new weapon("Profane Greatsword", SWORD_TILE, TCODColor::purple,
