@@ -27,10 +27,17 @@ public:
 	weaponRune* getRune() { return runeApplied; }
 	void setRune(weaponRune* r) { runeApplied = r; }
 
+	//Information
+	void setWhatWeDo(std::string wwd) { whatWeDo = wwd; }
+	std::string getWhatWeDo() { return whatWeDo; }
+
 private:
 
 	//How this key is identified
 	std::string keyTag;
+
+	//Little chunk of text that tells you what the item is for
+	std::string whatWeDo;
 
 	//Runestone information
 	weaponRune* runeApplied;

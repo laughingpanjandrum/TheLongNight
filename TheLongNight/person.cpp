@@ -970,7 +970,8 @@ bool person::isRunestoneEquipped(miscItemSharedPtr r)
 {
 	if (r->isRunestone) {
 		weaponSharedPtr wp = getWeapon();
-		return (wp->getRune() == r->getRune());
+		if (wp != nullptr)
+			return (wp->getRune() == r->getRune());
 	}
 	return false;
 }

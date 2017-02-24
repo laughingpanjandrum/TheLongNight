@@ -705,6 +705,7 @@ void game::drawScreen(bool doRefresh)
 		drawMenu(currentMenu, MAP_DRAW_X, MAP_DRAW_Y);
 	else
 		drawMap(MAP_DRAW_X, MAP_DRAW_Y);
+
 	
 	//win.drawFont();
 	if (doRefresh)
@@ -1005,6 +1006,7 @@ void game::drawInterface(int leftx, int topy)
 	for (auto m : messages) {
 		win.write(atx, aty++, m.txt, m.color);
 	}
+
 }
 
 /*
@@ -1814,8 +1816,12 @@ Miscellaneous item info
 */
 void game::drawMiscItemInfo(miscItemSharedPtr it, int atx, int aty)
 {
+
+	//What we actually do
+	win.writeWrapped(atx, aty++, 30, it->getWhatWeDo(), TCODColor::white);
+
 	if (it->isRunestone) {
-		win.write(atx, aty, "Equip to slot into your current weapon.", TCODColor::white);
+		win.write(atx, aty++, "Equip to slot into your current weapon.", TCODColor::white);
 		//Specific effects
 		weaponRune* rune = it->getRune();
 		if (rune != nullptr) {
