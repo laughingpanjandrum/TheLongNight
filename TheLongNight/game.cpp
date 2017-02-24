@@ -921,15 +921,18 @@ void game::drawInterface(int leftx, int topy)
 		aty += currentMenu->getAllElements().size() + 1;
 	}
 	else {
+		//Current consumable
 		consumableSharedPtr c = player->getSelectedConsumable();
 		if (c != nullptr) {
-			if (c != nullptr) {
-				win.writec(atx, ++aty, c->getTileCode(), c->getColor());
-				win.write(atx + 2, aty, c->getMenuName(), c->getColor());
-			}
-			else
-				win.write(atx + 2, ++aty, "no consumable", TCODColor::darkGrey);
+			//It exists
+			win.writec(atx, ++aty, c->getTileCode(), c->getColor());
+			win.write(atx + 2, aty, c->getMenuName(), c->getColor());
+			//Info about it, if we're touching it
+			if (mouse.cx >= atx && mouse.cx <= atx + c->getMenuName().size() && mouse.cy == aty)
+				drawItemInfo(c, MAP_DRAW_X, MAP_DRAW_Y + 42);
 		}
+		else
+			win.write(atx + 2, ++aty, "no consumable", TCODColor::darkGrey);
 	}
 	
 	//List known spells
