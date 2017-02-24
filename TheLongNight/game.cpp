@@ -1866,12 +1866,26 @@ void game::drawMiscItemInfo(miscItemSharedPtr it, int atx, int aty)
 /*
 Draws an item's image onto the screen, if it has one.
 */
-void game::drawItemImage(itemSharedPtr it, int atx, int aty)
+void game::drawItemImage(itemSharedPtr it, int atx, int aty, bool drawOtherArmourPiece)
 {
 	if (it->hasImage()) {
+
+		//If this is an ARMOUR item, we also draw the helmet!
+		if (it->getCategory() == ITEM_BODY_ARMOUR && drawOtherArmourPiece) {
+			auto h = player->getHelmet();
+			if (h != nullptr)
+				drawItemImage(h, atx, aty, false);
+		}
 		
 		//Draw this item
 		win.drawImage(it->getImage(), atx, aty);
+
+		//If this is a HELMET item, we also draw the armour!
+		if (it->getCategory() == ITEM_HELMET && drawOtherArmourPiece) {
+			auto a = player->getArmour();
+			if (a != nullptr)
+				drawItemImage(a, atx, aty, false);
+		}
 	
 	}
 }

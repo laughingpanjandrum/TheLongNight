@@ -200,7 +200,7 @@ private:
 	void drawConsumableInfo(consumableSharedPtr it, int atx, int aty);
 	void drawCharmInfo(charmSharedPtr it, int atx, int aty);
 	void drawMiscItemInfo(miscItemSharedPtr it, int atx, int aty);
-	void drawItemImage(itemSharedPtr it, int atx, int aty);
+	void drawItemImage(itemSharedPtr it, int atx, int aty, bool drawOtherArmourPiece = true);
 
 	//Input processing
 	void processCommand();
