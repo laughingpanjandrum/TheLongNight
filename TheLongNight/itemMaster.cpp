@@ -293,6 +293,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return charm_SirPercivelsRing();
 	else if (handle == "starweavers_ring")
 		return charm_StarweaversRing();
+	else if (handle == "voidwalkers_ring")
+		return charm_VoidwalkersRing();
 
 	//SPELLS
 	else if (handle == "magic_missile")
@@ -543,10 +545,12 @@ std::string getEffectName(effect e)
 	case(DEATHFIRE_INFUSION): return "fire explosion on death";
 	case(DEATHLINK): return "upon death, return to life";
 	case(SILENCE): return "silence";
+	case(DROP_WEB): return "create spiderweb";
 
 	case(TELEPORT_VIA_WATER): return "water warp";
 	case(TELEPORT_TO_VOID): return "warp to void";
 	case(TELEPORT_BACK_FROM_VOID): return "escape void";
+	case(IMMUNE_TO_VOID): return "walk upon the void";
 
 	case(CREATE_FOG): return "radius fog cloud";
 

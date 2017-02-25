@@ -124,5 +124,6 @@ const int TABLE_TILE_2 = 304;
 const int TABLE_TILE_3 = 305;
 const int TABLE_TILE_4 = 306;
 const int TOMBSTONE_TILE = 320;
+const int ALTAR_TILE = 321;
 
 #endif

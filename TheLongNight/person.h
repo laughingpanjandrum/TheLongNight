@@ -259,6 +259,7 @@ protected:
 	std::vector<int> damageResist;
 	std::vector<bool> damageWeakness;
 	int stinkResist = 0;
+	int immuneToVoid = 0;
 
 	//Status effects
 	int isBleeding = 0;

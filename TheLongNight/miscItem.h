@@ -74,6 +74,7 @@ miscItemSharedPtr key_WatchfulEyestalk();
 miscItemSharedPtr key_MawtoothFragment();
 miscItemSharedPtr key_WitheredFinger();
 miscItemSharedPtr key_BeatingHeart();
+miscItemSharedPtr key_EffigyOfTheSlumberingLord();
 
 miscItemSharedPtr key_IetrasAmberPendant();
 

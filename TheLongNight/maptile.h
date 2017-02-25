@@ -76,6 +76,10 @@ public:
 	float glitterCoef = 0.0;
 	bool ascendingGlitter = true;
 
+	//Special actions
+	void activateAltar();
+	bool isAltarActive = false;
+
 	//Special flags
 	bool isWater = false;
 
@@ -191,6 +195,14 @@ maptile* tile_LostDoor(); //"lost_door"
 maptile* tile_SilentDoor(); //"silent_door"
 maptile* tile_VoidMausoleumDoor(); //"void_mausoleum_door"
 
+maptile* tile_SlumberingGate(); //"slumbering_gate"
+
+//Ritual altars
+maptile* tile_AltarOfTheEye();
+maptile* tile_AltarOfTheMouth();
+maptile* tile_AltarOfTheHand();
+maptile* tile_AltarOfTheHeart();
+
 //Furniture
 maptile* tile_Chair1(); //"chair1"
 maptile* tile_Chair2(); //"chair2"
@@ -213,6 +225,8 @@ const tileVector ALL_MAPTILES = {
 	tile_Bloodstain(), tile_Corpse(), tile_Bones(), tile_SandBones(),
 	tile_Bed(), tile_Terminal(),
 	tile_StatueOfRest(), tile_VoidWarpstone(),
+	//Altars
+	tile_AltarOfTheEye(), tile_AltarOfTheHand(), tile_AltarOfTheHeart(), tile_AltarOfTheMouth(),
 	//Stairs
 	tile_StairsDown(), tile_StairsUp(),
 	//Furniture
@@ -226,6 +240,7 @@ const tileVector ALL_MAPTILES = {
 	tile_SparrowTowerDoor(), tile_ObservatoryDoor(), tile_MoonPalaceDoor(),
 	tile_GraveDoor(), tile_AtalundraGate(), tile_RatDoor(),
 	tile_BloodyMausoleumDoor(), tile_LostDoor(), tile_SilentDoor(), tile_VoidMausoleumDoor(),
+	tile_SlumberingGate(),
 };
 
 #endif

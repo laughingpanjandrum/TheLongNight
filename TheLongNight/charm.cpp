@@ -186,3 +186,12 @@ charmSharedPtr charm_StarweaversRing()
 	c->addEffect(GAIN_MAX_HEALTH, -50);
 	return c;
 }
+
+charmSharedPtr charm_VoidwalkersRing()
+{
+	charmSharedPtr c(new charm("Voidwalker's Ring", CHARM_TILE, TCODColor::purple,
+		"The Voidwalkers stride upon the astral expanse without fear. In the end, of course, they perish too - so what \
+good does their knowledge bring them?"));
+	c->addEffect(IMMUNE_TO_VOID, 1);
+	return c;
+}

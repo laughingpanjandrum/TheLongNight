@@ -178,6 +178,31 @@ std::string monster::getNextDialogueLine()
 }
 
 
+/*
+Special unlocks
+*/
+
+
+void monster::addSpecialDialogue(std::string key, std::string text)
+{
+	itemUnlockKeys.push_back(key);
+	itemUnlockDialogue.push_back(text);
+}
+
+
+/*
+Returns dialogue for the given key-item, or a blank string if there isn't any.
+*/
+std::string monster::getDialogueForKey(std::string key)
+{
+	for (int i = 0; i < itemUnlockKeys.size(); i++) {
+		if (itemUnlockKeys.at(i) == key)
+			return itemUnlockDialogue.at(i);
+	}
+	return "";
+}
+
+
 
 
 
@@ -1799,6 +1824,8 @@ monsterSharedPtr monster_SirPercivel()
 	m->setMoveStats(SPEED_NORMAL);
 	m->isBoss = true;
 	m->makeProfane();
+	m->setFragmentsDropped(1000);
+	m->addItemDrop(charm_VoidwalkersRing());
 	return m;
 }
 
@@ -1888,6 +1915,8 @@ monsterSharedPtr npc_ElenaThePilgrim()
 	m->addShopUnlock("piece_of_bone");
 	//Dialogue
 	m->loadDialogue("dialogue/elena_chat.txt");
+	m->addSpecialDialogue("piece_of_jade",
+		"What a lovely piece of jade! It reminds me of home...");
 	return m;
 }
 

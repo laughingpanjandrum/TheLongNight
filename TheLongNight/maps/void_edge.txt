@@ -15,6 +15,9 @@ T void_tree
 * warpstone
 -endcodes
 -connections
+north:void_mausoleum_2
+east:void_mausoleum_4
+south:voidtouched_district_1
 -endconnections
 ........................................
 ........................................

@@ -19,7 +19,9 @@ o ooze
 t void_tree
 -endcodes
 -connections
-west:void_mausoleum_2
+north:void_mausoleum_3
+south:voidtouched_district_2
+west:void_edge
 -endconnections
 ;;;;;;;;;...;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;...;;;;;;;;;;;;;;;;;;;;;;;;;;;;

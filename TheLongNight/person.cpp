@@ -554,6 +554,8 @@ void person::applyEffect(effect eff, int potency)
 			takeDamage(potency, DAMAGE_PROFANE);
 		}
 	}
+	else if (eff == IMMUNE_TO_VOID)
+		immuneToVoid += potency;
 
 	//Spell buffs
 
@@ -592,6 +594,12 @@ void person::applyEffect(effect eff, int potency)
 		takeDamage(potency, DAMAGE_PROFANE);
 	else if (eff == APPLY_BLESSED_DAMAGE)
 		takeDamage(potency, DAMAGE_BLESSED);
+	else if (eff == APPLY_VOID_DAMAGE) {
+		//Only void immunity can protect us from this
+		if (immuneToVoid == 0) {
+			takeDamage(potency);
+		}
+	}
 
 	// Status effects
 

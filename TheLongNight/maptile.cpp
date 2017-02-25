@@ -36,6 +36,17 @@ bool maptile::hasTouchEffect(effect te)
 
 
 /*
+Used by ritual altars!
+*/
+void maptile::activateAltar()
+{
+	color = TCODColor::lightRed;
+	isAltarActive = true;
+}
+
+
+
+/*
 	All tiles
 */
 
@@ -74,7 +85,7 @@ maptile * tile_Road()
 maptile * tile_Void()
 {
 	maptile* v = new maptile("Void", "floor_void", BASIC_FLOOR_TILE, TCODColor::darkestPurple, TCODColor::black);
-	v->addTouchEffect(APPLY_PROFANE_DAMAGE);
+	v->addTouchEffect(APPLY_VOID_DAMAGE);
 	v->setPotency(50);
 	return v;
 }
@@ -561,6 +572,62 @@ maptile * tile_VoidMausoleumDoor()
 	door->addTouchEffect(CHECK_FOR_UNLOCK);
 	return door;
 }
+
+maptile * tile_SlumberingGate()
+{
+	maptile* door = new maptile("Slumbering Gate", "slumbering_gate", BASIC_DOOR_TILE,
+		TCODColor::lightRed, TCODColor::black, false, false);
+	door->isDoor = true;
+	door->unlockCode = "effigy";
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	return door;
+}
+
+
+/*
+	Ritual altars
+*/
+
+maptile * tile_AltarOfTheEye()
+{
+	maptile* a = new maptile("Altar of the Eye", "eye_altar", ALTAR_TILE, LIGHT_STONE_COLOR, DARK_STONE_COLOR,
+		true, true, true);
+	a->unlockCode = "watchful_eyestalk";
+	a->addTouchEffect(MAKE_RITUAL_OFFERING);
+	return a;
+}
+
+maptile * tile_AltarOfTheMouth()
+{
+	maptile* a = new maptile("Altar of the Mouth", "mouth_altar", ALTAR_TILE, LIGHT_STONE_COLOR, DARK_STONE_COLOR,
+		true, true, true);
+	a->unlockCode = "mawtooth_fragment";
+	a->addTouchEffect(MAKE_RITUAL_OFFERING);
+	return a;
+}
+
+maptile * tile_AltarOfTheHand()
+{
+	maptile* a = new maptile("Altar of the Hand", "hand_altar", ALTAR_TILE, LIGHT_STONE_COLOR, DARK_STONE_COLOR,
+		true, true, true);
+	a->unlockCode = "withered_finger";
+	a->addTouchEffect(MAKE_RITUAL_OFFERING);
+	return a;
+}
+
+maptile * tile_AltarOfTheHeart()
+{
+	maptile* a = new maptile("Altar of the Heart", "heart_altar", ALTAR_TILE, LIGHT_STONE_COLOR, DARK_STONE_COLOR,
+		true, true, true);
+	a->unlockCode = "beating_heart";
+	a->addTouchEffect(MAKE_RITUAL_OFFERING);
+	return a;
+}
+
+
+/*
+	Furniture
+*/
 
 maptile * tile_Chair1()
 {

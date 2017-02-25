@@ -67,6 +67,9 @@ public:
 	std::string getCurrentDialogueLine() { return dialogue.at(atChatLine); }
 	void backUpDialogue() { atChatLine--; }
 	bool hasDialogue() { return dialogue.size() > 0; }
+	//	Special dialogue based on item unlocks
+	void addSpecialDialogue(std::string key, std::string text);
+	std::string getDialogueForKey(std::string key);
 
 	//Fog
 	int emitsFog = 0;
@@ -96,6 +99,9 @@ protected:
 	//Chatting
 	std::vector<std::string> dialogue;
 	int atChatLine = 0;
+	//Item-based special dialogue
+	std::vector<std::string> itemUnlockKeys;
+	std::vector<std::string> itemUnlockDialogue;
 
 };
 

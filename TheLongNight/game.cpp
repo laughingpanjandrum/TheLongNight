@@ -2177,6 +2177,8 @@ void game::applyEffectToPerson(personSharedPtr target, effect eff, int potency, 
 		tryUnlockDoor(target->getx(), target->gety());
 	else if (eff == DO_WARP && target->isPlayer)
 		setupWarpMenu();
+	else if (eff == MAKE_RITUAL_OFFERING && target->isPlayer)
+		makeRitualOffering();
 	else if (eff == TELEPORT_TO_VOID)
 		teleportToVoid();
 	else if (eff == TELEPORT_BACK_FROM_VOID)
@@ -2856,6 +2858,34 @@ void game::teleportOutOfVoid()
 {
 	loadMapFromHandle(VOID_RETURN_MAP, CONNECT_WARP, player->getx(), player->gety());
 	setSavePoint();
+}
+
+
+
+/*
+These are how we unlock the final boss!
+*/
+void game::makeRitualOffering()
+{
+	auto t = currentMap->getTile(player->getx(), player->gety());
+	std::string keyReq = t->unlockCode;
+	if (player->hasKey(keyReq)) {
+		//We make an offering!
+		player->loseKey(keyReq);
+		t->activateAltar();
+		addMessage("The " + t->getName() + " shines with ethereal light.", TCODColor::white);
+		offeringsMade++;
+		if (offeringsMade == 4) {
+			//SPECIAL EVENT! We get the final key.
+			pickUpItem(key_EffigyOfTheSlumberingLord());
+		}
+	}
+	else if (!t->isAltarActive) {
+		addMessage("The altar is silent. A proper offering is required.", TCODColor::white);
+	}
+	else {
+		addMessage("An offering already rests upon this altar.", TCODColor::white);
+	}
 }
 
 
@@ -3586,6 +3616,30 @@ void game::talkToNPC()
 	}
 }
 
+void game::drawDialogueLine(personSharedPtr target, std::string line)
+{
+	//Box it in
+	win.clearRegion(MAP_DRAW_X, MAP_DRAW_Y, 40, 15);
+	win.drawBox(MAP_DRAW_X, MAP_DRAW_Y, 40, 15, TCODColor::sepia);
+
+	//Controls
+	int atx = MAP_DRAW_X + 1;
+	int aty = MAP_DRAW_Y + 1;
+	std::string txt = "[SPACE] Chat   [ESCAPE] Goodbye";
+	win.write(atx, aty, centreText(txt, 38), TCODColor::white);
+
+	//NPC name
+	aty += 2;
+	win.write(atx, aty, centreText(target->getName(), 38), target->getColor());
+
+	//Write dialogue!
+	aty += 4;
+	win.writeWrapped(atx, aty, 38, line, TCODColor::lightGrey);
+
+	//Done drawing!
+	win.refresh();
+}
+
 
 /*
 Chitchat with an npc!
@@ -3597,26 +3651,7 @@ void game::doDialogue(monsterSharedPtr target)
 		//Draw the screen underneath
 		drawScreen(false);
 
-		//Box it in
-		win.clearRegion(MAP_DRAW_X, MAP_DRAW_Y, 40, 15);
-		win.drawBox(MAP_DRAW_X, MAP_DRAW_Y, 40, 15, TCODColor::sepia);
-
-		//Controls
-		int atx = MAP_DRAW_X + 1;
-		int aty = MAP_DRAW_Y + 1;
-		std::string txt = "[SPACE] Chat   [ESCAPE] Goodbye";
-		win.write(atx, aty, centreText(txt, 38), TCODColor::white);
-
-		//NPC name
-		aty += 2;
-		win.write(atx, aty, centreText(target->getName(), 38), target->getColor());
-
-		//Write dialogue!
-		aty += 4;
-		win.writeWrapped(atx, aty, 38, target->getCurrentDialogueLine(), TCODColor::lightGrey);
-
-		//Done drawing!
-		win.refresh();
+		drawDialogueLine(target, target->getCurrentDialogueLine());
 
 		//Check for input
 		TCODSystem::checkForEvent(TCOD_EVENT_ANY, &key, &mouse);
@@ -3711,8 +3746,18 @@ void game::checkForStockUnlocks(monsterSharedPtr shopkeeper)
 					for (auto it : (*iter)->stock) {
 						currentShop->addItem(it, it->getPrice());
 					}
+					
 					//And then delete this unlock, cuz we can only unlock it once
 					allUnlockableShops.erase(iter);
+
+					//Is there special dialogue about this?!
+					std::string specialTxt = shopkeeper->getDialogueForKey(unlock);
+					if (specialTxt.size() > 0) {
+						drawDialogueLine(shopkeeper, specialTxt);
+						win.refresh();
+						while (win.getkey().vk != KEY_ACCEPT) {}
+					}
+					
 					//And we're done; stop iterating
 					break;
 
@@ -4355,6 +4400,11 @@ void getAllItems(personSharedPtr player)
 	player->addItem(heart_VenomousSpiderHeart());
 	player->addItem(heart_VortensShriveledHeart());
 	player->addItem(heart_WretchedHeart());
+
+	player->addItem(key_WatchfulEyestalk());
+	player->addItem(key_WitheredFinger());
+	player->addItem(key_BeatingHeart());
+	player->addItem(key_MawtoothFragment());
 
 	for (int i = 0; i <= 9; i++)
 		player->addItem(consumable_StarwaterDraught());

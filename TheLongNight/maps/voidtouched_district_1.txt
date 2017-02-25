@@ -31,6 +31,7 @@ t table2
 -connections
 south:crumbling_city_2
 east:voidtouched_district_2
+north:void_edge
 -endconnections
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

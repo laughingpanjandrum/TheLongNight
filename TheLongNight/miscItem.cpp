@@ -219,6 +219,16 @@ his eternal strength.'"));
 	return m;
 }
 
+miscItemSharedPtr key_EffigyOfTheSlumberingLord()
+{
+	miscItemSharedPtr m(new miscItem("Effigy of the Slumbering Lord", KEY_TILE, TCODColor::lighterRed,
+		"The Lord of Fallow Fields sleeps at the heart of the Void, waiting for the end of the world. This effigy should be \
+sufficient to rouse him from that astral prison, and to put an end to his accursed dreaming."));
+	m->setKeyTag("effigy");
+	m->setWhatWeDo("Use to unlock the gateway to the Slumbering Wild.");
+	return m;
+}
+
 miscItemSharedPtr key_IetrasAmberPendant()
 {
 	miscItemSharedPtr m(new miscItem("Ietra's Amber Pendant", KEY_TILE, TCODColor::amber,

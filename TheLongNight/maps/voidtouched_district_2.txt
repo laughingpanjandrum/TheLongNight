@@ -31,6 +31,7 @@ t table2
 -endcodes
 -connections
 west:voidtouched_district_1
+north:void_mausoleum_4
 -endconnections
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

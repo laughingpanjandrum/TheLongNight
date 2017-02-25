@@ -21,6 +21,7 @@ t void_tree
 -endcodes
 -connections
 west:void_mausoleum_2
+south:void_mausoleum_4
 -endconnections
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

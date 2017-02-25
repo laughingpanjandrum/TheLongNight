@@ -255,6 +255,7 @@ private:
 	//Player-only SPECIAL MAP JUMPS
 	void teleportToVoid();
 	void teleportOutOfVoid();
+	void makeRitualOffering();
 
 	//Boss fights
 	monsterSharedPtr currentBoss;
@@ -291,6 +292,7 @@ private:
 	shopVector allUnlockableShops;
 	monsterSharedPtr currentShopkeeper;
 	void talkToNPC();
+	void drawDialogueLine(personSharedPtr target, std::string line);
 	void doDialogue(monsterSharedPtr target);
 	bool checkForDialogueEvent(std::string line, monsterSharedPtr target);
 	void drawShopMenu(int atx, int aty);
@@ -339,6 +341,7 @@ private:
 
 	//Special story progression
 	int gotSirPercivelsSet = 0;
+	int offeringsMade = 0;
 
 
 };
