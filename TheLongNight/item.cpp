@@ -32,7 +32,8 @@ const std::string getItemCategoryName(itemTypes cat)
 	case(ITEM_CHARM): return "Charm";
 	case(ITEM_CONSUMABLE): return "Consumable";
 	case(ITEM_SPELL): return "Spell";
-	case(ITEM_MISC): return "Miscellaneous";
+	case(ITEM_MISC): return "Runestone";
+	case(ITEM_KEY): return "Key";
 	}
 	return "Unknown";
 }

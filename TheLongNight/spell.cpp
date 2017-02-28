@@ -30,8 +30,15 @@ spell::spell(std::string name, TCODColor color, attackType aType, int range, eff
 	addEffect(mainEff, potency);
 }
 
-
-
+//Same as above, but with two effects.
+spell::spell(std::string name, TCODColor color, attackType aType, int range, effect eff1, int pot1, effect eff2, int pot2) :
+	aType(aType), attackRange(range)
+{
+	this->name = name;
+	this->color = color;
+	addEffect(eff1, pot1);
+	addEffect(eff2, pot2);
+}
 
 spell::~spell()
 {

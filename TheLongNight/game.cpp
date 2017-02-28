@@ -876,6 +876,9 @@ void game::drawInterface(int leftx, int topy)
 		//Weapon
 		win.writec(atx, ++aty, wp->getTileCode(), wp->getColor());
 		win.write(atx + 2, aty, wp->getMenuName(), wp->getColor());
+		//Check mouseover
+		if (isMouseOver(atx, wp->getMenuName().size(), aty))
+			drawItemInfo(wp, ITEM_DRAW_X, ITEM_DRAW_Y);
 	}
 	else
 		win.write(atx + 2, ++aty, "no weapon", TCODColor::darkGrey);
@@ -885,6 +888,8 @@ void game::drawInterface(int leftx, int topy)
 	if (of != nullptr) {
 		win.writec(atx, ++aty, of->getTileCode(), of->getColor());
 		win.write(atx + 2, aty, of->getMenuName(), of->getColor());
+		if (isMouseOver(atx, of->getMenuName().size(), aty))
+			drawItemInfo(wp, ITEM_DRAW_X, ITEM_DRAW_Y);
 	}
 	
 	//Helmet
@@ -892,6 +897,8 @@ void game::drawInterface(int leftx, int topy)
 	if (helm != nullptr) {
 		win.writec(atx, ++aty, helm->getTileCode(), helm->getColor());
 		win.write(atx + 2, aty, helm->getMenuName(), helm->getColor());
+		if (isMouseOver(atx, helm->getMenuName().size(), aty))
+			drawItemInfo(helm, ITEM_DRAW_X, ITEM_DRAW_Y);
 	}
 	else
 		win.write(atx + 2, ++aty, "no helmet", TCODColor::darkGrey);
@@ -901,6 +908,8 @@ void game::drawInterface(int leftx, int topy)
 	if (ar != nullptr) {
 		win.writec(atx, ++aty, ar->getTileCode(), ar->getColor());
 		win.write(atx + 2, aty, ar->getMenuName(), ar->getColor());
+		if (isMouseOver(atx, ar->getMenuName().size(), aty))
+			drawItemInfo(ar, ITEM_DRAW_X, ITEM_DRAW_Y);
 	}
 	else
 		win.write(atx + 2, ++aty, "no armour", TCODColor::darkGrey);
@@ -910,6 +919,8 @@ void game::drawInterface(int leftx, int topy)
 	if (ch != nullptr) {
 		win.writec(atx, ++aty, ch->getTileCode(), ch->getColor());
 		win.write(atx + 2, aty, ch->getMenuName(), ch->getColor());
+		if (isMouseOver(atx, ch->getMenuName().size(), aty))
+			drawItemInfo(ch, ITEM_DRAW_X, ITEM_DRAW_Y);
 	}
 	else
 		win.write(atx + 2, ++aty, "no charm", TCODColor::darkGrey);
@@ -1868,23 +1879,26 @@ Draws an item's image onto the screen, if it has one.
 */
 void game::drawItemImage(itemSharedPtr it, int atx, int aty, bool drawOtherArmourPiece)
 {
-	if (it->hasImage()) {
+	//Box around the image
+	win.drawBox(atx - 1, aty - 1, 41, 61, TCODColor::darkSepia);
 
-		//If this is an ARMOUR item, we also draw the helmet!
-		if (it->getCategory() == ITEM_BODY_ARMOUR && drawOtherArmourPiece) {
-			auto h = player->getHelmet();
-			if (h != nullptr)
-				drawItemImage(h, atx, aty, false);
-		}
-		
-		//Draw this item
-		win.drawImage(it->getImage(), atx, aty);
+	if (it->hasImage()) {
 
 		//If this is a HELMET item, we also draw the armour!
 		if (it->getCategory() == ITEM_HELMET && drawOtherArmourPiece) {
 			auto a = player->getArmour();
 			if (a != nullptr)
 				drawItemImage(a, atx, aty, false);
+		}
+		
+		//Draw this item
+		win.drawImage(it->getImage(), atx, aty);
+
+		//If this is an ARMOUR item, we also draw the helmet!
+		if (it->getCategory() == ITEM_BODY_ARMOUR && drawOtherArmourPiece) {
+			auto h = player->getHelmet();
+			if (h != nullptr)
+				drawItemImage(h, atx, aty, false);
 		}
 	
 	}
@@ -1985,6 +1999,15 @@ void game::processMouseClick()
 			}
 		}
 	}
+}
+
+
+/*
+Returns whether mouse in the given region.
+*/
+bool game::isMouseOver(int x, int xwidth, int y)
+{
+	return (mouse.cx >= x && mouse.cx <= x + xwidth && mouse.cy == y);
 }
 
 
@@ -4405,6 +4428,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(key_WitheredFinger());
 	player->addItem(key_BeatingHeart());
 	player->addItem(key_MawtoothFragment());
+	player->addItem(key_EffigyOfTheSlumberingLord());
 
 	for (int i = 0; i <= 9; i++)
 		player->addItem(consumable_StarwaterDraught());

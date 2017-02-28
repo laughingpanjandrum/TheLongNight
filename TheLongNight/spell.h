@@ -16,6 +16,8 @@ public:
 		effect otherEffect = NULL_EFFECT, int otherEffectPotency = 0);
 	//This is for quickly constructing any spell with a single effect
 	spell(std::string name, TCODColor color, attackType aType, int range, effect mainEff, int potency);
+	//Dual-effect spell
+	spell(std::string name, TCODColor color, attackType aType, int range, effect eff1, int pot1, effect eff2, int pot2);
 	~spell();
 
 	//Setting

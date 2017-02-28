@@ -205,6 +205,7 @@ private:
 	//Input processing
 	void processCommand();
 	void processMouseClick();
+	bool isMouseOver(int x, int xwidth, int y);
 
 	//Auto-walking for the PC
 	bool isAutoWalking = false;
@@ -338,6 +339,8 @@ private:
 	//Draw location constants
 	const static int MAP_DRAW_X = 3;
 	const static int MAP_DRAW_Y = 3;
+	const static int ITEM_DRAW_X = 3;
+	const static int ITEM_DRAW_Y = 43;
 
 	//Special story progression
 	int gotSirPercivelsSet = 0;

@@ -222,19 +222,19 @@ SPECIAL DRAWING FUNCTIONS
 
 void window::drawBox(int leftx, int topy, int width, int height, TCODColor col) {
 	//Stars in the four corners
-	writec(leftx, topy, '*', col);
-	writec(leftx + width, topy, '*', col);
-	writec(leftx, topy + height, '*', col);
-	writec(leftx + width, topy + height, '*', col);
+	writec(leftx, topy, TOP_LEFT_CORNER, col);
+	writec(leftx + width, topy, TOP_RIGHT_CORNER, col);
+	writec(leftx, topy + height, BOTTOM_LEFT_CORNER, col);
+	writec(leftx + width, topy + height, BOTTOM_RIGHT_CORNER, col);
 	//Horizontal sides
 	for (int x = leftx + 1; x < leftx + width; x++) {
-		writec(x, topy, '-', col);
-		writec(x, topy + height, '-', col);
+		writec(x, topy, HORIZONTAL_BAR, col);
+		writec(x, topy + height, HORIZONTAL_BAR, col);
 	}
 	//Vertical sides
 	for (int y = topy + 1; y < topy + height; y++) {
-		writec(leftx, y, '|', col);
-		writec(leftx + width, y, '|', col);
+		writec(leftx, y, VERTICAL_BAR, col);
+		writec(leftx + width, y, VERTICAL_BAR, col);
 	}
 }
 

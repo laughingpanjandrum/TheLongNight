@@ -19,7 +19,7 @@ public:
 
 	//For key/lock items
 	bool isKey = true;
-	void setKeyTag(std::string t) { keyTag = t; isKey = true; }
+	void setKeyTag(std::string t) { keyTag = t; isKey = true; category = ITEM_KEY; }
 	std::string getKeyTag() { return keyTag; }
 
 	//For runestones

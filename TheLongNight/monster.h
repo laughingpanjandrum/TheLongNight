@@ -250,6 +250,11 @@ monsterSharedPtr monster_SirPercivel();
 
 //The Void
 monsterSharedPtr monster_VoidTouched();
+monsterSharedPtr monster_AstralJailorFireAcid();
+monsterSharedPtr monster_AstralJailorElectricMagic();
+monsterSharedPtr monster_AstralJailorColdPhys();
+monsterSharedPtr monster_AstralJailorPoisBleed();
+monsterSharedPtr monster_AstralJailorPlague();
 
 //Friendly NPCs
 monsterSharedPtr npc_Gorem();

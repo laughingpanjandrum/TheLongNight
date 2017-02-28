@@ -206,7 +206,7 @@ Returns whether we have the key that will unlock the given door tag.
 bool inventory::hasKey(std::string keyTag)
 {
 	//Search our MISCELLANEOUS ITEMS
-	for (auto it : getItemList(ITEM_MISC)) {
+	for (auto it : getItemList(ITEM_KEY)) {
 		miscItemSharedPtr misc = std::static_pointer_cast<miscItem>(it);
 		if (misc->isKey && misc->getKeyTag() == keyTag)
 			return true;

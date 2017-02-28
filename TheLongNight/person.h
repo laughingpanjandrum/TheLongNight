@@ -83,6 +83,8 @@ public:
 	int getMeleeDamage();
 	int getDamageOfType(damageType dtype);
 	bool isStinkResistant() { return stinkResist > 0; }
+	bool isImmuneToVoid() { return immuneToVoid > 0; }
+	void makeImmuneToVoid() { immuneToVoid += 1; }
 
 	//Setters
 	void setTarget(personSharedPtr target) { this->target = target; }

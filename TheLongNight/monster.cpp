@@ -1383,6 +1383,7 @@ monsterSharedPtr monster_VoidwalkerEnkidu()
 	m->addItemDrop(spell_StormLash());
 	m->isBoss = true;
 	m->showBossHealthBar = false;
+	m->makeImmuneToVoid();
 	return m;
 }
 
@@ -1402,6 +1403,7 @@ monsterSharedPtr monster_VoidwalkerIcarus()
 	m->setSpellCastChance(30);
 	m->isBoss = true;
 	m->showBossHealthBar = false;
+	m->makeImmuneToVoid();
 	return m;
 }
 
@@ -1421,6 +1423,7 @@ monsterSharedPtr monster_VoidwalkerPenelope()
 	m->addItemDrop(weapon_LightningWarhammer());
 	m->isBoss = true;
 	m->showBossHealthBar = false;
+	m->makeImmuneToVoid();
 	return m;
 }
 
@@ -1442,6 +1445,7 @@ she wields a crooked scythe imbued with flames; in the other, she clutches an am
 	m->setSpellCastChance(20);
 	m->addItemDrop(heart_IetrasBurningHeart());
 	m->addItemDrop(key_IetrasAmberPendant());
+	m->makeImmuneToVoid();
 	return m;
 }
 
@@ -1845,6 +1849,93 @@ monsterSharedPtr monster_VoidTouched()
 	m->addSpellKnown(ability_ShadowWalk());
 	m->setSpellCastChance(50);
 	m->setFragmentsDropped(50);
+	m->makeImmuneToVoid();
+	return m;
+}
+
+monsterSharedPtr monster_AstralJailorFireAcid()
+{
+	monsterSharedPtr m(new monster("Astral Jailor", JAILOR_TILE, TCODColor::flame,
+		"A creature shrouded in a cloud of astral energy."));
+	m->setHealth(100);
+	m->setDefence(DAMAGE_FIRE, 90);
+	m->setDefence(DAMAGE_ACID, 90);
+	m->setMoveStats(SPEED_NORMAL);
+	m->setMeleeStats(10, SPEED_NORMAL);
+	m->setFragmentsDropped(100);
+	m->addSpellKnown(spellSharedPtr(new spell("Astral Beam", TCODColor::flame, ATTACK_RANGE, 5,
+		APPLY_FIRE_DAMAGE, 15, APPLY_ACID_DAMAGE, 15)));
+	m->addSpellKnown(ability_ShadowWalk());
+	m->setSpellCastChance(50);
+	m->makeImmuneToVoid();
+	return m;
+}
+
+monsterSharedPtr monster_AstralJailorElectricMagic()
+{
+	monsterSharedPtr m(new monster("Astral Jailor", JAILOR_TILE, TCODColor::lightPurple,
+		"A creature shrouded in a cloud of astral energy."));
+	m->setHealth(100);
+	m->setDefence(DAMAGE_MAGIC, 90);
+	m->setDefence(DAMAGE_ELECTRIC, 90);
+	m->setMoveStats(SPEED_NORMAL);
+	m->setMeleeStats(10, SPEED_NORMAL);
+	m->setFragmentsDropped(100);
+	m->addSpellKnown(spellSharedPtr(new spell("Astral Beam", TCODColor::flame, ATTACK_RANGE, 5,
+		APPLY_ACID_DAMAGE, 15, APPLY_ELECTRIC_DAMAGE, 15)));
+	m->addSpellKnown(ability_ShadowWalk());
+	m->setSpellCastChance(50);
+	m->makeImmuneToVoid();
+	return m;
+}
+
+monsterSharedPtr monster_AstralJailorColdPhys()
+{
+	monsterSharedPtr m(new monster("Astral Jailor", JAILOR_TILE, TCODColor::cyan,
+		"A creature shrouded in a cloud of astral energy."));
+	m->setHealth(100);
+	m->setDefence(DAMAGE_COLD, 90);
+	m->setDefence(DAMAGE_PHYSICAL, 90);
+	m->setMoveStats(SPEED_NORMAL);
+	m->setMeleeStats(10, SPEED_NORMAL);
+	m->setFragmentsDropped(100);
+	m->addSpellKnown(spellSharedPtr(new spell("Astral Beam", TCODColor::flame, ATTACK_RANGE, 5,
+		APPLY_COLD_DAMAGE, 15, APPLY_PHYSICAL_DAMAGE, 15)));
+	m->addSpellKnown(ability_ShadowWalk());
+	m->setSpellCastChance(50);
+	m->makeImmuneToVoid();
+	return m;
+}
+
+monsterSharedPtr monster_AstralJailorPoisBleed()
+{
+	monsterSharedPtr m(new monster("Astral Jailor", JAILOR_TILE, TCODColor::lime,
+		"A creature shrouded in a cloud of astral energy."));
+	m->setHealth(100);
+	m->setBleedResist(100);
+	m->setPoisonResist(100);
+	m->setMoveStats(SPEED_NORMAL);
+	m->equipItem(weaponSharedPtr(new weapon(5, SPEED_NORMAL, EFFECT_BLEED, 10)));
+	m->setFragmentsDropped(100);
+	m->addSpellKnown(spellSharedPtr(new spell("Poison Ray", TCODColor::lime, 5, 0, APPLY_POISON_DAMAGE, 10)));
+	m->addSpellKnown(ability_ShadowWalk());
+	m->setSpellCastChance(50);
+	m->makeImmuneToVoid();
+	return m;
+}
+
+monsterSharedPtr monster_AstralJailorPlague()
+{
+	monsterSharedPtr m(new monster("Astral Jailor", JAILOR_TILE, TCODColor::sepia,
+		"A creature shrouded in a cloud of astral energy."));
+	m->setHealth(100);
+	m->setPlagueResist(100);
+	m->setMoveStats(SPEED_NORMAL);
+	m->equipItem(weaponSharedPtr(new weapon(10, SPEED_NORMAL, EFFECT_PLAGUE, 10)));
+	m->setFragmentsDropped(100);
+	m->addSpellKnown(ability_ShadowWalk());
+	m->setSpellCastChance(50);
+	m->makeImmuneToVoid();
 	return m;
 }
 
@@ -1917,6 +2008,8 @@ monsterSharedPtr npc_ElenaThePilgrim()
 	m->loadDialogue("dialogue/elena_chat.txt");
 	m->addSpecialDialogue("piece_of_jade",
 		"What a lovely piece of jade! It reminds me of home...");
+	m->addSpecialDialogue("piece_of_bone",
+		"Oh - say, a scrap of bone! It brings back strange memories...");
 	return m;
 }
 
@@ -2223,6 +2316,16 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 	//The Void
 	else if (handle == "void_touched")
 		return monster_VoidTouched();
+	else if (handle == "astral_jailor_fire_acid")
+		return monster_AstralJailorFireAcid();
+	else if (handle == "astral_jailor_cold_phys")
+		return monster_AstralJailorColdPhys();
+	else if (handle == "astral_jailor_electric_magic")
+		return monster_AstralJailorElectricMagic();
+	else if (handle == "astral_jailor_pois_bleed")
+		return monster_AstralJailorPoisBleed();
+	else if (handle == "astral_jailor_plague")
+		return monster_AstralJailorPlague();
 
 	//Friendly NPCs
 	else if (handle == "gorem")
