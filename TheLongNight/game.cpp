@@ -583,6 +583,10 @@ Just displays a menu! It's pretty simple.
 */
 void game::drawMenu(menu * m, int atx, int aty)
 {
+
+	//Box it in
+	win.drawBox(atx - 1, aty - 1, 46, 39, TCODColor::darkSepia);
+
 	//Title
 	win.write(atx, aty++, m->getTitle(), TCODColor::white);
 
@@ -692,7 +696,7 @@ void game::drawScreen(bool doRefresh)
 	
 	//Always draw the interface, except with our inventory!
 	if (state != STATE_VIEW_INVENTORY_CATEGORY)
-		drawInterface(MAP_DRAW_X + 43, MAP_DRAW_Y);
+		drawInterface(MAP_DRAW_X + 47, MAP_DRAW_Y);
 	
 	//Figure out else what to draw
 	if (state == STATE_VIEW_INVENTORY || state == STATE_VIEW_INVENTORY_CATEGORY)
@@ -718,6 +722,9 @@ Input: Coordinates to start drawing at (the top left corner of the map)
 */
 void game::drawMap(int leftx, int topy)
 {
+
+	//Box it in
+	win.drawBox(leftx - 1, topy - 2, 41, 42, TCODColor::darkSepia);
 	
 	//Draw map name just above
 	win.write(leftx, topy - 1, centreText(currentMap->getName(), 38), TCODColor::white);
@@ -859,6 +866,9 @@ void game::drawInterface(int leftx, int topy)
 	
 	int atx = leftx;
 	int aty = topy;
+
+	//Box it in
+	win.drawBox(atx - 1, aty - 1, 50, 30, TCODColor::darkSepia);
 	
 	//Health
 	win.drawCounter(player->getHealth(), "LIFE", atx, aty, TCODColor::darkRed, TCODColor::darkGrey, 20);
@@ -1433,6 +1443,10 @@ This just figures out which particular info-drawing function to use.
 */
 void game::drawItemInfo(itemSharedPtr it, int atx, int aty)
 {
+
+	//Box around it
+	win.clearRegion(atx - 1, aty - 1, 46, 19);
+	win.drawBox(atx - 1, aty - 1, 46, 19, TCODColor::darkSepia);
 	
 	//Tile and name
 	win.writec(atx, aty, it->getTileCode(), it->getColor());
@@ -1880,6 +1894,7 @@ Draws an item's image onto the screen, if it has one.
 void game::drawItemImage(itemSharedPtr it, int atx, int aty, bool drawOtherArmourPiece)
 {
 	//Box around the image
+	win.clearRegion(atx - 1, aty - 1, 41, 61);
 	win.drawBox(atx - 1, aty - 1, 41, 61, TCODColor::darkSepia);
 
 	if (it->hasImage()) {
@@ -2956,8 +2971,8 @@ bool game::itemPickupMessage(itemSharedPtr it)
 {
 	int atx = MAP_DRAW_X;
 	int aty = MAP_DRAW_Y + 10;
-	win.clearRegion(atx - 1, aty, 42, 25);
-	win.drawBox(atx - 1, aty, 42, 25, TCODColor::darkSepia);
+	//win.clearRegion(atx - 1, aty, 42, 25);
+	//win.drawBox(atx - 1, aty, 42, 25, TCODColor::darkSepia);
 	//What we can do
 	std::string txt = "[SPACE] Equip  [ESC] Store";
 	win.write(atx, ++aty, centreText(txt, 20), TCODColor::white);
