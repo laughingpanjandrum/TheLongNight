@@ -193,7 +193,7 @@ private:
 	void spellTitleAnimation(personSharedPtr caster, spellSharedPtr sp);
 
 	//Drawing item information
-	void drawItemInfo(itemSharedPtr it, int atx, int aty);
+	void drawItemInfo(itemSharedPtr it, int atx, int aty, bool drawImage = true);
 	void drawWeaponInfo(weaponSharedPtr it, int atx, int aty);
 	void drawArmourInfo(armourSharedPtr it, int atx, int aty);
 	void drawSpellInfo(spellSharedPtr it, int atx, int aty);
@@ -340,7 +340,7 @@ private:
 	const static int MAP_DRAW_X = 3;
 	const static int MAP_DRAW_Y = 3;
 	const static int ITEM_DRAW_X = 3;
-	const static int ITEM_DRAW_Y = 43;
+	const static int ITEM_DRAW_Y = 45;
 
 	//Special story progression
 	int gotSirPercivelsSet = 0;

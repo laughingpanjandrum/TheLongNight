@@ -869,6 +869,12 @@ void game::drawInterface(int leftx, int topy)
 
 	//Box it in
 	win.drawBox(atx - 1, aty - 1, 50, 30, TCODColor::darkSepia);
+
+	//Messages
+	int my = ITEM_DRAW_Y;
+	for (auto m : messages) {
+		win.write(ITEM_DRAW_X, my++, m.txt, m.color);
+	}
 	
 	//Health
 	win.drawCounter(player->getHealth(), "LIFE", atx, aty, TCODColor::darkRed, TCODColor::darkGrey, 20);
@@ -888,7 +894,7 @@ void game::drawInterface(int leftx, int topy)
 		win.write(atx + 2, aty, wp->getMenuName(), wp->getColor());
 		//Check mouseover
 		if (isMouseOver(atx, wp->getMenuName().size(), aty))
-			drawItemInfo(wp, ITEM_DRAW_X, ITEM_DRAW_Y);
+			drawItemInfo(wp, ITEM_DRAW_X, ITEM_DRAW_Y, false);
 	}
 	else
 		win.write(atx + 2, ++aty, "no weapon", TCODColor::darkGrey);
@@ -899,7 +905,7 @@ void game::drawInterface(int leftx, int topy)
 		win.writec(atx, ++aty, of->getTileCode(), of->getColor());
 		win.write(atx + 2, aty, of->getMenuName(), of->getColor());
 		if (isMouseOver(atx, of->getMenuName().size(), aty))
-			drawItemInfo(wp, ITEM_DRAW_X, ITEM_DRAW_Y);
+			drawItemInfo(wp, ITEM_DRAW_X, ITEM_DRAW_Y, false);
 	}
 	
 	//Helmet
@@ -908,7 +914,7 @@ void game::drawInterface(int leftx, int topy)
 		win.writec(atx, ++aty, helm->getTileCode(), helm->getColor());
 		win.write(atx + 2, aty, helm->getMenuName(), helm->getColor());
 		if (isMouseOver(atx, helm->getMenuName().size(), aty))
-			drawItemInfo(helm, ITEM_DRAW_X, ITEM_DRAW_Y);
+			drawItemInfo(helm, ITEM_DRAW_X, ITEM_DRAW_Y, false);
 	}
 	else
 		win.write(atx + 2, ++aty, "no helmet", TCODColor::darkGrey);
@@ -919,7 +925,7 @@ void game::drawInterface(int leftx, int topy)
 		win.writec(atx, ++aty, ar->getTileCode(), ar->getColor());
 		win.write(atx + 2, aty, ar->getMenuName(), ar->getColor());
 		if (isMouseOver(atx, ar->getMenuName().size(), aty))
-			drawItemInfo(ar, ITEM_DRAW_X, ITEM_DRAW_Y);
+			drawItemInfo(ar, ITEM_DRAW_X, ITEM_DRAW_Y, false);
 	}
 	else
 		win.write(atx + 2, ++aty, "no armour", TCODColor::darkGrey);
@@ -930,7 +936,7 @@ void game::drawInterface(int leftx, int topy)
 		win.writec(atx, ++aty, ch->getTileCode(), ch->getColor());
 		win.write(atx + 2, aty, ch->getMenuName(), ch->getColor());
 		if (isMouseOver(atx, ch->getMenuName().size(), aty))
-			drawItemInfo(ch, ITEM_DRAW_X, ITEM_DRAW_Y);
+			drawItemInfo(ch, ITEM_DRAW_X, ITEM_DRAW_Y, false);
 	}
 	else
 		win.write(atx + 2, ++aty, "no charm", TCODColor::darkGrey);
@@ -951,7 +957,7 @@ void game::drawInterface(int leftx, int topy)
 			win.write(atx + 2, aty, c->getMenuName(), c->getColor());
 			//Info about it, if we're touching it
 			if (mouse.cx >= atx && mouse.cx <= atx + c->getMenuName().size() && mouse.cy == aty)
-				drawItemInfo(c, MAP_DRAW_X, MAP_DRAW_Y + 42);
+				drawItemInfo(c, ITEM_DRAW_X, ITEM_DRAW_Y, false);
 		}
 		else
 			win.write(atx + 2, ++aty, "no consumable", TCODColor::darkGrey);
@@ -973,7 +979,7 @@ void game::drawInterface(int leftx, int topy)
 		s++;
 		//Show description if our mouse is hovering over this spell
 		if (mouse.cx > atx && mouse.cx < atx + sp->getName().size() && mouse.cy == aty)
-			drawItemInfo(sp, MAP_DRAW_X, MAP_DRAW_Y + 42);
+			drawItemInfo(sp, ITEM_DRAW_X, ITEM_DRAW_Y, false);
 	}
 
 	//Money
@@ -1020,12 +1026,6 @@ void game::drawInterface(int leftx, int topy)
 	if (currentBoss != nullptr && currentBoss->showBossHealthBar) {
 		win.write(atx, aty, currentBoss->getName(), currentBoss->getColor());
 		win.drawCounter(currentBoss->getHealth(), "", atx, aty + 1, TCODColor::red, TCODColor::darkGrey, 40);
-	}
-
-	//Messages
-	aty += 3;
-	for (auto m : messages) {
-		win.write(atx, aty++, m.txt, m.color);
 	}
 
 }
@@ -1166,8 +1166,8 @@ void game::drawMonsterInfo(monsterSharedPtr m, int atx, int aty)
 	//Box it in!
 	TCODColor maincol = TCODColor::white;
 	int offset = 12;
-	int w = 40;
-	int h = 40;
+	int w = 41;
+	int h = 41;
 	win.clearRegion(atx, aty, w, h);
 	win.drawBox(atx, aty, w, h, TCODColor::sepia);
 
@@ -1441,7 +1441,7 @@ void game::spellTitleAnimation(personSharedPtr caster, spellSharedPtr sp)
 /*
 This just figures out which particular info-drawing function to use.
 */
-void game::drawItemInfo(itemSharedPtr it, int atx, int aty)
+void game::drawItemInfo(itemSharedPtr it, int atx, int aty, bool drawImage)
 {
 
 	//Box around it
@@ -1490,7 +1490,8 @@ void game::drawItemInfo(itemSharedPtr it, int atx, int aty)
 	}
 
 	//Item image
-	drawItemImage(it, 50, 1);
+	if (drawImage)
+		drawItemImage(it, 50, 1);
 
 }
 
@@ -2010,7 +2011,7 @@ void game::processMouseClick()
 		if (currentMap->inBounds(clk.first, clk.second)) {
 			personSharedPtr m = currentMap->getPerson(clk.first, clk.second);
 			if (m != nullptr && !m->isPlayer) {
-				drawMonsterInfo(std::static_pointer_cast<monster>(m), MAP_DRAW_X, MAP_DRAW_Y);
+				drawMonsterInfo(std::static_pointer_cast<monster>(m), MAP_DRAW_X - 1, MAP_DRAW_Y - 1);
 			}
 		}
 	}
@@ -2172,12 +2173,7 @@ void game::doAOE(spellSharedPtr sp, personSharedPtr caster)
 	int r = sp->getAttackRange();
 	TCODColor col1 = sp->getColor();
 	TCODColor col2 = win.mixColors(col1, TCODColor::white, 0.5);
-	/*if (sp->useAlternateAnimation) {
-		addAnimations(new explosion(caster->getPosition(), r, col1, col2));
-	}
-	else {
-		addAnimations(new shockwave(caster->getx(), caster->gety(), col1, col2));
-	}*/
+	addAnimations(new shockwave(caster->getx(), caster->gety(), col1, col2));
 	
 	//Execute the spell
 	for (int x = caster->getx() - r; x <= caster->getx() + r; x++) {
@@ -3098,12 +3094,7 @@ void game::doRangedSpell(spellSharedPtr sp)
 		coordVectorSharedPtr path = coordVectorSharedPtr(getLine(player->getPosition(), tp));
 
 		//Bullet animation!
-		/*if (sp->useAlternateAnimation) {
-			addAnimations(new bulletPath(path, BULLET_TILE, sp->getColor()));
-		}
-		else {
-			addAnimations(new glowPath(path, sp->getColor(), TCODColor::white));
-		}*/
+		addAnimations(new bulletPath(path, BULLET_TILE, sp->getColor()));
 		
 		//See if there's something to hit on the path
 		personSharedPtr target;
@@ -4033,10 +4024,10 @@ void game::checkForAreaText(std::string mapTag)
 	areaText* txt = findAreaText(mapTag);
 	if (txt != nullptr) {
 		//Display it!
-		int atx = MAP_DRAW_X;
-		int aty = MAP_DRAW_Y;
-		win.clearRegion(atx, aty, 40, 40);
-		win.drawBox(atx, aty, 40, 40, TCODColor::sepia);
+		int atx = MAP_DRAW_X - 1;
+		int aty = MAP_DRAW_Y - 1;
+		win.clearRegion(atx, aty, 41, 41);
+		win.drawBox(atx, aty, 41, 41, TCODColor::sepia);
 		//Title
 		atx += 1;
 		aty += 1;
