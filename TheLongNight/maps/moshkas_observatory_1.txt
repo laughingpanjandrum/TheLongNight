@@ -23,6 +23,7 @@ t void_tree
 -connections
 north:dead_sparrows_tower_4
 south:moshkas_observatory_2
+east:deathless_knights_keep
 -endconnections
 ;;;;;;...;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;...;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

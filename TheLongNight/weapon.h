@@ -173,6 +173,9 @@ weaponSharedPtr weapon_FarinsTorch();
 
 weaponSharedPtr weapon_RatboneCleaver();
 
+weaponSharedPtr weapon_DeathlessBlade();
+weaponSharedPtr weapon_GreatswordOfTheAncientLords();
+
 weaponSharedPtr weapon_ProfaneGreatsword();
 
 //Shields

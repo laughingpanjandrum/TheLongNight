@@ -402,6 +402,26 @@ spellSharedPtr attack_RatCleave()
 	return sp;
 }
 
+spellSharedPtr attack_BlightingInfusion()
+{
+	spellSharedPtr sp(new spell("Blighted Rage", SWORD_TILE, TCODColor::amber,
+		"The ancient power of the old blade strikes all nearby targets."));
+	sp->setAttackType(ATTACK_AOE, 4);
+	sp->addEffect(CASTER_MELEE_ATTACK, 1);
+	sp->setVigourCost(4);
+	return sp;
+}
+
+spellSharedPtr attack_Deathstrike()
+{
+	spellSharedPtr sp(new spell("Deathstrike", SWORD_TILE, TCODColor::red,
+		"Infuses your next attack with the raw power of death itself."));
+	sp->setAttackType(ATTACK_MELEE);
+	sp->addEffect(APPLY_UNTYPED_DAMAGE, 1000);
+	sp->setVigourCost(10);
+	return sp;
+}
+
 spellSharedPtr ability_EtherealSurge()
 {
 	spellSharedPtr sp(new spell("Ethereal Surge", SPELL_TILE, TCODColor::magenta,
@@ -901,11 +921,22 @@ spellSharedPtr prayer_ProfaneRadiance()
 {
 	spellSharedPtr sp(new spell("Profane Radiance", SPELL_TILE, TCODColor::purple,
 		"Spell deals profane damage in a blast around you."));
-	sp->setAttackType(ATTACK_AOE);
-	sp->setAttackRange(2);
+	sp->setAttackType(ATTACK_AOE, 2);
 	sp->setVigourCost(2);
 	sp->addEffect(APPLY_PROFANE_DAMAGE, 25);
 	sp->addEffect(APPLY_BLINDING, 2);
+	sp->usesDivinePower = true;
+	sp->isProfane = true;
+	return sp;
+}
+
+spellSharedPtr prayer_AstralPrison()
+{
+	spellSharedPtr sp(new spell("Astral Prison", SPELL_TILE, TCODColor::lightFuchsia,
+		"Target is transported to an astral prison. This spell is only effective against Profane targets."));
+	sp->setAttackType(ATTACK_RANGE, 3);
+	sp->setVigourCost(10);
+	sp->addEffect(ASTRAL_IMPRISONMENT, 1);
 	sp->usesDivinePower = true;
 	sp->isProfane = true;
 	return sp;

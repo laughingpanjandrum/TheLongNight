@@ -311,6 +311,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 	//PRAYERS
 	else if (handle == "restoration")
 		return prayer_Restoration();
+	else if (handle == "astral_prison")
+		return prayer_AstralPrison();
 
 	//MISC ITEMS
 	if (handle == "green_chapel_garden_key")
@@ -546,6 +548,7 @@ std::string getEffectName(effect e)
 	case(DEATHLINK): return "upon death, return to life";
 	case(SILENCE): return "silence";
 	case(DROP_WEB): return "create spiderweb";
+	case(ASTRAL_IMPRISONMENT): return "astral imprisonment";
 
 	case(TELEPORT_VIA_WATER): return "water warp";
 	case(TELEPORT_TO_VOID): return "warp to void";

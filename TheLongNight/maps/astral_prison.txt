@@ -1,16 +1,11 @@
 Astral Prison
 darkness:0.4,0
-start:20,39
+start:30,20
 astral_jailor_fire_acid:20,10
 astral_jailor_cold_phys:22,12
 astral_jailor_electric_magic:18,8
 astral_jailor_pois_bleed:20,12
 astral_jailor_plague:24,7
-astral_jailor_fire_acid:21,11
-astral_jailor_cold_phys:17,12
-astral_jailor_electric_magic:15,9
-astral_jailor_pois_bleed:20,14
-astral_jailor_plague:21,7
 -items
 -enditems
 -codes

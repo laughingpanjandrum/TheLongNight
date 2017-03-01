@@ -22,6 +22,7 @@ t void_tree
 -connections
 south:altar_of_khull_khallen
 east:void_1
+north:deathless_knights_keep
 -endconnections
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

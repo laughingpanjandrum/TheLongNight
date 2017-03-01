@@ -585,6 +585,7 @@ void game::drawMenu(menu * m, int atx, int aty)
 {
 
 	//Box it in
+	win.clearRegion(atx - 1, aty - 1, 46, 39);
 	win.drawBox(atx - 1, aty - 1, 46, 39, TCODColor::darkSepia);
 
 	//Title
@@ -724,7 +725,7 @@ void game::drawMap(int leftx, int topy)
 {
 
 	//Box it in
-	win.drawBox(leftx - 1, topy - 2, 41, 42, TCODColor::darkSepia);
+	win.drawBox(leftx - 1, topy - 2, 41, 43, TCODColor::darkSepia);
 	
 	//Draw map name just above
 	win.write(leftx, topy - 1, centreText(currentMap->getName(), 38), TCODColor::white);
@@ -1229,6 +1230,20 @@ void game::drawMonsterInfo(monsterSharedPtr m, int atx, int aty)
 			win.write(atx + offset, aty, std::to_string(res), getDamageTypeColor(dtype));
 		}
 	}
+
+	//Bleed Resist
+	win.write(atx, ++aty, "Bleed Res", maincol);
+	std::string res = std::to_string(m->getSpecialEffectBuildup(EFFECT_BLEED)->getMaxValue());
+	win.write(atx + offset, aty, res, getStatusEffectColor(EFFECT_BLEED));
+	//Poison Resist
+	win.write(atx, ++aty, "Poison Res", maincol);
+	res = std::to_string(m->getSpecialEffectBuildup(EFFECT_POISON)->getMaxValue());
+	win.write(atx + offset, aty, res, getStatusEffectColor(EFFECT_POISON));
+	//Plague Resist
+	win.write(atx, ++aty, "Plague Res", maincol);
+	res = std::to_string(m->getSpecialEffectBuildup(EFFECT_PLAGUE)->getMaxValue());
+	win.write(atx + offset, aty, res, getStatusEffectColor(EFFECT_PLAGUE));
+
 
 	//Weaknesses
 	for (int dt = 0; dt < ALL_DAMAGE_TYPES; dt++) {
@@ -2227,6 +2242,10 @@ void game::applyEffectToPerson(personSharedPtr target, effect eff, int potency, 
 		caster->takeDamage(potency);
 	else if (eff == HEAL_CASTER)
 		caster->addHealth(potency);
+	else if (eff == ASTRAL_IMPRISONMENT) {
+		if (caster->isProfane())
+			currentMap->removePerson(caster);
+	}
 
 	//Special effects, other
 	else if (eff == KNOCKBACK_TARGET)
@@ -4321,6 +4340,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(charm_SirPercivelsRing());
 	player->addItem(charm_ToxicantsCharm());
 	player->addItem(charm_VenomrubyRing());
+	player->addItem(charm_VoidwalkersRing());
 	player->addItem(charm_WretchedFleshBand());
 	player->addItem(charm_WretchedFleshmask());
 

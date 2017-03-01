@@ -1939,6 +1939,51 @@ monsterSharedPtr monster_AstralJailorPlague()
 	return m;
 }
 
+monsterSharedPtr monster_LordOfFallowFields()
+{
+	monsterSharedPtr m(new monster("The Lord of Fallow Fields", FINAL_BOSS_TILE, TCODColor::lightestPurple,
+		"The Lord of famine and death strides across the astral precipice, wielding a blade infused with the profane \
+energy of death itself."));
+	m->setHealth(5000);
+	m->setDefence(DAMAGE_PHYSICAL, 50);
+	m->setBleedResist(100);
+	m->setPoisonResist(100);
+	m->setDefence(DAMAGE_FIRE, 25);
+	m->setDefence(DAMAGE_COLD, 25);
+	m->setDefence(DAMAGE_ACID, 25);
+	m->setDefence(DAMAGE_ELECTRIC, 25);
+	m->equipItem(weapon_GreatswordOfTheAncientLords());
+	m->setMoveStats(SPEED_NORMAL);
+	m->addSpellKnown(prayer_ProfoundStill());
+	m->addSpellKnown(prayer_ProfaneRay());
+	m->setSpellCastChance(50);
+	m->setFragmentsDropped(10000);
+	m->isBoss = true;
+	return m;
+}
+
+monsterSharedPtr monster_TheDeathlessKnight()
+{
+	monsterSharedPtr m(new monster("The Deathless Knight", KNIGHT_TILE, TCODColor::pink,
+		"A silent suit of armour regards you from across the room, glowing sword in hand."));
+	m->setHealth(200);
+	m->setDefence(DAMAGE_PHYSICAL, 100);
+	m->setDefence(DAMAGE_ACID, 100);
+	m->setDefence(DAMAGE_COLD, 100);
+	m->setDefence(DAMAGE_ELECTRIC, 100);
+	m->setDefence(DAMAGE_FIRE, 100);
+	m->setDefence(DAMAGE_BLESSED, 100);
+	m->setDefence(DAMAGE_PROFANE, 100);
+	m->setBleedResist(1000);
+	m->setPoisonResist(1000);
+	m->setPlagueResist(1000);
+	m->isBoss = true;
+	m->setFragmentsDropped(1);
+	m->equipItem(weapon_DeathlessBlade());
+	m->setSpellCastChance(25);
+	return m;
+}
+
 
 /*
 	FRIENDLIES
@@ -2326,6 +2371,10 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return monster_AstralJailorPoisBleed();
 	else if (handle == "astral_jailor_plague")
 		return monster_AstralJailorPlague();
+	else if (handle == "lord_of_fallow_fields")
+		return monster_LordOfFallowFields();
+	else if (handle == "the_deathless_knight")
+		return monster_TheDeathlessKnight();
 
 	//Friendly NPCs
 	else if (handle == "gorem")

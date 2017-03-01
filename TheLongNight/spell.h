@@ -110,6 +110,8 @@ spellSharedPtr attack_PaleSlash();
 spellSharedPtr attack_PoisonHook();
 spellSharedPtr attack_FlameBreath();
 spellSharedPtr attack_RatCleave();
+spellSharedPtr attack_BlightingInfusion();
+spellSharedPtr attack_Deathstrike();
 
 //Wand/chime powers
 spellSharedPtr ability_PowerSurge();
@@ -186,6 +188,7 @@ spellSharedPtr prayer_ProfoundStill();
 spellSharedPtr prayer_SpidersPrayer();
 spellSharedPtr prayer_TouchOfDoom();
 //Misc
+spellSharedPtr prayer_AstralPrison();
 spellSharedPtr prayer_ProfaneRay();
 
 //Monster abilities

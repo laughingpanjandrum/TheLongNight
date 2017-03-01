@@ -699,6 +699,33 @@ weaponSharedPtr weapon_RatboneCleaver()
 	return wp;
 }
 
+weaponSharedPtr weapon_DeathlessBlade()
+{
+	weaponSharedPtr wp(new weapon("Deathless Blade", SWORD_TILE, TCODColor::pink,
+		"Glowing sword of the Deathless Knight, infused with the raw energy of obliteration."));
+	wp->setBasicAttributes(50, SPEED_NORMAL);
+	wp->setSpecialAttack(attack_Deathstrike());
+	return wp;
+}
+
+weaponSharedPtr weapon_GreatswordOfTheAncientLords()
+{
+	weaponSharedPtr wp(new weapon("Greatsword of the Ancient Lords", SWORD_TILE, TCODColor::lightFuchsia,
+		"The ancient sword of the first lords. Its eternal flame has been corrupted by death and plague."));
+	wp->setBasicAttributes(20, SPEED_SLOW);
+	wp->addStatusEffect(EFFECT_PLAGUE, 20);
+	wp->addDamageType(DAMAGE_FIRE, 20);
+	wp->addDamageType(DAMAGE_ACID, 20);
+	wp->addDamageType(DAMAGE_COLD, 20);
+	wp->addDamageType(DAMAGE_ELECTRIC, 20);
+	wp->addScalingType(SCALE_STR);
+	wp->addScalingType(SCALE_DEX);
+	wp->addScalingType(SCALE_ARC);
+	wp->addScalingType(SCALE_DEV);
+	wp->setSpecialAttack(attack_BlightingInfusion());
+	return wp;
+}
+
 weaponSharedPtr weapon_ProfaneGreatsword()
 {
 	weaponSharedPtr wp(new weapon("Profane Greatsword", SWORD_TILE, TCODColor::purple,

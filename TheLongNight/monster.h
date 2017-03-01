@@ -255,6 +255,8 @@ monsterSharedPtr monster_AstralJailorElectricMagic();
 monsterSharedPtr monster_AstralJailorColdPhys();
 monsterSharedPtr monster_AstralJailorPoisBleed();
 monsterSharedPtr monster_AstralJailorPlague();
+monsterSharedPtr monster_LordOfFallowFields();
+monsterSharedPtr monster_TheDeathlessKnight();
 
 //Friendly NPCs
 monsterSharedPtr npc_Gorem();
