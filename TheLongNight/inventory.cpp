@@ -173,6 +173,25 @@ bool inventory::isConsumableEquipped(consumableSharedPtr c)
 
 
 /*
+Permanently remove consumable.
+*/
+void inventory::removeConsumable(consumableSharedPtr c)
+{
+	//First see if it needs to be ticked down
+	if (c->getAmountLeft() > 1)
+		c->lose(1);
+	else {
+		//Remove item permanently
+		auto itemList = &carried.at(ITEM_CONSUMABLE).items;
+		auto iter = std::find(itemList->begin(), itemList->end(), c);
+		if (iter != itemList->end()) {
+			itemList->erase(iter);
+		}
+	}
+}
+
+
+/*
 Misc items can do various things when equipped, but usually it's nothing!
 */
 void inventory::equipMiscItem(miscItemSharedPtr m)

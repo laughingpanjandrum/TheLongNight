@@ -64,6 +64,9 @@ const int TENTACLE_TILE = 116;
 const int LANTERN_BEARER_TILE = 108;
 const int FINAL_BOSS_TILE = 76;
 
+const int PASH_TILE = 80;
+const int GLURG_TILE = 71;
+
 const int GOREM_TILE = 327; 
 
 //Items

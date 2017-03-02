@@ -268,11 +268,19 @@ maptile * tile_WebOnFloor()
 
 maptile * tile_PoisonOoze()
 {
-	maptile* ooze = new maptile("Poison Ooze", "poison_ooze", BASIC_WATER_TILE, TCODColor::darkGreen, TCODColor::green);
+	maptile* ooze = new maptile("Poison Ooze", "poison_ooze", BASIC_WATER_TILE, TCODColor::darkLime, TCODColor::lime);
 	ooze->addTouchEffect(APPLY_POISON_DAMAGE);
 	ooze->setPotency(10);
 	return ooze;
 
+}
+
+maptile * tile_CorrodingBlood()
+{
+	maptile* blood = new maptile("Corroding Blood", "corroding_blood", BASIC_WATER_TILE, TCODColor::darkRed, TCODColor::red);
+	blood->addTouchEffect(APPLY_ACID_DAMAGE);
+	blood->setPotency(20);
+	return blood;
 }
 
 maptile * tile_Bloodstain()
@@ -579,6 +587,26 @@ maptile * tile_SlumberingGate()
 		TCODColor::lightRed, TCODColor::black, false, false);
 	door->isDoor = true;
 	door->unlockCode = "effigy";
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	return door;
+}
+
+maptile * tile_UnderpoolDoor()
+{
+	maptile* door = new maptile("Underpool Door", "underpool_door", BASIC_DOOR_TILE,
+		TCODColor::lighterCrimson, TCODColor::black, false, false);
+	door->isDoor = true;
+	door->unlockCode = "underpool_key";
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	return door;
+}
+
+maptile * tile_AbattoirDoor()
+{
+	maptile* door = new maptile("Abattoir Door", "abattoir_door", BASIC_DOOR_TILE,
+		TCODColor::lighterCrimson, TCODColor::black, false, false);
+	door->isDoor = true;
+	door->unlockCode = "abattoir_key";
 	door->addTouchEffect(CHECK_FOR_UNLOCK);
 	return door;
 }

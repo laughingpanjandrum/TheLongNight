@@ -293,6 +293,61 @@ consumableSharedPtr oil_RotbloodOil()
 	return c;
 }
 
+
+/*
+	Items that give fragments when devoured
+*/
+
+consumableSharedPtr gem_DullGreyGemstone()
+{
+	consumableSharedPtr c(new consumable("Dull Grey Gemstone", FRAGMENT_GLYPH, TCODColor::lighterGrey,
+		"Meagre gemstone, perhaps treasured by a peasant."));
+	c->addEffect(ACQUIRE_FRAGMENTS);
+	c->setPotency(300);
+	c->oneUseOnly = true;
+	return c;
+}
+
+consumableSharedPtr gem_SmallShiningGemstone()
+{
+	consumableSharedPtr c(new consumable("Small Shining Gemstone", FRAGMENT_GLYPH, TCODColor::lightPink,
+		"Minor gemstone that shines with inner glory."));
+	c->addEffect(ACQUIRE_FRAGMENTS);
+	c->setPotency(600);
+	c->oneUseOnly = true;
+	return c;
+}
+
+consumableSharedPtr gem_NobleGlowingGemstone()
+{
+	consumableSharedPtr c(new consumable("Noble Glowing Gemstone", FRAGMENT_GLYPH, TCODColor::lightOrange,
+		"Glorious gemstone of a noble aristocrat."));
+	c->addEffect(ACQUIRE_FRAGMENTS);
+	c->setPotency(1200);
+	c->oneUseOnly = true;
+	return c;
+}
+
+consumableSharedPtr gem_KingsGiantGemstone()
+{
+	consumableSharedPtr c(new consumable("King's Giant Gemstone", FRAGMENT_GLYPH, TCODColor::lighterPurple,
+		"Gemstone once embedded in a king's crown, imbued with ancient power."));
+	c->addEffect(ACQUIRE_FRAGMENTS);
+	c->setPotency(1800);
+	c->oneUseOnly = true;
+	return c;
+}
+
+consumableSharedPtr gem_GodlessGemstone()
+{
+	consumableSharedPtr c(new consumable("Godless Gemstone", FRAGMENT_GLYPH, TCODColor::lightestYellow,
+		"Gemstone engorged with the lost power of the old gods."));
+	c->addEffect(ACQUIRE_FRAGMENTS);
+	c->setPotency(2400);
+	c->oneUseOnly = true;
+	return c;
+}
+
 consumableSharedPtr bell_VoidwalkersDancingBell()
 {
 	consumableSharedPtr c(new consumable("Voidwalker's Dancing Bell", BELL_TILE, TCODColor::purple,

@@ -929,6 +929,15 @@ bool person::addItem(itemSharedPtr which)
 
 
 /*
+We permanently lose the given item.
+*/
+void person::loseItemForever(itemSharedPtr which)
+{
+	items.removeConsumable(std::static_pointer_cast<consumable>(which));
+}
+
+
+/*
 Sets up a newly-equipped weapon.
 */
 void person::doWeaponEquip(weaponSharedPtr wp)

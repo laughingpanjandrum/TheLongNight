@@ -155,6 +155,7 @@ maptile* tile_Ooze(); //"ooze"
 maptile* tile_Web(); //"web"
 maptile* tile_WebOnFloor(); //"web_floor"
 maptile* tile_PoisonOoze(); //"poison_ooze"
+maptile* tile_CorrodingBlood(); //"toxic_blood"
 
 maptile* tile_Bloodstain(); //"bloodstain"
 maptile* tile_Corpse(); //"corpse"
@@ -196,6 +197,8 @@ maptile* tile_SilentDoor(); //"silent_door"
 maptile* tile_VoidMausoleumDoor(); //"void_mausoleum_door"
 
 maptile* tile_SlumberingGate(); //"slumbering_gate"
+maptile* tile_UnderpoolDoor(); //"underpool_door"
+maptile* tile_AbattoirDoor(); //"abattoir_door"
 
 //Ritual altars
 maptile* tile_AltarOfTheEye();
@@ -221,7 +224,7 @@ const tileVector ALL_MAPTILES = {
 	tile_Glass(), tile_Bush(), tile_Rosebush(), tile_Tree(), tile_VoidTree(), tile_DeadTree(), tile_SnowboundTree(),
 	tile_Bars(), tile_CellDoor(),
 	tile_Water(), tile_MossyWater(), tile_DeepWater(), tile_Acid(), tile_DrainingPool(),
-	tile_Ooze(), tile_Web(), tile_WebOnFloor(), tile_PoisonOoze(),
+	tile_Ooze(), tile_Web(), tile_WebOnFloor(), tile_PoisonOoze(), tile_CorrodingBlood(),
 	tile_Bloodstain(), tile_Corpse(), tile_Bones(), tile_SandBones(),
 	tile_Bed(), tile_Terminal(),
 	tile_StatueOfRest(), tile_VoidWarpstone(),
@@ -240,7 +243,7 @@ const tileVector ALL_MAPTILES = {
 	tile_SparrowTowerDoor(), tile_ObservatoryDoor(), tile_MoonPalaceDoor(),
 	tile_GraveDoor(), tile_AtalundraGate(), tile_RatDoor(),
 	tile_BloodyMausoleumDoor(), tile_LostDoor(), tile_SilentDoor(), tile_VoidMausoleumDoor(),
-	tile_SlumberingGate(),
+	tile_SlumberingGate(), tile_UnderpoolDoor(), tile_AbattoirDoor()
 };
 
 #endif

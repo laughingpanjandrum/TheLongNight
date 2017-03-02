@@ -40,6 +40,7 @@ public:
 
 	//Flags
 	bool consumeOnUse = true; //Doesn't have to get USED UP!
+	bool oneUseOnly = false; //If true, we lose it PERMANENTLY when it's used
 	bool addsPermanentBuff = false;
 
 private:
@@ -100,6 +101,12 @@ consumableSharedPtr oil_WitchsOoze();
 consumableSharedPtr oil_LightningOil();
 consumableSharedPtr oil_DeepRedOil();
 consumableSharedPtr oil_RotbloodOil();
+
+consumableSharedPtr gem_DullGreyGemstone();
+consumableSharedPtr gem_SmallShiningGemstone();
+consumableSharedPtr gem_NobleGlowingGemstone();
+consumableSharedPtr gem_KingsGiantGemstone();
+consumableSharedPtr gem_GodlessGemstone();
 
 consumableSharedPtr bell_VoidwalkersDancingBell();
 consumableSharedPtr bell_VoidwalkersReturningBell();

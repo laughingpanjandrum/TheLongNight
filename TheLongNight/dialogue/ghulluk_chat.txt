@@ -6,4 +6,4 @@
 "Wouldn't you love to be its ravenous servant?"
 "Little, little pilgrim! Bring me the oracular shards of the lords of this land, and I'll show you the path of the Immortal Throne..."
 "Begone, begone! Tee-hee!"
-|BACK_UP_AND_END
+|SHOP

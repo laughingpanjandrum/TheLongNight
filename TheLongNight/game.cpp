@@ -585,8 +585,9 @@ void game::drawMenu(menu * m, int atx, int aty)
 {
 
 	//Box it in
-	win.clearRegion(atx - 1, aty - 1, 46, 39);
-	win.drawBox(atx - 1, aty - 1, 46, 39, TCODColor::darkSepia);
+	int height = m->getAllElements().size() + 4;
+	win.clearRegion(atx - 1, aty - 1, 46, height);
+	win.drawBox(atx - 1, aty - 1, 46, height, TCODColor::darkSepia);
 
 	//Title
 	win.write(atx, aty++, m->getTitle(), TCODColor::white);
@@ -597,7 +598,7 @@ void game::drawMenu(menu * m, int atx, int aty)
 	{
 
 		//SHOW NAME and tile
-		win.write(atx + 4, ++aty, (*it)->getName(), (*it)->getColor());
+		win.write(atx + 4, ++aty, (*it)->getMenuName(), (*it)->getColor());
 		win.writec(atx + 3, aty, (*it)->getTileCode(), (*it)->getColor());
 
 		//Mouse highlighting?!
@@ -872,7 +873,7 @@ void game::drawInterface(int leftx, int topy)
 	win.drawBox(atx - 1, aty - 1, 50, 30, TCODColor::darkSepia);
 
 	//Messages
-	int my = ITEM_DRAW_Y;
+	int my = ITEM_DRAW_Y + 3;
 	for (auto m : messages) {
 		win.write(ITEM_DRAW_X, my++, m.txt, m.color);
 	}
@@ -2246,6 +2247,8 @@ void game::applyEffectToPerson(personSharedPtr target, effect eff, int potency, 
 		if (caster->isProfane())
 			currentMap->removePerson(caster);
 	}
+	else if (eff == ACQUIRE_FRAGMENTS)
+		fragments += potency;
 
 	//Special effects, other
 	else if (eff == KNOCKBACK_TARGET)
@@ -2262,6 +2265,8 @@ void game::applyEffectToPerson(personSharedPtr target, effect eff, int potency, 
 		currentMap->setTile(tile_Web(), target->getx(), target->gety());
 	else if (eff == DROP_DRAINING_POOL)
 		currentMap->setTile(tile_DrainingPool(), target->getx(), target->gety());
+	else if (eff == DROP_CORRODING_BLOOD)
+		currentMap->setTile(tile_CorrodingBlood(), target->getx(), target->gety());
 	else if (eff == CREATE_FOG)
 		currentMap->createFogCloud(target->getx(), target->gety(), potency);
 
@@ -3072,7 +3077,24 @@ Equip the selected item.
 */
 void game::equipItem(itemSharedPtr it)
 {
-	player->equipItem(it);
+	if (it->getCategory() == ITEM_CONSUMABLE) {
+		consumableSharedPtr c = std::static_pointer_cast<consumable>(it);
+		if (c->oneUseOnly) {
+			//Instantly apply item effect
+			for (auto eff : c->getEffects()) {
+				applyEffectToPerson(player, eff, c->getPotency());
+			}
+			//Message about it
+			addMessage("Devoured " + c->getName() + '!', c->getColor());
+			//Expend item
+			player->loseItemForever(c);
+			//Close menu
+			menuBackOut();
+		}
+	}
+	else {
+		player->equipItem(it);
+	}
 }
 
 
@@ -3458,6 +3480,18 @@ void game::initializeShops()
 	goremShop->addItem(prayer_WyrdChantOfStrength(), 25);
 	allShops.push_back(goremShop);
 
+	//Ghulluk
+	shopSharedPtr ghullukShop = shopSharedPtr(new shop("ghulluk_shop"));
+	allShops.push_back(ghullukShop);
+	//Watchful Eyestalk
+	shopSharedPtr eyestalk = shopSharedPtr(new shop("watchful_eyestalk"));
+	eyestalk->addItem(key_UnderpoolKey(), 0);
+	allUnlockableShops.push_back(eyestalk);
+	//Mawtooth Fragment
+	shopSharedPtr mawtooth = shopSharedPtr(new shop("mawtooth_fragment"));
+	mawtooth->addItem(key_AbattoirKey(), 0);
+	allUnlockableShops.push_back(mawtooth);
+
 	//Utric
 	shopSharedPtr utricShop = shopSharedPtr(new shop("utric_shop"));
 	utricShop->addItem(charm_ArcanaDrenchedCharm(), 100);
@@ -3767,7 +3801,7 @@ void game::drawShopMenu(int atx, int aty)
 	aty += currentMenu->getAllElements().size() + 10;
 	itemSharedPtr sel = std::static_pointer_cast<item>(currentMenu->getSelectedItem());
 	if (sel != nullptr)
-		drawItemInfo(sel, atx, aty);
+		drawItemInfo(sel, ITEM_DRAW_X, ITEM_DRAW_Y);
 }
 
 
@@ -4111,6 +4145,8 @@ void game::clearDeadCreatures()
 		win.write(MAP_DRAW_X + 15, MAP_DRAW_Y + 20, "Y O U   D I E D", TCODColor::lightestRed);
 		win.refresh();
 		while (win.getkey().vk != KEY_ACCEPT) {}
+		//We lose all of our fragments
+		fragments = 0;
 		//Reload game
 		restoreFromSavePoint();
 	}

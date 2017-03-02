@@ -64,6 +64,7 @@ public:
 	void equipConsumable(consumableSharedPtr c);
 	void setSelectedConsumable(consumableSharedPtr c);
 	bool isConsumableEquipped(consumableSharedPtr c);
+	void removeConsumable(consumableSharedPtr c);
 
 	//Misc items
 	void equipMiscItem(miscItemSharedPtr m);

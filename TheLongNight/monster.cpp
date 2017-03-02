@@ -845,7 +845,7 @@ monsterSharedPtr monster_SwampSpider()
 
 monsterSharedPtr monster_AdherentOfGlug()
 {
-	monsterSharedPtr m(new monster("Adherent of Glug", TOAD_TILE, TCODColor::sea,
+	monsterSharedPtr m(new monster("Adherent of Glurg", TOAD_TILE, TCODColor::sea,
 		"Under the mud-soaked hood, a toad's bulging eyes leer at you. The \
 creature rings a filth-stained chime and chants in an unknown tongue."));
 	m->setHealth(100);
@@ -1449,9 +1449,14 @@ she wields a crooked scythe imbued with flames; in the other, she clutches an am
 	return m;
 }
 
+
+
+
 /*
 	Bridge of Lords
 */
+
+
 
 monsterSharedPtr monster_SentinelPikeman()
 {
@@ -1716,9 +1721,13 @@ monsterSharedPtr monster_TombHorror()
 }
 
 
+
+
 /*
 	Sunken Atalundra
 */
+
+
 
 monsterSharedPtr monster_LanternBearer()
 {
@@ -1837,6 +1846,7 @@ monsterSharedPtr monster_SirPercivel()
 /*
 	The Void
 */
+
 
 monsterSharedPtr monster_VoidTouched()
 {
@@ -1978,9 +1988,60 @@ monsterSharedPtr monster_TheDeathlessKnight()
 	m->setPoisonResist(1000);
 	m->setPlagueResist(1000);
 	m->isBoss = true;
-	m->setFragmentsDropped(1);
+	m->setFragmentsDropped(5000);
 	m->equipItem(weapon_DeathlessBlade());
 	m->setSpellCastChance(25);
+	m->addItemDrop(weapon_DeathlessBlade());
+	return m;
+}
+
+
+/*
+	GODS
+*/
+
+
+monsterSharedPtr monster_GlurgTheImbecile()
+{
+	monsterSharedPtr m(new monster("Glurg the Imbecile", GLURG_TILE, TCODColor::darkGreen,
+		"The earthly avatar of Glurg manifests as a drooling toad, shuddering in the deep. Perhaps when the imbecile god \
+devoured its forebears, the revelation of the truth beyond the stars proved unbearable."));
+	m->setHealth(2500);
+	m->setMoveStats(SPEED_SLOW);
+	m->keepsDistance = true;
+	m->setPoisonResist(1000);
+	m->setDefence(DAMAGE_PHYSICAL, 80);
+	m->addWeakness(DAMAGE_FIRE);
+	m->isBoss = true;
+	m->setFragmentsDropped(5000);
+	m->addSpellKnown(spellSharedPtr(new spell("Hop", TCODColor::yellow, ATTACK_BUFF_SELF, 1, GAIN_FREE_MOVES, 4)));
+	m->setSpellCastChance(20);
+	m->addSpawnableCreature("adherent_of_glug");
+	m->setSpawnChance(30);
+	return m;
+}
+
+monsterSharedPtr monster_PashTheRavenous()
+{
+	monsterSharedPtr m(new monster("Pash the Ravenous", PASH_TILE, TCODColor::lightestCrimson,
+		"The earthly avatar of Pash manifests as a creature composed entirely of mouths, all agape and bristling with teeth. Pale \
+eyes peer from the darkness within Pash's myriad maws, and saliva drips upon the ground."));
+	m->setHealth(5000);
+	m->setMoveStats(SPEED_NORMAL);
+	m->keepsDistance = true;
+	m->makeProfane();
+	m->setBleedResist(1000);
+	m->setDefence(DAMAGE_PHYSICAL, 40);
+	m->setDefence(DAMAGE_FIRE, 30);
+	m->addWeakness(DAMAGE_ELECTRIC);
+	m->isBoss = true;
+	m->setFragmentsDropped(5000);
+	m->addSpellKnown(spellSharedPtr(new spell("Planar Shift", TCODColor::purple, 8, 0, TELEPORT, 5)));
+	m->addSpellKnown(spellSharedPtr(new spell("Corrosion", TCODColor::red, ATTACK_BUFF_SELF, 1, DROP_CORRODING_BLOOD, 1)));
+	m->setSpellCastChance(50);
+	m->equipItem(weaponSharedPtr(new weapon(25, SPEED_NORMAL, DAMAGE_FIRE, 15)));
+	m->addSpawnableCreature("bleeding_maw");
+	m->setSpawnChance(5);
 	return m;
 }
 
@@ -2018,6 +2079,18 @@ monsterSharedPtr npc_UtricTheRat()
 	m->addShopUnlock("singed_writings");
 	//Dialogue
 	m->loadDialogue("dialogue/utric_chat.txt");
+	m->addSpecialDialogue("waterlogged_writings",
+		"Aha! So Gottric's journeys brought him to the lowlands! I suspect he was on his way to the Winter Court. But who knows \
+what he found there?");
+	m->addSpecialDialogue("minas_profaned_writings",
+		"It must have troubled Gottric to record these awful words! He was always a man of the most blessed devotion, never \
+turning away from the glorious light of the old gods, even during the age of despair.");
+	m->addSpecialDialogue("frostbitten_writings",
+		"I suppose I thought that Gottric's journeys would end at the Winter Court, but I suppose I was wrong! Where could he \
+have gone next?");
+	m->addSpecialDialogue("singed_writings",
+		"Yes, the Sparrows knew certain magicks that were meant to have been forgotten... Nonetheless, I wonder what profane \
+inspiration drove Gottric to such depths of insanity!");
 	return m;
 }
 
@@ -2036,6 +2109,21 @@ monsterSharedPtr npc_MuiraClericOfTheRose()
 	m->addShopUnlock("tome_of_the_dead");
 	//Dialogue
 	m->loadDialogue("dialogue/muira_chat.txt");
+	m->addSpecialDialogue("orsyls_tome_of_prayer",
+		"Have an interest in the profane, do you? Hee hee... Careful, that could lead to the grip of an unknowable depravity, \
+of the kind that the old gods forsook!");
+	m->addSpecialDialogue("divine_moonspark_tome",
+		"The Murdermire was once a beautiful place, you know, and it had quite a different name! But those were Yutria's times, \
+when the gods still answered prayers...");
+	m->addSpecialDialogue("divine_tome_of_the_emissary",
+		"Be careful now! Some say that Lady Tvert's emissaries are no longer agents of purity and light, but that she's dragged \
+them into the same decay that consumed her and her accursed scion...");
+	m->addSpecialDialogue("divine_nightmare_tome",
+		"Learning about Ietra, are we? Let me give you some advice... If you take the road of the old saints, you'll end up as \
+they did - we all know how that went!");
+	m->addSpecialDialogue("tome_of_the_dead",
+		"So you seek the secrets of the dead, just as they did in Sunken Atalundra! You know their city was drowned, surely, and \
+that their ancient teachings were lose forever? Do you desire the same fate?");
 	return m;
 }
 
@@ -2076,7 +2164,6 @@ monsterSharedPtr npc_Ydella()
 	m->setHealth(500);
 	m->isHostile = false;
 	m->isShopkeeper = true;
-	m->loadDialogue("dialogue/ydella_chat.txt");
 	//Items are all acquired via HEART-TRADING
 	m->setShopTag("ydella_shop");
 	m->addShopUnlock("wretched_heart");
@@ -2094,6 +2181,34 @@ monsterSharedPtr npc_Ydella()
 	m->addShopUnlock("plague_ridden_heart");
 	m->addShopUnlock("heart_of_farin");
 	m->addShopUnlock("rat_kings_heart");
+	//Dialogue
+	m->loadDialogue("dialogue/ydella_chat.txt");
+	m->addSpecialDialogue("wretched_heart",
+		"Alas, the poor wretches! I saw them fleeing the ruin of the city, but there was nothing I could do...");
+	m->addSpecialDialogue("old_crows_heart",
+		"Shame! The Old Crow and I were once friends, and we spoke about the old days, before the stars left the sky...");
+	m->addSpecialDialogue("fishborn_heart",
+		"Pshaw! Creatures of the deep, one and all, deserve none of our pity - they devoured everything that mattered...");
+	m->addSpecialDialogue("orsyls_heart",
+		"Orsyl dead too? All the old clerics dying, one after the other, in the sordid light of the nightmare!");
+	m->addSpecialDialogue("vortens_heart",
+		"A thousand curses be heaped upon Vorten! His betrayal was our downfall, the cause of the accursed gaze of Pash!");
+	m->addSpecialDialogue("venomous_spiders_heart",
+		"My, this heart has a particular toxicity! Surely it came from a creature most disgustingly vile!");
+	m->addSpecialDialogue("dead_sparrows_heart",
+		"Be careful, little pilgrim! I've heard that it's not wise for certain creatures to die...");
+	m->addSpecialDialogue("corens_heart",
+		"Coren, scourge of the lowlands, laid low at last!");
+	m->addSpecialDialogue("khalles_heart",
+		"Khalle, madman whom the gods ignored, laid low at last!");
+	m->addSpecialDialogue("ietras_heart",
+		"Ietra, queen of the abyss, captain of the abandoned, laid low at last!");
+	m->addSpecialDialogue("pale_heart",
+		"This heart is singularly cold! Is it the heart of the old king, or just his echo?");
+	m->addSpecialDialogue("heart_of_farin",
+		"Alas, Farin! He was fascinated by the truth that lay beyond death, I heard, but perhaps he didn't find it to his liking...");
+	m->addSpecialDialogue("rat_kings_heart",
+		"Now here's a revelation best left alone...");
 	return m;
 }
 
@@ -2114,7 +2229,16 @@ monsterSharedPtr npc_ToadPriestGhulluk()
 		"This tiny, toadlike man clutches a gnarled wooden staff, and leers at your from under his mud-stained hood."));
 	m->setHealth(500);
 	m->isHostile = false;
+	//Shop
+	m->setShopTag("ghulluk_shop");
+	m->addShopUnlock("watchful_eyestalk");
+	m->addShopUnlock("mawtooth_fragment");
+	//Dialogue
 	m->loadDialogue("dialogue/ghulluk_chat.txt");
+	m->addSpecialDialogue("watchful_eyestalk",
+		"Haha, excellent! The eyestalk of Vorten, delver into the watchful deeps, will serve our purpose!");
+	m->addSpecialDialogue("mawtooth_fragment",
+		"Good, good! The mawtooth of the ravenous Pash, hungering for everlasting flesh, will serve our purpose!");
 	return m;
 }
 
@@ -2375,6 +2499,12 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return monster_LordOfFallowFields();
 	else if (handle == "the_deathless_knight")
 		return monster_TheDeathlessKnight();
+
+	//The Gods
+	else if (handle == "glurg_the_imbecile")
+		return monster_GlurgTheImbecile();
+	else if (handle == "pash_the_ravenous")
+		return monster_PashTheRavenous();
 
 	//Friendly NPCs
 	else if (handle == "gorem")

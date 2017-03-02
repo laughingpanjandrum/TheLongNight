@@ -229,6 +229,26 @@ sufficient to rouse him from that astral prison, and to put an end to his accurs
 	return m;
 }
 
+miscItemSharedPtr key_UnderpoolKey()
+{
+	miscItemSharedPtr k(new miscItem("Underpool Key", KEY_TILE, TCODColor::darkGreen,
+		"All creatures of slime and muck are welcome in the worship of Glurg, the filth-encrusted god of horrors that emerge from \
+the deep. But only the most profane are welcome in Glurg's eternal sanctum."));
+	k->setKeyTag("underpool_key");
+	k->setWhatWeDo("Unlocks the door to Underpool from the Toad Shrine.");
+	return k;
+}
+
+miscItemSharedPtr key_AbattoirKey()
+{
+	miscItemSharedPtr k(new miscItem("Abattoir Key", KEY_TILE, TCODColor::lighterCrimson,
+		"The gaze of Pash inspires a curious bloodlust in those it regards. Evidence of the awful misdeeds of the slaves of \
+Pash were hidden away beneath the crumbling city, never meant to be uncovered."));
+	k->setKeyTag("abattoir_key");
+	k->setWhatWeDo("Unlocks the door to the Abattoir of Pash in the Crumbling City.");
+	return k;
+}
+
 miscItemSharedPtr key_IetrasAmberPendant()
 {
 	miscItemSharedPtr m(new miscItem("Ietra's Amber Pendant", KEY_TILE, TCODColor::amber,
@@ -473,7 +493,7 @@ as befit their role in the Valley."));
 miscItemSharedPtr spellbook_DivineNightmareTome()
 {
 	miscItemSharedPtr s(new miscItem("Divine Nightmare Tome", SPELL_TILE, TCODColor::magenta,
-		"Before she was devoured by the Void, Iedra, last wizard of the Winter Court, sought a truth beyond the \
+		"Before she was devoured by the Void, Ietra, last wizard of the Winter Court, sought a truth beyond the \
 stars. The First Sparrow rejected her offer to teach him the prayers that led her to this holy knowledge, however, \
 and she was cast out to wither away."));
 	s->setKeyTag("divine_nightmare_tome");

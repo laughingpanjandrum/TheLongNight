@@ -386,6 +386,18 @@ itemSharedPtr getItemByHandle(std::string handle)
 	else if (handle == "piece_of_bone")
 		return misc_PieceOfBone();
 
+	//GEMSTONES
+	if (handle == "dull_grey_gemstone")
+		return gem_DullGreyGemstone();
+	else if (handle == "small_shining_gemstone")
+		return gem_SmallShiningGemstone();
+	else if (handle == "noble_glowing_gemstone")
+		return gem_NobleGlowingGemstone();
+	else if (handle == "kings_giant_gemstone")
+		return gem_KingsGiantGemstone();
+	else if (handle == "godless_gemstone")
+		return gem_GodlessGemstone();
+
 	//RUNESTONES
 	if (handle == "corens_runestone")
 		return runestone_CorensRunestone();
@@ -549,6 +561,7 @@ std::string getEffectName(effect e)
 	case(SILENCE): return "silence";
 	case(DROP_WEB): return "create spiderweb";
 	case(ASTRAL_IMPRISONMENT): return "astral imprisonment";
+	case(ACQUIRE_FRAGMENTS): return "acquire fragments";
 
 	case(TELEPORT_VIA_WATER): return "water warp";
 	case(TELEPORT_TO_VOID): return "warp to void";

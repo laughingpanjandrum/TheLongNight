@@ -258,6 +258,10 @@ monsterSharedPtr monster_AstralJailorPlague();
 monsterSharedPtr monster_LordOfFallowFields();
 monsterSharedPtr monster_TheDeathlessKnight();
 
+//Gods
+monsterSharedPtr monster_GlurgTheImbecile();
+monsterSharedPtr monster_PashTheRavenous();
+
 //Friendly NPCs
 monsterSharedPtr npc_Gorem();
 monsterSharedPtr npc_UtricTheRat();

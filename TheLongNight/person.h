@@ -203,6 +203,7 @@ public:
 	void swapWeapon();
 	void unequipItem(itemSharedPtr which);
 	bool addItem(itemSharedPtr which);
+	void loseItemForever(itemSharedPtr which);
 	void doWeaponEquip(weaponSharedPtr it);
 	void loseKey(std::string keyTag);
 	bool isRunestoneEquipped(miscItemSharedPtr r);
