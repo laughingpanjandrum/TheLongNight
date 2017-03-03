@@ -22,8 +22,8 @@ const int PLAYER_TILE = 257;
 
 const int DROWNED_DEAD_TILE = 356;
 
-const int WRETCH_TILE = 375;
-const int BLOATED_WRETCH_TILE = 322;
+const int WRETCH_TILE = 119;
+const int BLOATED_WRETCH_TILE = 66;
 const int WRETCHED_MASS_TILE = 343;
 
 const int CROW_KNIGHT_TILE = 355;

@@ -1919,8 +1919,8 @@ void game::drawItemImage(itemSharedPtr it, int atx, int aty, bool drawOtherArmou
 		//If this is a HELMET item, we also draw the armour!
 		if (it->getCategory() == ITEM_HELMET && drawOtherArmourPiece) {
 			auto a = player->getArmour();
-			if (a != nullptr)
-				drawItemImage(a, atx, aty, false);
+			if (a != nullptr && a->hasImage())
+				win.drawImage(a->getImage(), atx, aty);
 		}
 		
 		//Draw this item
@@ -1929,8 +1929,8 @@ void game::drawItemImage(itemSharedPtr it, int atx, int aty, bool drawOtherArmou
 		//If this is an ARMOUR item, we also draw the helmet!
 		if (it->getCategory() == ITEM_BODY_ARMOUR && drawOtherArmourPiece) {
 			auto h = player->getHelmet();
-			if (h != nullptr)
-				drawItemImage(h, atx, aty, false);
+			if (h != nullptr && h->hasImage())
+				win.drawImage(h->getImage(), atx, aty);
 		}
 	
 	}
@@ -3090,11 +3090,12 @@ void game::equipItem(itemSharedPtr it)
 			player->loseItemForever(c);
 			//Close menu
 			menuBackOut();
+			return;
 		}
 	}
-	else {
-		player->equipItem(it);
-	}
+
+	//Just equip the item normally
+	player->equipItem(it);
 }
 
 
