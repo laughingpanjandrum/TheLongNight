@@ -642,7 +642,7 @@ miscItemSharedPtr runestone_VenomousRunestone()
 
 miscItemSharedPtr bones_KhallesBones()
 {
-	miscItemSharedPtr b(new miscItem("Khalle's Bones", KEY_TILE, TCODColor::lightestYellow,
+	miscItemSharedPtr b(new miscItem("Khalle's Bones", CORPSE_TILE, TCODColor::lightestYellow,
 		"All that remains of Khalle, who prayed to the old gods for the downfall of the void. Her prayers were met with silence, \
 and her congregation was swallowed by the rising mud."));
 	b->isKey = true;
@@ -653,7 +653,7 @@ and her congregation was swallowed by the rising mud."));
 
 miscItemSharedPtr bones_SiltrasBones()
 {
-	miscItemSharedPtr b(new miscItem("Siltra's Bones", KEY_TILE, TCODColor::lightestYellow,
+	miscItemSharedPtr b(new miscItem("Siltra's Bones", CORPSE_TILE, TCODColor::lightestYellow,
 		"All that remains of Siltra, who once menaced the lowlands with her red-eyed army. In later days it was said that she \
 was greatly changed, and that the old gods gave her a fitting reward for her deeds."));
 	b->isKey = true;
@@ -664,7 +664,7 @@ was greatly changed, and that the old gods gave her a fitting reward for her dee
 
 miscItemSharedPtr bones_CorensBones()
 {
-	miscItemSharedPtr b(new miscItem("Coren's Bones", KEY_TILE, TCODColor::lightestYellow,
+	miscItemSharedPtr b(new miscItem("Coren's Bones", CORPSE_TILE, TCODColor::lightestYellow,
 		"All that remains of Coren, who prayed to the old gods for glory and victory, and who once laid waste to the\
  lowlands. After the gods had slaked their thirst, his bones were laid to rest in the muck."));
 	b->setKeyTag("corens_bones");
@@ -674,7 +674,7 @@ miscItemSharedPtr bones_CorensBones()
 
 miscItemSharedPtr bones_IetrasBones()
 {
-	miscItemSharedPtr b(new miscItem("Ietra's Bones", KEY_TILE, TCODColor::lightestYellow,
+	miscItemSharedPtr b(new miscItem("Ietra's Bones", CORPSE_TILE, TCODColor::lightestYellow,
 		"All that remains of Ietra, who sought truth among the fallen stars. According to certain storytellers, \
 she told Moshka the true history of the immortals, and then fell to lie eternally in the void."));
 	b->setKeyTag("ietras_bones");

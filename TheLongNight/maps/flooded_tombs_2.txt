@@ -4,6 +4,8 @@ start:29,17
 tomb_horror:25,12
 -items
 venomous_runestone:3,15
+kings_giant_gemstone:32,28
+rotten_beast_shield:8,26
 -enditems
 -codes
 ; floor_grass
@@ -55,12 +57,12 @@ south:rat_kings_cathedral_1
 #wwwwwwwwwwwwwww'wwwww'wwwwwwwww'''ww'w#
 ###@##wwww'www'wwwwwwwwwwwwwwww'w'ww''w#
 #wwww####wwwwwwwwwwwwwwwww'ww''w###&####
-#wwww#ww######wwwww'wwwwwwwwwwww#wwwwww#
+#wwww#ww###w##wwwww'wwwwwwwwwwww#wwwwww#
 #wwww#wwwwwww#########ww'wwwww'w#wwwwww#
-#wwww#wwwwwwwwwwwwwww#####wwwwww#wwwwww#
-#.www#wwwwwwwwwwwwwwwwwww########wwwwww#
-#.%ww#wwwwwwwwwwwwwwwwwwwwww#wwwwwwwwww#
-#%..w##wwwwwwwwwwwwwwwwwwwww#wwwww.....#
+#wwww#ww'wwww#wwwwwww#####wwwwww#wwwwww#
+#.www#wwwww'w#wwwwwwwwwww########wwwwww#
+#.%ww#'wwwwww#wwwwwwwwwwwwww#wwwwwwwwww#
+#%..w#########wwwwwwwwwwwwww#wwwww.....#
 #.....#wwwwwwwwwwwwwwwwwwwww#wwwwww....#
 #..%.%#wwwwwwwwwwwwwwwwwwwww#wwwww...>.#
 #.%%..##wwwwwwwwwwwwwwwwwwww#wwww......#

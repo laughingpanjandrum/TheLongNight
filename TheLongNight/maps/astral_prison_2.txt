@@ -7,7 +7,7 @@ astral_jailor_electric_magic:27,17
 astral_jailor_pois_bleed:3,20
 astral_jailor_plague:5,23
 -items
-astral_prison:13,9
+godless_gemstone:13,9
 -enditems
 -codes
 . floor_stone

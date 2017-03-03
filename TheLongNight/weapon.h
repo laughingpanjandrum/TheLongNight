@@ -66,8 +66,8 @@ public:
 	void setBuff(weaponBuff buff) { currentBuff = buff; }
 	void clearBuff(weaponBuff buff) { currentBuff = weaponBuff(); }
 	weaponBuff getCurrentBuff() { return currentBuff; }
-	void setRune(weaponRune* r) { rune = r; }
-	weaponRune* getRune() { return rune; }
+	void setRune(weaponRuneSharedPtr r) { rune = r; }
+	weaponRuneSharedPtr getRune() { return rune; }
 
 	//Scaling
 	void addScalingType(statScaling st) { scaling.push_back(st); }
@@ -107,7 +107,7 @@ private:
 
 	//Buffing
 	weaponBuff currentBuff;
-	weaponRune* rune;
+	weaponRuneSharedPtr rune;
 
 	//Scaling
 	statScaleVector scaling;
@@ -189,6 +189,7 @@ weaponSharedPtr shield_EtherealShield();
 weaponSharedPtr shield_KhallesBellShield();
 weaponSharedPtr shield_GhostlyShield();
 weaponSharedPtr shield_SirPercivelsShield();
+weaponSharedPtr shield_RottenBeastShield();
 
 //Wands
 weaponSharedPtr wand_DriftwoodWand();

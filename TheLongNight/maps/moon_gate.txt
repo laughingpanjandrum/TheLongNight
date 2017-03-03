@@ -1,6 +1,7 @@
 Moon Gate
 start:39,20
 -items
+noble_glowing_gemstone:12,18
 -enditems
 -codes
 . floor_magic

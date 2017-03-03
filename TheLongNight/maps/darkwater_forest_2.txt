@@ -8,6 +8,7 @@ muira:21,15
 -items
 pyromancers_flask:32,21
 pyromancers_oil:10,22
+dull_grey_gemstone:15,5
 -enditems
 -codes
 ; floor_stone

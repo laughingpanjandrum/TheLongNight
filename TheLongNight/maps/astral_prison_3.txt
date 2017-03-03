@@ -3,7 +3,6 @@ darkness:0.4,0
 start:24,38
 lord_of_fallow_fields:18,25
 -items
-astral_prison:13,9
 -enditems
 -codes
 . floor_stone

@@ -111,7 +111,7 @@ const int MOSS_TILE = 293;
 const int BUSH_TILE = 294;
 const int TREE_TILE = 295;
 const int TERMINAL_TILE = 296; //ie a computer terminal
-const int CORPSE_TILE = 37;
+const int CORPSE_TILE = 322;
 const int CARPET_TILE = 177;
 const int WEB_TILE = 37;
 

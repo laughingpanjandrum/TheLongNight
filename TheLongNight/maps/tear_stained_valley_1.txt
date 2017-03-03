@@ -3,6 +3,7 @@ start:20,0
 emissary:19,14
 -items
 divine_tome_of_the_emissary:19,15
+noble_glowing_gemstone:9,30
 -enditems
 -codes
 . floor_grass

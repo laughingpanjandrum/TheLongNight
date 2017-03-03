@@ -8,6 +8,7 @@ crawling_zombie:9,16
 -items
 idol_of_pash:22,33
 heavy_javelin:8,14
+small_shining_gemstone:25,5
 -enditems
 -codes
 . floor_stone

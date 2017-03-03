@@ -89,6 +89,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return shield_GhostlyShield();
 	else if (handle == "sir_percivels_shield")
 		return shield_SirPercivelsShield();
+	else if (handle == "rotten_beast_shield")
+		return shield_RottenBeastShield();
 
 	//WANDS/CHIMES
 	if (handle == "driftwood_wand")

@@ -3,6 +3,7 @@ darkness:0.4,0
 start:39,12
 ghorth:12,28
 -items
+noble_glowing_gemstone:24,8
 -enditems
 -codes
 ; floor_grass

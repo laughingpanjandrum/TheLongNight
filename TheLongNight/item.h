@@ -114,8 +114,8 @@ struct weaponRune {
 	statScaling addScalingType;
 };
 
-
-typedef std::vector<weaponRune*> weaponRuneVector;
+typedef std::shared_ptr<weaponRune> weaponRuneSharedPtr;
+typedef std::vector<weaponRuneSharedPtr> weaponRuneVector;
 
 //Names of item categories.
 const std::string getItemCategoryName(itemTypes cat);

@@ -1637,7 +1637,7 @@ void game::drawWeaponInfo(weaponSharedPtr it, int atx, int aty)
 
 	//Rune, if any
 	aty += 2;
-	weaponRune* rune = it->getRune();
+	weaponRuneSharedPtr rune = it->getRune();
 	if (rune != nullptr) {
 		win.write(atx, aty, "RUNE:", TCODColor::white);
 		win.write(atx + 5, aty, rune->name, rune->color);
@@ -1865,32 +1865,13 @@ void game::drawMiscItemInfo(miscItemSharedPtr it, int atx, int aty)
 	if (it->isRunestone) {
 		win.write(atx, aty++, "Equip to slot into your current weapon.", TCODColor::white);
 		//Specific effects
-		weaponRune* rune = it->getRune();
+		weaponRuneSharedPtr rune = it->getRune();
 		if (rune != nullptr) {
 			//Description
-			if (rune->addScalingType == SCALE_FIRE) {
-				win.write(atx, ++aty, "Weapon deals additional fire damage.", rune->color);
-			}
-			else if (rune->addScalingType == SCALE_ELECTRIC) {
-				win.write(atx, ++aty, "Weapon deals additional electric damage.", rune->color);
-			}
-			else if (rune->addScalingType == SCALE_MAGIC) {
-				win.write(atx, ++aty, "Weapon deals additional magic damage.", rune->color);
-			}
-			else if (rune->addScalingType == SCALE_PHYSICAL) {
-				win.write(atx, ++aty, "Weapon deals additional physical damage.", rune->color);
-			}
-			else if (rune->addScalingType == SCALE_BLEED) {
-				win.write(atx, ++aty, "Weapon deals additional bleed damage.", rune->color);
-			}
-			else if (rune->addScalingType == SCALE_ACID) {
-				win.write(atx, ++aty, "Weapon deals additional acid damage.", rune->color);
-			}
-			else if (rune->addScalingType == SCALE_COLD) {
-				win.write(atx, ++aty, "Weapon deals additional cold damage.", rune->color);
-			}
-			else {
-				//Changes scaling
+			if (rune->addScalingType == SCALE_STR || rune->addScalingType == SCALE_DEX || rune->addScalingType == SCALE_ARC ||
+				rune->addScalingType == SCALE_DEV) {
+				
+				//Scales with a stat
 				std::string scaleType;
 				switch (rune->addScalingType) {
 				case(SCALE_STR): scaleType = "Strength"; break;
@@ -1898,7 +1879,26 @@ void game::drawMiscItemInfo(miscItemSharedPtr it, int atx, int aty)
 				case(SCALE_ARC): scaleType = "Arcane"; break;
 				case(SCALE_DEV): scaleType = "Devotion"; break;
 				}
+				
 				win.write(atx, ++aty, "Improves scaling with " + scaleType + ".", rune->color);
+			}
+			else {
+
+				//Adds bonus damage of a particular type
+				std::string addsDmg;
+				switch (rune->addScalingType) {
+				case(SCALE_ACID): addsDmg = "Acid"; break;
+				case(SCALE_COLD): addsDmg = "Cold"; break;
+				case(SCALE_FIRE): addsDmg = "Fire"; break;
+				case(SCALE_ELECTRIC): addsDmg = "Electric"; break;
+				case(SCALE_MAGIC): addsDmg = "Magic"; break;
+				case(SCALE_PHYSICAL): addsDmg = "Physical"; break;
+				case(SCALE_POISON): addsDmg = "Poison"; break;
+				case(SCALE_BLEED): addsDmg = "Bleed"; break;
+				}
+
+				win.write(atx, ++aty, "Weapon deals additional " + addsDmg + " damage.", rune->color);
+
 			}
 		}
 	}
@@ -3446,7 +3446,7 @@ void game::drawLevelUpMenu(int atx, int aty)
 	win.write(atx + offset, ++aty, std::to_string(player->stats->arcana), statCol);
 	win.write(atx + offset, ++aty, std::to_string(player->stats->devotion), statCol);
 	//How much the next level COSTS
-	aty += 2;
+	aty += 3;
 	win.write(atx, aty, "Requires", TCODColor::white);
 	win.writec(atx + 9, aty, FRAGMENT_GLYPH, TCODColor::amber);
 	//Colour indicates whether we have enough
@@ -4449,6 +4449,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(runestone_CharredRunestone());
 	player->addItem(runestone_CorensRunestone());
 	player->addItem(runestone_CorrodingRunestone());
+	player->addItem(runestone_FrozenRunestone());
 	player->addItem(runestone_IetrasRunestone());
 	player->addItem(runestone_KhallesRunestone());
 	player->addItem(runestone_KinslayersRunestone());

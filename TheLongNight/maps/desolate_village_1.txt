@@ -4,6 +4,7 @@ slavemaster_gasgut:31,29
 -items
 black_honey:35,15
 obscuring_charm:34,23
+noble_glowing_gemstone:8,34
 -enditems
 -codes
 . floor_grass

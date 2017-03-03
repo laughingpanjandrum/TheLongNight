@@ -4,6 +4,7 @@ duke_vorten:15,5
 cursed_knight:14,7
 cursed_knight:16,7
 -items
+small_shining_gemstone:37,37
 -enditems
 -codes
 . floor_stone

@@ -866,6 +866,17 @@ what comes of those who rely on the strength of the old gods, and was immensely 
 	return wp;
 }
 
+weaponSharedPtr shield_RottenBeastShield()
+{
+	weaponSharedPtr wp(new weapon("Rotten Beast Shield", SHIELD_TILE, TCODColor::lightLime,
+		"Shield rotted from extensive contact with the toxins of the tombs."));
+	wp->setDefence(10);
+	wp->setPoisonResist(20);
+	wp->makeOffhand();
+	wp->setDamagePenalty(5);
+	return wp;
+}
+
 //		Wands
 
 weaponSharedPtr wand_DriftwoodWand()

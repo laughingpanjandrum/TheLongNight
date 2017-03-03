@@ -24,8 +24,8 @@ public:
 
 	//For runestones
 	bool isRunestone = false;
-	weaponRune* getRune() { return runeApplied; }
-	void setRune(weaponRune* r) { runeApplied = r; }
+	weaponRuneSharedPtr getRune() { return runeApplied; }
+	void setRune(weaponRune* r) { runeApplied = weaponRuneSharedPtr(r); }
 
 	//Information
 	void setWhatWeDo(std::string wwd) { whatWeDo = wwd; }
@@ -40,7 +40,7 @@ private:
 	std::string whatWeDo;
 
 	//Runestone information
-	weaponRune* runeApplied;
+	weaponRuneSharedPtr runeApplied;
 
 };
 

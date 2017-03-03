@@ -6,6 +6,7 @@ decomposing_knight:19,18
 lifedrinker_wraith:20,13
 -items
 warping_javelins:20,16
+kings_giant_gemstone:3,20
 -enditems
 -codes
 . floor_magic

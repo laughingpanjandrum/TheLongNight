@@ -8,7 +8,7 @@ ooze:12,22
 moshkas_headpiece:8,5
 moshkas_robes:9,6
 witchwater_flask:5,19
-startouched_writings:12,24
+kings_giant_gemstone:12,24
 -enditems
 -codes
 . floor_magic

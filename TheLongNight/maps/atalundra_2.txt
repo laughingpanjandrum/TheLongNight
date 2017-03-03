@@ -5,6 +5,7 @@ distorted_horror:20,20
 distorted_horror:21,20
 -items
 atalundra_arcane_spear:20,2
+godless_gemstone:8,10
 -enditems
 -codes
 ; floor_grass
