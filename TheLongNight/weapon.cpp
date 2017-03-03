@@ -226,7 +226,7 @@ weaponSharedPtr weapon_SplinteredSword()
 		"Once a treasured heirloom. Now it's just a broken sword, decent at serration, but certainly unfit for a stardrift captain."));
 	wp->setBasicAttributes(25, SPEED_NORMAL);
 	wp->addScalingType(SCALE_STR);
-	wp->setImage(IMAGE_SPLINTERED_SWORD);
+	wp->setImage(loadWeaponImage("W_splintered sword"));
 	return wp;
 }
 
@@ -237,7 +237,7 @@ weaponSharedPtr weapon_ThinKnife()
 	wp->setBasicAttributes(15, SPEED_FAST);
 	wp->setSpecialAttack(attack_Quickstep());
 	wp->addScalingType(SCALE_DEX);
-	wp->setImage(IMAGE_THIN_KNIFE);
+	wp->setImage(loadWeaponImage("W_thin knife"));
 	return wp;
 }
 
@@ -249,7 +249,7 @@ weaponSharedPtr weapon_StraightSword()
 	wp->setSpecialAttack(attack_StrongAttack());
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEX);
-	wp->setImage(IMAGE_STRAIGHT_SWORD);
+	wp->setImage(loadWeaponImage("W_straight sword"));
 	return wp;
 }
 
@@ -260,7 +260,7 @@ weaponSharedPtr weapon_Warhammer()
 	wp->setBasicAttributes(50, SPEED_SLOW);
 	wp->setSpecialAttack(attack_Knockback());
 	wp->addScalingType(SCALE_STR);
-	wp->setImage(IMAGE_WARHAMMER);
+	wp->setImage(loadWeaponImage("W_warhammer"));
 	return wp;
 }
 
@@ -272,7 +272,7 @@ weaponSharedPtr weapon_CrowKnightSword()
 	wp->setSpecialAttack(attack_Splintering());
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEX);
-	wp->setImage(IMAGE_CROW_KNIGHT_SWORD);
+	wp->setImage(loadWeaponImage("W_crow knight sword"));
 	return wp;
 }
 
@@ -284,7 +284,7 @@ weaponSharedPtr weapon_CrowKnife()
 	wp->addStatusEffect(EFFECT_BLEED, 10);
 	wp->setSpecialAttack(attack_Splintering());
 	wp->addScalingType(SCALE_DEX);
-	wp->setImage(IMAGE_CROW_KNIFE);
+	wp->setImage(loadWeaponImage("W_crow knife"));
 	return wp;
 }
 
@@ -297,7 +297,7 @@ weaponSharedPtr weapon_CrowHalfsword()
 	wp->setSpecialAttack(attack_Splintering());
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEX);
-	wp->setImage(IMAGE_CROW_HALFSWORD);
+	wp->setImage(loadWeaponImage("W_crow halfsword"));
 	return wp;
 }
 
@@ -310,7 +310,7 @@ but over the years his promise was forgotten."));
 	wp->addStatusEffect(EFFECT_BLEED, 15);
 	wp->setSpecialAttack(attack_Quickstep());
 	wp->addScalingType(SCALE_DEX);
-	wp->setImage(IMAGE_OLD_CROWS_LONG_KNIFE);
+	wp->setImage(loadWeaponImage("W_old crow's long knife"));
 	return wp;
 }
 
@@ -321,7 +321,7 @@ weaponSharedPtr weapon_NotchedGreatsword()
 	wp->setBasicAttributes(100, SPEED_SLOW);
 	wp->addScalingType(SCALE_STR);
 	wp->setSpecialAttack(attack_MightyCleave());
-	wp->setImage(IMAGE_NOTCHED_GREATSWORD);
+	wp->setImage(loadWeaponImage("W_notched greatsword"));
 	return wp;
 }
 
@@ -334,7 +334,7 @@ weaponSharedPtr weapon_FishmansHarpoon()
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_Spearfishing());
-	wp->setImage(IMAGE_FISHMANS_HARPOON);
+	wp->setImage(loadWeaponImage("W_fishmans harpoon"));
 	return wp;
 }
 
@@ -345,7 +345,7 @@ weaponSharedPtr weapon_FishmansKnife()
 	wp->setBasicAttributes(15, SPEED_FAST);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_Fillet());
-	wp->setImage(IMAGE_FISHMANS_KNIFE);
+	wp->setImage(loadWeaponImage("W_fishmans knife"));
 	return wp;
 }
 
@@ -358,7 +358,7 @@ weaponSharedPtr weapon_CityGuardianWarhammer()
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEV);
 	wp->setSpecialAttack(attack_DivineSmite());
-	wp->setImage(IMAGE_HOLY_WARHAMMER);
+	wp->setImage(loadWeaponImage("W_holy warhammer"));
 	return wp;
 }
 
@@ -372,7 +372,7 @@ see the true shape of all things."));
 	wp->addScalingType(SCALE_DEX);
 	wp->addScalingType(SCALE_DEV);
 	wp->setSpecialAttack(attack_BloodFeast());
-	wp->setImage(IMAGE_BLOOD_KNIFE);
+	wp->setImage(loadWeaponImage("W_blood knife"));
 	return wp;
 }
 
@@ -386,7 +386,7 @@ weaponSharedPtr weapon_KythielsScythe()
 	wp->addScalingType(SCALE_DEX);
 	wp->addScalingType(SCALE_DEV);
 	wp->setSpecialAttack(attack_HolySummons());
-	wp->setImage(IMAGE_HOLY_SCYTHE);
+	wp->setImage(loadWeaponImage("W_holy scythe"));
 	return wp;
 }
 
@@ -398,7 +398,7 @@ weaponSharedPtr weapon_VoidTouchedKnife()
 	wp->addDamageType(DAMAGE_PROFANE, 20);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_VoidSlash());
-	wp->setImage(IMAGE_ETHEREAL_KNIFE);
+	wp->setImage(loadWeaponImage("W_ethereal knife"));
 	return wp;
 }
 
@@ -411,7 +411,7 @@ weaponSharedPtr weapon_VoidCrystalGreatsword()
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEV);
 	wp->setSpecialAttack(attack_VoidSurge());
-	wp->setImage(IMAGE_PROFANE_GREATSWORD);
+	wp->setImage(loadWeaponImage("W_profane greatsword"));
 	return wp;
 }
 
@@ -427,7 +427,7 @@ weaponSharedPtr weapon_ArmOfTheDuke()
 	wp->setDivinePower(80);
 	wp->setSpecialAttack(ability_TentacleSwarm());
 	wp->isProfane = true;
-	wp->setImage(IMAGE_TENTACLE_ARM);
+	wp->setImage(loadWeaponImage("W_tentacle arm"));
 	return wp;
 }
 
@@ -441,7 +441,7 @@ contain some of that power."));
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_FlameSwathe());
-	wp->setImage(IMAGE_DRAGONBONE_SWORD);
+	wp->setImage(loadWeaponImage("W_dragonbone sword"));
 	return wp;
 }
 
@@ -453,7 +453,7 @@ weaponSharedPtr weapon_SerpentsTooth()
 	wp->addStatusEffect(EFFECT_POISON, 15);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_DripVenom());
-	wp->setImage(IMAGE_SERPENTS_TOOTH);
+	wp->setImage(loadWeaponImage("W_serpent tooth"));
 	return wp;
 }
 
@@ -465,7 +465,7 @@ weaponSharedPtr weapon_CrimsonNail()
 	wp->addScalingType(SCALE_DEX);
 	wp->scaleWithDamage = true;
 	wp->setSpecialAttack(attack_SuckOutLife());
-	wp->setImage(IMAGE_CRIMSON_NAIL);
+	wp->setImage(loadWeaponImage("W_crimson nail"));
 	return wp;
 }
 
@@ -477,7 +477,7 @@ weaponSharedPtr weapon_SpiderboneShard()
 	wp->addStatusEffect(EFFECT_POISON, 20);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_SpiderStrike());
-	wp->setImage(IMAGE_SPIDERBONE_SHARD);
+	wp->setImage(loadWeaponImage("W_spiderbone shard"));
 	return wp;
 }
 
@@ -490,7 +490,7 @@ Those who refused to heed the call were sacrificed to the Gaping Maw to the bene
 	wp->addScalingType(SCALE_DEX);
 	wp->setDamageToSelf(5);
 	wp->setSpecialAttack(attack_DeepCut());
-	wp->setImage(IMAGE_SACRIFICAL_KNIFE);
+	wp->setImage(loadWeaponImage("W_sacrificial knife"));
 	return wp;
 }
 
@@ -503,7 +503,7 @@ until death, but this did not satisfy Lady Tvert, whose made a pact to ensure th
 	wp->addStatusEffect(EFFECT_BLEED, 20);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_Lash());
-	wp->setImage(IMAGE_SLAVEMASTER_WHIP);
+	wp->setImage(loadWeaponImage("W_slave master whip"));
 	return wp;
 }
 
@@ -517,7 +517,7 @@ and her followers, saw a peculiar beauty in the transformation."));
 	wp->addStatusEffect(EFFECT_POISON, 10);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_RavenousHunger());
-	wp->setImage(IMAGE_POISONOUS_CLAWS);
+	wp->setImage(loadWeaponImage("W_poisonous claws"));
 	return wp;
 }
 
@@ -531,7 +531,7 @@ little of their original form remains."));
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_ARC);
 	wp->setSpecialAttack(attack_EtherealStrike());
-	wp->setImage(IMAGE_ENERGY_SWORD);
+	wp->setImage(loadWeaponImage("W_energy sword"));
 	return wp;
 }
 
@@ -544,7 +544,7 @@ weaponSharedPtr weapon_SentinelsPike()
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_Penetrate());
-	wp->setImage(IMAGE_SENTINEL_SPEAR);
+	wp->setImage(loadWeaponImage("W_sentinelspear"));
 	return wp;
 }
 
@@ -557,7 +557,7 @@ what he desired, and it drove him mad."));
 	wp->addScalingType(SCALE_STR);
 	wp->addStatusEffect(EFFECT_BLEED, 10);
 	wp->setSpecialAttack(attack_Frenzy());
-	wp->setImage(IMAGE_BLOODY_GREATAXE);
+	wp->setImage(loadWeaponImage("W_bloody greataxe"));
 	return wp;
 }
 
@@ -574,7 +574,7 @@ According to certain storytellers, she once peered into Heaven itself, and what 
 	wp->setSpellstoreSize(1);
 	wp->setDivinePower(50);
 	wp->setSpecialAttack(prayer_BlessedRadiance());
-	wp->setImage(IMAGE_SUPER_HOLY_SCYTHE);
+	wp->setImage(loadWeaponImage("W_super holy scythe"));
 	return wp;
 }
 
@@ -587,7 +587,7 @@ in the forsaken mausoleums of the lowlands, he found only one who would still he
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_PercivelsFire());
-	wp->setImage(IMAGE_GREEN_KNIGHT_SWORD);
+	wp->setImage(loadWeaponImage("W_green knight sword"));
 	wp->inSirPercivelsSet = true;
 	return wp;
 }
@@ -601,7 +601,7 @@ weaponSharedPtr weapon_VoidfireKnife()
 	wp->addDamageType(DAMAGE_FIRE, 15);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_KnifeCast());
-	wp->setImage(IMAGE_VOIDFIRE_KNIFE);
+	wp->setImage(loadWeaponImage("W_voidfire knife"));
 	return wp;
 }
 
@@ -613,7 +613,7 @@ weaponSharedPtr weapon_LightningWarhammer()
 	wp->addDamageType(DAMAGE_ELECTRIC, 50);
 	wp->addScalingType(SCALE_STR);
 	wp->setSpecialAttack(attack_LightningSlam());
-	wp->setImage(IMAGE_LIGHTNING_WARHAMMER);
+	wp->setImage(loadWeaponImage("W_lightning warhammer"));
 	return wp;
 }
 
@@ -626,7 +626,7 @@ her tomb was sealed, she resolved that the secret of the Angel would never leave
 	wp->addDamageType(DAMAGE_PROFANE, 25);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_BillowingFlames());
-	wp->setImage(IMAGE_PROFANE_SCYTHE);
+	wp->setImage(loadWeaponImage("W_iteras scythe"));
 	return wp;
 }
 
@@ -745,7 +745,7 @@ weaponSharedPtr shield_BatteredWoodenShield()
 		"It's just a scrap of wood, but it might still save your life."));
 	wp->setDefence(10);
 	wp->makeOffhand();
-	wp->setImage(IMAGE_BATTERED_WOODEN_SHIELD);
+	wp->setImage(loadWeaponImage("S_battered wooden shield"));
 	return wp;
 }
 
@@ -757,7 +757,7 @@ weaponSharedPtr shield_WoodenWyrdShield()
 	wp->setBleedResist(15);
 	wp->setDamagePenalty(5);
 	wp->makeOffhand();
-	wp->setImage(IMAGE_WYRD_SHIELD);
+	wp->setImage(loadWeaponImage("S_wyrd shield"));
 	return wp;
 }
 
@@ -772,7 +772,7 @@ weaponSharedPtr shield_BatteredSteelShield()
 	wp->setDamageResist(DAMAGE_COLD, 5);
 	wp->setDamagePenalty(10);
 	wp->makeOffhand();
-	wp->setImage(IMAGE_BATTERED_STEEL_SHIELD);
+	wp->setImage(loadWeaponImage("S_battered steel shield"));
 	return wp;
 }
 
@@ -786,7 +786,7 @@ but not a single knight survived."));
 	wp->setDamageResist(DAMAGE_FIRE, 10);
 	wp->setDamagePenalty(10);
 	wp->makeOffhand();
-	wp->setImage(IMAGE_HOLY_SHIELD);
+	wp->setImage(loadWeaponImage("S_holy shield"));
 	return wp;
 }
 
@@ -798,7 +798,7 @@ weaponSharedPtr shield_VoidTouchedShield()
 	wp->setDamageResist(DAMAGE_PROFANE, 50);
 	wp->setDamagePenalty(5);
 	wp->makeOffhand();
-	wp->setImage(IMAGE_ETHEREAL_SHIELD);
+	wp->setImage(loadWeaponImage("S_ethereal shield"));
 	return wp;
 }
 
@@ -810,7 +810,7 @@ weaponSharedPtr shield_DragonboneShield()
 	wp->setDamageResist(DAMAGE_FIRE, 50);
 	wp->setDamagePenalty(15);
 	wp->makeOffhand();
-	wp->setImage(IMAGE_DRAGONBONE_SHIELD);
+	wp->setImage(loadWeaponImage("S_dragonbone shield"));
 	return wp;
 }
 
@@ -821,7 +821,7 @@ weaponSharedPtr shield_EtherealShield()
 	wp->setDefence(0);
 	wp->setDamageResist(DAMAGE_MAGIC, 25);
 	wp->makeOffhand();
-	wp->setImage(IMAGE_ETHEREAL_SHIELD);
+	wp->setImage(loadWeaponImage("S_ethereal shield"));
 	return wp;
 }
 
@@ -861,7 +861,7 @@ what comes of those who rely on the strength of the old gods, and was immensely 
 	wp->setBleedResist(40);
 	wp->setDamagePenalty(10);
 	wp->makeOffhand();
-	wp->setImage(IMAGE_GREEN_KNIGHTS_SHIELD);
+	wp->setImage(loadWeaponImage("S_green knight shield"));
 	wp->inSirPercivelsSet = true;
 	return wp;
 }
@@ -888,7 +888,7 @@ weaponSharedPtr wand_DriftwoodWand()
 	wp->setSpellPower(100);
 	wp->makeOffhand();
 	wp->setSpecialAttack(ability_PowerSurge());
-	wp->setImage(IMAGE_DRIFTWOOD_WAND);
+	wp->setImage(loadWeaponImage("M_driftwood wand"));
 	return wp;
 }
 
@@ -976,7 +976,7 @@ weaponSharedPtr chime_ClericsCrackedChime()
 	wp->setDivinePower(100);
 	wp->makeOffhand();
 	wp->setSpecialAttack(ability_DivineFavour());
-	wp->setImage(IMAGE_CRACKED_CHIME);
+	wp->setImage(loadWeaponImage("M_cracked chime"));
 	return wp;
 }
 
@@ -1014,7 +1014,7 @@ weaponSharedPtr chime_WyrdBellbranch()
 	wp->setDivinePower(100);
 	wp->setSpecialAttack(ability_WyrdChannel());
 	wp->makeOffhand();
-	wp->setImage(IMAGE_WYRD_BELLBRANCH);
+	wp->setImage(loadWeaponImage("M_wyrd bellbranch"));
 	return wp;
 }
 
@@ -1028,6 +1028,6 @@ the old gods, but they did not answer."));
 	wp->setSpecialAttack(prayer_ProfaneRadiance());
 	wp->makeOffhand();
 	wp->isProfane = true;
-	wp->setImage(IMAGE_UNHOLY_CHIME);
+	wp->setImage(loadWeaponImage("M_unholy chime"));
 	return wp;
 }

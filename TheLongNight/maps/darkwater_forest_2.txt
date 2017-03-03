@@ -1,10 +1,10 @@
 Darkwater Forest
 start:0,14
-crow_thief:9,22
+muira:21,15
+skinless_knight:31,13
 crow_archer:6,22
 crow_archer:9,26
-skinless_knight:31,13
-muira:21,15
+crow_thief:9,22
 -items
 pyromancers_flask:32,21
 pyromancers_oil:10,22

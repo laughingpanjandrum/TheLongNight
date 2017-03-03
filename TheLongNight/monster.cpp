@@ -319,7 +319,7 @@ monsterSharedPtr monster_CrowArcher()
 	m->setHealth(100);
 	m->setMoveStats(SPEED_NORMAL);
 	m->setMeleeStats(10, SPEED_NORMAL);
-	m->addSpellKnown(ability_CrowArrow());
+	m->addSpellKnown(spellSharedPtr(new spell("Crow Arrow", TCODColor::grey, 8, 10)));
 	m->setSpellCastChance(50);
 	m->keepsDistance = true;
 	m->setFragmentsDropped(25);

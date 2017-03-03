@@ -81,7 +81,7 @@ armourSharedPtr headgear_CrowKnightsHood()
 		"The hood of a crow knight is black, and interlaced with singular white feathers."));
 	a->setDefence(5);
 	a->setBleedResist(10);
-	a->setImage(loadArmourImage("B_crow knight"));
+	a->setImage(loadArmourImage("H_crow knight"));
 	return a;
 }
 
@@ -92,7 +92,7 @@ armourSharedPtr armour_CrowKnightsArmour()
 	a->setDefence(10);
 	a->setBleedResist(15);
 	a->setMoveSpeed(SPEED_FAST);
-	a->setImage(loadArmourImage("H_crow knight"));
+	a->setImage(loadArmourImage("B_crow knight"));
 	return a;
 }
 

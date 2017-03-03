@@ -2582,6 +2582,7 @@ void game::loadNewMap(map * newMap, connectionPoint connect, int oldx, int oldy)
 	
 	//Set new map
 	setCurrentMap(newMap);
+	turns.clear();
 	
 	//Respawn monsters on map
 	newMap->respawnAllMonsters(storyEventsReady);
@@ -2607,7 +2608,6 @@ void game::loadNewMap(map * newMap, connectionPoint connect, int oldx, int oldy)
 	newMap->addPerson(player, xnew, ynew);
 	
 	//Set up new clock for the new map
-	turns.clear();
 	for (auto person : newMap->getAllPeople())
 		if (!person->isPlayer)
 			turns.addEntity(person, 1);
@@ -3015,13 +3015,25 @@ We get a new item - picked up off the floor, auto-dropped by a monster, or whate
 */
 void game::pickUpItem(itemSharedPtr it)
 {
+	
 	//Get it
 	bool stackedWithOther = player->addItem(it);
+	
 	//Message about it
 	addMessage("Got " + it->getName() + "!", it->getColor());
 	bool equipItem = itemPickupMessage(it);
+	
+	//Can't auto-use items that work that way!
+	if (it->getCategory() == ITEM_CONSUMABLE) {
+		auto co = std::static_pointer_cast<consumable>(it);
+		if (co->oneUseOnly)
+			equipItem = false;
+	}
+	
+	//Equip, if that's the kind of thing we do
 	if (equipItem && !stackedWithOther)
 		player->equipItem(it);
+	
 	//Items from SIR PERCIVEL'S SET accumulate to give us a special key
 	if (it->inSirPercivelsSet) {
 		gotSirPercivelsSet++;
