@@ -4439,6 +4439,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(consumable_TinyGreenFlower());
 	player->addItem(consumable_TinyRedFlower());
 	player->addItem(consumable_WitchwaterFlask());
+	player->addItem(horn_HeraldsWhiteHorn());
 
 	player->addItem(ranged_CorrodingJar());
 	player->addItem(ranged_FrostKnives());

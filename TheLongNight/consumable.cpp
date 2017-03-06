@@ -373,7 +373,8 @@ consumableSharedPtr horn_HeraldsWhiteHorn()
 		"The silver horn of the Herald, who comes in the White Fog. According to certain storytellers, his presence signifies the coming of the \
 Lord of Fallow Fields, who rises from the realms of the old gods to bring final judgement upon the world."));
 	c->consumeOnUse = false;
-	c->addEffect(CREATE_FOG);
-	c->setPotency(5);
+	c->addEffect(RESTORE_VIGOUR);
+	c->addEffect(APPLY_UNTYPED_DAMAGE);
+	c->setPotency(10);
 	return c;
 }

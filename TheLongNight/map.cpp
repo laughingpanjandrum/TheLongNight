@@ -335,8 +335,10 @@ Creates a new fog of cloud in this region.
 */
 void map::createFogCloud(int ctrx, int ctry, int radius)
 {
+	
 	//We now have fog!
 	hasFog = true;
+	
 	//Set up the cloud
 	for (int x = ctrx - radius; x <= ctrx + radius; x++) {
 		for (int y = ctry - radius; y <= ctry - radius; y++) {
@@ -348,6 +350,7 @@ void map::createFogCloud(int ctrx, int ctry, int radius)
 			}
 		}
 	}
+
 }
 
 
