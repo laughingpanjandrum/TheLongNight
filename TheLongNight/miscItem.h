@@ -78,6 +78,7 @@ miscItemSharedPtr key_EffigyOfTheSlumberingLord();
 
 miscItemSharedPtr key_UnderpoolKey();
 miscItemSharedPtr key_AbattoirKey();
+miscItemSharedPtr key_GreenKnightsKey();
 
 miscItemSharedPtr key_IetrasAmberPendant();
 

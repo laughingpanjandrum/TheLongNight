@@ -249,6 +249,15 @@ Pash were hidden away beneath the crumbling city, never meant to be uncovered.")
 	return k;
 }
 
+miscItemSharedPtr key_GreenKnightsKey()
+{
+	miscItemSharedPtr k(new miscItem("Green Knight's Key", KEY_TILE, TCODColor::green,
+		"Lost key to the Court of the Rose, abandoned by Sir Percivel when the downfall of the Rose seemed inevitable."));
+	k->setKeyTag("green_knights_key");
+	k->setWhatWeDo("Unlocks the hidden door to the Court of the Rose.");
+	return k;
+}
+
 miscItemSharedPtr key_IetrasAmberPendant()
 {
 	miscItemSharedPtr m(new miscItem("Ietra's Amber Pendant", KEY_TILE, TCODColor::amber,

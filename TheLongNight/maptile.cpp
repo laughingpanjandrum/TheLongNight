@@ -183,7 +183,7 @@ maptile * tile_Bush()
 
 maptile * tile_Rosebush()
 {
-	return new maptile("Rosebush", "rosebush", BUSH_TILE, TCODColor::pink, DARK_GRASS_COLOR, true, false);
+	return new maptile("Rose-laden Branch", "rosebush", TREE_TILE, TCODColor::pink, DARK_GRASS_COLOR, true, false);
 }
 
 maptile * tile_Tree()
@@ -607,6 +607,16 @@ maptile * tile_AbattoirDoor()
 		TCODColor::lighterCrimson, TCODColor::black, false, false);
 	door->isDoor = true;
 	door->unlockCode = "abattoir_key";
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	return door;
+}
+
+maptile * tile_RoseCourtGate()
+{
+	maptile* door = new maptile("Rose Court Gate", "rose_court_gate", BASIC_DOOR_TILE,
+		TCODColor::lightPink, TCODColor::black, false, false);
+	door->isDoor = true;
+	door->unlockCode = "green_knights_key";
 	door->addTouchEffect(CHECK_FOR_UNLOCK);
 	return door;
 }

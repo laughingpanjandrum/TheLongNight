@@ -359,6 +359,7 @@ void person::fullRestore()
 	isBleeding = 0;
 	isPoisoned = 0;
 	entangling = 0;
+	blinding = 0;
 	acidic = 0;
 	frozen = 0;
 	electrified = 0;

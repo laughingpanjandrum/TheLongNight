@@ -3502,6 +3502,10 @@ void game::initializeShops()
 	shopSharedPtr mawtooth = shopSharedPtr(new shop("mawtooth_fragment"));
 	mawtooth->addItem(key_AbattoirKey(), 0);
 	allUnlockableShops.push_back(mawtooth);
+	//Withered Finger
+	shopSharedPtr finger = shopSharedPtr(new shop("withered_finger"));
+	finger->addItem(key_GreenKnightsKey(), 0);
+	allUnlockableShops.push_back(finger);
 
 	//Utric
 	shopSharedPtr utricShop = shopSharedPtr(new shop("utric_shop"));

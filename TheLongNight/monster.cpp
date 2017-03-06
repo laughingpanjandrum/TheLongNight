@@ -2045,6 +2045,28 @@ eyes peer from the darkness within Pash's myriad maws, and saliva drips upon the
 	return m;
 }
 
+monsterSharedPtr monster_TheBlindKing()
+{
+	monsterSharedPtr m(new monster("The Blind King", BLIND_KING_TILE, TCODColor::lightAmber,
+		"The master of the blind worms that gibber at the base of the universe. This living worm shrieks endlessly, exuding \
+putrid toxins from every pore."));
+	m->setHealth(8000);
+	m->setDefence(DAMAGE_FIRE, 60);
+	m->setDefence(DAMAGE_ACID, 60);
+	m->setPoisonResist(1000);
+	m->setPlagueResist(100);
+	m->setMoveStats(SPEED_SLOW);
+	m->equipItem(weaponSharedPtr(new weapon(30, SPEED_NORMAL, EFFECT_POISON, 40)));
+	m->addSpellKnown(spellSharedPtr(new spell("The King's Eyes", TCODColor::blue, 4, 0, APPLY_BLINDING, 5)));
+	m->addSpellKnown(spellSharedPtr(new spell("Dragging Stare", TCODColor::white, 8, 10, PULL_CLOSER, 5)));
+	m->addSpellKnown(spellSharedPtr(new spell("The King's Scream", TCODColor::lightYellow, ATTACK_BUFF_SELF, 0,
+		APPLY_DAMAGE_PENALTY, -10)));
+	m->setSpellCastChance(60);
+	m->isBoss = true;
+	m->setFragmentsDropped(5000);
+	return m;
+}
+
 
 /*
 	FRIENDLIES
@@ -2233,12 +2255,15 @@ monsterSharedPtr npc_ToadPriestGhulluk()
 	m->setShopTag("ghulluk_shop");
 	m->addShopUnlock("watchful_eyestalk");
 	m->addShopUnlock("mawtooth_fragment");
+	m->addShopUnlock("withered_finger");
 	//Dialogue
 	m->loadDialogue("dialogue/ghulluk_chat.txt");
 	m->addSpecialDialogue("watchful_eyestalk",
 		"Haha, excellent! The eyestalk of Vorten, delver into the watchful deeps, will serve our purpose!");
 	m->addSpecialDialogue("mawtooth_fragment",
 		"Good, good! The mawtooth of the ravenous Pash, hungering for everlasting flesh, will serve our purpose!");
+	m->addSpecialDialogue("withered_finger",
+		"Remarkable! This finger, pointing to gibbering oblivion, speaks to a forgotten truth!");
 	return m;
 }
 
@@ -2505,6 +2530,8 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return monster_GlurgTheImbecile();
 	else if (handle == "pash_the_ravenous")
 		return monster_PashTheRavenous();
+	else if (handle == "the_blind_king")
+		return monster_TheBlindKing();
 
 	//Friendly NPCs
 	else if (handle == "gorem")

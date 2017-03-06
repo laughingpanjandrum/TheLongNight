@@ -261,6 +261,7 @@ monsterSharedPtr monster_TheDeathlessKnight();
 //Gods
 monsterSharedPtr monster_GlurgTheImbecile();
 monsterSharedPtr monster_PashTheRavenous();
+monsterSharedPtr monster_TheBlindKing();
 
 //Friendly NPCs
 monsterSharedPtr npc_Gorem();
