@@ -946,7 +946,7 @@ void game::drawInterface(int leftx, int topy)
 	//Consumable selected, or menu if we have that open
 	if (state == STATE_SELECT_CONSUMABLE) {
 		drawMenu(currentMenu, atx, ++aty);
-		aty += currentMenu->getAllElements().size() + 1;
+		aty += currentMenu->getAllElements().size() + 3;
 	}
 	else {
 		//Current consumable
