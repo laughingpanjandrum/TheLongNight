@@ -213,7 +213,7 @@ public:
 	weaponSharedPtr getOffhand() { return items.getOffhand(); }
 	armourSharedPtr getArmour() { return items.getArmour(); }
 	armourSharedPtr getHelmet() { return items.getHelmet(); }
-	charmSharedPtr getCharm() { return items.getCharm(); }
+	charmVector getCharms() { return items.getCharms(); }
 	bool hasItemEquipped(itemSharedPtr it);
 
 	//Consumables

@@ -33,6 +33,7 @@ private:
 };
 
 typedef std::shared_ptr<charm> charmSharedPtr;
+typedef std::vector<charmSharedPtr> charmVector;
 
 
 //Defined items

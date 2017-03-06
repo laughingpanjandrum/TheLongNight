@@ -35,7 +35,7 @@ bool inventory::equipItem(itemSharedPtr which)
 	else if (cat == ITEM_HELMET)
 		equippedHelmet = std::static_pointer_cast<armour>(which);
 	else if (cat == ITEM_CHARM)
-		equippedCharm = std::static_pointer_cast<charm>(which);
+		return equipCharm(std::static_pointer_cast<charm>(which));
 	else if (cat == ITEM_CONSUMABLE)
 		equipConsumable(std::static_pointer_cast<consumable>(which));
 	else if (cat == ITEM_SPELL) //Currently only spells can fail to equip
@@ -53,6 +53,7 @@ void inventory::unequipItem(itemSharedPtr which)
 {
 	itemTypes cat = which->getCategory();
 }
+
 
 
 /*
@@ -117,6 +118,36 @@ bool inventory::isSpellEquipped(spellSharedPtr sp)
 		return true;
 	if (off != nullptr && off->hasSpellStored(sp))
 		return true;
+	return false;
+}
+
+bool inventory::equipCharm(charmSharedPtr c)
+{
+	
+	//If the charm is already equipped, unequip it instead
+	auto iter = std::find(equippedCharms.begin(), equippedCharms.end(), c);
+
+	//If already equipped, remove it
+	if (iter != equippedCharms.end()) {
+		equippedCharms.erase(iter);
+		return false;
+	}
+	else if (equippedCharms.size() < MAX_CHARM_SLOTS) {
+		//Otherwise, equip!
+		equippedCharms.push_back(c);
+		return true;
+	}
+
+	//If we get here, there was no free slot for the charm
+	return false;
+}
+
+bool inventory::isCharmEquipped(charmSharedPtr c)
+{
+	for (auto ch : equippedCharms) {
+		if (ch == c)
+			return true;
+	}
 	return false;
 }
 
@@ -277,7 +308,6 @@ itemSharedPtr inventory::getEquipped(itemTypes category)
 	case(ITEM_OFFHAND): return getOffhand();
 	case(ITEM_BODY_ARMOUR): return getArmour();
 	case(ITEM_HELMET): return getHelmet();
-	case(ITEM_CHARM): return getCharm();
 	}
 	return nullptr;
 }

@@ -34,6 +34,7 @@ D water_deep
 G glass
 + door_stone
 < upstairs
+* warpstone
 -endcodes
 -connections
 north:cbeach_1

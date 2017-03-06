@@ -772,6 +772,10 @@ void person::equipItem(itemSharedPtr which)
 	if (here != nullptr)
 		unequipItem(here);
 
+	//If we're trying to equip an already-equipped charm, that's an UNEQUIP MOMENT
+	if (which->getCategory() == ITEM_CHARM && items.isCharmEquipped(std::static_pointer_cast<charm>(which)))
+		unequipItem(which);
+
 	//Equip the new item
 	bool equipped = items.equipItem(which);
 	
@@ -1047,7 +1051,7 @@ bool person::hasItemEquipped(itemSharedPtr it)
 	case(ITEM_OFFHAND): return it == getOffhand();
 	case(ITEM_BODY_ARMOUR): return it == getArmour();
 	case(ITEM_HELMET): return it == getHelmet();
-	case(ITEM_CHARM): return it == getCharm();
+	case(ITEM_CHARM): return items.isCharmEquipped(std::static_pointer_cast<charm>(it));
 	case(ITEM_SPELL): return items.isSpellEquipped(std::static_pointer_cast<spell>(it));
 	case(ITEM_CONSUMABLE): return items.isConsumableEquipped(std::static_pointer_cast<consumable>(it));
 	case(ITEM_MISC): return isRunestoneEquipped(std::static_pointer_cast<miscItem>(it));

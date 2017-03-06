@@ -877,7 +877,7 @@ Venom drips from its fangs, and it drags itself along the ground with eight spin
 	m->keepsDistance = true;
 	m->isBoss = true;
 	m->canSwapWithAllies = true;
-	m->setFragmentsDropped(500);
+	m->setFragmentsDropped(800);
 	m->addItemDrop(heart_VenomousSpiderHeart());
 	m->addItemDrop(key_OldValleyKey());
 	return m;
@@ -1059,13 +1059,9 @@ it's the sight of her sharpened teeth as she turns to grin at you, or the blankn
 	m->addSpellKnown(attack_RavenousHunger());
 	m->addSpellKnown(spell_VoidJaunt());
 	m->setSpellCastChance(20);
-	m->isBoss = true;
 	m->keepsDistance = true;
 	m->addSpawnableCreature("scion_of_tvert");
 	m->setSpawnHealthThreshold(400);
-	m->addItemDrop(key_LadyTvertsKey());
-	m->addItemDrop(heart_LadyTvertsHeart());
-	m->setFragmentsDropped(1500);
 	return m;
 }
 
@@ -1083,6 +1079,10 @@ his face riddled with scars, his arms gruesome chunks of flesh covered in vile w
 	m->equipItem(weaponSharedPtr(new weapon(0, SPEED_NORMAL, DAMAGE_PROFANE, 30)));
 	m->addSpellKnown(ability_ShredSkin());
 	m->setSpellCastChance(20);
+	m->addItemDrop(key_LadyTvertsKey());
+	m->addItemDrop(heart_LadyTvertsHeart());
+	m->setFragmentsDropped(1500);
+	m->isBoss = true;
 	return m;
 }
 

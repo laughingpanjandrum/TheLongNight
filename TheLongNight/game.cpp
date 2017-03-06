@@ -933,15 +933,13 @@ void game::drawInterface(int leftx, int topy)
 		win.write(atx + 2, ++aty, "no armour", TCODColor::darkGrey);
 
 	//Charms
-	charmSharedPtr ch = player->getCharm();
-	if (ch != nullptr) {
+	charmVector chList = player->getCharms();
+	for (auto ch : chList) {
 		win.writec(atx, ++aty, ch->getTileCode(), ch->getColor());
 		win.write(atx + 2, aty, ch->getMenuName(), ch->getColor());
 		if (isMouseOver(atx, ch->getMenuName().size(), aty))
 			drawItemInfo(ch, ITEM_DRAW_X, ITEM_DRAW_Y, false);
 	}
-	else
-		win.write(atx + 2, ++aty, "no charm", TCODColor::darkGrey);
 
 	aty++;
 	

@@ -32,6 +32,7 @@ public:
 
 	//Constants
 	static const int MAX_CONSUMABLE_SLOTS = 5;
+	static const int MAX_CHARM_SLOTS = 2;
 
 	//Setters
 	bool equipItem(itemSharedPtr which);
@@ -50,7 +51,7 @@ public:
 	weaponSharedPtr getOffhand() { return equippedOffhand; }
 	armourSharedPtr getArmour() { return equippedArmour; }
 	armourSharedPtr getHelmet() { return equippedHelmet; }
-	charmSharedPtr getCharm() { return equippedCharm; }
+	charmVector getCharms() { return equippedCharms; }
 
 	//Weapon swapping
 	weaponSharedPtr swapWeapon();
@@ -59,6 +60,10 @@ public:
 	bool equipSpell(spellSharedPtr sp);
 	void unequipSpell(spellSharedPtr sp);
 	bool isSpellEquipped(spellSharedPtr sp);
+
+	//Charms
+	bool equipCharm(charmSharedPtr c);
+	bool isCharmEquipped(charmSharedPtr c);
 
 	//Consumables
 	void equipConsumable(consumableSharedPtr c);
@@ -87,15 +92,17 @@ private:
 	weaponSharedPtr equippedOffhand;
 	armourSharedPtr equippedArmour;
 	armourSharedPtr equippedHelmet;
-	charmSharedPtr equippedCharm;
 	consumableSharedPtr selectedConsumable;
+
+	//Multiple charms can be equipped at once
+	charmVector equippedCharms;
 
 	//Secondary items for quick-swapping
 	weaponSharedPtr secondaryWeapon;
 
 	//Consumables appear as a list
 	consumableVector equippedConsumables;
-	//int selectedConsumable = 0;
+
 };
 
 #endif
