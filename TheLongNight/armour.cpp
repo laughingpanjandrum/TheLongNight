@@ -244,6 +244,7 @@ armourSharedPtr headgear_EtherealCrown()
 This silver crown can hardly be seen, though it feels real enough."));
 	a->setDefence(0);
 	a->setDamageResist(DAMAGE_MAGIC, 25);
+	a->setImage(loadArmourImage("H_ethereal robes"));
 	return a;
 }
 
@@ -255,6 +256,7 @@ Now they exist as mere shadows, gazing upon planes of existence beyond our own."
 	a->setDefence(0);
 	a->setDamageResist(DAMAGE_MAGIC, 50);
 	a->setMoveSpeed(SPEED_FAST);
+	a->setImage(loadArmourImage("B_ethereal robes"));
 	return a;
 }
 
@@ -265,6 +267,7 @@ armourSharedPtr headgear_SparrowKnightsHelm()
 what do they see in the pale realm beyond the world?"));
 	a->setDefence(5);
 	a->setDamageResist(DAMAGE_MAGIC, 15);
+	a->setImage(loadArmourImage("H_sparrow knight"));
 	return a;
 }
 
@@ -276,6 +279,7 @@ were slowly drawn into pale worlds of the imagination, until only their spectral
 	a->setDefence(10);
 	a->setDamageResist(DAMAGE_MAGIC, 25);
 	a->setMoveSpeed(SPEED_NORMAL);
+	a->setImage(loadArmourImage("B_sparrow knight"));
 	return a;
 }
 
@@ -312,6 +316,7 @@ that the Sentinels were not entirely human."));
 	a->setDefence(15);
 	a->setDamageResist(DAMAGE_ELECTRIC, 15);
 	a->setDamageResist(DAMAGE_MAGIC, 15);
+	a->setImage(loadArmourImage("H_sentinel armour"));
 	return a;
 }
 
@@ -324,6 +329,7 @@ their ancient duty, and indeed, some began to suspect that they were not even hu
 	a->setDamageResist(DAMAGE_ELECTRIC, 35);
 	a->setDamageResist(DAMAGE_MAGIC, 15);
 	a->setMoveSpeed(SPEED_SLOW);
+	a->setImage(loadArmourImage("B_sentinel armour"));
 	return a;
 }
 
@@ -335,6 +341,7 @@ who slowly faded from existence."));
 	a->setDamageResist(DAMAGE_MAGIC, 15);
 	a->setDamageResist(DAMAGE_COLD, 10);
 	a->setDamageResist(DAMAGE_ACID, 10);
+	a->setImage(loadArmourImage("H_ghostly armour"));
 	return a;
 }
 
@@ -347,6 +354,7 @@ until they slowly faded from time."));
 	a->setDamageResist(DAMAGE_COLD, 20);
 	a->setDamageResist(DAMAGE_ACID, 20);
 	a->setMoveSpeed(SPEED_FAST);
+	a->setImage(loadArmourImage("B_ghostly armour"));
 	return a;
 }
 
@@ -356,7 +364,9 @@ armourSharedPtr headgear_SirPercivelsHelm()
 		"Sir Percivel sought the truth of the Rose's decline. His search brought him first to the depths of the Deadmarsh, where he learned \
 obscure wisdom from the rotten folk that lurked in the mud."));
 	a->setDefence(10);
-	a->setPoisonResist(25);
+	a->setPoisonResist(10);
+	a->setBleedResist(10);
+	a->setPlagueResist(10);
 	a->inSirPercivelsSet = true;
 	a->setImage(loadArmourImage("H_green knight"));
 	return a;
@@ -368,6 +378,9 @@ armourSharedPtr armour_SirPercivelsArmour()
 		"Sir Percivel sought the truth of the Rose's decline. The legend of Khalle and the silence of the gods drew \
 him to her forsaken mausoleum, where he uncovered an awful truth."));
 	a->setDefence(20);
+	a->setDamageResist(DAMAGE_ACID, 20);
+	a->setDamageResist(DAMAGE_COLD, 20);
+	a->setDamageResist(DAMAGE_FIRE, 20);
 	a->setDamageResist(DAMAGE_ELECTRIC, 20);
 	a->setMoveSpeed(SPEED_NORMAL);
 	a->inSirPercivelsSet = true;
@@ -471,5 +484,6 @@ armourSharedPtr headgear_MoonPaleCrown()
 		"Crown of the Moon-Pale King. According to certain storytellers, the ancestral crown was cursed, causing his \
 lands to drift endlessly in the void. But the king refused to remove it from his head."));
 	a->setDamageResist(DAMAGE_MAGIC, 25);
+	a->setImage(loadArmourImage("H_moonpale crown"));
 	return a;
 }

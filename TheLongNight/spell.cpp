@@ -930,6 +930,18 @@ spellSharedPtr prayer_ProfaneRadiance()
 	return sp;
 }
 
+spellSharedPtr prayer_Intoxify()
+{
+	spellSharedPtr sp(new spell("Intoxify", SPELL_TILE, TCODColor::lime,
+		"Blasts target with poison."));
+	sp->setAttackType(ATTACK_RANGE, 4);
+	sp->setVigourCost(1);
+	sp->addEffect(APPLY_POISON_DAMAGE, 10);
+	sp->usesDivinePower = true;
+	sp->isProfane = true;
+	return sp;
+}
+
 spellSharedPtr prayer_AstralPrison()
 {
 	spellSharedPtr sp(new spell("Astral Prison", SPELL_TILE, TCODColor::lightFuchsia,

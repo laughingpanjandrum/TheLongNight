@@ -346,6 +346,9 @@ private:
 	int gotSirPercivelsSet = 0;
 	int offeringsMade = 0;
 
+	//Image used to represent the PC when armour is being drawn
+	imageSharedPtr PLAYER_IMAGE = imageSharedPtr(loadImage("character"));
+
 
 };
 

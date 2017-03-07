@@ -1471,7 +1471,7 @@ void game::drawItemInfo(itemSharedPtr it, int atx, int aty, bool drawImage)
 	
 	//Indicate whether equipped or not
 	if (player->hasItemEquipped(it))
-		win.write(atx + 12, aty, "EQUIPPED", TCODColor::grey);
+		win.write(atx + 18, aty, "EQUIPPED", TCODColor::grey);
 	
 	//Show price, if one is defined
 	if (it->getPrice() > 0) {
@@ -1908,11 +1908,12 @@ Draws an item's image onto the screen, if it has one.
 */
 void game::drawItemImage(itemSharedPtr it, int atx, int aty, bool drawOtherArmourPiece)
 {
-	//Box around the image
-	win.clearRegion(atx - 1, aty - 1, 41, 61);
-	win.drawBox(atx - 1, aty - 1, 41, 61, TCODColor::darkSepia);
 
 	if (it->hasImage()) {
+
+		//Box around the image
+		win.clearRegion(atx - 1, aty - 1, 41, 61);
+		win.drawBox(atx - 1, aty - 1, 41, 61, TCODColor::darkSepia);
 
 		//If this is a HELMET item, we also draw the armour!
 		if (it->getCategory() == ITEM_HELMET && drawOtherArmourPiece) {
@@ -3550,6 +3551,7 @@ void game::initializeShops()
 	shopSharedPtr orsyl = shopSharedPtr(new shop("orsyls_tome_of_prayer"));
 	orsyl->addItem(prayer_ProfaneRadiance(), 50);
 	orsyl->addItem(prayer_DrawOutTheBlood(), 75);
+	orsyl->addItem(prayer_Intoxify(), 50);
 	allUnlockableShops.push_back(orsyl);
 	//	Divine Moonspark Tome
 	shop* moonspark = new shop("divine_moonspark_tome");
@@ -3603,7 +3605,6 @@ void game::initializeShops()
 	allShops.push_back(shopSharedPtr(ydella));
 	//	Wretched Heart
 	shop* wretched = new shop("wretched_heart", true);
-	wretched->addItem(charm_WretchedFleshBand(), 200);
 	wretched->addItem(charm_WretchedFleshmask(), 200);
 	allUnlockableShops.push_back(shopSharedPtr(wretched));
 	//	Old Crow's Heart
@@ -4327,12 +4328,15 @@ void getAllItems(personSharedPtr player)
 	player->addItem(shield_CityGuardianShield());
 	player->addItem(shield_DragonboneShield());
 	player->addItem(shield_EtherealShield());
+	player->addItem(shield_KhallesBellShield());
 	player->addItem(shield_GhostlyShield());
+	player->addItem(shield_RottenBeastShield());
 	player->addItem(shield_SirPercivelsShield());
 	player->addItem(shield_VoidTouchedShield());
 	player->addItem(shield_WoodenWyrdShield());
 
 	player->addItem(chime_ClericsCrackedChime());
+	player->addItem(chime_GreenKnightsChime());
 	player->addItem(chime_OrsylsProfaneChime());
 	player->addItem(chime_RotbloodBell());
 	player->addItem(chime_WyrdBellbranch());
@@ -4341,6 +4345,8 @@ void getAllItems(personSharedPtr player)
 	player->addItem(wand_DriftwoodWand());
 	player->addItem(wand_EtherealWand());
 	player->addItem(wand_FishmansToadstaff());
+	player->addItem(wand_GottricsWand());
+	player->addItem(wand_MoshkasSingingStaff());
 	player->addItem(wand_SparrowsStaff());
 
 	player->addItem(headgear_CaptainsTricorn());
@@ -4392,7 +4398,6 @@ void getAllItems(personSharedPtr player)
 	player->addItem(charm_ToxicantsCharm());
 	player->addItem(charm_VenomrubyRing());
 	player->addItem(charm_VoidwalkersRing());
-	player->addItem(charm_WretchedFleshBand());
 	player->addItem(charm_WretchedFleshmask());
 
 	player->addItem(spell_AcidBlade());
@@ -4421,6 +4426,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(prayer_Deathlink());
 	player->addItem(prayer_DivineRetribution());
 	player->addItem(prayer_DrawOutTheBlood());
+	player->addItem(prayer_Intoxify());
 	player->addItem(prayer_NightmarePrayer());
 	player->addItem(prayer_ProfaneRadiance());
 	player->addItem(prayer_ProfoundStill());

@@ -172,6 +172,7 @@ spellSharedPtr prayer_RemovePoison();
 //Orsyl's Tome of Prayer
 spellSharedPtr prayer_DrawOutTheBlood();
 spellSharedPtr prayer_ProfaneRadiance();
+spellSharedPtr prayer_Intoxify();
 //Divine Moonspark Tome
 spellSharedPtr prayer_DivineRetribution();
 spellSharedPtr prayer_YutriasDivineSpark();

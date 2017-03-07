@@ -24,6 +24,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return weapon_CrowKnife();
 	else if (handle == "crow_half_sword")
 		return weapon_CrowHalfsword();
+	else if (handle == "old_crows_long_knife")
+		return weapon_OldCrowsLongKnife();
 	//Flooded Lowlands
 	else if (handle == "notched_greatsword")
 		return weapon_NotchedGreatsword();
@@ -40,6 +42,10 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return weapon_KythielsScythe();
 	else if (handle == "void_touched_knife")
 		return weapon_VoidTouchedKnife();
+	else if (handle == "void_crystal_greatsword")
+		return weapon_VoidCrystalGreatsword();
+	else if (handle == "arm_of_the_duke")
+		return weapon_ArmOfTheDuke();
 	//Winter Court
 	else if (handle == "dragonbone_sword")
 		return weapon_DragonboneSword();
@@ -48,9 +54,15 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return weapon_SerpentsTooth();
 	else if (handle == "crimson_nail")
 		return weapon_CrimsonNail();
+	else if (handle == "spiderbone_shard")
+		return weapon_SpiderboneShard();
 	//Tear-Stained Valley
 	else if (handle == "sacrificial_knife")
 		return weapon_SacrificialKnife();
+	else if (handle == "slave_masters_whip")
+		return weapon_SlaveMastersWhip();
+	else if (handle == "lady_tverts_claws")
+		return weapon_LadyTvertsClaws();
 	//Dead Sparrow's Tower
 	else if (handle == "ethereal_sword")
 		return weapon_EtherealSword();
@@ -67,6 +79,27 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return weapon_GravekeeperSpear();
 	else if (handle == "farins_torch")
 		return weapon_FarinsTorch();
+	else if (handle == "selvixs_hookblade")
+		return weapon_SelvixsHookblade();
+	else if (handle == "ratbone_cleaver")
+		return weapon_RatboneCleaver();
+	//Tombs
+	else if (handle == "corens_greataxe")
+		return weapon_CorensGreataxe();
+	else if (handle == "khalles_holy_scythe")
+		return weapon_KhallesHolyScythe();
+	//Misc boss weapons
+	else if (handle == "voidfire_knife")
+		return weapon_VoidfireKnife();
+	else if (handle == "lightning_warhammer")
+		return weapon_LightningWarhammer();
+	else if (handle == "ietras_flame_scythe")
+		return weapon_IetrasFlameScythe();
+	//Ultimate weapons
+	else if (handle == "deathless_blade")
+		return weapon_DeathlessBlade();
+	else if (handle == "greatsword_of_the_ancient_lords")
+		return weapon_GreatswordOfTheAncientLords();
 
 	//SHIELDS
 	if (handle == "battered_wooden_shield")
@@ -92,19 +125,30 @@ itemSharedPtr getItemByHandle(std::string handle)
 	else if (handle == "rotten_beast_shield")
 		return shield_RottenBeastShield();
 
-	//WANDS/CHIMES
+	//WANDS
 	if (handle == "driftwood_wand")
 		return wand_DriftwoodWand();
 	else if (handle == "fishmans_toadstaff")
 		return wand_FishmansToadstaff();
 	else if (handle == "ethereal_wand")
 		return wand_EtherealWand();
+	else if (handle == "bleachwood_wand")
+		return wand_BleachwoodWand();
+	else if (handle == "moshkas_singing_staff")
+		return wand_MoshkasSingingStaff();
 	else if (handle == "gottrics_wand")
 		return wand_GottricsWand();
+	//CHIMES
 	else if (handle == "clerics_cracked_chime")
 		return chime_ClericsCrackedChime();
+	else if (handle == "green_knights_chime")
+		return chime_GreenKnightsChime();
 	else if (handle == "rotblood_bell")
 		return chime_RotbloodBell();
+	else if (handle == "wyrd_bellbranch")
+		return chime_WyrdBellbranch();
+	else if (handle == "orsyls_profane_chime")
+		return chime_OrsylsProfaneChime();
 
 	//CONSUMABLES
 	if (handle == "starwater_draught")
@@ -267,6 +311,11 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return headgear_StarweaversHood();
 	else if (handle == "starweavers_robe")
 		return armour_StarweaversRobe();
+
+	else if (handle == "pilgrims_hood")
+		return headgear_PilgrimsHood();
+	else if (handle == "pilgrims_coat")
+		return armour_PilgrimsCoat();
 
 	//CHARMS
 	if (handle == "bloodstained_charm")

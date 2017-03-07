@@ -651,6 +651,7 @@ that remained of the Moon-Pale King, who wasted away in his abandoned palace as 
 	wp->addDamageType(DAMAGE_MAGIC, 25);
 	wp->addScalingType(SCALE_ARC);
 	wp->setSpecialAttack(attack_PaleSlash());
+	wp->setImage(loadWeaponImage("W_moonpale scythe"));
 	return wp;
 }
 
@@ -849,6 +850,7 @@ the crest slowly changed into the shape of a crooked finger."));
 	wp->setDamageResist(DAMAGE_COLD, 15);
 	wp->setDamageResist(DAMAGE_ACID, 15);
 	wp->makeOffhand();
+	wp->setImage(loadWeaponImage("S_ghost shield"));
 	return wp;
 }
 
@@ -872,6 +874,7 @@ weaponSharedPtr shield_RottenBeastShield()
 		"Shield rotted from extensive contact with the toxins of the tombs."));
 	wp->setDefence(10);
 	wp->setPoisonResist(20);
+	wp->setPlagueResist(20);
 	wp->makeOffhand();
 	wp->setDamagePenalty(5);
 	return wp;
@@ -901,6 +904,7 @@ weaponSharedPtr wand_FishmansToadstaff()
 	wp->setSpellPower(75);
 	wp->setSpecialAttack(ability_AcidInfusion());
 	wp->makeOffhand();
+	wp->setImage(loadWeaponImage("M_toadstaff"));
 	return wp;
 }
 
@@ -913,6 +917,7 @@ weaponSharedPtr wand_EtherealWand()
 	wp->setSpellPower(80);
 	wp->setSpecialAttack(ability_EtherealSurge());
 	wp->makeOffhand();
+	wp->setImage(loadWeaponImage("M_ethereal wand"));
 	return wp;
 }
 
