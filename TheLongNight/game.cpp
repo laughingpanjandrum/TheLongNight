@@ -3515,6 +3515,7 @@ void game::initializeShops()
 	oldgods->addItem(charm_IconOfFamine(), 300);
 	oldgods->addItem(charm_AtalundraPactRing(), 500);
 	oldgods->addItem(charm_DivinePactRing(), 500);
+	oldgods->addItem(charm_AgonyRing(), 500);
 	allUnlockableShops.push_back(oldgods);
 
 	//Utric
@@ -4596,6 +4597,7 @@ void game::debugMenu()
 		player->addItem(charm_IconOfFamine());
 		player->addItem(charm_AtalundraPactRing());
 		player->addItem(charm_DivinePactRing());
+		player->addItem(charm_AgonyRing());
 	}
 
 }

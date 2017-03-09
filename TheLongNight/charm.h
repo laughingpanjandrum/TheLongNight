@@ -63,5 +63,6 @@ charmSharedPtr charm_VenomousImbecilesRing();
 charmSharedPtr charm_IconOfFamine();
 charmSharedPtr charm_AtalundraPactRing();
 charmSharedPtr charm_DivinePactRing();
+charmSharedPtr charm_AgonyRing();
 
 #endif

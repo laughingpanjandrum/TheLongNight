@@ -596,6 +596,7 @@ std::string getEffectName(effect e)
 	case(APPLY_BLINDING): return "blind target";
 	case(APPLY_ENTANGLING): return "entangle target";
 	case(APPLY_DAMAGE_PENALTY): return "attack damage penalty";
+	case(GAIN_DAMAGE_BUFF): return "extra melee damage";
 	case(KNOCKBACK_TARGET): return "knockback target";
 	case(PULL_CLOSER): return "pull target";
 	case(BLEED_DAMAGE_FACTOR): return "times bleed damage dealt and taken";

@@ -236,3 +236,12 @@ charmSharedPtr charm_DivinePactRing()
 	c->addEffect(INCREASE_PRAYER_POWER, 50);
 	return c;
 }
+
+charmSharedPtr charm_AgonyRing()
+{
+	charmSharedPtr c(new charm("Agony Ring", CHARM_TILE, TCODColor::darkRed,
+		"The excruciating pain caused by this lacerating ring confers proportionate rage and power to its wearer."));
+	c->addEffect(GAIN_DAMAGE_BUFF, 30);
+	c->addEffect(GAIN_MAX_HEALTH, -20);
+	return c;
+}

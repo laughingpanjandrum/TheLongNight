@@ -183,9 +183,9 @@ int person::getMeleeDamage()
 				damage += damage / 2;
 		}
 
-		//Basic penalty
+		//Basic penalty or buff
 		int penalty = (float)damage * (float)damagePenalty / 100.0;
-		if (penalty > 0)
+		if (penalty != 0)
 			damage -= penalty;
 
 		//Penalty if electrified
@@ -517,6 +517,8 @@ void person::applyEffect(effect eff, int potency)
 		entangle(potency);
 	else if (eff == APPLY_DAMAGE_PENALTY)
 		damagePenalty += potency;
+	else if (eff == GAIN_DAMAGE_BUFF)
+		damagePenalty -= potency;
 	else if (eff == INSTILL_FEAR)
 		fear += potency;
 
