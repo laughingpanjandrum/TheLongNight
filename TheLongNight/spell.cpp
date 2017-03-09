@@ -1065,6 +1065,21 @@ spellSharedPtr prayer_YutriasDivineSpark()
 	return sp;
 }
 
+spellSharedPtr prayer_YutriasProtection()
+{
+	spellSharedPtr sp(new spell("Yutria's Protection", SPELL_TILE, TCODColor::lightBlue,
+		"Grant oneself the elemental protection offered to Yutria, who walked upon death without fear."));
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(GAIN_ACID_RESIST, 10);
+	sp->addEffect(GAIN_COLD_RESIST, 10);
+	sp->addEffect(GAIN_FIRE_RESIST, 10);
+	sp->addEffect(GAIN_ELECTRIC_RESIST, 10);
+	sp->setVigourCost(4);
+	sp->usesDivinePower = true;
+	sp->addPermanentBuff = true;
+	return sp;
+}
+
 spellSharedPtr prayer_DivineRestoration()
 {
 	spellSharedPtr sp(new spell("Divine Restoration", SPELL_TILE, TCODColor::flame,

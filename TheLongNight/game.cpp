@@ -1049,7 +1049,7 @@ void game::drawInventory(int atx, int aty)
 			itemSharedPtr sel = std::static_pointer_cast<item>(currentMenu->getSelectedItem());
 
 			//Draw the item and the image for the item
-			drawItemInfo(sel, atx, aty + 40);
+			drawItemInfo(sel, ITEM_DRAW_X, ITEM_DRAW_Y);
 		
 		}
 	}
@@ -3509,9 +3509,12 @@ void game::initializeShops()
 	allUnlockableShops.push_back(finger);
 	//Heart of the Old Gods
 	shopSharedPtr oldgods = shopSharedPtr(new shop("heart_of_the_old_gods", true));
-	oldgods->addItem(consumable_PutridBrew(), 100);
-	oldgods->addItem(charm_VenomousImbecilesRing(), 100);
-	oldgods->addItem(charm_IconOfFamine(), 100);
+	oldgods->addItem(consumable_PutridBrew(), 500);
+	oldgods->addItem(consumable_GodsbloodBrew(), 500);
+	oldgods->addItem(charm_VenomousImbecilesRing(), 300);
+	oldgods->addItem(charm_IconOfFamine(), 300);
+	oldgods->addItem(charm_AtalundraPactRing(), 500);
+	oldgods->addItem(charm_DivinePactRing(), 500);
 	allUnlockableShops.push_back(oldgods);
 
 	//Utric
@@ -3563,6 +3566,7 @@ void game::initializeShops()
 	shop* moonspark = new shop("divine_moonspark_tome");
 	moonspark->addItem(prayer_DivineRetribution(), 100);
 	moonspark->addItem(prayer_YutriasDivineSpark(), 100);
+	moonspark->addItem(prayer_YutriasProtection(), 100);
 	allUnlockableShops.push_back(shopSharedPtr(moonspark));
 	//	Divine Tome of the Emissary
 	shop* emissary = new shop("divine_tome_of_the_emissary");
@@ -4452,6 +4456,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(prayer_WordOfUnmaking());
 	player->addItem(prayer_WyrdChantOfStrength());
 	player->addItem(prayer_YutriasDivineSpark());
+	player->addItem(prayer_YutriasProtection());
 
 	player->addItem(consumable_BlackHoney());
 	player->addItem(consumable_BloodDrinkersEyes());
@@ -4584,4 +4589,13 @@ void game::debugMenu()
 		getAllItems(player);
 		fragments += 15000;
 	}
+	else if (txt == "finalitems") {
+		player->addItem(consumable_PutridBrew());
+		player->addItem(consumable_GodsbloodBrew());
+		player->addItem(charm_VenomousImbecilesRing());
+		player->addItem(charm_IconOfFamine());
+		player->addItem(charm_AtalundraPactRing());
+		player->addItem(charm_DivinePactRing());
+	}
+
 }

@@ -61,5 +61,7 @@ charmSharedPtr charm_VoidwalkersRing();
 //Special upgrade rings
 charmSharedPtr charm_VenomousImbecilesRing();
 charmSharedPtr charm_IconOfFamine();
+charmSharedPtr charm_AtalundraPactRing();
+charmSharedPtr charm_DivinePactRing();
 
 #endif

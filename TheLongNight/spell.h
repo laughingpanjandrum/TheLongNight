@@ -176,6 +176,7 @@ spellSharedPtr prayer_Intoxify();
 //Divine Moonspark Tome
 spellSharedPtr prayer_DivineRetribution();
 spellSharedPtr prayer_YutriasDivineSpark();
+spellSharedPtr prayer_YutriasProtection();
 //Divine Tome of the Emissary
 spellSharedPtr prayer_DivineRestoration();
 spellSharedPtr prayer_DivineJudgement();

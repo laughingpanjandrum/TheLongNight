@@ -124,6 +124,16 @@ consumableSharedPtr consumable_PutridBrew()
 	return c;
 }
 
+consumableSharedPtr consumable_GodsbloodBrew()
+{
+	consumableSharedPtr c(new consumable("Godsblood Brew", VIAL_TILE, TCODColor::lightChartreuse,
+		"Brew concocted from the boiling blood of the old gods, whose remains smoulder in the heart of the Void."));
+	c->addEffect(GAIN_MAX_HEALTH);
+	c->setPotency(40);
+	c->addsPermanentBuff = true;
+	return c;
+}
+
 consumableSharedPtr ranged_ThrowingKnives()
 {
 	consumableSharedPtr c(new consumable("Throwing Knives", DAGGER_TILE, TCODColor::lightGrey,

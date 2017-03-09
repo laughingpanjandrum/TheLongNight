@@ -220,3 +220,19 @@ old gods at the hands of the ravenous slaves of the Void."));
 	c->addEffect(GAIN_KILL_DAMAGE_BUFF, 10);
 	return c;
 }
+
+charmSharedPtr charm_AtalundraPactRing()
+{
+	charmSharedPtr c(new charm("Atalundra Pact Ring", CHARM_TILE, TCODColor::lightPurple,
+		"A pact with the dying relics of the old gods grants supreme arcane power."));
+	c->addEffect(INCREASE_SPELL_POWER, 50);
+	return c;
+}
+
+charmSharedPtr charm_DivinePactRing()
+{
+	charmSharedPtr c(new charm("Divine Pact Ring", CHARM_TILE, TCODColor::lightYellow,
+		"A pact with the fading flame of the old gods grants supreme divine power."));
+	c->addEffect(INCREASE_PRAYER_POWER, 50);
+	return c;
+}
