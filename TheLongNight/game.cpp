@@ -3507,6 +3507,12 @@ void game::initializeShops()
 	shopSharedPtr finger = shopSharedPtr(new shop("withered_finger"));
 	finger->addItem(key_GreenKnightsKey(), 0);
 	allUnlockableShops.push_back(finger);
+	//Heart of the Old Gods
+	shopSharedPtr oldgods = shopSharedPtr(new shop("heart_of_the_old_gods", true));
+	oldgods->addItem(consumable_PutridBrew(), 100);
+	oldgods->addItem(charm_VenomousImbecilesRing(), 100);
+	oldgods->addItem(charm_IconOfFamine(), 100);
+	allUnlockableShops.push_back(oldgods);
 
 	//Utric
 	shopSharedPtr utricShop = shopSharedPtr(new shop("utric_shop"));
@@ -3922,17 +3928,26 @@ Remove items from the current shop that also correspond to this key.
 void game::destroyShopItemsWithKey(shopSharedPtr currentShop, std::string keyTag)
 {
 	itemVector toRemove;
+	
 	//Make a list of items that use this key
 	for (auto iter = currentShop->stock.begin(); iter != currentShop->stock.end(); iter++) {
 		if ((*iter)->eatsKeyWhenBought && (*iter)->getKeyEaten() == keyTag) {
 			toRemove.push_back(*iter);
 		}
 	}
+	
 	//KILL THEM ALL
 	for (auto it : toRemove) {
 		currentShop->removeItem(it);
 		currentMenu->removeElement(it);
 	}
+
+	//We keep a list of items destroyed, just in case the player regains the key
+	shopSharedPtr saveShop = shopSharedPtr(new shop(keyTag, true));
+	for (auto it : toRemove)
+		saveShop->addItem(it, it->getPrice());
+	allUnlockableShops.push_back(saveShop);
+
 }
 
 
@@ -4508,6 +4523,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(heart_VenomousSpiderHeart());
 	player->addItem(heart_VortensShriveledHeart());
 	player->addItem(heart_WretchedHeart());
+	player->addItem(heart_HeartOfTheOldGods());
 
 	player->addItem(key_WatchfulEyestalk());
 	player->addItem(key_WitheredFinger());

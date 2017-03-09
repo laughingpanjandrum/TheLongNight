@@ -195,3 +195,28 @@ good does their knowledge bring them?"));
 	c->addEffect(IMMUNE_TO_VOID, 1);
 	return c;
 }
+
+
+/*
+	Special rings
+*/
+
+charmSharedPtr charm_VenomousImbecilesRing()
+{
+	charmSharedPtr c(new charm("Venomous Imbecile's Ring", CHARM_TILE, TCODColor::green,
+		"The putrid rage of Glurg is embedded in this toxic ring, drenched in eldritch sludge vomited up by the \
+slaughtered gods of old."));
+	c->addEffect(DAMAGE_WHEN_POISONED, 25);
+	c->addEffect(PHYS_RESIST_WHILE_POISONED, 30);
+	return c;
+}
+
+charmSharedPtr charm_IconOfFamine()
+{
+	charmSharedPtr c(new charm("Icon of Famine", CHARM_TILE, TCODColor::yellow,
+		"Icon depicting one of the old gods, but the icon's face has been destroyed, suggesting the obliteration of the \
+old gods at the hands of the ravenous slaves of the Void."));
+	c->addEffect(GAIN_HEALTH_ON_KILL, 30);
+	c->addEffect(GAIN_KILL_DAMAGE_BUFF, 10);
+	return c;
+}

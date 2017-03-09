@@ -99,6 +99,8 @@ miscItemSharedPtr heart_PlagueRiddenHeart();
 miscItemSharedPtr heart_HeartOfFarin();
 miscItemSharedPtr heart_RatKingsHeart();
 
+miscItemSharedPtr heart_HeartOfTheOldGods();
+
 //Spellbooks
 miscItemSharedPtr spellbook_WaterloggedWritings();
 miscItemSharedPtr spellbook_MinasProfanedWritings();

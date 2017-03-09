@@ -58,4 +58,8 @@ charmSharedPtr charm_PaleShadesRing();
 charmSharedPtr charm_StarweaversRing();
 charmSharedPtr charm_VoidwalkersRing();
 
+//Special upgrade rings
+charmSharedPtr charm_VenomousImbecilesRing();
+charmSharedPtr charm_IconOfFamine();
+
 #endif

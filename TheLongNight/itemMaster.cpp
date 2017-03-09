@@ -410,6 +410,12 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return heart_IetrasBurningHeart();
 	else if (handle == "pale_heart")
 		return heart_PaleHeart();
+	else if (handle == "plague_ridden_heart")
+		return heart_PlagueRiddenHeart();
+	else if (handle == "heart_of_farin")
+		return heart_HeartOfFarin();
+	else if (handle == "heart_of_the_old_gods")
+		return heart_HeartOfTheOldGods();
 
 	//SPELLBOOKS
 	if (handle == "waterlogged_writings")

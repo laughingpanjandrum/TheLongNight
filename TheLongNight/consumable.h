@@ -78,6 +78,7 @@ consumableSharedPtr consumable_BloodDrinkersEyes();
 consumableSharedPtr consumable_IntoxicatingWine();
 consumableSharedPtr consumable_WitchwaterFlask();
 consumableSharedPtr consumable_BlackHoney();
+consumableSharedPtr consumable_PutridBrew();
 
 consumableSharedPtr ranged_ThrowingKnives();
 consumableSharedPtr ranged_HeavyJavelin();

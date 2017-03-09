@@ -2018,6 +2018,7 @@ devoured its forebears, the revelation of the truth beyond the stars proved unbe
 	m->setSpellCastChance(20);
 	m->addSpawnableCreature("adherent_of_glug");
 	m->setSpawnChance(30);
+	m->addItemDrop(heart_HeartOfTheOldGods());
 	return m;
 }
 
@@ -2256,6 +2257,7 @@ monsterSharedPtr npc_ToadPriestGhulluk()
 	m->addShopUnlock("watchful_eyestalk");
 	m->addShopUnlock("mawtooth_fragment");
 	m->addShopUnlock("withered_finger");
+	m->addShopUnlock("heart_of_the_old_gods");
 	//Dialogue
 	m->loadDialogue("dialogue/ghulluk_chat.txt");
 	m->addSpecialDialogue("watchful_eyestalk",

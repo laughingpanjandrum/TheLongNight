@@ -415,6 +415,15 @@ took him here, to the miserable depths of the earth, where no possible insight c
 	return h;
 }
 
+miscItemSharedPtr heart_HeartOfTheOldGods()
+{
+	miscItemSharedPtr h(new miscItem("Heart of the Old Gods", HEART_TILE, TCODColor::white,
+		"Ruins of the old gods, left to moulder in the Heart of the Void."));
+	h->setKeyTag("heart_of_the_old_gods");
+	h->setWhatWeDo("Offer to the Toad Priest Ghulluk in the Murdermire to acquire power.");
+	return h;
+}
+
 
 
 /*

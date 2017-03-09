@@ -113,6 +113,17 @@ with bloodshed, one's dreams are unlikely to bring peace."));
 	return c;
 }
 
+consumableSharedPtr consumable_PutridBrew()
+{
+	consumableSharedPtr c(new consumable("Putrid Brew", VIAL_TILE, TCODColor::darkLime,
+		"A profoundly toxic drink, said to contain the putrid rage of the dead gods that rot in the heart of the Void."));
+	c->addEffect(APPLY_POISON_DAMAGE);
+	c->addEffect(DAMAGE_WHEN_POISONED);
+	c->setPotency(40);
+	c->addsPermanentBuff = true;
+	return c;
+}
+
 consumableSharedPtr ranged_ThrowingKnives()
 {
 	consumableSharedPtr c(new consumable("Throwing Knives", DAGGER_TILE, TCODColor::lightGrey,
