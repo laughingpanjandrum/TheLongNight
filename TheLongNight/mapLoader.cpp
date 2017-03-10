@@ -30,7 +30,6 @@ map * mapLoader::loadMapFromFile(std::string filename)
 	//The starting point, just in case we happen to have one
 	coord startPt;
 	//Tracks MONSTERS that we want to put on the map!
-	//monsterVector monsters;
 	stringVector monsterSpawnTags;
 	coordVector monsterSpawnCoords;
 	//Tracks ITEMS that we want to put on the map!

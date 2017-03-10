@@ -26,6 +26,8 @@ It also draws all the stuff that needs drawing.
 #include "person.h"
 #include "monster.h"
 
+#include "savegame.h"
+
 
 //Messages!
 struct message {
@@ -348,6 +350,10 @@ private:
 
 	//Image used to represent the PC when armour is being drawn
 	imageSharedPtr PLAYER_IMAGE = imageSharedPtr(loadImage("character"));
+
+	//Saving, loading!
+	void saveGame();
+	void loadSaveGame(std::string fname);
 
 
 };

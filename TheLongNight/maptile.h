@@ -196,6 +196,8 @@ maptile* tile_LostDoor(); //"lost_door"
 maptile* tile_SilentDoor(); //"silent_door"
 maptile* tile_VoidMausoleumDoor(); //"void_mausoleum_door"
 
+maptile* tile_AncientPrisonDoor(); //"ancient_prison_door"
+
 maptile* tile_SlumberingGate(); //"slumbering_gate"
 maptile* tile_UnderpoolDoor(); //"underpool_door"
 maptile* tile_AbattoirDoor(); //"abattoir_door"
@@ -245,6 +247,7 @@ const tileVector ALL_MAPTILES = {
 	tile_GraveDoor(), tile_AtalundraGate(), tile_RatDoor(),
 	tile_BloodyMausoleumDoor(), tile_LostDoor(), tile_SilentDoor(), tile_VoidMausoleumDoor(),
 	tile_SlumberingGate(), tile_UnderpoolDoor(), tile_AbattoirDoor(), tile_RoseCourtGate(),
+	tile_AncientPrisonDoor(),
 };
 
 #endif

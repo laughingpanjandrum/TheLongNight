@@ -1056,8 +1056,9 @@ void game::drawInventory(int atx, int aty)
 	
 	else {
 		
-		//We can go to the level-up menu from here
+		//We can go to the level-up menu from here, & also save le game
 		win.write(atx, aty + 20, "Press [p] to LEVEL UP", TCODColor::white);
+		win.write(atx, aty + 21, "Press [s] to SAVE THE GAME", TCODColor::white);
 	
 	}
 }
@@ -1968,6 +1969,12 @@ void game::processCommand()
 				setupLevelUpMenu();
 			else
 				drawPlayerInfo(MAP_DRAW_X, MAP_DRAW_Y);
+		}
+		else if (key.c == 'm') {
+			if (state == STATE_VIEW_INVENTORY) {
+				saveGame();
+				addMessage("Game saved!", TCODColor::white);
+			}
 		}
 
 		//Using stuff
@@ -4598,6 +4605,36 @@ void game::debugMenu()
 		player->addItem(charm_AtalundraPactRing());
 		player->addItem(charm_DivinePactRing());
 		player->addItem(charm_AgonyRing());
+		player->addItem(key_IetrasAmberPendant());
 	}
 
+}
+
+
+
+/*
+	SAVING AND LOADING
+*/
+
+
+/*
+Generate a new save game.
+*/
+void game::saveGame()
+{
+
+	//Save object
+	savegame* newSave = new savegame(allMapHandles, allMaps, currentMap->getMapTag(), player->getPosition());
+
+	//Dump all this information into a big ole' file.
+	newSave->dumpToFile("currentsave");
+
+}
+
+
+/*
+This loads a save from a given file.
+*/
+void game::loadSaveGame(std::string fname)
+{
 }

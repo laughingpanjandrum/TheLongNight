@@ -263,6 +263,8 @@ monsterSharedPtr monster_GlurgTheImbecile();
 monsterSharedPtr monster_PashTheRavenous();
 monsterSharedPtr monster_TheBlindKing();
 
+monsterSharedPtr monster_RuinsOfTheOldGods();
+
 //Friendly NPCs
 monsterSharedPtr npc_Gorem();
 monsterSharedPtr npc_UtricTheRat();

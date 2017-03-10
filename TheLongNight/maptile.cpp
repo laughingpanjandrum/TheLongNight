@@ -581,6 +581,16 @@ maptile * tile_VoidMausoleumDoor()
 	return door;
 }
 
+maptile * tile_AncientPrisonDoor()
+{
+	maptile* door = new maptile("Ancient Prison Door", "ancient_prison_door", BASIC_DOOR_TILE,
+		TCODColor::amber, TCODColor::black, false, false);
+	door->isDoor = true;
+	door->unlockCode = "ietras_amber_pendant";
+	door->addTouchEffect(CHECK_FOR_UNLOCK);
+	return door;
+}
+
 maptile * tile_SlumberingGate()
 {
 	maptile* door = new maptile("Slumbering Gate", "slumbering_gate", BASIC_DOOR_TILE,

@@ -143,6 +143,7 @@
     <ClCompile Include="miscItem.cpp" />
     <ClCompile Include="monster.cpp" />
     <ClCompile Include="person.cpp" />
+    <ClCompile Include="savegame.cpp" />
     <ClCompile Include="spell.cpp" />
     <ClCompile Include="TheLongNight.cpp" />
     <ClCompile Include="turnTracker.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="menu.h" />
     <ClInclude Include="miscItem.h" />
     <ClInclude Include="monster.h" />
+    <ClInclude Include="savegame.h" />
     <ClInclude Include="spell.h" />
     <ClInclude Include="tileConsts.h" />
     <ClInclude Include="map.h" />

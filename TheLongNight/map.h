@@ -77,6 +77,7 @@ public:
 	personSharedPtr getPerson(int x, int y);
 	personVector getAllPeople() { return people; }
 	itemSharedPtr getItem(int x, int y);
+	itemVector getAllItems() { return items; }
 	coord getStartPoint() { return startPt; }
 
 	//Getting: movement data

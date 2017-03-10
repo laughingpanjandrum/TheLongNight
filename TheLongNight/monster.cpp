@@ -2068,6 +2068,18 @@ putrid toxins from every pore."));
 	return m;
 }
 
+monsterSharedPtr monster_RuinsOfTheOldGods()
+{
+	monsterSharedPtr m(new monster("Ruins of the Old Gods", WRETCH_TILE, TCODColor::white,
+		"Sordid wreckage of an old god, withered beyond recognition."));
+	m->setHealth(1000);
+	m->setMoveStats(SPEED_SLOW);
+	m->setMeleeStats(25, SPEED_SLOW);
+	m->keepsDistance = true;
+	m->addItemDrop(gem_GodlessGemstone());
+	return m;
+}
+
 
 /*
 	FRIENDLIES
@@ -2534,6 +2546,8 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return monster_PashTheRavenous();
 	else if (handle == "the_blind_king")
 		return monster_TheBlindKing();
+	else if (handle == "ruins_of_the_old_gods")
+		return monster_RuinsOfTheOldGods();
 
 	//Friendly NPCs
 	else if (handle == "gorem")
