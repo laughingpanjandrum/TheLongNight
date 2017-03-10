@@ -169,6 +169,18 @@ void savegame::loadFromFile(std::string fname)
 	}
 }
 
+/*
+Returns whether the item at the given coordinate should be kept.
+*/
+bool savegame::shouldSaveItem(int mapIdx, coord pt)
+{
+	for (auto keepPt : keepItemsAtCoord.at(mapIdx)) {
+		if (keepPt == pt)
+			return true;
+	}
+	return false;
+}
+
 
 
 /*

@@ -29,6 +29,7 @@ public:
 	std::vector<coordVector> getItemsToKeep() { return keepItemsAtCoord; }
 	std::string getStartMapTag() { return lastMap; }
 	coord getStartPosition() { return lastPos; }
+	bool shouldSaveItem(int mapIdx, coord pt);
 
 private:
 

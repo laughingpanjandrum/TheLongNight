@@ -4632,12 +4632,24 @@ void game::loadSaveGame(std::string fname)
 	//	Translate save game into actual reality
 	
 	//Load up all the maps we have saved up
-	for (auto mapTag : sg->getAllMapTags()) {
+	auto mapTags = sg->getAllMapTags();
+	for (int i = 0; i < mapTags.size(); i++) {
 
+		std::string mapTag = mapTags.at(i);
+
+		//Create the map and save it
 		map* newmap = new map();
 		newmap = makemap.loadMapFromFile(mapTag);
 		newmap->respawnAllMonsters(storyEventsReady);
 		addKnownMap(newmap, mapTag);
+
+		//Delete items from the map that have already been picked up
+		for (auto it : newmap->getAllItems()) {
+			
+			if (!sg->shouldSaveItem(i, it->getPosition()))
+				newmap->removeItem(it);
+
+		}
 
 	}
 
