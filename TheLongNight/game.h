@@ -103,6 +103,9 @@ class game
 public:
 	
 	game();
+	game(std::string fname) {
+		loadSaveGame(fname);
+	} //Constructs a game using a save file
 	~game();
 	
 	//Map stuff

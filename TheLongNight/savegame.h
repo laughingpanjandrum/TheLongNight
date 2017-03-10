@@ -24,6 +24,12 @@ public:
 	void dumpToFile(std::string fname);
 	void loadFromFile(std::string fname);
 
+	//Getting data to transform into a real game
+	stringVector getAllMapTags() { return knownMapTags; }
+	std::vector<coordVector> getItemsToKeep() { return keepItemsAtCoord; }
+	std::string getStartMapTag() { return lastMap; }
+	coord getStartPosition() { return lastPos; }
+
 private:
 
 	//List of all map tags we should remember

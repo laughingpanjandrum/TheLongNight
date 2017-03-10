@@ -162,6 +162,9 @@ void savegame::loadFromFile(std::string fname)
 				}
 			}
 
+			//Clear chunk
+			chunk = "";
+
 		}
 	}
 }
@@ -195,8 +198,9 @@ coord savegame::stringToCoord(std::string c)
 	pos.first = std::stoi(chunk);
 	chunk = "";
 	//Second coordinate
+	i++;
 	while (i < c.size())
-		chunk += c.at(++i);
+		chunk += c.at(i++);
 	pos.second = std::stoi(chunk);
 	//Done
 	return pos;

@@ -106,7 +106,9 @@ Delete a character from the map.
 */
 void map::removePerson(personSharedPtr p)
 {
-	people.erase(std::find(people.begin(), people.end(), p));
+	auto pt = std::find(people.begin(), people.end(), p);
+	if (pt != people.end())
+		people.erase(pt);
 }
 
 /*

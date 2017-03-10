@@ -2584,7 +2584,8 @@ void game::loadNewMap(map * newMap, connectionPoint connect, int oldx, int oldy)
 {
 	
 	//Remove player from current map
-	currentMap->removePerson(player);
+	if (currentMap != nullptr)
+		currentMap->removePerson(player);
 	
 	//Set new map
 	setCurrentMap(newMap);
@@ -4637,4 +4638,49 @@ This loads a save from a given file.
 */
 void game::loadSaveGame(std::string fname)
 {
+	
+	//Generate savegame
+	savegame* sg = new savegame(fname);
+	
+	//	Translate save game into actual reality
+	
+	//Load up all the maps we have saved up
+	for (auto mapTag : sg->getAllMapTags()) {
+
+		map* newmap = new map();
+		newmap = makemap.loadMapFromFile(mapTag);
+		newmap->respawnAllMonsters(storyEventsReady);
+		addKnownMap(newmap, mapTag);
+
+	}
+
+	//Character create
+	player = personSharedPtr(new person());
+	player->isPlayer = true;
+	player->isHostile = false;
+	player->stats = new statline(1, 1, 1, 1, 1, 1, 1);
+
+	//Load in story events
+	loadStoryEvents("maps/storyFlags.txt");
+	loadTextDumps("dialogue/journalText.txt");
+
+	//Set up store inventories
+	initializeShops();
+	
+	//We start on a given map
+	loadMapFromHandle(sg->getStartMapTag(), CONNECT_WARP, 0, 0);
+	player->setPosition(sg->getStartPosition());
+
+	currentMap->addPerson(player, player->getx(), player->gety());
+	currentMap->updateFOV(player->getx(), player->gety());
+
+	//Make our starting position a save point
+	setSavePoint();
+
+	//Add monsters to clock
+	for (auto m : currentMap->getAllPeople()) {
+		if (!m->isPlayer)
+			turns.addEntity(m, 1);
+	}
+
 }
