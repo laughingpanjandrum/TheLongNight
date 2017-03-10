@@ -17,13 +17,6 @@ game::game()
 	
 	//Remember the first map
 	addKnownMap(newmap, makemap.getStartMapHandle());
-
-	//Load in story events
-	loadStoryEvents("maps/storyFlags.txt");
-	loadTextDumps("dialogue/journalText.txt");
-
-	//Set up store inventories
-	initializeShops();
 	
 	//Character create
 	player = personSharedPtr (new person());
@@ -33,17 +26,11 @@ game::game()
 	
 	//Find starting position
 	coord startPt = currentMap->getStartPoint();
-	currentMap->addPerson(player, startPt.first, startPt.second);
-	currentMap->updateFOV(player->getx(), player->gety());
+	player->setPosition(startPt.first, startPt.second);
 	
-	//Make our starting position a save point
-	setSavePoint();
-	
-	//Add monsters to clock
-	for (auto m : currentMap->getAllPeople()) {
-		if (!m->isPlayer)
-			turns.addEntity(m, 1);
-	}
+	//Setup we do whether loading a game or creating a new one
+	setupGeneralGame();
+
 }
 
 
@@ -4659,6 +4646,26 @@ void game::loadSaveGame(std::string fname)
 	player->isPlayer = true;
 	player->isHostile = false;
 	player->stats = new statline(1, 1, 1, 1, 1, 1, 1);
+	
+	//We start on a given map
+	loadMapFromHandle(sg->getStartMapTag(), CONNECT_WARP, 0, 0);
+	player->setPosition(sg->getStartPosition());
+
+	//General setup
+	setupGeneralGame();
+
+}
+
+
+/*
+This is stuff we do whether generating a new game or loading an old one.
+*/
+void game::setupGeneralGame()
+{
+
+	//Make sure player is on the starting map and that the FOV is up to date
+	currentMap->addPerson(player, player->getx(), player->gety());
+	currentMap->updateFOV(player->getx(), player->gety());
 
 	//Load in story events
 	loadStoryEvents("maps/storyFlags.txt");
@@ -4666,13 +4673,6 @@ void game::loadSaveGame(std::string fname)
 
 	//Set up store inventories
 	initializeShops();
-	
-	//We start on a given map
-	loadMapFromHandle(sg->getStartMapTag(), CONNECT_WARP, 0, 0);
-	player->setPosition(sg->getStartPosition());
-
-	currentMap->addPerson(player, player->getx(), player->gety());
-	currentMap->updateFOV(player->getx(), player->gety());
 
 	//Make our starting position a save point
 	setSavePoint();
@@ -4682,5 +4682,4 @@ void game::loadSaveGame(std::string fname)
 		if (!m->isPlayer)
 			turns.addEntity(m, 1);
 	}
-
 }

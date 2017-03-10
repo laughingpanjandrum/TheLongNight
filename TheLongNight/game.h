@@ -358,6 +358,8 @@ private:
 	void saveGame();
 	void loadSaveGame(std::string fname);
 
+	void setupGeneralGame();
+
 
 };
 
