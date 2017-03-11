@@ -34,6 +34,12 @@ savegame::savegame(stringVector savedMapHandles, mapVector savedMaps, std::strin
 		//Retain this list
 		keepItemsAtCoord.push_back(*itemCoords);
 
+		//Also keep track of whether or not the boss of this map is dead
+		if (m->bossDestroyed)
+			bossDead.push_back(true);
+		else
+			bossDead.push_back(false);
+
 	}
 
 	//Save our current position
@@ -81,6 +87,12 @@ void savegame::dumpToFile(std::string fname)
 		for (auto crd : keepItemsAtCoord.at(i)) {
 			saveData += coordToString(crd) + ';';
 		}
+
+		//Dump boss living/dead information
+		if (bossDead.at(i))
+			saveData += "BOSS_DEAD;";
+		else
+			saveData += "BOSS_ALIVE;";
 
 		//Indication that we're done saving this map information
 		saveData += "END;";
@@ -156,6 +168,11 @@ void savegame::loadFromFile(std::string fname)
 					keepItemsAtCoord.push_back(*savedItemVectors);
 					endOfMap = true;
 				}
+				else if (chunk == "BOSS_DEAD")
+					//The boss of this map has been killed, which is important to remember
+					bossDead.push_back(true);
+				else if (chunk == "BOSS_ALIVE")
+					bossDead.push_back(false);
 				else {
 					//This is a coordinate
 					savedItemVectors->push_back(stringToCoord(chunk));

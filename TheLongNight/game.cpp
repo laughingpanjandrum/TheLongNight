@@ -13,7 +13,6 @@ game::game()
 	map* newmap = new map();
 	newmap = makemap.loadMapFromFile(makemap.getStartMapHandle());
 	setCurrentMap(newmap);
-	newmap->respawnAllMonsters(storyEventsReady);
 	
 	//Remember the first map
 	addKnownMap(newmap, makemap.getStartMapHandle());
@@ -4640,15 +4639,17 @@ void game::loadSaveGame(std::string fname)
 		//Create the map and save it
 		map* newmap = new map();
 		newmap = makemap.loadMapFromFile(mapTag);
-		newmap->respawnAllMonsters(storyEventsReady);
 		addKnownMap(newmap, mapTag);
 
 		//Delete items from the map that have already been picked up
 		for (auto it : newmap->getAllItems()) {
-			
 			if (!sg->shouldSaveItem(i, it->getPosition()))
 				newmap->removeItem(it);
+		}
 
+		//Remove the boss if it's supposed to be dead
+		if (sg->isBossDead(i)) {
+			newmap->bossDestroyed = true;
 		}
 
 	}
@@ -4678,6 +4679,9 @@ void game::setupGeneralGame()
 	//Make sure player is on the starting map and that the FOV is up to date
 	currentMap->addPerson(player, player->getx(), player->gety());
 	currentMap->updateFOV(player->getx(), player->gety());
+
+	//Spawn creatures on new map
+	currentMap->respawnAllMonsters(storyEventsReady);
 
 	//Load in story events
 	loadStoryEvents("maps/storyFlags.txt");

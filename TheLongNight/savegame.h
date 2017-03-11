@@ -29,6 +29,7 @@ public:
 	std::vector<coordVector> getItemsToKeep() { return keepItemsAtCoord; }
 	std::string getStartMapTag() { return lastMap; }
 	coord getStartPosition() { return lastPos; }
+	bool isBossDead(int mapIdx) { return bossDead.at(mapIdx); }
 	bool shouldSaveItem(int mapIdx, coord pt);
 
 private:
@@ -38,6 +39,9 @@ private:
 
 	//We only retain items at the given coordinates; all other items have been picked up.
 	std::vector<coordVector> keepItemsAtCoord;
+
+	//Keeps track of which bosses are dead
+	std::vector<bool> bossDead;
 
 	//This is where we were when the game was saved.
 	std::string lastMap;
