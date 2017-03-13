@@ -29,6 +29,7 @@ public:
 	//Getters
 	itemTypes getCategory() { return category; }
 	virtual int getAmountLeft() { return 1; }
+	virtual int getMaxAmount() { return 1; }
 	virtual const int isEquippable() { return true; }
 
 	//Universal attributes: getting
@@ -42,6 +43,7 @@ public:
 	virtual const bool isStackable() { return false; }
 	virtual const void add(int amount) {}
 	virtual const void restoreToMax() {}
+	virtual const void setAmount(int amount) {}
 
 	//Shopkeeping
 	int getPrice() { return price; }

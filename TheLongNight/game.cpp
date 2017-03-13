@@ -4661,8 +4661,8 @@ void game::loadSaveGame(std::string fname)
 		//Are we carrying the item?
 		int count = sg->getItemQuantity(it->getName());
 		if (count > 0) {
-			for (int i = 0; i < count; i++)
-				player->addItem(it);
+			it->setAmount(count);
+			player->addItem(it);
 		}
 
 		//Also do we have this item equipped?

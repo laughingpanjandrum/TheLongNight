@@ -54,7 +54,7 @@ savegame::savegame(stringVector savedMapHandles, mapVector savedMaps, std::strin
 			//Item
 			allCarriedItems.push_back(it->getName());
 			//Quantity
-			itemCount.push_back(it->getAmountLeft());
+			itemCount.push_back(it->getMaxAmount());
 		}
 	}
 
@@ -289,7 +289,7 @@ bool savegame::hasItemEquipped(std::string itemName)
 /*
 Returns zero if we don't have the item at all.
 */
-bool savegame::getItemQuantity(std::string itemName)
+int savegame::getItemQuantity(std::string itemName)
 {
 	for (int i = 0; i < allCarriedItems.size(); i++) {
 		if (allCarriedItems.at(i) == itemName) {

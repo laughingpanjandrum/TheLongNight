@@ -20,7 +20,9 @@ public:
 	virtual const void add(int n = 1) { amount.increaseMaxValue(n); }
 	void lose(int n = 1) { amount.decrease(n); }
 	virtual int getAmountLeft() { return amount.getValue(); }
+	virtual int getMaxAmount() { return amount.getMaxValue(); }
 	virtual void const restoreToMax() { amount.restore(); }
+	virtual const void setAmount(int amount) { this->amount.setTo(amount); }
 
 	//Flava
 	virtual std::string getMenuName();

@@ -39,7 +39,7 @@ public:
 	bool shouldSaveItem(int mapIdx, coord pt);
 	bool hasItemWithName(std::string itemName);
 	bool hasItemEquipped(std::string itemName);
-	bool getItemQuantity(std::string itemName);
+	int getItemQuantity(std::string itemName);
 
 private:
 

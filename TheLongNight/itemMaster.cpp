@@ -652,7 +652,7 @@ const itemVector getListOfAllItems()
 		weapon_SelvixsHookblade(), weapon_FarinsTorch(),
 		weapon_RatboneCleaver(), weapon_DeathlessBlade(), weapon_GreatswordOfTheAncientLords(),
 		//Shields
-		shield_BatteredSteelShield(), shield_WoodenWyrdShield(), shield_BatteredSteelShield(),
+		shield_BatteredWoodenShield(), shield_WoodenWyrdShield(), shield_BatteredSteelShield(),
 		shield_CityGuardianShield(), shield_VoidTouchedShield(), shield_DragonboneShield(),
 		shield_EtherealShield(), shield_KhallesBellShield(), shield_GhostlyShield(),
 		shield_SirPercivelsShield(), shield_RottenBeastShield(),
