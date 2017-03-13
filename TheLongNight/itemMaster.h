@@ -32,4 +32,12 @@ TCODColor getStatusEffectColor(statusEffects stype);
 
 std::string getEffectName(effect e);
 
+
+
+/*
+Monolithic list of all items in the game.
+This data is required for save games, which refer to each item by its name.
+*/
+const itemVector getListOfAllItems();
+
 #endif

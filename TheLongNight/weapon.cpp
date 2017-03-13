@@ -639,6 +639,7 @@ weaponSharedPtr weapon_EtherealGreatsword()
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_ARC);
 	wp->setSpecialAttack(attack_EtherealRay());
+	wp->setImage(loadWeaponImage("W_ethereal sword"));
 	return wp;
 }
 
@@ -664,6 +665,7 @@ weaponSharedPtr weapon_GravekeeperSpear()
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_Quickstep());
+	wp->setImage(loadWeaponImage("W_gravekeeper spear"));
 	return wp;
 }
 
@@ -675,6 +677,7 @@ weaponSharedPtr weapon_SelvixsHookblade()
 	wp->addStatusEffect(EFFECT_PLAGUE, 10);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_PoisonHook());
+	wp->setImage(loadWeaponImage("W_selvix blade"));
 	return wp;
 }
 
@@ -686,6 +689,7 @@ weaponSharedPtr weapon_FarinsTorch()
 	wp->addDamageType(DAMAGE_FIRE, 25);
 	wp->addScalingType(SCALE_ARC);
 	wp->setSpecialAttack(attack_FlameBreath());
+	wp->setImage(loadWeaponImage("W_farins torch"));
 	return wp;
 }
 
@@ -697,6 +701,7 @@ weaponSharedPtr weapon_RatboneCleaver()
 	wp->addStatusEffect(EFFECT_POISON, 20);
 	wp->addScalingType(SCALE_STR);
 	wp->setSpecialAttack(attack_RatCleave());
+	wp->setImage(loadWeaponImage("W_ratbone cleaver"));
 	return wp;
 }
 
@@ -706,6 +711,7 @@ weaponSharedPtr weapon_DeathlessBlade()
 		"Glowing sword of the Deathless Knight, infused with the raw energy of obliteration."));
 	wp->setBasicAttributes(50, SPEED_NORMAL);
 	wp->setSpecialAttack(attack_Deathstrike());
+	wp->setImage(loadWeaponImage("W_deathless blade"));
 	return wp;
 }
 
@@ -724,6 +730,7 @@ weaponSharedPtr weapon_GreatswordOfTheAncientLords()
 	wp->addScalingType(SCALE_ARC);
 	wp->addScalingType(SCALE_DEV);
 	wp->setSpecialAttack(attack_BlightingInfusion());
+	wp->setImage(loadWeaponImage("W_ancient lord greatsword"));
 	return wp;
 }
 
@@ -838,6 +845,7 @@ They ring in times of danger, bringing the favour of the old gods upon the lost.
 	wp->setSpellstoreSize(2);
 	wp->setDivinePower(75);
 	wp->makeOffhand();
+	wp->setImage(loadWeaponImage("S_kalle bell shield"));
 	return wp;
 }
 
@@ -877,6 +885,7 @@ weaponSharedPtr shield_RottenBeastShield()
 	wp->setPlagueResist(20);
 	wp->makeOffhand();
 	wp->setDamagePenalty(5);
+	wp->setImage(loadWeaponImage("S_rotten beast shield"));
 	return wp;
 }
 
@@ -930,6 +939,7 @@ weaponSharedPtr wand_BleachwoodWand()
 	wp->setSpellPower(120);
 	wp->makeOffhand();
 	wp->setSpecialAttack(ability_Metamagic());
+	wp->setImage(loadWeaponImage("M_bleachwood wand"));
 	return wp;
 }
 
@@ -942,6 +952,7 @@ weaponSharedPtr wand_SparrowsStaff()
 	wp->setSpellPower(80);
 	wp->setSpecialAttack(ability_TransitorySurge());
 	wp->makeOffhand();
+	wp->setImage(loadWeaponImage("M_sparrow staff"));
 	return wp;
 }
 
@@ -957,6 +968,7 @@ and divine prayers."));
 	wp->setDivinePower(80);
 	wp->makeOffhand();
 	wp->setSpecialAttack(ability_StrengthOfMind());
+	wp->setImage(loadWeaponImage("M_moshkas staff"));
 	return wp;
 }
 
@@ -969,6 +981,7 @@ weaponSharedPtr wand_GottricsWand()
 	wp->setSpellPower(100);
 	wp->makeOffhand();
 	wp->setSpecialAttack(ability_GottricsPartingCall());
+	wp->setImage(loadWeaponImage("M_gottrics wand"));
 	return wp;
 }
 
@@ -994,6 +1007,7 @@ weaponSharedPtr chime_GreenKnightsChime()
 	wp->setDivinePower(120);
 	wp->makeOffhand();
 	wp->setSpecialAttack(ability_MemoryOfLight());
+	wp->setImage(loadWeaponImage("M_green knight chime"));
 	return wp;
 }
 
@@ -1007,6 +1021,7 @@ waiting for the end of the world."));
 	wp->setDivinePower(100);
 	wp->makeOffhand();
 	wp->setSpecialAttack(ability_Rotcall());
+	wp->setImage(loadWeaponImage("M_rotblood bell"));
 	return wp;
 }
 

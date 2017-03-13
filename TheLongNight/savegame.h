@@ -8,19 +8,25 @@
 #include <iostream>
 #include <fstream>
 
+#include "itemMaster.h"
 #include "element.h"
 #include "map.h"
+
+
 
 class savegame
 {
 	typedef std::vector<std::string> stringVector;
+	typedef std::vector<int> itemVector;
 public:
 	
 	savegame();
-	savegame(stringVector savedMapHandles, mapVector savedMaps, std::string currentMap, coord currentPos);
+	savegame(stringVector savedMapHandles, mapVector savedMaps, 
+		std::string currentMap, coord currentPos, personSharedPtr player);
 	savegame(std::string fileToLoad);
 	~savegame();
 
+	//File reading and writing
 	void dumpToFile(std::string fname);
 	void loadFromFile(std::string fname);
 
@@ -31,6 +37,9 @@ public:
 	coord getStartPosition() { return lastPos; }
 	bool isBossDead(int mapIdx) { return bossDead.at(mapIdx); }
 	bool shouldSaveItem(int mapIdx, coord pt);
+	bool hasItemWithName(std::string itemName);
+	bool hasItemEquipped(std::string itemName);
+	bool getItemQuantity(std::string itemName);
 
 private:
 
@@ -46,6 +55,11 @@ private:
 	//This is where we were when the game was saved.
 	std::string lastMap;
 	coord lastPos;
+
+	//Items the player is carrying.
+	stringVector allCarriedItems;
+	stringVector allEquippedItems;
+	itemVector itemCount;
 
 	//Utility functions
 	std::string coordToString(coord c);

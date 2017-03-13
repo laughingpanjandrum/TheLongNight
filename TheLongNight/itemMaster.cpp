@@ -632,3 +632,120 @@ std::string getEffectName(effect e)
 
 	return "Unknown";
 }
+
+const itemVector getListOfAllItems()
+{
+	const itemVector allItems = {
+		//Weapons
+		weapon_SplinteredSword(), weapon_ThinKnife(), weapon_StraightSword(), weapon_Warhammer(),
+		weapon_CrowKnightSword(), weapon_CrowKnife(), weapon_CrowHalfsword(), weapon_OldCrowsLongKnife(),
+		weapon_NotchedGreatsword(), weapon_FishmansHarpoon(), weapon_FishmansKnife(),
+		weapon_CityGuardianWarhammer(), weapon_BloodDrinkersKnife(), weapon_KythielsScythe(), weapon_VoidTouchedKnife(),
+		weapon_VoidCrystalGreatsword(), weapon_ArmOfTheDuke(),
+		weapon_DragonboneSword(),
+		weapon_SerpentsTooth(), weapon_CrimsonNail(), weapon_SpiderboneShard(),
+		weapon_SacrificialKnife(), weapon_SlaveMastersWhip(), weapon_LadyTvertsClaws(),
+		weapon_EtherealSword(), weapon_SentinelsPike(),
+		weapon_CorensGreataxe(), weapon_KhallesHolyScythe(), weapon_SirPercivelsSword(),
+		weapon_VoidfireKnife(), weapon_LightningWarhammer(), weapon_IetrasFlameScythe(),
+		weapon_EtherealGreatsword(), weapon_MoonpaleScythe(), weapon_GravekeeperSpear(),
+		weapon_SelvixsHookblade(), weapon_FarinsTorch(),
+		weapon_RatboneCleaver(), weapon_DeathlessBlade(), weapon_GreatswordOfTheAncientLords(),
+		//Shields
+		shield_BatteredSteelShield(), shield_WoodenWyrdShield(), shield_BatteredSteelShield(),
+		shield_CityGuardianShield(), shield_VoidTouchedShield(), shield_DragonboneShield(),
+		shield_EtherealShield(), shield_KhallesBellShield(), shield_GhostlyShield(),
+		shield_SirPercivelsShield(), shield_RottenBeastShield(),
+		//Wands
+		wand_DriftwoodWand(), wand_FishmansToadstaff(), wand_EtherealWand(), wand_BleachwoodWand(),
+		wand_SparrowsStaff(), wand_MoshkasSingingStaff(), wand_GottricsWand(),
+		//Chimes
+		chime_ClericsCrackedChime(), chime_GreenKnightsChime(), chime_RotbloodBell(), chime_WyrdBellbranch(),
+		chime_OrsylsProfaneChime(),
+		//Armour sets
+		headgear_CaptainsTricorn(), armour_RuinedUniform(),
+		headgear_RuinedKnightsHelm(), armour_RuinedKnightsArmour(),
+		headgear_ClericsHood(), armour_ClericsVestments(),
+		headgear_CrowKnightsHood(), armour_CrowKnightsArmour(),
+		headgear_FishpriestHat(), armour_FishscaleCoat(),
+		headgear_CityGuardHelm(), armour_CityGuardArmour(),
+		headgear_PashHood(), armour_PashRobes(),
+		headgear_CursedKnightsHelm(), armour_CursedKnightsArmour(),
+		headgear_GreyThiefsHood(), armour_GreyThiefsRags(),
+		headgear_SilverPlatedHood(), armour_SilverPlatedArmour(),
+		headgear_EtherealCrown(), armour_EtherealRobes(),
+		headgear_SparrowKnightsHelm(), armour_SparrowKnightsArmour(),
+		headgear_MoshkasHeadpiece(), armour_MoshkasRobes(),
+		headgear_SentinelsHelm(), armour_SentinelsArmour(),
+		headgear_GhostlyHelm(), armour_GhostlyArmour(),
+		headgear_SirPercivelsHelm(), armour_SirPercivelsArmour(),
+		headgear_GravekeepersHood(), armour_GravekeepersRags(),
+		headgear_PilgrimsHood(), armour_PilgrimsCoat(),
+		headgear_DragonboneHelm(), armour_DragonboneArmour(),
+		headgear_StarweaversHood(), armour_StarweaversRobe(),
+		headgear_MoonPaleCrown(),
+		//Consumables
+		consumable_StarwaterDraught(), consumable_InvigoratingTea(),
+		consumable_TinyGreenFlower(), consumable_TinyRedFlower(), consumable_PutridBrew(),
+		consumable_BloodDrinkersEyes(), consumable_IntoxicatingWine(), consumable_WitchwaterFlask(), consumable_BlackHoney(),
+		consumable_PutridBrew(), consumable_GodsbloodBrew(),
+		ranged_ThrowingKnives(), ranged_HeavyJavelin(), ranged_LaceratingKnives(), ranged_PoisonThrowingKnives(),
+		ranged_CorrodingJar(), ranged_VoidEssenceJar(), ranged_PyromancersFlask(), ranged_WitchsJar(),
+		ranged_LightingJavelin(), ranged_FrostKnives(), ranged_WarpingJavelin(),
+		oil_PyromancersOil(), oil_CorrosiveOil(), oil_FrozenOil(), oil_HolyWater(), oil_CursedWater(),
+		oil_HangmansBlood(), oil_WitchsOoze(), oil_LightningOil(), oil_DeepRedOil(), oil_RotbloodOil(),
+		gem_DullGreyGemstone(), gem_SmallShiningGemstone(), gem_NobleGlowingGemstone(),
+		gem_KingsGiantGemstone(), gem_GodlessGemstone(),
+		bell_VoidwalkersDancingBell(), bell_VoidwalkersReturningBell(), horn_HeraldsWhiteHorn(),
+		//Charms
+		charm_ArcanaDrenchedCharm(), charm_ClericsHolyPendant(), charm_BloodstainedCharm(),
+		charm_KhallesHeadband(), charm_IdolOfPash(), charm_EvisceratingRing(), charm_BloodDrinkersBand(),
+		charm_WretchedFleshBand(), charm_WretchedFleshmask(), charm_FrozenFlowerCharm(), charm_ToxicantsCharm(),
+		charm_ObscuringCharm(), charm_FragrantAmulet(), charm_RavenousIdol(), charm_FrenzyCharm(),
+		charm_VenomrubyRing(), charm_SirPercivelsRing(), charm_PaleShadesRing(), charm_StarweaversRing(),
+		charm_VoidwalkersRing(),
+		charm_VenomousImbecilesRing(), charm_IconOfFamine(), charm_AtalundraPactRing(), charm_DivinePactRing(),
+		charm_AgonyRing(),
+		//Spells
+		spell_MagicMissile(), spell_ArcaneRadiance(), spell_ArcaneBlade(), spell_GottricsArcaneProtection(),
+		spell_Frostbolt(), spell_AcidSpit(), spell_AcidBlade(), spell_AcidBurst(), spell_ProfanedBlade(),
+		spell_VoidJaunt(), spell_DevouringVoidCloud(), spell_FrostBlast(), spell_FrozenBlade(), spell_Chillbite(),
+		spell_LightningStrike(), spell_ElectricBlade(), spell_ArcLightning(), spell_AtalundraArcaneSpear(),
+		spell_AtalundraDeathSurge(), spell_AtalundraSoulBlade(), spell_SpitFire(), spell_StormLash(),
+		spell_Firestorm(), spell_LightOfFarin(),
+		//Prayers
+		prayer_Restoration(), prayer_WyrdChantOfStrength(), prayer_RayOfLight(), prayer_BlessedRadiance(), prayer_RemovePoison(),
+		prayer_DrawOutTheBlood(), prayer_ProfaneRadiance(), prayer_Intoxify(), prayer_DivineRetribution(), 
+		prayer_YutriasDivineSpark(), prayer_YutriasProtection(), prayer_DivineRestoration(), prayer_DivineJudgement(),
+		prayer_NightmarePrayer(), prayer_WordOfUnmaking(), prayer_SinkBeneath(), prayer_Deathlink(), prayer_ProfoundStill(),
+		prayer_SpidersPrayer(), prayer_TouchOfDoom(), prayer_AstralPrison(), prayer_ProfaneRay(),
+		//Keys
+		key_WretchsKey(), key_OldCrowsKey(), key_RuinedTownshipKey(), key_WyrdKey(), key_GreenChapelGardenKey(),
+		key_SordidChapelKey(), key_SpinalColumnShard(), key_OldValleyKey(), key_BartonsKey(), key_HightowerKey(),
+		key_LadyTvertsKey(), key_DeadSparrowKey(), key_MoshkasKey(), key_MoonpaleKey(), key_FarinsKey(),
+		key_AtalundraRunekey(), key_PercivelsSign(),
+		key_WatchfulEyestalk(), key_MawtoothFragment(), key_WitheredFinger(), key_BeatingHeart(),
+		key_EffigyOfTheSlumberingLord(),
+		key_UnderpoolKey(), key_AbattoirKey(), key_GreenKnightsKey(), key_IetrasAmberPendant(),
+		//Hearts
+		heart_WretchedHeart(), heart_OldCrowsHeart(), heart_FishBornGoddessesHeart(), heart_OrsylsShriveledHeart(),
+		heart_VortensShriveledHeart(), heart_VenomousSpiderHeart(), heart_LadyTvertsHeart(), heart_DeadSparrowsHeart(),
+		heart_HeartOfCoren(), heart_KhallesWretchedHeart(), heart_IetrasBurningHeart(), heart_PaleHeart(),
+		heart_PlagueRiddenHeart(), heart_HeartOfFarin(), heart_RatKingsHeart(), heart_HeartOfTheOldGods(),
+		//Spellbooks
+		spellbook_WaterloggedWritings(), spellbook_MinasProfanedWritings(), spellbook_FrostbittenWritings(),
+		spellbook_SingedWritings(), spellbook_StartouchedWritings(),
+		spellbook_OrsylsTomeOfPrayer(), spellbook_DivineMoonsparkTome(), spellbook_DivineTomeOfTheEmissary(),
+		spellbook_DivineNightmareTome(), spellbook_TomeOfTheDead(),
+		//Runestones
+		runestone_CorensRunestone(), runestone_SiltrasRunestone(), runestone_KhallesRunestone(), runestone_IetrasRunestone(),
+		runestone_CharredRunestone(), runestone_KinslayersRunestone(), runestone_StarweaversRunestone(),
+		runestone_ThundrousRunestone(), runestone_BloodDrenchedRunestone(), runestone_CorrodingRunestone(),
+		runestone_FrozenRunestone(), runestone_VenomousRunestone(),
+		//Bones
+		bones_KhallesBones(), bones_SiltrasBones(), bones_CorensBones(), bones_IetrasBones(),
+		//Other misc
+		misc_VoidSigil(), misc_PieceOfJade(), misc_PieceOfBone(),
+	};
+	return allItems;
+}

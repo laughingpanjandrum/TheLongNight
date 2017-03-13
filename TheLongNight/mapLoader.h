@@ -9,9 +9,11 @@ Creates maps defined by text files.
 #include <string>
 #include <iostream>
 #include <fstream>
+
 #include "map.h"
 #include "monster.h"
 #include "itemMaster.h"
+
 
 class mapLoader
 {

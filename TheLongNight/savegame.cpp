@@ -11,7 +11,8 @@ savegame::savegame()
 /*
 Constructor to generate a new savegame, hurrah.
 */
-savegame::savegame(stringVector savedMapHandles, mapVector savedMaps, std::string currentMap, coord currentPos)
+savegame::savegame(stringVector savedMapHandles, mapVector savedMaps, std::string currentMap, 
+	coord currentPos, personSharedPtr player)
 {
 
 	//Copy over all saved map handles
@@ -45,6 +46,22 @@ savegame::savegame(stringVector savedMapHandles, mapVector savedMaps, std::strin
 	//Save our current position
 	lastMap = currentMap;
 	lastPos = currentPos;
+
+	//Complete list of names of items carried by the player
+	for (auto cat : ALL_ITEM_TYPES) {
+		auto itemList = player->getItemsOfType(cat);
+		for (auto it : itemList) {
+			//Item
+			allCarriedItems.push_back(it->getName());
+			//Quantity
+			itemCount.push_back(it->getAmountLeft());
+		}
+	}
+
+	//Complete list of names of items the player has equipped
+	for (auto it : player->getAllEquippedItems()) {
+		allEquippedItems.push_back(it->getName());
+	}
 
 }
 
@@ -99,6 +116,21 @@ void savegame::dumpToFile(std::string fname)
 
 	}
 
+	//Label indicating that ITEMS are up next
+	saveData += "&ITEMS;";
+	for (int i = 0; i < allCarriedItems.size(); i++) {
+		std::string itName = allCarriedItems.at(i);
+		//Item name
+		saveData += itName + ';';
+		//Quantity
+		saveData += std::to_string(itemCount.at(i)) + ';';
+	}
+
+	//Label indicating that EQUIPPED ITEMS are up next
+	saveData += "&EQUIPPED;";
+	for (auto itName : allEquippedItems)
+		saveData += itName + ';';
+
 	//We have it all! Make a file and dump it in there
 	std::ofstream saveFile(SAVE_FILE_LOCATION + fname);
 	saveFile << saveData;
@@ -126,6 +158,9 @@ void savegame::loadFromFile(std::string fname)
 	//Keep track of the stuff we've memorized so far
 	bool gotCurrentLocation = false;
 	bool gotCurrentPosition = false;
+	bool readingInItems = false;
+	bool nextChunkIsItemAmount = false;
+	bool readingInEquipped = false;
 	bool endOfMap = true;
 
 	coordVector* savedItemVectors = new coordVector();
@@ -140,9 +175,16 @@ void savegame::loadFromFile(std::string fname)
 		else {
 
 			//End of line! Now interpret this information
+
+			if (chunk == "&ITEMS")
+				readingInItems = true;
+			else if (chunk == "&EQUIPPED") {
+				readingInItems = false;
+				readingInEquipped = true;
+			}
 			
 			//Current map
-			if (!gotCurrentLocation) {
+			else if (!gotCurrentLocation) {
 				lastMap = chunk;
 				gotCurrentLocation = true;
 			}
@@ -151,6 +193,23 @@ void savegame::loadFromFile(std::string fname)
 			else if (!gotCurrentPosition) {
 				lastPos = stringToCoord(chunk);
 				gotCurrentPosition = true;
+			}
+
+			//Loading equipped item names
+			else if (readingInEquipped) {
+				allEquippedItems.push_back(chunk);
+			}
+
+			//Loading quantity of the previous item we loaded
+			else if (nextChunkIsItemAmount) {
+				itemCount.push_back(std::stoi(chunk));
+				nextChunkIsItemAmount = false;
+			}
+
+			//Loading item names
+			else if (readingInItems) {
+				allCarriedItems.push_back(chunk);
+				nextChunkIsItemAmount = true;
 			}
 
 			//New map handle (cuz we're at the end of the last map)
@@ -184,6 +243,7 @@ void savegame::loadFromFile(std::string fname)
 
 		}
 	}
+
 }
 
 /*
@@ -196,6 +256,47 @@ bool savegame::shouldSaveItem(int mapIdx, coord pt)
 			return true;
 	}
 	return false;
+}
+
+
+
+/*
+Returns true if the player should have the item with the given name.
+*/
+bool savegame::hasItemWithName(std::string itemName)
+{
+	for (auto it : allCarriedItems) {
+		if (it == itemName)
+			return true;
+	}
+	return false;
+}
+
+
+/*
+Returns true if the player has this item equipped.
+*/
+bool savegame::hasItemEquipped(std::string itemName)
+{
+	for (auto it : allEquippedItems) {
+		if (it == itemName)
+			return true;
+	}
+	return false;
+}
+
+
+/*
+Returns zero if we don't have the item at all.
+*/
+bool savegame::getItemQuantity(std::string itemName)
+{
+	for (int i = 0; i < allCarriedItems.size(); i++) {
+		if (allCarriedItems.at(i) == itemName) {
+			return itemCount.at(i);
+		}
+	}
+	return 0;
 }
 
 

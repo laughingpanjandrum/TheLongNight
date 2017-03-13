@@ -3,12 +3,15 @@
 
 int main() {
 
+	//MAIN MENU SITUATION
 	window w;
 	char c = ' ';
-	while (c != 'n' && c != 'l') {
+	while (c != 'n' && c != 'l' && c != 'q') {
 		w.clear();
+		w.write(8, 8, "T H E    L O N G    N I G H T", TCODColor::white);
 		w.write(10, 10, "[n] NEW GAME", TCODColor::white);
 		w.write(10, 11, "[l] LOAD GAME", TCODColor::white);
+		w.write(10, 12, "[q] QUIT GAME", TCODColor::white);
 		w.refresh();
 		c = w.getkey().c;
 	}
@@ -20,11 +23,13 @@ int main() {
 	}
 
 	//LOAD GAME
-	else {
+	else if (c == 'l') {
 		w.write(10, 14, "LOADING...", TCODColor::white);
 		w.refresh();
 		game g("currentsave");
 		g.mainGameLoop();
 	}
+
+	//QUIT GAME
 	
 }

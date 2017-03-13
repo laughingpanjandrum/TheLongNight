@@ -1044,7 +1044,7 @@ void game::drawInventory(int atx, int aty)
 		
 		//We can go to the level-up menu from here, & also save le game
 		win.write(atx, aty + 20, "Press [p] to LEVEL UP", TCODColor::white);
-		win.write(atx, aty + 21, "Press [s] to SAVE THE GAME", TCODColor::white);
+		win.write(atx, aty + 21, "Press [m] to SAVE THE GAME", TCODColor::white);
 	
 	}
 }
@@ -4395,6 +4395,12 @@ void getAllItems(personSharedPtr player)
 	player->addItem(armour_PilgrimsCoat());
 	player->addItem(headgear_SirPercivelsHelm());
 	player->addItem(armour_SirPercivelsArmour());
+	player->addItem(headgear_MoshkasHeadpiece());
+	player->addItem(armour_MoshkasRobes());
+	player->addItem(headgear_StarweaversHood());
+	player->addItem(armour_StarweaversRobe());
+	player->addItem(headgear_SilverPlatedHood());
+	player->addItem(armour_SilverPlatedArmour());
 
 	player->addItem(charm_ArcanaDrenchedCharm());
 	player->addItem(charm_BloodDrinkersBand());
@@ -4564,26 +4570,11 @@ void game::debugMenu()
 		addStoryFlag(txt);
 	}
 
-	//Set up special game states
-	else if (txt == "warpboss1") {
-		player->addItem(weapon_SplinteredSword());
-		player->addItem(armour_RuinedUniform());
-		player->addItem(headgear_CaptainsTricorn());
-		player->addItem(spell_MagicMissile());
-		player->addItem(spell_ArcaneRadiance());
-		player->addItem(wand_DriftwoodWand());
-		player->addItem(shield_BatteredWoodenShield());
-		player->addItem(consumable_StarwaterDraught());
-		player->addItem(consumable_StarwaterDraught());
-		player->addItem(consumable_StarwaterDraught());
-		fragments += 125;
-		loadMapFromHandle("maps/cbeach_2.txt", CONNECT_WARP, player->getx(), player->gety());
-	}
-
 	else if (txt == "allitems") {
 		getAllItems(player);
 		fragments += 15000;
 	}
+
 	else if (txt == "finalitems") {
 		player->addItem(consumable_PutridBrew());
 		player->addItem(consumable_GodsbloodBrew());
@@ -4611,7 +4602,7 @@ void game::saveGame()
 {
 
 	//Save object
-	savegame* newSave = new savegame(allMapHandles, allMaps, currentMap->getMapTag(), player->getPosition());
+	savegame* newSave = new savegame(allMapHandles, allMaps, currentMap->getMapTag(), player->getPosition(), player);
 
 	//Dump all this information into a big ole' file.
 	newSave->dumpToFile("currentsave");
@@ -4663,6 +4654,23 @@ void game::loadSaveGame(std::string fname)
 	//We start on a given map
 	loadMapFromHandle(sg->getStartMapTag(), CONNECT_WARP, 0, 0);
 	player->setPosition(sg->getStartPosition());
+
+	//Add all the items the player should have.
+	for (auto it : getListOfAllItems()) {
+
+		//Are we carrying the item?
+		int count = sg->getItemQuantity(it->getName());
+		if (count > 0) {
+			for (int i = 0; i < count; i++)
+				player->addItem(it);
+		}
+
+		//Also do we have this item equipped?
+		if (sg->hasItemEquipped(it->getName())) {
+			player->equipItem(it);
+		}
+
+	}
 
 	//General setup
 	setupGeneralGame();

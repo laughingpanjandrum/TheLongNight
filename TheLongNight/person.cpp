@@ -764,6 +764,45 @@ void person::paySpellCost(spellSharedPtr sp)
 	INVENTORY, EQUIPMENT
 */
 
+
+
+/*
+Returns a list of all items the player has equipped.
+*/
+itemVector person::getAllEquippedItems()
+{
+	
+	itemVector equipped;
+	
+	//Basic equipment
+	itemVector equipment = { items.getWeapon(), items.getHelmet(), items.getArmour(), items.getOffhand() };
+	for (auto it : equipment) {
+		if (it != nullptr)
+			equipped.push_back(it);
+	}
+	
+	//Consumables
+	for (auto it : items.getConsumables()) {
+		if (it != nullptr)
+			equipped.push_back(it);
+	}
+	
+	//Charms
+	for (auto it : items.getCharms()) {
+		if (it != nullptr)
+			equipped.push_back(it);
+	}
+	
+	//Spells
+	for (auto it : getSpellsKnown())
+		if (it != nullptr)
+			equipped.push_back(it);
+	
+	//Done
+	return equipped;
+}
+
+
 /*
 Equip the given item, if possible.
 */

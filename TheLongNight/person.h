@@ -199,6 +199,7 @@ public:
 
 	//Equipping and unequipping items
 	itemVector getItemsOfType(itemTypes category) { return items.getItemList(category); }
+	itemVector getAllEquippedItems();
 	void equipItem(itemSharedPtr which);
 	void swapWeapon();
 	void unequipItem(itemSharedPtr which);

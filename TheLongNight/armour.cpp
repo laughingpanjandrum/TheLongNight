@@ -103,6 +103,7 @@ armourSharedPtr headgear_FishpriestHat()
 	a->setDefence(5);
 	a->setBleedResist(5);
 	a->setDamageResist(DAMAGE_ACID, 5);
+	a->setImage(loadArmourImage("H_fishpriest coat"));
 	return a;
 }
 
@@ -114,6 +115,7 @@ armourSharedPtr armour_FishscaleCoat()
 	a->setBleedResist(10);
 	a->setDamageResist(DAMAGE_ACID, 10);
 	a->setMoveSpeed(SPEED_NORMAL);
+	a->setImage(loadArmourImage("B_fishpriest coat"));
 	return a;
 }
 
@@ -292,6 +294,7 @@ to look into other realms."));
 	a->setDamageResist(DAMAGE_FIRE, 10);
 	a->setDamageResist(DAMAGE_ACID, 10);
 	a->setDamageResist(DAMAGE_COLD, 10);
+	a->setImage(loadArmourImage("H_moshkas robes"));
 	return a;
 }
 
@@ -305,6 +308,7 @@ into his robes protected him from doom."));
 	a->setDamageResist(DAMAGE_ACID, 20);
 	a->setDamageResist(DAMAGE_COLD, 20);
 	a->setMoveSpeed(SPEED_FAST);
+	a->setImage(loadArmourImage("B_moshkas robes"));
 	return a;
 }
 
@@ -394,6 +398,7 @@ armourSharedPtr headgear_GravekeepersHood()
 		"Putrid hood of the gravekeepers, who keep watch over the dead. Under these hoods, little flesh remains."));
 	a->setPlagueResist(10);
 	a->setDamageResist(DAMAGE_ACID, 10);
+	a->setImage(loadArmourImage("H_gravekeeper rags"));
 	return a;
 }
 
@@ -404,6 +409,7 @@ armourSharedPtr armour_GravekeepersRags()
 Farin kept a secret even from his most trusted gravekeepers, and took it with him when he walked out of the world."));
 	a->setPlagueResist(40);
 	a->setDamageResist(DAMAGE_ACID, 20);
+	a->setImage(loadArmourImage("B_gravekeeper rags"));
 	return a;
 }
 
@@ -418,6 +424,7 @@ armourSharedPtr headgear_PilgrimsHood()
 	a->setDamageResist(DAMAGE_ACID, 10);
 	a->setDamageResist(DAMAGE_FIRE, 10);
 	a->setDamageResist(DAMAGE_ELECTRIC, 10);
+	a->setImage(loadArmourImage("H_pilgrim robes"));
 	return a;
 }
 
@@ -434,6 +441,7 @@ dangerous road."));
 	a->setDamageResist(DAMAGE_FIRE, 20);
 	a->setDamageResist(DAMAGE_ELECTRIC, 20);
 	a->setMoveSpeed(SPEED_NORMAL);
+	a->setImage(loadArmourImage("B_pilgrim robes"));
 	return a;
 }
 
@@ -445,6 +453,7 @@ the shape of a dragon's head - is always cool to touch."));
 	a->setDefence(10);
 	a->setDamageResist(DAMAGE_FIRE, 15);
 	a->setDamageResist(DAMAGE_ELECTRIC, 10);
+	a->setImage(loadArmourImage("H_dragonbone armour"));
 	return a;
 }
 
@@ -458,6 +467,7 @@ bears those properties."));
 	a->setDamageResist(DAMAGE_ACID, 20);
 	a->setDamageResist(DAMAGE_ELECTRIC, 20);
 	a->setMoveSpeed(SPEED_SLOW);
+	a->setImage(loadArmourImage("B_dragonbone armour"));
 	return a;
 }
 
@@ -467,6 +477,7 @@ armourSharedPtr headgear_StarweaversHood()
 		"Majestic hood of a starweaver - the lost artificers of Atalundra, who knit universes together with their minds."));
 	a->setDefence(0);
 	a->setDamageResist(DAMAGE_MAGIC, 40);
+	a->setImage(loadArmourImage("H_starweaver robes"));
 	return a;
 }
 
@@ -475,6 +486,7 @@ armourSharedPtr armour_StarweaversRobe()
 	armourSharedPtr a(new armour("Starweaver's Robe", ROBE_TILE, TCODColor::pink, ITEM_BODY_ARMOUR,
 		"Majestic robes of a starweaver - the lost artificers of Atalundra, who knit universes together with their minds."));
 	a->setDamageResist(DAMAGE_MAGIC, 60);
+	a->setImage(loadArmourImage("B_starweaver robes"));
 	return a;
 }
 
