@@ -12,7 +12,7 @@ savegame::savegame()
 Constructor to generate a new savegame, hurrah.
 */
 savegame::savegame(stringVector savedMapHandles, mapVector savedMaps, std::string currentMap, 
-	coord currentPos, personSharedPtr player)
+	coord currentPos, personSharedPtr player, stringVector storyFlags)
 {
 
 	//Copy over all saved map handles
@@ -62,6 +62,10 @@ savegame::savegame(stringVector savedMapHandles, mapVector savedMaps, std::strin
 	for (auto it : player->getAllEquippedItems()) {
 		allEquippedItems.push_back(it->getName());
 	}
+
+	//Remember all story flags that have triggered
+	for (auto flag : storyFlags)
+		this->storyFlags.push_back(flag);
 
 }
 
@@ -131,6 +135,11 @@ void savegame::dumpToFile(std::string fname)
 	for (auto itName : allEquippedItems)
 		saveData += itName + ';';
 
+	//Save all story flags
+	saveData += "&STORYFLAGS;";
+	for (auto flag : storyFlags)
+		saveData += flag + ';';
+
 	//We have it all! Make a file and dump it in there
 	std::ofstream saveFile(SAVE_FILE_LOCATION + fname);
 	saveFile << saveData;
@@ -161,6 +170,7 @@ void savegame::loadFromFile(std::string fname)
 	bool readingInItems = false;
 	bool nextChunkIsItemAmount = false;
 	bool readingInEquipped = false;
+	bool readingStoryFlags = false;
 	bool endOfMap = true;
 
 	coordVector* savedItemVectors = new coordVector();
@@ -182,6 +192,10 @@ void savegame::loadFromFile(std::string fname)
 				readingInItems = false;
 				readingInEquipped = true;
 			}
+			else if (chunk == "&STORYFLAGS") {
+				readingStoryFlags = true;
+				readingInEquipped = false;
+			}
 			
 			//Current map
 			else if (!gotCurrentLocation) {
@@ -193,6 +207,11 @@ void savegame::loadFromFile(std::string fname)
 			else if (!gotCurrentPosition) {
 				lastPos = stringToCoord(chunk);
 				gotCurrentPosition = true;
+			}
+
+			//Story flags
+			else if (readingStoryFlags) {
+				storyFlags.push_back(chunk);
 			}
 
 			//Loading equipped item names

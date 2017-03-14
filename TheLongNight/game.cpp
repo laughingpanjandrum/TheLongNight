@@ -26,6 +26,9 @@ game::game()
 	//Find starting position
 	coord startPt = currentMap->getStartPoint();
 	player->setPosition(startPt.first, startPt.second);
+
+	//Prepare story events
+	loadStoryEvents("maps/storyFlags.txt");
 	
 	//Setup we do whether loading a game or creating a new one
 	setupGeneralGame();
@@ -4602,7 +4605,8 @@ void game::saveGame()
 {
 
 	//Save object
-	savegame* newSave = new savegame(allMapHandles, allMaps, currentMap->getMapTag(), player->getPosition(), player);
+	savegame* newSave = new savegame(allMapHandles, allMaps, currentMap->getMapTag(), player->getPosition(), player,
+		storyFlags);
 
 	//Dump all this information into a big ole' file.
 	newSave->dumpToFile("currentsave");
@@ -4672,6 +4676,11 @@ void game::loadSaveGame(std::string fname)
 
 	}
 
+	//Load up story flags
+	loadStoryEvents("maps/storyFlags.txt");
+	for (auto fl : sg->getStoryFlags())
+		addStoryFlag(fl);
+
 	//General setup
 	setupGeneralGame();
 
@@ -4688,12 +4697,10 @@ void game::setupGeneralGame()
 	currentMap->addPerson(player, player->getx(), player->gety());
 	currentMap->updateFOV(player->getx(), player->gety());
 
+	loadTextDumps("dialogue/journalText.txt");
+
 	//Spawn creatures on new map
 	currentMap->respawnAllMonsters(storyEventsReady);
-
-	//Load in story events
-	loadStoryEvents("maps/storyFlags.txt");
-	loadTextDumps("dialogue/journalText.txt");
 
 	//Set up store inventories
 	initializeShops();

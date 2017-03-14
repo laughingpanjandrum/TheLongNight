@@ -22,7 +22,8 @@ public:
 	
 	savegame();
 	savegame(stringVector savedMapHandles, mapVector savedMaps, 
-		std::string currentMap, coord currentPos, personSharedPtr player);
+		std::string currentMap, coord currentPos, personSharedPtr player,
+		stringVector storyFlags);
 	savegame(std::string fileToLoad);
 	~savegame();
 
@@ -40,6 +41,7 @@ public:
 	bool hasItemWithName(std::string itemName);
 	bool hasItemEquipped(std::string itemName);
 	int getItemQuantity(std::string itemName);
+	stringVector getStoryFlags() { return storyFlags; }
 
 private:
 
@@ -60,6 +62,9 @@ private:
 	stringVector allCarriedItems;
 	stringVector allEquippedItems;
 	itemVector itemCount;
+
+	//Story flags triggered
+	stringVector storyFlags;
 
 	//Utility functions
 	std::string coordToString(coord c);
