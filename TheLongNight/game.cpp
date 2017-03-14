@@ -4677,7 +4677,11 @@ void game::loadSaveGame(std::string fname)
 
 		//Also do we have this item equipped?
 		if (sg->hasItemEquipped(it->getName())) {
-			player->equipItem(it);
+			//Spells are equipped differently
+			if (it->getCategory() == ITEM_SPELL)
+				player->addSpellKnown(std::static_pointer_cast<spell>(it));
+			else
+				player->equipItem(it);
 		}
 
 	}
