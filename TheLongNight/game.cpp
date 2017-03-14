@@ -4656,6 +4656,10 @@ void game::loadSaveGame(std::string fname)
 	auto st = sg->getPlayerStats();
 	player->stats = new statline(st->health, st->vigour, st->strength, st->dexterity, st->arcana, st->devotion);
 	fragments = sg->getFragmentsHeld();
+
+	//Make sure to set player's max health and vigour appropriately
+	player->increaseMaxHealth((st->health - 1) * 10);
+	player->increaseMaxVigour((st->vigour - 1) * 2);
 	
 	//We start on a given map
 	loadMapFromHandle(sg->getStartMapTag(), CONNECT_WARP, 0, 0);
