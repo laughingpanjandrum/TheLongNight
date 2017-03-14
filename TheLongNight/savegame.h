@@ -23,7 +23,7 @@ public:
 	savegame();
 	savegame(stringVector savedMapHandles, mapVector savedMaps, 
 		std::string currentMap, coord currentPos, personSharedPtr player,
-		stringVector storyFlags);
+		stringVector storyFlags, int fragments);
 	savegame(std::string fileToLoad);
 	~savegame();
 
@@ -42,6 +42,8 @@ public:
 	bool hasItemEquipped(std::string itemName);
 	int getItemQuantity(std::string itemName);
 	stringVector getStoryFlags() { return storyFlags; }
+	statline* getPlayerStats() { return &playerStats; }
+	int getFragmentsHeld() { return fragmentsHeld; }
 
 private:
 
@@ -65,6 +67,10 @@ private:
 
 	//Story flags triggered
 	stringVector storyFlags;
+
+	//Player statline
+	statline playerStats;
+	int fragmentsHeld;
 
 	//Utility functions
 	std::string coordToString(coord c);

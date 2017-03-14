@@ -4606,7 +4606,7 @@ void game::saveGame()
 
 	//Save object
 	savegame* newSave = new savegame(allMapHandles, allMaps, currentMap->getMapTag(), player->getPosition(), player,
-		storyFlags);
+		storyFlags, fragments);
 
 	//Dump all this information into a big ole' file.
 	newSave->dumpToFile("currentsave");
@@ -4653,7 +4653,9 @@ void game::loadSaveGame(std::string fname)
 	player = personSharedPtr(new person());
 	player->isPlayer = true;
 	player->isHostile = false;
-	player->stats = new statline(1, 1, 1, 1, 1, 1, 1);
+	auto st = sg->getPlayerStats();
+	player->stats = new statline(st->health, st->vigour, st->strength, st->dexterity, st->arcana, st->devotion);
+	fragments = sg->getFragmentsHeld();
 	
 	//We start on a given map
 	loadMapFromHandle(sg->getStartMapTag(), CONNECT_WARP, 0, 0);

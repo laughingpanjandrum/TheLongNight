@@ -12,7 +12,7 @@ savegame::savegame()
 Constructor to generate a new savegame, hurrah.
 */
 savegame::savegame(stringVector savedMapHandles, mapVector savedMaps, std::string currentMap, 
-	coord currentPos, personSharedPtr player, stringVector storyFlags)
+	coord currentPos, personSharedPtr player, stringVector storyFlags, int fragments)
 {
 
 	//Copy over all saved map handles
@@ -67,6 +67,10 @@ savegame::savegame(stringVector savedMapHandles, mapVector savedMaps, std::strin
 	for (auto flag : storyFlags)
 		this->storyFlags.push_back(flag);
 
+	//Preserve player's statline
+	playerStats = *player->stats;
+	fragmentsHeld = fragments;
+
 }
 
 
@@ -97,6 +101,15 @@ void savegame::dumpToFile(std::string fname)
 	//First piece of information is two lines: current map tag and current coordinate.
 	saveData += lastMap + ';';
 	saveData += coordToString(lastPos) + ';';
+
+	//Then we preserve the player's 6 attributes and the no. of fragments they have.
+	saveData += std::to_string(playerStats.arcana) + ';';
+	saveData += std::to_string(playerStats.dexterity) + ';';
+	saveData += std::to_string(playerStats.devotion) + ';';
+	saveData += std::to_string(playerStats.health) + ';';
+	saveData += std::to_string(playerStats.strength) + ';';
+	saveData += std::to_string(playerStats.vigour) + ';';
+	saveData += std::to_string(fragmentsHeld) + ';';
 
 	//Then the rest of the line is each of the saved maps and the coordinates that still have items.
 	for (int i = 0; i < knownMapTags.size(); i++) {
@@ -167,6 +180,7 @@ void savegame::loadFromFile(std::string fname)
 	//Keep track of the stuff we've memorized so far
 	bool gotCurrentLocation = false;
 	bool gotCurrentPosition = false;
+	int atPlayerStat = 0;
 	bool readingInItems = false;
 	bool nextChunkIsItemAmount = false;
 	bool readingInEquipped = false;
@@ -207,6 +221,21 @@ void savegame::loadFromFile(std::string fname)
 			else if (!gotCurrentPosition) {
 				lastPos = stringToCoord(chunk);
 				gotCurrentPosition = true;
+			}
+
+			//Player statistics
+			else if (atPlayerStat < 7) {
+				int val = std::stoi(chunk);
+				switch (atPlayerStat) {
+				case(0): playerStats.arcana = val; break;
+				case(1): playerStats.dexterity = val; break;
+				case(2): playerStats.devotion = val; break;
+				case(3): playerStats.health = val; break;
+				case(4): playerStats.strength = val; break;
+				case(5): playerStats.vigour = val; break;
+				case(6): fragmentsHeld = val; break;
+				}
+				atPlayerStat++;
 			}
 
 			//Story flags

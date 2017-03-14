@@ -35,6 +35,7 @@ i.e. the PC.
 These alter stats; don't use them for monsters with hardcoded stats.
 */
 struct statline {
+	statline() {}
 	statline(int h, int v, int s, int d, int a, int dv, int lvl = 0) : 
 		health(h), vigour(v), strength(s), dexterity(d), arcana(a), devotion(dv), level(lvl) {}
 	int health;
