@@ -4670,6 +4670,9 @@ void game::loadSaveGame(std::string fname)
 	//Make sure to set player's max health and vigour appropriately
 	player->increaseMaxHealth((st->health - 1) * 10);
 	player->increaseMaxVigour((st->vigour - 1) * 2);
+
+	//Calculate player's level based on their stats
+	player->stats->level = st->health + st->vigour + st->strength + st->dexterity + st->arcana + st->devotion - 5;
 	
 	//We start on a given map
 	loadMapFromHandle(sg->getStartMapTag(), CONNECT_WARP, 0, 0);
@@ -4690,11 +4693,7 @@ void game::loadSaveGame(std::string fname)
 
 		//Also do we have this item equipped?
 		if (sg->hasItemEquipped(it->getName())) {
-			//Spells are equipped differently
-			if (it->getCategory() == ITEM_SPELL)
-				player->addSpellKnown(std::static_pointer_cast<spell>(it));
-			else
-				player->equipItem(it);
+			player->equipItem(it);
 		}
 
 	}
@@ -4714,15 +4713,16 @@ void game::loadSaveGame(std::string fname)
 	auto allItems = getListOfAllItems();
 	for (auto sh : sg->getCurrentShops()) {
 		shopSharedPtr newShop = shopSharedPtr(new shop(sh.tag, sh.eatsKeyWhenBought));
-		for (auto it : sh.itemTags) {
-			newShop->addItem(getItemByName(it), 0);
+		for (int i = 0; i < sh.itemTags.size(); i++) {
+			newShop->addItem(getItemByName(sh.itemTags.at(i)), sh.itemPrices.at(i));
 		}
 		allShops.push_back(newShop);
 	}
 	for (auto sh : sg->getUnlockableShops()) {
 		shopSharedPtr newShop = shopSharedPtr(new shop(sh.tag, sh.eatsKeyWhenBought));
-		for (auto it : sh.itemTags)
-			newShop->addItem(getItemByName(it), 0);
+		for (int i = 0; i < sh.itemTags.size(); i++) {
+			newShop->addItem(getItemByName(sh.itemTags.at(i)), sh.itemPrices.at(i));
+		}
 		allUnlockableShops.push_back(newShop);
 	}
 
