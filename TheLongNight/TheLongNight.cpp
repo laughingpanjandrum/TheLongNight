@@ -6,13 +6,15 @@ int main() {
 	//MAIN MENU SITUATION
 	window w;
 	char c = ' ';
+	imagePtr TITLE = loadImage("title");
 	while (c != 'n' && c != 'l' && c != 'q') {
-		w.clear();
-		w.write(8, 8, "T H E    L O N G    N I G H T", TCODColor::white);
+		//w.clear();
+		//w.write(8, 8, "T H E    L O N G    N I G H T", TCODColor::white);
 		w.write(10, 10, "[n] NEW GAME", TCODColor::white);
 		w.write(10, 11, "[l] LOAD GAME", TCODColor::white);
 		w.write(10, 12, "[q] QUIT GAME", TCODColor::white);
 		w.refresh();
+		w.drawImage(TITLE, 0, 0);
 		c = w.getkey().c;
 	}
 

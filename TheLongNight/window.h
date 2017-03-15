@@ -46,6 +46,7 @@ public:
 
 	//Image drawing
 	void drawImage(imageSharedPtr img, int atx, int aty);
+	void drawImage(imagePtr img, int atx, int aty);
 
 private:
 

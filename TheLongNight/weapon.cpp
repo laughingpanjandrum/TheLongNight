@@ -378,7 +378,7 @@ see the true shape of all things."));
 
 weaponSharedPtr weapon_KythielsScythe()
 {
-	weaponSharedPtr wp(new weapon("Kythiel's Scythe", SPEAR_TILE, TCODColor::lightYellow,
+	weaponSharedPtr wp(new weapon("Kythiel's Scythe", SCYTHE_TILE, TCODColor::lightYellow,
 		"Kythiel, last priestess of the Winter Court, was the only one who stood against the Void when the city fell."));
 	wp->setBasicAttributes(50, SPEED_NORMAL);
 	wp->addDamageType(DAMAGE_BLESSED, 25);
@@ -417,7 +417,7 @@ weaponSharedPtr weapon_VoidCrystalGreatsword()
 
 weaponSharedPtr weapon_ArmOfTheDuke()
 {
-	weaponSharedPtr wp(new weapon("Arm of the Duke", SWORD_TILE, TCODColor::lightGreen,
+	weaponSharedPtr wp(new weapon("Arm of the Duke", TENTACLE_TILE, TCODColor::lightGreen,
 		"The arms of the Duke were rubbery and numerous. Serves as both a weapon and a catalyst of obscene prayer."));
 	wp->setBasicAttributes(25, SPEED_SLOW);
 	wp->addDamageType(DAMAGE_PROFANE, 25);
@@ -550,7 +550,7 @@ weaponSharedPtr weapon_SentinelsPike()
 
 weaponSharedPtr weapon_CorensGreataxe()
 {
-	weaponSharedPtr wp(new weapon("Coren's Greataxe", SWORD_TILE, TCODColor::darkCrimson,
+	weaponSharedPtr wp(new weapon("Coren's Greataxe", AXE_TILE, TCODColor::darkCrimson,
 		"The enormous greataxe of Coren, whose thirst for blood was insatiable. Eventually the gods gave him \
 what he desired, and it drove him mad."));
 	wp->setBasicAttributes(100, SPEED_SLOW);
@@ -563,7 +563,7 @@ what he desired, and it drove him mad."));
 
 weaponSharedPtr weapon_KhallesHolyScythe()
 {
-	weaponSharedPtr wp(new weapon("Khalle's Holy Scythe", SWORD_TILE, TCODColor::darkYellow,
+	weaponSharedPtr wp(new weapon("Khalle's Holy Scythe", SCYTHE_TILE, TCODColor::darkYellow,
 		"The scythe of Khalle, who devoutly opposed the void, but eventually saw the uselessness of the old gods. \
 According to certain storytellers, she once peered into Heaven itself, and what she saw there drove her to despair."));
 	wp->setBasicAttributes(25, SPEED_NORMAL);
@@ -619,7 +619,7 @@ weaponSharedPtr weapon_LightningWarhammer()
 
 weaponSharedPtr weapon_IetrasFlameScythe()
 {
-	weaponSharedPtr wp(new weapon("Ietra's Flame Scythe", SPEAR_TILE, TCODColor::flame,
+	weaponSharedPtr wp(new weapon("Ietra's Flame Scythe", SCYTHE_TILE, TCODColor::flame,
 		"Scythe of Ietra, imbued with the secret fire that lies at the heart of the void. When \
 her tomb was sealed, she resolved that the secret of the Angel would never leave its depths."));
 	wp->setBasicAttributes(25, SPEED_NORMAL);
@@ -645,7 +645,7 @@ weaponSharedPtr weapon_EtherealGreatsword()
 
 weaponSharedPtr weapon_MoonpaleScythe()
 {
-	weaponSharedPtr wp(new weapon("Moon-Pale Scythe", SPEAR_TILE, TCODColor::lighterBlue,
+	weaponSharedPtr wp(new weapon("Moon-Pale Scythe", SCYTHE_TILE, TCODColor::lighterBlue,
 		"Half-unreal scythe wielded by the Pale Shade. According to certain storytellers, the Shade was all \
 that remained of the Moon-Pale King, who wasted away in his abandoned palace as it drifted through the Void."));
 	wp->setBasicAttributes(0, SPEED_NORMAL);
@@ -695,7 +695,7 @@ weaponSharedPtr weapon_FarinsTorch()
 
 weaponSharedPtr weapon_RatboneCleaver()
 {
-	weaponSharedPtr wp(new weapon("Ratbone Cleaver", SWORD_TILE, TCODColor::amber,
+	weaponSharedPtr wp(new weapon("Ratbone Cleaver", AXE_TILE, TCODColor::amber,
 		"Cleaver forged from shards of ratbone, drenched with ichorous toxins and crawling plague."));
 	wp->setBasicAttributes(50, SPEED_SLOW);
 	wp->addStatusEffect(EFFECT_POISON, 20);

@@ -271,3 +271,8 @@ void window::drawImage(imageSharedPtr img, int atx, int aty)
 {
 	img->blitRect(TCODConsole::root, atx, aty);
 }
+
+void window::drawImage(imagePtr img, int atx, int aty)
+{
+	img->blitRect(TCODConsole::root, atx, aty);
+}

@@ -22,7 +22,7 @@ std::string consumable::getMenuName()
 
 consumableSharedPtr consumable_StarwaterDraught()
 {
-	consumableSharedPtr c(new consumable("Starwater Draught", VIAL_TILE, TCODColor::cyan,
+	consumableSharedPtr c(new consumable("Starwater Draught", FLASK_TILE, TCODColor::cyan,
 		"Flask of water touched by starlight, which confers healing properties."));
 	c->addEffect(RESTORE_HEALTH);
 	c->setPotency(25);
@@ -31,7 +31,7 @@ consumableSharedPtr consumable_StarwaterDraught()
 
 consumableSharedPtr consumable_InvigoratingTea()
 {
-	consumableSharedPtr c(new consumable("Invigorating Tea", VIAL_TILE, TCODColor::green,
+	consumableSharedPtr c(new consumable("Invigorating Tea", FLASK_TILE, TCODColor::green,
 		"A specially brewed tea that restores vigour."));
 	c->addEffect(RESTORE_VIGOUR);
 	c->setPotency(5);
@@ -79,7 +79,7 @@ contain profound power when eaten."));
 
 consumableSharedPtr consumable_IntoxicatingWine()
 {
-	consumableSharedPtr c(new consumable("Intoxicating Wine", VIAL_TILE, TCODColor::darkRed,
+	consumableSharedPtr c(new consumable("Intoxicating Wine", FLASK_TILE, TCODColor::darkRed,
 		"This heady draught is said to purge the mind of material desires while enhancing one's will."));
 	c->addEffect(INCREASE_PRAYER_POWER);
 	c->addEffect(APPLY_DAMAGE_PENALTY);
@@ -90,7 +90,7 @@ consumableSharedPtr consumable_IntoxicatingWine()
 
 consumableSharedPtr consumable_WitchwaterFlask()
 {
-	consumableSharedPtr c(new consumable("Witchwater Flask", VIAL_TILE, TCODColor::fuchsia,
+	consumableSharedPtr c(new consumable("Witchwater Flask", FLASK_TILE, TCODColor::fuchsia,
 		"A flask of invigorating witchwater, said to break down the barriers between our world and reality. Moshka \
 was a great believer in witchwater, and consumed it in copious amounts."));
 	c->addEffect(INCREASE_SPELL_POWER);
@@ -102,7 +102,7 @@ was a great believer in witchwater, and consumed it in copious amounts."));
 
 consumableSharedPtr consumable_BlackHoney()
 {
-	consumableSharedPtr c(new consumable("Black Honey", VIAL_TILE, TCODColor::darkPurple,
+	consumableSharedPtr c(new consumable("Black Honey", FLASK_TILE, TCODColor::darkPurple,
 		"Black honey, once the principle export of the village, was said to induce vivid dreams. But if one's life is filled \
 with bloodshed, one's dreams are unlikely to bring peace."));
 	c->addEffect(APPLY_DAMAGE_PENALTY);
@@ -115,7 +115,7 @@ with bloodshed, one's dreams are unlikely to bring peace."));
 
 consumableSharedPtr consumable_PutridBrew()
 {
-	consumableSharedPtr c(new consumable("Putrid Brew", VIAL_TILE, TCODColor::darkLime,
+	consumableSharedPtr c(new consumable("Putrid Brew", FLASK_TILE, TCODColor::darkLime,
 		"A profoundly toxic drink, said to contain the putrid rage of the dead gods that rot in the heart of the Void."));
 	c->addEffect(APPLY_POISON_DAMAGE);
 	c->addEffect(DAMAGE_WHEN_POISONED);
@@ -126,7 +126,7 @@ consumableSharedPtr consumable_PutridBrew()
 
 consumableSharedPtr consumable_GodsbloodBrew()
 {
-	consumableSharedPtr c(new consumable("Godsblood Brew", VIAL_TILE, TCODColor::lightChartreuse,
+	consumableSharedPtr c(new consumable("Godsblood Brew", FLASK_TILE, TCODColor::lightChartreuse,
 		"Brew concocted from the boiling blood of the old gods, whose remains smoulder in the heart of the Void."));
 	c->addEffect(GAIN_MAX_HEALTH);
 	c->setPotency(40);
@@ -172,7 +172,7 @@ consumableSharedPtr ranged_PoisonThrowingKnives()
 
 consumableSharedPtr ranged_CorrodingJar()
 {
-	consumableSharedPtr c(new consumable("Corroding Jar", VIAL_TILE, TCODColor::lime,
+	consumableSharedPtr c(new consumable("Corroding Jar", BOMB_TILE, TCODColor::lime,
 		"A jar filled with acid. Throw at armoured enemies to penetrate their defences."));
 	c->setRangedAttack(spellSharedPtr(new spell(c->getName(), c->getColor(), 5, 5, APPLY_ACID_DAMAGE, 40)));
 	c->add(3);
@@ -181,7 +181,7 @@ consumableSharedPtr ranged_CorrodingJar()
 
 consumableSharedPtr ranged_VoidEssenceJar()
 {
-	consumableSharedPtr c(new consumable("Void-Essence Jar", VIAL_TILE, TCODColor::purple,
+	consumableSharedPtr c(new consumable("Void-Essence Jar", BOMB_TILE, TCODColor::purple,
 		"A jar filled with cursed oil, designed to shatter on contact."));
 	c->setRangedAttack(spellSharedPtr(new spell(c->getName(), c->getColor(), 5, 5, APPLY_PROFANE_DAMAGE, 45)));
 	c->add(2);
@@ -190,7 +190,7 @@ consumableSharedPtr ranged_VoidEssenceJar()
 
 consumableSharedPtr ranged_PyromancersFlask()
 {
-	consumableSharedPtr c(new consumable("Pyromancer's Flask", VIAL_TILE, TCODColor::flame,
+	consumableSharedPtr c(new consumable("Pyromancer's Flask", BOMB_TILE, TCODColor::flame,
 		"A jar of volatile oil, ready to burst into flame on contact."));
 	c->setRangedAttack(spellSharedPtr(new spell(c->getName(), c->getColor(), 5, 5, APPLY_FIRE_DAMAGE, 40)));
 	c->add(3);
@@ -199,7 +199,7 @@ consumableSharedPtr ranged_PyromancersFlask()
 
 consumableSharedPtr ranged_WitchsJar()
 {
-	consumableSharedPtr c(new consumable("Witch's Jar", VIAL_TILE, TCODColor::magenta,
+	consumableSharedPtr c(new consumable("Witch's Jar", BOMB_TILE, TCODColor::magenta,
 		"Jars of magical oil, often carried by wizards for use as a last resort."));
 	c->setRangedAttack(spellSharedPtr(new spell(c->getName(), c->getColor(), 5, 5, APPLY_MAGIC_DAMAGE, 40)));
 	c->add(3);

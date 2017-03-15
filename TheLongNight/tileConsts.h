@@ -76,6 +76,9 @@ const int DAGGER_TILE = 268;
 const int HAMMER_TILE = 269;
 const int SPEAR_TILE = 279;
 const int WHIP_TILE = 279;
+const int SCYTHE_TILE = 307;
+const int TENTACLE__TILE = 308;
+const int AXE_TILE = 309;
 const int STAFF_TILE = 277;
 const int CHIME_TILE = 278;
 
@@ -85,6 +88,8 @@ const int HELMET_TILE = 272;
 const int ROBE_TILE = 280;
 const int HOOD_TILE = 281;
 const int VIAL_TILE = 273;
+const int FLASK_TILE = 285;
+const int BOMB_TILE = 286;
 
 const int SPELL_TILE = 274;
 const int KEY_TILE = 275;
