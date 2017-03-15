@@ -155,11 +155,11 @@ GETTING INPUT
 This is a super klutzy function that constantly clears the whole screen
 It's pretty much just for debugging purposes
 */
-std::string window::getstr(int x, int y)
+std::string window::getstr(int x, int y, std::string prompt)
 {
 	std::string txt = "";
 	clear();
-	write(x, y, "~_", TCODColor::white);
+	write(x, y, prompt + "_", TCODColor::white);
 	refresh();
 	TCOD_key_t key = TCODConsole::waitForKeypress(false);
 	while (key.vk != TCODK_ENTER || !key.pressed) {
@@ -178,7 +178,7 @@ std::string window::getstr(int x, int y)
 		}
 		//Show what we did
 		clear();
-		write(x, y, '~' + txt + '_', TCODColor::white);
+		write(x, y, prompt + txt + '_', TCODColor::white);
 		refresh();
 	}
 	return txt;

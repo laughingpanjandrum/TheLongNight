@@ -6,7 +6,7 @@ const std::string game::VOID_EDGE_MAP = "maps/void_edge.txt";
 const std::string game::VOID_RETURN_MAP = "maps/sordid_chapel.txt";
 
 
-game::game()
+game::game(std::string saveFileName, bool isNewGame) : SAVE_FILE_NAME(saveFileName)
 {
 	
 	//We start by creating an empty map, just for now
@@ -4612,7 +4612,7 @@ void game::saveGame()
 		storyFlags, fragments, allShops, allUnlockableShops, warpPoints);
 
 	//Dump all this information into a big ole' file.
-	newSave->dumpToFile("currentsave");
+	newSave->dumpToFile(SAVE_FILE_NAME);
 
 }
 

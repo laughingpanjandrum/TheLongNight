@@ -61,8 +61,9 @@ class game
 {
 public:
 	
-	game();
-	game(std::string fname) {
+	game() : game("unnamed") {}
+	game(std::string saveFileName, bool isNewGame);
+	game(std::string fname) : SAVE_FILE_NAME(fname) {
 		loadSaveGame(fname);
 	} //Constructs a game using a save file
 	~game();
@@ -76,6 +77,9 @@ public:
 private:
 	
 	window win;
+
+	//Name of the save file we use.
+	const std::string SAVE_FILE_NAME;
 
 	//Constants
 	const static std::string VOID_EDGE_MAP;

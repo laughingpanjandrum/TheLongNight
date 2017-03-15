@@ -36,7 +36,7 @@ public:
 	bool isPunctuator(char c);
 	
 	//Input
-	std::string getstr(int x, int y);
+	std::string getstr(int x, int y, std::string prompt = "~");
 	TCOD_key_t getkey();
 	TCOD_key_t waitForKeypress();
 	
