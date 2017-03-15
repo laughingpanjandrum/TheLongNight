@@ -12,7 +12,8 @@ savegame::savegame()
 Constructor to generate a new savegame, hurrah.
 */
 savegame::savegame(stringVector savedMapHandles, mapVector savedMaps, std::string currentMap, 
-	coord currentPos, personSharedPtr player, stringVector storyFlags, int fragments)
+	coord currentPos, personSharedPtr player, stringVector storyFlags, int fragments,
+	shopVector currentShops, shopVector unlockableShops)
 {
 
 	//Copy over all saved map handles
@@ -70,6 +71,20 @@ savegame::savegame(stringVector savedMapHandles, mapVector savedMaps, std::strin
 	//Preserve player's statline
 	playerStats = *player->stats;
 	fragmentsHeld = fragments;
+
+	//Save shop data
+	for (auto sh : currentShops) {
+		shopData d(sh->tag, sh->eatsKeyWhenBought);
+		for (auto it : sh->stock)
+			d.addItem(it);
+		this->currentShops.push_back(d);
+	}
+	for (auto sh : unlockableShops) {
+		shopData d(sh->tag, sh->eatsKeyWhenBought);
+		for (auto it : sh->stock)
+			d.addItem(it);
+		this->unlockableShops.push_back(d);
+	}
 
 }
 
@@ -153,6 +168,12 @@ void savegame::dumpToFile(std::string fname)
 	for (auto flag : storyFlags)
 		saveData += flag + ';';
 
+	//Shops
+	saveData += "&SHOPS;";
+	saveData += createShopData(currentShops);
+	saveData += "&UNLOCKABLE;";
+	saveData += createShopData(unlockableShops);
+
 	//We have it all! Make a file and dump it in there
 	std::ofstream saveFile(SAVE_FILE_LOCATION + fname);
 	saveFile << saveData;
@@ -185,9 +206,14 @@ void savegame::loadFromFile(std::string fname)
 	bool nextChunkIsItemAmount = false;
 	bool readingInEquipped = false;
 	bool readingStoryFlags = false;
+	bool readingCurrentShops = false;
+	bool readingUnlockableShops = false;
+	bool nextChunkIsItemPrice = false;
+	bool endOfStore = true;
 	bool endOfMap = true;
 
 	coordVector* savedItemVectors = new coordVector();
+	shopData* buildingShop = new shopData();
 
 	//Each ; represents the end of a line
 	std::string chunk = "";
@@ -209,6 +235,14 @@ void savegame::loadFromFile(std::string fname)
 			else if (chunk == "&STORYFLAGS") {
 				readingStoryFlags = true;
 				readingInEquipped = false;
+			}
+			else if (chunk == "&SHOPS") {
+				readingStoryFlags = false;
+				readingCurrentShops = true;
+			}
+			else if (chunk == "&UNLOCKABLE") {
+				readingCurrentShops = false;
+				readingUnlockableShops = true;
 			}
 			
 			//Current map
@@ -236,6 +270,40 @@ void savegame::loadFromFile(std::string fname)
 				case(6): fragmentsHeld = val; break;
 				}
 				atPlayerStat++;
+			}
+
+			//Shop data
+			else if (readingCurrentShops || readingUnlockableShops) {
+
+				if (endOfStore) {
+					//Chunk represents the start of a new piece of STORE data
+					buildingShop = new shopData();
+					buildingShop->tag = chunk;
+					endOfStore = false;
+				}
+				else if (chunk == "END") {
+					//End of current shop
+					endOfStore = true;
+					if (readingCurrentShops)
+						currentShops.push_back(*buildingShop);
+					else if (readingUnlockableShops)
+						unlockableShops.push_back(*buildingShop);
+				}
+				else if (chunk == "true")
+					buildingShop->eatsKeyWhenBought = true;
+				else if (chunk == "false")
+					buildingShop->eatsKeyWhenBought = false;
+				else if (nextChunkIsItemPrice) {
+					int price = std::stoi(chunk);
+					buildingShop->itemPrices.push_back(price);
+					nextChunkIsItemPrice = false;
+				}
+				else {
+					//Item the store sells
+					buildingShop->itemTags.push_back(chunk);
+					nextChunkIsItemPrice = true;
+				}
+
 			}
 
 			//Story flags
@@ -382,4 +450,29 @@ coord savegame::stringToCoord(std::string c)
 	pos.second = std::stoi(chunk);
 	//Done
 	return pos;
+}
+
+
+/*
+Creates data string for a given list of shop datums.
+*/
+std::string savegame::createShopData(shopDataVector shopList)
+{
+	std::string saveData = "";
+	for (auto sh : shopList) {
+		//Shop tag
+		saveData += sh.tag + ';';
+		//Whether we eat the key
+		if (sh.eatsKeyWhenBought)
+			saveData += "true;";
+		else
+			saveData += "false;";
+		//List of items and their prices.
+		for (int i = 0; i < sh.itemTags.size(); i++) {
+			saveData += sh.itemTags.at(i) + ';';
+			saveData += std::to_string(sh.itemPrices.at(i)) + ';';
+		}
+		saveData += "END;";
+	}
+	return saveData;
 }

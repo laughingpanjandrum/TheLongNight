@@ -29,6 +29,9 @@ game::game()
 
 	//Prepare story events
 	loadStoryEvents("maps/storyFlags.txt");
+
+	//Set up store inventories
+	initializeShops();
 	
 	//Setup we do whether loading a game or creating a new one
 	setupGeneralGame();
@@ -4606,7 +4609,7 @@ void game::saveGame()
 
 	//Save object
 	savegame* newSave = new savegame(allMapHandles, allMaps, currentMap->getMapTag(), player->getPosition(), player,
-		storyFlags, fragments);
+		storyFlags, fragments, allShops, allUnlockableShops);
 
 	//Dump all this information into a big ole' file.
 	newSave->dumpToFile("currentsave");
@@ -4622,8 +4625,12 @@ void game::loadSaveGame(std::string fname)
 	
 	//Generate savegame
 	savegame* sg = new savegame(fname);
+
+	int datay = 15;
 	
 	//	Translate save game into actual reality
+	win.write(12, datay++, "Loading map data...", TCODColor::white);
+	win.refresh();
 	
 	//Load up all the maps we have saved up
 	auto mapTags = sg->getAllMapTags();
@@ -4649,6 +4656,9 @@ void game::loadSaveGame(std::string fname)
 
 	}
 
+	win.write(12, datay++, "Loading character data...", TCODColor::white);
+	win.refresh();
+
 	//Character create
 	player = personSharedPtr(new person());
 	player->isPlayer = true;
@@ -4664,6 +4674,9 @@ void game::loadSaveGame(std::string fname)
 	//We start on a given map
 	loadMapFromHandle(sg->getStartMapTag(), CONNECT_WARP, 0, 0);
 	player->setPosition(sg->getStartPosition());
+
+	win.write(12, datay++, "Loading inventory...", TCODColor::white);
+	win.refresh();
 
 	//Add all the items the player should have.
 	for (auto it : getListOfAllItems()) {
@@ -4686,10 +4699,32 @@ void game::loadSaveGame(std::string fname)
 
 	}
 
+	win.write(12, datay++, "Loading story flags...", TCODColor::white);
+	win.refresh();
+
 	//Load up story flags
 	loadStoryEvents("maps/storyFlags.txt");
 	for (auto fl : sg->getStoryFlags())
 		addStoryFlag(fl);
+
+	win.write(12, datay++, "Loading shop states...", TCODColor::white);
+	win.refresh();
+
+	//Load up shop states
+	auto allItems = getListOfAllItems();
+	for (auto sh : sg->getCurrentShops()) {
+		shopSharedPtr newShop = shopSharedPtr(new shop(sh.tag, sh.eatsKeyWhenBought));
+		for (auto it : sh.itemTags) {
+			newShop->addItem(getItemByName(it), 0);
+		}
+		allShops.push_back(newShop);
+	}
+	for (auto sh : sg->getUnlockableShops()) {
+		shopSharedPtr newShop = shopSharedPtr(new shop(sh.tag, sh.eatsKeyWhenBought));
+		for (auto it : sh.itemTags)
+			newShop->addItem(getItemByName(it), 0);
+		allUnlockableShops.push_back(newShop);
+	}
 
 	//General setup
 	setupGeneralGame();
@@ -4711,9 +4746,6 @@ void game::setupGeneralGame()
 
 	//Spawn creatures on new map
 	currentMap->respawnAllMonsters(storyEventsReady);
-
-	//Set up store inventories
-	initializeShops();
 
 	//Make our starting position a save point
 	setSavePoint();

@@ -686,7 +686,7 @@ const itemVector getListOfAllItems()
 		headgear_MoonPaleCrown(),
 		//Consumables
 		consumable_StarwaterDraught(), consumable_InvigoratingTea(),
-		consumable_TinyGreenFlower(), consumable_TinyRedFlower(), consumable_PutridBrew(),
+		consumable_TinyGreenFlower(), consumable_TinyRedFlower(), consumable_PutridFlower(),
 		consumable_BloodDrinkersEyes(), consumable_IntoxicatingWine(), consumable_WitchwaterFlask(), consumable_BlackHoney(),
 		consumable_PutridBrew(), consumable_GodsbloodBrew(),
 		ranged_ThrowingKnives(), ranged_HeavyJavelin(), ranged_LaceratingKnives(), ranged_PoisonThrowingKnives(),
@@ -748,4 +748,17 @@ const itemVector getListOfAllItems()
 		misc_VoidSigil(), misc_PieceOfJade(), misc_PieceOfBone(),
 	};
 	return allItems;
+}
+
+
+/*
+Uses the list of all items to find this item's name.
+*/
+itemSharedPtr getItemByName(std::string name)
+{
+	for (auto it : getListOfAllItems()) {
+		if (it->getName() == name)
+			return it;
+	}
+	return nullptr;
 }

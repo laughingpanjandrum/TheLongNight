@@ -58,41 +58,10 @@ struct areaText {
 };
 
 
-//Shop inventory storage
-struct shop {
-	//Basic constructors
-	shop(std::string tag, bool eatsKeyWhenBought = false) : 
-		tag(tag), eatsKeyWhenBought(eatsKeyWhenBought) {}
-	//Methods
-	void addItem(itemSharedPtr it, int price) { 
-		it->isGlittery = false;
-		it->setPrice(price);
-		stock.push_back(it); 
-		//Additional attributes if this is a key-eating shop
-		if (eatsKeyWhenBought) {
-			it->setKeyEaten(tag);
-		}
-	}
-	void removeItem(itemSharedPtr it) {
-		auto iter = std::find(stock.begin(), stock.end(), it);
-		if (iter != stock.end())
-			stock.erase(iter);
-	}
-	//Data
-	std::string tag; //How we're identified
-	itemVector stock; //List of items sold
-	//If true, items in this inventory consume a key when bought
-	bool eatsKeyWhenBought = false;
-};
-
-
 typedef std::vector<message> messageVector;
 typedef std::vector<savePoint> savePointVector;
 typedef std::vector<std::string> stringVector;
 typedef std::vector<areaText*> areaTextVector;
-
-typedef std::shared_ptr<shop> shopSharedPtr;
-typedef std::vector<shopSharedPtr> shopVector;
 
 typedef std::shared_ptr<TCODPath> pathSharedPtr;
 

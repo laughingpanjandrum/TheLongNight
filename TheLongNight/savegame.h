@@ -12,18 +12,32 @@
 #include "element.h"
 #include "map.h"
 
+typedef std::vector<std::string> stringVector;
+
+struct shopData {
+	shopData() {}
+	shopData(std::string tag, bool eatsKeyWhenBought) :
+		tag(tag), eatsKeyWhenBought(eatsKeyWhenBought) {}
+	std::string tag;
+	stringVector itemTags;
+	std::vector<int> itemPrices;
+	bool eatsKeyWhenBought;
+	void addItem(itemSharedPtr it) { itemTags.push_back(it->getName()); itemPrices.push_back(it->getPrice()); }
+};
+
 
 
 class savegame
 {
-	typedef std::vector<std::string> stringVector;
 	typedef std::vector<int> itemVector;
+	typedef std::vector<shopData> shopDataVector;
 public:
 	
 	savegame();
 	savegame(stringVector savedMapHandles, mapVector savedMaps, 
 		std::string currentMap, coord currentPos, personSharedPtr player,
-		stringVector storyFlags, int fragments);
+		stringVector storyFlags, int fragments, 
+		shopVector currentShops, shopVector unlockableShops);
 	savegame(std::string fileToLoad);
 	~savegame();
 
@@ -44,6 +58,8 @@ public:
 	stringVector getStoryFlags() { return storyFlags; }
 	statline* getPlayerStats() { return &playerStats; }
 	int getFragmentsHeld() { return fragmentsHeld; }
+	shopDataVector getCurrentShops() { return currentShops; }
+	shopDataVector getUnlockableShops() { return unlockableShops; }
 
 private:
 
@@ -72,9 +88,14 @@ private:
 	statline playerStats;
 	int fragmentsHeld;
 
+	//Shop state
+	shopDataVector currentShops;
+	shopDataVector unlockableShops;
+
 	//Utility functions
 	std::string coordToString(coord c);
 	coord stringToCoord(std::string c);
+	std::string createShopData(shopDataVector shopList);
 
 };
 
