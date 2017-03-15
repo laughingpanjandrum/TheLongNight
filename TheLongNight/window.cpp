@@ -120,7 +120,6 @@ Output: None.
 */
 void window::refresh() 
 {
-	//TCODConsole::blit(mainConsole, 0, 0, 0, 0, TCODConsole::root, 0, 0);
 	TCODConsole::flush();
 }
 

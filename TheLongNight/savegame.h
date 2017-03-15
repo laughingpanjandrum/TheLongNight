@@ -25,6 +25,17 @@ struct shopData {
 	void addItem(itemSharedPtr it) { itemTags.push_back(it->getName()); itemPrices.push_back(it->getPrice()); }
 };
 
+//Save point data - a coordinate and a map pointer, and an optional name
+struct savePoint {
+	savePoint() {}
+	savePoint(map* saveMap, coord savePt) : saveMap(saveMap), savePt(savePt) {}
+	bool operator==(const savePoint& rhs) { return name == rhs.name; }
+	map* saveMap;
+	coord savePt;
+	std::string name;
+};
+typedef std::vector<savePoint> savePointVector;
+
 
 
 class savegame
@@ -37,7 +48,8 @@ public:
 	savegame(stringVector savedMapHandles, mapVector savedMaps, 
 		std::string currentMap, coord currentPos, personSharedPtr player,
 		stringVector storyFlags, int fragments, 
-		shopVector currentShops, shopVector unlockableShops);
+		shopVector currentShops, shopVector unlockableShops,
+		savePointVector warpPoints);
 	savegame(std::string fileToLoad);
 	~savegame();
 
@@ -60,6 +72,7 @@ public:
 	int getFragmentsHeld() { return fragmentsHeld; }
 	shopDataVector getCurrentShops() { return currentShops; }
 	shopDataVector getUnlockableShops() { return unlockableShops; }
+	savePointVector getWarpPoints() { return warpPoints; }
 
 private:
 
@@ -91,6 +104,9 @@ private:
 	//Shop state
 	shopDataVector currentShops;
 	shopDataVector unlockableShops;
+
+	//Warp points
+	savePointVector warpPoints;
 
 	//Utility functions
 	std::string coordToString(coord c);

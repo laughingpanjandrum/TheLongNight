@@ -4609,7 +4609,7 @@ void game::saveGame()
 
 	//Save object
 	savegame* newSave = new savegame(allMapHandles, allMaps, currentMap->getMapTag(), player->getPosition(), player,
-		storyFlags, fragments, allShops, allUnlockableShops);
+		storyFlags, fragments, allShops, allUnlockableShops, warpPoints);
 
 	//Dump all this information into a big ole' file.
 	newSave->dumpToFile("currentsave");
@@ -4724,6 +4724,17 @@ void game::loadSaveGame(std::string fname)
 			newShop->addItem(getItemByName(sh.itemTags.at(i)), sh.itemPrices.at(i));
 		}
 		allUnlockableShops.push_back(newShop);
+	}
+
+	//Warp points
+	for (auto pt : sg->getWarpPoints()) {
+		//Get the corresponding map
+		map* newMap = makemap.loadMapFromFile(pt.name);
+		//Tidy up the warp point data
+		pt.name = newMap->getName();
+		pt.saveMap = newMap;
+		//Add to list of warp points we know
+		warpPoints.push_back(pt);
 	}
 
 	//General setup

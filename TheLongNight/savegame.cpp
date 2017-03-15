@@ -13,7 +13,8 @@ Constructor to generate a new savegame, hurrah.
 */
 savegame::savegame(stringVector savedMapHandles, mapVector savedMaps, std::string currentMap, 
 	coord currentPos, personSharedPtr player, stringVector storyFlags, int fragments,
-	shopVector currentShops, shopVector unlockableShops)
+	shopVector currentShops, shopVector unlockableShops,
+	savePointVector warpPoints)
 {
 
 	//Copy over all saved map handles
@@ -84,6 +85,11 @@ savegame::savegame(stringVector savedMapHandles, mapVector savedMaps, std::strin
 		for (auto it : sh->stock)
 			d.addItem(it);
 		this->unlockableShops.push_back(d);
+	}
+
+	//Save warp point data
+	for (auto pt : warpPoints) {
+		this->warpPoints.push_back(pt);
 	}
 
 }
@@ -174,6 +180,14 @@ void savegame::dumpToFile(std::string fname)
 	saveData += "&UNLOCKABLE;";
 	saveData += createShopData(unlockableShops);
 
+	//Saved warp points
+	saveData += "&WARPZONES;";
+	for (auto pt : warpPoints) {
+		saveData += pt.name + ';';
+		saveData += pt.saveMap->getMapTag() + ';';
+		saveData += coordToString(pt.savePt) + ';';
+	}
+
 	//We have it all! Make a file and dump it in there
 	std::ofstream saveFile(SAVE_FILE_LOCATION + fname);
 	saveFile << saveData;
@@ -211,9 +225,12 @@ void savegame::loadFromFile(std::string fname)
 	bool nextChunkIsItemPrice = false;
 	bool endOfStore = true;
 	bool endOfMap = true;
+	bool loadingWarpPoints = false;
+	int warpPointLoadStage = 0;
 
 	coordVector* savedItemVectors = new coordVector();
 	shopData* buildingShop = new shopData();
+	savePoint* buildingWarpPt = new savePoint();
 
 	//Each ; represents the end of a line
 	std::string chunk = "";
@@ -244,6 +261,10 @@ void savegame::loadFromFile(std::string fname)
 				readingCurrentShops = false;
 				readingUnlockableShops = true;
 			}
+			else if (chunk == "&WARPZONES") {
+				readingUnlockableShops = false;
+				loadingWarpPoints = true;
+			}
 			
 			//Current map
 			else if (!gotCurrentLocation) {
@@ -255,6 +276,27 @@ void savegame::loadFromFile(std::string fname)
 			else if (!gotCurrentPosition) {
 				lastPos = stringToCoord(chunk);
 				gotCurrentPosition = true;
+			}
+
+			//Warp points
+			else if (loadingWarpPoints) {
+
+				//There are three elements of data to each warp point
+				if (warpPointLoadStage == 0) {
+					warpPointLoadStage++;
+					buildingWarpPt = new savePoint();
+					buildingWarpPt->name = chunk;
+				}
+				else if (warpPointLoadStage == 1) {
+					warpPointLoadStage++;
+					buildingWarpPt->name = chunk;
+				}
+				else if (warpPointLoadStage == 2) {
+					warpPointLoadStage = 0;
+					buildingWarpPt->savePt = stringToCoord(chunk);
+					warpPoints.push_back(*buildingWarpPt);
+				}
+
 			}
 
 			//Player statistics

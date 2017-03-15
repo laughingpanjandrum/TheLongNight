@@ -37,15 +37,6 @@ struct message {
 	TCODColor color;
 };
 
-//Save point data - a coordinate and a map pointer, and an optional name
-struct savePoint {
-	savePoint() {}
-	savePoint(map* saveMap, coord savePt) : saveMap(saveMap), savePt(savePt) {}
-	bool operator==(const savePoint& rhs) { return name == rhs.name; }
-	map* saveMap;
-	coord savePt;
-	std::string name;
-};
 
 //A little chunk of flavour text to display when an area is first loaded.
 struct areaText {
@@ -59,7 +50,6 @@ struct areaText {
 
 
 typedef std::vector<message> messageVector;
-typedef std::vector<savePoint> savePointVector;
 typedef std::vector<std::string> stringVector;
 typedef std::vector<areaText*> areaTextVector;
 
