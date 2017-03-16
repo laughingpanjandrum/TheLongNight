@@ -1,6 +1,11 @@
 Heart of the Void
 start:20,0
 darkness:0.3,0
+qom:20,37
+astral_spider:18,35
+astral_spider:22,35
+astral_spider:19,34
+astral_spider:21,34
 -items
 -enditems
 -codes

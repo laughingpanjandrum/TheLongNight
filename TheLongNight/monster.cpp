@@ -1968,6 +1968,7 @@ energy of death itself."));
 	m->addSpellKnown(prayer_ProfaneRay());
 	m->setSpellCastChance(50);
 	m->setFragmentsDropped(10000);
+	m->makeImmuneToVoid();
 	m->isBoss = true;
 	return m;
 }
@@ -2077,6 +2078,44 @@ monsterSharedPtr monster_RuinsOfTheOldGods()
 	m->setMeleeStats(25, SPEED_SLOW);
 	m->keepsDistance = true;
 	m->addItemDrop(gem_GodlessGemstone());
+	return m;
+}
+
+
+/*
+TRUE FINAL BAWS
+*/
+monsterSharedPtr monster_QomTheGibberingSpider()
+{
+	monsterSharedPtr m(new monster("Qom, the Gibbering Spider", SPIDER_TILE, TCODColor::lightRed,
+		"The devourer of the ancients gibbers at the heart of the void, weeping the ichor of obliteration from its \
+myriad eyes."));
+	m->setHealth(8000);
+	m->setDefence(DAMAGE_PHYSICAL, 80);
+	m->setDefence(DAMAGE_ACID, 25);
+	m->setDefence(DAMAGE_COLD, 25);
+	m->setDefence(DAMAGE_FIRE, 25);
+	m->setDefence(DAMAGE_ELECTRIC, 25);
+	m->setDefence(DAMAGE_MAGIC, 25);
+	m->makeImmuneToVoid();
+	m->keepsDistance = true;
+	m->setMoveStats(SPEED_FAST);
+	m->equipItem(weaponSharedPtr(new weapon(50, SPEED_SLOW, EFFECT_PLAGUE, 20)));
+	m->addSpawnableCreature("astral_spider");
+	m->setSpawnChance(50);
+	m->isBoss = true;
+	return m;
+}
+
+//TRUE FINAL BAWS ASSISTANT
+monsterSharedPtr monster_AstralSpider()
+{
+	monsterSharedPtr m(new monster("Astral Spider", SPIDER_TILE, TCODColor::lightestPurple,
+		"One of Qom's endless spawn, gibbering with incoherent rage."));
+	m->setHealth(50);
+	m->setMoveStats(SPEED_FAST);
+	m->equipItem(weaponSharedPtr(new weapon(20, SPEED_FAST, DAMAGE_PROFANE, 20)));
+	m->makeImmuneToVoid();
 	return m;
 }
 
@@ -2548,6 +2587,10 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return monster_TheBlindKing();
 	else if (handle == "ruins_of_the_old_gods")
 		return monster_RuinsOfTheOldGods();
+	else if (handle == "qom")
+		return monster_QomTheGibberingSpider();
+	else if (handle == "astral_spider")
+		return monster_AstralSpider();
 
 	//Friendly NPCs
 	else if (handle == "gorem")

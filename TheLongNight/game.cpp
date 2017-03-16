@@ -4272,11 +4272,19 @@ Buffs are fully reset.
 */
 void game::deletePlayerBuffs()
 {
+
+	//Buffs on player
 	for (auto b : player->getAllBuffs()) {
 		//Negative buff is applied!
 		applyEffectToPerson(player, b->effectApplied, -b->potency);
 	}
 	player->clearBuffs();
+
+	//Buffs on player's equipment
+	auto wp = player->getWeapon();
+	if (wp != nullptr)
+		wp->clearBuff();
+
 }
 
 
@@ -4324,6 +4332,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(weapon_EtherealSword());
 	player->addItem(weapon_FishmansHarpoon());
 	player->addItem(weapon_FishmansKnife());
+	player->addItem(weapon_GravekeeperSpear());
 	player->addItem(weapon_IetrasFlameScythe());
 	player->addItem(weapon_KhallesHolyScythe());
 	player->addItem(weapon_KythielsScythe());

@@ -64,7 +64,7 @@ public:
 
 	//Buffing
 	void setBuff(weaponBuff buff) { currentBuff = buff; }
-	void clearBuff(weaponBuff buff) { currentBuff = weaponBuff(); }
+	void clearBuff() { currentBuff = weaponBuff(); }
 	weaponBuff getCurrentBuff() { return currentBuff; }
 	void setRune(weaponRuneSharedPtr r) { rune = r; }
 	weaponRuneSharedPtr getRune() { return rune; }

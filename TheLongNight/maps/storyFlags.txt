@@ -15,3 +15,9 @@ map:maps/old_fairweather.txt
 npc:elena
 spt:20,17
 !end
+
+!daedelusToHeart
+map:maps/heart_of_the_void_2.txt
+npc:daedelus
+spt:17,6
+!end

@@ -6,7 +6,7 @@ elenaToFairweather
 "Hm? What's that? You want to see what I've got?"
 |STORY_FLAG
 elenaToFairweather
-"Sure, sure..."
+"Meet me in Fairweather then, kiddo."
 |BACK_UP_AND_END
 [IN_FAIRWEATHER]
 "Aha! Good to see you here too, kiddo."

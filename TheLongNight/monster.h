@@ -264,6 +264,8 @@ monsterSharedPtr monster_PashTheRavenous();
 monsterSharedPtr monster_TheBlindKing();
 
 monsterSharedPtr monster_RuinsOfTheOldGods();
+monsterSharedPtr monster_QomTheGibberingSpider();
+monsterSharedPtr monster_AstralSpider();
 
 //Friendly NPCs
 monsterSharedPtr npc_Gorem();

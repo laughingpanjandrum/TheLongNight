@@ -479,9 +479,9 @@ spellSharedPtr ability_StrengthOfMind()
 spellSharedPtr ability_PowerSurge()
 {
 	spellSharedPtr sp(new spell("Power Surge", SWORD_TILE, TCODColor::magenta,
-		"Your next spell gains +100% power."));
+		"Your next spell gains +150% power."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
-	sp->addEffect(SCALE_NEXT_SPELL, 100);
+	sp->addEffect(SCALE_NEXT_SPELL, 150);
 	sp->setVigourCost(1);
 	return sp;
 }
@@ -509,7 +509,7 @@ spellSharedPtr ability_DivineFavour()
 spellSharedPtr ability_WyrdChannel()
 {
 	spellSharedPtr sp(new spell("Wyrd Channel", SWORD_TILE, TCODColor::lightSepia,
-		"Next prayer has 150% power."));
+		"Next prayer has +50% power."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(SCALE_NEXT_PRAYER, 50);
 	sp->setVigourCost(1);
@@ -519,10 +519,10 @@ spellSharedPtr ability_WyrdChannel()
 spellSharedPtr ability_Rotcall()
 {
 	spellSharedPtr sp(new spell("Rotcall", SPELL_TILE, TCODColor::darkAmber,
-		"Buff self; being poisoned increases physical resistance."));
-	sp->setAttackType(ATTACK_BUFF_SELF);
-	sp->addEffect(PHYS_RESIST_WHILE_POISONED, 40);
-	sp->setVigourCost(1);
+		"Speak a fetid chant to coat your weapon with poison."));
+	sp->setAttackType(ATTACK_BUFF_WEAPON);
+	sp->setStatusEffectBuff(EFFECT_POISON, 10);
+	sp->setVigourCost(2);
 	return sp;
 }
 
