@@ -1,3 +1,4 @@
+
 #include "libtcod.hpp"
 #include "game.h"
 
@@ -58,6 +59,11 @@ int main() {
 
 		if (iter != allProfiles.end())
 			selectedProfile = (*iter);
+
+		//Catch attempting to load if no profile exists
+		if (c == 'l' && selectedProfile.size() == 0)
+			c = ' ';
+
 	}
 
 	//NEW GAME

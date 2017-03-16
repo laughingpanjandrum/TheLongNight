@@ -70,6 +70,7 @@ void game::mainGameLoop()
 			processMouseClick();
 		}
 	}
+
 }
 
 /*
@@ -4233,6 +4234,8 @@ void game::setSavePoint()
 	ourSavePt.savePt = player->getPosition();
 	//And reload the map around us
 	restoreFromSavePoint();
+	//Autosave at each save point
+	saveGame();
 }
 
 /*
