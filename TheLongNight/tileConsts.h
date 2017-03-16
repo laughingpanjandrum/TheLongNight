@@ -28,7 +28,7 @@ const int WRETCHED_MASS_TILE = 343;
 
 const int CROW_KNIGHT_TILE = 355;
 const int CROW_THIEF_TILE = 372;
-const int THE_OLD_CROW_TILE = 322; //boss crow knight
+const int THE_OLD_CROW_TILE = 355; //boss crow knight
 
 const int FISHMAN_TILE = 358;
 

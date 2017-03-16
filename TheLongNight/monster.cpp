@@ -347,11 +347,10 @@ monsterSharedPtr monster_TheOldCrow()
 {
 	monsterSharedPtr m(new monster("The Old Crow", THE_OLD_CROW_TILE, TCODColor::lightCrimson,
 		"The tallest of the crow knights moves with gaunt grace, and flicks a knife between his long fingers."));
-	m->setHealth(400);
-	m->setMoveStats(SPEED_NORMAL);
+	m->setHealth(500);
+	m->setMoveStats(SPEED_FAST);
 	m->equipItem(weapon_CrowKnife());
 	m->addSpellKnown(attack_Quickstep());
-	m->addSpellKnown(attack_Splintering());
 	m->setSpellCastChance(20);
 	m->setDefence(DAMAGE_PHYSICAL, 10);
 	m->setBleedResist(45);
@@ -443,7 +442,7 @@ monsterSharedPtr monster_DegenerateFishman()
 
 monsterSharedPtr monster_SkinlessKnight()
 {
-	monsterSharedPtr m(new monster("Skinless Knight", CROW_KNIGHT_TILE, TCODColor::lightPink,
+	monsterSharedPtr m(new monster("Skinless Knight", KNIGHT_TILE, TCODColor::lightPink,
 		"The armour stained and dented, and beneath the slitted helm, two bloated eyes sit in a skinless skull."));
 	m->setHealth(200);
 	m->setDefence(DAMAGE_PHYSICAL, 15);

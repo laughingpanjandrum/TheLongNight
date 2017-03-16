@@ -993,8 +993,24 @@ void game::drawInterface(int leftx, int topy)
 	if (player->spellColdInfusion > 0)
 		win.write(atx, ++aty, "Infusion: COLD " + std::to_string(player->spellColdInfusion), TCODColor::cyan);
 
-	//Draws whatever we have HIGHLIGHTED
+	//Show whether current spell is in range, if any
 	aty += 2;
+	auto sp = player->getCurrentSpell();
+	if (sp != nullptr && sp->getAttackType() == ATTACK_RANGE) {
+		int attackR = sp->getAttackRange();
+		coord mpos = screenToMapCoords(coord(mouse.cx, mouse.cy));
+		if (currentMap->inBounds(mpos.first, mpos.second)) {
+			if (hypot(mpos.first - player->getx(), mpos.second - player->gety()) <= attackR) {
+				win.write(atx, ++aty, "Spell in range", TCODColor::white);
+			}
+			else {
+				win.write(atx, ++aty, "Spell out of range", TCODColor::white);
+			}
+		}
+	}
+
+	//Draws whatever we have HIGHLIGHTED
+	aty += 1;
 	drawMouseover(atx, aty);
 
 	//List controls
