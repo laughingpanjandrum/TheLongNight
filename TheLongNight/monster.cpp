@@ -1124,6 +1124,7 @@ the glistening helm."));
 	m->addSpellKnown(spellSharedPtr(new spell("Ethereal Jaunt", TCODColor::magenta, ATTACK_BUFF_SELF,
 		0, TELEPORT, 3)));
 	m->setSpellCastChance(10);
+	m->setFragmentsDropped(200);
 	return m;
 }
 
@@ -1141,6 +1142,7 @@ a wand, while two pale eyes regard you with something like disinterest."));
 		TELEPORT, 3)));
 	m->setSpellCastChance(75);
 	m->keepsDistance = true;
+	m->setFragmentsDropped(100);
 	return m;
 }
 
@@ -1156,6 +1158,7 @@ monsterSharedPtr monster_DecomposingKnight()
 	m->equipItem(weaponSharedPtr(new weapon(25, SPEED_NORMAL, EFFECT_POISON, 20)));
 	m->addSpellKnown(spellSharedPtr(new spell("Flesh Chunk", TCODColor::darkLime, 5, 0, APPLY_POISON_DAMAGE, 10)));
 	m->setSpellCastChance(20);
+	m->setFragmentsDropped(250);
 	return m;
 }
 
@@ -1171,6 +1174,7 @@ monsterSharedPtr monster_LifedrinkerWraith()
 	m->addWeakness(DAMAGE_MAGIC);
 	m->addWeakness(DAMAGE_ELECTRIC);
 	m->setMoveStats(SPEED_FAST);
+	m->setFragmentsDropped(200);
 	m->equipItem(weaponSharedPtr(new weapon(0, SPEED_FAST, DAMAGE_MAGIC, 25)));
 	return m;
 }

@@ -522,7 +522,7 @@ void game::aiFindTarget(monsterSharedPtr ai)
 	//If the player can see us, we can see them. ONE SIMPLE RULE.
 	if (canPlayerSeePoint(ai->getx(), ai->gety())) {
 		int dist = hypot(player->getx() - ai->getx(), player->gety() - ai->gety());
-		if (dist <= player->detectionRange) {
+		if (dist <= player->detectionRange && player->invisibility <= 0) {
 			ai->setTarget(player);
 			//If we are a BOSS, it looks like a BOSS FIGHT just started
 			if (ai->isBoss)
@@ -580,7 +580,7 @@ void game::drawMenu(menu * m, int atx, int aty)
 	//Box it in
 	int height = m->getAllElements().size() + 4;
 	win.clearRegion(atx - 1, aty - 1, 46, height);
-	win.drawBox(atx - 1, aty - 1, 46, height, TCODColor::darkSepia);
+	win.drawBox(atx - 1, aty - 1, 46, height);
 
 	//Title
 	win.write(atx, aty++, m->getTitle(), TCODColor::white);
@@ -1001,10 +1001,10 @@ void game::drawInterface(int leftx, int topy)
 		coord mpos = screenToMapCoords(coord(mouse.cx, mouse.cy));
 		if (currentMap->inBounds(mpos.first, mpos.second)) {
 			if (hypot(mpos.first - player->getx(), mpos.second - player->gety()) <= attackR) {
-				win.write(atx, ++aty, "Spell in range", TCODColor::white);
+				win.write(atx, ++aty, "Spell in range", TCODColor::green);
 			}
 			else {
-				win.write(atx, ++aty, "Spell out of range", TCODColor::white);
+				win.write(atx, ++aty, "Spell out of range", TCODColor::red);
 			}
 		}
 	}
@@ -1332,7 +1332,7 @@ void game::drawTargetInfo(personSharedPtr target, int atx, int aty)
 	aty = listStatusEffects(target, atx, aty);
 	
 	//Text description
-	win.writeWrapped(atx, ++aty, 20, target->description, TCODColor::lightGrey);
+	//win.writeWrapped(atx, ++aty, 20, target->description, TCODColor::lightGrey);
 }
 
 
@@ -2235,6 +2235,10 @@ void game::applyEffectToPerson(personSharedPtr target, effect eff, int potency, 
 	else if (eff == SET_SAVE_POINT && target->isPlayer)
 		//This is a save point; we'll respawn here on death
 		setSavePoint();
+	else if (eff == WARP_TO_SAVE_POINT && target->isPlayer) {
+		//Warp to our last save point
+		restoreFromSavePoint();
+	}
 	else if (eff == UNLOCK_ADJACENT_DOORS && target->isPlayer)
 		//Auto-unlock adjacent doors
 		unlockAdjacentTiles(target->getx(), target->gety());
@@ -3115,7 +3119,8 @@ void game::equipItem(itemSharedPtr it)
 			//Message about it
 			addMessage("Devoured " + c->getName() + '!', c->getColor());
 			//Expend item
-			player->loseItemForever(c);
+			if (c->consumeOnUse)
+				player->loseItemForever(c);
 			//Close menu
 			menuBackOut();
 			return;

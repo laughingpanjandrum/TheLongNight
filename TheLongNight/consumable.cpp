@@ -38,6 +38,16 @@ consumableSharedPtr consumable_InvigoratingTea()
 	return c;
 }
 
+consumableSharedPtr consumable_PilgrimsFingerbone()
+{
+	consumableSharedPtr c(new consumable("Pilgrim's Fingerbone", CHARM_TILE, TCODColor::lightestYellow,
+		"Fingerbone of a lonesome pilgrim, who dreamt eternally of returning home. But the way home was not easy to find."));
+	c->addEffect(WARP_TO_SAVE_POINT);
+	c->consumeOnUse = false;
+	c->oneUseOnly = true;
+	return c;
+}
+
 consumableSharedPtr consumable_TinyRedFlower()
 {
 	consumableSharedPtr c(new consumable("Tiny Red Flower", FLOWER_TILE, TCODColor::crimson,

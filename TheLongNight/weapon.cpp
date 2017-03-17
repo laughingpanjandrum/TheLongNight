@@ -486,7 +486,7 @@ weaponSharedPtr weapon_SacrificialKnife()
 	weaponSharedPtr wp(new weapon("Sacrificial Knife", DAGGER_TILE, TCODColor::orange,
 		"Lady Tvert sent the Emissaries to bring the word of the gods to the people of the Valley. \
 Those who refused to heed the call were sacrificed to the Gaping Maw to the benefit of the living."));
-	wp->setBasicAttributes(15, SPEED_FAST);
+	wp->setBasicAttributes(25, SPEED_FAST);
 	wp->addScalingType(SCALE_DEX);
 	wp->setDamageToSelf(5);
 	wp->setSpecialAttack(attack_DeepCut());

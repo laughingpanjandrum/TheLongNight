@@ -6,6 +6,7 @@ starwater_draught:24,29
 ruined_knights_helm:21,21
 ruined_knights_armour:20,22
 dull_grey_gemstone:28,6
+pilgrims_fingerbone:15,34
 -enditems
 -codes
 ; floor_stone

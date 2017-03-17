@@ -372,6 +372,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return key_DeadSparrowKey();
 	else if (handle == "void_sigil")
 		return misc_VoidSigil();
+	else if (handle == "pilgrims_fingerbone")
+		return consumable_PilgrimsFingerbone();
 	else if (handle == "sordid_chapel_key")
 		return key_SordidChapelKey();
 	else if (handle == "voidwalkers_returning_bell")
@@ -552,6 +554,7 @@ std::string getEffectName(effect e)
 	case(RESTORE_VIGOUR): return "vigour regain";
 	case(GAIN_FREE_MOVES): return "free moves";
 	case(GAIN_MAX_HEALTH): return "max health";
+	case(WARP_TO_SAVE_POINT): return "return to last save point";
 
 	case(REMOVE_BLEED): return "cures bleed buildup";
 	case(REMOVE_POISON): return "cures poisoning";
@@ -745,7 +748,7 @@ const itemVector getListOfAllItems()
 		//Bones
 		bones_KhallesBones(), bones_SiltrasBones(), bones_CorensBones(), bones_IetrasBones(),
 		//Other misc
-		misc_VoidSigil(), misc_PieceOfJade(), misc_PieceOfBone(),
+		misc_VoidSigil(), misc_PieceOfJade(), misc_PieceOfBone(), consumable_PilgrimsFingerbone(),
 	};
 	return allItems;
 }

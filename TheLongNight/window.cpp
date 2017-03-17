@@ -20,6 +20,8 @@ window::window(std::string name, int xsize, int ysize) {
 		TCODConsole::mapAsciiCodesToFont(asc, 16, 0, y);
 		asc += 16;
 	}
+	//Default bg colour
+	TCODConsole::root->setDefaultBackground(SCREEN_BACKGROUND_COLOR);
 }
 
 /*
@@ -219,22 +221,34 @@ bool window::isPunctuator(char c)
 SPECIAL DRAWING FUNCTIONS
 */
 
-void window::drawBox(int leftx, int topy, int width, int height, TCODColor col) {
-	//Stars in the four corners
-	writec(leftx, topy, TOP_LEFT_CORNER, col);
-	writec(leftx + width, topy, TOP_RIGHT_CORNER, col);
-	writec(leftx, topy + height, BOTTOM_LEFT_CORNER, col);
-	writec(leftx + width, topy + height, BOTTOM_RIGHT_CORNER, col);
+void window::drawBox(int leftx, int topy, int width, int height, TCODColor col) 
+{
+
+	//Fill in background
+	for (int x = leftx; x < leftx + width; x++) {
+		for (int y = topy; y < topy + height; y++) {
+			TCODConsole::root->setCharBackground(x, y, BOX_BACKGROUND_COLOR);
+		}
+	}
+	
+	//Corners
+	writec(leftx, topy, TOP_LEFT_CORNER, BORDER_COLOR);
+	writec(leftx + width, topy, TOP_RIGHT_CORNER, BORDER_COLOR);
+	writec(leftx, topy + height, BOTTOM_LEFT_CORNER, BORDER_COLOR);
+	writec(leftx + width, topy + height, BOTTOM_RIGHT_CORNER, BORDER_COLOR);
+	
 	//Horizontal sides
 	for (int x = leftx + 1; x < leftx + width; x++) {
-		writec(x, topy, HORIZONTAL_BAR, col);
-		writec(x, topy + height, HORIZONTAL_BAR, col);
+		writec(x, topy, HORIZONTAL_BAR, BORDER_COLOR);
+		writec(x, topy + height, HORIZONTAL_BAR, BORDER_COLOR);
 	}
+	
 	//Vertical sides
 	for (int y = topy + 1; y < topy + height; y++) {
-		writec(leftx, y, VERTICAL_BAR, col);
-		writec(leftx + width, y, VERTICAL_BAR, col);
+		writec(leftx, y, VERTICAL_BAR, BORDER_COLOR);
+		writec(leftx + width, y, VERTICAL_BAR, BORDER_COLOR);
 	}
+
 }
 
 /*

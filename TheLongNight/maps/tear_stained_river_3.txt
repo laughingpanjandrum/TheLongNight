@@ -1,11 +1,6 @@
 The Tear-Stained River
 start:20,0
-undead_prisoner:20,13
-undead_prisoner:19,12
-undead_prisoner:24,10
-bloated_slave_driver:16,14
-slavering_hound:13,13
-slavering_hound:13,14
+emissary:16,14
 -items
 noble_glowing_gemstone:4,30
 -enditems

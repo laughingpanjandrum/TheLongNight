@@ -1,4 +1,4 @@
-Dead Sparrow's Tower
+Dead Sparrow's Chamber
 start:6,20
 dead_sparrow:36,18
 -items

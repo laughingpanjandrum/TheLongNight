@@ -4,6 +4,12 @@
 #include "counter.h"
 #include "images.h"
 
+
+//Colour constants
+#define SCREEN_BACKGROUND_COLOR TCODColor(12,17,18)
+#define BOX_BACKGROUND_COLOR TCODColor(23,26,25)
+#define BORDER_COLOR TCODColor(28,45,52)
+
 #ifndef WINDOW_H
 #define WINDOW_H
 
@@ -21,9 +27,9 @@ public:
 	TCODConsole* mainConsole;
 	
 	//Writing
-	void writec(int x, int y, int c, TCODColor col, TCODColor bgcol = TCODColor::black, bool toAltConsole = false);
-	void write(int x, int y, std::string txt, TCODColor col, TCODColor bgcol = TCODColor::black, bool toAltConsole = false);
-	int writeWrapped(int x, int y, unsigned int lineLen, std::string txt, TCODColor col, TCODColor bgcol = TCODColor::black,
+	void writec(int x, int y, int c, TCODColor col, TCODColor bgcol = BOX_BACKGROUND_COLOR, bool toAltConsole = false);
+	void write(int x, int y, std::string txt, TCODColor col, TCODColor bgcol = BOX_BACKGROUND_COLOR, bool toAltConsole = false);
+	int writeWrapped(int x, int y, unsigned int lineLen, std::string txt, TCODColor col, TCODColor bgcol = BOX_BACKGROUND_COLOR,
 		bool toAltConsole = false);
 	
 	//Clearing/refreshing
