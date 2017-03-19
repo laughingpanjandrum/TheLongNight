@@ -1635,9 +1635,11 @@ monsterSharedPtr monster_Gravekeeper()
 	m->setHealth(200);
 	m->setPlagueResist(1000);
 	m->setPoisonResist(100);
+	m->setDefence(DAMAGE_PHYSICAL, 15);
 	m->setDefence(DAMAGE_ACID, 50);
 	m->setMoveStats(SPEED_NORMAL);
 	m->equipItem(weaponSharedPtr(new weapon(25, SPEED_NORMAL, EFFECT_PLAGUE, 10)));
+	m->addSpellKnown(spellSharedPtr(new spell("Corrosion Spear", TCODColor::lime, 4, 15, APPLY_ACID_DAMAGE, 20)));
 	m->setFragmentsDropped(200);
 	return m;
 }
@@ -1646,7 +1648,8 @@ monsterSharedPtr monster_PlagueRottedZombie()
 {
 	monsterSharedPtr m = monsterSharedPtr(new monster("Plague-Rotted Zombie", ZOMBIE_TILE, TCODColor::lightSepia,
 		"Shambling remnant of the vile dead, putrid with plague."));
-	m->setHealth(100);
+	m->setHealth(400);
+	m->addDamageResist(DAMAGE_ACID, 25);
 	m->setPlagueResist(1000);
 	m->setPoisonResist(1000);
 	m->setBleedResist(1000);
@@ -1668,8 +1671,9 @@ his spear, and the furious yellow light in his eyes."));
 	m->setPoisonResist(1000);
 	m->setBleedResist(120);
 	m->setMoveStats(SPEED_FAST);
-	m->equipItem(weaponSharedPtr(new weapon(10, SPEED_FAST, EFFECT_PLAGUE, 10)));
-	m->addSpellKnown(spellSharedPtr(new spell("Plaguebomb", TCODColor::amber, 4, 10, APPLY_PLAGUE_DAMAGE, 10)));
+	m->equipItem(weaponSharedPtr(new weapon(20, SPEED_FAST, EFFECT_PLAGUE, 20)));
+	m->addSpellKnown(attack_Quickstep());
+	m->addSpellKnown(spellSharedPtr(new spell("Plaguebomb", TCODColor::amber, 4, 10, APPLY_PLAGUE_DAMAGE, 20)));
 	m->setSpellCastChance(40);
 	m->setFragmentsDropped(4000);
 	m->keepsDistance = true;
@@ -1686,7 +1690,7 @@ monsterSharedPtr monster_StarvingRat()
 	m->setHealth(30);
 	m->setPlagueResist(1000);
 	m->setMoveStats(SPEED_FAST);
-	m->equipItem(weaponSharedPtr(new weapon(10, SPEED_FAST, EFFECT_PLAGUE, 5)));
+	m->equipItem(weaponSharedPtr(new weapon(10, SPEED_FAST, EFFECT_PLAGUE, 20)));
 	m->setFragmentsDropped(5);
 	return m;
 }
@@ -1710,11 +1714,12 @@ monsterSharedPtr monster_TombHorror()
 {
 	monsterSharedPtr m = monsterSharedPtr(new monster("Tomb Horror", SPIDER_TILE, TCODColor::lightAmber,
 		"A gaping maw rises from the muck, ringed with millions of tiny teeth, surrounded by squirming throngs of tentacles."));
-	m->setHealth(2000);
+	m->setHealth(4000);
 	m->setMoveStats(SPEED_SLOW);
-	m->equipItem(weaponSharedPtr(new weapon(25, SPEED_SLOW, DAMAGE_ACID, 25)));
+	m->equipItem(weaponSharedPtr(new weapon(50, SPEED_SLOW, DAMAGE_ACID, 25)));
+	m->addSpellKnown(spellSharedPtr(new spell("Rotblast", TCODColor::amber, 3, 50, APPLY_PLAGUE_DAMAGE, 30)));
 	m->addSpawnableCreature("tentacle");
-	m->setSpawnChance(50);
+	m->setSpawnChance(75);
 	m->keepsDistance = true;
 	m->setFragmentsDropped(5000);
 	m->addItemDrop(heart_HeartOfFarin());
@@ -2010,8 +2015,8 @@ monsterSharedPtr monster_GlurgTheImbecile()
 	monsterSharedPtr m(new monster("Glurg the Imbecile", GLURG_TILE, TCODColor::darkGreen,
 		"The earthly avatar of Glurg manifests as a drooling toad, shuddering in the deep. Perhaps when the imbecile god \
 devoured its forebears, the revelation of the truth beyond the stars proved unbearable."));
-	m->setHealth(2500);
-	m->setMoveStats(SPEED_SLOW);
+	m->setHealth(6000);
+	m->setMoveStats(SPEED_NORMAL);
 	m->keepsDistance = true;
 	m->setPoisonResist(1000);
 	m->setDefence(DAMAGE_PHYSICAL, 80);
@@ -2021,7 +2026,7 @@ devoured its forebears, the revelation of the truth beyond the stars proved unbe
 	m->addSpellKnown(spellSharedPtr(new spell("Hop", TCODColor::yellow, ATTACK_BUFF_SELF, 1, GAIN_FREE_MOVES, 4)));
 	m->setSpellCastChance(20);
 	m->addSpawnableCreature("adherent_of_glug");
-	m->setSpawnChance(30);
+	m->setSpawnChance(60);
 	m->addItemDrop(heart_HeartOfTheOldGods());
 	return m;
 }

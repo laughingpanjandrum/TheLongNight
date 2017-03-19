@@ -301,7 +301,8 @@ spellSharedPtr attack_PercivelsFire()
 	sp->setAttackType(ATTACK_RANGE, 1);
 	sp->addEffect(CASTER_MELEE_ATTACK, 1);
 	sp->addEffect(APPLY_FIRE_DAMAGE, 25);
-	sp->setVigourCost(1);
+	sp->addEffect(APPLY_BLESSED_DAMAGE, 25);
+	sp->setVigourCost(2);
 	return sp;
 }
 

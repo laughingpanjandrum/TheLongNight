@@ -4642,7 +4642,7 @@ void game::saveGame()
 
 	//Save object
 	savegame* newSave = new savegame(allMapHandles, allMaps, currentMap->getMapTag(), player->getPosition(), player,
-		storyFlags, fragments, allShops, allUnlockableShops, warpPoints);
+		storyFlags, fragments, allShops, allUnlockableShops, warpPoints, gotSirPercivelsSet);
 
 	//Dump all this information into a big ole' file.
 	newSave->dumpToFile(SAVE_FILE_NAME);
@@ -4769,6 +4769,9 @@ void game::loadSaveGame(std::string fname)
 		//Add to list of warp points we know
 		warpPoints.push_back(pt);
 	}
+
+	//Percivel's set pieces collected
+	gotSirPercivelsSet = sg->getPercivelSetProgress();
 
 	//General setup
 	setupGeneralGame();

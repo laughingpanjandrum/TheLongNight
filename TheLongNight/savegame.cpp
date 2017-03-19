@@ -14,7 +14,7 @@ Constructor to generate a new savegame, hurrah.
 savegame::savegame(stringVector savedMapHandles, mapVector savedMaps, std::string currentMap, 
 	coord currentPos, personSharedPtr player, stringVector storyFlags, int fragments,
 	shopVector currentShops, shopVector unlockableShops,
-	savePointVector warpPoints)
+	savePointVector warpPoints, int percySet)
 {
 
 	//Copy over all saved map handles
@@ -92,6 +92,9 @@ savegame::savegame(stringVector savedMapHandles, mapVector savedMaps, std::strin
 		this->warpPoints.push_back(pt);
 	}
 
+	//Save Percivel's Set progress
+	percivelsSetPieces = percySet;
+
 }
 
 
@@ -131,6 +134,9 @@ void savegame::dumpToFile(std::string fname)
 	saveData += std::to_string(playerStats.strength) + ';';
 	saveData += std::to_string(playerStats.vigour) + ';';
 	saveData += std::to_string(fragmentsHeld) + ';';
+
+	//Pieces of Sir Percivel's Set collected
+	saveData += std::to_string(percivelsSetPieces) + ';';
 
 	//Then the rest of the line is each of the saved maps and the coordinates that still have items.
 	for (int i = 0; i < knownMapTags.size(); i++) {
@@ -216,6 +222,7 @@ void savegame::loadFromFile(std::string fname)
 	bool gotCurrentLocation = false;
 	bool gotCurrentPosition = false;
 	int atPlayerStat = 0;
+	bool gotPercivelsSetProgress = false;
 	bool readingInItems = false;
 	bool nextChunkIsItemAmount = false;
 	bool readingInEquipped = false;
@@ -312,6 +319,12 @@ void savegame::loadFromFile(std::string fname)
 				case(6): fragmentsHeld = val; break;
 				}
 				atPlayerStat++;
+			}
+
+			//Pieces of Sir Percivel's Set collected
+			else if (!gotPercivelsSetProgress) {
+				percivelsSetPieces = std::stoi(chunk);
+				gotPercivelsSetProgress = true;
 			}
 
 			//Shop data

@@ -6,6 +6,12 @@ It also draws all the stuff that needs drawing.
 */
 
 
+/*
+TODO
+	Fix items respawning on maps with warp destinations when loading saves
+*/
+
+
 #ifndef GAME_H
 #define GAME_H
 

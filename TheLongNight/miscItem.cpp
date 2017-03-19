@@ -676,7 +676,7 @@ miscItemSharedPtr bones_SiltrasBones()
 was greatly changed, and that the old gods gave her a fitting reward for her deeds."));
 	b->isKey = true;
 	b->setKeyTag("siltras_bones");
-	b->setKeyTag("Unlocks the entrance to the Silent Mausoleum in the Flooded Lowlands.");
+	b->setWhatWeDo("Unlocks the entrance to the Silent Mausoleum in the Flooded Lowlands.");
 	return b;
 }
 

@@ -2,6 +2,11 @@ Sir Percivel's Shrine
 start:13,39
 rat_prince:16,17
 -items
+sir_percivels_sword:18,7
+sir_percivels_shield:18,8
+sir_percivels_helm:18,9
+sir_percivels_armour:19,7
+sir_percivels_ring:19,8
 -enditems
 -codes
 ; floor_stone

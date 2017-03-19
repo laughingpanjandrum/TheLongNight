@@ -207,10 +207,32 @@ int person::getDamageOfType(damageType dtype)
 {
 	weaponSharedPtr wp = getWeapon();
 	if (wp != nullptr) {
+
+		//Base damage
 		int dmg = wp->getDamageOfType(dtype);
+
+		if (isPlayer) {
+			//Particular scaling types
+			if (dtype == DAMAGE_MAGIC) {
+				int arc = wp->getScalingDamage(SCALE_ARC);
+				int bonus = arc * stats->arcana;
+				dmg += bonus;
+			}
+
+			//Profane damage scales with devotion
+			else if (dtype == DAMAGE_PROFANE || dtype == DAMAGE_BLESSED) {
+				int dev = wp->getScalingDamage(SCALE_DEV);
+				int bonus = dev * stats->devotion;
+				dmg += bonus;
+			}
+
+		}
+
+		//Blessings can have bonuses
 		if (dtype == DAMAGE_BLESSED) {
 			dmg += (float)dmg * ((float)percentBuffHolyDamage / 100);
 		}
+
 		return dmg;
 	}
 	return 0;

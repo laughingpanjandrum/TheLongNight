@@ -4,7 +4,7 @@ start:29,17
 tomb_horror:25,12
 -items
 venomous_runestone:3,15
-kings_giant_gemstone:32,28
+kings_giant_gemstone:33,29
 rotten_beast_shield:8,26
 -enditems
 -codes

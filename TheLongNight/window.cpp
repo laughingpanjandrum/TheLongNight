@@ -271,7 +271,7 @@ void window::drawCounter(counter c, std::string title, int x, int y, TCODColor c
 		writec(x + i, y, FULL_COUNTER_TILE, col1);
 	}
 	for (i; i < maxSize; i++) {
-		writec(x + i, y, EMPTY_COUNTER_TILE, col2);
+		writec(x + i, y, EMPTY_COUNTER_TILE, BOX_BACKGROUND_COLOR);
 	}
 }
 

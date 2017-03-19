@@ -3,6 +3,7 @@ start:8,9
 starspawned:25,20
 starspawned:26,24
 -items
+corens_bones:25,15
 -enditems
 -codes
 . floor_magic

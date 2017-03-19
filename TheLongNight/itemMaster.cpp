@@ -444,6 +444,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return misc_PieceOfJade();
 	else if (handle == "piece_of_bone")
 		return misc_PieceOfBone();
+	else if (handle == "percivels_sign")
+		return key_PercivelsSign();
 
 	//GEMSTONES
 	if (handle == "dull_grey_gemstone")

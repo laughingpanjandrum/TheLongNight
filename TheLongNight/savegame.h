@@ -49,7 +49,7 @@ public:
 		std::string currentMap, coord currentPos, personSharedPtr player,
 		stringVector storyFlags, int fragments, 
 		shopVector currentShops, shopVector unlockableShops,
-		savePointVector warpPoints);
+		savePointVector warpPoints, int percySet);
 	savegame(std::string fileToLoad);
 	~savegame();
 
@@ -73,6 +73,7 @@ public:
 	shopDataVector getCurrentShops() { return currentShops; }
 	shopDataVector getUnlockableShops() { return unlockableShops; }
 	savePointVector getWarpPoints() { return warpPoints; }
+	int getPercivelSetProgress() { return percivelsSetPieces; }
 
 private:
 
@@ -107,6 +108,9 @@ private:
 
 	//Warp points
 	savePointVector warpPoints;
+
+	//How many pieces of Percivel's Set we've collected
+	int percivelsSetPieces;
 
 	//Utility functions
 	std::string coordToString(coord c);
