@@ -4761,11 +4761,18 @@ void game::loadSaveGame(std::string fname)
 
 	//Warp points
 	for (auto pt : sg->getWarpPoints()) {
+		
 		//Get the corresponding map
-		map* newMap = makemap.loadMapFromFile(pt.name);
+		map* newMap = getKnownMap(pt.name);
+		if (newMap == nullptr) {
+			newMap = makemap.loadMapFromFile(pt.name);
+			addKnownMap(newMap, pt.name);
+		}
+		
 		//Tidy up the warp point data
 		pt.name = newMap->getName();
 		pt.saveMap = newMap;
+		
 		//Add to list of warp points we know
 		warpPoints.push_back(pt);
 	}
