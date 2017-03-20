@@ -640,7 +640,7 @@ void game::acceptCurrentMenuIndex()
 	else if (state == STATE_VIEW_INVENTORY_CATEGORY) {
 		//Equip the selected item
 		itemSharedPtr sel = std::static_pointer_cast<item>(currentMenu->getSelectedItem());
-		if (sel != nullptr)
+		if (sel != nullptr && canAccessInventory)
 			equipItem(sel);
 	}
 	
@@ -672,6 +672,11 @@ void game::menuBackOut()
 		//Return to map
 		setState(STATE_VIEW_MAP);
 	}
+
+	//Stop allowing inventory adjustment, if we just exited an inventory menu
+	if (state != STATE_VIEW_INVENTORY && state != STATE_VIEW_INVENTORY)
+		canAccessInventory = false;
+
 }
 
 
@@ -1067,7 +1072,6 @@ void game::drawInventory(int atx, int aty)
 		
 		//We can go to the level-up menu from here, & also save le game
 		win.write(atx, aty + 20, "Press [p] to LEVEL UP", TCODColor::white);
-		win.write(atx, aty + 21, "Press [m] to SAVE THE GAME", TCODColor::white);
 	
 	}
 }
@@ -1984,10 +1988,10 @@ void game::processCommand()
 				drawPlayerInfo(MAP_DRAW_X, MAP_DRAW_Y);
 		}
 		else if (key.c == 'm') {
-			if (state == STATE_VIEW_INVENTORY) {
-				saveGame();
-				addMessage("Game saved!", TCODColor::white);
-			}
+			//if (state == STATE_VIEW_INVENTORY) {
+				//saveGame();
+				//addMessage("Game saved!", TCODColor::white);
+			//}
 		}
 
 		//Using stuff
@@ -2007,8 +2011,6 @@ void game::processCommand()
 		}
 
 		//Movement
-		else if (key.c == 't')
-			toggleTargetMode();
 		else if (key.c == 'z')
 			playerTurnDelay = player->getMoveDelay();
 		else if (isMovementKey(key))
@@ -2233,9 +2235,11 @@ void game::applyEffectToPerson(personSharedPtr target, effect eff, int potency, 
 	
 	//Interface stuff for PCs only
 	
-	if (eff == ALLOW_INVENTORY_MANAGEMENT && target->isPlayer)
+	if (eff == ALLOW_INVENTORY_MANAGEMENT && target->isPlayer) {
 		//Can manage inventory when we step on this tile
 		createInventoryMenu();
+		canAccessInventory = true;
+	}
 	else if (eff == SET_SAVE_POINT && target->isPlayer)
 		//This is a save point; we'll respawn here on death
 		setSavePoint();

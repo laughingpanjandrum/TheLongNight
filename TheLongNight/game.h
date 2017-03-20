@@ -98,6 +98,7 @@ private:
 	personSharedPtr player;
 	gameState state = STATE_VIEW_MAP;
 	bool isGameOver = false;
+	bool canAccessInventory = false;
 
 	//State manipulation
 	void setState(gameState st);
