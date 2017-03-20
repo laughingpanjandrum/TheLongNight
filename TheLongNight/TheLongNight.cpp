@@ -85,10 +85,12 @@ int main() {
 
 	//LOAD GAME
 	else if (c == 'l' && selectedProfile.size() > 0) {
+
 		w.write(10, 14, "LOADING...", TCODColor::white);
 		w.refresh();
 		game g(selectedProfile);
 		g.mainGameLoop();
+
 	}
 
 	//QUIT GAME

@@ -2351,6 +2351,15 @@ monsterSharedPtr npc_CastalaTheExile()
 	return m;
 }
 
+monsterSharedPtr npc_TrainingDummy()
+{
+	monsterSharedPtr m(new monster("Training Dummy", PLAYER_TILE, TCODColor::lighterYellow,
+		"An immobile training dummy."));
+	m->setHealth(5000);
+	m->immobile = true;
+	return m;
+}
+
 /*
 This giant nightmare is how monsters are defined in map files.
 */
@@ -2634,6 +2643,9 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return npc_SiltraTheRedEyed();
 	else if (handle == "castala")
 		return npc_CastalaTheExile();
+
+	else if (handle == "dummy")
+		return npc_TrainingDummy();
 
 	//LET'S HOPE WE NEVER GET HERE!
 	return nullptr;

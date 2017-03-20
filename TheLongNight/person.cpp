@@ -212,14 +212,15 @@ int person::getDamageOfType(damageType dtype)
 		int dmg = wp->getDamageOfType(dtype);
 
 		if (isPlayer) {
-			//Particular scaling types
-			if (dtype == DAMAGE_MAGIC) {
+			
+			//Magic + fire damage scale with Arcane
+			if (dtype == DAMAGE_MAGIC || dtype == DAMAGE_FIRE) {
 				int arc = wp->getScalingDamage(SCALE_ARC);
 				int bonus = arc * stats->arcana;
 				dmg += bonus;
 			}
 
-			//Profane damage scales with devotion
+			//Profane + blessed damage scales with devotion
 			else if (dtype == DAMAGE_PROFANE || dtype == DAMAGE_BLESSED) {
 				int dev = wp->getScalingDamage(SCALE_DEV);
 				int bonus = dev * stats->devotion;

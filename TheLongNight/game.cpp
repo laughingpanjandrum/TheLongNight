@@ -1745,6 +1745,10 @@ void game::drawSpellInfo(spellSharedPtr it, int atx, int aty)
 		win.write(atx, ++aty, "Range:", TCODColor::lightBlue);
 		win.write(atx + 6, aty, std::to_string(it->getAttackRange()), TCODColor::white);
 	}
+
+	//Special
+	if (it->inverseHealthScaling)
+		win.write(atx, ++aty, "Power increases as health decreases", TCODColor::red);
 	
 	//Effects conferred
 	for (int i = 0; i < it->getEffectsCount(); i++) {
@@ -3315,7 +3319,7 @@ void game::dischargeSpellOnTarget(spellSharedPtr sp, personSharedPtr caster, per
 		//Additional potency from low health, possibly
 		if (sp->inverseHealthScaling) {
 			float f = caster->getHealth().getPercent();
-			potency += (1.0 - f) * 100;
+			potency += (1.0 - f) * 150;
 		}
 
 		//Permanent buff or temporary?

@@ -279,6 +279,8 @@ monsterSharedPtr npc_ToadPriestGhulluk();
 monsterSharedPtr npc_SiltraTheRedEyed();
 monsterSharedPtr npc_CastalaTheExile();
 
+monsterSharedPtr npc_TrainingDummy();
+
 
 //For map files
 monsterSharedPtr getMonsterByHandle(std::string handle);
