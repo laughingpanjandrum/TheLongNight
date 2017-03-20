@@ -2015,7 +2015,8 @@ monsterSharedPtr monster_GlurgTheImbecile()
 	monsterSharedPtr m(new monster("Glurg the Imbecile", GLURG_TILE, TCODColor::darkGreen,
 		"The earthly avatar of Glurg manifests as a drooling toad, shuddering in the deep. Perhaps when the imbecile god \
 devoured its forebears, the revelation of the truth beyond the stars proved unbearable."));
-	m->setHealth(6000);
+	m->setHealth(3000);
+	m->healthTrickle = 3000;
 	m->setMoveStats(SPEED_NORMAL);
 	m->keepsDistance = true;
 	m->setPoisonResist(1000);
@@ -2024,6 +2025,8 @@ devoured its forebears, the revelation of the truth beyond the stars proved unbe
 	m->isBoss = true;
 	m->setFragmentsDropped(5000);
 	m->addSpellKnown(spellSharedPtr(new spell("Hop", TCODColor::yellow, ATTACK_BUFF_SELF, 1, GAIN_FREE_MOVES, 4)));
+	m->addSpellKnown(spellSharedPtr(new spell("Idiot's Prayer", TCODColor::lightYellow, ATTACK_BUFF_SELF, 1,
+		RESTORE_HEALTH, 100)));
 	m->setSpellCastChance(20);
 	m->addSpawnableCreature("adherent_of_glug");
 	m->setSpawnChance(60);
@@ -2338,6 +2341,16 @@ monsterSharedPtr npc_SiltraTheRedEyed()
 	return m;
 }
 
+monsterSharedPtr npc_CastalaTheExile()
+{
+	monsterSharedPtr m(new monster("Castala the Exile", PLAYER_TILE, TCODColor::lightBlue,
+		"A woman in a regal dress, dripping golden jewelry, regards you haughtily. What is she doing in this strange place?"));
+	m->setHealth(100);
+	m->isHostile = false;
+	m->loadDialogue("dialogue/castala_chat.txt");
+	return m;
+}
+
 /*
 This giant nightmare is how monsters are defined in map files.
 */
@@ -2619,6 +2632,8 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return npc_ToadPriestGhulluk();
 	else if (handle == "siltra")
 		return npc_SiltraTheRedEyed();
+	else if (handle == "castala")
+		return npc_CastalaTheExile();
 
 	//LET'S HOPE WE NEVER GET HERE!
 	return nullptr;

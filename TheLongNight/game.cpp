@@ -4278,6 +4278,9 @@ void game::restoreFromSavePoint(savePoint* warpTo)
 	player->isDead = false;
 	player->setTarget(nullptr);
 	isAutoWalking = false; //Make sure we don't keep autowalking on death!
+
+	//Clear boss data
+	currentBoss = nullptr;
 	
 	//Return us to our save point
 	loadNewMap(warpTo->saveMap, CONNECT_VERTICAL, warpTo->savePt.first, warpTo->savePt.second);

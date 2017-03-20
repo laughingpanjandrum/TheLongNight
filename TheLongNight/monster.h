@@ -277,6 +277,7 @@ monsterSharedPtr npc_Ydella();
 monsterSharedPtr npc_TheEyelessQueen();
 monsterSharedPtr npc_ToadPriestGhulluk();
 monsterSharedPtr npc_SiltraTheRedEyed();
+monsterSharedPtr npc_CastalaTheExile();
 
 
 //For map files

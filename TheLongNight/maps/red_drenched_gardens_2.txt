@@ -1,6 +1,7 @@
 Red-Drenched Cathedral
 start:13,0
 orsyl_the_profaned:18,21
+castala:3,30
 -items
 -enditems
 -codes

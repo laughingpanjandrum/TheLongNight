@@ -21,3 +21,15 @@ map:maps/heart_of_the_void_2.txt
 npc:daedelus
 spt:17,6
 !end
+
+!castalaToCourt
+map:maps/altar_of_khull_khallen.txt
+npc:castala
+spt:25,10
+!end
+
+!castalaToTombs
+map:maps/flooded_tombs_1.txt
+npc:castala
+spt:3,36
+!end

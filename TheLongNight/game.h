@@ -34,6 +34,8 @@ TODO
 
 #include "savegame.h"
 
+const std::string PROFILES_FILE = "_profiles.txt";
+
 
 //Messages!
 struct message {

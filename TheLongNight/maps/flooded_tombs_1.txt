@@ -15,6 +15,7 @@ starving_rat:14,15
 starving_rat:12,20
 starving_rat:13,17
 starving_rat:3,5
+castala:3,36
 -items
 dragonbone_helm:36,2
 dragonbone_armour:36,4

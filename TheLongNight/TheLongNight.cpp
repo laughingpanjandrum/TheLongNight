@@ -8,7 +8,7 @@
 int main() {
 
 	//Gather profiles.
-	std::ifstream prFile(SAVE_FILE_LOCATION + "profiles.txt");
+	std::ifstream prFile(SAVE_FILE_LOCATION + PROFILES_FILE);
 	std::vector<std::string> allProfiles;
 	std::string profileName;
 	while (getline(prFile, profileName)) {
@@ -74,7 +74,7 @@ int main() {
 		std::string prName = w.getstr(10, 10, "ENTER PROFILE NAME: ");
 
 		//Add new profile
-		std::ofstream prFile(SAVE_FILE_LOCATION + "profiles.txt", std::fstream::app);
+		std::ofstream prFile(SAVE_FILE_LOCATION + PROFILES_FILE, std::fstream::app);
 		prFile << prName + "\n";
 		prFile.close();
 
