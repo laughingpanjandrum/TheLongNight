@@ -117,5 +117,6 @@ consumableSharedPtr gem_GodlessGemstone();
 consumableSharedPtr bell_VoidwalkersDancingBell();
 consumableSharedPtr bell_VoidwalkersReturningBell();
 consumableSharedPtr horn_HeraldsWhiteHorn();
+consumableSharedPtr misc_BrandOfTheEmissary();
 
 #endif

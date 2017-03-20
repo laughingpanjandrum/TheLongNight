@@ -282,8 +282,8 @@ void person::takeDamage(int amount, damageType dtype)
 	if (dtype < ALL_DAMAGE_TYPES && isWeakTo(dtype))
 		amount = amount * 2;
 
-	//Special effects: gain spell power upon taking cold damage
-	if (dtype == DAMAGE_COLD)
+	//Special effects: gain spell power upon taking FIRE damage
+	if (dtype == DAMAGE_FIRE)
 		spellColdInfusion += coldDamageAppliesInfusion;
 	
 	//Minimum 1 damage

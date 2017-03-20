@@ -99,7 +99,7 @@ charmSharedPtr charm_FrozenFlowerCharm()
 {
 	charmSharedPtr c(new charm("Frozen Flower Charm", CHARM_TILE, TCODColor::cyan,
 		"This charm is made of unmelting ice shaped like a tiny flower."));
-	c->addEffect(COLD_DAMAGE_ADDS_INFUSION, 25);
+	c->addEffect(COLD_DAMAGE_ADDS_INFUSION, 50);
 	return c;
 }
 

@@ -571,7 +571,7 @@ std::string getEffectName(effect e)
 	case(SCALE_NEXT_PRAYER): return "% divine power for next prayer";
 	case(SPELL_ACID_INFUSION): return "acid infusion for next spell";
 	case(SPELL_COLD_INFUSION): return "cold infusion for next spell";
-	case(COLD_DAMAGE_ADDS_INFUSION): return "cold infusion upon taking cold damage";
+	case(COLD_DAMAGE_ADDS_INFUSION): return "spells gain cold infusion upon taking fire damage";
 	case(INSTANT_SPELL_CAST): return "instant spell cast";
 	case(NEXT_SPELL_COST_ADJUST): return "next spell cost";
 
@@ -702,6 +702,7 @@ const itemVector getListOfAllItems()
 		gem_DullGreyGemstone(), gem_SmallShiningGemstone(), gem_NobleGlowingGemstone(),
 		gem_KingsGiantGemstone(), gem_GodlessGemstone(),
 		bell_VoidwalkersDancingBell(), bell_VoidwalkersReturningBell(), horn_HeraldsWhiteHorn(),
+		misc_BrandOfTheEmissary(),
 		//Charms
 		charm_ArcanaDrenchedCharm(), charm_ClericsHolyPendant(), charm_BloodstainedCharm(),
 		charm_KhallesHeadband(), charm_IdolOfPash(), charm_EvisceratingRing(), charm_BloodDrinkersBand(),
@@ -751,6 +752,7 @@ const itemVector getListOfAllItems()
 		bones_KhallesBones(), bones_SiltrasBones(), bones_CorensBones(), bones_IetrasBones(),
 		//Other misc
 		misc_VoidSigil(), misc_PieceOfJade(), misc_PieceOfBone(), consumable_PilgrimsFingerbone(),
+			
 	};
 	return allItems;
 }

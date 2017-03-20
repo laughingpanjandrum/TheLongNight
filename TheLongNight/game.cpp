@@ -4630,6 +4630,8 @@ void game::debugMenu()
 		player->addItem(charm_DivinePactRing());
 		player->addItem(charm_AgonyRing());
 		player->addItem(key_IetrasAmberPendant());
+		player->addItem(horn_HeraldsWhiteHorn());
+		player->addItem(misc_BrandOfTheEmissary());
 	}
 
 }

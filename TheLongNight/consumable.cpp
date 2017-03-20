@@ -409,3 +409,15 @@ Lord of Fallow Fields, who rises from the realms of the old gods to bring final 
 	c->setPotency(10);
 	return c;
 }
+
+consumableSharedPtr misc_BrandOfTheEmissary()
+{
+	consumableSharedPtr c(new consumable("Brand of the Emissary", BRAND_TILE, TCODColor::darkFlame,
+		"Brand used by the Emissaries to mark sinners. The brand is agonizing, but it inspired a spiritual fervour in its victims, \
+proof of the true power of the olds gods."));
+	c->consumeOnUse = false;
+	c->addEffect(APPLY_FIRE_DAMAGE);
+	c->addEffect(SCALE_NEXT_PRAYER);
+	c->setPotency(50);
+	return c;
+}

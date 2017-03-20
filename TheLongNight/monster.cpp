@@ -2005,6 +2005,35 @@ monsterSharedPtr monster_TheDeathlessKnight()
 }
 
 
+
+/*
+	SOME RANDOM UNIQUE ENEMIES
+*/
+
+
+monsterSharedPtr monster_SlaveOfPash()
+{
+	monsterSharedPtr m(new monster("Slave of Pash", PRIEST_TILE, TCODColor::lightRed,
+		"Agonized devotee of the great god Pash, bound in chains and shrieking in blessed agony. As the scriptures of Pash state, \
+the blood drains from the body, but the spirit will never perish."));
+	m->setHealth(1000);
+	m->setDefence(DAMAGE_PHYSICAL, 25);
+	m->setDefence(DAMAGE_FIRE, 50);
+	m->addWeakness(DAMAGE_COLD);
+	m->makeProfane();
+	m->setMoveStats(SPEED_NORMAL);
+	m->equipItem(weaponSharedPtr(new weapon(20, SPEED_FAST, DAMAGE_COLD, 40)));
+	m->addSpellKnown(spellSharedPtr(new spell("Agony", TCODColor::crimson, ATTACK_BUFF_SELF, 0, APPLY_BLEED_DAMAGE, 20)));
+	m->addSpellKnown(spellSharedPtr(new spell("Ecstasy", TCODColor::yellow, ATTACK_BUFF_SELF, 0, RESTORE_HEALTH, 100)));
+	m->setSpellCastChance(25);
+	m->isBoss = true;
+	m->showBossHealthBar = false;
+	m->addItemDrop(misc_BrandOfTheEmissary());
+	m->setFragmentsDropped(1000);
+	return m;
+}
+
+
 /*
 	GODS
 */
@@ -2621,6 +2650,10 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return monster_QomTheGibberingSpider();
 	else if (handle == "astral_spider")
 		return monster_AstralSpider();
+
+	//Misc special enemies
+	else if (handle == "slave_of_pash")
+		return monster_SlaveOfPash();
 
 	//Friendly NPCs
 	else if (handle == "gorem")

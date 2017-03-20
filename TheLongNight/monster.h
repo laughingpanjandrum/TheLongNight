@@ -258,6 +258,9 @@ monsterSharedPtr monster_AstralJailorPlague();
 monsterSharedPtr monster_LordOfFallowFields();
 monsterSharedPtr monster_TheDeathlessKnight();
 
+//Unique monsters
+monsterSharedPtr monster_SlaveOfPash();
+
 //Gods
 monsterSharedPtr monster_GlurgTheImbecile();
 monsterSharedPtr monster_PashTheRavenous();
