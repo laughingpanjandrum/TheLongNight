@@ -150,6 +150,7 @@
     <ClCompile Include="utility.cpp" />
     <ClCompile Include="weapon.cpp" />
     <ClCompile Include="window.cpp" />
+    <ClCompile Include="worldmap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animations.h" />
@@ -179,6 +180,7 @@
     <ClInclude Include="utility.h" />
     <ClInclude Include="weapon.h" />
     <ClInclude Include="window.h" />
+    <ClInclude Include="worldmap.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

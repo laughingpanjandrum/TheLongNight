@@ -986,7 +986,11 @@ void game::drawInterface(int leftx, int topy)
 
 	//Money
 	win.writec(atx, ++aty, FRAGMENT_GLYPH, TCODColor::amber);
-	win.write(atx + 2, aty, std::to_string(fragments), TCODColor::lightAmber);
+	std::string frTxt = std::to_string(fragments);
+	win.write(atx + 2, aty, frTxt, TCODColor::lightAmber);
+	//	Also indicate if we have enough fragments to level up
+	if (fragments >= player->getNextLevelCost())
+		win.write(atx + 3 + frTxt.size(), aty, "+Level up!", TCODColor::lightestAmber);
 	
 	//Buffs
 	if (player->hasFreeMoves()) {
