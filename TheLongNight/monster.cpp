@@ -595,7 +595,7 @@ monsterSharedPtr monster_DevoteeOfPash()
 monsterSharedPtr monster_VoidwalkerMinas()
 {
 	monsterSharedPtr m(new monster("Voidwalker Minas", PLAYER_TILE, TCODColor::lightPurple,
-		"His armour glows with profane radiance, and his jet-black sword pulses with dark radiance."));
+		"His armour glows with profane energy, and his jet-black sword pulses with dark radiance."));
 	m->setHealth(250);
 	m->setMoveStats(SPEED_SLOW);
 	m->setDefence(DAMAGE_PHYSICAL, 30);
@@ -1069,13 +1069,13 @@ monsterSharedPtr monster_ScionOfTvert()
 	monsterSharedPtr m(new monster("Scion of Tvert", ARISTOCRAT_TILE, TCODColor::lightPink,
 		"Lady Tvert's bile forms the shape of this twisted creature - a mockery of the human form, \
 his face riddled with scars, his arms gruesome chunks of flesh covered in vile worms."));
-	m->setHealth(800);
-	m->setDefence(DAMAGE_PHYSICAL, 10);
-	m->setBleedResist(60);
-	m->setPoisonResist(60);
+	m->setHealth(1200);
+	m->setDefence(DAMAGE_PHYSICAL, 50);
+	m->setBleedResist(80);
+	m->setPoisonResist(80);
 	m->makeProfane();
-	m->setMoveStats(SPEED_NORMAL);
-	m->equipItem(weaponSharedPtr(new weapon(0, SPEED_NORMAL, DAMAGE_PROFANE, 30)));
+	m->setMoveStats(SPEED_FAST);
+	m->equipItem(weaponSharedPtr(new weapon(5, SPEED_FAST, DAMAGE_PROFANE, 30)));
 	m->addSpellKnown(ability_ShredSkin());
 	m->setSpellCastChance(20);
 	m->addItemDrop(key_LadyTvertsKey());
@@ -1369,9 +1369,9 @@ crooked scythe, and whispers unanswered prayers."));
 	return m;
 }
 
-monsterSharedPtr monster_VoidwalkerEnkidu()
+monsterSharedPtr monster_VoidwalkerMarduk()
 {
-	monsterSharedPtr m = monsterSharedPtr(new monster("Voidwalker Enkidu", PLAYER_TILE, TCODColor::lightPurple,
+	monsterSharedPtr m = monsterSharedPtr(new monster("Voidwalker Marduk", PLAYER_TILE, TCODColor::lightPurple,
 		"This voidwalker wears armour spiked with void crystals, and wields a broken deadwood wand."));
 	m->setHealth(400);
 	m->setDefence(DAMAGE_PHYSICAL, 50);
@@ -1393,7 +1393,8 @@ monsterSharedPtr monster_VoidwalkerEnkidu()
 monsterSharedPtr monster_VoidwalkerIcarus()
 {
 	monsterSharedPtr m = monsterSharedPtr(new monster("Voidwalker Icarus", PLAYER_TILE, TCODColor::purple,
-		"This voidwalker wears a crown that glows with the light of the void, and wields a pair of knives imbued with dark flame."));
+		"This voidwalker wears a crown that glows with the light of the void, and wields a\
+ pair of knives imbued with dark flame."));
 	m->setHealth(400);
 	m->setDefence(DAMAGE_PHYSICAL, 50);
 	m->setDefence(DAMAGE_ELECTRIC, 50);
@@ -2577,7 +2578,7 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 
 	//Mausoleum of the Void
 	else if (handle == "voidwalker_enkidu")
-		return monster_VoidwalkerEnkidu();
+		return monster_VoidwalkerMarduk();
 	else if (handle == "voidwalker_icarus")
 		return monster_VoidwalkerIcarus();
 	else if (handle == "voidwalker_penelope")

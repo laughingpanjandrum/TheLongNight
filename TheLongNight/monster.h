@@ -211,7 +211,7 @@ monsterSharedPtr monster_SkeletonArcher();
 monsterSharedPtr monster_KhalleTheLost();
 
 //Mausoleum of the Void
-monsterSharedPtr monster_VoidwalkerEnkidu();
+monsterSharedPtr monster_VoidwalkerMarduk();
 monsterSharedPtr monster_VoidwalkerIcarus();
 monsterSharedPtr monster_VoidwalkerPenelope();
 monsterSharedPtr monster_IetraEaterOfSilence();

@@ -4,6 +4,7 @@
 
 const std::string game::VOID_EDGE_MAP = "maps/void_edge.txt";
 const std::string game::VOID_RETURN_MAP = "maps/sordid_chapel.txt";
+const std::string game::BLACKWATCH_FORTRESS = "maps/blackwatch_fortress.txt";
 
 
 game::game(std::string saveFileName, bool isNewGame) : SAVE_FILE_NAME(saveFileName)
@@ -503,9 +504,11 @@ What we choose to do if we have a target.
 */
 void game::aiDoCombatAction(monsterSharedPtr ai)
 {
+	
 	//First see if we want to spawn something!
-	if (ai->canSpawnCreatures() && ai->wantsToSpawn())
+	if (ai->canSpawnCreatures() && ai->wantsToSpawn() && !currentMap->bossDestroyed)
 		aiSpawnCreature(ai);
+	
 	//If not, try casting a spell. If that fails, move towards our target.
 	else if (!aiTryUseSpell(ai) && !ai->immobile)
 		//We keep moving until the move function says we're done.
@@ -968,17 +971,22 @@ void game::drawInterface(int leftx, int topy)
 	//List known spells
 	int s = 1;
 	for (auto sp : player->getSpellsKnown()) {
+		
 		//Spell numeral
 		win.write(atx + 1, ++aty, '[' + std::to_string(s) + ']', TCODColor::white);
+		
 		//Vigour cost
 		win.writec(atx + 5, aty, VIGOUR_GLYPH, TCODColor::green);
 		win.write(atx + 6, aty, std::to_string(sp->getVigourCost()), TCODColor::green);
+		
 		//Spell name
 		win.write(atx + 8, aty, sp->getName(), sp->getColor());
+		
 		//Indicate whether this is the selected spell
 		if (sp == player->getCurrentSpell())
 			win.writec(atx, aty, '>', TCODColor::white);
 		s++;
+		
 		//Show description if our mouse is hovering over this spell
 		if (mouse.cx > atx && mouse.cx < atx + sp->getName().size() && mouse.cy == aty)
 			drawItemInfo(sp, ITEM_DRAW_X, ITEM_DRAW_Y, false);
@@ -1663,12 +1671,15 @@ void game::drawWeaponInfo(weaponSharedPtr it, int atx, int aty)
 	//Special attack, if any
 	spellSharedPtr atk = it->getSpecialAttack();
 	if (atk != nullptr) {
+		
 		//Name of special attack
 		win.writec(atx, ++aty, VIGOUR_GLYPH, TCODColor::green);
 		win.write(atx + 1, aty, std::to_string(atk->getVigourCost()), TCODColor::green);
 		win.write(atx + 4, aty, atk->getName(), atk->getColor());
+		
 		//Special attack description
 		win.writeWrapped(atx + 4, ++aty, 30, atk->description, TCODColor::lightGrey);
+	
 	}
 
 	//Rune, if any
@@ -2291,6 +2302,8 @@ void game::applyEffectToPerson(personSharedPtr target, effect eff, int potency, 
 		teleportToVoid();
 	else if (eff == TELEPORT_BACK_FROM_VOID)
 		teleportOutOfVoid();
+	else if (eff == MOON_GATE_WARP)
+		operateMoonGate();
 	else if (eff == NAVIGATE_STAIRS)
 		takeStairs();
 
@@ -2980,6 +2993,17 @@ void game::teleportOutOfVoid()
 {
 	loadMapFromHandle(VOID_RETURN_MAP, CONNECT_WARP, player->getx(), player->gety());
 	setSavePoint();
+}
+
+/*
+Warp to a special map in the Void, available only 
+*/
+void game::operateMoonGate()
+{
+	if (player->hasPaleCrown()) {
+		loadMapFromHandle(BLACKWATCH_FORTRESS, CONNECT_WARP, player->getx(), player->gety());
+		setSavePoint();
+	}
 }
 
 
@@ -4488,6 +4512,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(armour_StarweaversRobe());
 	player->addItem(headgear_SilverPlatedHood());
 	player->addItem(armour_SilverPlatedArmour());
+	player->addItem(headgear_MoonPaleCrown());
 
 	player->addItem(charm_ArcanaDrenchedCharm());
 	player->addItem(charm_BloodDrinkersBand());
@@ -4586,6 +4611,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(runestone_SiltrasRunestone());
 	player->addItem(runestone_StarweaversRunestone());
 	player->addItem(runestone_ThundrousRunestone());
+	player->addItem(runestone_VenomousRunestone());
 
 	player->addItem(key_DeadSparrowKey());
 	player->addItem(key_FarinsKey());

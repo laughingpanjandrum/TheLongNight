@@ -24,6 +24,7 @@ t void_tree
 -connections
 west:slumbering_wild
 stairs:astral_prison
+north:blackwatch_fortress
 -endconnections
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

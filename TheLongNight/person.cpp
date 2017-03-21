@@ -1132,6 +1132,19 @@ bool person::hasKey(std::string keyTag)
 	return items.hasKey(keyTag);
 }
 
+
+/*
+Unique, hard-coded headgear item.
+*/
+bool person::hasPaleCrown()
+{
+	for (auto it : getItemsOfType(ITEM_HELMET)) {
+		if (it->getName() == "Moon-Pale Crown")
+			return true;
+	}
+	return false;
+}
+
 /*
 	TARGETING
 */

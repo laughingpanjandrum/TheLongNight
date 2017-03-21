@@ -227,6 +227,7 @@ public:
 
 	//Keys
 	bool hasKey(std::string keyTag);
+	bool hasPaleCrown(); //Returns whether we have this specific special item.
 
 	//Targeting
 	void checkTargetValidity();

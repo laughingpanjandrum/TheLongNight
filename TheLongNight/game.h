@@ -92,6 +92,7 @@ private:
 	//Constants
 	const static std::string VOID_EDGE_MAP;
 	const static std::string VOID_RETURN_MAP;
+	const static std::string BLACKWATCH_FORTRESS;
 
 	//Character/state/etc
 	map* currentMap;
@@ -233,6 +234,7 @@ private:
 	//Player-only SPECIAL MAP JUMPS
 	void teleportToVoid();
 	void teleportOutOfVoid();
+	void operateMoonGate();
 	void makeRitualOffering();
 
 	//Boss fights

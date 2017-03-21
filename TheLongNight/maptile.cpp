@@ -631,6 +631,15 @@ maptile * tile_RoseCourtGate()
 	return door;
 }
 
+maptile * tile_MoonGate()
+{
+	maptile* mg = new maptile("Moon Gate", "moon_gate", BASIC_FLOOR_TILE,
+		TCODColor::black, TCODColor::pink);
+	mg->isGlittery = true;
+	mg->addTouchEffect(MOON_GATE_WARP);
+	return mg;
+}
+
 
 /*
 	Ritual altars
