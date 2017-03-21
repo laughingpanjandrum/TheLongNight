@@ -1322,7 +1322,7 @@ void game::drawMouseover(int atx, int aty)
 	
 		//Show highlighted object: person?
 		personSharedPtr target = currentMap->getPerson(mpt.first, mpt.second);
-		if (target != nullptr)
+		if (target != nullptr && target->invisibility < 1 && !player->isBlind())
 			drawTargetInfo(target, atx, aty);
 		else {
 			//Item?
@@ -3078,15 +3078,25 @@ Returns whether we want to equip it or not!
 bool game::itemPickupMessage(itemSharedPtr it)
 {
 	int atx = MAP_DRAW_X;
-	int aty = MAP_DRAW_Y + 10;
+	int aty = MAP_DRAW_Y + 3;
 	//win.clearRegion(atx - 1, aty, 42, 25);
 	//win.drawBox(atx - 1, aty, 42, 25, TCODColor::darkSepia);
+	
 	//What we can do
 	std::string txt = "[SPACE] Equip  [ESC] Store";
 	win.write(atx, ++aty, centreText(txt, 20), TCODColor::white);
 	aty += 2;
+	
 	//Fill in with ITEM DEETS
 	drawItemInfo(it, atx, aty + 1);
+
+	//And draw current item info as well
+	auto allEquipped = player->getAllEquippedItems();
+	for (auto otherIt : allEquipped) {
+		if (otherIt->getCategory() == it->getCategory())
+			drawItemInfo(otherIt, atx, aty + 21);
+	}
+	
 	//Wait for input: equip or no?
 	win.refresh();
 	TCOD_key_t kp = win.getkey();

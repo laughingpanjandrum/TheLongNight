@@ -571,7 +571,7 @@ std::string getEffectName(effect e)
 	case(SCALE_NEXT_PRAYER): return "% divine power bonus for next prayer";
 	case(SPELL_ACID_INFUSION): return "acid infusion for next spell";
 	case(SPELL_COLD_INFUSION): return "cold infusion for next spell";
-	case(COLD_DAMAGE_ADDS_INFUSION): return "spells gain cold infusion upon taking fire damage";
+	case(COLD_DAMAGE_ADDS_INFUSION): return "cold infusion gained upon taking fire damage";
 	case(INSTANT_SPELL_CAST): return "instant spell cast";
 	case(NEXT_SPELL_COST_ADJUST): return "next spell cost";
 
@@ -609,7 +609,7 @@ std::string getEffectName(effect e)
 	case(DAMAGE_WHEN_POISONED): return "extra damage dealt when poisoned";
 	case(PHYS_RESIST_WHILE_POISONED): return "defence when poisoned";
 	case(HURT_BLEEDER): return "profane damage dealt to bleeding target";
-	case(HEALING_FACTOR): return "percent healing boost";
+	case(HEALING_FACTOR): return "% boost to healing";
 	case(BECOME_INVISIBLE): return "invisibility";
 	case(GAIN_HEALTH_ON_KILL): return "health restored on kill";
 	case(CHANGE_FRAGMENT_PICKUP_MULT): return "times fragments gained";
