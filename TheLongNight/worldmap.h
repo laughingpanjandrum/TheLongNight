@@ -9,6 +9,8 @@ class worldmap
 public:
 	worldmap();
 	~worldmap();
+protected:
+
 };
 
 #endif

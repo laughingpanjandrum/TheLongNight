@@ -3,7 +3,7 @@ start:0,23
 forlorn_crow_knight:15,25
 utric:29,24
 -items
-dull_grey_gem:14,31
+dull_grey_gemstone:14,31
 -enditems
 -codes
 . floor_grass
