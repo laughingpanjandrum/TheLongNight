@@ -323,42 +323,60 @@ bool game::aiMoveToTarget(monsterSharedPtr ai)
 		return true;
 	}
 
-	//If there are, find the one that's nearest our target
-	personSharedPtr t = ai->getTarget();
-	coord bestPt = pts.at(0);
-	int bestDist = hypot(bestPt.first - t->getx(), bestPt.second - t->gety());
+	if (!ai->isBlind()) 
+	{
 
-	//Look for the shortest distance (or the greatest distance, if we're the timid type)
-	for (int i = 1; i < pts.size(); i++) {
-		coord pt = pts.at(i);
-		int newDist = hypot(pt.first - t->getx(), pt.second - t->gety());
+		//If there are, find the one that's nearest our target
+		personSharedPtr t = ai->getTarget();
+		coord bestPt = pts.at(0);
+		int bestDist = hypot(bestPt.first - t->getx(), bestPt.second - t->gety());
 
-		//Figure out what we want - to get closer or further away
-		bool cond;
-		if ((ai->fear > 0) || (ai->keepsDistance && !ai->hasFreeMoves() && randint(1, 3) == 1))
-			cond = newDist > bestDist;
-		else
-			cond = newDist < bestDist;
-		//Now see if the new point is better according to our condition
-		if (cond) {
-			bestDist = newDist;
-			bestPt = pt;
+		//Look for the shortest distance (or the greatest distance, if we're the timid type)
+		for (int i = 1; i < pts.size(); i++) 
+		{
+			coord pt = pts.at(i);
+			int newDist = hypot(pt.first - t->getx(), pt.second - t->gety());
+
+			//Figure out what we want - to get closer or further away
+			bool cond;
+			if ((ai->fear > 0) || (ai->keepsDistance && !ai->hasFreeMoves() && randint(1, 3) == 1))
+				cond = newDist > bestDist;
+			else
+				cond = newDist < bestDist;
+			//Now see if the new point is better according to our condition
+			if (cond) {
+				bestDist = newDist;
+				bestPt = pt;
+			}
 		}
+
+		//We might need to remember our prior location
+		int oldx = ai->getx();
+		int oldy = ai->gety();
+
+		//Now move to this point
+		movePerson(ai, bestPt.first, bestPt.second);
+
 	}
 
-	//We might need to remember our prior location
-	int oldx = ai->getx();
-	int oldy = ai->gety();
+	else
+	{
+		
+		//If we're blind, we move at random.
+		int idx = randrange(pts.size());
+		auto pt = pts.at(idx);
+		movePerson(ai, pt.first, pt.second);
 
-	//Now move to this point
-	movePerson(ai, bestPt.first, bestPt.second);
+	}
 	
 	//Time passes (UNLESS WE HAVE FREE MOVES!)
-	if (!ai->hasFreeMoves()) {
+	if (!ai->hasFreeMoves()) 
+	{
 		turns.addEntity(ai, ai->getMoveDelay());
 		return true;
 	}
-	else {
+	else 
+	{
 		ai->useFreeMove();
 		return false;
 	}
@@ -416,12 +434,7 @@ bool game::aiTryUseSpell(monsterSharedPtr ai)
 						//ANIMATION BLAST!
 						spellTitleAnimation(ai, sp);
 						coordVectorSharedPtr path = coordVectorSharedPtr(getLine(ai->getPosition(), target->getPosition()));
-						/*if (sp->useAlternateAnimation) {
-							addAnimations(new glowPath(path, sp->getColor(), TCODColor::white));
-						}
-						else {
-							addAnimations(new bulletPath(path, BULLET_TILE, sp->getColor()));
-						}*/
+						addAnimations(new bulletPath(path, BULLET_TILE, sp->getColor()));
 						
 						//We hit!
 						dischargeSpellOnTarget(sp, ai, target);
@@ -542,21 +555,20 @@ Monster does its turn and then is placed back into the turn tracker.
 void game::doMonsterTurn(personSharedPtr p)
 {
 	monsterSharedPtr ai = std::static_pointer_cast<monster>(p);
+
 	//If we're dead, we probably shouldn't do anything
 	if (ai->isDead)
 		return;
+
 	//Likewise, if we're non-hostile, we don't do anything
 	if (!ai->isHostile)
 		return;
-	//If we're blind, we skip our turn
-	if (ai->isBlind()) {
-		turns.addEntity(ai, SPEED_NORMAL);
-		return;
-	}
+
 	//Do we have a target?
 	personSharedPtr target = ai->getTarget();
 	if (target == nullptr)
 		aiFindTarget(ai);
+
 	//If we have one, just move towards it
 	if (target != nullptr) {
 		aiDoCombatAction(ai);
