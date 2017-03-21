@@ -1,7 +1,7 @@
 The Tear-Stained River
 start:20,0
-slave_of_pash:23,10
-emissary:24,11
+slave_of_pash:13,10
+emissary:14,11
 -items
 charred_runestone:18,26
 bloodstained_charm:35,10

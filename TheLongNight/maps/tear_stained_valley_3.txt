@@ -10,6 +10,7 @@ undead_prisoner:18,22
 undead_prisoner:27,6
 -items
 cursed_water:29,6
+dull_grey_gemstone:10,36
 -enditems
 -codes
 . floor_grass

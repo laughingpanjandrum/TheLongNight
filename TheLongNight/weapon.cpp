@@ -164,15 +164,18 @@ We do more scaling damage the fewer stats we scale with.
 int weapon::getScalingDamage(statScaling st)
 {
 	int dmg = 0;
+	
 	//Inherent to the weapon
 	auto it = std::find(scaling.begin(), scaling.end(), st);
 	if (it != scaling.end())
 		dmg = 5 - scaling.size();
+	
 	//From runestone
 	if (rune != nullptr) {
 		if (rune->addScalingType == st)
 			dmg += 5 - scaling.size();
 	}
+	
 	//Done, return total
 	return dmg;
 }
@@ -417,7 +420,7 @@ weaponSharedPtr weapon_VoidCrystalGreatsword()
 
 weaponSharedPtr weapon_ArmOfTheDuke()
 {
-	weaponSharedPtr wp(new weapon("Arm of the Duke", TENTACLE_TILE, TCODColor::lightGreen,
+	weaponSharedPtr wp(new weapon("Arm of the Duke", TENTACLE_ITEM_TILE, TCODColor::lightGreen,
 		"The arms of the Duke were rubbery and numerous. Serves as both a weapon and a catalyst of obscene prayer."));
 	wp->setBasicAttributes(25, SPEED_SLOW);
 	wp->addDamageType(DAMAGE_PROFANE, 25);

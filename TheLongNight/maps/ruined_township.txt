@@ -1,10 +1,11 @@
 Ruined Township
 start:20,20
 guardian_golem:23,32
+castala:10,13
 -items
 void_sigil:30,19
 waterlogged_writings:28,21
-corens_runestone:12,27
+siltras_runestone:12,27
 -enditems
 -codes
 . floor_stone
@@ -63,7 +64,7 @@ rrrrrrr....~~~#...~~~#.r.#####..###.w...
 .####.r.#."...#.#".~.#.r.#.......~..wwww
 .#..#.r.#######.#...##.r.....""...#ggggw
 .#..+.r................r.#~.......#.gTgw
-.####.rrrrrrrrrrrrrrrrrr.##..###....%ggg
+.####.rrrrrrrrrrrrrrrrrr.##..###....%ggw
 .................~~~~..............%g.gw
 wwww...........~~~~~......wwwwwwwwwwwwww
 #..wwwwwwwwwwwwwwwwwwwwwwww............w

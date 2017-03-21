@@ -33,6 +33,7 @@ TODO
 #include "monster.h"
 
 #include "savegame.h"
+#include "worldmap.h"
 
 const std::string PROFILES_FILE = "_profiles.txt";
 
@@ -113,6 +114,11 @@ private:
 	//Messages
 	messageVector messages;
 	void addMessage(std::string txt, TCODColor color);
+
+	//Worldmap
+	worldmap ourWorldMap;
+	void drawWorldMap();
+	void setupWorldMap();
 
 	//Targeting
 	bool targetModeOn = false;

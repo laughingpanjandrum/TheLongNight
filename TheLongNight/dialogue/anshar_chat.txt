@@ -1,0 +1,18 @@
+"Mm?"
+|STORY_FLAG_SKIP
+metCaptainAnshar
+[MET_ANSHAR]
+"Welcome, thee who walks upon the Void!"
+"We, the remnant of the Blackwatch, keepers of the nightmare, greet thee."
+"We keep the peace of those who slumber in the deep. Hast thou the key to their astral prison?"\
+|STORY_FLAG
+metCaptainAnshar
+"If so, I urge thee, enter to aid my lost allies, whose war against the surging dark has failed."
+|STORY_FLAG_SKIP
+metCaptainAnshar
+[MET_ANSHAR]
+"And speak to my ally Shamash, whose gifts of the deep may aid thee in thy forlorn task."
+|BACK_UP_AND_END
+[MET_ANSHAR]
+"Greetings, pilgrim. May the perils of the Void spare thee."
+|BACK_UP_AND_END

@@ -77,7 +77,7 @@ const int HAMMER_TILE = 269;
 const int SPEAR_TILE = 279;
 const int WHIP_TILE = 279;
 const int SCYTHE_TILE = 307;
-const int TENTACLE__TILE = 308;
+const int TENTACLE_ITEM_TILE = 308;
 const int AXE_TILE = 309;
 const int STAFF_TILE = 277;
 const int CHIME_TILE = 278;
@@ -92,6 +92,7 @@ const int FLASK_TILE = 285;
 const int BOMB_TILE = 286;
 
 const int SPELL_TILE = 274;
+const int PRAYER_TILE = 319;
 const int KEY_TILE = 275;
 const int CHARM_TILE = 276;
 const int SIGIL_TILE = 6;
@@ -100,6 +101,15 @@ const int FLOWER_TILE = 284;
 const int BELL_TILE = 278;
 const int HEART_TILE = 3;
 const int BRAND_TILE = 310;
+const int EYEBALL_TILE = 311;
+const int BOTTLE_TILE = 312;
+const int HORN_TILE = 313;
+const int FINGERBONE_TILE = 314;
+const int PENDANT_TILE = 315;
+const int HEADBAND_TILE = 316;
+const int IDOL_TILE = 317;
+const int RING_TILE = 318;
+const int MASK_TILE = 258;
 
 //Maptiles
 const int BASIC_FLOOR_TILE = 288;

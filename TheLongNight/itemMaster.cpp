@@ -566,7 +566,7 @@ std::string getEffectName(effect e)
 	case(INCREASE_SPELL_POWER): return "arcane power";
 	case(INCREASE_PRAYER_POWER): return "divine power";
 
-	case(SCALE_NEXT_ATTACK): return "% damage next attack";
+	case(SCALE_NEXT_ATTACK): return "% damage bonus on next attack";
 	case(SCALE_NEXT_SPELL): return "% spell power bonus for next spell";
 	case(SCALE_NEXT_PRAYER): return "% divine power bonus for next prayer";
 	case(SPELL_ACID_INFUSION): return "acid infusion for next spell";
@@ -693,7 +693,7 @@ const itemVector getListOfAllItems()
 		consumable_StarwaterDraught(), consumable_InvigoratingTea(),
 		consumable_TinyGreenFlower(), consumable_TinyRedFlower(), consumable_PutridFlower(),
 		consumable_BloodDrinkersEyes(), consumable_IntoxicatingWine(), consumable_WitchwaterFlask(), consumable_BlackHoney(),
-		consumable_PutridBrew(), consumable_GodsbloodBrew(),
+		consumable_PutridBrew(), consumable_GodsbloodBrew(), consumable_BlackTarLiquor(), consumable_PurifiedStarwater(),
 		ranged_ThrowingKnives(), ranged_HeavyJavelin(), ranged_LaceratingKnives(), ranged_PoisonThrowingKnives(),
 		ranged_CorrodingJar(), ranged_VoidEssenceJar(), ranged_PyromancersFlask(), ranged_WitchsJar(),
 		ranged_LightingJavelin(), ranged_FrostKnives(), ranged_WarpingJavelin(),

@@ -84,6 +84,8 @@ consumableSharedPtr consumable_BlackHoney();
 
 consumableSharedPtr consumable_PutridBrew();
 consumableSharedPtr consumable_GodsbloodBrew();
+consumableSharedPtr consumable_BlackTarLiquor();
+consumableSharedPtr consumable_PurifiedStarwater();
 
 consumableSharedPtr ranged_ThrowingKnives();
 consumableSharedPtr ranged_HeavyJavelin();

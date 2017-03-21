@@ -282,6 +282,9 @@ monsterSharedPtr npc_ToadPriestGhulluk();
 monsterSharedPtr npc_SiltraTheRedEyed();
 monsterSharedPtr npc_CastalaTheExile();
 
+monsterSharedPtr npc_BlackwatchKnightShamash();
+monsterSharedPtr npc_BlackwatchCaptainAnshar();
+
 monsterSharedPtr npc_ShadeOfCastala();
 monsterSharedPtr npc_ShadeOfGottric();
 

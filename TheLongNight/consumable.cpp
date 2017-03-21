@@ -40,7 +40,7 @@ consumableSharedPtr consumable_InvigoratingTea()
 
 consumableSharedPtr consumable_PilgrimsFingerbone()
 {
-	consumableSharedPtr c(new consumable("Pilgrim's Fingerbone", CHARM_TILE, TCODColor::lightestYellow,
+	consumableSharedPtr c(new consumable("Pilgrim's Fingerbone", FINGERBONE_TILE, TCODColor::lightestYellow,
 		"Fingerbone of a lonesome pilgrim, who dreamt eternally of returning home. But the way home was not easy to find."));
 	c->addEffect(WARP_TO_SAVE_POINT);
 	c->consumeOnUse = false;
@@ -78,7 +78,7 @@ cultivated these in secret, afraid that he would someday regret bringing plague 
 
 consumableSharedPtr consumable_BloodDrinkersEyes()
 {
-	consumableSharedPtr c(new consumable("Blood Drinker's Eyes", CHARM_TILE, TCODColor::crimson,
+	consumableSharedPtr c(new consumable("Blood Drinker's Eyes", EYEBALL_TILE, TCODColor::crimson,
 		"The reddened eyes of one who has consumed too much blood. According to the profane scriptures of Pash, these eyes \
 contain profound power when eaten."));
 	c->addEffect(BLEED_DAMAGE_FACTOR);
@@ -89,7 +89,7 @@ contain profound power when eaten."));
 
 consumableSharedPtr consumable_IntoxicatingWine()
 {
-	consumableSharedPtr c(new consumable("Intoxicating Wine", FLASK_TILE, TCODColor::darkRed,
+	consumableSharedPtr c(new consumable("Intoxicating Wine", BOTTLE_TILE, TCODColor::darkRed,
 		"This heady draught is said to purge the mind of material desires while enhancing one's will."));
 	c->addEffect(INCREASE_PRAYER_POWER);
 	c->addEffect(APPLY_DAMAGE_PENALTY);
@@ -100,7 +100,7 @@ consumableSharedPtr consumable_IntoxicatingWine()
 
 consumableSharedPtr consumable_WitchwaterFlask()
 {
-	consumableSharedPtr c(new consumable("Witchwater Flask", FLASK_TILE, TCODColor::fuchsia,
+	consumableSharedPtr c(new consumable("Witchwater Flask", BOTTLE_TILE, TCODColor::fuchsia,
 		"A flask of invigorating witchwater, said to break down the barriers between our world and reality. Moshka \
 was a great believer in witchwater, and consumed it in copious amounts."));
 	c->addEffect(INCREASE_SPELL_POWER);
@@ -112,7 +112,7 @@ was a great believer in witchwater, and consumed it in copious amounts."));
 
 consumableSharedPtr consumable_BlackHoney()
 {
-	consumableSharedPtr c(new consumable("Black Honey", FLASK_TILE, TCODColor::darkPurple,
+	consumableSharedPtr c(new consumable("Black Honey", BOTTLE_TILE, TCODColor::darkPurple,
 		"Black honey, once the principle export of the village, was said to induce vivid dreams. But if one's life is filled \
 with bloodshed, one's dreams are unlikely to bring peace."));
 	c->addEffect(APPLY_DAMAGE_PENALTY);
@@ -141,6 +141,30 @@ consumableSharedPtr consumable_GodsbloodBrew()
 	c->addEffect(GAIN_MAX_HEALTH);
 	c->setPotency(40);
 	c->addsPermanentBuff = true;
+	return c;
+}
+
+consumableSharedPtr consumable_BlackTarLiquor()
+{
+	consumableSharedPtr c(new consumable("Black Tar Liquor", BOTTLE_TILE, TCODColor::darkPurple,
+		"A flagon of spiced liquor, made from the tar that floats in the Void. Foul to drink, but it has certain powerful \
+properties that the Blackwatch treasures."));
+	c->addEffect(SCALE_NEXT_ATTACK);
+	c->setPotency(100);
+	c->setAmount(5);
+	return c;
+}
+
+consumableSharedPtr consumable_PurifiedStarwater()
+{
+	consumableSharedPtr c(new consumable("Purified Starwater", FLASK_TILE, TCODColor::lightestCyan,
+		"Starwater descends from the emptiness of the Void. This flask of starwater is drawn from the pool at the heart of the world, \
+and is impossible to forget."));
+	c->addEffect(RESTORE_HEALTH);
+	c->addEffect(REMOVE_BLEED);
+	c->addEffect(REMOVE_PLAGUE);
+	c->addEffect(REMOVE_POISON);
+	c->setPotency(500);
 	return c;
 }
 

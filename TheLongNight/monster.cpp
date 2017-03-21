@@ -1874,8 +1874,8 @@ monsterSharedPtr monster_VoidTouched()
 
 monsterSharedPtr monster_AstralJailorFireAcid()
 {
-	monsterSharedPtr m(new monster("Astral Jailor", JAILOR_TILE, TCODColor::flame,
-		"A creature shrouded in a cloud of astral energy."));
+	monsterSharedPtr m(new monster("Lost Blackwatch Knight", JAILOR_TILE, TCODColor::flame,
+		"A knight shrouded in a halo of flame and acid."));
 	m->setHealth(100);
 	m->setDefence(DAMAGE_FIRE, 90);
 	m->setDefence(DAMAGE_ACID, 90);
@@ -1892,8 +1892,8 @@ monsterSharedPtr monster_AstralJailorFireAcid()
 
 monsterSharedPtr monster_AstralJailorElectricMagic()
 {
-	monsterSharedPtr m(new monster("Astral Jailor", JAILOR_TILE, TCODColor::lightPurple,
-		"A creature shrouded in a cloud of astral energy."));
+	monsterSharedPtr m(new monster("Lost Blackwatch Knight", JAILOR_TILE, TCODColor::lightPurple,
+		"A knight shrouded in an arcane field, crackling with lightning."));
 	m->setHealth(100);
 	m->setDefence(DAMAGE_MAGIC, 90);
 	m->setDefence(DAMAGE_ELECTRIC, 90);
@@ -1910,8 +1910,8 @@ monsterSharedPtr monster_AstralJailorElectricMagic()
 
 monsterSharedPtr monster_AstralJailorColdPhys()
 {
-	monsterSharedPtr m(new monster("Astral Jailor", JAILOR_TILE, TCODColor::cyan,
-		"A creature shrouded in a cloud of astral energy."));
+	monsterSharedPtr m(new monster("Lost Blackwatch Knight", JAILOR_TILE, TCODColor::cyan,
+		"A knight shrouded in frost."));
 	m->setHealth(100);
 	m->setDefence(DAMAGE_COLD, 90);
 	m->setDefence(DAMAGE_PHYSICAL, 90);
@@ -1928,8 +1928,8 @@ monsterSharedPtr monster_AstralJailorColdPhys()
 
 monsterSharedPtr monster_AstralJailorPoisBleed()
 {
-	monsterSharedPtr m(new monster("Astral Jailor", JAILOR_TILE, TCODColor::lime,
-		"A creature shrouded in a cloud of astral energy."));
+	monsterSharedPtr m(new monster("Lost Blackwatch Knight", JAILOR_TILE, TCODColor::lime,
+		"A knight drenched in blood and bleeding venom."));
 	m->setHealth(100);
 	m->setBleedResist(100);
 	m->setPoisonResist(100);
@@ -1945,8 +1945,8 @@ monsterSharedPtr monster_AstralJailorPoisBleed()
 
 monsterSharedPtr monster_AstralJailorPlague()
 {
-	monsterSharedPtr m(new monster("Astral Jailor", JAILOR_TILE, TCODColor::sepia,
-		"A creature shrouded in a cloud of astral energy."));
+	monsterSharedPtr m(new monster("Lost Blackwatch Knight", JAILOR_TILE, TCODColor::sepia,
+		"A knight rotten with plague."));
 	m->setHealth(100);
 	m->setPlagueResist(100);
 	m->setMoveStats(SPEED_NORMAL);
@@ -1988,6 +1988,7 @@ monsterSharedPtr monster_TheDeathlessKnight()
 		"A silent suit of armour regards you from across the room, glowing sword in hand."));
 	m->setHealth(200);
 	m->setDefence(DAMAGE_PHYSICAL, 100);
+	m->setDefence(DAMAGE_MAGIC, 100);
 	m->setDefence(DAMAGE_ACID, 100);
 	m->setDefence(DAMAGE_COLD, 100);
 	m->setDefence(DAMAGE_ELECTRIC, 100);
@@ -2381,6 +2382,27 @@ monsterSharedPtr npc_CastalaTheExile()
 	return m;
 }
 
+monsterSharedPtr npc_BlackwatchKnightShamash()
+{
+	monsterSharedPtr m(new monster("Blackwatch Knight Shamash", PLAYER_TILE, TCODColor::lightPurple,
+		"A figure in jet-black armour, sorting through a pile of rubble."));
+	m->setHealth(1000);
+	m->isHostile = false;
+	m->setShopTag("shamash_shop");
+	m->loadDialogue("dialogue/shamash_chat.txt");
+	return m;
+}
+
+monsterSharedPtr npc_BlackwatchCaptainAnshar()
+{
+	monsterSharedPtr m(new monster("Blackwatch Captain Anshar", PLAYER_TILE, TCODColor::lightestPurple,
+		"A figure in jet-black armour, radiating the pure energy of the Void."));
+	m->setHealth(1000);
+	m->isHostile = false;
+	m->loadDialogue("dialogue/anshar_chat.txt");
+	return m;
+}
+
 monsterSharedPtr npc_ShadeOfCastala()
 {
 	monsterSharedPtr m(new monster("Shade of Castala, the Exile", PLAYER_TILE, TCODColor::lightBlue,
@@ -2697,6 +2719,10 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return npc_SiltraTheRedEyed();
 	else if (handle == "castala")
 		return npc_CastalaTheExile();
+	else if (handle == "blackwatch_captain_anshar")
+		return npc_BlackwatchCaptainAnshar();
+	else if (handle == "blackwatch_knight_shamash")
+		return npc_BlackwatchKnightShamash();
 	else if (handle == "shade_of_castala")
 		return npc_ShadeOfCastala();
 	else if (handle == "shade_of_gottric")

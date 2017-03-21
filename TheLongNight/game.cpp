@@ -143,6 +143,72 @@ void game::addMessage(std::string txt, TCODColor color)
 }
 
 
+
+
+/*
+	WORLD MAP
+*/
+
+
+/*
+Just DRAW IT!
+*/
+void game::drawWorldMap()
+{
+
+	//Title
+	win.write(5, 5, " STARDRIFT CAPTAIN'S MAP: LOST LANDS ", TCODColor::lightestGrey);
+	win.write(5, 6, "-------------------------------------", TCODColor::lighterGrey);
+
+	//Walk through the whole world map!
+	int atx = -20;
+	int aty = -20;
+
+	for (auto zlist : ourWorldMap.getZones()) {
+		for (auto z : zlist) {
+
+			//Draw this zone
+			if (z != nullptr) {
+
+				//Tile
+				win.writec(atx, aty, 177, z->color);
+				win.writec(atx + 1, aty, 177, z->color);
+				win.writec(atx, aty + 1, 177, z->color);
+				win.writec(atx + 1, aty + 1, 177, z->color);
+
+				//If our mouse is here, add further details
+				if (isMouseOver(atx, 1, aty) || isMouseOver(atx, 1, aty + 1)) {
+
+					//Map name
+					win.write(50, 8, z->name, TCODColor::black, z->color);
+
+					//Map description
+					win.writeWrapped(50, 9, 40, z->description, TCODColor::white);
+
+				}
+
+			}
+			aty += 2;
+
+		}
+
+		aty = MAP_DRAW_Y;
+		atx += 2;
+
+	}
+
+}
+
+
+/*
+Setting this up is pretty simple - it's just a state change.
+*/
+void game::setupWorldMap()
+{
+	setState(STATE_VIEW_WORLD_MAP);
+}
+
+
 /*
 	TARGETING
 */
@@ -710,7 +776,7 @@ void game::drawScreen(bool doRefresh)
 	win.clear();
 	
 	//Always draw the interface, except with our inventory!
-	if (state != STATE_VIEW_INVENTORY_CATEGORY)
+	if (state != STATE_VIEW_INVENTORY_CATEGORY && state != STATE_VIEW_WORLD_MAP)
 		drawInterface(MAP_DRAW_X + 47, MAP_DRAW_Y);
 	
 	//Figure out else what to draw
@@ -722,6 +788,8 @@ void game::drawScreen(bool doRefresh)
 		drawShopMenu(MAP_DRAW_X, MAP_DRAW_Y);
 	else if (state == STATE_WARP)
 		drawMenu(currentMenu, MAP_DRAW_X, MAP_DRAW_Y);
+	else if (state == STATE_VIEW_WORLD_MAP)
+		drawWorldMap();
 	else
 		drawMap(MAP_DRAW_X, MAP_DRAW_Y);
 
@@ -2027,6 +2095,8 @@ void game::processCommand()
 			TCODConsole::setFullscreen(!TCODConsole::isFullscreen());
 		else if (key.c == 'l')
 			startAutoWalk();
+		else if (key.c == 'm')
+			setupWorldMap();
 
 		//Menus
 		else if (key.vk == KEY_BACK_OUT)
@@ -3791,6 +3861,13 @@ void game::initializeShops()
 	shop* rat = new shop("rat_kings_heart", true);
 	rat->addItem(weapon_RatboneCleaver(), 300);
 	allUnlockableShops.push_back(shopSharedPtr(rat));
+
+	//Shamash
+	shop* shamash = new shop("shamash_shop");
+	shamash->addItem(ranged_VoidEssenceJar(), 100);
+	shamash->addItem(consumable_BlackTarLiquor(), 1000);
+	shamash->addItem(consumable_PurifiedStarwater(), 1000);
+	allShops.push_back(shopSharedPtr(shamash));
 
 }
 

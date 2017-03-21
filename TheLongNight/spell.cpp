@@ -870,7 +870,7 @@ of this flame can be harnessed."));
 
 spellSharedPtr prayer_Restoration()
 {
-	spellSharedPtr sp(new spell("Restoration", SPELL_TILE, TCODColor::darkYellow,
+	spellSharedPtr sp(new spell("Restoration", PRAYER_TILE, TCODColor::darkYellow,
 		"Call upon the favour of the old gods to restore life essence. But the old gods are fickle, and help only those who \
 strike their fancy."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
@@ -882,7 +882,7 @@ strike their fancy."));
 
 spellSharedPtr prayer_WyrdChantOfStrength()
 {
-	spellSharedPtr sp(new spell("Wyrd Chant of Strength", SPELL_TILE, TCODColor::darkGreen,
+	spellSharedPtr sp(new spell("Wyrd Chant of Strength", PRAYER_TILE, TCODColor::darkGreen,
 		"Increases defence by 10%. During the final days of the Wyrd, this chant filled the forest, though it did no good."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(GAIN_DEFENCE, 10);
@@ -894,7 +894,7 @@ spellSharedPtr prayer_WyrdChantOfStrength()
 
 spellSharedPtr prayer_RayOfLight()
 {
-	spellSharedPtr sp(new spell("Ray of Light", SPELL_TILE, TCODColor::lightYellow,
+	spellSharedPtr sp(new spell("Ray of Light", PRAYER_TILE, TCODColor::lightYellow,
 		"Fires a ray of blessed energy."));
 	sp->setAttackType(ATTACK_RANGE);
 	sp->setAttackRange(8);
@@ -906,7 +906,7 @@ spellSharedPtr prayer_RayOfLight()
 
 spellSharedPtr prayer_BlessedRadiance()
 {
-	spellSharedPtr sp(new spell("Blessed Radiance", SPELL_TILE, TCODColor::lighterYellow,
+	spellSharedPtr sp(new spell("Blessed Radiance", PRAYER_TILE, TCODColor::lighterYellow,
 		"Blind nearby creatures with holy radiance."));
 	sp->setAttackType(ATTACK_AOE);
 	sp->setAttackRange(3);
@@ -919,7 +919,7 @@ spellSharedPtr prayer_BlessedRadiance()
 
 spellSharedPtr prayer_RemovePoison()
 {
-	spellSharedPtr sp(new spell("Remove Poison", SPELL_TILE, TCODColor::green,
+	spellSharedPtr sp(new spell("Remove Poison", PRAYER_TILE, TCODColor::green,
 		"Cleanses the body of poison."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(REMOVE_POISON, 1);
@@ -930,7 +930,7 @@ spellSharedPtr prayer_RemovePoison()
 
 spellSharedPtr prayer_ProfaneRadiance()
 {
-	spellSharedPtr sp(new spell("Profane Radiance", SPELL_TILE, TCODColor::purple,
+	spellSharedPtr sp(new spell("Profane Radiance", PRAYER_TILE, TCODColor::purple,
 		"Spell deals profane damage in a blast around you."));
 	sp->setAttackType(ATTACK_AOE, 2);
 	sp->setVigourCost(2);
@@ -943,7 +943,7 @@ spellSharedPtr prayer_ProfaneRadiance()
 
 spellSharedPtr prayer_Intoxify()
 {
-	spellSharedPtr sp(new spell("Intoxify", SPELL_TILE, TCODColor::lime,
+	spellSharedPtr sp(new spell("Intoxify", PRAYER_TILE, TCODColor::lime,
 		"Blasts target with poison."));
 	sp->setAttackType(ATTACK_RANGE, 4);
 	sp->setVigourCost(1);
@@ -955,7 +955,7 @@ spellSharedPtr prayer_Intoxify()
 
 spellSharedPtr prayer_AstralPrison()
 {
-	spellSharedPtr sp(new spell("Astral Prison", SPELL_TILE, TCODColor::lightFuchsia,
+	spellSharedPtr sp(new spell("Astral Prison", PRAYER_TILE, TCODColor::lightFuchsia,
 		"Target is transported to an astral prison. This spell is only effective against Profane targets."));
 	sp->setAttackType(ATTACK_RANGE, 3);
 	sp->setVigourCost(10);
@@ -967,7 +967,7 @@ spellSharedPtr prayer_AstralPrison()
 
 spellSharedPtr prayer_ProfaneRay()
 {
-	spellSharedPtr sp(new spell("Profane Ray", SPELL_TILE, TCODColor::lightPurple,
+	spellSharedPtr sp(new spell("Profane Ray", PRAYER_TILE, TCODColor::lightPurple,
 		"Fire a ray of profane energy, drawing upon the forbidden power of the Void."));
 	sp->setAttackType(ATTACK_RANGE);
 	sp->setAttackRange(8);
@@ -980,7 +980,7 @@ spellSharedPtr prayer_ProfaneRay()
 
 spellSharedPtr prayer_Deathlink()
 {
-	spellSharedPtr sp(new spell("Deathlink", SPELL_TILE, TCODColor::blue,
+	spellSharedPtr sp(new spell("Deathlink", PRAYER_TILE, TCODColor::blue,
 		"Students of the Arcane in Sunken Atalundra learned that the gods were the true source of arcane power. \
 With this prayer, they begged the gods to send them life beyond death."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
@@ -992,7 +992,7 @@ With this prayer, they begged the gods to send them life beyond death."));
 
 spellSharedPtr prayer_ProfoundStill()
 {
-	spellSharedPtr sp(new spell("Profound Still", SPELL_TILE, TCODColor::lightBlue,
+	spellSharedPtr sp(new spell("Profound Still", PRAYER_TILE, TCODColor::lightBlue,
 		"The clerics of Atalundra begged the gods to spare their kingdom, and were met only with profound silence."));
 	sp->setAttackType(ATTACK_AOE, 5);
 	sp->addEffect(SILENCE, 20);
@@ -1003,7 +1003,7 @@ spellSharedPtr prayer_ProfoundStill()
 
 spellSharedPtr prayer_SinkBeneath()
 {
-	spellSharedPtr sp(new spell("Sink Beneath", SPELL_TILE, TCODColor::cyan,
+	spellSharedPtr sp(new spell("Sink Beneath", PRAYER_TILE, TCODColor::cyan,
 		"Plunge below the waves and re-emerge somewhere unknown."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(TELEPORT_VIA_WATER, 5);
@@ -1014,7 +1014,7 @@ spellSharedPtr prayer_SinkBeneath()
 
 spellSharedPtr prayer_SpidersPrayer()
 {
-	spellSharedPtr sp(new spell("Spider's Prayer", SPELL_TILE, TCODColor::white,
+	spellSharedPtr sp(new spell("Spider's Prayer", PRAYER_TILE, TCODColor::white,
 		"According to certain storytellers, the old gods gave power to the spiders to keep humanity from overrunning the earth."));
 	sp->setAttackType(ATTACK_RANGE, 10);
 	sp->addEffect(DROP_WEB, 1);
@@ -1025,7 +1025,7 @@ spellSharedPtr prayer_SpidersPrayer()
 
 spellSharedPtr prayer_TouchOfDoom()
 {
-	spellSharedPtr sp(new spell("Touch of Doom", SPELL_TILE, TCODColor::lightYellow,
+	spellSharedPtr sp(new spell("Touch of Doom", PRAYER_TILE, TCODColor::lightYellow,
 		"Khalle's devotion allowed her to glimpse the divine light of Heaven. Her followers claimed that \
 the true shape of the old gods drove her mad, but they never discerned why."));
 	sp->setAttackType(ATTACK_RANGE, 1);
@@ -1042,7 +1042,7 @@ the true shape of the old gods drove her mad, but they never discerned why."));
 
 spellSharedPtr prayer_DrawOutTheBlood()
 {
-	spellSharedPtr sp(new spell("Draw Out the Blood", SPELL_TILE, TCODColor::crimson,
+	spellSharedPtr sp(new spell("Draw Out the Blood", PRAYER_TILE, TCODColor::crimson,
 		"Certain adherents of the Void acquired a great interest in blood. Orsyl was convinced that a secret power lay in \
 the blood of the living, but he never found it."));
 	sp->setAttackType(ATTACK_RANGE);
@@ -1054,7 +1054,7 @@ the blood of the living, but he never found it."));
 
 spellSharedPtr prayer_DivineRetribution()
 {
-	spellSharedPtr sp(new spell("Divine Retribution", SPELL_TILE, TCODColor::lightBlue,
+	spellSharedPtr sp(new spell("Divine Retribution", PRAYER_TILE, TCODColor::lightBlue,
 		"Saint Yutria was surrounded by a divine aura wherever she went, such that the nightmare could never touch her."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addPermanentBuff = true;
@@ -1066,7 +1066,7 @@ spellSharedPtr prayer_DivineRetribution()
 
 spellSharedPtr prayer_YutriasDivineSpark()
 {
-	spellSharedPtr sp(new spell("Yutria's Divine Spark", SPELL_TILE, TCODColor::lightestBlue,
+	spellSharedPtr sp(new spell("Yutria's Divine Spark", PRAYER_TILE, TCODColor::lightestBlue,
 		"Evildoers did not dare tread upon the footprints of Saint Yutria, for those who did were swiftly struck with divine fire."));
 	sp->setAttackType(ATTACK_RANGE, 8);
 	sp->addEffect(APPLY_BLESSED_DAMAGE, 20);
@@ -1078,7 +1078,7 @@ spellSharedPtr prayer_YutriasDivineSpark()
 
 spellSharedPtr prayer_YutriasProtection()
 {
-	spellSharedPtr sp(new spell("Yutria's Protection", SPELL_TILE, TCODColor::lightBlue,
+	spellSharedPtr sp(new spell("Yutria's Protection", PRAYER_TILE, TCODColor::lightBlue,
 		"Grant oneself the elemental protection offered to Yutria, who walked upon death without fear."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(GAIN_ACID_RESIST, 10);
@@ -1093,7 +1093,7 @@ spellSharedPtr prayer_YutriasProtection()
 
 spellSharedPtr prayer_DivineRestoration()
 {
-	spellSharedPtr sp(new spell("Divine Restoration", SPELL_TILE, TCODColor::flame,
+	spellSharedPtr sp(new spell("Divine Restoration", PRAYER_TILE, TCODColor::flame,
 		"Slowly restores a large amount of health."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(ADD_HEALTH_TRICKLE, 100);
@@ -1104,7 +1104,7 @@ spellSharedPtr prayer_DivineRestoration()
 
 spellSharedPtr prayer_DivineJudgement()
 {
-	spellSharedPtr sp(new spell("Divine Judgement", SPELL_TILE, TCODColor::lightFlame,
+	spellSharedPtr sp(new spell("Divine Judgement", PRAYER_TILE, TCODColor::lightFlame,
 		"Reduces damage dealt by enemies."));
 	sp->setAttackType(ATTACK_AOE, 3);
 	sp->addEffect(APPLY_DAMAGE_PENALTY, 20);
@@ -1116,7 +1116,7 @@ spellSharedPtr prayer_DivineJudgement()
 
 spellSharedPtr prayer_NightmarePrayer()
 {
-	spellSharedPtr sp(new spell("Nightmare Prayer", SPELL_TILE, TCODColor::orange,
+	spellSharedPtr sp(new spell("Nightmare Prayer", PRAYER_TILE, TCODColor::orange,
 		"Perhaps the old gods did hear the prayers of Ietra, who - surrounded by enemies - called upon their aid, \
 and found her enemies fleeing; but their attention did not serve her well in the end."));
 	sp->setAttackType(ATTACK_AOE, 10);
@@ -1128,7 +1128,7 @@ and found her enemies fleeing; but their attention did not serve her well in the
 
 spellSharedPtr prayer_WordOfUnmaking()
 {
-	spellSharedPtr sp(new spell("Word of Unmaking", SPELL_TILE, TCODColor::darkOrange,
+	spellSharedPtr sp(new spell("Word of Unmaking", PRAYER_TILE, TCODColor::darkOrange,
 		"Ietra began to see the true shape of things, buried within the arcane mysteries, and asked the gods to \
 unmake her being; with which they happily complied."));
 	sp->setAttackType(ATTACK_RANGE, 10);

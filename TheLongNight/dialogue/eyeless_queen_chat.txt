@@ -1,5 +1,6 @@
 "Aha! Another pilgrim seeking the true way of things!"
 "Well, you won't learn anything here, my friend! The Winter Court is finished."
 "He who strode from the Void, the Lord of Fallow Fields, walks upon the earth, laying waste to all."
-"Goodbye, goodbye, and do not return to this forsaken land."
+"I beg you, find the four parts desired by Khull-Khallen, that he swore would be united to open that astral prison that lies northward!"
+"Obtain the effigy of the lord that slumbers in the deep, whose undying gaze will one day fall upon the world again!"
 |BACK_UP_AND_END
