@@ -234,7 +234,7 @@ weaponSharedPtr weapon_ThinKnife()
 {
 	weaponSharedPtr wp(new weapon("Thin Knife", DAGGER_TILE, TCODColor::lightGrey,
 		"A weapon for small, quick folks."));
-	wp->setBasicAttributes(15, SPEED_FAST);
+	wp->setBasicAttributes(20, SPEED_FAST);
 	wp->setSpecialAttack(attack_Quickstep());
 	wp->addScalingType(SCALE_DEX);
 	wp->setImage(loadWeaponImage("W_thin knife"));
@@ -245,7 +245,7 @@ weaponSharedPtr weapon_StraightSword()
 {
 	weaponSharedPtr wp(new weapon("Straight Sword", SWORD_TILE, TCODColor::lightGrey,
 		"It's just a simple sword, but the haft has a nice little dragon face carved in it."));
-	wp->setBasicAttributes(25, SPEED_NORMAL);
+	wp->setBasicAttributes(30, SPEED_NORMAL);
 	wp->setSpecialAttack(attack_StrongAttack());
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEX);
@@ -268,7 +268,7 @@ weaponSharedPtr weapon_CrowKnightSword()
 {
 	weaponSharedPtr wp(new weapon("Crow Knight Sword", SWORD_TILE, TCODColor::lightGrey,
 		"The hilt is carved in the shape of a crow's head, and the blade is tinted black. The crow knights are certainly dedicated to a theme."));
-	wp->setBasicAttributes(50, SPEED_NORMAL);
+	wp->setBasicAttributes(45, SPEED_NORMAL);
 	wp->setSpecialAttack(attack_Splintering());
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEX);
@@ -292,9 +292,9 @@ weaponSharedPtr weapon_CrowHalfsword()
 {
 	weaponSharedPtr wp(new weapon("Crow Half-sword", SWORD_TILE, TCODColor::darkCrimson,
 		"Serrated half-sword of a crow knight, thirsting for blood."));
-	wp->setBasicAttributes(25, SPEED_NORMAL);
+	wp->setBasicAttributes(30, SPEED_NORMAL);
 	wp->addStatusEffect(EFFECT_BLEED, 25);
-	wp->setSpecialAttack(attack_Splintering());
+	wp->setSpecialAttack(attack_CrowShriek());
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEX);
 	wp->setImage(loadWeaponImage("W_crow halfsword"));
@@ -306,8 +306,8 @@ weaponSharedPtr weapon_OldCrowsLongKnife()
 	weaponSharedPtr wp(new weapon("Old Crow's Long Knife", DAGGER_TILE, TCODColor::lightCrimson,
 		"Long, serrated knife wielded by the Old Crow. Once he swore an oath to protect the pilgrims who ventured past the Wyrd, \
 but over the years his promise was forgotten."));
-	wp->setBasicAttributes(15, SPEED_FAST);
-	wp->addStatusEffect(EFFECT_BLEED, 15);
+	wp->setBasicAttributes(20, SPEED_FAST);
+	wp->addStatusEffect(EFFECT_BLEED, 20);
 	wp->setSpecialAttack(attack_Quickstep());
 	wp->addScalingType(SCALE_DEX);
 	wp->setImage(loadWeaponImage("W_old crow's long knife"));

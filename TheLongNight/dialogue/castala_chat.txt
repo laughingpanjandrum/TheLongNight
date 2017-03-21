@@ -11,14 +11,14 @@ castalaToCourt
 |BACK_UP_AND_END
 [CASTALA_TO_COURT]
 |STORY_FLAG_SKIP
-castalaToTombs
-[CASTALA_TO_TOMBS]
+castalaToAtalundra
+[CASTALA_TO_ATALUNDRA]
 "Do you know what this place signifies?"
 "Khull-Khallen, the old lord who once closed the gates of the Astral Prison..."
 "He was my ancestor."
 "Whatever he locked away now trembles in the dark... I suspect it will soon re-emerge."
 |STORY_FLAG
-castalaToTombs
+castalaToAtalundra
 "I had better move on... Perhaps we will meet again, in some sordid place below the earth."
 "Or perhaps this will be our final meeting."
 |BACK_UP_AND_END

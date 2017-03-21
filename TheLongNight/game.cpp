@@ -781,21 +781,25 @@ drawData game::getDrawData(int x, int y)
 	drawDataSharedPtr toDraw( new drawData(m->getTileCode(), m->getColor(), m->getBgColor()) );
 	
 	//If this point isn't visible, don't draw it!
-	if (!canPlayerSeePoint(x, y) || player->isBlind()) {
+	if (!canPlayerSeePoint(x, y) || player->isBlind())
+	{
 		
 		//What to draw if out of FOV
-		if (currentMap->inMemoryMap(x, y)) {
+		if (currentMap->inMemoryMap(x, y))
+		{
 			toDraw->color = win.mixColors(toDraw->color, TCODColor::black, 0.9);
 			toDraw->bgcolor = win.mixColors(toDraw->bgcolor, TCODColor::black, 0.9);
 		}
-		else {
+		else 
+		{
 			toDraw->tileCode = EMPTY_TILE;
 			toDraw->color = TCODColor::black;
 			toDraw->bgcolor = TCODColor::black;
 		}
 	
 	}
-	else {
+	else 
+	{
 		
 		//If we can see it, add it to the memory map
 		currentMap->addToMemoryMap(x, y);
@@ -988,6 +992,9 @@ void game::drawInterface(int leftx, int topy)
 	if (player->hasFreeMoves()) {
 		win.write(atx, ++aty, "CHARGE!", TCODColor::yellow);
 	}
+
+	if (player->invisibility > 0)
+		win.write(atx, ++aty, "Invisible " + std::to_string(player->invisibility), TCODColor::white);
 	
 	//Status effects
 	aty = listStatusEffects(player, atx, aty);
@@ -997,6 +1004,14 @@ void game::drawInterface(int leftx, int topy)
 		win.write(atx, ++aty, "Infusion: ACID " + std::to_string(player->spellAcidInfusion), TCODColor::lime);
 	if (player->spellColdInfusion > 0)
 		win.write(atx, ++aty, "Infusion: COLD " + std::to_string(player->spellColdInfusion), TCODColor::cyan);
+
+	//Buffs
+	if (player->scaleNextAttack > 0)
+		win.write(atx, ++aty, "MELEE Buff +" + std::to_string(player->scaleNextAttack), TCODColor::red);
+	if (player->scaleNextSpell > 0)
+		win.write(atx, ++aty, "Next spell +" + std::to_string(player->scaleNextSpell) + " power", TCODColor::magenta);
+	if (player->scaleNextPrayer > 0)
+		win.write(atx, ++aty, "Next prayer +" + std::to_string(player->scaleNextPrayer) + " power", TCODColor::darkYellow);
 
 	//Show whether current spell is in range, if any
 	aty += 2;
@@ -1023,8 +1038,6 @@ void game::drawInterface(int leftx, int topy)
 	aty = MAP_DRAW_Y + 43;
 	win.writec(atx, ++aty, 'c', TCODColor::green);
 	win.write(atx + 2, aty, "Select consumable", TCODColor::white);
-	win.writec(atx, ++aty, 't', TCODColor::green);
-	win.write(atx + 2, aty, "Toggle targeting mode", TCODColor::white);
 	win.writec(atx, ++aty, 'f', TCODColor::green);
 	win.write(atx + 2, aty, "Switch to secondary weapon", TCODColor::white);
 	win.writec(atx, ++aty, 'q', TCODColor::green);
@@ -1334,6 +1347,13 @@ void game::drawTargetInfo(personSharedPtr target, int atx, int aty)
 	
 	//Status effects
 	aty = listStatusEffects(target, atx, aty);
+
+	//Hostility
+	if (!target->isHostile) {
+		win.write(atx, ++aty, "[Friendly!]", TCODColor::white);
+		if (hypot(player->getx() - target->getx(), player->gety() - target->gety()) < 2)
+			win.write(atx, ++aty, "Press [h] to talk", TCODColor::white);
+	}
 	
 	//Text description
 	//win.writeWrapped(atx, ++aty, 20, target->description, TCODColor::lightGrey);
@@ -1733,6 +1753,11 @@ void game::drawSpellInfo(spellSharedPtr it, int atx, int aty)
 		win.write(atx + 5, aty, "Area Attack", TCODColor::white);
 	else if (at == ATTACK_MELEE)
 		win.write(atx + 5, aty, "Melee Attack", TCODColor::white);
+
+	//Casting cost
+	win.write(atx, ++aty, "Cast:", TCODColor::white);
+	win.writec(atx + 6, aty, VIGOUR_GLYPH, TCODColor::green);
+	win.write(atx + 7, aty, std::to_string(it->getVigourCost()), TCODColor::lightGreen);
 	
 	//Spell details
 	if (at == ATTACK_BUFF_WEAPON) {
@@ -1889,7 +1914,8 @@ void game::drawMiscItemInfo(miscItemSharedPtr it, int atx, int aty)
 				
 				//Scales with a stat
 				std::string scaleType;
-				switch (rune->addScalingType) {
+				switch (rune->addScalingType) 
+				{
 				case(SCALE_STR): scaleType = "Strength"; break;
 				case(SCALE_DEX): scaleType = "Dexterity"; break;
 				case(SCALE_ARC): scaleType = "Arcane"; break;
@@ -1902,7 +1928,8 @@ void game::drawMiscItemInfo(miscItemSharedPtr it, int atx, int aty)
 
 				//Adds bonus damage of a particular type
 				std::string addsDmg;
-				switch (rune->addScalingType) {
+				switch (rune->addScalingType) 
+				{
 				case(SCALE_ACID): addsDmg = "Acid"; break;
 				case(SCALE_COLD): addsDmg = "Cold"; break;
 				case(SCALE_FIRE): addsDmg = "Fire"; break;
@@ -2634,6 +2661,10 @@ void game::loadNewMap(map * newMap, connectionPoint connect, int oldx, int oldy)
 	
 	//Add player to new map
 	newMap->addPerson(player, xnew, ynew);
+
+	//Clear boss and target data.
+	currentBoss = nullptr;
+	player->clearTarget();
 	
 	//Set up new clock for the new map
 	for (auto person : newMap->getAllPeople())
@@ -2839,8 +2870,9 @@ void game::meleeAttack(personSharedPtr attacker, personSharedPtr target)
 	if (!target->isPlayer && target->hasFreeMoves())
 		target->clearFreeMoves();
 
-	//Multiattack ends after use
+	//Multiattack ends after use, and we lose all free moves
 	attacker->attacksPerHit = 1;
+	attacker->clearFreeMoves();
 
 }
 
@@ -4289,6 +4321,7 @@ void game::restoreFromSavePoint(savePoint* warpTo)
 
 	//Clear boss data
 	currentBoss = nullptr;
+	player->clearTarget();
 	
 	//Return us to our save point
 	loadNewMap(warpTo->saveMap, CONNECT_VERTICAL, warpTo->savePt.first, warpTo->savePt.second);

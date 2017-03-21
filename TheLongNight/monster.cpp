@@ -2380,6 +2380,26 @@ monsterSharedPtr npc_CastalaTheExile()
 	return m;
 }
 
+monsterSharedPtr npc_ShadeOfCastala()
+{
+	monsterSharedPtr m(new monster("Shade of Castala, the Exile", PLAYER_TILE, TCODColor::lightBlue,
+		"Shadow of a woman in a regal dress, dripping golden jewelry."));
+	m->setHealth(100);
+	m->isHostile = false;
+	m->loadDialogue("dialogue/castala_shade_chat.txt");
+	return m;
+}
+
+monsterSharedPtr npc_ShadeOfGottric()
+{
+	monsterSharedPtr m(new monster("Shade of Gottric", PLAYER_TILE, TCODColor::lightPurple,
+		"Shadow of a man in tattered mage's robes."));
+	m->setHealth(100);
+	m->isHostile = false;
+	m->loadDialogue("dialogue/gottric_shade_chat.txt");
+	return m;
+}
+
 monsterSharedPtr npc_TrainingDummy()
 {
 	monsterSharedPtr m(new monster("Training Dummy", PLAYER_TILE, TCODColor::lighterYellow,
@@ -2676,6 +2696,10 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 		return npc_SiltraTheRedEyed();
 	else if (handle == "castala")
 		return npc_CastalaTheExile();
+	else if (handle == "shade_of_castala")
+		return npc_ShadeOfCastala();
+	else if (handle == "shade_of_gottric")
+		return npc_ShadeOfGottric();
 
 	else if (handle == "dummy")
 		return npc_TrainingDummy();

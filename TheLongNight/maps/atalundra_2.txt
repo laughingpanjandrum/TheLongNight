@@ -3,6 +3,7 @@ darkness:0.3,0
 start:31,34
 distorted_horror:20,20
 distorted_horror:21,20
+shade_of_gottric:21,3
 -items
 atalundra_arcane_spear:20,2
 godless_gemstone:8,10

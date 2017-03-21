@@ -28,8 +28,8 @@ npc:castala
 spt:25,10
 !end
 
-!castalaToTombs
-map:maps/flooded_tombs_1.txt
+!castalaToAtalundra
+map:maps/atalundra_1.txt
 npc:castala
-spt:3,36
+spt:10,24
 !end

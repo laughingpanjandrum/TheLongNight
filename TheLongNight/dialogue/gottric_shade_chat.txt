@@ -1,0 +1,10 @@
+"Hrm?"
+"Yes, yes, I am Gottric."
+"What was I searching for again...?"
+"Knowledge, I suppose! But it's not all it's cracked up to be!"
+"Let me tell you! I thought I'd find the old gods down here, resting in their cages!"
+"But there's nothing after all! The gods are missing, and who's taken their place?"
+"I don't know..."
+"But I had a vision of a spider cackling at the heart of the universe, spinning the universe out like string!"
+"Just lie down and wait here, my friend! Wait here for the heart of the Void to stop beating!"
+|BACK_UP_AND_END

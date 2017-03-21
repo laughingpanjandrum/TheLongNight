@@ -91,6 +91,16 @@ spellSharedPtr attack_Splintering()
 	return sp;
 }
 
+spellSharedPtr attack_CrowShriek()
+{
+	spellSharedPtr sp(new spell("Crow Shriek", SWORD_TILE, TCODColor::crimson,
+		"Enchanted crowfeathers coat the blade, increasing bleed damage dealt."));
+	sp->setAttackType(ATTACK_BUFF_WEAPON);
+	sp->setStatusEffectBuff(EFFECT_BLEED, 15);
+	sp->setVigourCost(1);
+	return sp;
+}
+
 spellSharedPtr attack_Quickstep()
 {
 	spellSharedPtr sp(new spell("Quickstep", SWORD_TILE, TCODColor::yellow,

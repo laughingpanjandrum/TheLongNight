@@ -1,0 +1,9 @@
+"Hm?"
+"Here we are! All that's left of the glory of old Atalundra!"
+"I've heard that the heart of this beautiful old ruin is a mirror to the heart of the Void itself!"
+"Do you know from whence the Void issues? I've heard lots of theories..."
+"Anyway, it doesn't matter."
+"I think the rats have nibbled away the last of my thoughts!"
+"I'm finally at peace, here in the deep quiet!"
+"So don't bother me again!"
+|BACK_UP_AND_END

@@ -81,6 +81,7 @@ typedef std::vector<spellSharedPtr> spellVector;
 
 //Weapon arts
 spellSharedPtr attack_Splintering();
+spellSharedPtr attack_CrowShriek();
 spellSharedPtr attack_Quickstep();
 spellSharedPtr attack_StrongAttack();
 spellSharedPtr attack_Knockback();

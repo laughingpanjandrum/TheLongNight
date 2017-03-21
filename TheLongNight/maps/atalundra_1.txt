@@ -4,6 +4,7 @@ start:31,34
 lantern_bearer:28,26
 lantern_bearer:25,3
 lantern_bearer:3,20
+shade_of_castala:10,24
 -items
 gottrics_wand:6,8
 -enditems

@@ -567,8 +567,8 @@ std::string getEffectName(effect e)
 	case(INCREASE_PRAYER_POWER): return "divine power";
 
 	case(SCALE_NEXT_ATTACK): return "% damage next attack";
-	case(SCALE_NEXT_SPELL): return "% spell power for next spell";
-	case(SCALE_NEXT_PRAYER): return "% divine power for next prayer";
+	case(SCALE_NEXT_SPELL): return "% spell power bonus for next spell";
+	case(SCALE_NEXT_PRAYER): return "% divine power bonus for next prayer";
 	case(SPELL_ACID_INFUSION): return "acid infusion for next spell";
 	case(SPELL_COLD_INFUSION): return "cold infusion for next spell";
 	case(COLD_DAMAGE_ADDS_INFUSION): return "spells gain cold infusion upon taking fire damage";
