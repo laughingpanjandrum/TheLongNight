@@ -1735,16 +1735,18 @@ void game::drawWeaponInfo(weaponSharedPtr it, int atx, int aty)
 	}
 
 	//Magic attributes, if any
-	if (it->getSpellstoreSize()) {
+	if (it->getSpellstoreSize() > 0) {
 		win.write(atx, ++aty, "SPELLSTORE", TCODColor::magenta);
 		win.write(atx + offset, aty, std::to_string(it->getSpellstoreSize()), maincol);
 	}
-	if (it->getSpellPower()) {
-		win.write(atx, ++aty, "SPELL POWER", TCODColor::lightBlue);
+	if (it->getSpellPower() > 0) {
+		win.writec(atx, ++aty, SPELL_TILE, TCODColor::lightBlue);
+		win.write(atx + 1, aty, "SPELL POWER", TCODColor::lightBlue);
 		win.write(atx + offset, aty, std::to_string(it->getSpellPower()), maincol);
 	}
-	if (it->getDivinePower()) {
-		win.write(atx, ++aty, "DIVINE POWER", TCODColor::darkYellow);
+	if (it->getDivinePower() > 0) {
+		win.writec(atx, ++aty, PRAYER_TILE, TCODColor::darkYellow);
+		win.write(atx + 1, aty, "DIVINE POWER", TCODColor::darkYellow);
 		win.write(atx + offset, aty, std::to_string(it->getDivinePower()), maincol);
 	}
 

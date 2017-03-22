@@ -74,27 +74,32 @@ Returns whether we were able to equip the spell.
 */
 bool inventory::equipSpell(spellSharedPtr sp)
 {
+	
+	weaponSharedPtr toStore;
+
 	//Can our main weapon hold it?
 	weaponSharedPtr wp = getWeapon();
-	if (wp != nullptr && wp->canAddSpell()) {
-		wp->addSpell(sp);
-		return true;
-	}
-	else {
-		//If not, try offhand
-		weaponSharedPtr off = getOffhand();
+	weaponSharedPtr off = getOffhand();
+
+	if (wp != nullptr && wp->canAddSpell())
+		toStore = wp;
+	else if (off != nullptr && off->canAddSpell())
+		toStore = off;
+	
+	if (toStore != nullptr) {
+		
 		//If it's already in here, remove it!
-		if (off != nullptr) {
-			if (off->hasSpellStored(sp)) {
-				off->removeSpell(sp);
-				return false;
-			}
-			else if (off->canAddSpell()) {
-				off->addSpell(sp);
-				return true;
-			}
+		if (toStore->hasSpellStored(sp)) {
+			toStore->removeSpell(sp);
+			return false;
 		}
+		else if (toStore->canAddSpell()) {
+			toStore->addSpell(sp);
+			return true;
+		}
+	
 	}
+	
 	//We didn't find a place to equip this item.
 	return false;
 }
