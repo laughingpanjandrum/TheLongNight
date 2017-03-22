@@ -542,7 +542,7 @@ spellSharedPtr ability_MemoryOfLight()
 	spellSharedPtr sp(new spell("Memory of Light", SPELL_TILE, TCODColor::lightGreen,
 		"Memories of prior days restore a hint of life."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
-	sp->addEffect(HEAL_CASTER, 25);
+	sp->addEffect(RESTORE_HEALTH, 25);
 	sp->addEffect(ADD_HEALTH_TRICKLE, 25);
 	sp->setVigourCost(2);
 	return sp;
@@ -1263,7 +1263,7 @@ spellSharedPtr attack_RavenousHunger()
 {
 	spellSharedPtr sp(new spell("Ravenous Hunger", SPELL_TILE, TCODColor::red,
 		"Attack heals you and deals bleed damage to target."));
-	sp->setAttackType(ATTACK_RANGE, 1);
+	sp->setAttackType(ATTACK_RANGE, 3);
 	sp->addEffect(APPLY_BLEED_DAMAGE, 25);
 	sp->addEffect(HEAL_CASTER, 25);
 	return sp;

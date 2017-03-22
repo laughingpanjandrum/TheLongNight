@@ -92,7 +92,7 @@ maptile * tile_Void()
 
 maptile * tile_Carpet()
 {
-	return new maptile("Carpet", "floor_carpet", CARPET_TILE, TCODColor::darkerRed, TCODColor::black);
+	return new maptile("Carpet", "floor_carpet", CARPET_TILE, TCODColor::darkerRed, TCODColor::darkestRed);
 }
 
 maptile * tile_SnowFloor()

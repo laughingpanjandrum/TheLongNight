@@ -1627,6 +1627,7 @@ void game::drawItemInfo(itemSharedPtr it, int atx, int aty, bool drawImage)
 	case(ITEM_CONSUMABLE): drawConsumableInfo(std::static_pointer_cast<consumable>(it), atx, aty); break;
 	case(ITEM_CHARM): drawCharmInfo(std::static_pointer_cast<charm>(it), atx, aty); break;
 	case(ITEM_MISC): drawMiscItemInfo(std::static_pointer_cast<miscItem>(it), atx, aty); break;
+	case(ITEM_KEY): drawMiscItemInfo(std::static_pointer_cast<miscItem>(it), atx, aty); break;
 	}
 
 	//Item image
