@@ -362,7 +362,8 @@ consumableSharedPtr oil_RotbloodOil()
 consumableSharedPtr gem_DullGreyGemstone()
 {
 	consumableSharedPtr c(new consumable("Dull Grey Gemstone", FRAGMENT_GLYPH, TCODColor::lighterGrey,
-		"Meagre gemstone, perhaps treasured by a peasant."));
+		"Meagre gemstone, perhaps treasured by a peasant. (You can use this from your inventory at any time to gain fragments. \
+Recall that fragments are lost upon death.)"));
 	c->addEffect(ACQUIRE_FRAGMENTS);
 	c->setPotency(300);
 	c->oneUseOnly = true;
@@ -412,8 +413,10 @@ consumableSharedPtr gem_GodlessGemstone()
 consumableSharedPtr bell_VoidwalkersDancingBell()
 {
 	consumableSharedPtr c(new consumable("Voidwalker's Dancing Bell", BELL_TILE, TCODColor::purple,
-		"This bell pulses with the energy of the Void. You sense that to use it would be a dire sin."));
+		"This bell pulses with the energy of the Void. You sense that to use it would be a dire sin. (You can use this directly \
+from your inventory.)"));
 	c->consumeOnUse = false;
+	c->oneUseOnly = true;
 	c->addEffect(TELEPORT_TO_VOID);
 	return c;
 }
@@ -422,8 +425,9 @@ consumableSharedPtr bell_VoidwalkersReturningBell()
 {
 	consumableSharedPtr c(new consumable("Voidwalker's Returning Bell", BELL_TILE, TCODColor::lightPurple,
 		"This bell radiates warmth. From within the void, it whispers to every walker of the dark, promising them that \
-they will return home someday."));
+they will return home someday. (You can use this directly from your inventory.)"));
 	c->consumeOnUse = false;
+	c->oneUseOnly = true;
 	c->addEffect(TELEPORT_BACK_FROM_VOID);
 	return c;
 }
@@ -444,7 +448,7 @@ consumableSharedPtr misc_BrandOfTheEmissary()
 {
 	consumableSharedPtr c(new consumable("Brand of the Emissary", BRAND_TILE, TCODColor::darkFlame,
 		"Brand used by the Emissaries to mark sinners. The brand is agonizing, but it inspired a spiritual fervour in its victims, \
-proof of the true power of the olds gods."));
+proof of the true power of the old gods."));
 	c->consumeOnUse = false;
 	c->addEffect(APPLY_FIRE_DAMAGE);
 	c->addEffect(SCALE_NEXT_PRAYER);

@@ -3307,7 +3307,7 @@ void game::equipItem(itemSharedPtr it)
 				applyEffectToPerson(player, eff, c->getPotency());
 			}
 			//Message about it
-			addMessage("Devoured " + c->getName() + '!', c->getColor());
+			addMessage("Used " + c->getName() + '!', c->getColor());
 			//Expend item
 			if (c->consumeOnUse)
 				player->loseItemForever(c);
@@ -4469,13 +4469,18 @@ Sets save point to our current position.
 */
 void game::setSavePoint()
 {
+	
 	//Set this as our save point
 	ourSavePt.saveMap = currentMap;
 	ourSavePt.savePt = player->getPosition();
+	
 	//And reload the map around us
 	restoreFromSavePoint();
+	
 	//Autosave at each save point
 	saveGame();
+	addMessage("Game saved!", TCODColor::white);
+
 }
 
 /*
@@ -4560,6 +4565,9 @@ coord game::screenToMapCoords(coord pt)
 */
 
 
+/*
+Debug function. Gives player (almost) all items.
+*/
 void getAllItems(personSharedPtr player)
 {
 	
@@ -4808,7 +4816,7 @@ void getAllItems(personSharedPtr player)
 
 
 /*
-FOR DEBUGGING, IDIOT
+Parses a few handy debug commands. Press '~' in game to access this console.
 */
 void game::debugMenu()
 {
@@ -4985,6 +4993,9 @@ void game::loadSaveGame(std::string fname)
 		}
 		allUnlockableShops.push_back(newShop);
 	}
+
+	win.write(12, datay++, "Loading warp points...", TCODColor::white);
+	win.refresh();
 
 	//Warp points
 	for (auto pt : sg->getWarpPoints()) {
