@@ -19,7 +19,8 @@ armour::~armour()
 armourSharedPtr headgear_CaptainsTricorn()
 {
 	armourSharedPtr h(new armour("Captain's Tricorn", HELMET_TILE, TCODColor::lightBlue, ITEM_HELMET,
-		"Ornate tricorn hat, intended to make the stardrift captain more imposing to his subordinates."));
+		"Ornate tricorn hat, intended to make the stardrift captain more imposing to his subordinates. (Headgear reduces your \
+damage taken.)"));
 	h->setDefence(5);
 	h->setImage(loadArmourImage("H_captian's uniform"));
 	return h;
@@ -28,7 +29,8 @@ armourSharedPtr headgear_CaptainsTricorn()
 armourSharedPtr armour_RuinedUniform()
 {
 	armourSharedPtr a(new armour("Ruined Uniform", ARMOUR_TILE, TCODColor::lightBlue, ITEM_BODY_ARMOUR,
-		"A relic of eras prior to the annihilation of time, when the stardrift sigil meant something."));
+		"A relic of eras prior to the annihilation of time, when the stardrift sigil meant something. (Armour reduces your damage \
+taken. It also determines your movement speed.)"));
 	a->setDefence(10);
 	a->setMoveSpeed(SPEED_FAST);
 	a->setImage(loadArmourImage("B_captian's uniform"));

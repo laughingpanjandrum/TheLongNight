@@ -1140,6 +1140,8 @@ void game::drawInterface(int leftx, int topy)
 	win.write(atx + 2, aty, "Use current consumable", TCODColor::white);
 	win.writec(atx, ++aty, 'h', TCODColor::green);
 	win.write(atx + 2, aty, "Talk to friendly NPC", TCODColor::white);
+	win.writec(atx, ++aty, 'i', TCODColor::green);
+	win.write(atx + 2, aty, "View inventory", TCODColor::white);
 
 	//BOSS HEALTH BAR, if we're fighting a boss
 	atx = MAP_DRAW_X;
@@ -1695,6 +1697,11 @@ void game::drawWeaponInfo(weaponSharedPtr it, int atx, int aty)
 		//Rate
 		win.write(atx, ++aty, "SPEED", TCODColor::yellow);
 		win.write(atx + offset, aty, getAttackSpeedName(it->getAttackDelay()), maincol);
+	}
+
+	//Scaling with damage
+	if (it->scaleWithDamage > 0) {
+		win.write(atx, ++aty, "Deals more damage when health is lower", TCODColor::white);
 	}
 
 	//Damage to self
@@ -3637,8 +3644,10 @@ void game::doLevelUp()
 
 void game::drawLevelUpMenu(int atx, int aty)
 {
+	
 	//Stats menu
 	drawMenu(currentMenu, atx, aty);
+	
 	//Stat levels
 	TCODColor statCol = TCODColor::green;
 	int offset = 15;
@@ -3649,16 +3658,34 @@ void game::drawLevelUpMenu(int atx, int aty)
 	win.write(atx + offset, ++aty, std::to_string(player->stats->dexterity), statCol);
 	win.write(atx + offset, ++aty, std::to_string(player->stats->arcana), statCol);
 	win.write(atx + offset, ++aty, std::to_string(player->stats->devotion), statCol);
+		
+	
 	//How much the next level COSTS
 	aty += 3;
 	win.write(atx, aty, "Requires", TCODColor::white);
 	win.writec(atx + 9, aty, FRAGMENT_GLYPH, TCODColor::amber);
+	
 	//Colour indicates whether we have enough
 	TCODColor col = TCODColor::red;
 	if (fragments >= player->getNextLevelCost())
 		col = TCODColor::green;
+	
 	//Show it
 	win.write(atx + 10, aty, std::to_string(player->getNextLevelCost()), col);
+
+	//Then display descriptive text for selected stat
+	std::string description = "";
+	//Figure out what we're highlighting
+	switch (currentMenu->getIdx()) {
+	case(0): description = "Increases your maximum health by 10."; break;
+	case(1): description = "Increases your maximum vigour by 2."; break;
+	case(2): description = "Increases damage with STR-based weapons."; break;
+	case(3): description = "Increases damage with DEX-based weapons."; break;
+	case(4): description = "Increases your Spell Power."; break;
+	case(5): description = "Increases your Divine Power."; break;
+	}
+	win.write(atx, aty + 2, description, TCODColor::white);
+
 }
 
 

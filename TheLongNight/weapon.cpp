@@ -226,7 +226,8 @@ std::string getAttackSpeedName(int del)
 weaponSharedPtr weapon_SplinteredSword()
 {
 	weaponSharedPtr wp(new weapon("Splintered Sword", SWORD_TILE, TCODColor::grey,
-		"Once a treasured heirloom. Now it's just a broken sword, decent at serration, but certainly unfit for a stardrift captain."));
+		"Once a treasured heirloom. Now it's just a broken sword, decent at serration, but certainly unfit for a stardrift \
+captain. (With a weapon equipped, bump into enemies to attack them.)"));
 	wp->setBasicAttributes(25, SPEED_NORMAL);
 	wp->addScalingType(SCALE_STR);
 	wp->setImage(loadWeaponImage("W_splintered sword"));
@@ -236,7 +237,7 @@ weaponSharedPtr weapon_SplinteredSword()
 weaponSharedPtr weapon_ThinKnife()
 {
 	weaponSharedPtr wp(new weapon("Thin Knife", DAGGER_TILE, TCODColor::lightGrey,
-		"A weapon for small, quick folks."));
+		"A weapon for small, quick folks. (Most weapons have special attacks that consume Vigour when used.)"));
 	wp->setBasicAttributes(20, SPEED_FAST);
 	wp->setSpecialAttack(attack_Quickstep());
 	wp->addScalingType(SCALE_DEX);
@@ -247,7 +248,8 @@ weaponSharedPtr weapon_ThinKnife()
 weaponSharedPtr weapon_StraightSword()
 {
 	weaponSharedPtr wp(new weapon("Straight Sword", SWORD_TILE, TCODColor::lightGrey,
-		"It's just a simple sword, but the haft has a nice little dragon face carved in it."));
+		"It's just a simple sword, but the haft has a nice little dragon face carved in it. (Most weapons gain extra damage \
+based on one or more of your stats. This sword will scale with both Strength and Dexterity.)"));
 	wp->setBasicAttributes(30, SPEED_NORMAL);
 	wp->setSpecialAttack(attack_StrongAttack());
 	wp->addScalingType(SCALE_STR);
@@ -259,7 +261,8 @@ weaponSharedPtr weapon_StraightSword()
 weaponSharedPtr weapon_Warhammer()
 {
 	weaponSharedPtr wp(new weapon("Warhammer", HAMMER_TILE, TCODColor::lightSepia,
-		"A big ole hammer for smashing things."));
+		"A big ole hammer for smashing things. (Weapons have different attack speeds. Attacking with this weapon takes more time, \
+but also deals more damage.)"));
 	wp->setBasicAttributes(50, SPEED_SLOW);
 	wp->setSpecialAttack(attack_Knockback());
 	wp->addScalingType(SCALE_STR);
@@ -270,7 +273,8 @@ weaponSharedPtr weapon_Warhammer()
 weaponSharedPtr weapon_CrowKnightSword()
 {
 	weaponSharedPtr wp(new weapon("Crow Knight Sword", SWORD_TILE, TCODColor::lightGrey,
-		"The hilt is carved in the shape of a crow's head, and the blade is tinted black. The crow knights are certainly dedicated to a theme."));
+		"The hilt is carved in the shape of a crow's head, and the blade is tinted black. The crow knights are certainly \
+dedicated to a theme."));
 	wp->setBasicAttributes(45, SPEED_NORMAL);
 	wp->setSpecialAttack(attack_Splintering());
 	wp->addScalingType(SCALE_STR);
@@ -753,7 +757,8 @@ weaponSharedPtr weapon_ProfaneGreatsword()
 weaponSharedPtr shield_BatteredWoodenShield()
 {
 	weaponSharedPtr wp(new weapon("Battered Wooden Shield", SHIELD_TILE, TCODColor::sepia,
-		"It's just a scrap of wood, but it might still save your life."));
+		"It's just a scrap of wood, but it might still save your life. (Shields take up the offhand slot. They increase your \
+defence instead of providing you with extra abilities.)"));
 	wp->setDefence(10);
 	wp->makeOffhand();
 	wp->setImage(loadWeaponImage("S_battered wooden shield"));
@@ -897,7 +902,8 @@ weaponSharedPtr shield_RottenBeastShield()
 weaponSharedPtr wand_DriftwoodWand()
 {
 	weaponSharedPtr wp(new weapon("Driftwood Wand", STAFF_TILE, TCODColor::sepia,
-		"Someone made this chunk of wand in a desparate hurry."));
+		"Someone made this chunk of wand in a desparate hurry. (Equip spells to add them to your equipped wand. Wands cast \
+Arcane magic, which is typically focused on dealing elemental damage to enemies.)"));
 	wp->setBasicAttributes(5, SPEED_SLOW);
 	wp->setSpellstoreSize(2);
 	wp->setSpellPower(100);
@@ -991,7 +997,8 @@ weaponSharedPtr wand_GottricsWand()
 weaponSharedPtr chime_ClericsCrackedChime()
 {
 	weaponSharedPtr wp(new weapon("Cleric's Cracked Chime", CHIME_TILE, TCODColor::darkYellow,
-		"Ring this broken chime to politely ask favours of the gods."));
+		"Ring this broken chime to politely ask favours of the gods. (Equip prayers to add them to your equipped chime. Divine \
+prayers typically heal or buff you, or apply status effects to enemies.)"));
 	wp->setBasicAttributes(5, SPEED_SLOW);
 	wp->setSpellstoreSize(6);
 	wp->setDivinePower(100);

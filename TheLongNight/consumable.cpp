@@ -23,7 +23,7 @@ std::string consumable::getMenuName()
 consumableSharedPtr consumable_StarwaterDraught()
 {
 	consumableSharedPtr c(new consumable("Starwater Draught", FLASK_TILE, TCODColor::cyan,
-		"Flask of water touched by starlight, which confers healing properties."));
+		"Flask of water touched by starlight, which confers healing properties. (Press [e] to use your selected item.)"));
 	c->addEffect(RESTORE_HEALTH);
 	c->setPotency(25);
 	return c;
@@ -41,7 +41,8 @@ consumableSharedPtr consumable_InvigoratingTea()
 consumableSharedPtr consumable_PilgrimsFingerbone()
 {
 	consumableSharedPtr c(new consumable("Pilgrim's Fingerbone", FINGERBONE_TILE, TCODColor::lightestYellow,
-		"Fingerbone of a lonesome pilgrim, who dreamt eternally of returning home. But the way home was not easy to find."));
+		"Fingerbone of a lonesome pilgrim, who dreamt eternally of returning home. But the way home was not easy to find. \
+(You can use this item from your inventory at any time.)"));
 	c->addEffect(WARP_TO_SAVE_POINT);
 	c->consumeOnUse = false;
 	c->oneUseOnly = true;
@@ -51,7 +52,8 @@ consumableSharedPtr consumable_PilgrimsFingerbone()
 consumableSharedPtr consumable_TinyRedFlower()
 {
 	consumableSharedPtr c(new consumable("Tiny Red Flower", FLOWER_TILE, TCODColor::crimson,
-		"A small flower of the kind Princess Yulia once wore in her hair. Clears Bleed buildup."));
+		"A small flower of the kind Princess Yulia once wore in her hair. Clears Bleed buildup. (Once the Bleed bar fills, you \
+take a large amount of damage on your next two turns. Use this flower to prevent damage or clear the bar.)"));
 	c->addEffect(REMOVE_BLEED);
 	c->setPotency(1);
 	return c;
@@ -60,7 +62,8 @@ consumableSharedPtr consumable_TinyRedFlower()
 consumableSharedPtr consumable_TinyGreenFlower()
 {
 	consumableSharedPtr c(new consumable("Tiny Green Flower", FLOWER_TILE, TCODColor::green,
-		"These gentle green flowers purge toxins from the body."));
+		"These gentle green flowers purge toxins from the body. (Once the Poison bar fills, you slowly take damage until you die \
+or rest. Use this flower to clear the effect.)"));
 	c->addEffect(REMOVE_POISON);
 	c->setPotency(1);
 	return c;
@@ -70,7 +73,8 @@ consumableSharedPtr consumable_PutridFlower()
 {
 	consumableSharedPtr c(new consumable("Putrid Flower", FLOWER_TILE, TCODColor::amber,
 		"A foul-smelling flower that grows underground. According to certain storytellers, Farin \
-cultivated these in secret, afraid that he would someday regret bringing plague upon the world."));
+cultivated these in secret, afraid that he would someday regret bringing plague upon the world. (Plague reduces your maximum \
+hitpoints until you rest or die. Use this flower to clear the effect.)"));
 	c->addEffect(REMOVE_PLAGUE);
 	c->setPotency(1);
 	return c;
@@ -171,7 +175,8 @@ and is impossible to forget."));
 consumableSharedPtr ranged_ThrowingKnives()
 {
 	consumableSharedPtr c(new consumable("Throwing Knives", DAGGER_TILE, TCODColor::lightGrey,
-		"Short knives to chuck at your enemies."));
+		"Short knives to chuck at your enemies. (You can equip up to 5 consumables at once. They are fully refreshed each time you \
+die or rest. Select a consumable by pressing [c], and press [e] to use it.)"));
 	c->setRangedAttack(spellSharedPtr(new spell("Throwing Knife", c->getColor(), 5, 25)));
 	c->add(4); //Comes in a stack
 	return c;
@@ -270,7 +275,8 @@ consumableSharedPtr ranged_WarpingJavelin()
 consumableSharedPtr oil_PyromancersOil()
 {
 	consumableSharedPtr c(new consumable("Pyromancer's Oil", VIAL_TILE, TCODColor::darkFlame,
-		"If properly treated, pyromancer's oil can be convinced to burn rather than explode."));
+		"If properly treated, pyromancer's oil can be convinced to burn rather than explode. (A burning creature takes extra \
+damage the round after.)"));
 	c->setWeaponBuff(new weaponBuff(DAMAGE_FIRE, 15));
 	return c;
 }

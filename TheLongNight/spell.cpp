@@ -563,7 +563,9 @@ spellSharedPtr ability_FogCloud()
 spellSharedPtr spell_MagicMissile()
 {
 	spellSharedPtr sp(new spell("Magic Missile", SPELL_TILE, TCODColor::magenta,
-		"Attack deals magic damage. Magic blasting is the simplest kind of magic there is, and perhaps the most useful."));
+		"Attack deals magic damage. Magic blasting is the simplest kind of magic there is, and perhaps the most useful. \
+(You need to have a wand equipped to use spells. Each wand can hold a number of spells equal to its Spellstore value. Press [q] \
+to cast your selected spell.)"));
 	sp->setAttackType(ATTACK_RANGE);
 	sp->addEffect(APPLY_MAGIC_DAMAGE, 25);
 	sp->setAttackRange(5);
@@ -574,11 +576,11 @@ spellSharedPtr spell_MagicMissile()
 
 spellSharedPtr spell_ArcaneRadiance()
 {
-	spellSharedPtr sp(new spell("Arcane Radiance", SPELL_TILE, TCODColor::darkMagenta,
-		"A blast of magical energy strikes everything within 3 spaces. In Sunken Atalundra, when arcane power was harmless, \
-mages used this as a party trick."));
+	spellSharedPtr sp(new spell("Arcane Burst", SPELL_TILE, TCODColor::darkMagenta,
+		"A blast of magical energy strikes everything within 3 spaces. (Spells become more powerful the higher your Spell Power \
+is. You can increase Spell Power by putting points into Arcana.)"));
 	sp->setAttackType(ATTACK_AOE);
-	sp->addEffect(APPLY_PHYSICAL_DAMAGE, 25);
+	sp->addEffect(APPLY_MAGIC_DAMAGE, 25);
 	sp->setAttackRange(3);
 	sp->setVigourCost(2);
 	sp->usesSpellPower = true;
@@ -614,7 +616,7 @@ spellSharedPtr spell_Frostbolt()
 {
 	spellSharedPtr sp(new spell("Frostbolt", SPELL_TILE, TCODColor::cyan,
 		"Bolt deals cold damage. The mages of Sunken Atalundra attempted to use ice magic to protect their city from the rising \
-waves, though of course they did not succeed."));
+waves, though of course they did not succeed. (Being Frozen reduces physical defence for a short time.)"));
 	sp->setAttackType(ATTACK_RANGE);
 	sp->setAttackRange(5);
 	sp->addEffect(APPLY_COLD_DAMAGE, 25);
@@ -628,7 +630,7 @@ spellSharedPtr spell_AcidSpit()
 {
 	spellSharedPtr sp(new spell("Acid Spit", SPELL_TILE, TCODColor::lightGreen,
 		"This spell draws upon the anger of the earth itself towards its despoilers. It was discovered by the Wyrd, who \
-fruitlessly stood against the annihilation of their homeland."));
+fruitlessly stood against the annihilation of their homeland. (Acid damage can cause damage over time.)"));
 	sp->setAttackType(ATTACK_RANGE);
 	sp->setAttackRange(5);
 	sp->addEffect(APPLY_ACID_DAMAGE, 25);
@@ -666,7 +668,8 @@ spellSharedPtr spell_AcidBurst()
 spellSharedPtr spell_ProfanedBlade()
 {
 	spellSharedPtr sp(new spell("Profaned Blade", SPELL_TILE, TCODColor::darkPurple,
-		"A blade touched by this spell briefly ceases to exist, replaced by a sucking portal that draws flesh into the Void."));
+		"A blade touched by this spell briefly ceases to exist, replaced by a sucking portal that draws flesh into the Void. \
+(Profane damage is more effective against Blessed creatures.)"));
 	sp->setAttackType(ATTACK_BUFF_WEAPON);
 	sp->setBuffApplied(DAMAGE_PROFANE, 15);
 	sp->setVigourCost(2);
@@ -754,7 +757,7 @@ spellSharedPtr spell_ElectricBlade()
 {
 	spellSharedPtr sp(new spell("Electric Blade", SPELL_TILE, TCODColor::lightPurple,
 		"The weapons of the Sparrow Knights once flashed with arcane lightning, drawn from the earth \
-by arcane power near to godhood."));
+by arcane power near to godhood. (Being Electrified reduces damage dealt by 10% for a short period.)"));
 	sp->setAttackType(ATTACK_BUFF_WEAPON);
 	sp->setBuffApplied(DAMAGE_ELECTRIC, 15);
 	sp->usesSpellPower = true;
@@ -872,7 +875,8 @@ spellSharedPtr prayer_Restoration()
 {
 	spellSharedPtr sp(new spell("Restoration", PRAYER_TILE, TCODColor::darkYellow,
 		"Call upon the favour of the old gods to restore life essence. But the old gods are fickle, and help only those who \
-strike their fancy."));
+strike their fancy. (Prayers are more effective the higher your Divine Power is. Put points into Devotion to increase your divine \
+power.)"));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(RESTORE_HEALTH, 25);
 	sp->setVigourCost(2);
@@ -883,7 +887,8 @@ strike their fancy."));
 spellSharedPtr prayer_WyrdChantOfStrength()
 {
 	spellSharedPtr sp(new spell("Wyrd Chant of Strength", PRAYER_TILE, TCODColor::darkGreen,
-		"Increases defence by 10%. During the final days of the Wyrd, this chant filled the forest, though it did no good."));
+		"Increases defence by 10%. During the final days of the Wyrd, this chant filled the forest, though it did no good. \
+(Buffs last until you die or rest.)"));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(GAIN_DEFENCE, 10);
 	sp->setVigourCost(2);
@@ -895,7 +900,7 @@ spellSharedPtr prayer_WyrdChantOfStrength()
 spellSharedPtr prayer_RayOfLight()
 {
 	spellSharedPtr sp(new spell("Ray of Light", PRAYER_TILE, TCODColor::lightYellow,
-		"Fires a ray of blessed energy."));
+		"Fires a ray of blessed energy. (Blessed damage is more effective against Profane creatures.)"));
 	sp->setAttackType(ATTACK_RANGE);
 	sp->setAttackRange(8);
 	sp->addEffect(APPLY_BLESSED_DAMAGE, 25);
@@ -920,7 +925,8 @@ spellSharedPtr prayer_BlessedRadiance()
 spellSharedPtr prayer_RemovePoison()
 {
 	spellSharedPtr sp(new spell("Remove Poison", PRAYER_TILE, TCODColor::green,
-		"Cleanses the body of poison."));
+		"Cleanses the body of poison. (Poison builds up in the blood, and once it takes hold, slowly causes damage until you \
+rest or are killed.)"));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(REMOVE_POISON, 1);
 	sp->setVigourCost(1);

@@ -33,6 +33,7 @@ public:
 	std::string getTitle() { return title; }
 	elementVector getAllElements() { return elements; }
 	elementSharedPtr getSelectedItem();
+	int getIdx() { return idx; }
 
 private:
 

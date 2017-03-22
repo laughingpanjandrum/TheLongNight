@@ -358,8 +358,8 @@ void person::takeStatusEffectDamage(statusEffects eType, int damage)
 		plagueBuildup.increase(damage);
 		if (plagueBuildup.isFull()) {
 			//We have the PLAGUE
-			plagueDamage += 10;
-			health.increaseMaxValue(-10, false);
+			plagueDamage += 20;
+			health.increaseMaxValue(-20, false);
 			plagueBuildup.clear();
 		}
 	}
@@ -387,6 +387,7 @@ void person::fullRestore()
 	frozen = 0;
 	electrified = 0;
 	burning = 0;
+	invisibility = 0;
 	//Remove accumulated buffs
 	flatDamageBuff = 0;
 	//Replenish items
