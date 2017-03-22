@@ -864,7 +864,7 @@ monsterSharedPtr monster_GhorthTheBloatedSpider()
 	monsterSharedPtr m(new monster("Ghorth the Bloated Spider", SPIDER_TILE, TCODColor::purple,
 		"This monstrous creature has a body the size of a horse, on which rest a dozen egg-sized green eyes. \
 Venom drips from its fangs, and it drags itself along the ground with eight spindly arms."));
-	m->setHealth(800);
+	m->setHealth(1200);
 	m->setMoveStats(SPEED_FAST);
 	m->equipItem(weaponSharedPtr(new weapon(25, SPEED_SLOW, EFFECT_POISON, 25)));
 	m->setDefence(DAMAGE_PHYSICAL, 10);
@@ -972,7 +972,7 @@ monsterSharedPtr monster_SlaveMasterGasgut()
 	monsterSharedPtr m(new monster("Slavemaster Gasgut", JAILOR_TILE, TCODColor::red,
 		"This bloated lord of the slave-drivers wields a crooked whip and bellows with impotent rage. \
 Alone, there is little he can do."));
-	m->setHealth(300);
+	m->setHealth(600);
 	m->setDefence(DAMAGE_PHYSICAL, 10);
 	m->setBleedResist(80);
 	m->setMoveStats(SPEED_NORMAL);
@@ -992,7 +992,7 @@ monsterSharedPtr monster_WhiteFogHerald()
 	monsterSharedPtr m(new monster("White Fog Herald", HERALD_TILE, TCODColor::darkGrey,
 		"A figure is visible in the fog: no less than ten feet tall, with stretched skin of pure white and eyes that \
 glow crystal-blue. Torn silver robes hang from its gaunt body, and it wields a horn and a slender staff."));
-	m->setHealth(1000);
+	m->setHealth(2000);
 	m->setDefence(DAMAGE_PHYSICAL, 15);
 	m->setDefence(DAMAGE_COLD, 100);
 	m->addWeakness(DAMAGE_FIRE);
@@ -1049,7 +1049,7 @@ monsterSharedPtr monster_LadyTvert()
 		"Her gown and jewels are the portrait of elegance, but something about her aspect is unsettling. Perhaps her unnatural \
 height, or her extraordinarily long and thin fingers, which end in hooked nails; or perhaps \
 it's the sight of her sharpened teeth as she turns to grin at you, or the blankness of her pure red eyes."));
-	m->setHealth(800);
+	m->setHealth(1000);
 	m->setDefence(DAMAGE_PHYSICAL, 10);
 	m->setDefence(DAMAGE_MAGIC, 50);
 	m->makeProfane();
@@ -1069,7 +1069,7 @@ monsterSharedPtr monster_ScionOfTvert()
 	monsterSharedPtr m(new monster("Scion of Tvert", ARISTOCRAT_TILE, TCODColor::lightPink,
 		"Lady Tvert's bile forms the shape of this twisted creature - a mockery of the human form, \
 his face riddled with scars, his arms gruesome chunks of flesh covered in vile worms."));
-	m->setHealth(1200);
+	m->setHealth(1600);
 	m->setDefence(DAMAGE_PHYSICAL, 50);
 	m->setBleedResist(80);
 	m->setPoisonResist(80);
@@ -1090,7 +1090,7 @@ monsterSharedPtr monster_MouthOfPash()
 	monsterSharedPtr m(new monster("Mouth of Pash", SPIDER_TILE, TCODColor::lightestRed,
 		"This thing looks like nothing more than an enormous mouth, crawling on hundreds of tiny insect's legs. \
 Its thousands of teeth drip poison, and a mass of eyestalks protrude from its head."));
-	m->setHealth(1000);
+	m->setHealth(1400);
 	m->setDefence(DAMAGE_PHYSICAL, 10);
 	m->makeProfane();
 	m->setMoveStats(SPEED_FAST);
@@ -1183,7 +1183,7 @@ monsterSharedPtr monster_TheDeadSparrow()
 {
 	monsterSharedPtr m(new monster("The Dead Sparrow", GHOST_TILE, TCODColor::lightestFuchsia,
 		"The First Sparrow has died a hundred times, but his body endures, shrouded in arcane mist."));
-	m->setHealth(1000);
+	m->setHealth(2000);
 	m->setDefence(DAMAGE_MAGIC, 90);
 	m->setMoveStats(SPEED_FAST);
 	m->setMeleeStats(10, SPEED_NORMAL);
@@ -1295,7 +1295,7 @@ monsterSharedPtr monster_CorenTheBloody()
 	monsterSharedPtr m(new monster("Coren the Bloody", PLAYER_TILE, TCODColor::crimson,
 		"Wounds cover the naked warrior's body, gushing blood as though from a hundred gaping mouths. \
 He hefts his greataxe and roars incoherently."));
-	m->setHealth(900);
+	m->setHealth(3000);
 	m->setDefence(DAMAGE_PHYSICAL, 15);
 	m->setDefence(DAMAGE_FIRE, 25);
 	m->setBleedResist(1000);
@@ -1353,7 +1353,7 @@ monsterSharedPtr monster_KhalleTheLost()
 	monsterSharedPtr m = monsterSharedPtr(new monster("Khalle the Lost", PLAYER_TILE, TCODColor::darkYellow,
 		"Her skull is visible through her thin flesh; bones jut from her arms. She clutches her holy chime and her \
 crooked scythe, and whispers unanswered prayers."));
-	m->setHealth(800);
+	m->setHealth(3000);
 	m->setDefence(DAMAGE_ELECTRIC, 50);
 	m->setDefence(DAMAGE_FIRE, 50);
 	m->setDefence(DAMAGE_BLESSED, 100);
@@ -1436,7 +1436,7 @@ monsterSharedPtr monster_IetraEaterOfSilence()
 	monsterSharedPtr m = monsterSharedPtr(new monster("Ietra, Eater of Silence", PLAYER_TILE, TCODColor::lighterPurple,
 		"Her eyes are deep pools that reflect the dark of the void; her hair crackles with lightning and fire. In one hand \
 she wields a crooked scythe imbued with flames; in the other, she clutches an amber pendant."));
-	m->setHealth(1000);
+	m->setHealth(2500);
 	m->setDefence(DAMAGE_PHYSICAL, 50);
 	m->setDefence(DAMAGE_ELECTRIC, 30);
 	m->setDefence(DAMAGE_FIRE, 30);
@@ -1549,7 +1549,7 @@ monsterSharedPtr monster_ThePaleShade()
 	monsterSharedPtr m = monsterSharedPtr(new monster("The Pale Shade", GHOST_TILE, TCODColor::lightCyan,
 		"This near-invisible creature floats in a pale cloud, and its frost-drenched eyes suggest a sense of profound calm. \
 Acid drips from one twisted hand, while the other sings with electricity."));
-	m->setHealth(1200);
+	m->setHealth(3000);
 	m->setLightEmitted(0.4);
 	m->setDefence(DAMAGE_PHYSICAL, 100);
 	m->setDefence(DAMAGE_COLD, 75);
@@ -1788,7 +1788,7 @@ monsterSharedPtr monster_HeartOfAtalundra()
 {
 	monsterSharedPtr m = monsterSharedPtr(new monster("Heart of Atalundra", HEART_TILE, TCODColor::red,
 		"A singular beating heart rests in the muck, exuding magical surges."));
-	m->setHealth(3000);
+	m->setHealth(5000);
 	m->immobile = true;
 	m->makeProfane();
 	m->setMeleeStats(1, SPEED_SLOW);
@@ -1836,7 +1836,7 @@ monsterSharedPtr monster_SirPercivel()
 {
 	monsterSharedPtr m = monsterSharedPtr(new monster("Sir Percivel the Enslaved", KNIGHT_TILE, TCODColor::green,
 		"Ruined and tattered, Sir Percivel stands before you, wielding a broken sword."));
-	m->setHealth(1000);
+	m->setHealth(4000);
 	m->setDefence(DAMAGE_PHYSICAL, 50);
 	m->setDefence(DAMAGE_ELECTRIC, 20);
 	m->setPoisonResist(45);
@@ -1963,7 +1963,7 @@ monsterSharedPtr monster_LordOfFallowFields()
 	monsterSharedPtr m(new monster("The Lord of Fallow Fields", FINAL_BOSS_TILE, TCODColor::lightestPurple,
 		"The Lord of famine and death strides across the astral precipice, wielding a blade infused with the profane \
 energy of death itself."));
-	m->setHealth(5000);
+	m->setHealth(10000);
 	m->setDefence(DAMAGE_PHYSICAL, 50);
 	m->setBleedResist(100);
 	m->setPoisonResist(100);
@@ -1986,7 +1986,7 @@ monsterSharedPtr monster_TheDeathlessKnight()
 {
 	monsterSharedPtr m(new monster("The Deathless Knight", KNIGHT_TILE, TCODColor::pink,
 		"A silent suit of armour regards you from across the room, glowing sword in hand."));
-	m->setHealth(200);
+	m->setHealth(400);
 	m->setDefence(DAMAGE_PHYSICAL, 100);
 	m->setDefence(DAMAGE_MAGIC, 100);
 	m->setDefence(DAMAGE_ACID, 100);
@@ -2070,7 +2070,7 @@ monsterSharedPtr monster_PashTheRavenous()
 	monsterSharedPtr m(new monster("Pash the Ravenous", PASH_TILE, TCODColor::lightestCrimson,
 		"The earthly avatar of Pash manifests as a creature composed entirely of mouths, all agape and bristling with teeth. Pale \
 eyes peer from the darkness within Pash's myriad maws, and saliva drips upon the ground."));
-	m->setHealth(5000);
+	m->setHealth(7000);
 	m->setMoveStats(SPEED_NORMAL);
 	m->keepsDistance = true;
 	m->makeProfane();
@@ -2132,7 +2132,7 @@ monsterSharedPtr monster_QomTheGibberingSpider()
 	monsterSharedPtr m(new monster("Qom, the Gibbering Spider", SPIDER_TILE, TCODColor::lightRed,
 		"The devourer of the ancients gibbers at the heart of the void, weeping the ichor of obliteration from its \
 myriad eyes."));
-	m->setHealth(8000);
+	m->setHealth(10000);
 	m->setDefence(DAMAGE_PHYSICAL, 80);
 	m->setDefence(DAMAGE_ACID, 25);
 	m->setDefence(DAMAGE_COLD, 25);
