@@ -2814,7 +2814,7 @@ void game::setupWarpMenu()
 	addWarpPoint(currentPt);
 	//We need a particular item to be able to use warp stones
 	if (!player->hasKey("warpstone")) {
-		addMessage("This mysterious stone does not respond to your presence.", TCODColor::white);
+		addMessage("This mysterious stone hums slightly as you approach.", TCODColor::white);
 		return;
 	}
 	
@@ -2825,7 +2825,7 @@ void game::setupWarpMenu()
 		warpMenu->addElement(e);
 	}
 	
-	//Ready to rock
+	//Open the menu
 	currentMenu = warpMenu;
 	setState(STATE_WARP);
 }

@@ -54,7 +54,7 @@ public:
 	typedef std::shared_ptr<person> personSharedPtr;
 
 	//Constructors/destructors
-	person(): person("Player", PLAYER_TILE, TCODColor::white) {}
+	person(): person("Stardrift Pilgrim", PLAYER_TILE, TCODColor::white) {}
 	person(std::string name, int tileCode, TCODColor color, std::string description = "");
 	//Copy constructor
 	person(const person& other);
