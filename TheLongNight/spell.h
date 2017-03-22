@@ -181,9 +181,11 @@ spellSharedPtr prayer_YutriasProtection();
 //Divine Tome of the Emissary
 spellSharedPtr prayer_DivineRestoration();
 spellSharedPtr prayer_DivineJudgement();
+spellSharedPtr prayer_DivineForgiveness();
 //Divine Nightmare Tome
 spellSharedPtr prayer_NightmarePrayer();
 spellSharedPtr prayer_WordOfUnmaking();
+spellSharedPtr prayer_GazeIntoEmptiness();
 //Sold by Ydella
 spellSharedPtr prayer_SinkBeneath();
 spellSharedPtr prayer_Deathlink();

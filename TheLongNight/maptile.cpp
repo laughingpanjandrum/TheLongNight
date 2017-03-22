@@ -105,6 +105,11 @@ maptile * tile_SandyRock()
 	return new maptile("Sandy Rock", "wall_sand", STONE_WALL_TILE, DARKEST_SAND_COLOR, LIGHT_SAND_COLOR, false, false);
 }
 
+maptile * tile_SecretWall()
+{
+	return new maptile("Sandy Rock", "wall_secret", STONE_WALL_TILE, DARKEST_SAND_COLOR, LIGHT_SAND_COLOR, true, false);
+}
+
 maptile * tile_Wall()
 {
 	return new maptile("Wall", "wall_stone", BASIC_WALL_TILE, DARK_STONE_COLOR, LIGHT_STONE_COLOR, false, false);

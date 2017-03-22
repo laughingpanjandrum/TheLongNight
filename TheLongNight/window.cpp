@@ -165,7 +165,6 @@ std::string window::getstr(int x, int y, std::string prompt)
 	refresh();
 	TCOD_key_t key = TCODConsole::waitForKeypress(false);
 	while (key.vk != TCODK_ENTER || !key.pressed) {
-		key = TCODConsole::waitForKeypress(false);
 		//SPECIAL KEYS
 		if (key.pressed) {
 			if (key.vk == TCODK_BACKSPACE) {
@@ -182,6 +181,7 @@ std::string window::getstr(int x, int y, std::string prompt)
 		clear();
 		write(x, y, prompt + txt + '_', TCODColor::white);
 		refresh();
+		key = TCODConsole::waitForKeypress(false);
 	}
 	return txt;
 }

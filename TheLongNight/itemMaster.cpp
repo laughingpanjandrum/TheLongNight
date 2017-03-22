@@ -722,8 +722,10 @@ const itemVector getListOfAllItems()
 		//Prayers
 		prayer_Restoration(), prayer_WyrdChantOfStrength(), prayer_RayOfLight(), prayer_BlessedRadiance(), prayer_RemovePoison(),
 		prayer_DrawOutTheBlood(), prayer_ProfaneRadiance(), prayer_Intoxify(), prayer_DivineRetribution(), 
-		prayer_YutriasDivineSpark(), prayer_YutriasProtection(), prayer_DivineRestoration(), prayer_DivineJudgement(),
-		prayer_NightmarePrayer(), prayer_WordOfUnmaking(), prayer_SinkBeneath(), prayer_Deathlink(), prayer_ProfoundStill(),
+		prayer_YutriasDivineSpark(), prayer_YutriasProtection(), 
+		prayer_DivineRestoration(), prayer_DivineJudgement(), prayer_DivineForgiveness(),
+		prayer_NightmarePrayer(), prayer_WordOfUnmaking(), prayer_GazeIntoEmptiness(),
+		prayer_SinkBeneath(), prayer_Deathlink(), prayer_ProfoundStill(),
 		prayer_SpidersPrayer(), prayer_TouchOfDoom(), prayer_AstralPrison(), prayer_ProfaneRay(),
 		//Keys
 		key_WretchsKey(), key_OldCrowsKey(), key_RuinedTownshipKey(), key_WyrdKey(), key_GreenChapelGardenKey(),

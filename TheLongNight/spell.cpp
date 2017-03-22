@@ -1114,6 +1114,18 @@ spellSharedPtr prayer_DivineJudgement()
 	return sp;
 }
 
+spellSharedPtr prayer_DivineForgiveness()
+{
+	spellSharedPtr sp(new spell("Divine Forgiveness", PRAYER_TILE, TCODColor::darkFlame,
+		"Cleanse oneself of all ailments."));
+	sp->setAttackType(ATTACK_BUFF_SELF, 1);
+	sp->addEffect(REMOVE_BLEED, 1);
+	sp->addEffect(REMOVE_POISON, 1);
+	sp->addEffect(REMOVE_PLAGUE, 1);
+	sp->setVigourCost(2);
+	return sp;
+}
+
 spellSharedPtr prayer_NightmarePrayer()
 {
 	spellSharedPtr sp(new spell("Nightmare Prayer", PRAYER_TILE, TCODColor::orange,
@@ -1136,6 +1148,17 @@ unmake her being; with which they happily complied."));
 	sp->addEffect(HURT_CASTER, 50);
 	sp->usesDivinePower = true;
 	sp->setVigourCost(1);
+	return sp;
+}
+
+spellSharedPtr prayer_GazeIntoEmptiness()
+{
+	spellSharedPtr sp(new spell("Gaze Into Emptiness", PRAYER_TILE, TCODColor::orange,
+		"Ietra's glimpse of the Void placed a permanent blindness in her heart."));
+	sp->setAttackType(ATTACK_RANGE, 12);
+	sp->addEffect(APPLY_BLINDING, 10);
+	sp->usesDivinePower = true;
+	sp->setVigourCost(2);
 	return sp;
 }
 

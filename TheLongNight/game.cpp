@@ -3755,11 +3755,13 @@ void game::initializeShops()
 	shop* emissary = new shop("divine_tome_of_the_emissary");
 	emissary->addItem(prayer_DivineRestoration(), 100);
 	emissary->addItem(prayer_DivineJudgement(), 100);
+	emissary->addItem(prayer_DivineForgiveness(), 100);
 	allUnlockableShops.push_back(shopSharedPtr(emissary));
 	//	Divine Nightmare Tome
 	shop* nightmare = new shop("divine_nightmare_tome");
 	nightmare->addItem(prayer_NightmarePrayer(), 150);
 	nightmare->addItem(prayer_WordOfUnmaking(), 150);
+	nightmare->addItem(prayer_GazeIntoEmptiness(), 150);
 	allUnlockableShops.push_back(shopSharedPtr(nightmare));
 	//	Tome of the Dead
 	shop* dead = new shop("tome_of_the_dead");
