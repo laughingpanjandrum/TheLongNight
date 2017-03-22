@@ -964,12 +964,14 @@ void game::drawInterface(int leftx, int topy)
 	}
 	
 	//Health
-	win.drawCounter(player->getHealth(), "LIFE", atx, aty, TCODColor::darkRed, TCODColor::darkGrey, 20);
-	win.write(atx + 4, ++aty, player->getHealth().getAsString(), TCODColor::darkRed);
+	win.writec(atx, aty, HEART_TILE, TCODColor::darkRed);
+	win.drawCounter(player->getHealth(), "LIFE", atx + 1, aty, TCODColor::darkRed, TCODColor::darkGrey, 20);
+	win.write(atx + 5, ++aty, player->getHealth().getAsString(), TCODColor::darkRed);
 	
 	//Vigour
-	win.drawCounter(player->getVigour(), "VIG ", atx, ++aty, TCODColor::darkGreen, TCODColor::darkGrey, 20);
-	win.write(atx + 4, ++aty, player->getVigour().getAsString(), TCODColor::darkGreen);
+	win.writec(atx, ++aty, VIGOUR_GLYPH, TCODColor::darkGreen);
+	win.drawCounter(player->getVigour(), "VIG ", atx + 1, aty, TCODColor::darkGreen, TCODColor::darkGrey, 20);
+	win.write(atx + 5, ++aty, player->getVigour().getAsString(), TCODColor::darkGreen);
 	
 	//	Equipment
 	
@@ -1446,6 +1448,8 @@ void game::drawTargetInfo(personSharedPtr target, int atx, int aty)
 		if (hypot(player->getx() - target->getx(), player->gety() - target->gety()) < 2)
 			win.write(atx, ++aty, "Press [h] to talk", TCODColor::white);
 	}
+	else
+		win.write(atx, ++aty, "[Rclick] to view info", TCODColor::white);
 	
 	//Text description
 	//win.writeWrapped(atx, ++aty, 20, target->description, TCODColor::lightGrey);
