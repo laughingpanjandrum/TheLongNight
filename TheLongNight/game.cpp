@@ -136,7 +136,7 @@ map * game::getKnownMap(std::string handle)
 void game::addMessage(std::string txt, TCODColor color)
 {
 	messages.push_back(message(txt, color));
-	if (messages.size() > 5) {
+	if (messages.size() > MAX_MESSAGE_LOG) {
 		//Delete first message
 		messages.erase(messages.begin());
 	}
@@ -3171,9 +3171,6 @@ bool game::itemPickupMessage(itemSharedPtr it)
 	std::string txt = "[SPACE] Equip  [ESC] Store";
 	win.write(atx, ++aty, centreText(txt, 20), TCODColor::white);
 	aty += 2;
-	
-	//Fill in with ITEM DEETS
-	drawItemInfo(it, atx, aty + 1);
 
 	//And draw current item info as well
 	auto cat = it->getCategory();
@@ -3184,6 +3181,9 @@ bool game::itemPickupMessage(itemSharedPtr it)
 				drawItemInfo(otherIt, atx, aty + 21);
 		}
 	}
+	
+	//Fill in with ITEM DEETS
+	drawItemInfo(it, atx, aty + 1);
 	
 	//Wait for input: equip or no?
 	win.refresh();
@@ -4375,7 +4375,7 @@ void game::clearDeadCreatures()
 	//If the player is dead, SPECIAL STUFF happens
 	if (player->isDead) {
 		//Message about our death
-		win.write(MAP_DRAW_X + 15, MAP_DRAW_Y + 20, "Y O U   D I E D", TCODColor::lightestRed);
+		win.write(MAP_DRAW_X + 12, MAP_DRAW_Y + 18, "Y O U   D I E D", TCODColor::lightestRed);
 		win.refresh();
 		while (win.getkey().vk != KEY_ACCEPT) {}
 		//We lose all of our fragments

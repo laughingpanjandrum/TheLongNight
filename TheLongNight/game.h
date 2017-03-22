@@ -326,6 +326,7 @@ private:
 	const static int MAP_DRAW_Y = 3;
 	const static int ITEM_DRAW_X = 3;
 	const static int ITEM_DRAW_Y = 50;
+	const static int MAX_MESSAGE_LOG = 10;
 
 	//Special story progression
 	int gotSirPercivelsSet = 0;
