@@ -3173,10 +3173,13 @@ bool game::itemPickupMessage(itemSharedPtr it)
 	drawItemInfo(it, atx, aty + 1);
 
 	//And draw current item info as well
-	auto allEquipped = player->getAllEquippedItems();
-	for (auto otherIt : allEquipped) {
-		if (otherIt->getCategory() == it->getCategory())
-			drawItemInfo(otherIt, atx, aty + 21);
+	auto cat = it->getCategory();
+	if (cat != ITEM_SPELL && cat != ITEM_CONSUMABLE) {
+		auto allEquipped = player->getAllEquippedItems();
+		for (auto otherIt : allEquipped) {
+			if (otherIt->getCategory() == cat)
+				drawItemInfo(otherIt, atx, aty + 21);
+		}
 	}
 	
 	//Wait for input: equip or no?
