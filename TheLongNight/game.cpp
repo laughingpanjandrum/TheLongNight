@@ -719,10 +719,23 @@ void game::acceptCurrentMenuIndex()
 		selectInventoryCategory(sel->getCategory());
 	}
 	else if (state == STATE_VIEW_INVENTORY_CATEGORY) {
-		//Equip the selected item
+
+		//See if we can equip the selected item
 		itemSharedPtr sel = std::static_pointer_cast<item>(currentMenu->getSelectedItem());
-		if (sel != nullptr && canAccessInventory)
-			equipItem(sel);
+		if (sel != nullptr) {
+			
+			//We can only equip items if we're resting at a statue
+			if (canAccessInventory)
+				equipItem(sel);
+
+			//Certain consumables can be used regardless of whether we're allowed to access inventory
+			else if (sel->getCategory() == ITEM_CONSUMABLE) {
+				auto cons = std::static_pointer_cast<consumable>(sel);
+				if (cons->oneUseOnly)
+					equipItem(cons);
+			}
+		}
+
 	}
 	
 	else if (state == STATE_LEVEL_UP_MENU)
