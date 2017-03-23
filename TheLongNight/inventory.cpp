@@ -81,23 +81,32 @@ bool inventory::equipSpell(spellSharedPtr sp)
 	weaponSharedPtr wp = getWeapon();
 	weaponSharedPtr off = getOffhand();
 
-	if (wp != nullptr && wp->canAddSpell())
-		toStore = wp;
-	else if (off != nullptr && off->canAddSpell())
-		toStore = off;
-	
-	if (toStore != nullptr) {
-		
-		//If it's already in here, remove it!
-		if (toStore->hasSpellStored(sp)) {
-			toStore->removeSpell(sp);
-			return false;
+	//First see if we want to UNEQUIP the item!
+	if (wp != nullptr && wp->hasSpellStored(sp)) {
+		wp->removeSpell(sp);
+		return false;
+	}
+	else if (off != nullptr && off->hasSpellStored(sp)) {
+		off->removeSpell(sp);
+		return false;
+	}
+
+	else 
+	{
+		//If we didn't UNEQUIP it, try to EQUIP it!
+		if (wp != nullptr && wp->canAddSpell())
+			toStore = wp;
+		else if (off != nullptr && off->canAddSpell())
+			toStore = off;
+
+		if (toStore != nullptr) {
+
+			if (toStore->canAddSpell()) {
+				toStore->addSpell(sp);
+				return true;
+			}
+
 		}
-		else if (toStore->canAddSpell()) {
-			toStore->addSpell(sp);
-			return true;
-		}
-	
 	}
 	
 	//We didn't find a place to equip this item.
