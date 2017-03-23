@@ -1306,7 +1306,7 @@ spellSharedPtr ability_DevouringGaze()
 spellSharedPtr ability_Deathwatch()
 {
 	spellSharedPtr sp(new spell("Death Stink", SPELL_TILE, TCODColor::green));
-	sp->setAttackType(ATTACK_RANGE, 8);
+	sp->setAttackType(ATTACK_RANGE, 20);
 	sp->addEffect(APPLY_UNTYPED_DAMAGE, 50);
 	sp->isStenchBased = true;
 	return sp;

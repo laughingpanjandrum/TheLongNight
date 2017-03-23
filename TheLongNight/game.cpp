@@ -1944,8 +1944,10 @@ void game::drawConsumableInfo(consumableSharedPtr it, int atx, int aty)
 {
 	
 	if (it->isRangedAttackItem()) {
+	
 		//This is just a container for a spell attack!
 		drawSpellInfo(it->getRangedAttack(), atx, aty);
+	
 	}
 	
 	else if (it->getWeaponBuff() != nullptr) {
@@ -1981,7 +1983,8 @@ void game::drawConsumableInfo(consumableSharedPtr it, int atx, int aty)
 		for (int i = 0; i < it->getEffects().size(); i++) {
 			auto eff = it->getEffects().at(i);
 			auto potency = it->getPotencies().at(i);
-			win.write(atx, ++aty, std::to_string(potency), TCODColor::white);
+			if (potency > 0)
+				win.write(atx, ++aty, std::to_string(potency), TCODColor::white);
 			win.write(atx + 5, aty, getEffectName(eff), TCODColor::lightGrey);
 		}
 	
