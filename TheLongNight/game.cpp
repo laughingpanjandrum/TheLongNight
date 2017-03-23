@@ -1007,8 +1007,10 @@ void game::drawInterface(int leftx, int topy)
 		win.writec(atx, ++aty, of->getTileCode(), of->getColor());
 		win.write(atx + 2, aty, of->getMenuName(), of->getColor());
 		if (isMouseOver(atx, of->getMenuName().size(), aty))
-			drawItemInfo(wp, ITEM_DRAW_X, ITEM_DRAW_Y, false);
+			drawItemInfo(of, ITEM_DRAW_X, ITEM_DRAW_Y, false);
 	}
+	else
+		win.write(atx + 2, ++aty, "no offhand", TCODColor::darkGrey);
 	
 	//Helmet
 	armourSharedPtr helm = player->getHelmet();
