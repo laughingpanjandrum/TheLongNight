@@ -243,7 +243,7 @@ spellSharedPtr attack_DripVenom()
 spellSharedPtr attack_SuckOutLife()
 {
 	spellSharedPtr sp(new spell("Suck Out Life", DAGGER_TILE, TCODColor::lightCrimson,
-		"The agony dealt by the knife pours life into you."));
+		"The agony dealt by the nail pours life into you."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(RESTORE_HEALTH, 10);
 	sp->usesDivinePower = true;

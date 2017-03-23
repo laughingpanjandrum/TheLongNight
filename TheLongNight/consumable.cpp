@@ -24,8 +24,7 @@ consumableSharedPtr consumable_StarwaterDraught()
 {
 	consumableSharedPtr c(new consumable("Starwater Draught", FLASK_TILE, TCODColor::cyan,
 		"Flask of water touched by starlight, which confers healing properties. (Press [e] to use your selected item.)"));
-	c->addEffect(RESTORE_HEALTH);
-	c->setPotency(25);
+	c->addEffect(RESTORE_HEALTH, 25);
 	return c;
 }
 
@@ -33,8 +32,7 @@ consumableSharedPtr consumable_InvigoratingTea()
 {
 	consumableSharedPtr c(new consumable("Invigorating Tea", FLASK_TILE, TCODColor::green,
 		"A specially brewed tea that restores vigour."));
-	c->addEffect(RESTORE_VIGOUR);
-	c->setPotency(5);
+	c->addEffect(RESTORE_VIGOUR, 5);
 	return c;
 }
 
@@ -55,7 +53,6 @@ consumableSharedPtr consumable_TinyRedFlower()
 		"A small flower of the kind Princess Yulia once wore in her hair. Clears Bleed buildup. (Once the Bleed bar fills, you \
 take a large amount of damage on your next two turns. Use this flower to prevent damage or clear the bar.)"));
 	c->addEffect(REMOVE_BLEED);
-	c->setPotency(1);
 	return c;
 }
 
@@ -65,7 +62,6 @@ consumableSharedPtr consumable_TinyGreenFlower()
 		"These gentle green flowers purge toxins from the body. (Once the Poison bar fills, you slowly take damage until you die \
 or rest. Use this flower to clear the effect.)"));
 	c->addEffect(REMOVE_POISON);
-	c->setPotency(1);
 	return c;
 }
 
@@ -76,7 +72,6 @@ consumableSharedPtr consumable_PutridFlower()
 cultivated these in secret, afraid that he would someday regret bringing plague upon the world. (Plague reduces your maximum \
 hitpoints until you rest or die. Use this flower to clear the effect.)"));
 	c->addEffect(REMOVE_PLAGUE);
-	c->setPotency(1);
 	return c;
 }
 
@@ -85,8 +80,7 @@ consumableSharedPtr consumable_BloodDrinkersEyes()
 	consumableSharedPtr c(new consumable("Blood Drinker's Eyes", EYEBALL_TILE, TCODColor::crimson,
 		"The reddened eyes of one who has consumed too much blood. According to the profane scriptures of Pash, these eyes \
 contain profound power when eaten."));
-	c->addEffect(BLEED_DAMAGE_FACTOR);
-	c->setPotency(2);
+	c->addEffect(BLEED_DAMAGE_FACTOR, 2);
 	c->addsPermanentBuff = true;
 	return c;
 }
@@ -95,9 +89,8 @@ consumableSharedPtr consumable_IntoxicatingWine()
 {
 	consumableSharedPtr c(new consumable("Intoxicating Wine", BOTTLE_TILE, TCODColor::darkRed,
 		"This heady draught is said to purge the mind of material desires while enhancing one's will."));
-	c->addEffect(INCREASE_PRAYER_POWER);
-	c->addEffect(APPLY_DAMAGE_PENALTY);
-	c->setPotency(25);
+	c->addEffect(INCREASE_PRAYER_POWER, 25);
+	c->addEffect(APPLY_DAMAGE_PENALTY, 15);
 	c->addsPermanentBuff = true;
 	return c;
 }
@@ -107,9 +100,8 @@ consumableSharedPtr consumable_WitchwaterFlask()
 	consumableSharedPtr c(new consumable("Witchwater Flask", BOTTLE_TILE, TCODColor::fuchsia,
 		"A flask of invigorating witchwater, said to break down the barriers between our world and reality. Moshka \
 was a great believer in witchwater, and consumed it in copious amounts."));
-	c->addEffect(INCREASE_SPELL_POWER);
-	c->addEffect(APPLY_DAMAGE_PENALTY);
-	c->setPotency(25);
+	c->addEffect(INCREASE_SPELL_POWER, 25);
+	c->addEffect(APPLY_DAMAGE_PENALTY, 15);
 	c->addsPermanentBuff = true;
 	return c;
 }
@@ -119,10 +111,9 @@ consumableSharedPtr consumable_BlackHoney()
 	consumableSharedPtr c(new consumable("Black Honey", BOTTLE_TILE, TCODColor::darkPurple,
 		"Black honey, once the principle export of the village, was said to induce vivid dreams. But if one's life is filled \
 with bloodshed, one's dreams are unlikely to bring peace."));
-	c->addEffect(APPLY_DAMAGE_PENALTY);
-	c->addEffect(INCREASE_SPELL_POWER);
-	c->addEffect(INCREASE_PRAYER_POWER);
-	c->setPotency(-10);
+	c->addEffect(GAIN_DAMAGE_BUFF, 25);
+	c->addEffect(INCREASE_SPELL_POWER, -15);
+	c->addEffect(INCREASE_PRAYER_POWER, -15);
 	c->addsPermanentBuff = true;
 	return c;
 }
@@ -131,9 +122,8 @@ consumableSharedPtr consumable_PutridBrew()
 {
 	consumableSharedPtr c(new consumable("Putrid Brew", FLASK_TILE, TCODColor::darkLime,
 		"A profoundly toxic drink, said to contain the putrid rage of the dead gods that rot in the heart of the Void."));
-	c->addEffect(APPLY_POISON_DAMAGE);
-	c->addEffect(DAMAGE_WHEN_POISONED);
-	c->setPotency(40);
+	c->addEffect(APPLY_POISON_DAMAGE, 40);
+	c->addEffect(DAMAGE_WHEN_POISONED, 50);
 	c->addsPermanentBuff = true;
 	return c;
 }
@@ -142,8 +132,7 @@ consumableSharedPtr consumable_GodsbloodBrew()
 {
 	consumableSharedPtr c(new consumable("Godsblood Brew", FLASK_TILE, TCODColor::lightChartreuse,
 		"Brew concocted from the boiling blood of the old gods, whose remains smoulder in the heart of the Void."));
-	c->addEffect(GAIN_MAX_HEALTH);
-	c->setPotency(40);
+	c->addEffect(GAIN_MAX_HEALTH, 50);
 	c->addsPermanentBuff = true;
 	return c;
 }
@@ -153,8 +142,7 @@ consumableSharedPtr consumable_BlackTarLiquor()
 	consumableSharedPtr c(new consumable("Black Tar Liquor", BOTTLE_TILE, TCODColor::darkPurple,
 		"A flagon of spiced liquor, made from the tar that floats in the Void. Foul to drink, but it has certain powerful \
 properties that the Blackwatch treasures."));
-	c->addEffect(SCALE_NEXT_ATTACK);
-	c->setPotency(100);
+	c->addEffect(SCALE_NEXT_ATTACK, 100);
 	c->setAmount(5);
 	return c;
 }
@@ -164,11 +152,10 @@ consumableSharedPtr consumable_PurifiedStarwater()
 	consumableSharedPtr c(new consumable("Purified Starwater", FLASK_TILE, TCODColor::lightestCyan,
 		"Starwater descends from the emptiness of the Void. This flask of starwater is drawn from the pool at the heart of the world, \
 and is impossible to forget."));
-	c->addEffect(RESTORE_HEALTH);
+	c->addEffect(RESTORE_HEALTH, 500);
 	c->addEffect(REMOVE_BLEED);
 	c->addEffect(REMOVE_PLAGUE);
 	c->addEffect(REMOVE_POISON);
-	c->setPotency(500);
 	return c;
 }
 
@@ -364,8 +351,7 @@ consumableSharedPtr gem_DullGreyGemstone()
 	consumableSharedPtr c(new consumable("Dull Grey Gemstone", FRAGMENT_GLYPH, TCODColor::lighterGrey,
 		"Meagre gemstone, perhaps treasured by a peasant. (You can use this from your inventory at any time to gain fragments. \
 Recall that fragments are lost upon death.)"));
-	c->addEffect(ACQUIRE_FRAGMENTS);
-	c->setPotency(300);
+	c->addEffect(ACQUIRE_FRAGMENTS, 300);
 	c->oneUseOnly = true;
 	return c;
 }
@@ -374,8 +360,7 @@ consumableSharedPtr gem_SmallShiningGemstone()
 {
 	consumableSharedPtr c(new consumable("Small Shining Gemstone", FRAGMENT_GLYPH, TCODColor::lightPink,
 		"Minor gemstone that shines with inner glory."));
-	c->addEffect(ACQUIRE_FRAGMENTS);
-	c->setPotency(600);
+	c->addEffect(ACQUIRE_FRAGMENTS, 600);
 	c->oneUseOnly = true;
 	return c;
 }
@@ -384,8 +369,7 @@ consumableSharedPtr gem_NobleGlowingGemstone()
 {
 	consumableSharedPtr c(new consumable("Noble Glowing Gemstone", FRAGMENT_GLYPH, TCODColor::lightOrange,
 		"Glorious gemstone of a noble aristocrat."));
-	c->addEffect(ACQUIRE_FRAGMENTS);
-	c->setPotency(1200);
+	c->addEffect(ACQUIRE_FRAGMENTS, 1200);
 	c->oneUseOnly = true;
 	return c;
 }
@@ -394,8 +378,7 @@ consumableSharedPtr gem_KingsGiantGemstone()
 {
 	consumableSharedPtr c(new consumable("King's Giant Gemstone", FRAGMENT_GLYPH, TCODColor::lighterPurple,
 		"Gemstone once embedded in a king's crown, imbued with ancient power."));
-	c->addEffect(ACQUIRE_FRAGMENTS);
-	c->setPotency(1800);
+	c->addEffect(ACQUIRE_FRAGMENTS, 1800);
 	c->oneUseOnly = true;
 	return c;
 }
@@ -404,8 +387,7 @@ consumableSharedPtr gem_GodlessGemstone()
 {
 	consumableSharedPtr c(new consumable("Godless Gemstone", FRAGMENT_GLYPH, TCODColor::lightestYellow,
 		"Gemstone engorged with the lost power of the old gods."));
-	c->addEffect(ACQUIRE_FRAGMENTS);
-	c->setPotency(2400);
+	c->addEffect(ACQUIRE_FRAGMENTS, 2400);
 	c->oneUseOnly = true;
 	return c;
 }
@@ -438,9 +420,8 @@ consumableSharedPtr horn_HeraldsWhiteHorn()
 		"The silver horn of the Herald, who comes in the White Fog. According to certain storytellers, his presence signifies the coming of the \
 Lord of Fallow Fields, who rises from the realms of the old gods to bring final judgement upon the world."));
 	c->consumeOnUse = false;
-	c->addEffect(RESTORE_VIGOUR);
-	c->addEffect(APPLY_UNTYPED_DAMAGE);
-	c->setPotency(10);
+	c->addEffect(RESTORE_VIGOUR, 10);
+	c->addEffect(APPLY_UNTYPED_DAMAGE, 100);
 	return c;
 }
 
@@ -450,8 +431,7 @@ consumableSharedPtr misc_BrandOfTheEmissary()
 		"Brand used by the Emissaries to mark sinners. The brand is agonizing, but it inspired a spiritual fervour in its victims, \
 proof of the true power of the old gods."));
 	c->consumeOnUse = false;
-	c->addEffect(APPLY_FIRE_DAMAGE);
-	c->addEffect(SCALE_NEXT_PRAYER);
-	c->setPotency(50);
+	c->addEffect(APPLY_FIRE_DAMAGE, 30);
+	c->addEffect(SCALE_NEXT_PRAYER, 50);
 	return c;
 }

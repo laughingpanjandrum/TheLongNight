@@ -1963,9 +1963,11 @@ void game::drawConsumableInfo(consumableSharedPtr it, int atx, int aty)
 	else {
 		
 		//Just applies some sort of effect to the player.
-		for (auto eff : it->getEffects()) {
-			win.write(atx, ++aty, std::to_string(it->getPotency()), TCODColor::white);
-			win.write(atx + 4, aty, getEffectName(eff), TCODColor::lightGrey);
+		for (int i = 0; i < it->getEffects().size(); i++) {
+			auto eff = it->getEffects().at(i);
+			auto potency = it->getPotencies().at(i);
+			win.write(atx, ++aty, std::to_string(potency), TCODColor::white);
+			win.write(atx + 5, aty, getEffectName(eff), TCODColor::lightGrey);
 		}
 	
 	}
@@ -2284,9 +2286,6 @@ void game::useConsumable()
 			//Use it!
 			if (toUse->consumeOnUse)
 				toUse->lose();
-			
-			//And perform the proper effect
-			int potency = toUse->getPotency();
 
 			//Is this a ranged-attack item?
 			if (toUse->isRangedAttackItem()) {
@@ -2303,7 +2302,9 @@ void game::useConsumable()
 
 			else if (toUse->addsPermanentBuff) {
 				//We add some kind of permanent buff that has to be tracked
-				for (auto eff : toUse->getEffects()) {
+				for (int i = 0; i < toUse->getEffects().size(); i++) {
+					auto eff = toUse->getEffects().at(i);
+					auto potency = toUse->getPotencies().at(i);
 					std::string effName = toUse->getName() + " - " + getEffectName(eff);
 					if (player->addBuff(effName, toUse->getColor(), eff, potency))
 						applyEffectToPerson(player, eff, potency);
@@ -2312,7 +2313,9 @@ void game::useConsumable()
 			
 			else {
 				//All effects are applied to PERSON
-				for (auto eff : toUse->getEffects()) {
+				for (int i = 0; i < toUse->getEffects().size(); i++) {
+					auto eff = toUse->getEffects().at(i);
+					auto potency = toUse->getPotencies().at(i);
 					applyEffectToPerson(player, eff, potency);
 				}
 			}
@@ -3311,18 +3314,25 @@ void game::equipItem(itemSharedPtr it)
 	if (it->getCategory() == ITEM_CONSUMABLE) {
 		consumableSharedPtr c = std::static_pointer_cast<consumable>(it);
 		if (c->oneUseOnly) {
+			
 			//Instantly apply item effect
-			for (auto eff : c->getEffects()) {
-				applyEffectToPerson(player, eff, c->getPotency());
+			for (int i = 0; i < c->getEffects().size(); i++) {
+				auto eff = c->getEffects().at(i);
+				auto potency = c->getPotencies().at(i);
+				applyEffectToPerson(player, eff, potency);
 			}
+			
 			//Message about it
 			addMessage("Used " + c->getName() + '!', c->getColor());
+			
 			//Expend item
 			if (c->consumeOnUse)
 				player->loseItemForever(c);
+			
 			//Close menu
 			menuBackOut();
 			return;
+		
 		}
 	}
 

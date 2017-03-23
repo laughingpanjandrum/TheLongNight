@@ -30,13 +30,12 @@ public:
 	//Effects
 	bool isRangedAttackItem() { return rangedAttack != nullptr; }
 	effectVector getEffects() { return effectsApplied; }
-	int getPotency() { return potency; }
+	std::vector<int> getPotencies() { return effectPotencies; }
 	spellSharedPtr getRangedAttack() { return rangedAttack; }
 	weaponBuffSharedPtr getWeaponBuff() { return buff; }
 
 	//Setting effects
-	void addEffect(effect eff) { effectsApplied.push_back(eff); }
-	void setPotency(int pot) { potency = pot; }
+	void addEffect(effect eff, int pot = 1) { effectsApplied.push_back(eff); effectPotencies.push_back(pot); }
 	void setRangedAttack(spellSharedPtr at) { rangedAttack = at; }
 	void setWeaponBuff(weaponBuff* b) { buff = weaponBuffSharedPtr(b); }
 
@@ -52,7 +51,7 @@ private:
 
 	//Effects and potency
 	effectVector effectsApplied;
-	int potency;
+	std::vector<int> effectPotencies;
 
 	//Ranged attack is treated as a spell, for ranged-attack consumables
 	spellSharedPtr rangedAttack;
