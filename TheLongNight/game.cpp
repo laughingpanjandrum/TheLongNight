@@ -1136,6 +1136,21 @@ void game::drawInterface(int leftx, int topy)
 		}
 	}
 
+	//Show whether current consumable is in range, if it's a ranged attack
+	auto c = player->getSelectedConsumable();
+	if (c != nullptr && c->isRangedAttackItem()) {
+		int attackR = c->getRangedAttack()->getAttackRange();
+		coord mpos = screenToMapCoords(coord(mouse.cx, mouse.cy));
+		if (currentMap->inBounds(mpos.first, mpos.second)) {
+			if (hypot(mpos.first - player->getx(), mpos.second - player->gety()) <= attackR) {
+				win.write(atx, ++aty, c->getName() + " in range", TCODColor::green);
+			}
+			else {
+				win.write(atx, ++aty, c->getName() + " out of range", TCODColor::red);
+			}
+		}
+	}
+
 	//Draws whatever we have HIGHLIGHTED
 	aty += 1;
 	drawMouseover(atx, aty);
