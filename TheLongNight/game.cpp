@@ -1886,8 +1886,17 @@ void game::drawSpellInfo(spellSharedPtr it, int atx, int aty)
 		//Buff details
 		win.write(atx + 1, ++aty, "Adds", TCODColor::white);
 		weaponBuff buff = it->getWeaponBuff();
-		std::string txt = std::to_string(buff.bonusDamage) + " " + getDamageTypeName(buff.dtype);
-		win.write(atx + 6, aty, txt, getDamageTypeColor(buff.dtype));
+		std::string txt = "";
+		TCODColor col = TCODColor::white;
+		if (buff.etype != EFFECT_NONE) {
+			txt = std::to_string(buff.bonusDamage) + " " + getStatusEffectName(buff.etype);
+			col = getStatusEffectColor(buff.etype);
+		}
+		else {
+			txt = std::to_string(buff.bonusDamage) + " " + getDamageTypeName(buff.dtype);
+			col = getDamageTypeColor(buff.dtype);
+		}
+		win.write(atx + 6, aty, txt, col);
 		win.write(atx + 7 + txt.size(), aty, "damage", TCODColor::white);
 	}
 	
