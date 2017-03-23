@@ -99,7 +99,7 @@ the Rose have now fallen, and the chapel is deserted.");
 		"In the centre of Deep Lake, it is said, the mausoleum of an old lord lingers.");
 
 	addZone("Crumbling City", TCODColor::grey, 25, 14, CRUMBLING_CITY_TXT);
-	addZone("Crumbling City", TCODColor::grey, 24, 14, CRUMBLING_CITY_TXT);
+	addZone("Crumbling City Outskirts", TCODColor::lightGrey, 24, 14, CRUMBLING_CITY_TXT);
 	addZone("Crumbling City", TCODColor::grey, 26, 14, CRUMBLING_CITY_TXT);
 	addZone("Crumbling City", TCODColor::grey, 26, 13, CRUMBLING_CITY_TXT); //Duke Vorten
 	addZone("Sordid Chapel", TCODColor::darkRed, 27, 14,

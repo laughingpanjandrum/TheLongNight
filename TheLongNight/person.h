@@ -140,7 +140,7 @@ public:
 
 	//Other buffs
 	void clearFreeMoves() { freeMoves = 0; }
-	void gainFreeMoves(int f) { freeMoves += f; }
+	void gainFreeMoves(int f);
 	void gainFlatDamageBuff(int d);
 	bool hasFreeMoves() { return freeMoves > 0; }
 	void useFreeMove() { freeMoves--; }

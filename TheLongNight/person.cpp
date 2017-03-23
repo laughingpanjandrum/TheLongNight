@@ -641,6 +641,17 @@ void person::applyEffect(effect eff, int potency)
 
 }
 
+
+/*
+Adds free moves, though they have a cap.
+*/
+void person::gainFreeMoves(int f)
+{
+	freeMoves += f;
+	if (freeMoves > 3)
+		freeMoves = 3;
+}
+
 void person::gainFlatDamageBuff(int d)
 {
 	if (d < MAX_FLAT_DAMAGE_BUFF)
