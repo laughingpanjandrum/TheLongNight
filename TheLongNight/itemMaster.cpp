@@ -597,6 +597,7 @@ std::string getEffectName(effect e)
 	case(APPLY_BLESSED_DAMAGE): return "blessed damage";
 	case(APPLY_PROFANE_DAMAGE): return "profane damage";
 	case(HURT_CASTER): return "damage to caster";
+	case(HEAL_CASTER): return "health to caster";
 
 	case(APPLY_BLINDING): return "blind target";
 	case(APPLY_ENTANGLING): return "entangle target";

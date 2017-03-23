@@ -2118,7 +2118,7 @@ void game::processCommand()
 		//Meta
 		if (key.c == 'Q')
 			isGameOver = true;
-		else if (key.c == 'F')
+		else if (key.vk == TCODK_F11)
 			TCODConsole::setFullscreen(!TCODConsole::isFullscreen());
 		else if (key.c == 'l')
 			startAutoWalk();

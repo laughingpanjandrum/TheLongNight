@@ -36,6 +36,8 @@ int main() {
 		w.write(10, 11, "[l] LOAD GAME", TCODColor::white);
 		w.write(10, 12, "[q] QUIT GAME", TCODColor::white);
 
+		w.write(10, 20, "Press [F11] at any time to toggle fullscreen.", TCODColor::lighterGrey);
+
 		//Profile menu
 		int atx = 50;
 		w.write(atx, 10, "SELECT PROFILE", TCODColor::white);
@@ -56,6 +58,8 @@ int main() {
 			if (iter == allProfiles.end())
 				iter = allProfiles.begin();
 		}
+		else if (kp.vk == TCODK_F11)
+			TCODConsole::setFullscreen(!TCODConsole::isFullscreen());
 
 		if (iter != allProfiles.end())
 			selectedProfile = (*iter);

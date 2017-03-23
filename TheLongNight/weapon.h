@@ -176,8 +176,6 @@ weaponSharedPtr weapon_RatboneCleaver();
 weaponSharedPtr weapon_DeathlessBlade();
 weaponSharedPtr weapon_GreatswordOfTheAncientLords();
 
-weaponSharedPtr weapon_ProfaneGreatsword();
-
 //Shields
 weaponSharedPtr shield_BatteredWoodenShield();
 weaponSharedPtr shield_WoodenWyrdShield();

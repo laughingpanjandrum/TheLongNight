@@ -446,7 +446,7 @@ contain some of that power."));
 	wp->setBasicAttributes(30, SPEED_NORMAL);
 	wp->addDamageType(DAMAGE_FIRE, 20);
 	wp->addScalingType(SCALE_STR);
-	wp->addScalingType(SCALE_DEX);
+	wp->addScalingType(SCALE_ARC);
 	wp->setSpecialAttack(attack_FlameSwathe());
 	wp->setImage(loadWeaponImage("W_dragonbone sword"));
 	return wp;
@@ -493,8 +493,9 @@ weaponSharedPtr weapon_SacrificialKnife()
 	weaponSharedPtr wp(new weapon("Sacrificial Knife", DAGGER_TILE, TCODColor::orange,
 		"Lady Tvert sent the Emissaries to bring the word of the gods to the people of the Valley. \
 Those who refused to heed the call were sacrificed to the Gaping Maw to the benefit of the living."));
-	wp->setBasicAttributes(25, SPEED_FAST);
+	wp->setBasicAttributes(30, SPEED_FAST);
 	wp->addScalingType(SCALE_DEX);
+	wp->addScalingType(SCALE_DEV);
 	wp->setDamageToSelf(5);
 	wp->setSpecialAttack(attack_DeepCut());
 	wp->setImage(loadWeaponImage("W_sacrificial knife"));
@@ -535,7 +536,6 @@ weaponSharedPtr weapon_EtherealSword()
 little of their original form remains."));
 	wp->setBasicAttributes(0, SPEED_NORMAL);
 	wp->addDamageType(DAMAGE_MAGIC, 50);
-	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_ARC);
 	wp->setSpecialAttack(attack_EtherealStrike());
 	wp->setImage(loadWeaponImage("W_energy sword"));
@@ -590,7 +590,7 @@ weaponSharedPtr weapon_SirPercivelsSword()
 	weaponSharedPtr wp(new weapon("Sir Percivel's Sword", SWORD_TILE, TCODColor::green,
 		"Sir Percivel sought the truth of the Rose's decline. Amongst all the ruined souls \
 in the forsaken mausoleums of the lowlands, he found only one who would still heed him."));
-	wp->setBasicAttributes(75, SPEED_NORMAL);
+	wp->setBasicAttributes(60, SPEED_NORMAL);
 	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_PercivelsFire());
@@ -606,7 +606,8 @@ weaponSharedPtr weapon_VoidfireKnife()
 	wp->setBasicAttributes(0, SPEED_FAST);
 	wp->addDamageType(DAMAGE_PROFANE, 10);
 	wp->addDamageType(DAMAGE_FIRE, 15);
-	wp->addScalingType(SCALE_DEX);
+	wp->addScalingType(SCALE_DEV);
+	wp->addScalingType(SCALE_ARC);
 	wp->setSpecialAttack(attack_KnifeCast());
 	wp->setImage(loadWeaponImage("W_voidfire knife"));
 	return wp;
@@ -629,8 +630,9 @@ weaponSharedPtr weapon_IetrasFlameScythe()
 	weaponSharedPtr wp(new weapon("Ietra's Flame Scythe", SCYTHE_TILE, TCODColor::flame,
 		"Scythe of Ietra, imbued with the secret fire that lies at the heart of the void. When \
 her tomb was sealed, she resolved that the secret of the Angel would never leave its depths."));
-	wp->setBasicAttributes(25, SPEED_NORMAL);
+	wp->setBasicAttributes(5, SPEED_NORMAL);
 	wp->addDamageType(DAMAGE_PROFANE, 25);
+	wp->addDamageType(DAMAGE_FIRE, 25);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_BillowingFlames());
 	wp->setImage(loadWeaponImage("W_iteras scythe"));
@@ -643,7 +645,6 @@ weaponSharedPtr weapon_EtherealGreatsword()
 		"An unreal blade infused with potent magical energy."));
 	wp->setBasicAttributes(0, SPEED_SLOW);
 	wp->addDamageType(DAMAGE_MAGIC, 100);
-	wp->addScalingType(SCALE_STR);
 	wp->addScalingType(SCALE_ARC);
 	wp->setSpecialAttack(attack_EtherealRay());
 	wp->setImage(loadWeaponImage("W_ethereal sword"));
@@ -658,6 +659,7 @@ that remained of the Moon-Pale King, who wasted away in his abandoned palace as 
 	wp->setBasicAttributes(0, SPEED_NORMAL);
 	wp->addDamageType(DAMAGE_MAGIC, 25);
 	wp->addScalingType(SCALE_ARC);
+	wp->setSpellPower(20);
 	wp->setSpecialAttack(attack_PaleSlash());
 	wp->setImage(loadWeaponImage("W_moonpale scythe"));
 	return wp;
@@ -681,7 +683,7 @@ weaponSharedPtr weapon_SelvixsHookblade()
 	weaponSharedPtr wp(new weapon("Selvix's Hookblade", SWORD_TILE, TCODColor::lightAmber,
 		"Curved shortsword used by Gravekeeper Selvix, infused with poison and rot."));
 	wp->setBasicAttributes(15, SPEED_FAST);
-	wp->addStatusEffect(EFFECT_PLAGUE, 10);
+	wp->addStatusEffect(EFFECT_PLAGUE, 20);
 	wp->addScalingType(SCALE_DEX);
 	wp->setSpecialAttack(attack_PoisonHook());
 	wp->setImage(loadWeaponImage("W_selvix blade"));
@@ -705,7 +707,8 @@ weaponSharedPtr weapon_RatboneCleaver()
 	weaponSharedPtr wp(new weapon("Ratbone Cleaver", AXE_TILE, TCODColor::amber,
 		"Cleaver forged from shards of ratbone, drenched with ichorous toxins and crawling plague."));
 	wp->setBasicAttributes(50, SPEED_SLOW);
-	wp->addStatusEffect(EFFECT_POISON, 20);
+	wp->addStatusEffect(EFFECT_POISON, 30);
+	wp->addStatusEffect(EFFECT_PLAGUE, 10);
 	wp->addScalingType(SCALE_STR);
 	wp->setSpecialAttack(attack_RatCleave());
 	wp->setImage(loadWeaponImage("W_ratbone cleaver"));
@@ -741,16 +744,7 @@ weaponSharedPtr weapon_GreatswordOfTheAncientLords()
 	return wp;
 }
 
-weaponSharedPtr weapon_ProfaneGreatsword()
-{
-	weaponSharedPtr wp(new weapon("Profane Greatsword", SWORD_TILE, TCODColor::purple,
-		"A greatsword charged with the profane energy of the Void."));
-	wp->setBasicAttributes(50, SPEED_SLOW);
-	wp->addDamageType(DAMAGE_PROFANE, 25);
-	wp->addScalingType(SCALE_STR);
-	wp->addScalingType(SCALE_DEV);
-	return wp;
-}
+
 
 //		Shields
 

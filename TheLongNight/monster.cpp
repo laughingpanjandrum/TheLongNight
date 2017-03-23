@@ -601,7 +601,7 @@ monsterSharedPtr monster_VoidwalkerMinas()
 	m->setDefence(DAMAGE_PHYSICAL, 30);
 	m->addDamageResist(DAMAGE_COLD, 50);
 	m->makeProfane();
-	m->equipItem(weapon_ProfaneGreatsword());
+	m->equipItem(weapon_VoidCrystalGreatsword());
 	m->addSpellKnown(ability_ShadowWalk());
 	m->setSpellCastChance(25);
 	m->isBoss = true;
