@@ -642,15 +642,15 @@ monsterSharedPtr monster_HighClericOrsylTheProfaned()
 	monsterSharedPtr m(new monster("High Cleric Orsyl the Profaned", ORSYL_TILE, TCODColor::silver,
 		"The High Clerics robes are tattered and blood-drenched; his eyes are blank, and putrid tendrils of the Void crawl up \
 his flesh."));
-	m->setHealth(800);
+	m->setHealth(1500);
 	m->bleedScaling = 50;
-	m->setDefence(DAMAGE_PHYSICAL, 10);
+	m->setDefence(DAMAGE_PHYSICAL, 15);
 	m->setDefence(DAMAGE_BLESSED, 25);
 	m->setMoveStats(SPEED_NORMAL);
-	m->equipItem(weaponSharedPtr(new weapon(10, SPEED_NORMAL, EFFECT_BLEED, 15)));
+	m->equipItem(weaponSharedPtr(new weapon(25, SPEED_NORMAL, EFFECT_BLEED, 30)));
 	m->addSpellKnown(prayer_ProfaneRadiance());
-	m->addSpellKnown(attack_BloodFeast());
 	m->addSpellKnown(prayer_DrawOutTheBlood());
+	m->addSpellKnown(attack_BloodFeast());
 	m->setSpellCastChance(90);
 	m->setDivinePower(120);
 	m->isBoss = true;
@@ -1091,12 +1091,15 @@ monsterSharedPtr monster_MouthOfPash()
 		"This thing looks like nothing more than an enormous mouth, crawling on hundreds of tiny insect's legs. \
 Its thousands of teeth drip poison, and a mass of eyestalks protrude from its head."));
 	m->setHealth(1400);
-	m->setDefence(DAMAGE_PHYSICAL, 10);
+	m->setDefence(DAMAGE_PHYSICAL, 30);
+	m->setDefence(DAMAGE_MAGIC, 50);
+	m->setDefence(DAMAGE_FIRE, 30);
+	m->setBleedResist(100);
 	m->makeProfane();
 	m->setMoveStats(SPEED_FAST);
-	m->equipItem(weaponSharedPtr(new weapon(15, SPEED_NORMAL, EFFECT_POISON, 15)));
+	m->equipItem(weaponSharedPtr(new weapon(50, SPEED_NORMAL, EFFECT_POISON, 20)));
 	m->addSpellKnown(ability_Gnash());
-	m->setSpellCastChance(50);
+	m->setSpellCastChance(75);
 	m->isBoss = true;
 	m->setFragmentsDropped(2000);
 	m->addItemDrop(key_MawtoothFragment());

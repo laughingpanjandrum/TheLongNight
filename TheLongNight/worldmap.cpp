@@ -60,6 +60,9 @@ worldmap::worldmap()
 	addZone("Wretchcave", TCODColor::lightGrey, 22, 19,
 		"Wretched travelers often find their end in this miserable cave.");
 
+	addZone("Dead Sparrow's Tower", TCODColor::violet, 20, 20,
+		"Tower of the Sparrow, the final home of ethereal magic.");
+
 	addZone("Old Fairweather", TCODColor::lightSepia, 22, 18, OLD_FAIRWEATHER_TXT);
 
 	addZone("Darkwater Forest", TCODColor::darkGreen, 22, 17, DARKWATER_FOREST_TXT);

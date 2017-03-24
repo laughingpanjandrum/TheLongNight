@@ -177,10 +177,10 @@ spellSharedPtr attack_DivineSmite()
 spellSharedPtr attack_BloodFeast()
 {
 	spellSharedPtr sp(new spell("Blood Feast", SPELL_TILE, TCODColor::crimson,
-		"Inflict bleed on oneself. Next attack deals +15 damage."));
+		"Inflict bleed on oneself. Next attack deals +25 damage."));
 	sp->setAttackType(ATTACK_BUFF_SELF);
 	sp->addEffect(APPLY_BLEED_DAMAGE, 10);
-	sp->addEffect(SCALE_NEXT_ATTACK, 15);
+	sp->addEffect(SCALE_NEXT_ATTACK, 25);
 	sp->setVigourCost(1);
 	return sp;
 }
@@ -1051,7 +1051,7 @@ spellSharedPtr prayer_DrawOutTheBlood()
 	spellSharedPtr sp(new spell("Draw Out the Blood", PRAYER_TILE, TCODColor::crimson,
 		"Certain adherents of the Void acquired a great interest in blood. Orsyl was convinced that a secret power lay in \
 the blood of the living, but he never found it."));
-	sp->setAttackType(ATTACK_RANGE);
+	sp->setAttackType(ATTACK_RANGE, 6);
 	sp->addEffect(HURT_BLEEDER, 50);
 	sp->usesDivinePower = true;
 	sp->setVigourCost(2);
@@ -1288,7 +1288,7 @@ spellSharedPtr ability_Gnash()
 {
 	spellSharedPtr sp(new spell("Gnash", SPELL_TILE, TCODColor::lightestRed));
 	sp->setAttackType(ATTACK_RANGE, 1);
-	sp->addEffect(HEAL_CASTER, 100);
+	sp->addEffect(HEAL_CASTER, 200);
 	sp->addEffect(APPLY_ENTANGLING, 1);
 	sp->addEffect(APPLY_BLEED_DAMAGE, 10);
 	return sp;
