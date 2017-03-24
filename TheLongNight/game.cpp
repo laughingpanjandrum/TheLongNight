@@ -135,9 +135,13 @@ map * game::getKnownMap(std::string handle)
 
 void game::addMessage(std::string txt, TCODColor color)
 {
+	//Truncate size
+	if (txt.size() > 60)
+		txt = txt.substr(0, 60);
+	//Add to list
 	messages.push_back(message(txt, color));
 	if (messages.size() > MAX_MESSAGE_LOG) {
-		//Delete first message
+		//Delete first message if we've overflowed the max number of messages
 		messages.erase(messages.begin());
 	}
 }
@@ -1241,7 +1245,10 @@ void game::drawInventory(int atx, int aty)
 	else {
 		
 		//We can go to the level-up menu from here, & also save le game
-		win.write(atx, aty + 20, "Press [p] to LEVEL UP", TCODColor::white);
+		TCODColor col = TCODColor::darkGrey;
+		if (fragments >= player->getNextLevelCost())
+			col = TCODColor::green;
+		win.write(atx, aty + 20, "Press [p] to LEVEL UP", col);
 
 		//Indicate whether we're allowed to modify our equipment or not
 		std::string txt = "";
