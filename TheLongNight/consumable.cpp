@@ -36,6 +36,14 @@ consumableSharedPtr consumable_InvigoratingTea()
 	return c;
 }
 
+consumableSharedPtr consumable_PalegrassHerb()
+{
+	consumableSharedPtr c(new consumable("Palegrass Herb", MOSS_TILE, TCODColor::lightestGreen,
+		"Slowly restores health. Palegrass was once abundant in the kingdom, but is now endangered."));
+	c->addEffect(ADD_HEALTH_TRICKLE, 50);
+	return c;
+}
+
 consumableSharedPtr consumable_PilgrimsFingerbone()
 {
 	consumableSharedPtr c(new consumable("Pilgrim's Fingerbone", FINGERBONE_TILE, TCODColor::lightestYellow,

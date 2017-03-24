@@ -3922,6 +3922,7 @@ void game::initializeShops()
 	elena->addItem(ranged_WitchsJar(), 75);
 	elena->addItem(consumable_TinyGreenFlower(), 75);
 	elena->addItem(consumable_InvigoratingTea(), 150);
+	elena->addItem(consumable_PalegrassHerb(), 100);
 	allShops.push_back(shopSharedPtr(elena));
 	//With Piece of Jade
 	shop* jade = new shop("piece_of_jade");
@@ -3931,6 +3932,7 @@ void game::initializeShops()
 	jade->addItem(ranged_HeavyJavelin(), 100);
 	jade->addItem(ranged_LightingJavelin(), 100);
 	jade->addItem(ranged_FrostKnives(), 100);
+	elena->addItem(consumable_PalegrassHerb(), 200);
 	allUnlockableShops.push_back(shopSharedPtr(jade));
 	//With Piece of Bone
 	shop* bone = new shop("piece_of_bone");
@@ -3939,6 +3941,7 @@ void game::initializeShops()
 	bone->addItem(ranged_WarpingJavelin(), 100);
 	bone->addItem(headgear_PilgrimsHood(), 300);
 	bone->addItem(armour_PilgrimsCoat(), 500);
+	elena->addItem(consumable_PalegrassHerb(), 300);
 	allUnlockableShops.push_back(shopSharedPtr(bone));
 
 	//Ydella

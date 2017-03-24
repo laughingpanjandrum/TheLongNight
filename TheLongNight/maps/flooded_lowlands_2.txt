@@ -11,6 +11,7 @@ starving_fishman:22,24
 corroding_jar:22,9
 battered_steel_shield:20,31
 dull_grey_gemstone:37,12
+palegrass_herb:5,17
 -enditems
 -codes
 . floor_stone

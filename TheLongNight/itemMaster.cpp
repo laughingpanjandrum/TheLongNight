@@ -138,6 +138,7 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return wand_MoshkasSingingStaff();
 	else if (handle == "gottrics_wand")
 		return wand_GottricsWand();
+	
 	//CHIMES
 	else if (handle == "clerics_cracked_chime")
 		return chime_ClericsCrackedChime();
@@ -155,6 +156,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return consumable_StarwaterDraught();
 	else if (handle == "invigorating_tea")
 		return consumable_InvigoratingTea();
+	else if (handle == "palegrass_herb")
+		return consumable_PalegrassHerb();
 	else if (handle == "tiny_red_flower")
 		return consumable_TinyRedFlower();
 	else if (handle == "tiny_green_flower")
@@ -694,7 +697,7 @@ const itemVector getListOfAllItems()
 		headgear_StarweaversHood(), armour_StarweaversRobe(),
 		headgear_MoonPaleCrown(),
 		//Consumables
-		consumable_StarwaterDraught(), consumable_InvigoratingTea(),
+		consumable_StarwaterDraught(), consumable_InvigoratingTea(), consumable_PalegrassHerb(),
 		consumable_TinyGreenFlower(), consumable_TinyRedFlower(), consumable_PutridFlower(),
 		consumable_BloodDrinkersEyes(), consumable_IntoxicatingWine(), consumable_WitchwaterFlask(), consumable_BlackHoney(),
 		consumable_PutridBrew(), consumable_GodsbloodBrew(), consumable_BlackTarLiquor(), consumable_PurifiedStarwater(),

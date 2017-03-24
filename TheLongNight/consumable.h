@@ -71,6 +71,7 @@ typedef std::vector<consumableSharedPtr> consumableVector;
 
 consumableSharedPtr consumable_StarwaterDraught();
 consumableSharedPtr consumable_InvigoratingTea();
+consumableSharedPtr consumable_PalegrassHerb();
 consumableSharedPtr consumable_PilgrimsFingerbone();
 
 consumableSharedPtr consumable_TinyRedFlower();
