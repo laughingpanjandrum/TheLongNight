@@ -8,3 +8,5 @@ dhd
 tda
 djd
 dja
+movetest
+dsj

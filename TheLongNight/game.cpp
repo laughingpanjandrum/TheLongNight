@@ -807,7 +807,7 @@ void game::drawScreen(bool doRefresh)
 	
 	//Always draw the interface, except with our inventory!
 	if (state != STATE_VIEW_INVENTORY_CATEGORY && state != STATE_VIEW_WORLD_MAP)
-		drawInterface(MAP_DRAW_X + 47, MAP_DRAW_Y);
+		drawInterface(MAP_DRAW_X + 45, MAP_DRAW_Y);
 	
 	//Figure out else what to draw
 	if (state == STATE_VIEW_INVENTORY || state == STATE_VIEW_INVENTORY_CATEGORY)

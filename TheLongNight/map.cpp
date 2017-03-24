@@ -270,12 +270,13 @@ void map::addMovingMonster(storyEventVector eventsToWatch)
 	
 			//Make sure this guy isn't already in here
 			auto iter = std::find(monsterSpawnTags.begin(), monsterSpawnTags.end(), ev.monsterTag);
-			if (iter != monsterSpawnTags.end())
-				return;
+			if (iter == monsterSpawnTags.end()) {
 
-			//He's not! EMPLACE
-			monsterSpawnTags.push_back(ev.monsterTag);
-			monsterSpawnCoords.push_back(ev.spawnPt);
+				//He's not! EMPLACE
+				monsterSpawnTags.push_back(ev.monsterTag);
+				monsterSpawnCoords.push_back(ev.spawnPt);
+
+			}
 		
 		}
 	}
