@@ -394,6 +394,10 @@ void person::fullRestore()
 	scaleNextAttack = 0;
 	scaleNextPrayer = 0;
 	scaleNextSpell = 0;
+	attacksPerHit = 0;
+	healthTrickle = 0;
+	instantSpellCast = 0;
+	clearFreeMoves();
 	//Replenish items
 	restoreItemsToMax();
 }
