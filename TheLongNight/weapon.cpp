@@ -248,7 +248,7 @@ weaponSharedPtr weapon_ThinKnife()
 weaponSharedPtr weapon_StraightSword()
 {
 	weaponSharedPtr wp(new weapon("Straight Sword", SWORD_TILE, TCODColor::lightGrey,
-		"It's just a simple sword, but the haft has a nice little dragon face carved in it. (Most weapons gain extra damage \
+		"It's just a simple sword. (Most weapons gain extra damage \
 based on one or more of your stats. This sword will scale with both Strength and Dexterity.)"));
 	wp->setBasicAttributes(30, SPEED_NORMAL);
 	wp->setSpecialAttack(attack_StrongAttack());

@@ -390,6 +390,10 @@ void person::fullRestore()
 	invisibility = 0;
 	//Remove accumulated buffs
 	flatDamageBuff = 0;
+	nextSpellCostAdjust = 0;
+	scaleNextAttack = 0;
+	scaleNextPrayer = 0;
+	scaleNextSpell = 0;
 	//Replenish items
 	restoreItemsToMax();
 }

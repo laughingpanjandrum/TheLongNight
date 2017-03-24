@@ -459,6 +459,8 @@ bool game::aiShouldCastSpell(monsterSharedPtr ai, spellSharedPtr sp)
 	return true;
 }
 
+
+
 /*
 See if we want to cast any of our spells.
 */
@@ -1166,6 +1168,8 @@ void game::drawInterface(int leftx, int topy)
 	//List controls
 	atx += 15;
 	aty = MAP_DRAW_Y + 43;
+	win.writec(atx, ++aty, 'z', TCODColor::green);
+	win.write(atx + 2, aty, "Stand still for a moment", TCODColor::white);
 	win.writec(atx, ++aty, 'c', TCODColor::green);
 	win.write(atx + 2, aty, "Select consumable", TCODColor::white);
 	win.writec(atx, ++aty, 'f', TCODColor::green);
@@ -1178,6 +1182,10 @@ void game::drawInterface(int leftx, int topy)
 	win.write(atx + 2, aty, "Talk to friendly NPC", TCODColor::white);
 	win.writec(atx, ++aty, 'i', TCODColor::green);
 	win.write(atx + 2, aty, "View inventory", TCODColor::white);
+	win.writec(atx, ++aty, 'p', TCODColor::green);
+	win.write(atx + 2, aty, "View player info", TCODColor::white);
+	win.writec(atx, ++aty, 'm', TCODColor::green);
+	win.write(atx + 2, aty, "View map", TCODColor::white);
 
 	//BOSS HEALTH BAR, if we're fighting a boss
 	atx = MAP_DRAW_X;
@@ -1217,6 +1225,14 @@ void game::drawInventory(int atx, int aty)
 		
 		//We can go to the level-up menu from here, & also save le game
 		win.write(atx, aty + 20, "Press [p] to LEVEL UP", TCODColor::white);
+
+		//Indicate whether we're allowed to modify our equipment or not
+		std::string txt = "";
+		if (canAccessInventory)
+			txt = "You sit at the Statue of Rest. You can now adjust your equipment.";
+		else
+			txt = "You must sit at a Statue of Rest to change your equipment.";
+		win.writeWrapped(atx, aty + 22, 30, txt, TCODColor::lightCyan);
 	
 	}
 }
