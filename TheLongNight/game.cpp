@@ -572,16 +572,21 @@ void game::aiSpawnCreature(monsterSharedPtr ai)
 	}
 
 	//now PICK A RANDOM ONE
-	if (pts.size()) {
+	if (pts.size() > 0) {
+		
 		int p = randrange(pts.size());
 		coord pt = pts.at(p);
 		monsterSharedPtr m = ai->getRandomSpawn();
+		
 		//AND PUT IT DOWN
 		currentMap->addPerson(m, pt.first, pt.second);
+		
 		//And add it to the clock
 		turns.addEntity(m, 1);
+		
 		//And the current AI also uses up its turn
 		turns.addEntity(ai, ai->getAttackDelay());
+	
 	}
 
 }
@@ -1916,9 +1921,11 @@ void game::drawSpellInfo(spellSharedPtr it, int atx, int aty)
 		win.write(atx + 5, aty, "Melee Attack", TCODColor::white);
 
 	//Casting cost
-	win.write(atx, ++aty, "Cast:", TCODColor::white);
-	win.writec(atx + 6, aty, VIGOUR_GLYPH, TCODColor::green);
-	win.write(atx + 7, aty, std::to_string(it->getVigourCost()), TCODColor::lightGreen);
+	if (it->getVigourCost() > 0) {
+		win.write(atx, ++aty, "Cast:", TCODColor::white);
+		win.writec(atx + 6, aty, VIGOUR_GLYPH, TCODColor::green);
+		win.write(atx + 7, aty, std::to_string(it->getVigourCost()), TCODColor::lightGreen);
+	}
 	
 	//Spell details
 	if (at == ATTACK_BUFF_WEAPON) {
