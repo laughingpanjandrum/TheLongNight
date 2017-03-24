@@ -1699,7 +1699,7 @@ Weapon descriptions.
 */
 void game::drawWeaponInfo(weaponSharedPtr it, int atx, int aty)
 {
-	int offset = 13;
+	int offset = 15;
 	TCODColor maincol = TCODColor::white;
 	
 	//Stuff only relevant to weapons
@@ -1956,7 +1956,7 @@ void game::drawSpellInfo(spellSharedPtr it, int atx, int aty)
 		int potency = it->getEffectPotency(i);
 		//Display it
 		win.write(atx + 1, ++aty, std::to_string(potency), TCODColor::white);
-		win.write(atx + 4, aty, getEffectName(eType), TCODColor::lightGrey);
+		win.write(atx + std::to_string(potency).size() + 2, aty, getEffectName(eType), TCODColor::lightGrey);
 	}
 }
 
@@ -2007,9 +2007,13 @@ void game::drawConsumableInfo(consumableSharedPtr it, int atx, int aty)
 		for (int i = 0; i < it->getEffects().size(); i++) {
 			auto eff = it->getEffects().at(i);
 			auto potency = it->getPotencies().at(i);
-			if (potency > 0)
-				win.write(atx, ++aty, std::to_string(potency), TCODColor::white);
-			win.write(atx + 5, aty, getEffectName(eff), TCODColor::lightGrey);
+			aty++;
+			int msgx = atx + 1;
+			if (potency != 0) {
+				win.write(atx, aty, std::to_string(potency), TCODColor::white);
+				msgx += std::to_string(potency).size();
+			}
+			win.write(msgx, aty, getEffectName(eff), TCODColor::lightGrey);
 		}
 	
 	}

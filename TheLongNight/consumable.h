@@ -35,7 +35,7 @@ public:
 	weaponBuffSharedPtr getWeaponBuff() { return buff; }
 
 	//Setting effects
-	void addEffect(effect eff, int pot = 1) { effectsApplied.push_back(eff); effectPotencies.push_back(pot); }
+	void addEffect(effect eff, int pot = 0) { effectsApplied.push_back(eff); effectPotencies.push_back(pot); }
 	void setRangedAttack(spellSharedPtr at) { rangedAttack = at; }
 	void setWeaponBuff(weaponBuff* b) { buff = weaponBuffSharedPtr(b); }
 

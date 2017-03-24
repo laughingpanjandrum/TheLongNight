@@ -41,7 +41,7 @@ consumableSharedPtr consumable_PilgrimsFingerbone()
 	consumableSharedPtr c(new consumable("Pilgrim's Fingerbone", FINGERBONE_TILE, TCODColor::lightestYellow,
 		"Fingerbone of a lonesome pilgrim, who dreamt eternally of returning home. But the way home was not easy to find. \
 (You can use this item from your inventory at any time.)"));
-	c->addEffect(WARP_TO_SAVE_POINT);
+	c->addEffect(WARP_TO_SAVE_POINT, 0);
 	c->consumeOnUse = false;
 	c->oneUseOnly = true;
 	return c;
@@ -52,7 +52,7 @@ consumableSharedPtr consumable_TinyRedFlower()
 	consumableSharedPtr c(new consumable("Tiny Red Flower", FLOWER_TILE, TCODColor::crimson,
 		"A small flower of the kind Princess Yulia once wore in her hair. Clears Bleed buildup. (Once the Bleed bar fills, you \
 take a large amount of damage on your next two turns. Use this flower to prevent damage or clear the bar.)"));
-	c->addEffect(REMOVE_BLEED);
+	c->addEffect(REMOVE_BLEED, 0);
 	return c;
 }
 
@@ -61,7 +61,7 @@ consumableSharedPtr consumable_TinyGreenFlower()
 	consumableSharedPtr c(new consumable("Tiny Green Flower", FLOWER_TILE, TCODColor::green,
 		"These gentle green flowers purge toxins from the body. (Once the Poison bar fills, you slowly take damage until you die \
 or rest. Use this flower to clear the effect.)"));
-	c->addEffect(REMOVE_POISON);
+	c->addEffect(REMOVE_POISON, 0);
 	return c;
 }
 
@@ -71,7 +71,7 @@ consumableSharedPtr consumable_PutridFlower()
 		"A foul-smelling flower that grows underground. According to certain storytellers, Farin \
 cultivated these in secret, afraid that he would someday regret bringing plague upon the world. (Plague reduces your maximum \
 hitpoints until you rest or die. Use this flower to clear the effect.)"));
-	c->addEffect(REMOVE_PLAGUE);
+	c->addEffect(REMOVE_PLAGUE, 0);
 	return c;
 }
 
