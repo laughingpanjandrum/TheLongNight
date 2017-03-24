@@ -4516,6 +4516,7 @@ void game::clearDeadCreatures()
 	if (player->isDead) {
 		//Message about our death
 		win.write(MAP_DRAW_X + 12, MAP_DRAW_Y + 18, "Y O U   D I E D", TCODColor::lightestRed);
+		win.write(MAP_DRAW_X + 8, MAP_DRAW_Y + 20, "Press [SPACEBAR] to respawn", TCODColor::white);
 		win.refresh();
 		while (win.getkey().vk != KEY_ACCEPT) {}
 		//We lose some of our fragments
