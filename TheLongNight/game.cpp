@@ -1172,19 +1172,22 @@ void game::drawInterface(int leftx, int topy)
 
 	//List controls
 	atx += 15;
-	aty = MAP_DRAW_Y + 43;
+	aty = ITEM_DRAW_Y + 3;
 	win.writec(atx, ++aty, 'z', TCODColor::green);
 	win.write(atx + 2, aty, "Stand still for a moment", TCODColor::white);
 	win.writec(atx, ++aty, 'c', TCODColor::green);
 	win.write(atx + 2, aty, "Select consumable", TCODColor::white);
 	win.writec(atx, ++aty, 'f', TCODColor::green);
 	win.write(atx + 2, aty, "Switch to secondary weapon", TCODColor::white);
+	aty++;
 	win.writec(atx, ++aty, 'q', TCODColor::green);
 	win.write(atx + 2, aty, "Cast current spell", TCODColor::white);
 	win.writec(atx, ++aty, 'e', TCODColor::green);
 	win.write(atx + 2, aty, "Use current consumable", TCODColor::white);
+	aty++;
 	win.writec(atx, ++aty, 'h', TCODColor::green);
 	win.write(atx + 2, aty, "Talk to friendly NPC", TCODColor::white);
+	aty++;
 	win.writec(atx, ++aty, 'i', TCODColor::green);
 	win.write(atx + 2, aty, "View inventory", TCODColor::white);
 	win.writec(atx, ++aty, 'p', TCODColor::green);
@@ -1237,7 +1240,9 @@ void game::drawInventory(int atx, int aty)
 			txt = "You sit at the Statue of Rest. You can now adjust your equipment.";
 		else
 			txt = "You must sit at a Statue of Rest to change your equipment.";
-		win.writeWrapped(atx, aty + 22, 30, txt, TCODColor::lightCyan);
+		aty = win.writeWrapped(atx, aty + 22, 30, txt, TCODColor::lightCyan);
+
+		win.writeWrapped(atx, aty + 1, 30, "RESPAWN POINT SET", TCODColor::grey);
 	
 	}
 }
@@ -2349,8 +2354,11 @@ void game::useConsumable()
 			else if (toUse->getWeaponBuff() != nullptr) {
 				//Buffs a weapon
 				weaponSharedPtr wp = player->getWeapon();
-				if (wp != nullptr)
+				if (wp != nullptr) {
 					wp->setBuff(*toUse->getWeaponBuff());
+					auto dtype = toUse->getWeaponBuff()->dtype;
+					addMessage("Applied " + getDamageTypeName(dtype) + " to weapon!", getDamageTypeColor(dtype));
+				}
 			}
 
 			else if (toUse->addsPermanentBuff) {
@@ -3642,8 +3650,8 @@ void game::dischargeSpellOnWeapon(spellSharedPtr sp, personSharedPtr caster, wea
 		//Expend vigour
 		caster->paySpellCost(sp);
 		//Animation
-		coordVector pts;
-		pts.push_back(caster->getPosition());
+		auto dtype = sp->getWeaponBuff().dtype;
+		addMessage("Applied " + getDamageTypeName(dtype) + " to weapon!", getDamageTypeColor(dtype));
 	}
 }
 

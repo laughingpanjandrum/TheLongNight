@@ -310,7 +310,7 @@ maptile * tile_SandBones()
 
 maptile * tile_Bed()
 {
-	return new maptile("Bed", "bed", BED_TILE, TCODColor::darkRed, DARK_STONE_COLOR);
+	return new maptile("Ruined Bed", "bed", BED_TILE, TCODColor::darkestRed, DARK_STONE_COLOR);
 }
 
 maptile * tile_Terminal()

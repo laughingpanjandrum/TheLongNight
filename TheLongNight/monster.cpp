@@ -283,9 +283,14 @@ flailing."));
 	return m;
 }
 
+
+
+
 /*
 Pilgrim's Road
 */
+
+
 
 monsterSharedPtr monster_CrowKnight()
 {
@@ -297,6 +302,7 @@ monsterSharedPtr monster_CrowKnight()
 	m->equipItem(weapon_CrowKnightSword());
 	m->setFragmentsDropped(25);
 	m->setDefence(DAMAGE_PHYSICAL, 10);
+	m->setSpellCastChance(10);
 	return m;
 }
 
@@ -309,6 +315,7 @@ monsterSharedPtr monster_CrowThief()
 	m->setMeleeStats(10, SPEED_FAST);
 	m->equipItem(weapon_CrowKnife());
 	m->setFragmentsDropped(25);
+	m->setSpellCastChance(15);
 	return m;
 }
 
@@ -454,6 +461,7 @@ monsterSharedPtr monster_SkinlessKnight()
 	m->makeProfane();
 	m->isBoss = true;
 	m->showBossHealthBar = false;
+	m->setFragmentsDropped(200);
 	return m;
 }
 
