@@ -673,8 +673,8 @@ void game::drawMenu(menu * m, int atx, int aty)
 
 	//Box it in
 	int height = m->getAllElements().size() + 4;
-	win.clearRegion(atx - 1, aty - 1, 46, height);
-	win.drawBox(atx - 1, aty - 1, 46, height);
+	win.clearRegion(atx - 1, aty - 1, 44, height);
+	win.drawBox(atx - 1, aty - 1, 44, height);
 
 	//Title
 	win.write(atx, aty++, m->getTitle(), TCODColor::white);

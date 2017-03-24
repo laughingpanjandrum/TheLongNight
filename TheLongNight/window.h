@@ -57,12 +57,12 @@ public:
 private:
 
 	//Constants used in drawing
-	int BOTTOM_LEFT_CORNER = 200;
-	int TOP_LEFT_CORNER = 201;
-	int TOP_RIGHT_CORNER = 187;
-	int BOTTOM_RIGHT_CORNER = 188;
-	int VERTICAL_BAR = 186;
-	int HORIZONTAL_BAR = 205;
+	int BOTTOM_LEFT_CORNER = 177;// 200;
+	int TOP_LEFT_CORNER = 177;//201;
+	int TOP_RIGHT_CORNER = 177;//187;
+	int BOTTOM_RIGHT_CORNER = 177;//188;
+	int VERTICAL_BAR = 177;//186;
+	int HORIZONTAL_BAR = 177;//205;
 
 };
 
