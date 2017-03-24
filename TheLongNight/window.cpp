@@ -85,28 +85,37 @@ Returns the last y-coordinate we draw on.
 */
 int window::writeWrapped(int x, int y, unsigned int lineLen, std::string txt, TCODColor col, TCODColor bgcol, bool toAltConsole)
 {
+	
 	//Break string up into chunks, each of which (ideally) ends with a space.
 	std::string word = "";
 	std::string line = "";
+	
 	for (unsigned int i = 0; i < txt.size(); i++) {
+	
 		//Add new word
 		word += txt.at(i);
 		if (isPunctuator(txt.at(i))) {
+		
 			//End of word; will this exceed the max line length?
 			std::string possibleLine = line + word;
-			if (possibleLine.size() > lineLen) {
+			if (possibleLine.size() >= lineLen) {
+			
 				//Write last line and wrap
 				write(x, y, line, col, bgcol);
 				y++;
 				line = word;
+			
 			}
+			
 			else {
 				//Append to current line and continue
 				line += word;
 			}
+			
 			word = "";
 		}
 	}
+	
 	//Write the last line when we're done
 	if (word.size())
 		line += word;

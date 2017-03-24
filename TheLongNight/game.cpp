@@ -498,7 +498,9 @@ bool game::aiTryUseSpell(monsterSharedPtr ai)
 					if (dist <= sp->getAttackRange()) {
 						
 						//ANIMATION BLAST!
-						spellTitleAnimation(ai, sp);
+						if (currentMap->isPointInFOV(ai->getx(), ai->gety())) {
+							spellTitleAnimation(ai, sp);
+						}
 						coordVectorSharedPtr path = coordVectorSharedPtr(getLine(ai->getPosition(), target->getPosition()));
 						addAnimations(new bulletPath(path, BULLET_TILE, sp->getColor()));
 						
@@ -518,12 +520,15 @@ bool game::aiTryUseSpell(monsterSharedPtr ai)
 				//See if AOE spell will hit target
 				int dist = hypot(ai->getx() - target->getx(), ai->gety() - target->gety());
 				if (dist <= sp->getAttackRange()) {
+					
 					//ANIMATION BLAST!
-					spellTitleAnimation(ai, sp);
+					if (currentMap->isPointInFOV(ai->getx(), ai->gety()))
+						spellTitleAnimation(ai, sp);
 					//Do the AOE!
 					doAOE(sp, ai);
 					turns.addEntity(ai, ai->getAttackDelay());
 					return true;
+				
 				}
 
 			}
@@ -531,7 +536,8 @@ bool game::aiTryUseSpell(monsterSharedPtr ai)
 			else if (aType == ATTACK_BUFF_SELF) {
 
 				//ANIMATION BLAST!
-				spellTitleAnimation(ai, sp);
+				if (currentMap->isPointInFOV(ai->getx(), ai->gety()))
+					spellTitleAnimation(ai, sp);
 
 				//Cast spell on self - usually a good idea!
 				dischargeSpellOnTarget(sp, ai, ai);
@@ -1475,7 +1481,7 @@ void game::drawTargetInfo(personSharedPtr target, int atx, int aty)
 	aty = listStatusEffects(target, atx, aty);
 
 	//Hostility
-	if (!target->isHostile) {
+	if (!target->isHostile && !target->isPlayer) {
 		win.write(atx, ++aty, "[Friendly!]", TCODColor::white);
 		if (hypot(player->getx() - target->getx(), player->gety() - target->gety()) < 2)
 			win.write(atx, ++aty, "Press [h] to talk", TCODColor::white);
