@@ -1135,6 +1135,12 @@ void game::drawInterface(int leftx, int topy)
 	if (player->scaleNextPrayer > 0)
 		win.write(atx, ++aty, "Next prayer +" + std::to_string(player->scaleNextPrayer) + " power", TCODColor::darkYellow);
 
+	//Defensive buffs
+	if (player->tempDefenceBuff > 0)
+		win.write(atx, ++aty, "Defence +" + std::to_string(player->tempDefenceBuff), TCODColor::sepia);
+	if (player->tempElementalDefenceBuff)
+		win.write(atx, ++aty, "Elemental defence +" + std::to_string(player->tempElementalDefenceBuff), TCODColor::white);
+
 	//Show whether current spell is in range, if any
 	aty += 2;
 	auto sp = player->getCurrentSpell();
@@ -1194,6 +1200,9 @@ void game::drawInterface(int leftx, int topy)
 	win.write(atx + 2, aty, "View player info", TCODColor::white);
 	win.writec(atx, ++aty, 'm', TCODColor::green);
 	win.write(atx + 2, aty, "View map", TCODColor::white);
+	aty++;
+	win.write(atx, ++aty, "Shift-Q", TCODColor::green);
+	win.write(atx + 8, aty, "to quit", TCODColor::white);
 
 	//BOSS HEALTH BAR, if we're fighting a boss
 	atx = MAP_DRAW_X;
@@ -4502,8 +4511,8 @@ void game::clearDeadCreatures()
 		win.write(MAP_DRAW_X + 12, MAP_DRAW_Y + 18, "Y O U   D I E D", TCODColor::lightestRed);
 		win.refresh();
 		while (win.getkey().vk != KEY_ACCEPT) {}
-		//We lose all of our fragments
-		fragments = 0;
+		//We lose some of our fragments
+		fragments -= fragments / 3;
 		//Reload game
 		restoreFromSavePoint();
 	}

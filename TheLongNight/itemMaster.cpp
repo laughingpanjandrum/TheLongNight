@@ -583,6 +583,9 @@ std::string getEffectName(effect e)
 	case(GAIN_MAGIC_RESIST): return "magic defence";
 	case(GAIN_STINK_RESIST): return "stench resistance";
 
+	case(TEMP_GAIN_DEFENCE): return "defence on next attack";
+	case(TEMP_GAIN_ELEMENTAL_DEFENCE): return "elemental defence on next attack";
+
 	case(CASTER_MELEE_ATTACK): return "free melee attack";
 	case(APPLY_UNTYPED_DAMAGE): return "damage";
 	case(APPLY_PHYSICAL_DAMAGE): return "physical damage";

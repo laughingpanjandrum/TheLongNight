@@ -768,6 +768,7 @@ weaponSharedPtr shield_WoodenWyrdShield()
 	wp->setDamagePenalty(5);
 	wp->makeOffhand();
 	wp->setImage(loadWeaponImage("S_wyrd shield"));
+	wp->setSpecialAttack(ability_ShieldBlock());
 	return wp;
 }
 
@@ -783,6 +784,7 @@ weaponSharedPtr shield_BatteredSteelShield()
 	wp->setDamagePenalty(10);
 	wp->makeOffhand();
 	wp->setImage(loadWeaponImage("S_battered steel shield"));
+	wp->setSpecialAttack(ability_ElementalShieldBlock());
 	return wp;
 }
 
@@ -797,6 +799,7 @@ but not a single knight survived."));
 	wp->setDamagePenalty(10);
 	wp->makeOffhand();
 	wp->setImage(loadWeaponImage("S_holy shield"));
+	wp->setSpecialAttack(ability_DivineGuardian());
 	return wp;
 }
 
@@ -809,6 +812,7 @@ weaponSharedPtr shield_VoidTouchedShield()
 	wp->setDamagePenalty(5);
 	wp->makeOffhand();
 	wp->setImage(loadWeaponImage("S_ethereal shield"));
+	wp->setSpecialAttack(ability_VoidAura());
 	return wp;
 }
 
@@ -821,6 +825,7 @@ weaponSharedPtr shield_DragonboneShield()
 	wp->setDamagePenalty(15);
 	wp->makeOffhand();
 	wp->setImage(loadWeaponImage("S_dragonbone shield"));
+	wp->setSpecialAttack(ability_FlameBreath());
 	return wp;
 }
 
@@ -832,6 +837,7 @@ weaponSharedPtr shield_EtherealShield()
 	wp->setDamageResist(DAMAGE_MAGIC, 25);
 	wp->makeOffhand();
 	wp->setImage(loadWeaponImage("S_ethereal shield"));
+	wp->setSpecialAttack(ability_MagesDisquiet());
 	return wp;
 }
 
@@ -848,6 +854,7 @@ They ring in times of danger, bringing the favour of the old gods upon the lost.
 	wp->setDivinePower(75);
 	wp->makeOffhand();
 	wp->setImage(loadWeaponImage("S_kalle bell shield"));
+	wp->setSpecialAttack(ability_KhallesCryOfDespair());
 	return wp;
 }
 
@@ -861,6 +868,7 @@ the crest slowly changed into the shape of a crooked finger."));
 	wp->setDamageResist(DAMAGE_ACID, 15);
 	wp->makeOffhand();
 	wp->setImage(loadWeaponImage("S_ghost shield"));
+	wp->setSpecialAttack(ability_Materialize());
 	return wp;
 }
 
@@ -874,6 +882,7 @@ what comes of those who rely on the strength of the old gods, and was immensely 
 	wp->setDamagePenalty(10);
 	wp->makeOffhand();
 	wp->setImage(loadWeaponImage("S_green knight shield"));
+	wp->setSpecialAttack(ability_MemoryOfLight());
 	wp->inSirPercivelsSet = true;
 	return wp;
 }
@@ -888,6 +897,7 @@ weaponSharedPtr shield_RottenBeastShield()
 	wp->makeOffhand();
 	wp->setDamagePenalty(5);
 	wp->setImage(loadWeaponImage("S_rotten beast shield"));
+	wp->setSpecialAttack(ability_Corrosion());
 	return wp;
 }
 

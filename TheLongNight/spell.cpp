@@ -558,6 +558,95 @@ spellSharedPtr ability_FogCloud()
 }
 
 
+
+
+//Shield powers
+
+
+spellSharedPtr ability_ShieldBlock()
+{
+	spellSharedPtr sp(new spell("Shield Block", SHIELD_TILE, TCODColor::sepia,
+		"Extra defence the next time you take damage."));
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(TEMP_GAIN_DEFENCE, 50);
+	return sp;
+}
+
+spellSharedPtr ability_ElementalShieldBlock()
+{
+	spellSharedPtr sp(new spell("Elemental Shield Block", SHIELD_TILE, TCODColor::white,
+		"Extra defence against acid, cold, fire and electric the next time you take damage."));
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(TEMP_GAIN_ELEMENTAL_DEFENCE, 50);
+	return sp;
+}
+
+spellSharedPtr ability_DivineGuardian()
+{
+	spellSharedPtr sp(new spell("Divine Guardian", SHIELD_TILE, TCODColor::yellow,
+		"Call upon the protectors of the city to regain some health."));
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(ADD_HEALTH_TRICKLE, 50);
+	return sp;
+}
+
+spellSharedPtr ability_VoidAura()
+{
+	spellSharedPtr sp(new spell("Void Aura", SHIELD_TILE, TCODColor::purple,
+		"Call upon the Void to sap life from adjacent enemies."));
+	sp->setAttackType(ATTACK_AOE, 1);
+	sp->addEffect(APPLY_UNTYPED_DAMAGE, 25);
+	return sp;
+}
+
+spellSharedPtr ability_FlameBreath()
+{
+	spellSharedPtr sp(new spell("Flame Breath", SHIELD_TILE, TCODColor::flame,
+		"Call upon the power of dragons to cast flame at your enemies."));
+	sp->setAttackType(ATTACK_RANGE, 3);
+	sp->addEffect(APPLY_FIRE_DAMAGE, 50);
+	return sp;
+}
+
+spellSharedPtr ability_MagesDisquiet()
+{
+	spellSharedPtr sp(new spell("Mage's Disquiet", SHIELD_TILE, TCODColor::magenta,
+		"Silence all magic in your vicinity."));
+	sp->setAttackType(ATTACK_AOE, 8);
+	sp->addEffect(SILENCE, 10);
+	return sp;
+}
+
+spellSharedPtr ability_KhallesCryOfDespair()
+{
+	spellSharedPtr sp(new spell("Khalle's Cry of Despair", SHIELD_TILE, TCODColor::darkYellow,
+		"The cry of Khalle is said to confer lasting pain, but perhaps the gods look kindly upon it."));
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(GAIN_MAX_HEALTH, -20);
+	sp->addEffect(INCREASE_PRAYER_POWER, 50);
+	sp->addPermanentBuff = true;
+	return sp;
+}
+
+spellSharedPtr ability_Materialize()
+{
+	spellSharedPtr sp(new spell("Materialize", SHIELD_TILE, TCODColor::pink,
+		"The shield briefly becomes real, conferring excellent physical defence."));
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(TEMP_GAIN_DEFENCE, 100);
+	return sp;
+}
+
+spellSharedPtr ability_Corrosion()
+{
+	spellSharedPtr sp(new spell("Envenom", SHIELD_TILE, TCODColor::lightGreen,
+		"Touch your weapon to the shield to coat it with corrosive acid."));
+	sp->setAttackType(ATTACK_BUFF_WEAPON);
+	sp->setBuffApplied(DAMAGE_ACID, 30);
+	return sp;
+}
+
+
 //Spells
 
 spellSharedPtr spell_MagicMissile()

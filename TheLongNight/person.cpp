@@ -263,6 +263,17 @@ void person::takeDamage(int amount, damageType dtype)
 	else if (dtype != DAMAGE_UNTYPED)
 		resist = getDamageResist(dtype);
 
+	//Temporary buffs to defence
+	if (dtype == DAMAGE_PHYSICAL) {
+		resist += tempDefenceBuff;
+		tempDefenceBuff = 0;
+	}
+	else {
+		resist += tempElementalDefenceBuff;
+		tempElementalDefenceBuff = 0;
+	}
+
+	//Reduce damage
 	int def = ((float)resist / 100) * (float)amount;
 	amount -= def;
 
@@ -591,6 +602,11 @@ void person::applyEffect(effect eff, int potency)
 	}
 	else if (eff == IMMUNE_TO_VOID)
 		immuneToVoid += potency;
+
+	else if (eff == TEMP_GAIN_DEFENCE)
+		tempDefenceBuff += potency;
+	else if (eff == TEMP_GAIN_ELEMENTAL_DEFENCE)
+		tempElementalDefenceBuff += potency;
 
 	//Spell buffs
 

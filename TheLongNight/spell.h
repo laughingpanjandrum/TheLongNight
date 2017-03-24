@@ -129,6 +129,17 @@ spellSharedPtr ability_MemoryOfLight();
 
 spellSharedPtr ability_FogCloud();
 
+//Shield powers
+spellSharedPtr ability_ShieldBlock();
+spellSharedPtr ability_ElementalShieldBlock();
+spellSharedPtr ability_DivineGuardian();
+spellSharedPtr ability_VoidAura();
+spellSharedPtr ability_FlameBreath();
+spellSharedPtr ability_MagesDisquiet();
+spellSharedPtr ability_KhallesCryOfDespair();
+spellSharedPtr ability_Materialize();
+spellSharedPtr ability_Corrosion();
+
 //	Arcane spells
 spellSharedPtr spell_MagicMissile();
 spellSharedPtr spell_ArcaneRadiance();

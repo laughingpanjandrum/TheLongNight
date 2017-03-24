@@ -163,6 +163,8 @@ public:
 	int deathfireInfusion = 0; //We explode, dealing fire damage, upon death
 	int deathlink = 0; //If we die, we return to life with this much hp (so long as it's >0)
 	int silence = 0; //If >0, can't cast spells
+	int tempDefenceBuff = 0; //Defensive buff to next attack only
+	int tempElementalDefenceBuff = 0; //Defensive buff to next elemental defence only
 
 	//Debuffs
 	int slowdown = 0;
