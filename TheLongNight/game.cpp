@@ -3954,14 +3954,17 @@ void game::initializeShops()
 	//	Old Crow's Heart
 	shop* old_crow = new shop("old_crows_heart", true);
 	old_crow->addItem(weapon_OldCrowsLongKnife(), 200);
+	old_crow->addItem(consumable_Quickgrass(), 200);
 	allUnlockableShops.push_back(shopSharedPtr(old_crow));
 	//	Fishborn Goddess Heart
 	shop* fishborn = new shop("fishborn_heart", true);
 	fishborn->addItem(prayer_SinkBeneath(), 200);
+	fishborn->addItem(consumable_AcidBloodFlask(), 200);
 	allUnlockableShops.push_back(shopSharedPtr(fishborn));
 	//	Orsyl's Heart
 	shop* or = new shop("orsyls_heart", true);
 	or->addItem(chime_OrsylsProfaneChime(), 300);
+	or ->addItem(prayer_OrsylsCall(), 300);
 	allUnlockableShops.push_back(shopSharedPtr(or));
 	//	Vorten's Heart
 	shop* vorten = new shop("vortens_heart", true);

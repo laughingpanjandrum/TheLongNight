@@ -710,6 +710,7 @@ const itemVector getListOfAllItems()
 		gem_KingsGiantGemstone(), gem_GodlessGemstone(),
 		bell_VoidwalkersDancingBell(), bell_VoidwalkersReturningBell(), horn_HeraldsWhiteHorn(),
 		misc_BrandOfTheEmissary(),
+		consumable_Quickgrass(), consumable_AcidBloodFlask(),
 		//Charms
 		charm_ArcanaDrenchedCharm(), charm_ClericsHolyPendant(), charm_BloodstainedCharm(),
 		charm_KhallesHeadband(), charm_IdolOfPash(), charm_EvisceratingRing(), charm_BloodDrinkersBand(),
@@ -733,7 +734,7 @@ const itemVector getListOfAllItems()
 		prayer_DivineRestoration(), prayer_DivineJudgement(), prayer_DivineForgiveness(),
 		prayer_NightmarePrayer(), prayer_WordOfUnmaking(), prayer_GazeIntoEmptiness(),
 		prayer_SinkBeneath(), prayer_Deathlink(), prayer_ProfoundStill(),
-		prayer_SpidersPrayer(), prayer_TouchOfDoom(), prayer_AstralPrison(), prayer_ProfaneRay(),
+		prayer_SpidersPrayer(), prayer_TouchOfDoom(), prayer_AstralPrison(), prayer_ProfaneRay(), prayer_OrsylsCall(),
 		//Keys
 		key_WretchsKey(), key_OldCrowsKey(), key_RuinedTownshipKey(), key_WyrdKey(), key_GreenChapelGardenKey(),
 		key_SordidChapelKey(), key_SpinalColumnShard(), key_OldValleyKey(), key_BartonsKey(), key_HightowerKey(),

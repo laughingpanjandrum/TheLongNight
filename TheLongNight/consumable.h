@@ -82,6 +82,9 @@ consumableSharedPtr consumable_IntoxicatingWine();
 consumableSharedPtr consumable_WitchwaterFlask();
 consumableSharedPtr consumable_BlackHoney();
 
+consumableSharedPtr consumable_Quickgrass();
+consumableSharedPtr consumable_AcidBloodFlask();
+
 consumableSharedPtr consumable_PutridBrew();
 consumableSharedPtr consumable_GodsbloodBrew();
 consumableSharedPtr consumable_BlackTarLiquor();

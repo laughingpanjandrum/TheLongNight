@@ -126,6 +126,25 @@ with bloodshed, one's dreams are unlikely to bring peace."));
 	return c;
 }
 
+consumableSharedPtr consumable_Quickgrass()
+{
+	consumableSharedPtr c(new consumable("Quickgrass", MOSS_TILE, TCODColor::lightLime,
+		"A rare herb treasured by the crow knights for the exhilirating surge of energy it produces when chewed."));
+	c->addEffect(GAIN_FREE_MOVES, 3);
+	c->setAmount(4);
+	return c;
+}
+
+consumableSharedPtr consumable_AcidBloodFlask()
+{
+	consumableSharedPtr c(new consumable("Acid Blood Flask", FLASK_TILE, TCODColor::lightGreen,
+		"The blood of the Fishborn Goddess had a corrosive edge. Drinking it inspires a \
+surge of strange power."));
+	c->addEffect(SPELL_ACID_INFUSION, 100);
+	c->setAmount(3);
+	return c;
+}
+
 consumableSharedPtr consumable_PutridBrew()
 {
 	consumableSharedPtr c(new consumable("Putrid Brew", FLASK_TILE, TCODColor::darkLime,

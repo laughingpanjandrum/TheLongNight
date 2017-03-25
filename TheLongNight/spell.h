@@ -199,6 +199,7 @@ spellSharedPtr prayer_WordOfUnmaking();
 spellSharedPtr prayer_GazeIntoEmptiness();
 //Sold by Ydella
 spellSharedPtr prayer_SinkBeneath();
+spellSharedPtr prayer_OrsylsCall();
 spellSharedPtr prayer_Deathlink();
 spellSharedPtr prayer_ProfoundStill();
 spellSharedPtr prayer_SpidersPrayer();

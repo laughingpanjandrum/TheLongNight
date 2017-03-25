@@ -1107,6 +1107,19 @@ spellSharedPtr prayer_SinkBeneath()
 	return sp;
 }
 
+spellSharedPtr prayer_OrsylsCall()
+{
+	spellSharedPtr sp(new spell("Orsyl's Call", PRAYER_TILE, TCODColor::purple,
+		"Calling upon the old gods is a dangerous prospect, as Orsyl learned in his final days."));
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(APPLY_PROFANE_DAMAGE, 20);
+	sp->addEffect(SCALE_NEXT_PRAYER, 100);
+	sp->setVigourCost(1);
+	sp->usesDivinePower = true;
+	sp->isProfane = true;
+	return sp;
+}
+
 spellSharedPtr prayer_SpidersPrayer()
 {
 	spellSharedPtr sp(new spell("Spider's Prayer", PRAYER_TILE, TCODColor::white,
