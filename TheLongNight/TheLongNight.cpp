@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <ctime>
 
 int main() {
 
@@ -22,30 +23,37 @@ int main() {
 	//MAIN MENU SITUATION
 	window w;
 	char c = ' ';
-	imagePtr TITLE = loadImage("title");
+	TCODColor TEXT_COLOR_LIGHT(23, 44, 63);
+	TCODColor TEXT_COLOR_DARK(16, 34, 51);
+	TCODColor TEXT_COLOR_GREY(79, 79, 79);
+	TCODColor BACK_COLOR(0, 0, 0);
+
+	//Random title image
+	imagePtr TITLE = loadImage("img/title", true);
 
 	std::string selectedProfile = "";
 	
 	while (c != 'n' && c != 'l' && c != 'q') {
 		w.clear();
-		w.drawImage(TITLE, 1, 1);
-
+		w.drawImage(TITLE, 0, 0); 
+		
 		//Title and options
-		w.write(8, 8, "T H E    L O N G    N I G H T", TCODColor::white);
-		w.write(10, 10, "[n] NEW GAME", TCODColor::white);
-		w.write(10, 11, "[l] LOAD GAME", TCODColor::white);
-		w.write(10, 12, "[q] QUIT GAME", TCODColor::white);
+		//w.write(8, 8, "T H E    L O N G    N I G H T", TCODColor::white);
+		w.write(3, 18, "[n] NEW GAME", TEXT_COLOR_LIGHT, BACK_COLOR);
+		w.write(3, 19, "[l] LOAD GAME", TEXT_COLOR_LIGHT, BACK_COLOR);
+		w.write(3, 20, "[q] QUIT GAME", TEXT_COLOR_LIGHT, BACK_COLOR);
 
-		w.write(10, 20, "Press [F11] at any time to toggle fullscreen.", TCODColor::lighterGrey);
+		w.write(3, 69, "Press [F11] at any time to toggle fullscreen.", TEXT_COLOR_LIGHT, BACK_COLOR);
 
 		//Profile menu
-		int atx = 50;
-		w.write(atx, 10, "SELECT PROFILE", TCODColor::white);
+		int atx = 3;
+		int aty = 22;
+		w.write(atx, aty, "SELECT PROFILE", TEXT_COLOR_DARK, BACK_COLOR);
 		if (iter != allProfiles.end())
-			w.write(atx + 2, 11, (*iter), TCODColor::lightSepia);
+			w.write(atx + 2, ++aty, (*iter), TEXT_COLOR_GREY, BACK_COLOR);
 		else
-			w.write(atx + 2, 11, "NO PROFILES EXIST", TCODColor::darkGrey);
-		w.write(atx, 12, "Press [TAB] to switch profiles", TCODColor::lighterGrey);
+			w.write(atx + 2, ++aty, "NO PROFILES EXIST", TEXT_COLOR_GREY, BACK_COLOR);
+		w.write(atx, ++aty, "Press [TAB] to switch profiles", TEXT_COLOR_DARK, BACK_COLOR);
 
 		//Refresh and get input
 		w.refresh();

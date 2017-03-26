@@ -18,7 +18,7 @@ typedef std::shared_ptr<TCODImage> imageSharedPtr;
 
 
 //Main creator.
-imagePtr loadImage(const std::string fname);
+imagePtr loadImage(const std::string fname, bool noTransparency = false);
 
 //Loads specific types of image from the proper folder.
 imagePtr loadWeaponImage(const std::string fname);

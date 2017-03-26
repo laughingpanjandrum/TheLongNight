@@ -5,14 +5,15 @@
 /*
 Creates and returns a pointer to an image.
 */
-imagePtr loadImage(const std::string fname)
+imagePtr loadImage(const std::string fname, bool noTransparency)
 {
 	//Get actual file name by appending the extension
 	const std::string realname = fname + IMG_FILE_EXTENSION;
 	//Create pointer to image
 	imagePtr pix = new TCODImage(realname.c_str());
 	//Set the transparency colour to the top-left pixel
-	pix->setKeyColor(pix->getPixel(0, 0));
+	if (!noTransparency)
+		pix->setKeyColor(pix->getPixel(0, 0));
 	//Done
 	return pix;
 }
