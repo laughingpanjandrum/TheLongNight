@@ -41,7 +41,7 @@ armourSharedPtr headgear_RuinedKnightsHelm()
 {
 	armourSharedPtr h(new armour("Ruined Knight's Helm", HELMET_TILE, TCODColor::darkGreen, ITEM_HELMET,
 		"This helmet has taken more than a few blows."));
-	h->setDefence(10);
+	h->setDefence(15);
 	h->setImage(loadArmourImage("H_ruined knight"));
 	return h;
 }
@@ -113,7 +113,7 @@ armourSharedPtr armour_FishscaleCoat()
 {
 	armourSharedPtr a(new armour("Fishscale Coat", ROBE_TILE, TCODColor::lightLime, ITEM_BODY_ARMOUR,
 		"Scaly coat of the preachers of doom, whose pleas for the safety of Wyrd went unanswered."));
-	a->setDefence(10);
+	a->setDefence(5);
 	a->setBleedResist(10);
 	a->setDamageResist(DAMAGE_ACID, 10);
 	a->setMoveSpeed(SPEED_NORMAL);
@@ -126,7 +126,7 @@ armourSharedPtr headgear_CityGuardHelm()
 	armourSharedPtr a(new armour("City Guard Helm", HELMET_TILE, TCODColor::darkYellow, ITEM_HELMET,
 		"In the final days of the Winter Court, the faces of the guards were stripped of flesh, and their bare bone was \
 exposed to the devouring gaze of Pash."));
-	a->setDefence(15);
+	a->setDefence(10);
 	a->setDamageResist(DAMAGE_ELECTRIC, 10);
 	a->setDamageResist(DAMAGE_FIRE, 10);
 	a->setImage(loadArmourImage("H_city guard"));
@@ -174,7 +174,7 @@ armourSharedPtr headgear_CursedKnightsHelm()
 {
 	armourSharedPtr a(new armour("Cursed Knight's Helm", HELMET_TILE, TCODColor::lightPurple, ITEM_HELMET,
 		"Helm of the knights of the Winter Court, who stood guard over Kythiel until her final moments."));
-	a->setDefence(15);
+	a->setDefence(10);
 	a->setDamageResist(DAMAGE_BLESSED, 15);
 	a->setImage(loadArmourImage("H_cursed knight"));
 	return a;
@@ -184,7 +184,7 @@ armourSharedPtr armour_CursedKnightsArmour()
 {
 	armourSharedPtr a(new armour("Cursed Knight's Armour", ARMOUR_TILE, TCODColor::lightPurple, ITEM_BODY_ARMOUR,
 		"Armour of the knights of the Winter Court, who stood guard over Kythiel until her final moments."));
-	a->setDefence(30);
+	a->setDefence(35);
 	a->setDamageResist(DAMAGE_BLESSED, 30);
 	a->setMoveSpeed(SPEED_SLOW);
 	a->setImage(loadArmourImage("B_cursed knight"));
@@ -221,7 +221,7 @@ armourSharedPtr headgear_SilverPlatedHood()
 	armourSharedPtr a(new armour("Silver-plated Hood", HOOD_TILE, TCODColor::silver, ITEM_HELMET,
 		"The Silver Knights served in anonymity, and wore these hoods to conceal their features, so \
 that they would not recieve undue praise."));
-	a->setDefence(15);
+	a->setDefence(10);
 	a->setDamageResist(DAMAGE_FIRE, 10);
 	a->setDamageResist(DAMAGE_PROFANE, 20);
 	a->setImage(loadArmourImage("H_silver plated"));
@@ -233,7 +233,7 @@ armourSharedPtr armour_SilverPlatedArmour()
 	armourSharedPtr a(new armour("Silver-plated Armour", ARMOUR_TILE, TCODColor::silver, ITEM_BODY_ARMOUR,
 		"Holy armour of the knights serving under the Emissaries of Hightower. These blessed souls protected the Valley \
 from the onslaught of night."));
-	a->setDefence(40);
+	a->setDefence(45);
 	a->setDamageResist(DAMAGE_COLD, 10);
 	a->setDamageResist(DAMAGE_PROFANE, 30);
 	a->setMoveSpeed(SPEED_SLOW);
@@ -305,10 +305,10 @@ armourSharedPtr armour_MoshkasRobes()
 	armourSharedPtr a(new armour("Moshka's Robes", ROBE_TILE, TCODColor::fuchsia, ITEM_BODY_ARMOUR,
 		"Robes of Moshka, who peered into the mysteries beyond the world. He believed that the arcane symbols stitched \
 into his robes protected him from doom."));
-	a->setDamageResist(DAMAGE_MAGIC, 20);
-	a->setDamageResist(DAMAGE_FIRE, 20);
-	a->setDamageResist(DAMAGE_ACID, 20);
-	a->setDamageResist(DAMAGE_COLD, 20);
+	a->setDamageResist(DAMAGE_MAGIC, 30);
+	a->setDamageResist(DAMAGE_FIRE, 30);
+	a->setDamageResist(DAMAGE_ACID, 30);
+	a->setDamageResist(DAMAGE_COLD, 30);
 	a->setMoveSpeed(SPEED_FAST);
 	a->setImage(loadArmourImage("B_moshkas robes"));
 	return a;
@@ -319,7 +319,7 @@ armourSharedPtr headgear_SentinelsHelm()
 	armourSharedPtr a(new armour("Sentinel's Helm", HELMET_TILE, TCODColor::lightBlue, ITEM_HELMET,
 		"Slitted helm of the Sentinels. It permitted almost no light to enter, which led some to suspect \
 that the Sentinels were not entirely human."));
-	a->setDefence(15);
+	a->setDefence(10);
 	a->setDamageResist(DAMAGE_ELECTRIC, 15);
 	a->setDamageResist(DAMAGE_MAGIC, 15);
 	a->setImage(loadArmourImage("H_sentinel armour"));
@@ -331,7 +331,7 @@ armourSharedPtr armour_SentinelsArmour()
 	armourSharedPtr a(new armour("Sentinel's Armour", ARMOUR_TILE, TCODColor::lightBlue, ITEM_BODY_ARMOUR,
 		"Heavy armour of the Sentinels, decorated with the sigils of the Moon-Pale King. They never flagged in \
 their ancient duty, and indeed, some began to suspect that they were not even human."));
-	a->setDefence(45);
+	a->setDefence(50);
 	a->setDamageResist(DAMAGE_ELECTRIC, 35);
 	a->setDamageResist(DAMAGE_MAGIC, 15);
 	a->setMoveSpeed(SPEED_SLOW);
@@ -410,7 +410,7 @@ armourSharedPtr armour_GravekeepersRags()
 		"Rotted rags of the gravekeepers, charged by Farin to keep watch over the dead. According to certain storytellers, \
 Farin kept a secret even from his most trusted gravekeepers, and took it with him when he walked out of the world."));
 	a->setPlagueResist(40);
-	a->setDamageResist(DAMAGE_ACID, 20);
+	a->setDamageResist(DAMAGE_ACID, 40);
 	a->setImage(loadArmourImage("B_gravekeeper rags"));
 	return a;
 }
