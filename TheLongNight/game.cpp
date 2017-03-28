@@ -2472,6 +2472,21 @@ Its strength is the given potency.
 */
 void game::applyEffectToPerson(personSharedPtr target, effect eff, int potency, personSharedPtr caster)
 {
+
+	//Check for potency adjustment based on caster stats
+	if (caster != nullptr) {
+		float buff = 0;
+		if (eff == APPLY_ACID_DAMAGE)
+			buff = (float)caster->acidDamageScaling / 100.0;
+		else if (eff == APPLY_COLD_DAMAGE)
+			buff = (float)caster->coldDamageScaling / 100.0;
+		else if (eff == APPLY_ELECTRIC_DAMAGE)
+			buff = (float)caster->electricDamageScaling / 100.0;
+		else if (eff == APPLY_FIRE_DAMAGE)
+			buff = (float)caster->fireDamageScaling / 100.0;
+		int bonus = (float)potency * buff;
+		potency += bonus;
+	}
 	
 	//Interface stuff for PCs only
 	
@@ -4782,6 +4797,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(charm_BloodDrinkersBand());
 	player->addItem(charm_BloodstainedCharm());
 	player->addItem(charm_ClericsHolyPendant());
+	player->addItem(charm_CorrodedStoneRing());
 	player->addItem(charm_EvisceratingRing());
 	player->addItem(charm_FragrantAmulet());
 	player->addItem(charm_FrenzyCharm());
