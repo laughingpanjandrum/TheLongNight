@@ -166,6 +166,12 @@ public:
 	int tempDefenceBuff = 0; //Defensive buff to next attack only
 	int tempElementalDefenceBuff = 0; //Defensive buff to next elemental defence only
 
+	//Elemental scaling
+	int acidDamageScaling = 0;
+	int coldDamageScaling = 0;
+	int electricDamageScaling = 0;
+	int fireDamageScaling = 0;
+
 	//Debuffs
 	int slowdown = 0;
 	int damagePenalty = 0; //Percent reduction to melee damage.

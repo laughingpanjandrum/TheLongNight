@@ -234,6 +234,19 @@ int person::getDamageOfType(damageType dtype)
 			dmg += (float)dmg * ((float)percentBuffHolyDamage / 100);
 		}
 
+		//Additional type-based buff
+		float buff = 0;
+		if (dtype == DAMAGE_ACID)
+			buff = (float)acidDamageScaling / 100.0;
+		else if (dtype == DAMAGE_COLD)
+			buff = (float)coldDamageScaling / 100.0;
+		else if (dtype == DAMAGE_ELECTRIC)
+			buff = (float)electricDamageScaling / 100.0;
+		else if (dtype == DAMAGE_FIRE)
+			buff = (float)fireDamageScaling / 100.0;
+		int bonus = buff * dmg;
+		dmg += bonus;
+
 		return dmg;
 	}
 	return 0;
@@ -551,6 +564,16 @@ void person::applyEffect(effect eff, int potency)
 		deathlink += potency;
 	else if (eff == SILENCE)
 		silence += potency;
+
+	//Elemental buffs
+	else if (eff == SCALE_ACID_DAMAGE)
+		acidDamageScaling += potency;
+	else if (eff == SCALE_COLD_DAMAGE)
+		coldDamageScaling += potency;
+	else if (eff == SCALE_ELECTRIC_DAMAGE)
+		electricDamageScaling += potency;
+	else if (eff == SCALE_FIRE_DAMAGE)
+		fireDamageScaling += potency;
 
 	//Debuffs
 

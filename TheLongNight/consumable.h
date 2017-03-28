@@ -84,6 +84,7 @@ consumableSharedPtr consumable_BlackHoney();
 
 consumableSharedPtr consumable_Quickgrass();
 consumableSharedPtr consumable_AcidBloodFlask();
+consumableSharedPtr consumable_WitchsRoot();
 
 consumableSharedPtr consumable_PutridBrew();
 consumableSharedPtr consumable_GodsbloodBrew();

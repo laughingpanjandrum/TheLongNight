@@ -145,6 +145,15 @@ surge of strange power."));
 	return c;
 }
 
+consumableSharedPtr consumable_WitchsRoot()
+{
+	consumableSharedPtr c(new consumable("Witch's Root", FLOWER_TILE, TCODColor::lightFuchsia,
+		"Root of a plant, often touched by moonlight, and filled with magical vigour."));
+	c->addEffect(SCALE_NEXT_SPELL, 100);
+	c->setAmount(4);
+	return c;
+}
+
 consumableSharedPtr consumable_PutridBrew()
 {
 	consumableSharedPtr c(new consumable("Putrid Brew", FLASK_TILE, TCODColor::darkLime,

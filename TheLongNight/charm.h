@@ -58,6 +58,9 @@ charmSharedPtr charm_PaleShadesRing();
 charmSharedPtr charm_StarweaversRing();
 charmSharedPtr charm_VoidwalkersRing();
 
+//Elementally aligned rings
+charmSharedPtr charm_CorrodedStoneRing();
+
 //Special upgrade rings
 charmSharedPtr charm_VenomousImbecilesRing();
 charmSharedPtr charm_IconOfFamine();

@@ -2,6 +2,8 @@ Ur-Gnash, the Descended City
 darkness:0.4,0
 start:32,0
 -items
+witchs_root:20,18
+corroded_stone_ring:25,23
 -enditems
 -codes
 . floor_stone

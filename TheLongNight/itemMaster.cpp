@@ -172,6 +172,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return consumable_WitchwaterFlask();
 	else if (handle == "black_honey")
 		return consumable_BlackHoney();
+	else if (handle == "witchs_root")
+		return consumable_WitchsRoot();
 
 	//OILS
 	if (handle == "pyromancers_oil")
@@ -349,6 +351,8 @@ itemSharedPtr getItemByHandle(std::string handle)
 		return charm_StarweaversRing();
 	else if (handle == "voidwalkers_ring")
 		return charm_VoidwalkersRing();
+	else if (handle == "corroded_stone_ring")
+		return charm_CorrodedStoneRing();
 
 	//SPELLS
 	else if (handle == "magic_missile")
@@ -633,6 +637,11 @@ std::string getEffectName(effect e)
 	case(ASTRAL_IMPRISONMENT): return "astral imprisonment";
 	case(ACQUIRE_FRAGMENTS): return "acquire fragments";
 
+	case(SCALE_ACID_DAMAGE): return "acid damage buff";
+	case(SCALE_COLD_DAMAGE): return "cold damage buff";
+	case(SCALE_ELECTRIC_DAMAGE): return "electric damage buff";
+	case(SCALE_FIRE_DAMAGE): return "fire damage buff";
+
 	case(TELEPORT_VIA_WATER): return "water warp";
 	case(TELEPORT_TO_VOID): return "warp to void";
 	case(TELEPORT_BACK_FROM_VOID): return "escape void";
@@ -710,7 +719,7 @@ const itemVector getListOfAllItems()
 		gem_KingsGiantGemstone(), gem_GodlessGemstone(),
 		bell_VoidwalkersDancingBell(), bell_VoidwalkersReturningBell(), horn_HeraldsWhiteHorn(),
 		misc_BrandOfTheEmissary(),
-		consumable_Quickgrass(), consumable_AcidBloodFlask(),
+		consumable_Quickgrass(), consumable_AcidBloodFlask(), consumable_WitchsRoot(),
 		//Charms
 		charm_ArcanaDrenchedCharm(), charm_ClericsHolyPendant(), charm_BloodstainedCharm(),
 		charm_KhallesHeadband(), charm_IdolOfPash(), charm_EvisceratingRing(), charm_BloodDrinkersBand(),

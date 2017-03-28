@@ -197,6 +197,22 @@ good does their knowledge bring them?"));
 }
 
 
+
+/*
+	Elementally aligned rings
+*/
+
+
+charmSharedPtr charm_CorrodedStoneRing()
+{
+	charmSharedPtr c(new charm("Corroded Stone Ring", RING_TILE, TCODColor::green,
+		"Ring set with a stone that drips acid. Increases affiliation with acid, but reduces affiliation with electric."));
+	c->addEffect(SCALE_ACID_DAMAGE, 50);
+	c->addEffect(SCALE_ELECTRIC_DAMAGE, -25);
+	return c;
+}
+
+
 /*
 	Special rings
 */
