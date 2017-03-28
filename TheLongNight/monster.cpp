@@ -2018,6 +2018,102 @@ monsterSharedPtr monster_TheDeathlessKnight()
 }
 
 
+//Underpool
+
+
+monsterSharedPtr monster_GoblinSharpshooter()
+{
+	monsterSharedPtr m(new monster("Goblin Sharpshooter", GOBLIN_TILE, TCODColor::green,
+		"A miserable little creature in rags, wielding a blowdart gun."));
+	m->setHealth(100);
+	m->setPoisonResist(1000);
+	m->setPlagueResist(1000);
+	m->setDefence(DAMAGE_ACID, 80);
+	m->setMoveStats(SPEED_FAST);
+	m->setMeleeStats(15, SPEED_FAST);
+	m->addSpellKnown(spellSharedPtr(new spell("Poison Dart", TCODColor::lime, 8, 1, APPLY_POISON_DAMAGE, 20)));
+	m->addSpellKnown(spellSharedPtr(new spell("Scurry", TCODColor::yellow, ATTACK_BUFF_SELF, 0, GAIN_FREE_MOVES, 2)));
+	m->keepsDistance = true;
+	m->setFragmentsDropped(200);
+	return m;
+}
+
+monsterSharedPtr monster_GoblinBrute()
+{
+	monsterSharedPtr m(new monster("Goblin Brawler", GOBLIN_TILE, TCODColor::green,
+		"A miserable little creature wielding a serrated knife, endlessly screeching."));
+	m->setHealth(200);
+	m->setPoisonResist(1000);
+	m->setPlagueResist(1000);
+	m->setDefence(DAMAGE_ACID, 80);
+	m->setMoveStats(SPEED_FAST);
+	m->equipItem(weaponSharedPtr(new weapon(10, SPEED_FAST, EFFECT_POISON, 25)));
+	m->addSpellKnown(spellSharedPtr(new spell("Firebomb", TCODColor::flame, 4, 10, APPLY_FIRE_DAMAGE, 25)));
+	m->setSpellCastChance(20);
+	m->setFragmentsDropped(200);
+	return m;
+}
+
+monsterSharedPtr monster_GoblinBossKlug()
+{
+	monsterSharedPtr m(new monster("Goblin Boss Klug", GOBLIN_TILE, TCODColor::darkerLime,
+		"Klug lurks behind his filthy troops, swinging a poison-tipped spear and jeering."));
+	m->setHealth(500);
+	m->setPoisonResist(1000);
+	m->setPlagueResist(1000);
+	m->setDefence(DAMAGE_ACID, 80);
+	m->setMoveStats(SPEED_FAST);
+	m->equipItem(weaponSharedPtr(new weapon(25, SPEED_FAST, EFFECT_PLAGUE, 10)));
+	m->addSpellKnown(spellSharedPtr(new spell("Jab", TCODColor::lime, ATTACK_RANGE, 3, CASTER_MELEE_ATTACK, 1)));
+	m->setSpellCastChance(90);
+	m->setFragmentsDropped(500);
+	m->addItemDrop(key_KlugsKey());
+	m->isBoss = true;
+	m->showBossHealthBar = false;
+	return m;
+}
+
+
+
+//	Molten Legion
+
+
+monsterSharedPtr monster_MoltenKnight()
+{
+	monsterSharedPtr m(new monster("Molten Knight", KNIGHT_TILE, TCODColor::flame,
+		"A suit of armour, charred as if by rivers of fire, regards you vacantly."));
+	m->setHealth(800);
+	m->setDefence(DAMAGE_PHYSICAL, 70);
+	m->setDefence(DAMAGE_FIRE, 100);
+	m->addWeakness(DAMAGE_COLD);
+	m->equipItem(weaponSharedPtr(new weapon(25, SPEED_NORMAL, DAMAGE_FIRE, 25)));
+	m->setMoveStats(SPEED_SLOW);
+	m->setFragmentsDropped(500);
+	return m;
+}
+
+monsterSharedPtr monster_AzarelOfTheMoltenLegion()
+{
+	monsterSharedPtr m(new monster("Azarel of the Molten Legion", BIG_KNIGHT_TILE, TCODColor::lightFlame,
+		"His iron armour drips molten metal, and flames flash along his enormous sword."));
+	m->setHealth(5000);
+	m->setDefence(DAMAGE_PHYSICAL, 70);
+	m->setDefence(DAMAGE_FIRE, 100);
+	m->addWeakness(DAMAGE_COLD);
+	m->equipItem(weaponSharedPtr(new weapon(50, SPEED_SLOW, DAMAGE_FIRE, 50)));
+	m->setMoveStats(SPEED_SLOW);
+	m->addSpellKnown(spellSharedPtr(new spell("Burning Charge", TCODColor::flame, ATTACK_BUFF_SELF, 1,
+		GAIN_FREE_MOVES, 3, SCALE_NEXT_ATTACK, 100)));
+	m->addSpellKnown(spellSharedPtr(new spell("Fire Surge", TCODColor::lightFlame, ATTACK_AOE, 3,
+		APPLY_FIRE_DAMAGE, 50)));
+	m->setSpellCastChance(25);
+	m->setFragmentsDropped(5000);
+	m->isBoss = true;
+	m->addItemDrop(key_AzarelsMark());
+	return m;
+}
+
+
 
 /*
 	SOME RANDOM UNIQUE ENEMIES
@@ -2057,7 +2153,7 @@ monsterSharedPtr monster_GlurgTheImbecile()
 	monsterSharedPtr m(new monster("Glurg the Imbecile", GLURG_TILE, TCODColor::darkGreen,
 		"The earthly avatar of Glurg manifests as a drooling toad, shuddering in the deep. Perhaps when the imbecile god \
 devoured its forebears, the revelation of the truth beyond the stars proved unbearable."));
-	m->setHealth(3000);
+	m->setHealth(7000);
 	m->healthTrickle = 3000;
 	m->setMoveStats(SPEED_NORMAL);
 	m->keepsDistance = true;
@@ -2081,7 +2177,7 @@ monsterSharedPtr monster_PashTheRavenous()
 	monsterSharedPtr m(new monster("Pash the Ravenous", PASH_TILE, TCODColor::lightestCrimson,
 		"The earthly avatar of Pash manifests as a creature composed entirely of mouths, all agape and bristling with teeth. Pale \
 eyes peer from the darkness within Pash's myriad maws, and saliva drips upon the ground."));
-	m->setHealth(7000);
+	m->setHealth(10000);
 	m->setMoveStats(SPEED_NORMAL);
 	m->keepsDistance = true;
 	m->makeProfane();
@@ -2094,7 +2190,7 @@ eyes peer from the darkness within Pash's myriad maws, and saliva drips upon the
 	m->addSpellKnown(spellSharedPtr(new spell("Planar Shift", TCODColor::purple, 8, 0, TELEPORT, 5)));
 	m->addSpellKnown(spellSharedPtr(new spell("Corrosion", TCODColor::red, ATTACK_BUFF_SELF, 1, DROP_CORRODING_BLOOD, 1)));
 	m->setSpellCastChance(50);
-	m->equipItem(weaponSharedPtr(new weapon(25, SPEED_NORMAL, DAMAGE_FIRE, 15)));
+	m->equipItem(weaponSharedPtr(new weapon(25, SPEED_NORMAL, DAMAGE_FIRE, 30)));
 	m->addSpawnableCreature("bleeding_maw");
 	m->setSpawnChance(5);
 	return m;
@@ -2105,7 +2201,7 @@ monsterSharedPtr monster_TheBlindKing()
 	monsterSharedPtr m(new monster("The Blind King", BLIND_KING_TILE, TCODColor::lightAmber,
 		"The master of the blind worms that gibber at the base of the universe. This living worm shrieks endlessly, exuding \
 putrid toxins from every pore."));
-	m->setHealth(8000);
+	m->setHealth(12000);
 	m->setDefence(DAMAGE_FIRE, 60);
 	m->setDefence(DAMAGE_ACID, 60);
 	m->setPoisonResist(1000);
@@ -2705,12 +2801,26 @@ monsterSharedPtr getMonsterByHandle(std::string handle)
 	else if (handle == "astral_spider")
 		return monster_AstralSpider();
 
+	//Chapel of Flame
+	else if (handle == "molten_knight")
+		return monster_MoltenKnight();
+	else if (handle == "azarel")
+		return monster_AzarelOfTheMoltenLegion();
+
+	//Underpool
+	else if (handle == "goblin_sharpshooter")
+		return monster_GoblinSharpshooter();
+	else if (handle == "goblin_brute")
+		return monster_GoblinBrute();
+	else if (handle == "goblin_boss_klug")
+		return monster_GoblinBossKlug();
+
 	//Misc special enemies
 	else if (handle == "slave_of_pash")
 		return monster_SlaveOfPash();
 
 	//Friendly NPCs
-	else if (handle == "gorem")
+	if (handle == "gorem")
 		return npc_Gorem();
 	else if (handle == "utric")
 		return npc_UtricTheRat();

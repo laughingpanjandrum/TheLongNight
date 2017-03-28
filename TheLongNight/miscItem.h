@@ -76,9 +76,14 @@ miscItemSharedPtr key_WitheredFinger();
 miscItemSharedPtr key_BeatingHeart();
 miscItemSharedPtr key_EffigyOfTheSlumberingLord();
 
-miscItemSharedPtr key_UnderpoolKey();
 miscItemSharedPtr key_AbattoirKey();
 miscItemSharedPtr key_GreenKnightsKey();
+
+miscItemSharedPtr key_MoltenPriestsKey();
+miscItemSharedPtr key_AzarelsMark();
+
+miscItemSharedPtr key_UnderpoolKey();
+miscItemSharedPtr key_KlugsKey();
 
 miscItemSharedPtr key_IetrasAmberPendant();
 

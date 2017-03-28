@@ -403,12 +403,24 @@ spellSharedPtr attack_FlameBreath()
 	return sp;
 }
 
+spellSharedPtr attack_BlackwatchBattlecry()
+{
+	spellSharedPtr sp(new spell("Blackwatch Battlecry", SWORD_TILE, TCODColor::purple,
+		"The roar of the Blackwatch provides a surge of power."));
+	sp->setAttackType(ATTACK_BUFF_SELF);
+	sp->addEffect(SCALE_NEXT_ATTACK, 200);
+	sp->addEffect(ADD_HEALTH_TRICKLE, 20);
+	sp->setVigourCost(2);
+	return sp;
+}
+
 spellSharedPtr attack_RatCleave()
 {
 	spellSharedPtr sp(new spell("Rat Cleave", SWORD_TILE, TCODColor::sepia,
-		"Attack all adjacent targets."));
+		"Attack all adjacent targets and hurl them away."));
 	sp->setAttackType(ATTACK_AOE, 1);
 	sp->addEffect(CASTER_MELEE_ATTACK, 1);
+	sp->addEffect(KNOCKBACK_TARGET, 3);
 	sp->setVigourCost(2);
 	return sp;
 }

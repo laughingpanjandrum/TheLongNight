@@ -35,6 +35,13 @@ bool maptile::hasTouchEffect(effect te)
 
 
 
+void maptile::makeDoor(std::string unlockCode)
+{
+	isDoor = true;
+	this->unlockCode = unlockCode;
+	addTouchEffect(CHECK_FOR_UNLOCK);
+}
+
 /*
 Used by ritual altars!
 */
@@ -98,6 +105,11 @@ maptile * tile_Carpet()
 maptile * tile_SnowFloor()
 {
 	return new maptile("Snow", "floor_snow", BASIC_FLOOR_TILE, TCODColor::cyan, TCODColor::lighterGrey);
+}
+
+maptile * tile_SingedFloor()
+{
+	return new maptile("Floor", "floor_singed", BASIC_FLOOR_TILE, TCODColor::lightFlame, DARK_STONE_COLOR);
 }
 
 maptile * tile_SandyRock()
@@ -643,6 +655,22 @@ maptile * tile_MoonGate()
 	mg->isGlittery = true;
 	mg->addTouchEffect(MOON_GATE_WARP);
 	return mg;
+}
+
+maptile * tile_FlameDoor()
+{
+	maptile* door = new maptile("Flame Door", "flame_door", BASIC_DOOR_TILE,
+		TCODColor::black, TCODColor::darkFlame, false, false);
+	door->makeDoor("molten_priests_key");
+	return door;
+}
+
+maptile * tile_GateOfUrGnash()
+{
+	maptile* door = new maptile("Gate of Ur-Gnash", "gate_of_ur_gnash", BASIC_DOOR_TILE,
+		TCODColor::black, TCODColor::lime, false, false);
+	door->makeDoor("klugs_key");
+	return door;
 }
 
 

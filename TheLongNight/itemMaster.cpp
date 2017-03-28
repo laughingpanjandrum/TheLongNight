@@ -661,7 +661,7 @@ const itemVector getListOfAllItems()
 		weapon_CorensGreataxe(), weapon_KhallesHolyScythe(), weapon_SirPercivelsSword(),
 		weapon_VoidfireKnife(), weapon_LightningWarhammer(), weapon_IetrasFlameScythe(),
 		weapon_EtherealGreatsword(), weapon_MoonpaleScythe(), weapon_GravekeeperSpear(),
-		weapon_SelvixsHookblade(), weapon_FarinsTorch(),
+		weapon_SelvixsHookblade(), weapon_FarinsTorch(), weapon_BlackwatchBlade(),
 		weapon_RatboneCleaver(), weapon_DeathlessBlade(), weapon_GreatswordOfTheAncientLords(),
 		//Shields
 		shield_BatteredWoodenShield(), shield_WoodenWyrdShield(), shield_BatteredSteelShield(),
@@ -741,8 +741,10 @@ const itemVector getListOfAllItems()
 		key_LadyTvertsKey(), key_DeadSparrowKey(), key_MoshkasKey(), key_MoonpaleKey(), key_FarinsKey(),
 		key_AtalundraRunekey(), key_PercivelsSign(),
 		key_WatchfulEyestalk(), key_MawtoothFragment(), key_WitheredFinger(), key_BeatingHeart(),
-		key_EffigyOfTheSlumberingLord(),
+		key_EffigyOfTheSlumberingLord(), 
 		key_UnderpoolKey(), key_AbattoirKey(), key_GreenKnightsKey(), key_IetrasAmberPendant(),
+		key_MoltenPriestsKey(), key_AzarelsMark(),
+		key_KlugsKey(),
 		//Hearts
 		heart_WretchedHeart(), heart_OldCrowsHeart(), heart_FishBornGoddessesHeart(), heart_OrsylsShriveledHeart(),
 		heart_VortensShriveledHeart(), heart_VenomousSpiderHeart(), heart_LadyTvertsHeart(), heart_DeadSparrowsHeart(),

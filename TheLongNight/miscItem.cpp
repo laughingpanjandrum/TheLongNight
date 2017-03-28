@@ -235,7 +235,17 @@ miscItemSharedPtr key_UnderpoolKey()
 		"All creatures of slime and muck are welcome in the worship of Glurg, the filth-encrusted god of horrors that emerge from \
 the deep. But only the most profane are welcome in Glurg's eternal sanctum."));
 	k->setKeyTag("underpool_key");
-	k->setWhatWeDo("Unlocks the door to Underpool from the Toad Shrine.");
+	k->setWhatWeDo("Unlocks the door to Underpool from the Toad Shrine. This will set you on an arduous path.");
+	return k;
+}
+
+miscItemSharedPtr key_KlugsKey()
+{
+	miscItemSharedPtr k(new miscItem("Klug's Key", KEY_TILE, TCODColor::lime,
+		"The goblins were set to guard the entrance to Ur-Gnash, a city long overtaken by swamps, and dedicated to the worship \
+of the imbecile toad."));
+	k->setKeyTag("klugs_key");
+	k->setWhatWeDo("Unlocks the entrance to Ur-Gnash, the sunken city.");
 	return k;
 }
 
@@ -255,6 +265,26 @@ miscItemSharedPtr key_GreenKnightsKey()
 		"Lost key to the Court of the Rose, abandoned by Sir Percivel when the downfall of the Rose seemed inevitable."));
 	k->setKeyTag("green_knights_key");
 	k->setWhatWeDo("Unlocks the hidden door to the Court of the Rose.");
+	return k;
+}
+
+miscItemSharedPtr key_MoltenPriestsKey()
+{
+	miscItemSharedPtr k(new miscItem("Molten Priest's Key", KEY_TILE, TCODColor::darkFlame,
+		"In certain civilized lands, tales are still told of the pilgrimage of the Molten Priest, who ventured into the \
+forsaken wastelands of Ur in search of lost truths."));
+	k->setKeyTag("molten_priests_key");
+	k->setWhatWeDo("Unlocks the entrance to the Chapel of Flame, which lies on the western side of the Pilgrim's Road.");
+	return k;
+}
+
+miscItemSharedPtr key_AzarelsMark()
+{
+	miscItemSharedPtr k(new miscItem("Azarel's Mark", KEY_TILE, TCODColor::flame,
+		"The mark of Azarel, one of the lords of the Molten Legion, who rose from the expanse of fire that consumed the \
+lost city of Ur."));
+	k->setKeyTag("azarels_mark");
+	k->setWhatWeDo("Unlocks the entrance to the Flame-Seared Ruins.");
 	return k;
 }
 

@@ -706,12 +706,23 @@ weaponSharedPtr weapon_RatboneCleaver()
 {
 	weaponSharedPtr wp(new weapon("Ratbone Cleaver", AXE_TILE, TCODColor::amber,
 		"Cleaver forged from shards of ratbone, drenched with ichorous toxins and crawling plague."));
-	wp->setBasicAttributes(50, SPEED_SLOW);
+	wp->setBasicAttributes(70, SPEED_SLOW);
 	wp->addStatusEffect(EFFECT_POISON, 30);
 	wp->addStatusEffect(EFFECT_PLAGUE, 10);
 	wp->addScalingType(SCALE_STR);
 	wp->setSpecialAttack(attack_RatCleave());
 	wp->setImage(loadWeaponImage("W_ratbone cleaver"));
+	return wp;
+}
+
+weaponSharedPtr weapon_BlackwatchBlade()
+{
+	weaponSharedPtr wp(new weapon("Blackwatch Blade", SWORD_TILE, TCODColor::purple,
+		"Ice-cold blade of the knights of the Blackwatch, forged from the frigid energy of the Void."));
+	wp->setBasicAttributes(30, SPEED_FAST);
+	wp->addDamageType(DAMAGE_COLD, 20);
+	wp->addScalingType(SCALE_DEX);
+	wp->setSpecialAttack(attack_BlackwatchBattlecry());
 	return wp;
 }
 

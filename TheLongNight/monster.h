@@ -258,11 +258,20 @@ monsterSharedPtr monster_AstralJailorPlague();
 monsterSharedPtr monster_LordOfFallowFields();
 monsterSharedPtr monster_TheDeathlessKnight();
 
+//Underpool
+monsterSharedPtr monster_GoblinSharpshooter();
+monsterSharedPtr monster_GoblinBrute();
+monsterSharedPtr monster_GoblinBossKlug();
+monsterSharedPtr monster_GlurgTheImbecile();
+
+//Firey
+monsterSharedPtr monster_MoltenKnight();
+monsterSharedPtr monster_AzarelOfTheMoltenLegion();
+
 //Unique monsters
 monsterSharedPtr monster_SlaveOfPash();
 
 //Gods
-monsterSharedPtr monster_GlurgTheImbecile();
 monsterSharedPtr monster_PashTheRavenous();
 monsterSharedPtr monster_TheBlindKing();
 

@@ -40,8 +40,10 @@ const int HOUND_TILE = 104;
 const int ORSYL_TILE = 335;
 const int KNIGHT_TILE = 363;
 const int DUKE_TILE = 324;
+const int BIG_KNIGHT_TILE = 75;
 
 const int GHOST_TILE = 86;
+const int GOBLIN_TILE = 359;
 
 const int WISP_TILE = 119;
 const int SPIDER_TILE = 77;

@@ -3822,18 +3822,19 @@ void game::initializeShops()
 
 	//Ghulluk
 	shopSharedPtr ghullukShop = shopSharedPtr(new shop("ghulluk_shop"));
+	ghullukShop->addItem(key_MoltenPriestsKey(), 1000);
 	allShops.push_back(ghullukShop);
 	//Watchful Eyestalk
 	shopSharedPtr eyestalk = shopSharedPtr(new shop("watchful_eyestalk"));
-	eyestalk->addItem(key_UnderpoolKey(), 0);
+	eyestalk->addItem(key_UnderpoolKey(), 1);
 	allUnlockableShops.push_back(eyestalk);
 	//Mawtooth Fragment
 	shopSharedPtr mawtooth = shopSharedPtr(new shop("mawtooth_fragment"));
-	mawtooth->addItem(key_AbattoirKey(), 0);
+	mawtooth->addItem(key_AbattoirKey(), 1);
 	allUnlockableShops.push_back(mawtooth);
 	//Withered Finger
 	shopSharedPtr finger = shopSharedPtr(new shop("withered_finger"));
-	finger->addItem(key_GreenKnightsKey(), 0);
+	finger->addItem(key_GreenKnightsKey(), 1);
 	allUnlockableShops.push_back(finger);
 	//Heart of the Old Gods
 	shopSharedPtr oldgods = shopSharedPtr(new shop("heart_of_the_old_gods", true));
@@ -4021,6 +4022,7 @@ void game::initializeShops()
 	shamash->addItem(ranged_VoidEssenceJar(), 100);
 	shamash->addItem(consumable_BlackTarLiquor(), 1000);
 	shamash->addItem(consumable_PurifiedStarwater(), 1000);
+	shamash->addItem(weapon_BlackwatchBlade(), 1500);
 	allShops.push_back(shopSharedPtr(shamash));
 
 }
@@ -4880,6 +4882,7 @@ void getAllItems(personSharedPtr player)
 	player->addItem(key_GreenChapelGardenKey());
 	player->addItem(key_HightowerKey());
 	player->addItem(key_LadyTvertsKey());
+	player->addItem(key_MoltenPriestsKey());
 	player->addItem(key_MoonpaleKey());
 	player->addItem(key_MoshkasKey());
 	player->addItem(key_OldCrowsKey());

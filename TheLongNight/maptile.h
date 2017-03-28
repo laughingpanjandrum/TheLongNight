@@ -71,6 +71,9 @@ public:
 	bool isDoorLocked() { return isDoor && !walkable; }
 	std::string unlockCode;
 
+	//Door generation
+	void makeDoor(std::string unlockCode);
+
 	//Colour effects
 	bool isGlittery = false;
 	float glitterCoef = 0.0;
@@ -122,6 +125,7 @@ maptile* tile_Road(); //"floor_road"
 maptile* tile_Void(); //"floor_void"
 maptile* tile_Carpet(); //"floor_carpet"
 maptile* tile_SnowFloor(); //"floor_snow"
+maptile* tile_SingedFloor(); //"floor_singed"
 
 maptile* tile_SandyRock(); //"wall_sand"
 maptile* tile_SecretWall(); //"wall_secret"
@@ -206,6 +210,10 @@ maptile* tile_RoseCourtGate(); //"rose_court_gate";
 
 maptile* tile_MoonGate(); //"moon_gate"
 
+maptile* tile_FlameDoor(); //"flame_door"
+
+maptile* tile_GateOfUrGnash(); //"gate_of_ur_gnash"
+
 //Ritual altars
 maptile* tile_AltarOfTheEye();
 maptile* tile_AltarOfTheMouth();
@@ -224,7 +232,7 @@ maptile* tile_Tombstone(); //"tombstone"
 
 const tileVector ALL_MAPTILES = {
 	tile_Floor(), tile_MossyFloor(), tile_Sand(), tile_Grass(), tile_Road(), tile_Void(), tile_Carpet(), tile_SnowFloor(),
-	tile_MagicFloor(),
+	tile_MagicFloor(), tile_SingedFloor(),
 	tile_Wall(), tile_WoodenWall(), tile_SandyRock(), tile_MarbleWall(), tile_MagicWall(), tile_GoldenWall(),
 	tile_Door(), tile_WoodenDoor(), tile_LockedDoor(), tile_DoorUnlocker(), tile_SecretWall(),
 	tile_Glass(), tile_Bush(), tile_Rosebush(), tile_Tree(), tile_VoidTree(), tile_DeadTree(), tile_SnowboundTree(),
@@ -251,6 +259,8 @@ const tileVector ALL_MAPTILES = {
 	tile_BloodyMausoleumDoor(), tile_LostDoor(), tile_SilentDoor(), tile_VoidMausoleumDoor(),
 	tile_SlumberingGate(), tile_UnderpoolDoor(), tile_AbattoirDoor(), tile_RoseCourtGate(),
 	tile_AncientPrisonDoor(), tile_MoonGate(),
+	tile_FlameDoor(),
+	tile_GateOfUrGnash(),
 };
 
 #endif

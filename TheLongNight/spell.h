@@ -110,6 +110,7 @@ spellSharedPtr attack_EtherealRay();
 spellSharedPtr attack_PaleSlash();
 spellSharedPtr attack_PoisonHook();
 spellSharedPtr attack_FlameBreath();
+spellSharedPtr attack_BlackwatchBattlecry();
 spellSharedPtr attack_RatCleave();
 spellSharedPtr attack_BlightingInfusion();
 spellSharedPtr attack_Deathstrike();
